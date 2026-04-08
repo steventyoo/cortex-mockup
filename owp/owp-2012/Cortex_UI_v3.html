@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cortex — OWP Job #2012</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #ffffff; color: #1a1a1a; overflow: hidden; -webkit-font-smoothing: antialiased; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #ccc; }
+  ::selection { background: rgba(0,0,0,0.08); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+var h = React.createElement;
+var useState = React.useState, useEffect = React.useEffect, useRef = React.useRef;
+
+// ── MUTED PROFESSIONAL PALETTE ──
+var P = {
+  bg: "#ffffff",
+  bgSoft: "#fafafa",
+  surface: "#f7f7f7",
+  card: "#ffffff",
+  border: "#e8e8e8",
+  borderLight: "#f0f0f0",
+  text: "#1a1a1a",
+  textBody: "#3a3a3a",
+  textMuted: "#888888",
+  textDim: "#bbbbbb",
+  // Muted accents
+  node: "#4a4a4a",
+  nodeLight: "#6a6a6a",
+  nodeDim: "#999999",
+  link: "#d4d4d4",
+  linkHover: "#999",
+  // Subtle semantic colors
+  accent: "#5a5a5a",
+  red: "#c45c5c",
+  redBg: "#fef7f7",
+  redBorder: "#f0dede",
+  green: "#5a8a6a",
+  greenBg: "#f5faf7",
+  greenBorder: "#dceee3",
+  blue: "#5a7a9a",
+  blueBg: "#f5f8fc",
+  blueBorder: "#dce6f0",
+};
+
+var typeConfig = {
+  project: { fill: "#6b7280", label: "Project" },
+  costCode: { fill: "#7c9a72", label: "Cost Code" },
+  worker: { fill: "#c49a6c", label: "Worker" },
+  vendor: { fill: "#7a8fb5", label: "Vendor" },
+  document: { fill: "#9a8abf", label: "Document" },
+  gc: { fill: "#b57a7a", label: "GC" },
+  insight: { fill: "#8ab5b0", label: "Insight" },
+};
+
+// ── GRAPH DATA ──
+var graphData = {
+  nodes: [
+    { id: "owp2012", label: "Job #2012\nExxel 8th Ave", type: "project", size: 9 },
+    { id: "cc120", label: "120 Roughin", type: "costCode", size: 7 },
+    { id: "cc130", label: "130 Finish", type: "costCode", size: 5.5 },
+    { id: "cc111", label: "111 Garage", type: "costCode", size: 5 },
+    { id: "cc141", label: "141 Water Main", type: "costCode", size: 5 },
+    { id: "cc142", label: "142 Mech Room", type: "costCode", size: 4.5 },
+    { id: "cc145", label: "145 Tub/Shower", type: "costCode", size: 4.5 },
+    { id: "cc100", label: "100 Supervision", type: "costCode", size: 4 },
+    { id: "cc601", label: "601 Engineering", type: "costCode", size: 4 },
+    { id: "w_gerard", label: "Gerard, Jeffrey S", type: "worker", size: 4.5 },
+    { id: "w_quint", label: "Quintanilla, Esteban R", type: "worker", size: 4.5 },
+    { id: "w_veley", label: "Veley, Nathaniel S", type: "worker", size: 4 },
+    { id: "w_palma", label: "Palma Vides, Hugo", type: "worker", size: 4 },
+    { id: "w_paco", label: "Paco Leyva, Orlando", type: "worker", size: 4 },
+    { id: "w_cortes", label: "Cortes M., Victor H", type: "worker", size: 4 },
+    { id: "w_meza", label: "Meza Fuentes, Erick A", type: "worker", size: 4 },
+    { id: "w_sanders", label: "Sanders, Allen O", type: "worker", size: 4 },
+    { id: "v_rosen", label: "Rosen Supply Co", type: "vendor", size: 5 },
+    { id: "v_ferguson", label: "Ferguson Enterprises", type: "vendor", size: 4.5 },
+    { id: "v_keller", label: "Keller Supply", type: "vendor", size: 3.5 },
+    { id: "v_franklin", label: "Franklin Engineering", type: "vendor", size: 4 },
+    { id: "v_manor", label: "Manor Hardware", type: "vendor", size: 3.5 },
+    { id: "gc_exxel", label: "Exxel Pacific", type: "gc", size: 6 },
+    { id: "d_jcr", label: "Job Detail Report", type: "document", size: 5 },
+    { id: "d_contract", label: "Contract - $1.39M", type: "document", size: 4.5 },
+    { id: "d_payapps", label: "Pay Apps (8 invoices)", type: "document", size: 4 },
+    { id: "d_lien", label: "Lien Releases", type: "document", size: 3.5 },
+    { id: "i_roughin", label: "Roughin +27% Over", type: "insight", size: 4.5 },
+    { id: "i_mech", label: "Mech Room +178% Over", type: "insight", size: 4 },
+    { id: "i_watermain", label: "Water Main 62% Under", type: "insight", size: 4 },
+  ],
+  links: [
+    { source: "owp2012", target: "gc_exxel", strength: 0.8 },
+    { source: "owp2012", target: "d_jcr", strength: 0.9 },
+    { source: "owp2012", target: "d_contract", strength: 0.7 },
+    { source: "owp2012", target: "d_payapps", strength: 0.6 },
+    { source: "owp2012", target: "d_lien", strength: 0.5 },
+    { source: "owp2012", target: "cc120", strength: 0.9 },
+    { source: "owp2012", target: "cc130", strength: 0.7 },
+    { source: "owp2012", target: "cc111", strength: 0.6 },
+    { source: "owp2012", target: "cc141", strength: 0.6 },
+    { source: "owp2012", target: "cc142", strength: 0.5 },
+    { source: "owp2012", target: "cc145", strength: 0.5 },
+    { source: "owp2012", target: "cc100", strength: 0.5 },
+    { source: "owp2012", target: "cc601", strength: 0.4 },
+    { source: "w_gerard", target: "cc100", strength: 0.9 },
+    { source: "w_gerard", target: "cc120", strength: 0.3 },
+    { source: "w_quint", target: "cc120", strength: 0.9 },
+    { source: "w_quint", target: "cc142", strength: 0.6 },
+    { source: "w_veley", target: "cc120", strength: 0.8 },
+    { source: "w_veley", target: "cc145", strength: 0.4 },
+    { source: "w_palma", target: "cc120", strength: 0.8 },
+    { source: "w_paco", target: "cc120", strength: 0.7 },
+    { source: "w_paco", target: "cc111", strength: 0.4 },
+    { source: "w_cortes", target: "cc120", strength: 0.7 },
+    { source: "w_cortes", target: "cc111", strength: 0.4 },
+    { source: "w_meza", target: "cc130", strength: 0.9 },
+    { source: "w_sanders", target: "cc130", strength: 0.8 },
+    { source: "v_rosen", target: "cc120", strength: 0.7 },
+    { source: "v_rosen", target: "cc111", strength: 0.4 },
+    { source: "v_ferguson", target: "cc120", strength: 0.6 },
+    { source: "v_ferguson", target: "cc142", strength: 0.3 },
+    { source: "v_keller", target: "cc120", strength: 0.3 },
+    { source: "v_franklin", target: "cc601", strength: 0.9 },
+    { source: "v_manor", target: "cc145", strength: 0.7 },
+    { source: "gc_exxel", target: "d_contract", strength: 0.8 },
+    { source: "gc_exxel", target: "d_payapps", strength: 0.7 },
+    { source: "i_roughin", target: "cc120", strength: 0.9 },
+    { source: "i_mech", target: "cc142", strength: 0.9 },
+    { source: "i_watermain", target: "cc141", strength: 0.9 },
+    { source: "d_jcr", target: "cc120", strength: 0.5 },
+    { source: "d_jcr", target: "cc130", strength: 0.4 },
+    { source: "d_jcr", target: "cc111", strength: 0.3 },
+  ],
+};
+
+var nodeDetails = {
+  owp2012: { title: "Job #2012 \u2014 Exxel 8th Ave Apartments", desc: "163-unit mid-rise multifamily, Division 22 Plumbing, Seattle WA", stats: [["Revenue","$1,391,455"],["Expenses","$858,181"],["Net Profit","$533,274"],["Margin","38.3%"],["Units","163"],["Duration","17 months"]] },
+  cc120: { title: "120 \u00b7 Roughin Labor", desc: "Primary rough-in plumbing \u2014 largest cost center", stats: [["Budget","$139,800"],["Actual","$177,292"],["Variance","+$37,492 (+27%)"],["Hours","9,320"],["$/Hr","$19.02"]] },
+  cc130: { title: "130 \u00b7 Finish Labor", desc: "Fixture installation and finish trim", stats: [["Budget","$31,000"],["Actual","$34,658"],["Variance","+$3,658 (+12%)"],["Hours","1,841"]] },
+  cc111: { title: "111 \u00b7 Garage Labor", desc: "Below-grade garage plumbing", stats: [["Budget","$14,600"],["Actual","$19,354"],["Variance","+$4,754 (+33%)"],["Hours","872"]] },
+  cc141: { title: "141 \u00b7 Water Main", desc: "Main water service and pipe insulation", stats: [["Budget","$41,000"],["Actual","$15,756"],["Variance","\u2212$25,244 (\u221262%)"],["Hours","800"]] },
+  cc142: { title: "142 \u00b7 Mech Room", desc: "Mechanical room \u2014 manifolds, circ pumps", stats: [["Budget","$3,525"],["Actual","$9,784"],["Variance","+$6,259 (+178%)"],["Hours","379"]] },
+  cc145: { title: "145 \u00b7 Tub/Shower", desc: "Tub and shower valve installation", stats: [["Budget","$19,800"],["Actual","$6,781"],["Variance","\u2212$13,019 (\u221266%)"],["Hours","338"]] },
+  cc100: { title: "100 \u00b7 Supervision", desc: "Project superintendent", stats: [["Budget","$8,100"],["Actual","$6,023"],["Hours","165"],["$/Hr","$36.50"]] },
+  cc601: { title: "601 \u00b7 Engineering", desc: "Subcontracted engineering", stats: [["Vendor","Franklin Engineering"],["Cost","$15,682"]] },
+  w_gerard: { title: "Gerard, Jeffrey S", desc: "Superintendent", stats: [["Rate","\u2248$36.50/hr"],["Hours","165"]] },
+  w_quint: { title: "Quintanilla, Esteban R", desc: "Lead Journeyman", stats: [["Rate","\u2248$31/hr"],["Phases","Roughin, Mech Room"]] },
+  w_veley: { title: "Veley, Nathaniel S", desc: "Journeyman", stats: [["Rate","\u2248$25/hr"]] },
+  w_palma: { title: "Palma Vides, Hugo", desc: "Journeyman", stats: [["Rate","\u2248$22/hr"]] },
+  w_paco: { title: "Paco Leyva, Orlando", desc: "Journeyman", stats: [["Rate","\u2248$21/hr"]] },
+  w_cortes: { title: "Cortes M., Victor H", desc: "Journeyman", stats: [["Rate","\u2248$20/hr"]] },
+  w_meza: { title: "Meza Fuentes, Erick A", desc: "Journeyman", stats: [["Rate","\u2248$22/hr"]] },
+  w_sanders: { title: "Sanders, Allen O", desc: "Apprentice", stats: [["Rate","\u2248$15/hr"]] },
+  v_rosen: { title: "Rosen Supply Company", desc: "Primary material supplier", stats: [["Materials","Pipe, fittings, valves"]] },
+  v_ferguson: { title: "Ferguson Enterprises", desc: "Major fixture supplier", stats: [["Materials","Fixtures, fittings"]] },
+  v_keller: { title: "Keller Supply", desc: "Secondary supplier", stats: [] },
+  v_franklin: { title: "Franklin Engineering", desc: "Engineering subcontractor", stats: [["Cost","$15,682"]] },
+  v_manor: { title: "Manor Hardware", desc: "Hardware supplier", stats: [] },
+  gc_exxel: { title: "Exxel Pacific, Inc.", desc: "General Contractor", stats: [["Contract","$1,394,655"],["Retainage","$69,573"]] },
+  d_jcr: { title: "Job Detail Report", desc: "135-page financial record", stats: [["Cost Codes","20+"],["Sources","PR, AP, GL, AR"]] },
+  d_contract: { title: "Contract", desc: "Div. 22 Plumbing with Exxel Pacific", stats: [["Value","$1,394,655"]] },
+  d_payapps: { title: "Pay Applications", desc: "Monthly billing", stats: [["Count","8 invoices"]] },
+  d_lien: { title: "Lien Releases", desc: "Payment protection documents", stats: [] },
+  i_roughin: { title: "Roughin +27% Over Budget", desc: "Critical overrun alert", stats: [["Impact","+$37,492"],["Action","Budget 65+ hrs/unit"]] },
+  i_mech: { title: "Mech Room +178% Over Budget", desc: "Severe underestimate", stats: [["Impact","+$6,259"],["Action","Budget 2.5\u20133x"]] },
+  i_watermain: { title: "Water Main 62% Under Budget", desc: "Over-conservative estimate", stats: [["Savings","$25,244"],["Action","Tighten 40\u201350%"]] },
+};
+
+// ── GRAPH VIEW ──
+function GraphView(props) {
+  var svgRef = useRef(null);
+
+  useEffect(function() {
+    if (!svgRef.current) return;
+    var svg = d3.select(svgRef.current);
+    svg.selectAll("*").remove();
+
+    var w = svgRef.current.clientWidth;
+    var ht = svgRef.current.clientHeight;
+    var g = svg.append("g");
+
+    var zoom = d3.zoom().scaleExtent([0.15, 6]).on("zoom", function(ev) { g.attr("transform", ev.transform); });
+    svg.call(zoom);
+    svg.call(zoom.transform, d3.zoomIdentity.translate(w / 2, ht / 2).scale(0.85));
+
+    var nodes = graphData.nodes.map(function(d) { return Object.assign({}, d); });
+    var links = graphData.links.map(function(d) { return Object.assign({}, d); });
+
+    var sim = d3.forceSimulation(nodes)
+      .force("link", d3.forceLink(links).id(function(d) { return d.id; }).distance(130).strength(function(d) { return d.strength * 0.2; }))
+      .force("charge", d3.forceManyBody().strength(-350))
+      .force("center", d3.forceCenter(0, 0).strength(0.04))
+      .force("collision", d3.forceCollide().radius(function(d) { return d.size + 40; }))
+      .force("x", d3.forceX().strength(0.015))
+      .force("y", d3.forceY().strength(0.015));
+
+    // Links — thin, light gray
+    var link = g.append("g").selectAll("line").data(links).join("line")
+      .attr("stroke", "#d8d8d8")
+      .attr("stroke-width", function(d) { return 0.5 + d.strength * 0.8; });
+
+    // Nodes
+    var node = g.append("g").selectAll("g").data(nodes).join("g")
+      .style("cursor", "pointer")
+      .call(d3.drag()
+        .on("start", function(ev, d) { if (!ev.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+        .on("drag", function(ev, d) { d.fx = ev.x; d.fy = ev.y; })
+        .on("end", function(ev, d) { if (!ev.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+      );
+
+    // Solid dark circles
+    node.append("circle")
+      .attr("class", "core")
+      .attr("r", function(d) { return d.size; })
+      .attr("fill", function(d) { return typeConfig[d.type].fill; })
+      .attr("stroke", "none");
+
+    // Labels — offset below node, single line, clean
+    node.append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", function(d) { return d.size + 14; })
+      .attr("fill", "#555")
+      .attr("font-size", "11px")
+      .attr("font-family", "'Inter', -apple-system, sans-serif")
+      .attr("font-weight", "400")
+      .attr("pointer-events", "none")
+      .text(function(d) { return d.label.replace("\n", " "); });
+
+    // Hover
+    node.on("mouseover", function(ev, d) {
+      var connectedIds = new Set();
+      connectedIds.add(d.id);
+      // Highlight node
+      d3.select(this).select(".core").transition().duration(200)
+        .attr("r", d.size * 1.4).attr("fill", "#1a1a1a");
+      d3.select(this).select("text").transition().duration(200)
+        .attr("fill", "#1a1a1a").attr("font-weight", "600");
+      // Highlight links
+      link.transition().duration(200)
+        .attr("stroke", function(l) {
+          var s = typeof l.source === "object" ? l.source.id : l.source;
+          var t = typeof l.target === "object" ? l.target.id : l.target;
+          if (s === d.id || t === d.id) { connectedIds.add(s); connectedIds.add(t); return "#888"; }
+          return "#eee";
+        })
+        .attr("stroke-width", function(l) {
+          var s = typeof l.source === "object" ? l.source.id : l.source;
+          var t = typeof l.target === "object" ? l.target.id : l.target;
+          return (s === d.id || t === d.id) ? 1.5 : 0.3;
+        });
+      // Dim disconnected
+      node.transition().duration(200)
+        .attr("opacity", function(n) { return connectedIds.has(n.id) ? 1 : 0.15; });
+    }).on("mouseout", function() {
+      node.selectAll(".core").transition().duration(300)
+        .attr("r", function(d) { return d.size; }).attr("fill", function(d) { return typeConfig[d.type].fill; });
+      node.selectAll("text").transition().duration(300)
+        .attr("fill", "#555").attr("font-weight", "400");
+      link.transition().duration(300)
+        .attr("stroke", "#d8d8d8")
+        .attr("stroke-width", function(d) { return 0.5 + d.strength * 0.8; });
+      node.transition().duration(300).attr("opacity", 1);
+    }).on("click", function(ev, d) { props.onNodeClick(d); });
+
+    sim.on("tick", function() {
+      link.attr("x1", function(d) { return d.source.x; }).attr("y1", function(d) { return d.source.y; })
+          .attr("x2", function(d) { return d.target.x; }).attr("y2", function(d) { return d.target.y; });
+      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    });
+
+    return function() { sim.stop(); };
+  }, []);
+
+  return h("div", { style: { width: "100%", height: "100%", position: "relative" } },
+    h("svg", { ref: svgRef, style: { width: "100%", height: "100%", background: "#fff" } })
+  );
+}
+
+// ── NODE PANEL ──
+function NodePanel(props) {
+  var nd = props.node;
+  if (!nd) return null;
+  var info = nodeDetails[nd.id] || { title: nd.label.replace("\n"," "), desc: "", stats: [] };
+
+  return h("div", { style: {
+    position: "absolute", right: 24, top: 24, width: 300,
+    background: "#fff", border: "1px solid #e0e0e0", borderRadius: 10,
+    padding: 0, zIndex: 10, boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+    animation: "slideIn 0.2s ease-out", overflow: "hidden"
+  } },
+    h("div", { style: { height: 2, background: "#e0e0e0" } }),
+    h("div", { style: { padding: "18px 20px 16px" } },
+      h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 } },
+        h("span", { style: { fontSize: 10, color: P.textMuted, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 500 } }, typeConfig[nd.type].label),
+        h("button", { onClick: props.onClose, style: { background: "#f5f5f5", border: "none", color: "#999", cursor: "pointer", fontSize: 12, width: 22, height: 22, borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center" } }, "\u2715")
+      ),
+      h("div", { style: { fontSize: 15, fontWeight: 600, color: P.text, marginBottom: 3, lineHeight: 1.35 } }, info.title),
+      info.desc ? h("div", { style: { fontSize: 12, color: P.textMuted, marginBottom: 14, lineHeight: 1.5 } }, info.desc) : null,
+      info.stats.length > 0 ? h("div", { style: { borderTop: "1px solid #f0f0f0", paddingTop: 10 } },
+        info.stats.map(function(s, i) {
+          var vc = P.textBody;
+          if (s[1].indexOf("+$") > -1 || s[1].indexOf("+1") > -1 || s[1].indexOf("+2") > -1 || s[1].indexOf("+3") > -1 || s[1].indexOf("+4") > -1 || s[1].indexOf("+6") > -1) vc = P.red;
+          else if (s[1].indexOf("\u2212") > -1) vc = P.green;
+          return h("div", { key: i, style: { display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: i < info.stats.length - 1 ? "1px solid #f8f8f8" : "none" } },
+            h("span", { style: { fontSize: 12, color: P.textMuted } }, s[0]),
+            h("span", { style: { fontSize: 12, color: vc, fontWeight: 500, fontFamily: "'SF Mono', Menlo, monospace" } }, s[1])
+          );
+        })
+      ) : null
+    )
+  );
+}
+
+// ── SIDEBAR ──
+function Sidebar(props) {
+  return h("div", { style: {
+    position: "absolute", left: 0, top: 0, bottom: 0, width: 200,
+    background: "#fafafa", borderRight: "1px solid #eee",
+    padding: "20px 16px", display: "flex", flexDirection: "column", zIndex: 5
+  } },
+    h("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 28 } },
+      h("div", { style: { width: 24, height: 24, borderRadius: 6, background: "#2a2a2a", display: "flex", alignItems: "center", justifyContent: "center" } },
+        h("span", { style: { fontSize: 12, fontWeight: 700, color: "#fff" } }, "C")
+      ),
+      h("div", null,
+        h("div", { style: { fontSize: 13, fontWeight: 600, color: P.text } }, "Cortex"),
+        h("div", { style: { fontSize: 10, color: P.textMuted } }, "Knowledge Graph")
+      )
+    ),
+
+    h("div", { style: { position: "relative", marginBottom: 22 } },
+      h("input", { type: "text", placeholder: "Search\u2026",
+        style: { width: "100%", padding: "7px 10px", background: "#fff", border: "1px solid #e4e4e4", borderRadius: 6, color: P.text, fontSize: 12, outline: "none", fontFamily: "'Inter', sans-serif" }
+      })
+    ),
+
+    h("div", { style: { fontSize: 10, color: P.textMuted, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 500, marginBottom: 8 } }, "Entities"),
+    Object.entries(typeConfig).map(function(entry) {
+      var key = entry[0], tc = entry[1];
+      var count = graphData.nodes.filter(function(n) { return n.type === key; }).length;
+      return h("div", { key: key, style: { display: "flex", alignItems: "center", gap: 8, padding: "5px 6px", borderRadius: 4, marginBottom: 1 } },
+        h("div", { style: { width: 7, height: 7, borderRadius: "50%", background: tc.fill, flexShrink: 0 } }),
+        h("span", { style: { fontSize: 12, color: P.textBody, flex: 1 } }, tc.label),
+        h("span", { style: { fontSize: 11, color: P.textDim, fontFamily: "'SF Mono', monospace" } }, count)
+      );
+    }),
+
+    h("div", { style: { flex: 1 } }),
+
+    h("div", { style: { borderTop: "1px solid #eee", paddingTop: 12 } },
+      [["Nodes", graphData.nodes.length], ["Connections", graphData.links.length]].map(function(s) {
+        return h("div", { key: s[0], style: { display: "flex", justifyContent: "space-between", padding: "3px 0" } },
+          h("span", { style: { fontSize: 11, color: P.textMuted } }, s[0]),
+          h("span", { style: { fontSize: 11, color: P.textBody, fontFamily: "'SF Mono', monospace" } }, s[1])
+        );
+      }),
+      h("div", { style: { marginTop: 10, fontSize: 11, color: P.textMuted } }, "OWP, LLC \u00b7 Job #2012")
+    )
+  );
+}
+
+// ── REPORT COMPONENTS ──
+function MetricCard(props) {
+  return h("div", { style: {
+    background: "#fff", border: "1px solid " + P.border, borderRadius: 8,
+    padding: "20px 20px 16px", flex: "1 1 170px", minWidth: 155
+  } },
+    h("div", { style: { fontSize: 10, color: P.textMuted, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 8, fontWeight: 500 } }, props.label),
+    h("div", { style: { fontSize: 28, fontWeight: 600, color: props.color || P.text, letterSpacing: "-0.03em", lineHeight: 1 } }, props.value),
+    props.subtext ? h("div", { style: { fontSize: 12, color: P.textMuted, marginTop: 6 } }, props.subtext) : null
+  );
+}
+
+function Table(props) {
+  return h("div", { style: { overflowX: "auto", margin: "8px 0", borderRadius: 8, border: "1px solid " + P.border } },
+    h("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: 13 } },
+      h("thead", null,
+        h("tr", { style: { background: P.bgSoft } },
+          props.headers.map(function(hd, i) {
+            return h("th", { key: i, style: { padding: "10px 14px", textAlign: i === 0 ? "left" : "right", color: P.textMuted, fontWeight: 500, borderBottom: "1px solid " + P.border, fontSize: 10, textTransform: "uppercase", letterSpacing: "0.06em" } }, hd);
+          })
+        )
+      ),
+      h("tbody", null,
+        props.rows.map(function(row, ri) {
+          return h("tr", { key: ri },
+            row.map(function(cell, ci) {
+              var isObj = typeof cell === "object" && cell !== null;
+              return h("td", { key: ci, style: { padding: "10px 14px", textAlign: ci === 0 ? "left" : "right", color: isObj ? (cell.color || P.textBody) : P.textBody, borderBottom: "1px solid " + P.borderLight, fontWeight: isObj && cell.bold ? 600 : 400, fontFamily: ci > 0 ? "'SF Mono', Menlo, monospace" : "inherit", fontSize: ci > 0 ? 12 : 13 } }, isObj ? cell.value : cell);
+            })
+          );
+        })
+      )
+    )
+  );
+}
+
+function Bar(props) {
+  var pct = (props.value / props.max) * 100;
+  var over = pct > 100;
+  return h("div", { style: { marginBottom: 14 } },
+    h("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: 5 } },
+      h("span", { style: { fontSize: 13, color: P.textBody } }, props.label),
+      h("span", { style: { fontSize: 11, color: over ? P.red : P.textMuted, fontFamily: "'SF Mono', monospace" } }, Math.round(pct) + "%")
+    ),
+    h("div", { style: { height: 4, background: "#f0f0f0", borderRadius: 2, overflow: "hidden" } },
+      h("div", { style: { height: "100%", width: Math.min(pct, 100) + "%", background: over ? P.red : (props.color || "#888"), borderRadius: 2, transition: "width 0.8s ease" } })
+    )
+  );
+}
+
+function Callout(props) {
+  return h("div", { style: { padding: "16px 18px", background: props.bg || P.bgSoft, border: "1px solid " + (props.borderColor || P.border), borderRadius: 8, margin: "8px 0", borderLeft: "3px solid " + (props.accent || "#ccc") } },
+    h("div", { style: { fontWeight: 600, fontSize: 13, color: props.titleColor || P.text, marginBottom: 4 } }, props.title),
+    h("p", { style: { fontSize: 13, lineHeight: 1.7, color: P.textBody, margin: 0 } }, props.children)
+  );
+}
+
+// ── REPORT VIEW ──
+function ReportView() {
+  return h("div", { style: { maxWidth: 860, margin: "0 auto", padding: "40px 48px", animation: "fadeIn 0.3s ease" } },
+    h("div", { style: { marginBottom: 36 } },
+      h("div", { style: { fontSize: 10, color: P.textMuted, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 500, marginBottom: 10 } }, "Cortex Intelligence Report"),
+      h("h1", { style: { fontSize: 28, fontWeight: 600, color: P.text, margin: "0 0 6px", letterSpacing: "-0.02em" } }, "OWP Job #2012"),
+      h("h2", { style: { fontSize: 17, fontWeight: 400, color: P.textMuted, margin: "0 0 6px" } }, "Exxel 8th Ave Apartments"),
+      h("p", { style: { fontSize: 13, color: P.textDim, margin: 0 } }, "163-unit mid-rise \u00b7 Division 22 Plumbing \u00b7 Seattle, WA \u00b7 Jan 2013 \u2013 Jun 2014"),
+      h("div", { style: { height: 1, background: P.border, marginTop: 20 } })
+    ),
+
+    h("div", { style: { display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 32 } },
+      h(MetricCard, { label: "Contract Value", value: "$1.39M", subtext: "163 units" }),
+      h(MetricCard, { label: "Net Profit", value: "$533K", subtext: "38.3% margin", color: P.green }),
+      h(MetricCard, { label: "Labor Hours", value: "14,607", subtext: "\u224890 hrs/unit" }),
+      h(MetricCard, { label: "Labor : Material", value: "1.05:1", subtext: "$440K : $418K" })
+    ),
+
+    h("h3", { style: { fontSize: 16, fontWeight: 600, color: P.text, margin: "28px 0 4px" } }, "Budget vs Actual"),
+    h("p", { style: { fontSize: 13, color: P.textMuted, margin: "0 0 8px" } }, "Variance analysis across labor cost codes."),
+    h(Table, {
+      headers: ["Phase", "Budget", "Actual", "Variance", "Hours", "$/Hr"],
+      rows: [
+        ["120 \u00b7 Roughin", "$139,800", "$177,292", { value: "+$37,492", color: P.red, bold: true }, "9,320", "$19.02"],
+        ["130 \u00b7 Finish", "$31,000", "$34,658", { value: "+$3,658", color: P.red }, "1,841", "$18.83"],
+        ["111 \u00b7 Garage", "$14,600", "$19,354", { value: "+$4,754", color: P.red }, "872", "$22.19"],
+        ["142 \u00b7 Mech Room", "$3,525", "$9,784", { value: "+$6,259", color: P.red, bold: true }, "379", "$25.82"],
+        ["141 \u00b7 Water Main", "$41,000", "$15,756", { value: "\u2212$25,244", color: P.green, bold: true }, "800", "$19.70"],
+        ["145 \u00b7 Tub/Shower", "$19,800", "$6,781", { value: "\u2212$13,019", color: P.green }, "338", "$20.06"],
+        ["112 \u00b7 Canout", "$11,700", "$5,424", { value: "\u2212$6,276", color: P.green }, "238", "$22.79"],
+        ["100 \u00b7 Supervision", "$8,100", "$6,023", { value: "\u2212$2,077", color: P.green }, "165", "$36.50"],
+      ]
+    }),
+
+    h("h3", { style: { fontSize: 15, fontWeight: 600, color: P.text, margin: "26px 0 10px" } }, "Budget Consumption"),
+    h("div", { style: { background: P.bgSoft, border: "1px solid " + P.border, borderRadius: 8, padding: 22 } },
+      h(Bar, { label: "Roughin Labor", value: 177292, max: 139800, color: P.red }),
+      h(Bar, { label: "Mech Room", value: 9784, max: 3525, color: P.red }),
+      h(Bar, { label: "Garage Labor", value: 19354, max: 14600, color: "#b08050" }),
+      h(Bar, { label: "Finish Labor", value: 34658, max: 31000, color: "#b08050" }),
+      h(Bar, { label: "Supervision", value: 6023, max: 8100, color: P.green }),
+      h(Bar, { label: "Water Main", value: 15756, max: 41000, color: P.blue }),
+      h(Bar, { label: "Tub/Shower", value: 6781, max: 19800, color: P.blue })
+    ),
+
+    h("h3", { style: { fontSize: 16, fontWeight: 600, color: P.text, margin: "32px 0 10px" } }, "Insights"),
+
+    h(Callout, { bg: P.redBg, borderColor: P.redBorder, accent: P.red, title: "Roughin Labor \u2014 27% over budget", titleColor: P.red },
+      "9,320 hours consumed (64% of all labor). At 57 hrs/unit, exceeds comparable projects by ~15%. Budget 65+ hrs/unit on future mid-rise with 20% contingency."
+    ),
+    h(Callout, { bg: P.redBg, borderColor: P.redBorder, accent: P.red, title: "Mech Room \u2014 178% over budget", titleColor: P.red },
+      "$9,784 actual vs $3,525 budget. Complex manifold assemblies and circ pump installations consistently underestimated. Budget 2.5\u20133x initial estimate."
+    ),
+    h(Callout, { bg: P.greenBg, borderColor: P.greenBorder, accent: P.green, title: "Water Main \u2014 62% under budget", titleColor: P.green },
+      "$15,756 actual vs $41,000 budget. Over-conservative by ~$25K. Tighten by 40\u201350% on future bids to improve competitiveness."
+    ),
+    h(Callout, { bg: P.blueBg, borderColor: P.blueBorder, accent: P.blue, title: "Per-unit benchmark: $5,265 cost / $8,537 revenue", titleColor: P.blue },
+      "Use $5,000\u2013$5,500/unit as base cost for similar Division 22 scope on mid-rise multifamily. Target $8,000\u2013$9,000/unit revenue."
+    ),
+
+    h("h3", { style: { fontSize: 16, fontWeight: 600, color: P.text, margin: "32px 0 8px" } }, "Per-Unit Benchmarks"),
+    h("p", { style: { fontSize: 13, color: P.textMuted, margin: "0 0 6px" } }, "163 residential units."),
+    h(Table, {
+      headers: ["Metric", "Total", "Per Unit", "% of Revenue"],
+      rows: [
+        [{ value: "Revenue", bold: true }, "$1,391,455", "$8,537", "100%"],
+        [{ value: "Direct Cost", bold: true }, "$858,181", "$5,265", "61.7%"],
+        [{ value: "Net Profit", bold: true }, "$533,274", { value: "$3,272", color: P.green, bold: true }, "38.3%"],
+        ["", "", "", ""],
+        ["Roughin Labor", "$177,292", "$1,088", "12.7%"],
+        ["Roughin Material", "$22,695", "$139", "1.6%"],
+        ["Finish Labor", "$34,658", "$213", "2.5%"],
+        ["Engineering", "$15,682", "$96", "1.1%"],
+      ]
+    }),
+
+    h("h3", { style: { fontSize: 16, fontWeight: 600, color: P.text, margin: "32px 0 10px" } }, "Crew Rate Tiers"),
+    h("div", { style: { display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 20 } },
+      [
+        { tier: "Superintendent", range: "$33\u201338/hr", count: 1 },
+        { tier: "Lead Journeyman", range: "$28\u201331/hr", count: 4 },
+        { tier: "Journeyman", range: "$20\u201327/hr", count: 8 },
+        { tier: "Apprentice", range: "$12\u201316/hr", count: 7 },
+        { tier: "Helper", range: "$12\u201314/hr", count: 8 },
+      ].map(function(t) {
+        return h("div", { key: t.tier, style: { background: P.bgSoft, border: "1px solid " + P.border, borderRadius: 8, padding: "14px 18px", flex: "1 1 140px", minWidth: 130 } },
+          h("div", { style: { fontSize: 10, color: P.textMuted, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.05em" } }, t.tier),
+          h("div", { style: { fontSize: 20, fontWeight: 600, color: P.text, marginTop: 4 } }, t.range),
+          h("div", { style: { fontSize: 11, color: P.textDim, marginTop: 2 } }, t.count + " worker" + (t.count > 1 ? "s" : ""))
+        );
+      })
+    ),
+
+    h("h3", { style: { fontSize: 16, fontWeight: 600, color: P.text, margin: "32px 0 8px" } }, "Cost by Source"),
+    h(Table, {
+      headers: ["Source", "Amount", "% of Total", "Description"],
+      rows: [
+        [{ value: "Payroll (PR)", bold: true }, "$439,954", "51.3%", "All labor"],
+        [{ value: "Accounts Payable (AP)", bold: true }, "$408,537", "47.6%", "Material & subs"],
+        [{ value: "General Ledger (GL)", bold: true }, "$9,690", "1.1%", "Warehouse, parking"],
+      ]
+    }),
+
+    h("div", { style: { height: 1, background: P.border, margin: "36px 0 14px" } }),
+    h("p", { style: { fontSize: 11, color: P.textDim } }, "Generated by Cortex \u00b7 135-page JCR analysis \u00b7 " + new Date().toLocaleDateString())
+  );
+}
+
+// ── APP ──
+function App() {
+  var vs = useState("graph"), view = vs[0], setView = vs[1];
+  var ns = useState(null), selNode = ns[0], setSelNode = ns[1];
+  var ss = useState(true), showSb = ss[0], setSb = ss[1];
+
+  return h("div", { style: { width: "100%", height: "100vh", background: "#fff", color: P.text, display: "flex", flexDirection: "column" } },
+    // Nav
+    h("div", { style: { height: 46, borderBottom: "1px solid #eee", display: "flex", alignItems: "center", padding: "0 18px", gap: 10, flexShrink: 0, background: "#fff" } },
+      h("button", { onClick: function() { setSb(!showSb); }, style: { background: "none", border: "none", color: "#bbb", cursor: "pointer", fontSize: 14, padding: "2px 4px" } }, showSb ? "\u25c0" : "\u25b6"),
+      h("div", { style: { display: "flex", alignItems: "center", gap: 7 } },
+        h("div", { style: { width: 20, height: 20, borderRadius: 5, background: "#2a2a2a", display: "flex", alignItems: "center", justifyContent: "center" } },
+          h("span", { style: { fontSize: 10, fontWeight: 700, color: "#fff" } }, "C")
+        ),
+        h("span", { style: { fontSize: 13, fontWeight: 600 } }, "Cortex")
+      ),
+      h("div", { style: { width: 1, height: 20, background: "#eee" } }),
+      h("div", { style: { display: "flex", gap: 1, background: "#f5f5f5", borderRadius: 6, padding: 2 } },
+        [{ id: "graph", label: "Graph" }, { id: "report", label: "Report" }].map(function(tab) {
+          var active = view === tab.id;
+          return h("button", {
+            key: tab.id,
+            onClick: function() { setView(tab.id); setSelNode(null); },
+            style: { padding: "4px 14px", border: "none", borderRadius: 4, cursor: "pointer", background: active ? "#fff" : "transparent", color: active ? P.text : P.textMuted, fontSize: 12, fontWeight: active ? 500 : 400, fontFamily: "'Inter', sans-serif", boxShadow: active ? "0 1px 3px rgba(0,0,0,0.06)" : "none" }
+          }, tab.label);
+        })
+      ),
+      h("div", { style: { flex: 1 } }),
+      h("div", { style: { fontSize: 12, color: P.textMuted } }, "OWP, LLC \u00b7 Job #2012")
+    ),
+
+    // Content
+    h("div", { style: { flex: 1, position: "relative", overflow: "hidden", display: "flex" } },
+      view === "graph" && showSb ? h(Sidebar, null) : null,
+      h("div", { style: { flex: 1, position: "relative", overflow: "hidden" } },
+        view === "graph"
+          ? h(React.Fragment, null,
+              h(GraphView, { onNodeClick: setSelNode }),
+              h(NodePanel, { node: selNode, onClose: function() { setSelNode(null); } })
+            )
+          : h("div", { style: { height: "100%", overflow: "auto", background: "#fff" } },
+              h(ReportView, null)
+            )
+      )
+    )
+  );
+}
+
+ReactDOM.render(h(App, null), document.getElementById("root"));
+</script>
+</body>
+</html>
