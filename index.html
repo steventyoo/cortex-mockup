@@ -560,8 +560,19 @@
       </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- ================= PORTFOLIO SKYLINE HERO =================== -->
+    <!-- ============================================================ -->
+    <div class="blueprint mb-12" id="skyline-hero" style="padding: 28px 36px 36px;">
+      <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 01 / the portfolio — elevation</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">scale · n.t.s.</div>
+      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">seattle · one way plumbing llc</div>
+      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">4 jobs · 613 units · $4.04m</div>
+      <div id="skyline-svg-wrap"></div>
+    </div>
+
     <!-- CENTERED PROMPT AREA -->
-    <div class="flex flex-col items-center justify-center" style="min-height: calc(100vh - 180px); max-width: 780px; margin: 0 auto; padding-bottom: 80px;">
+    <div class="flex flex-col items-center justify-center" style="max-width: 820px; margin: 0 auto; padding-bottom: 80px;">
 
       <!-- Eyebrow -->
       <div class="mono mb-6" style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-4);">
@@ -569,14 +580,14 @@
       </div>
 
       <!-- Tagline -->
-      <h1 class="text-center tighter font-semibold" style="color: var(--ink); font-size: clamp(48px, 5.5vw, 76px); line-height: 0.98; letter-spacing: -0.035em;">
+      <h1 class="text-center tighter font-semibold" style="color: var(--ink); font-size: clamp(44px, 5vw, 68px); line-height: 0.98; letter-spacing: -0.035em;">
         Ask anything about<br/>
         <span class="serif-it" style="font-weight: 400;">your portfolio.</span>
       </h1>
 
       <!-- Pitch -->
-      <div class="mt-8 text-center text-[15px] leading-[1.7]" style="color: var(--ink-3); max-width: 620px;">
-        Cortex is an intelligence layer for specialty subcontractors. Drop in your job files — pay apps, POs, JCRs, takeoffs, submittals — and ask anything in plain English. Benchmark a bid against your closed jobs, diagnose why a margin slipped, or pull every PO ever issued to a vendor. The research tool a sub's back office has been missing.
+      <div class="mt-7 text-center text-[15px] leading-[1.7]" style="color: var(--ink-3); max-width: 620px;">
+        Drop in your job files — pay apps, POs, JCRs, takeoffs, submittals — and ask anything in plain English. Benchmark a bid against your closed jobs, diagnose why a margin slipped, or pull every PO ever issued to a vendor. The research tool a sub's back office has been missing.
       </div>
 
       <!-- Prompt box -->
@@ -2353,6 +2364,126 @@
     // switch to project detail view so user sees update
     setView('project');
   }
+
+  /* ============ PORTFOLIO SKYLINE HERO ============ */
+  const SKYLINE = [
+    { id: "2009", top: "CHINN", bottom: "GREENWOOD",  meta: "168u · 16mo · $394K",   floors: 4, cols: 14, w: 232 },
+    { id: "2010", top: "CHINN", bottom: "OLD TOWN",   meta: "165u · 24mo · $1.39M",  floors: 6, cols: 13, w: 252 },
+    { id: "2011", top: "CHINN", bottom: "BARRETT PK", meta: "117u · 17mo · $870K",   floors: 3, cols: 10, w: 178 },
+    { id: "2012", top: "EXXEL", bottom: "8TH AVE",    meta: "163u · 17mo · $1.39M",  floors: 5, cols: 14, w: 256 }
+  ];
+
+  function renderSkyline(){
+    const wrap = document.getElementById('skyline-svg-wrap'); if(!wrap) return;
+
+    const VBW = 1200, VBH = 320;
+    const ground = 266;            // ground-line y
+    const floorH = 24;              // floor height
+    const padL = 64, padR = 64;
+    const gap = 28;                 // gap between buildings
+
+    const totalBW = SKYLINE.reduce((a,b)=>a+b.w,0) + gap*(SKYLINE.length-1);
+    let x = padL + (VBW - padL - padR - totalBW) / 2;
+
+    let svg = `<svg viewBox="0 0 ${VBW} ${VBH}" class="w-full" style="display:block; height: auto; max-height: 340px;" fill="none" stroke="var(--ink)" stroke-linecap="square" stroke-linejoin="miter">`;
+
+    // Faint upper sky rule
+    svg += `<line x1="${padL}" y1="36" x2="${VBW-padR}" y2="36" stroke="var(--ink-4)" stroke-width="0.5" stroke-dasharray="2,3"/>`;
+
+    // Sun dot (upper right)
+    svg += `<circle cx="${VBW - padR - 30}" cy="60" r="14" stroke="var(--ink-3)" stroke-width="0.75" fill="none"/>`;
+    svg += `<circle cx="${VBW - padR - 30}" cy="60" r="2.4" fill="var(--clay)" stroke="none"/>`;
+
+    // Main ground line
+    svg += `<line x1="${padL-6}" y1="${ground}" x2="${VBW-padR+6}" y2="${ground}" stroke="var(--ink)" stroke-width="1.5"/>`;
+    svg += `<line x1="${padL-6}" y1="${ground+3}" x2="${VBW-padR+6}" y2="${ground+3}" stroke="var(--ink-3)" stroke-width="0.5"/>`;
+
+    // Hatched ground (ticks)
+    for(let gx = padL; gx < VBW-padR; gx += 9){
+      svg += `<line x1="${gx}" y1="${ground+3}" x2="${gx-5}" y2="${ground+10}" stroke="var(--ink-3)" stroke-width="0.5"/>`;
+    }
+
+    // Buildings
+    SKYLINE.forEach((b, idx) => {
+      const h = b.floors * floorH;
+      const top = ground - h;
+      const gId = `bldg-${b.id}`;
+
+      // Interactive group
+      svg += `<g class="skyline-bldg" data-project="${b.id}" style="cursor:pointer;">`;
+
+      // Invisible hit rect so hover works over the whole building
+      svg += `<rect x="${x-6}" y="${top-22}" width="${b.w+12}" height="${h+58}" fill="transparent" stroke="none"/>`;
+
+      // Roof cornice (double line)
+      svg += `<line x1="${x-6}" y1="${top-3}" x2="${x+b.w+6}" y2="${top-3}" stroke="var(--ink)" stroke-width="1"/>`;
+      svg += `<line x1="${x-2}" y1="${top}"   x2="${x+b.w+2}" y2="${top}"   stroke="var(--ink)" stroke-width="1.4"/>`;
+
+      // Main facade rectangle
+      svg += `<rect x="${x}" y="${top}" width="${b.w}" height="${h}" stroke="var(--ink)" stroke-width="1.2" fill="var(--cream-soft)"/>`;
+
+      // Floor divisions
+      for(let f = 1; f < b.floors; f++){
+        const fy = top + f*floorH;
+        svg += `<line x1="${x}" y1="${fy}" x2="${x+b.w}" y2="${fy}" stroke="var(--ink)" stroke-width="0.6"/>`;
+      }
+
+      // Window grid
+      const marginX = 12, marginTop = 6, marginBottom = 6;
+      const usableW = b.w - marginX*2;
+      const cellW = usableW / b.cols;
+      const winW = cellW * 0.62;
+      const winH = floorH - marginTop - marginBottom;
+      const entryCol = Math.floor(b.cols / 2);
+      for(let f = 0; f < b.floors; f++){
+        const fyTop = top + f*floorH + marginTop;
+        for(let c = 0; c < b.cols; c++){
+          const wx = x + marginX + c*cellW + (cellW-winW)/2;
+          // Entry door on ground floor, middle column
+          if(f === b.floors-1 && c === entryCol){
+            svg += `<rect x="${wx}" y="${fyTop-2}" width="${winW}" height="${winH+2}" stroke="var(--ink)" stroke-width="1" fill="var(--cream-card)"/>`;
+          } else {
+            svg += `<rect x="${wx}" y="${fyTop}" width="${winW}" height="${winH}" stroke="var(--ink-2)" stroke-width="0.7" fill="none"/>`;
+          }
+        }
+      }
+
+      // Building label block below ground line
+      const lx = x + b.w/2;
+      svg += `<text x="${lx}" y="${ground+26}" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle" letter-spacing="0.5">${b.top} <tspan font-family="Instrument Serif, Georgia, serif" font-style="italic" font-weight="400" font-size="14">${b.bottom.toLowerCase().replace(/^\w/, m => m.toUpperCase())}</tspan></text>`;
+      svg += `<text x="${lx}" y="${ground+40}" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--ink-4)" text-anchor="middle" letter-spacing="1.1">#${b.id} · ${b.meta}</text>`;
+
+      // Floor-count callout on the left side of the building
+      svg += `<text x="${x-10}" y="${top + h/2 + 3}" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">${b.floors}F</text>`;
+
+      svg += `</g>`;
+
+      x += b.w + gap;
+    });
+
+    // Corner crosshairs (architectural plate marks)
+    const cross = (cx, cy) => `<g stroke="var(--ink-3)" stroke-width="0.6"><line x1="${cx-5}" y1="${cy}" x2="${cx+5}" y2="${cy}"/><line x1="${cx}" y1="${cy-5}" x2="${cx}" y2="${cy+5}"/></g>`;
+    svg += cross(padL-20, 30);
+    svg += cross(VBW-padR+20, 30);
+    svg += cross(padL-20, VBH-20);
+    svg += cross(VBW-padR+20, VBH-20);
+
+    svg += `</svg>`;
+    wrap.innerHTML = svg;
+
+    // Hover + click wiring
+    wrap.querySelectorAll('.skyline-bldg').forEach(g => {
+      const rect = g.querySelector('rect[fill="var(--cream-soft)"]');
+      g.addEventListener('mouseenter', () => {
+        if(rect){ rect.setAttribute('stroke', 'var(--clay)'); rect.setAttribute('stroke-width','1.8'); rect.setAttribute('fill','var(--clay-soft)'); }
+      });
+      g.addEventListener('mouseleave', () => {
+        if(rect){ rect.setAttribute('stroke', 'var(--ink)'); rect.setAttribute('stroke-width','1.2'); rect.setAttribute('fill','var(--cream-soft)'); }
+      });
+      g.addEventListener('click', () => applyProject(g.dataset.project));
+    });
+  }
+  renderSkyline();
 
   /* ============ HOME PROMPT · CLAUDE API ============ */
   const KEY_STORAGE   = 'cortex_anthropic_key';
