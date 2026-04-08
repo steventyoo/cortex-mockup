@@ -552,6 +552,11 @@
       </div>
       <div class="flex items-center gap-4 text-[11px]" style="color: var(--ink-3);">
         <span class="mono">v0.2 · APR 8, 2026</span>
+        <span class="meta-sep"></span>
+        <button id="key-indicator" onclick="openKeyModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-semibold tracking-wider uppercase" style="background: transparent; color: var(--ink-3); border: 1px solid var(--border-2);">
+          <span id="key-indicator-dot" style="width: 6px; height: 6px; border-radius: 999px; background: var(--clay);"></span>
+          <span id="key-indicator-label">API key · not set</span>
+        </button>
       </div>
     </div>
 
@@ -577,24 +582,44 @@
       <!-- Prompt box -->
       <div class="mt-12 w-full">
         <div id="home-prompt-box" style="background: var(--cream-card); border: 1px solid var(--border-2); border-radius: 18px; padding: 20px 22px; transition: border-color .15s ease, box-shadow .15s ease;">
-          <textarea id="home-prompt-input" rows="3" placeholder="Ask Cortex anything about your jobs…" style="width: 100%; background: transparent; border: none; outline: none; resize: none; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: var(--ink); letter-spacing: -0.005em;"></textarea>
+          <textarea id="home-prompt-input" rows="3" placeholder="Ask Cortex anything about your jobs…  (⌘↵ to send)" style="width: 100%; background: transparent; border: none; outline: none; resize: none; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: var(--ink); letter-spacing: -0.005em;"></textarea>
           <div class="mt-3 flex items-center justify-between">
             <div class="flex items-center gap-2 text-[11px]" style="color: var(--ink-4);">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               <span>Grounded on 4 projects · 1,042 files · 64 fields</span>
             </div>
-            <button class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
+            <button id="home-prompt-send" onclick="sendPrompt()" class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
               Send ▸
             </button>
           </div>
         </div>
 
         <!-- Suggested prompts -->
-        <div class="mt-5 flex flex-wrap justify-center gap-2">
+        <div id="home-prompt-chips" class="mt-5 flex flex-wrap justify-center gap-2">
           <button onclick="fillPrompt(this)" class="prompt-chip">Why did #2009 labor run over budget?</button>
           <button onclick="fillPrompt(this)" class="prompt-chip">Benchmark this new bid against my last 4 jobs.</button>
           <button onclick="fillPrompt(this)" class="prompt-chip">Which vendors own the most of my material spend?</button>
           <button onclick="fillPrompt(this)" class="prompt-chip">Draft a JCR narrative for Barrett Park.</button>
+        </div>
+
+        <!-- API key banner (shown when no key is set) -->
+        <div id="home-key-banner" class="mt-6 flex items-center justify-between gap-4" style="background: var(--clay-soft); border: 1px solid #E8C6B2; border-radius: 12px; padding: 14px 18px;">
+          <div class="flex items-center gap-3 text-[12.5px]" style="color: var(--clay);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div><b>No Anthropic API key set.</b> Cortex calls Claude directly from your browser — paste a key to start asking questions.</div>
+          </div>
+          <button onclick="openKeyModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase whitespace-nowrap" style="background: var(--clay); color: var(--cream);">
+            Set API key ▸
+          </button>
+        </div>
+
+        <!-- Response area -->
+        <div id="home-response" class="mt-10" style="display: none;">
+          <div class="meta-bar mb-3" id="home-response-label">Cortex · thinking…</div>
+          <div id="home-response-body" class="text-[15px]" style="color: var(--ink-2); line-height: 1.75; max-width: 100%;"></div>
+          <div class="mt-6 flex items-center gap-3">
+            <button onclick="resetPrompt()" class="text-[11px] mono" style="color: var(--clay);">↺ New question</button>
+          </div>
         </div>
       </div>
 
@@ -1653,6 +1678,36 @@
 
   </main> <!-- /main -->
 </div> <!-- /shell -->
+<!-- ============================== API KEY MODAL ============================== -->
+<div id="key-modal" class="modal">
+  <div class="modal-backdrop" onclick="closeKeyModal()"></div>
+  <div class="modal-body" style="max-width: 560px;">
+    <button class="modal-close" onclick="closeKeyModal()">×</button>
+    <div class="modal-eyebrow">Settings · Anthropic API key</div>
+    <div class="modal-title">Bring your own key.</div>
+    <div class="modal-sub">Paste your Anthropic API key. It's stored in your browser's <b>localStorage</b> only — never sent anywhere except directly to <span class="mono" style="font-size: 12px;">api.anthropic.com</span>. Get one at <span class="mono" style="font-size: 12px;">console.anthropic.com/settings/keys</span>.</div>
+    <div class="modal-section">
+      <div class="modal-section-label">API Key</div>
+      <input id="key-input" type="password" placeholder="sk-ant-api03-…" spellcheck="false" autocomplete="off" style="width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 14px 16px; background: var(--cream-card); border: 1px solid var(--border-2); border-radius: 10px; color: var(--ink); outline: none;" />
+      <div class="mt-4 flex items-center gap-3">
+        <label class="flex items-center gap-2 text-[12px]" style="color: var(--ink-3);">
+          <span>Model</span>
+          <select id="key-model" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 7px 10px; background: var(--cream-card); border: 1px solid var(--border-2); border-radius: 8px; color: var(--ink); outline: none;">
+            <option value="claude-sonnet-4-5">claude-sonnet-4-5 (fast)</option>
+            <option value="claude-opus-4-5">claude-opus-4-5 (best)</option>
+            <option value="claude-haiku-4-5">claude-haiku-4-5 (cheap)</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="modal-section flex items-center gap-3">
+      <button onclick="saveKey()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">Save ▸</button>
+      <button onclick="clearKey()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: transparent; color: var(--ink-3); border: 1px solid var(--border-2);">Clear</button>
+      <span id="key-status" class="text-[11px]" style="color: var(--ink-4);"></span>
+    </div>
+  </div>
+</div>
+
 <!-- ============================== MODALS ============================== -->
 
 <!-- Modal 01 · Financial Overview -->
@@ -2299,11 +2354,203 @@
     setView('project');
   }
 
-  /* ============ HOME PROMPT ============ */
+  /* ============ HOME PROMPT · CLAUDE API ============ */
+  const KEY_STORAGE   = 'cortex_anthropic_key';
+  const MODEL_STORAGE = 'cortex_anthropic_model';
+  const DEFAULT_MODEL = 'claude-sonnet-4-5';
+
+  function getKey(){ return localStorage.getItem(KEY_STORAGE) || ''; }
+  function getModel(){ return localStorage.getItem(MODEL_STORAGE) || DEFAULT_MODEL; }
+
+  function refreshKeyIndicator(){
+    const hasKey = !!getKey();
+    const dot = document.getElementById('key-indicator-dot');
+    const lbl = document.getElementById('key-indicator-label');
+    if(dot) dot.style.background = hasKey ? '#5A8F4A' : 'var(--clay)';
+    if(lbl) lbl.textContent = hasKey ? ('API key · ' + getModel()) : 'API key · not set';
+    const banner = document.getElementById('home-key-banner');
+    if(banner) banner.style.display = hasKey ? 'none' : '';
+  }
+
+  function openKeyModal(){
+    const m = document.getElementById('key-modal');
+    if(!m) return;
+    const input = document.getElementById('key-input');
+    const model = document.getElementById('key-model');
+    if(input) input.value = getKey();
+    if(model) model.value = getModel();
+    document.getElementById('key-status').textContent = getKey() ? 'Key present in localStorage.' : '';
+    m.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input && input.focus(), 50);
+  }
+  function closeKeyModal(){
+    const m = document.getElementById('key-modal');
+    if(m) m.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function saveKey(){
+    const k = document.getElementById('key-input').value.trim();
+    const mdl = document.getElementById('key-model').value;
+    if(!k){ document.getElementById('key-status').textContent = 'Empty key — nothing saved.'; return; }
+    localStorage.setItem(KEY_STORAGE, k);
+    localStorage.setItem(MODEL_STORAGE, mdl);
+    document.getElementById('key-status').textContent = 'Saved.';
+    refreshKeyIndicator();
+    setTimeout(closeKeyModal, 400);
+  }
+  function clearKey(){
+    localStorage.removeItem(KEY_STORAGE);
+    localStorage.removeItem(MODEL_STORAGE);
+    document.getElementById('key-input').value = '';
+    document.getElementById('key-status').textContent = 'Cleared.';
+    refreshKeyIndicator();
+  }
+
   function fillPrompt(btn){
     const input = document.getElementById('home-prompt-input');
     if(input){ input.value = btn.textContent.trim(); input.focus(); }
   }
+  function resetPrompt(){
+    const resp  = document.getElementById('home-response');
+    const input = document.getElementById('home-prompt-input');
+    const chips = document.getElementById('home-prompt-chips');
+    if(resp)  resp.style.display = 'none';
+    if(chips) chips.style.display = '';
+    if(input){ input.value = ''; input.focus(); }
+  }
+
+  // Submit on ⌘/Ctrl + Enter
+  document.addEventListener('keydown', e => {
+    const input = document.getElementById('home-prompt-input');
+    if(input && document.activeElement === input && (e.metaKey || e.ctrlKey) && e.key === 'Enter'){
+      e.preventDefault(); sendPrompt();
+    }
+  });
+
+  // Build the grounding context from PROJECTS + BENCH
+  function buildContext(){
+    const lines = [];
+    lines.push("You are Cortex, an intelligence assistant for One Way Plumbing LLC — a specialty plumbing subcontractor based in Seattle. You answer questions about the four closed jobs in the portfolio below. Answer in the same editorial tone as an intelligence report: direct, numerate, no hedging. Lead with the answer. Use **bold** for key numbers and names. Keep responses concise (2–4 short paragraphs unless the user asks for depth). When you cite a number, cite it exactly from the data. Do not invent data that isn't below.");
+    lines.push("");
+    lines.push("## Portfolio summary");
+    lines.push("- 4 closed specialty plumbing jobs · $4,041,906 total revenue · $1,723,813 combined profit · 42.6% blended margin");
+    lines.push("- 613 units · 3,021 plumbing fixtures · 35,927 total labor hours · 104 unique workers");
+    lines.push("- 1,042 raw files ingested · 5 of 13 schemas parsed · 64 queryable fields");
+    lines.push("");
+    lines.push("## Project records");
+    Object.entries(PROJECTS).forEach(([id, p]) => {
+      lines.push(`### Job #${id} · ${p.jobTop} ${p.jobBottom}`);
+      lines.push(`- GC: ${p.gc} · Location: ${p.location} · Duration: ${p.dateRange} · Units: ${p.unitsDesc}`);
+      lines.push(`- Revenue: ${p.revenue} (${p.revenueFoot})`);
+      lines.push(`- Net profit: ${p.profit} (${p.profitFoot})`);
+      lines.push(`- Direct cost: ${p.k01_directCost} · Original contract: ${p.k01_origContract} · Change orders: ${p.k01_co}`);
+      lines.push(`- Expenses: ${p.expenses} (${p.expensesFoot})`);
+      lines.push(`- Retainage outstanding: ${p.retainage} (${p.retainageFoot})`);
+      lines.push(`- Workforce: ${p.workforce} · Gross margin: ${p.k01_margin}`);
+      lines.push(`- Executive take: ${p.execHeadline.replace(/<[^>]+>/g,'')}`);
+      lines.push(`- Narrative: ${p.execBody.replace(/<br\/?>/g,' ').replace(/<[^>]+>/g,'').slice(0, 700)}`);
+      lines.push("");
+    });
+    lines.push("## Benchmark comparison (4-way)");
+    lines.push("Columns: " + BENCH.head.join(" | "));
+    BENCH.groups.forEach(([glabel, rows]) => {
+      lines.push("### " + glabel);
+      rows.forEach(r => {
+        const fmt = fmtNum[r.fmt];
+        const vals = r.v.map(v => fmt(v));
+        const avg = fmt(r.v.reduce((a,b)=>a+b,0)/r.v.length);
+        lines.push(`- ${r.label}: ${vals.join(" / ")} (avg ${avg})`);
+      });
+    });
+    lines.push("");
+    lines.push("## Key benchmark observations");
+    lines.push("- #2010 Chinn Old Town is the margin outlier: 54.2% on $1.39M, driven by material buyout discipline and a labor-light mix (14.6% of revenue vs. 21.5% average).");
+    lines.push("- #2009 Chinn Greenwood is the margin floor at 27.0%.");
+    lines.push("- #2011 Chinn Barrett Park is the productivity leader at 11.8 hours per fixture (vs. 17.9 on #2012).");
+    lines.push("- Wage structure is remarkably stable: blended gross wage spans just $0.80 across all four jobs ($19.78 → $20.58).");
+    lines.push("- Chinn is the preferred GC (3 of 4 jobs). Blended Chinn margin: 39.8%. Exxel: 38.3%.");
+    lines.push("- #2009 has the cleanest PO discipline: 102% of material spend covered by 49 POs. #2012 tracks material via AP only — no PO discipline.");
+    return lines.join("\n");
+  }
+
+  // Tiny markdown → HTML (bold, italics, paragraphs, lists)
+  function mdToHtml(md){
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    let h = esc(md);
+    // bold, italic, inline code
+    h = h.replace(/\*\*([^*\n]+)\*\*/g, '<b style="color: var(--ink);">$1</b>');
+    h = h.replace(/\*([^*\n]+)\*/g, '<span class="serif-it">$1</span>');
+    h = h.replace(/`([^`\n]+)`/g, '<span class="mono" style="font-size: 13px; background: var(--cream-soft); padding: 1px 5px; border-radius: 4px;">$1</span>');
+    // paragraphs & simple unordered lists
+    const blocks = h.split(/\n{2,}/).map(block => {
+      if(/^\s*[-*]\s/.test(block)){
+        const items = block.split(/\n/).map(l => l.replace(/^\s*[-*]\s+/, '').trim()).filter(Boolean);
+        return '<ul style="margin: 10px 0 14px 20px; padding: 0; list-style: disc;">' + items.map(i => `<li style="margin-bottom: 6px;">${i}</li>`).join('') + '</ul>';
+      }
+      return '<p style="margin: 0 0 14px 0;">' + block.replace(/\n/g,'<br/>') + '</p>';
+    });
+    return blocks.join('');
+  }
+
+  async function sendPrompt(){
+    const input = document.getElementById('home-prompt-input');
+    const send  = document.getElementById('home-prompt-send');
+    const resp  = document.getElementById('home-response');
+    const body  = document.getElementById('home-response-body');
+    const label = document.getElementById('home-response-label');
+    const chips = document.getElementById('home-prompt-chips');
+
+    const question = (input.value || '').trim();
+    if(!question) return;
+
+    const key = getKey();
+    if(!key){ openKeyModal(); return; }
+
+    if(chips) chips.style.display = 'none';
+    resp.style.display = '';
+    label.textContent = 'Cortex · thinking…';
+    body.innerHTML = '<div class="mono" style="font-size: 11px; color: var(--ink-4);">Calling ' + getModel() + '…</div>';
+    send.disabled = true; send.style.opacity = '0.6';
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: getModel(),
+          max_tokens: 1024,
+          system: buildContext(),
+          messages: [{ role: 'user', content: question }]
+        })
+      });
+
+      if(!res.ok){
+        const txt = await res.text();
+        let msg = txt;
+        try { const j = JSON.parse(txt); msg = (j.error && j.error.message) || txt; } catch(e){}
+        throw new Error(`HTTP ${res.status} — ${msg}`);
+      }
+
+      const data = await res.json();
+      const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n\n');
+      label.textContent = 'Cortex · ' + getModel();
+      body.innerHTML = mdToHtml(text || '(empty response)');
+    } catch(err){
+      label.textContent = 'Cortex · error';
+      body.innerHTML = '<div style="color: var(--clay);"><b>Request failed.</b> ' + String(err.message || err) + '</div>' +
+                       '<div class="mt-3 text-[12px]" style="color: var(--ink-3);">Check that your API key is valid and has access to the selected model. Click the key badge in the top right to update it.</div>';
+    } finally {
+      send.disabled = false; send.style.opacity = '1';
+    }
+  }
+
+  refreshKeyIndicator();
 
   /* ============ VIEW SWITCHER ============ */
   function setView(v){
