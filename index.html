@@ -354,6 +354,27 @@
   /* --- Views --- */
   .view { display: none; }
   .view.active { display: block; }
+
+  /* --- Home prompt box --- */
+  #home-prompt-box:focus-within {
+    border-color: var(--ink-3);
+    box-shadow: 0 1px 0 var(--border), 0 18px 40px -28px rgba(31,30,29,0.22);
+  }
+  .prompt-chip {
+    background: var(--cream-card);
+    border: 1px solid var(--border-2);
+    color: var(--ink-2);
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .prompt-chip:hover {
+    background: var(--cream-soft);
+    border-color: var(--ink-4);
+    color: var(--ink);
+  }
   .main { padding: 40px 56px 60px; min-width: 0; }
 
   /* --- Condensed portfolio strip --- */
@@ -486,24 +507,24 @@
 
     <div class="sb-label">Projects</div>
     <div style="display: flex; flex-direction: column;">
-      <div class="sb-project active" data-project="2009">
-        <div class="sb-pnum">JOB #2009 · VIEWING</div>
-        <div class="sb-pname">Chinn Greenwood <span class="serif-it">Apts.</span></div>
+      <div class="sb-project" data-project="2009">
+        <div class="sb-pnum">JOB #2009</div>
+        <div class="sb-pname"><b>Chinn</b> <span class="serif-it">Greenwood Apts.</span></div>
         <div class="sb-psub">Chinn · Seattle · 168u</div>
       </div>
       <div class="sb-project" data-project="2010">
         <div class="sb-pnum">JOB #2010</div>
-        <div class="sb-pname">Chinn <span class="serif-it">Old Town.</span></div>
+        <div class="sb-pname"><b>Chinn</b> <span class="serif-it">Old Town.</span></div>
         <div class="sb-psub">Chinn · Seattle · 165u</div>
       </div>
       <div class="sb-project" data-project="2011">
         <div class="sb-pnum">JOB #2011</div>
-        <div class="sb-pname">Chinn Barrett <span class="serif-it">Park.</span></div>
+        <div class="sb-pname"><b>Chinn</b> <span class="serif-it">Barrett Park.</span></div>
         <div class="sb-psub">Chinn · Seattle · 117u</div>
       </div>
       <div class="sb-project" data-project="2012">
         <div class="sb-pnum">JOB #2012</div>
-        <div class="sb-pname">Exxel <span class="serif-it">8th Ave.</span></div>
+        <div class="sb-pname"><b>Exxel</b> <span class="serif-it">8th Ave.</span></div>
         <div class="sb-psub">Exxel · Seattle · 163u</div>
       </div>
     </div>
@@ -517,17 +538,82 @@
   <!-- ===== MAIN ===== -->
   <main class="main">
 
-  <!-- ========= HOME / PROJECT REPORT VIEW ========= -->
+  <!-- ============================================================ -->
+  <!-- ================= HOME · LANDING VIEW ====================== -->
+  <!-- ============================================================ -->
   <div class="view active" data-view="home">
+
+    <!-- TOP META BAR -->
+    <div class="flex items-center justify-between mb-10">
+      <div class="flex items-center gap-3">
+        <span class="font-semibold tracking-tight text-[13px] uppercase" style="color: var(--ink); letter-spacing: 0.08em;">One Way Plumbing LLC</span>
+        <span style="color: var(--border-2);">|</span>
+        <span class="meta-bar">Cortex · Specialty Sub Intelligence</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px]" style="color: var(--ink-3);">
+        <span class="mono">v0.2 · APR 8, 2026</span>
+      </div>
+    </div>
+
+    <!-- CENTERED PROMPT AREA -->
+    <div class="flex flex-col items-center justify-center" style="min-height: calc(100vh - 180px); max-width: 780px; margin: 0 auto; padding-bottom: 80px;">
+
+      <!-- Eyebrow -->
+      <div class="mono mb-6" style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-4);">
+        Cortex · built for subcontractors
+      </div>
+
+      <!-- Tagline -->
+      <h1 class="text-center tighter font-semibold" style="color: var(--ink); font-size: clamp(48px, 5.5vw, 76px); line-height: 0.98; letter-spacing: -0.035em;">
+        Ask anything about<br/>
+        <span class="serif-it" style="font-weight: 400;">your portfolio.</span>
+      </h1>
+
+      <!-- Pitch -->
+      <div class="mt-8 text-center text-[15px] leading-[1.7]" style="color: var(--ink-3); max-width: 620px;">
+        Cortex is an intelligence layer for specialty subcontractors. Drop in your job files — pay apps, POs, JCRs, takeoffs, submittals — and ask anything in plain English. Benchmark a bid against your closed jobs, diagnose why a margin slipped, or pull every PO ever issued to a vendor. The research tool a sub's back office has been missing.
+      </div>
+
+      <!-- Prompt box -->
+      <div class="mt-12 w-full">
+        <div id="home-prompt-box" style="background: var(--cream-card); border: 1px solid var(--border-2); border-radius: 18px; padding: 20px 22px; transition: border-color .15s ease, box-shadow .15s ease;">
+          <textarea id="home-prompt-input" rows="3" placeholder="Ask Cortex anything about your jobs…" style="width: 100%; background: transparent; border: none; outline: none; resize: none; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: var(--ink); letter-spacing: -0.005em;"></textarea>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-[11px]" style="color: var(--ink-4);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>Grounded on 4 projects · 1,042 files · 64 fields</span>
+            </div>
+            <button class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
+              Send ▸
+            </button>
+          </div>
+        </div>
+
+        <!-- Suggested prompts -->
+        <div class="mt-5 flex flex-wrap justify-center gap-2">
+          <button onclick="fillPrompt(this)" class="prompt-chip">Why did #2009 labor run over budget?</button>
+          <button onclick="fillPrompt(this)" class="prompt-chip">Benchmark this new bid against my last 4 jobs.</button>
+          <button onclick="fillPrompt(this)" class="prompt-chip">Which vendors own the most of my material spend?</button>
+          <button onclick="fillPrompt(this)" class="prompt-chip">Draft a JCR narrative for Barrett Park.</button>
+        </div>
+      </div>
+
+      <!-- Tiny footer hint -->
+      <div class="mt-16 text-[11px] mono" style="color: var(--ink-4);">
+        ↖ or open <button onclick="setView('portfolio')" style="color: var(--clay); text-decoration: underline; text-underline-offset: 3px;">the portfolio</button> · <button onclick="setView('benchmark')" style="color: var(--clay); text-decoration: underline; text-underline-offset: 3px;">the benchmark</button> · <button onclick="applyProject('2009')" style="color: var(--clay); text-decoration: underline; text-underline-offset: 3px;">a live project report</button>
+      </div>
+    </div>
+
+  </div> <!-- /view: home -->
+
+  <!-- ========= PROJECT REPORT VIEW ========= -->
+  <div class="view" data-view="project">
 
   <!-- TOP META BAR -->
   <div class="flex items-center justify-between mb-10">
     <div class="flex items-center gap-3">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round">
-        <path d="M12 2 L4 22 L12 17 L20 22 Z"/>
-      </svg>
-      <span class="font-semibold tracking-tight text-[18px]" style="color: var(--ink);">Cortex</span>
-      <span class="meta-sep"></span>
+      <span class="font-semibold tracking-tight text-[13px] uppercase" style="color: var(--ink); letter-spacing: 0.08em;">One Way Plumbing LLC</span>
+      <span style="color: var(--border-2);">|</span>
       <span class="meta-bar">Project Intelligence Report</span>
     </div>
     <div class="flex items-center gap-4 text-[11px]" style="color: var(--ink-3);">
@@ -548,9 +634,8 @@
       <span class="chip-clay">18.6% Cortex coverage</span>
     </div>
 
-    <h1 class="text-[86px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
-      <span data-f="jobTop">Chinn Greenwood</span><br/>
-      <span class="serif-it" style="font-size: 1em;" data-f="jobBottom">Ave Apartments.</span>
+    <h1 class="tighter font-semibold whitespace-nowrap" style="color: var(--ink); font-size: clamp(44px, 5.2vw, 68px); line-height: 1.02;">
+      <span data-f="jobTop">Chinn</span><span style="display:inline-block; width: 0.28em;"></span><span class="serif-it" data-f="jobBottom" style="font-weight: 400;">Greenwood Ave Apartments.</span>
     </h1>
 
     <div class="mt-6 flex items-center gap-5 text-[13px]" style="color: var(--ink-3);">
@@ -1383,7 +1468,7 @@
     <div>Confidential · For One Way Plumbing LLC management only</div>
   </div>
 
-  </div> <!-- /view: home -->
+  </div> <!-- /view: project -->
 
   <!-- ============================================================ -->
   <!-- ============= PORTFOLIO OVERVIEW VIEW ====================== -->
@@ -1401,15 +1486,16 @@
       Four closed specialty plumbing jobs ingested into Cortex. Three with Chinn Construction, one with Exxel Pacific. All Seattle multifamily. Click any project to open its full intelligence report.
     </div>
 
-    <div class="grid grid-cols-4 gap-5 mt-12" id="portfolio-grid">
-      <!-- populated by JS render -->
-    </div>
-
-    <div class="grid grid-cols-4 gap-8 py-10 mt-14 border-y border-dashed" style="border-color: var(--border-2);">
+    <div class="grid grid-cols-4 gap-8 py-10 mt-12 border-y border-dashed" style="border-color: var(--border-2);">
       <div><div class="hero-lab">Total Revenue</div><div class="hero-val tabular">$4,041,906</div><div class="hero-foot">across 4 closed jobs</div></div>
       <div><div class="hero-lab">Combined Profit</div><div class="hero-val tabular" style="color: var(--sage-ink);">$1,723,813</div><div class="hero-foot">42.6% blended margin</div></div>
       <div><div class="hero-lab">Total Units</div><div class="hero-val tabular">613</div><div class="hero-foot">3,021 plumbing fixtures</div></div>
       <div><div class="hero-lab">Total Labor Hours</div><div class="hero-val tabular">35,927</div><div class="hero-foot">104 unique workers</div></div>
+    </div>
+
+    <div class="meta-bar mt-14 mb-4">The four projects</div>
+    <div class="grid grid-cols-4 gap-5 items-stretch" id="portfolio-grid">
+      <!-- populated by JS render -->
     </div>
   </div>
 
@@ -1437,7 +1523,13 @@
     </div>
 
     <div class="mt-14">
-      <div class="meta-bar mb-3">The full table</div>
+      <div class="flex items-end justify-between mb-3">
+        <div class="meta-bar">The full table</div>
+        <button onclick="downloadBenchmarkCSV()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CSV
+        </button>
+      </div>
       <div id="bench-table"></div>
     </div>
 
@@ -2120,7 +2212,7 @@
     "2009": {
       reportNum: "REPORT #2009-IR02",
       chips: ['<span class="chip-sage">Strong margin · 7 pts above industry</span>','<span class="chip-ink">Closed · Retainage pending</span>','<span class="chip-clay">18.6% Cortex coverage</span>'],
-      jobTop: "Chinn Greenwood", jobBottom: "Ave Apartments.",
+      jobTop: "Chinn", jobBottom: "Greenwood Ave Apartments.",
       jobNum: "#2009", location: "Seattle, WA · Greenwood & 107th", gc: "Chinn Construction, LLC",
       gcShort: "Chinn Construction, LLC",
       dateRange: "Jul 2012 → Oct 2013 · 16 months", unitsDesc: "168-unit multifamily",
@@ -2158,7 +2250,7 @@
     "2011": {
       reportNum: "REPORT #2011-IR01",
       chips: ['<span class="chip-sage">Healthy margin · 38.3%</span>','<span class="chip-ink">Best hours / fixture</span>','<span class="chip-clay">Additive COs · +$57k</span>'],
-      jobTop: "Chinn Barrett", jobBottom: "Park Apartments.",
+      jobTop: "Chinn", jobBottom: "Barrett Park Apartments.",
       jobNum: "#2011", location: "Seattle, WA", gc: "Chinn Construction, LLC",
       gcShort: "Chinn Construction, LLC",
       dateRange: "17 months · live-work multifamily", unitsDesc: "117-unit multifamily",
@@ -2203,8 +2295,14 @@
     });
     // active state
     document.querySelectorAll('.sb-project').forEach(e => e.classList.toggle('active', e.dataset.project === id));
-    // return to home view so user sees update
-    setView('home');
+    // switch to project detail view so user sees update
+    setView('project');
+  }
+
+  /* ============ HOME PROMPT ============ */
+  function fillPrompt(btn){
+    const input = document.getElementById('home-prompt-input');
+    if(input){ input.value = btn.textContent.trim(); input.focus(); }
   }
 
   /* ============ VIEW SWITCHER ============ */
@@ -2338,16 +2436,47 @@
   }
   renderBench();
 
+  /* ============ BENCHMARK CSV DOWNLOAD ============ */
+  function downloadBenchmarkCSV(){
+    const esc = s => {
+      const str = String(s);
+      return /[",\n]/.test(str) ? `"${str.replace(/"/g,'""')}"` : str;
+    };
+    const rows = [];
+    rows.push(BENCH.head.concat(['Best','Worst']).map(esc).join(','));
+    BENCH.groups.forEach(([label, group]) => {
+      rows.push(esc(label));
+      group.forEach(r => {
+        const fmt = fmtNum[r.fmt];
+        const avg = r.v.reduce((a,b)=>a+b,0)/r.v.length;
+        let bestIdx = -1, worstIdx = -1;
+        if(r.dir === 'hi'){ bestIdx = r.v.indexOf(Math.max(...r.v)); worstIdx = r.v.indexOf(Math.min(...r.v)); }
+        else if(r.dir === 'lo'){ bestIdx = r.v.indexOf(Math.min(...r.v)); worstIdx = r.v.indexOf(Math.max(...r.v)); }
+        const cols = [r.label, ...r.v.map(v => fmt(v)), fmt(avg)];
+        const bestLabel = bestIdx >= 0 ? BENCH.head[bestIdx+1] : '';
+        const worstLabel = worstIdx >= 0 ? BENCH.head[worstIdx+1] : '';
+        cols.push(bestLabel, worstLabel);
+        rows.push(cols.map(esc).join(','));
+      });
+    });
+    const csv = rows.join('\n');
+    const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `OWP_Benchmark_Comparison_${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
   /* ============ PORTFOLIO GRID ============ */
-  function renderPortfolio(){
-    const cont = document.getElementById('portfolio-grid'); if(!cont) return;
-    const order = ["2009","2010","2011","2012"];
-    cont.innerHTML = order.map(id => {
-      const p = PROJECTS[id];
-      return `<div class="kpi" style="cursor:pointer;" onclick="applyProject('${id}')">
+  function portfolioCardHTML(id){
+    const p = PROJECTS[id];
+    return `<div class="kpi" style="cursor:pointer; height:100%;" onclick="applyProject('${id}')">
+      <div>
         <div class="kpi-eyebrow">JOB ${p.jobNum} · ${id}</div>
-        <div class="kpi-title" style="margin-top:12px;">${p.jobTop} <span class="serif-it">${p.jobBottom}</span></div>
-        <div class="kpi-sub">${p.gcShort} · ${p.location}</div>
+        <div class="kpi-title" style="margin-top:12px; min-height:54px; line-height:1.22;"><b>${p.jobTop}</b> <span class="serif-it">${p.jobBottom}</span></div>
+        <div class="kpi-sub" style="min-height:36px;">${p.gcShort} · ${p.location}</div>
         <div class="kpi-divider"></div>
         <div class="flex items-baseline justify-between">
           <div><div class="kpi-val-big italic">${p.revenue}</div><div class="hero-lab mt-2">Revenue</div></div>
@@ -2358,10 +2487,18 @@
         <div class="kpi-row"><span class="kpi-lbl">Direct cost</span><span class="kpi-val">${p.k01_directCost}</span></div>
         <div class="kpi-row"><span class="kpi-lbl">Change orders</span><span class="kpi-val">${p.k01_co}</span></div>
         <div class="kpi-row"><span class="kpi-lbl">Workforce</span><span class="kpi-val">${p.workforce}</span></div>
-        <div class="kpi-divider"></div>
+      </div>
+      <div style="margin-top:auto; padding-top:18px;">
+        <div style="border-top:1px dashed var(--border-2); margin-bottom:14px;"></div>
         <div class="text-[11px] mono" style="color:var(--clay);">Open report →</div>
-      </div>`;
-    }).join('');
+      </div>
+    </div>`;
+  }
+  function renderPortfolio(){
+    const order = ["2009","2010","2011","2012"];
+    const html = order.map(portfolioCardHTML).join('');
+    const a = document.getElementById('portfolio-grid'); if(a) a.innerHTML = html;
+    const b = document.getElementById('home-portfolio-grid'); if(b) b.innerHTML = html;
   }
   renderPortfolio();
 </script>
