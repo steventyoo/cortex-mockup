@@ -480,10 +480,110 @@
   .modal-table td.neg { color: var(--clay); }
   .modal-table td.pos { color: var(--sage-ink); }
   .modal-table tr.total td { font-weight: 700; color: var(--ink); border-top: 1px solid var(--border); border-bottom: none; padding-top: 12px; }
+
+  /* --- Mobile menu button (hidden on desktop) --- */
+  .mobile-menu-btn {
+    display: none;
+    position: fixed; top: 14px; left: 14px; z-index: 200;
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--cream); border: 1px solid var(--border-2);
+    align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px -6px rgba(31,30,29,0.18);
+    cursor: pointer;
+  }
+  .mobile-menu-btn svg { width: 20px; height: 20px; color: var(--ink); }
+  .mobile-scrim {
+    display: none;
+    position: fixed; inset: 0; z-index: 150;
+    background: rgba(31,30,29,0.35);
+    backdrop-filter: blur(2px);
+  }
+  body.nav-open .mobile-scrim { display: block; }
+
+  /* ============ RESPONSIVE ============ */
+  /* Tablet + iPad */
+  @media (max-width: 1100px) {
+    .shell { grid-template-columns: 220px 1fr; }
+    .main { padding: 34px 36px 50px; }
+  }
+
+  /* iPad portrait + mobile */
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: 280px; max-width: 84vw;
+      height: 100vh; z-index: 180;
+      transform: translateX(-105%);
+      transition: transform .25s ease;
+      box-shadow: 0 0 40px -10px rgba(31,30,29,0.3);
+    }
+    body.nav-open .sidebar { transform: translateX(0); }
+    .mobile-menu-btn { display: inline-flex; }
+    .main { padding: 72px 20px 50px; }
+
+    /* Home top meta bar — stack */
+    [data-view="home"] > .flex.items-center.justify-between.mb-10 {
+      flex-direction: column; align-items: flex-start; gap: 12px;
+    }
+
+    /* Skyline hero */
+    #skyline-hero { padding: 18px 18px 22px !important; }
+    #skyline-svg-wrap svg { width: 100% !important; height: auto !important; }
+    .blueprint-corner { font-size: 8px !important; }
+
+    /* Home prompt typography */
+    #home-prompt-box { padding: 18px !important; }
+    #home-prompt-input { font-size: 15px !important; }
+
+    /* Grid collapses — universal */
+    .grid.grid-cols-12 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; gap: 18px !important; }
+    .grid.grid-cols-4  { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px !important; }
+    .grid.grid-cols-3  { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px !important; }
+    .grid.grid-cols-2  { grid-template-columns: 1fr !important; gap: 14px !important; }
+    .grid.grid-cols-6  { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+
+    /* Tailwind col-span overrides — make full-width on mobile */
+    [class*="col-span-"] { grid-column: span 6 / span 6 !important; }
+
+    /* Portfolio strip — 2x2 */
+    .portfolio-strip { grid-template-columns: repeat(2, 1fr); }
+    .ps-item { padding: 16px 16px; }
+
+    /* Headlines shrink */
+    h1, h2 { letter-spacing: -0.01em; }
+    .view h2.text-\[32px\], h2.text-\[32px\] { font-size: 24px !important; }
+
+    /* Benchmark table horizontal scroll */
+    #bench-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    #bench-table .bench-table { min-width: 760px; }
+
+    /* Modals */
+    .modal { padding: 20px 12px; }
+    .modal-body { padding: 24px !important; }
+  }
+
+  @media (max-width: 560px) {
+    .main { padding: 68px 14px 40px; }
+    .grid.grid-cols-12 { grid-template-columns: 1fr !important; }
+    .grid.grid-cols-4  { grid-template-columns: 1fr !important; }
+    .grid.grid-cols-3  { grid-template-columns: 1fr !important; }
+    .grid.grid-cols-6  { grid-template-columns: repeat(2, 1fr) !important; }
+    [class*="col-span-"] { grid-column: 1 / -1 !important; }
+    .portfolio-strip { grid-template-columns: 1fr; }
+    .view h2.text-\[32px\], h2.text-\[32px\] { font-size: 22px !important; }
+    .prompt-chip { font-size: 11px; padding: 6px 11px; }
+    #skyline-hero { padding: 14px 12px 18px !important; }
+  }
 </style>
 </head>
 <body>
 <div class="ruler-bg"></div>
+
+<button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7 H20"/><path d="M4 12 H20"/><path d="M4 17 H20"/></svg>
+</button>
+<div class="mobile-scrim" onclick="document.body.classList.remove('nav-open')"></div>
 
 <div class="shell relative z-10">
 
@@ -2653,11 +2753,9 @@
 
     if(chips) chips.style.display = 'none';
     resp.style.display = '';
-    label.textContent = 'Cortex · thinking…';
+    label.innerHTML = '<span style="display:inline-flex; align-items:center; gap:8px;"><svg class="cortex-mark thinking" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M12 2 L4 22 L12 17 L20 22 Z"/></svg>Cortex · thinking…</span>';
     body.innerHTML = '<div class="mono" style="font-size: 11px; color: var(--ink-4);">Calling ' + getModel() + '…</div>';
     send.disabled = true; send.style.opacity = '0.6';
-    const mark = document.getElementById('cortex-logo');
-    if(mark) mark.classList.add('thinking');
 
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -2693,7 +2791,6 @@
                        '<div class="mt-3 text-[12px]" style="color: var(--ink-3);">Check that your API key is valid and has access to the selected model. Click the key badge in the top right to update it.</div>';
     } finally {
       send.disabled = false; send.style.opacity = '1';
-      if(mark) mark.classList.remove('thinking');
     }
   }
 
@@ -2707,10 +2804,10 @@
   }
 
   document.querySelectorAll('.sb-item').forEach(el => {
-    el.addEventListener('click', () => setView(el.dataset.viewTarget));
+    el.addEventListener('click', () => { setView(el.dataset.viewTarget); document.body.classList.remove('nav-open'); });
   });
   document.querySelectorAll('.sb-project').forEach(el => {
-    el.addEventListener('click', () => applyProject(el.dataset.project));
+    el.addEventListener('click', () => { applyProject(el.dataset.project); document.body.classList.remove('nav-open'); });
   });
 
   /* ============ BENCHMARK TABLE ============ */
