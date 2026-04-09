@@ -2599,19 +2599,26 @@
   renderSkyline();
 
   /* ============ HOME PROMPT · CLAUDE API ============ */
+  // If this is set to a deployed Cloudflare Worker URL, the site calls the
+  // proxy (which holds the API key server-side) and visitors don't need to
+  // enter their own key. Leave as '' to fall back to the BYOK flow.
+  const CORTEX_PROXY_URL = 'https://cortex-proxy.steventyoo.workers.dev';
+
   const KEY_STORAGE   = 'cortex_anthropic_key';
   const MODEL_STORAGE = 'cortex_anthropic_model';
   const DEFAULT_MODEL = 'claude-sonnet-4-5';
 
+  function usingProxy(){ return !!CORTEX_PROXY_URL; }
   function getKey(){ return localStorage.getItem(KEY_STORAGE) || ''; }
   function getModel(){ return localStorage.getItem(MODEL_STORAGE) || DEFAULT_MODEL; }
 
   function refreshKeyIndicator(){
-    const hasKey = !!getKey();
+    const proxy = usingProxy();
+    const hasKey = proxy || !!getKey();
     const dot = document.getElementById('key-indicator-dot');
     const lbl = document.getElementById('key-indicator-label');
     if(dot) dot.style.background = hasKey ? '#5A8F4A' : 'var(--clay)';
-    if(lbl) lbl.textContent = hasKey ? ('API key · ' + getModel()) : 'API key · not set';
+    if(lbl) lbl.textContent = proxy ? ('Cortex · ' + getModel()) : (hasKey ? ('API key · ' + getModel()) : 'API key · not set');
     const banner = document.getElementById('home-key-banner');
     if(banner) banner.style.display = hasKey ? 'none' : '';
   }
@@ -2748,8 +2755,9 @@
     const question = (input.value || '').trim();
     if(!question) return;
 
+    const proxy = usingProxy();
     const key = getKey();
-    if(!key){ openKeyModal(); return; }
+    if(!proxy && !key){ openKeyModal(); return; }
 
     if(chips) chips.style.display = 'none';
     resp.style.display = '';
@@ -2758,14 +2766,16 @@
     send.disabled = true; send.style.opacity = '0.6';
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const url = proxy ? CORTEX_PROXY_URL : 'https://api.anthropic.com/v1/messages';
+      const headers = { 'content-type': 'application/json' };
+      if(!proxy){
+        headers['x-api-key'] = key;
+        headers['anthropic-version'] = '2023-06-01';
+        headers['anthropic-dangerous-direct-browser-access'] = 'true';
+      }
+      const res = await fetch(url, {
         method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'x-api-key': key,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
+        headers,
         body: JSON.stringify({
           model: getModel(),
           max_tokens: 1024,
