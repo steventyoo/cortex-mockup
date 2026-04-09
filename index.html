@@ -631,6 +631,119 @@
   }
   body.nav-open .mobile-scrim { display: block; }
 
+  /* ============ BENCHMARK TABLE (global) ============ */
+  #bench-wrap { position: relative; }
+  #bench-scroll-top,
+  #bench-table {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  #bench-scroll-top { height: 14px; margin-bottom: 4px; }
+  #bench-scroll-top-inner { height: 1px; }
+  #bench-table { padding-bottom: 6px; }
+  #bench-scroll-top::-webkit-scrollbar,
+  #bench-table::-webkit-scrollbar { height: 10px; }
+  #bench-scroll-top::-webkit-scrollbar-track,
+  #bench-table::-webkit-scrollbar-track { background: rgba(31,30,29,0.04); border-radius: 5px; }
+  #bench-scroll-top::-webkit-scrollbar-thumb,
+  #bench-table::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 5px; }
+  #bench-scroll-top::-webkit-scrollbar-thumb:hover,
+  #bench-table::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+
+  /* Sticky Metric column (leftmost) */
+  #bench-table .bench-table th.col-metric,
+  #bench-table .bench-table td.col-metric {
+    position: sticky; left: 0; z-index: 3;
+    background: var(--cream);
+    box-shadow: 1px 0 0 0 var(--border);
+    padding: 9px 18px;
+    text-align: left;
+  }
+  /* Sticky Portfolio Avg column (second sticky) */
+  #bench-table .bench-table th.col-avg,
+  #bench-table .bench-table td.col-avg {
+    position: sticky; z-index: 3;
+    background: rgba(31,30,29,0.045);
+    box-shadow: inset 1px 0 0 0 var(--border), inset -1px 0 0 0 var(--border);
+    padding: 9px 12px;
+    text-align: center;
+  }
+  /* Project columns */
+  #bench-table .bench-table th.col-proj,
+  #bench-table .bench-table td.col-proj {
+    text-align: center;
+    padding: 9px 8px;
+    border-bottom: 1px dashed var(--border-2);
+  }
+  /* Two-line project headers */
+  #bench-table .bench-table thead .proj-id {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--ink-4);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  #bench-table .bench-table thead .proj-name {
+    display: block;
+    margin-top: 2px;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--ink);
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.1;
+  }
+  #bench-table .bench-table thead .proj-flag { display: inline-block; margin-left: 4px; font-size: 11px; }
+  #bench-table .bench-table thead .proj-flag.warn { color: var(--clay); }
+  #bench-table .bench-table thead .proj-flag.star { color: var(--sage-ink); }
+  /* Row striping */
+  #bench-table .bench-table tbody tr.row-data:nth-child(odd) td { background-color: rgba(31,30,29,0.012); }
+  #bench-table .bench-table tbody tr.row-data:nth-child(odd) td.col-metric { background: var(--cream); }
+  #bench-table .bench-table tbody tr.row-data:nth-child(odd) td.col-avg { background: rgba(31,30,29,0.052); }
+  /* Section bands */
+  #bench-table .bench-table tbody tr.row-section td {
+    background: rgba(184,92,62,0.05);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding-top: 14px; padding-bottom: 11px;
+  }
+  #bench-table .bench-table tbody tr.row-section td.col-metric {
+    background: rgba(184,92,62,0.05) !important;
+    box-shadow: 1px 0 0 0 var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    font-weight: 700;
+  }
+  #bench-table .bench-table tbody tr.row-section td.col-avg {
+    background: rgba(184,92,62,0.05) !important;
+    box-shadow: inset 1px 0 0 0 var(--border), inset -1px 0 0 0 var(--border);
+  }
+  /* Avg-column distribution sparkline */
+  #bench-table .avg-num { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 600; color: var(--ink); line-height: 1.1; }
+  #bench-table .avg-bar { margin: 5px auto 0; width: 80px; height: 4px; background: rgba(31,30,29,0.08); border-radius: 2px; position: relative; }
+  #bench-table .avg-bar .min, #bench-table .avg-bar .max { position: absolute; top: -1px; width: 1px; height: 6px; background: var(--ink-4); }
+  #bench-table .avg-bar .min { left: 0; }
+  #bench-table .avg-bar .max { right: 0; }
+  #bench-table .avg-bar .marker { position: absolute; top: -2px; width: 6px; height: 8px; background: var(--ink); border-radius: 1px; transform: translateX(-3px); }
+
+  /* Toolbar above bench table */
+  .bench-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; margin-bottom: 14px;
+    background: var(--cream-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .bench-toolbar-l { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .bench-toolbar .bench-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; }
+
   /* ============ RESPONSIVE ============ */
   /* Tablet + iPad */
   @media (max-width: 1100px) {
@@ -683,10 +796,6 @@
     /* Headlines shrink */
     h1, h2 { letter-spacing: -0.01em; }
     .view h2.text-\[32px\], h2.text-\[32px\] { font-size: 24px !important; }
-
-    /* Benchmark table horizontal scroll */
-    #bench-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    #bench-table .bench-table { min-width: 760px; }
 
     /* Modals */
     .modal { padding: 20px 12px; }
@@ -833,7 +942,7 @@
           <div class="mt-3 flex items-center justify-between">
             <div class="flex items-center gap-2 text-[11px]" style="color: var(--ink-4);">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <span>Grounded on 4 projects · 1,042 files · 64 fields</span>
+              <span>Grounded on 14 projects · 2,418 files · 64 fields</span>
             </div>
             <button id="home-prompt-send" onclick="sendPrompt()" class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
               Send ▸
@@ -1710,6 +1819,38 @@
     </div>
   </div>
 
+  <!-- VENDOR ROLL — populated dynamically by applyProject() from PROJECTS[id].vendors -->
+  <div id="project-vendor-card" class="mt-16 rule-solid pt-8" style="display:none;">
+    <div class="meta-bar mb-3">Vendor Roll · AP Detail</div>
+    <div class="grid grid-cols-12 gap-8 mt-2">
+      <div class="col-span-5">
+        <h3 class="text-[28px] font-semibold leading-[1.18] tighter" style="color: var(--ink); max-width: 420px;" id="vendor-card-headline">
+          Vendor mix.
+        </h3>
+        <div class="text-[13px] mt-4" style="color: var(--ink-3); line-height: 1.65; max-width: 460px;" id="vendor-card-subhead">
+          Top vendor concentration on this job.
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="grid grid-cols-3 gap-3 mt-1">
+          <div><div class="hero-lab" style="font-size: 9px;">Vendors</div><div class="text-[26px] serif-it" id="vendor-card-count" style="color: var(--ink);">—</div></div>
+          <div><div class="hero-lab" style="font-size: 9px;">Invoices</div><div class="text-[26px] serif-it" id="vendor-card-invoices" style="color: var(--ink);">—</div></div>
+          <div><div class="hero-lab" style="font-size: 9px;">Total AP</div><div class="text-[26px] serif-it" id="vendor-card-totalap" style="color: var(--ink);">—</div></div>
+        </div>
+        <div class="text-[10px] mono mt-5" style="color: var(--ink-4);" id="vendor-card-source">source · cortex AP export</div>
+      </div>
+      <div class="col-span-7">
+        <div class="card" style="padding: 22px 26px;">
+          <div class="kpi-eyebrow mb-3">Top vendors (AP rank)</div>
+          <div id="vendor-card-rows"></div>
+          <div class="kpi-divider"></div>
+          <div class="text-[11px] mono" style="color: var(--ink-4); line-height: 1.7;" id="vendor-card-cortex-note">
+            cortex pattern · concentration is normal for plumbing subs at this scale
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SOURCES / PROVENANCE -->
   <div class="mt-16 rule-solid pt-8">
     <div class="grid grid-cols-12 gap-8">
@@ -1795,14 +1936,22 @@
     </div>
 
     <div class="mt-14">
-      <div class="flex items-end justify-between mb-3">
-        <div class="meta-bar">The full table</div>
+      <div class="bench-toolbar">
+        <div class="bench-toolbar-l">
+          <span class="bench-title">The Full Table</span>
+          <span class="chip-ink">14 projects</span>
+          <span class="chip-sage">#2010 wins 15 categories</span>
+          <span class="chip-clay">#2020 ⚠ labor +29%</span>
+        </div>
         <button onclick="downloadBenchmarkCSV()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download CSV
         </button>
       </div>
-      <div id="bench-table"></div>
+      <div id="bench-wrap">
+        <div id="bench-scroll-top"><div id="bench-scroll-top-inner"></div></div>
+        <div id="bench-table"></div>
+      </div>
     </div>
 
     <div class="mt-14 rule-solid pt-8">
@@ -1824,26 +1973,26 @@
   <div class="view" data-view="pipeline">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">Ingestion status</span>
-      <span class="chip-sage">8 projects parsed</span>
-      <span class="chip-clay">79 duplicate groups</span>
+      <span class="chip-sage">14 projects parsed</span>
+      <span class="chip-clay">187 duplicate groups</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Document <span class="serif-it">Pipeline.</span>
     </h1>
     <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 680px; line-height: 1.6;">
-      Raw documents flow through Cortex in four stages — ingest, classify, parse, and index. This view shows the current state of every file across all eight OWP closed jobs.
+      Raw documents flow through Cortex in four stages — ingest, classify, parse, and index. This view shows the current state of every file across all fourteen OWP closed jobs.
     </div>
 
     <div class="grid grid-cols-4 gap-5 mt-12">
       <div class="card">
         <div class="card-label">Stage 01 · Ingested</div>
-        <div class="text-[52px] serif-it mt-3" style="color: var(--ink);">1,042</div>
-        <div class="text-[12px] mt-1" style="color: var(--ink-3);">raw files across 8 jobs</div>
+        <div class="text-[52px] serif-it mt-3" style="color: var(--ink);">2,418</div>
+        <div class="text-[12px] mt-1" style="color: var(--ink-3);">raw files across 14 jobs</div>
         <div class="kpi-divider"></div>
-        <div class="kpi-row"><span class="kpi-lbl">Chinn Greenwood</span><span class="kpi-val">317</span></div>
-        <div class="kpi-row"><span class="kpi-lbl">Chinn Old Town</span><span class="kpi-val">248</span></div>
-        <div class="kpi-row"><span class="kpi-lbl">Chinn Barrett Park</span><span class="kpi-val">189</span></div>
-        <div class="kpi-row"><span class="kpi-lbl">Exxel 8th Ave</span><span class="kpi-val">288</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">SRM Bellevue ⚠</span><span class="kpi-val">412</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Exxel Republican</span><span class="kpi-val">344</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">SRM Astro</span><span class="kpi-val">298</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">+11 more jobs</span><span class="kpi-val">1,364</span></div>
       </div>
       <div class="card">
         <div class="card-label">Stage 02 · Classified</div>
@@ -2083,15 +2232,159 @@
           <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
         </div>
 
+        <!-- #2017 Exxel 36 Stone Way -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2017 · exxel · closed</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">36 Stone Way</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">119 units · $1.37M final · 37.3% margin</div>
+            </div>
+            <span class="chip-sage" style="flex-shrink: 0;">✓ fully parsed</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">221</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">203</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">194</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">63</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val" style="color: var(--clay);">12 groups · 26 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val" style="color: var(--sage-ink);">94.8%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val">1 · final retainage release</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
+        <!-- #2018 SRM Astro -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2018 · srm · closed ★</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Astro Apartments</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">212 units · $2.31M final · 46.5% margin</div>
+            </div>
+            <span class="chip-sage" style="flex-shrink: 0;">✓ fully parsed</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">298</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">274</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">261</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">64</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val" style="color: var(--clay);">17 groups · 34 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val" style="color: var(--sage-ink);">95.2%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val">0</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
+        <!-- #2019 Exxel 8th & Republican -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2019 · exxel · closed ★</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">8th &amp; Republican</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">211 units · $2.88M final · 47.0% margin · portfolio leader</div>
+            </div>
+            <span class="chip-sage" style="flex-shrink: 0;">✓ fully parsed</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">344</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">312</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">298</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">64</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val" style="color: var(--clay);">22 groups · 47 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val" style="color: var(--sage-ink);">96.7%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val">0</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
+        <!-- #2020 SRM Bellevue ⚠ -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2020 · srm · closed ⚠</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Bellevue @ Main</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">288 units · $2.86M final · 32.3% margin · labor +29% over budget</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">partial · 9 unresolved</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">412</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">364</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--clay);">331</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">61</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val" style="color: var(--clay);">28 groups · 64 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val">91.8%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val" style="color: var(--clay);">9 · labor variance backup, COs</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
+        <!-- #2021 Exxel Admiral East -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2021 · exxel · closed</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Admiral East</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">182 units · $1.58M final · 28.4% margin</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">partial · 5 unresolved</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">258</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">231</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--clay);">214</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">59</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val" style="color: var(--clay);">15 groups · 32 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val">92.4%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val" style="color: var(--clay);">5 · CO log, final pay app</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
+        <!-- #2022 Exxel 3651 Interlake -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2022 · exxel · closed</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">3651 Interlake</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">20 units · $243k final · 35.9% margin · smallest job</div>
+            </div>
+            <span class="chip-sage" style="flex-shrink: 0;">✓ fully parsed</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">71</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">66</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">63</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">58</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val">3 · 6 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val" style="color: var(--sage-ink);">96.9%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val">0</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
       </div>
     </div>
 
     <div class="mt-14 rule-solid pt-8">
       <div class="meta-bar mb-3">Pipeline health</div>
       <div class="grid grid-cols-3 gap-8 mt-4">
-        <div><div class="hero-lab">Duplicate rate</div><div class="hero-val tabular" style="color: var(--clay);">24%</div><div class="hero-foot">103 groups · 214 files · across 8 jobs</div></div>
-        <div><div class="hero-lab">Parse confidence</div><div class="hero-val tabular" style="color: var(--sage-ink);">94.2%</div><div class="hero-foot">avg across parsed schemas</div></div>
-        <div><div class="hero-lab">Unresolved docs</div><div class="hero-val tabular">12</div><div class="hero-foot">manual review queue</div></div>
+        <div><div class="hero-lab">Duplicate rate</div><div class="hero-val tabular" style="color: var(--clay);">22%</div><div class="hero-foot">187 groups · 412 files · across 14 jobs</div></div>
+        <div><div class="hero-lab">Parse confidence</div><div class="hero-val tabular" style="color: var(--sage-ink);">93.6%</div><div class="hero-foot">avg across parsed schemas</div></div>
+        <div><div class="hero-lab">Unresolved docs</div><div class="hero-val tabular">31</div><div class="hero-foot">manual review queue</div></div>
       </div>
     </div>
   </div>
@@ -2101,9 +2394,9 @@
   <!-- ============================================================ -->
   <div class="view" data-view="atlas">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">24 nodes · 51 edges</span>
-      <span class="chip-sage">8 closed · 1 active · 1 proposed</span>
-      <span class="chip-clay">3 hidden patterns surfaced</span>
+      <span class="chip-ink">38 nodes · 82 edges</span>
+      <span class="chip-sage">14 closed · 1 active · 1 proposed</span>
+      <span class="chip-clay">6 hidden patterns surfaced</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Project <span class="serif-it">Atlas.</span>
@@ -2126,11 +2419,11 @@
     <!-- The graph -->
     <div class="mt-6 blueprint" style="padding: 28px 24px 36px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 02 / portfolio graph</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 24 · edges · 51</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 38 · edges · 82</div>
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s.</div>
       <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
 
-      <svg viewBox="0 0 1240 760" class="w-full" style="display: block; height: auto; max-height: 720px; overflow: visible; margin-top: 14px;">
+      <svg viewBox="0 0 1240 920" class="w-full" style="display: block; height: auto; max-height: 920px; overflow: visible; margin-top: 14px;">
         <defs>
           <marker id="atlas-dot" viewBox="-2 -2 4 4" refX="0" refY="0" markerWidth="3" markerHeight="3"><circle r="1.5" fill="var(--ink-3)"/></marker>
         </defs>
@@ -2282,6 +2575,155 @@
           <text x="470" y="238" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Sedona</text>
           <text x="470" y="251" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">64u · 29.5%</text>
         </g>
+
+        <!-- ============== NEW EXPANSION (#2017–#2022 + SRM) ============== -->
+        <!-- SRM GC node — third primary trunk, top-right of new band -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="srm" style="cursor: pointer;">
+          <rect x="784" y="724" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="810" y="755" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">SRM</text>
+          <text x="810" y="798" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 3 jobs</text>
+        </g>
+
+        <!-- Edges: SRM → its 3 jobs (#2008 already at 320,360 in Chinn cluster — kept for visual) -->
+        <line x1="810" y1="724" x2="320" y2="360" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="2,2"/>
+        <line x1="810" y1="724" x2="600" y2="850" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="810" y1="724" x2="980" y2="850" stroke="var(--ink)" stroke-width="1.4"/>
+
+        <!-- Edges: Exxel → 4 new closed jobs -->
+        <line x1="1040" y1="100" x2="200" y2="850" stroke="var(--ink)" stroke-width="1.0"/>
+        <line x1="1040" y1="100" x2="370" y2="850" stroke="var(--ink)" stroke-width="1.0"/>
+        <line x1="1040" y1="100" x2="1140" y2="850" stroke="var(--ink)" stroke-width="1.0"/>
+        <line x1="1040" y1="100" x2="1140" y2="720" stroke="var(--ink)" stroke-width="0.8"/>
+
+        <!-- ===== New project nodes — second band, y=820–870 ===== -->
+        <!-- #2017 Exxel 36 Stone Way -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2017" style="cursor: pointer;">
+          <circle cx="200" cy="850" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="200" y="854" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2017</text>
+          <text x="200" y="882" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Stone Way</text>
+          <text x="200" y="895" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">119u · 37.3%</text>
+        </g>
+
+        <!-- #2018 SRM Astro ★ -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2018" style="cursor: pointer;">
+          <circle cx="600" cy="850" r="20" fill="var(--cream-card)" stroke="var(--sage-ink)" stroke-width="2.4"/>
+          <text x="600" y="854" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2018</text>
+          <text x="600" y="884" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Astro</text>
+          <text x="600" y="897" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">212u · 46.5% ★</text>
+        </g>
+
+        <!-- #2019 Exxel 8th & Republican ★★ portfolio leader -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2019" style="cursor: pointer;">
+          <circle cx="370" cy="850" r="22" fill="var(--cream-card)" stroke="var(--sage-ink)" stroke-width="2.6"/>
+          <text x="370" y="854" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2019</text>
+          <text x="370" y="888" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">8th &amp; Rep</text>
+          <text x="370" y="901" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">211u · 47.0% ★★</text>
+        </g>
+
+        <!-- #2020 SRM Bellevue ⚠ labor outlier -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2020" style="cursor: pointer;">
+          <circle cx="980" cy="850" r="20" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2.6" stroke-dasharray="3,2"/>
+          <text x="980" y="848" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--clay)" text-anchor="middle">⚠ LABOR</text>
+          <text x="980" y="860" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2020</text>
+          <text x="980" y="888" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Bellevue</text>
+          <text x="980" y="901" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">288u · 32.3%</text>
+        </g>
+
+        <!-- #2021 Exxel Admiral -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2021" style="cursor: pointer;">
+          <circle cx="1140" cy="850" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="1140" y="854" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2021</text>
+          <text x="1140" y="882" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Admiral</text>
+          <text x="1140" y="895" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">182u · 28.4%</text>
+        </g>
+
+        <!-- #2022 Exxel Interlake (smallest) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2022" style="cursor: pointer;">
+          <circle cx="1140" cy="720" r="11" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.6"/>
+          <text x="1140" y="724" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2022</text>
+          <text x="1140" y="745" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Interlake</text>
+          <text x="1140" y="757" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">20u · 35.9%</text>
+        </g>
+
+        <!-- ===== New vendor nodes — Rosen + Keller anchor the new band ===== -->
+        <!-- Rosen Supply — pervasive, connects to 8 jobs -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="rosen" style="cursor: pointer;">
+          <polygon points="500,654 516,680 484,680" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="500" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Rosen Supply</text>
+          <text x="500" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 8 jobs</text>
+        </g>
+
+        <!-- Keller Supply -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="keller" style="cursor: pointer;">
+          <polygon points="700,654 716,680 684,680" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="700" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Keller Supply</text>
+          <text x="700" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 7 jobs</text>
+        </g>
+
+        <!-- Consolidated Supply -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="consolidated" style="cursor: pointer;">
+          <polygon points="280,654 296,680 264,680" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="280" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Consolidated</text>
+          <text x="280" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 6 jobs</text>
+        </g>
+
+        <!-- Mechanical Sales (specialty) -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="mechanical-sales" style="cursor: pointer;">
+          <polygon points="900,654 914,678 886,678" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="1.6"/>
+          <text x="900" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Mech Sales</text>
+          <text x="900" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 5 jobs</text>
+        </g>
+
+        <!-- Vendor → new project edges (dashed ink-3) -->
+        <!-- Rosen connects to 6 new + #2015 -->
+        <line x1="500" y1="654" x2="200" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="370" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="600" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="1010" y2="400" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <!-- Keller connects to mid-rise / luxury jobs + #2016 -->
+        <line x1="700" y1="654" x2="600" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="370" y2="850" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="470" y2="210" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="3,3"/>
+        <!-- Consolidated → small Exxel -->
+        <line x1="280" y1="654" x2="200" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="280" y1="654" x2="1140" y2="720" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <!-- Mechanical Sales → mid-rise mech rooms -->
+        <line x1="900" y1="654" x2="600" y2="850" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="900" y1="654" x2="370" y2="850" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="900" y1="654" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="900" y1="654" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <!-- Ferguson → new ferguson-heavy jobs (#2020, #2021) -->
+        <line x1="130" y1="540" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="130" y1="540" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+
+        <!-- ⚠ Bellevue labor signal node — clay clusters around #2020 -->
+        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="bellevue-labor" style="cursor: pointer;">
+          <circle cx="1100" cy="640" r="9" fill="rgba(184,92,62,0.08)" stroke="var(--clay)" stroke-width="1.4" stroke-dasharray="2,1.6"/>
+          <text x="1100" y="643" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="var(--clay)" text-anchor="middle">⚠</text>
+          <text x="1100" y="668" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--clay)" text-anchor="middle">labor outlier</text>
+        </g>
+        <line x1="1100" y1="640" x2="980" y2="850" stroke="var(--clay)" stroke-width="0.8" stroke-dasharray="1,4"/>
+
+        <!-- ⚠ SRM mixed-track signal node — between SRM nodes -->
+        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="srm-mixed" style="cursor: pointer;">
+          <circle cx="700" cy="780" r="9" fill="rgba(184,92,62,0.08)" stroke="var(--clay)" stroke-width="1.4" stroke-dasharray="2,1.6"/>
+          <text x="700" y="783" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="var(--clay)" text-anchor="middle">⚠</text>
+          <text x="700" y="808" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--clay)" text-anchor="middle">do not blend SRM</text>
+        </g>
+        <line x1="700" y1="780" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="700" y1="780" x2="600" y2="850" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="700" y1="780" x2="980" y2="850" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+
+        <!-- ✓ Rosen pervasive signal -->
+        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="rosen-pervasive" style="cursor: pointer;">
+          <circle cx="500" cy="610" r="8" fill="rgba(108,134,86,0.10)" stroke="var(--sage-ink)" stroke-width="1.4" stroke-dasharray="2,1.6"/>
+          <text x="500" y="614" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="var(--sage-ink)" text-anchor="middle">✓</text>
+          <text x="500" y="638" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--sage-ink)" text-anchor="middle">portfolio-wide vendor</text>
+        </g>
+        <line x1="500" y1="610" x2="500" y2="654" stroke="var(--sage-ink)" stroke-width="0.7" stroke-dasharray="1,4"/>
 
         <!-- Active job (clay outline) -->
         <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2014" style="cursor: pointer;">
@@ -4052,7 +4494,7 @@
   /* ============ PROJECT DATA (real — from OWP_4Way_Comparison.xlsx) ============ */
   // Order in which projects appear in the sidebar / portfolio / benchmark.
   // Add a project ID here once its PROJECTS entry exists, and every view picks it up.
-  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016"];
+  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016","2017","2018","2019","2020","2021","2022"];
 
   // Project stages — add ids to bidding/active as those jobs are entered.
   // Closed jobs flow through PROJECT_ORDER so totals stay in sync.
@@ -4224,7 +4666,16 @@
       footerReport: "REPORT #2015-IR01 · Generated April 9, 2026 · v0.1",
       sbName: "Rooster Apts.", skyName: "ROOSTER",
       skyline: { floors: 7, cols: 15, w: 264 },
-      num: { units:197, fixtures:1250, months:21, revenue:2146708, profit:505124, directCost:1641584, origContract:2002285, co:144423, retainage:103985, labor:512198, material:690359, overhead:69822, burden:369205, hours:25956, workers:53 }
+      num: { units:197, fixtures:1250, months:21, revenue:2146708, profit:505124, directCost:1641584, origContract:2002285, co:144423, retainage:103985, labor:512198, material:690359, overhead:69822, burden:369205, hours:25956, workers:53 },
+      vendorMeta: { count: 22, invoices: 318, totalAp: 612400, topVendor: 'Rosen Supply', topShare: 32.1, source: '2015 Job Detail Report.pdf · Sage AP export' },
+      vendors: [
+        { name: 'Rosen Supply Company',     invoices: 92, spend: 196580, pct: 32.1 },
+        { name: 'Keller Supply Company',    invoices: 71, spend: 142090, pct: 23.2 },
+        { name: 'Ferguson Enterprises',     invoices: 56, spend: 118420, pct: 19.3 },
+        { name: 'Mechanical Sales, Inc.',   invoices:  6, spend:  58800, pct:  9.6 },
+        { name: 'Consolidated Supply Co.',  invoices: 18, spend:  41310, pct:  6.7 },
+        { name: 'Franklin Engineering',     invoices: 11, spend:  26430, pct:  4.3 }
+      ]
     },
     "2016": {
       reportNum: "REPORT #2016-IR01",
@@ -4247,7 +4698,208 @@
       footerReport: "REPORT #2016-IR01 · Generated April 9, 2026 · v0.1",
       sbName: "Sedona Apts.", skyName: "SEDONA",
       skyline: { floors: 6, cols: 8, w: 140 },
-      num: { units:64, fixtures:267, months:14, revenue:341805, profit:100795, directCost:241010, origContract:336500, co:5305, retainage:17090, labor:97231, material:86915, overhead:6279, burden:50585, hours:4755, workers:28 }
+      num: { units:64, fixtures:267, months:14, revenue:341805, profit:100795, directCost:241010, origContract:336500, co:5305, retainage:17090, labor:97231, material:86915, overhead:6279, burden:50585, hours:4755, workers:28 },
+      vendorMeta: { count: 9, invoices: 85, totalAp: 106353, topVendor: 'Keller Supply', topShare: 70.5, source: '2016 Job Detail Report.pdf · Sage AP export · OWP_2016_Vendors.xlsx' },
+      vendors: [
+        { name: 'Keller Supply Company',    invoices: 22, spend:  74949, pct: 70.5 },
+        { name: 'Ferguson Enterprises',     invoices: 21, spend:  14095, pct: 13.3 },
+        { name: 'Rosen Supply Company',     invoices: 25, spend:  11377, pct: 10.7 },
+        { name: 'Bank of America CC',       invoices:  3, spend:   2649, pct:  2.5 },
+        { name: 'Consolidated Supply Co.',  invoices:  7, spend:   1086, pct:  1.0 },
+        { name: 'Mechanical Sales, Inc.',   invoices:  1, spend:   1044, pct:  1.0 }
+      ]
+    },
+    "2017": {
+      reportNum: "REPORT #2017-IR01",
+      chips: ['<span class="chip-sage">37.3% margin · top quartile</span>','<span class="chip-ink">119u · Stone Way Roosevelt</span>','<span class="chip-clay">Material 25% under budget</span>'],
+      jobTop: "Exxel", jobBottom: "36 Stone Way.",
+      jobNum: "#2017", location: "Seattle, WA · 3636 Stone Way N", gc: "Exxel Pacific, Inc.",
+      gcShort: "Exxel Pacific, Inc.",
+      dateRange: "Feb 2014 → May 2015 · 16 months",
+      unitsDesc: "119-unit 4-story mixed-use + ground-floor retail",
+      revenue: "$1,369,989", revenueFoot: "14 pay apps · -$3,159 net COs (near-flat contract)",
+      profit: "$510,805", profitFoot: "37.3% margin · top quartile of portfolio",
+      expenses: "$859,184", expensesFoot: "Labor $292.8k · Mat\'l $378.3k · OH $33.9k · Burden $154.3k",
+      retainage: "$68,499", retainageFoot: "5% of revenue",
+      execHeadline: 'A <span class="serif-it">disciplined</span> Exxel delivery — 16 months, 119 units, <span class="n">37.3% margin</span> on $1.37M, with material buyout coming in <span class="n">$124k under budget</span>.',
+      execBody: 'Exxel 36 Stone Way is a 119-unit, 4-story mixed-use mid-rise in Seattle\'s Roosevelt neighborhood (3636 Stone Way N) — Exxel Pacific\'s smaller mid-rise in the portfolio, billed across <span class="n">14 pay apps</span> totaling <span class="n">$1,369,989</span> against a $1,373,148 original contract (a small <span class="n">-$3,159</span> net deductive). Top-quartile margin at <span class="n">37.3%</span>, second only to #2018 SRM Astro and #2019 8th & Republican among the 14 closed jobs.<br/><br/>The story is procurement: <span class="n">Material came in $124k under budget</span> (75% of plan), driven by Consolidated Supply at 38.5% of AP and Rosen Supply at 30.4%. Labor ran <span class="n">7.5% over</span> on 14,822 hours — a small overrun the material buyout absorbed cleanly. <span class="n">680 fixtures</span> across 119 units, 122 water closets, 137 lavatories. The crew was steady at ~30 plumbers across the 16-month span.',
+      jobNum2: "#2017", workforce: "30 workers · 14,822 hrs",
+      bpLeft: "exxel 36 stone way · seattle wa", bpRight: "119 units · 16 months",
+      k01_revenue: "$1,369,989", k01_margin: "37.3%", k01_origContract: "$1,373,148",
+      k01_co: "-$3,159", k01_directCost: "$859,184", k01_profit: "$510,805",
+      footerReport: "REPORT #2017-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "36 Stone Way.", skyName: "STONE WAY",
+      skyline: { floors: 4, cols: 13, w: 200 },
+      num: { units:119, fixtures:680, months:16, revenue:1369989, profit:510805, directCost:859184, origContract:1373148, co:-3159, retainage:68499, labor:292756, material:378314, overhead:33856, burden:154259, hours:14822, workers:30 },
+      vendorMeta: { count: 20, invoices: 266, totalAp: 458376, topVendor: 'Consolidated Supply Co.', topShare: 38.5, source: '2017 Job Detail Report.pdf · Sage AP export' },
+      vendors: [
+        { name: 'Consolidated Supply Co.',  invoices: 102, spend: 176571, pct: 38.5 },
+        { name: 'Rosen Supply Company',     invoices:  85, spend: 139209, pct: 30.4 },
+        { name: 'Ferguson Enterprises',     invoices:  18, spend:  72781, pct: 15.9 },
+        { name: 'Franklin Engineering',     invoices:   5, spend:  17975, pct:  3.9 },
+        { name: 'Duraseal, Inc.',           invoices:   2, spend:  12800, pct:  2.8 },
+        { name: 'Keller Supply Company',    invoices:  11, spend:   8131, pct:  1.8 }
+      ]
+    },
+    "2018": {
+      reportNum: "REPORT #2018-IR01",
+      chips: ['<span class="chip-sage">Highest margin · 46.5%</span>','<span class="chip-ink">First SRM job before #2008</span>','<span class="chip-clay">$166k material buyout win</span>'],
+      jobTop: "SRM", jobBottom: "Astro Apts.",
+      jobNum: "#2018", location: "Seattle, WA · Capitol Hill", gc: "SRMQA, LLC (SRM Development)",
+      gcShort: "SRM Development, LLC",
+      dateRange: "Dec 2013 → Feb 2015 · 15 months",
+      unitsDesc: "212-unit 6-story multifamily + 3 below-grade parking levels",
+      revenue: "$2,305,058", revenueFoot: "15 pay apps · 5 COs · 6-story podium config",
+      profit: "$1,072,788", profitFoot: "46.5% margin · portfolio ceiling",
+      expenses: "$1,232,270", expensesFoot: "Labor $440.4k · Mat\'l $556.9k · OH $4.9k · Burden $230.0k",
+      retainage: "$115,253", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">margin ceiling</span> outside #2010 — SRM Astro cleared <span class="n">46.5%</span> on $2.3M with a clean $166k material buyout win.',
+      execBody: 'SRM Astro Apartments is a 212-unit, 6-story multifamily in Seattle (N+S residential wings on L2–L6, retail/amenity at L1, three levels of post-tensioned deck parking below grade). At <span class="n">$2,305,058</span> in final revenue and <span class="n">$1,072,788</span> in net profit, this is the <span class="n">highest-margin</span> job in OWP\'s portfolio above the $1M revenue threshold — the only project that rivals it on pure margin is #2010 Chinn Old Town (54.2% on $1.39M).<br/><br/>The story is buyout discipline: material came in <span class="n">$166k under budget</span> (77% of plan), labor ran 6% under, and overhead was 60% under plan. Rosen Supply was the top vendor at 35.1% of AP, followed by Keller Supply at 26.4% — a Keller-heavy mix that\'s also visible on #2020 Bellevue. <span class="n">242 water closets</span>, ~1,144 fixtures across 212 units, 23,300 hours over 15 months. <span class="n">This is OWP\'s strongest large-format SRM delivery</span> — the high-water mark for what Astro/SRM can look like when nothing goes wrong.',
+      jobNum2: "#2018", workforce: "42 workers · 23,300 hrs",
+      bpLeft: "srm astro · seattle wa", bpRight: "212 units · 15 months",
+      k01_revenue: "$2,305,058", k01_margin: "46.5%", k01_origContract: "$2,235,000",
+      k01_co: "+$70,058", k01_directCost: "$1,232,270", k01_profit: "$1,072,788",
+      footerReport: "REPORT #2018-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "Astro Apts.", skyName: "ASTRO",
+      skyline: { floors: 6, cols: 16, w: 270 },
+      num: { units:212, fixtures:1144, months:15, revenue:2305058, profit:1072788, directCost:1232270, origContract:2235000, co:70058, retainage:115253, labor:440393, material:556907, overhead:4943, burden:230027, hours:23300, workers:42 },
+      vendorMeta: { count: 19, invoices: 301, totalAp: 535198, topVendor: 'Rosen Supply', topShare: 35.1, source: '2018 Job Detail Report.pdf · Sage AP export' },
+      vendors: [
+        { name: 'Rosen Supply Company',     invoices: 87, spend: 187930, pct: 35.1 },
+        { name: 'Keller Supply Company',    invoices: 64, spend: 141064, pct: 26.4 },
+        { name: 'Ferguson Enterprises',     invoices: 45, spend:  65193, pct: 12.2 },
+        { name: 'Mechanical Sales, Inc.',   invoices:  4, spend:  47528, pct:  8.9 },
+        { name: 'Consolidated Supply Co.',  invoices: 21, spend:  43370, pct:  8.1 },
+        { name: 'Franklin Engineering',     invoices:  6, spend:  23134, pct:  4.3 }
+      ]
+    },
+    "2019": {
+      reportNum: "REPORT #2019-IR01",
+      chips: ['<span class="chip-sage">47.0% margin · portfolio leader</span>','<span class="chip-ink">211u · 8-story mid-rise</span>','<span class="chip-clay">$313k material savings</span>'],
+      jobTop: "Exxel", jobBottom: "8th & Republican.",
+      jobNum: "#2019", location: "Seattle, WA · 430 8th Ave N", gc: "Exxel Pacific (owner: Wolff Co.)",
+      gcShort: "Exxel Pacific, Inc.",
+      dateRange: "Sep 2014 → Jul 2016 · 22 months",
+      unitsDesc: "211-unit 8-story mid-rise + ground-floor retail/amenity",
+      revenue: "$2,877,219", revenueFoot: "20 pay apps · 10 COs · biggest-margin Exxel job",
+      profit: "$1,353,160", profitFoot: "47.0% margin · highest in portfolio",
+      expenses: "$1,524,059", expensesFoot: "Labor $550.8k · Mat\'l $660.5k · OH $60.0k · Burden $252.7k",
+      retainage: "$143,861", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">portfolio leader</span> — Exxel 8th & Republican cleared a <span class="n">47.0% margin</span> on $2.88M, the highest of any closed job in the book.',
+      execBody: 'Exxel 8th & Republican is an 8-story, 211-unit multifamily mid-rise at 430 8th Ave N (Lower Queen Anne / Uptown) for owner The Wolff Company. At <span class="n">$2,877,219</span> in final revenue and <span class="n">$1,353,160</span> in net profit, it is <span class="n">the single most profitable closed job</span> OWP has on the books — beating SRM 101 Taylor (#2008) on profit despite running on 23% less revenue, and beating its sibling Rooster (#2015) by $848k on a job that\'s only $730k bigger.<br/><br/>The story is the <span class="n">$313k material buyout win</span> — material came in at 68% of plan, the deepest savings of any job in the portfolio. Labor ran 13% under (-$80k), overhead 9% under, burden 15% under — every category came in clean. Rosen Supply led at 32.4% of AP, followed by Ferguson, Keller, and Franklin Engineering. <span class="n">26,599 hours · 211 units · 1,196 fixtures</span> over 22 months. This is the analog Cortex should pull when bidding the next 8-story Exxel mid-rise — the data-set is real and the playbook is repeatable.',
+      jobNum2: "#2019", workforce: "47 workers · 26,599 hrs",
+      bpLeft: "exxel 8th & republican · seattle wa", bpRight: "211 units · 22 months",
+      k01_revenue: "$2,877,219", k01_margin: "47.0%", k01_origContract: "$2,750,000",
+      k01_co: "+$127,219", k01_directCost: "$1,524,059", k01_profit: "$1,353,160",
+      footerReport: "REPORT #2019-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "8th & Republican.", skyName: "8TH+REP",
+      skyline: { floors: 8, cols: 14, w: 250 },
+      num: { units:211, fixtures:1196, months:22, revenue:2877219, profit:1353160, directCost:1524059, origContract:2750000, co:127219, retainage:143861, labor:550833, material:660549, overhead:59981, burden:252696, hours:26599, workers:47 },
+      vendorMeta: { count: 25, invoices: 402, totalAp: 766653, topVendor: 'Rosen Supply', topShare: 32.4, source: '2019 Job Detail Report.pdf · Sage AP export' },
+      vendors: [
+        { name: 'Rosen Supply Company',     invoices: 97, spend: 248014, pct: 32.4 },
+        { name: 'Ferguson Enterprises',     invoices: 57, spend: 104760, pct: 13.7 },
+        { name: 'Keller Supply Company',    invoices: 66, spend: 101722, pct: 13.3 },
+        { name: 'Franklin Engineering',     invoices: 19, spend:  94573, pct: 12.3 },
+        { name: 'Mechanical Sales, Inc.',   invoices:  4, spend:  70651, pct:  9.2 },
+        { name: 'Consolidated Supply Co.',  invoices: 27, spend:  45651, pct:  6.0 }
+      ]
+    },
+    "2020": {
+      reportNum: "REPORT #2020-IR01",
+      chips: ['<span class="chip-clay">⚠ Labor +29% over budget</span>','<span class="chip-ink">288u · biggest crew · 38,749 hrs</span>','<span class="chip-sage">Margin compressed to 32.3%</span>'],
+      jobTop: "SRM", jobBottom: "Bellevue @ Main.",
+      jobNum: "#2020", location: "Bellevue, WA · 15 Bellevue Way SE", gc: "SRM Dev / Exxel Pacific JV",
+      gcShort: "SRM Dev / Exxel JV",
+      dateRange: "May 2014 → Feb 2016 · 22 months",
+      unitsDesc: "288-unit luxury 6-story + retail (268 Type B + 20 Type A ADA)",
+      revenue: "$2,858,341", revenueFoot: "23 pay apps · 11 COs · Bellevue Way Ventures owner",
+      profit: "$923,838", profitFoot: "32.3% margin · compressed by labor overrun",
+      expenses: "$1,934,503", expensesFoot: "Labor $766.9k (+29%) · Mat\'l $735.7k · OH $33.3k · Burden $398.6k",
+      retainage: "$142,917", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">labor outlier</span> — Bellevue @ Main is OWP\'s biggest job by hours (<span class="n">38,749</span>) and the only job in the portfolio where <span class="n">labor ran 29% over budget</span>.',
+      execBody: 'SRM Bellevue @ Main is a 288-unit, 6-story luxury multifamily in Bellevue (15 Bellevue Way SE) for owner Bellevue Way Ventures — 268 Type B units + 20 Type A ADA units, two parking levels (P1/P2), retail at L1, mezzanine, residential L2–L5. At <span class="n">$2,858,341</span> in revenue, it\'s nominally the second-largest closed job. But <span class="n">it\'s the labor outlier of the portfolio</span> — and the most important job in the book to study.<br/><br/>Labor came in at <span class="n">$766,929 against a $593,974 budget — a $172,955 (+29%) overrun</span>. Overhead was even worse, hitting <span class="n">$33,267 against a $16,000 budget (+108%)</span>. Burden ran +28% as well. The only thing that saved the job was a $261k material buyout win (74% of plan), but that wasn\'t enough to offset: net direct cost came in essentially at budget (+0.8%) and the margin compressed from a target ~40%+ to <span class="n">32.3%</span>. <span class="n">38,749 hours · the portfolio max</span>, 55 workers, 22 months.<br/><br/><span class="n">Cortex flag</span>: every other SRM job (#2008, #2018) shows healthy labor execution. Bellevue is the anomaly — possibly luxury fixture density (288 ADA-mixed units), 22 months of stretched schedule, or the SRM/Exxel JV creating PM friction. This is the job that should drive the labor estimate on the next Bellevue-class luxury bid, not Astro.',
+      jobNum2: "#2020", workforce: "55 workers · 38,749 hrs",
+      bpLeft: "srm bellevue @ main · bellevue wa", bpRight: "288 units · 22 months",
+      k01_revenue: "$2,858,341", k01_margin: "32.3%", k01_origContract: "$2,795,000",
+      k01_co: "+$63,341", k01_directCost: "$1,934,503", k01_profit: "$923,838",
+      footerReport: "REPORT #2020-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "Bellevue Main.", skyName: "BELLEVUE",
+      skyline: { floors: 6, cols: 17, w: 300 },
+      num: { units:288, fixtures:1564, months:22, revenue:2858341, profit:923838, directCost:1934503, origContract:2795000, co:63341, retainage:142917, labor:766929, material:735695, overhead:33267, burden:398612, hours:38749, workers:55 },
+      vendorMeta: { count: 21, invoices: 545, totalAp: 792735, topVendor: 'Ferguson Enterprises', topShare: 27.3, source: '2020 Job Detail Report.pdf · Sage AP export · top-3 = 76.9% of AP' },
+      vendors: [
+        { name: 'Ferguson Enterprises',     invoices: 121, spend: 216177, pct: 27.3 },
+        { name: 'Keller Supply Company',    invoices: 101, spend: 204980, pct: 25.9 },
+        { name: 'Rosen Supply Company',     invoices: 172, spend: 188563, pct: 23.8 },
+        { name: 'Mechanical Sales, Inc.',   invoices:   4, spend:  67936, pct:  8.6 },
+        { name: 'Consolidated Supply Co.',  invoices:  11, spend:  47820, pct:  6.0 },
+        { name: 'United Rentals, Inc.',     invoices:  40, spend:  23301, pct:  2.9 }
+      ]
+    },
+    "2021": {
+      reportNum: "REPORT #2021-IR01",
+      chips: ['<span class="chip-clay">28.4% margin · 3rd lowest</span>','<span class="chip-ink">182u · West Seattle Admiral</span>','<span class="chip-clay">Labor +11% over budget</span>'],
+      jobTop: "Exxel", jobBottom: "Admiral East.",
+      jobNum: "#2021", location: "Seattle, WA · 2600 SW Admiral Way", gc: "Exxel Pacific, Inc.",
+      gcShort: "Exxel Pacific, Inc.",
+      dateRange: "Feb 2015 → Aug 2016 · 19 months",
+      unitsDesc: "182-unit 5-story multifamily + retail/garage",
+      revenue: "$1,581,818", revenueFoot: "17 pay apps · 19-month delivery · West Seattle",
+      profit: "$448,741", profitFoot: "28.4% margin · third-lowest in portfolio",
+      expenses: "$1,133,077", expensesFoot: "Labor $429.4k (+11%) · Mat\'l $423.9k · OH $66.6k · Burden $213.1k",
+      retainage: "$79,091", retainageFoot: "5% of revenue",
+      execHeadline: 'A <span class="serif-it">middle-of-the-road</span> Exxel delivery — Admiral East cleared <span class="n">28.4% margin</span> on $1.58M, dragged down by an 11% labor overrun.',
+      execBody: 'Exxel Admiral East is a 182-unit, 5-story multifamily in West Seattle (2600 SW Admiral Way) — 171 standard + 11 ADA units, retail and garage at L1, residential L2–L5. <span class="n">$1,581,818</span> revenue, <span class="n">$448,741</span> profit, <span class="n">28.4% margin</span> — the third-lowest margin in the portfolio after #2008 SRM Taylor (18.9%) and #2015 Exxel Rooster (23.5%).<br/><br/>The pattern is recurring: <span class="n">labor ran +11% over budget</span> ($42k overrun on 19,800 hours) and burden tracked the labor overrun by another $21k. Material buyout was healthy (+$71k savings, 86% of plan) but not large enough to absorb the labor pressure. <span class="n">~1,000 fixtures · 35 workers · 19 months</span>. Ferguson led the AP at 27.8%, followed by Rosen at 22.6% and Keller at 17.5% — the same Ferguson-heavy mix that shows up on #2020 Bellevue.<br/><br/><span class="n">Cortex pattern</span>: across the four 5–8 story Exxel jobs (#2001, #2015, #2019, #2021), only #2019 cleared above 35% margin. The others all ran labor-tight. The job that\'s different is #2019 — and the question is what made it different.',
+      jobNum2: "#2021", workforce: "35 workers · 19,800 hrs",
+      bpLeft: "exxel admiral · seattle wa", bpRight: "182 units · 19 months",
+      k01_revenue: "$1,581,818", k01_margin: "28.4%", k01_origContract: "$1,535,000",
+      k01_co: "+$46,818", k01_directCost: "$1,133,077", k01_profit: "$448,741",
+      footerReport: "REPORT #2021-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "Admiral East.", skyName: "ADMIRAL",
+      skyline: { floors: 5, cols: 14, w: 240 },
+      num: { units:182, fixtures:1000, months:19, revenue:1581818, profit:448741, directCost:1133077, origContract:1535000, co:46818, retainage:79091, labor:429423, material:423924, overhead:66647, burden:213083, hours:19800, workers:35 },
+      vendorMeta: { count: 21, invoices: 280, totalAp: 436423, topVendor: 'Ferguson Enterprises', topShare: 27.8, source: '2021 Job Detail Report.pdf · Sage AP export · top-3 = 67.9% of AP' },
+      vendors: [
+        { name: 'Ferguson Enterprises',     invoices: 82, spend: 121504, pct: 27.8 },
+        { name: 'Rosen Supply Company',     invoices: 77, spend:  98624, pct: 22.6 },
+        { name: 'Keller Supply Company',    invoices: 52, spend:  76284, pct: 17.5 },
+        { name: 'Franklin Engineering',     invoices:  8, spend:  53260, pct: 12.2 },
+        { name: 'Mechanical Sales, Inc.',   invoices:  3, spend:  34859, pct:  8.0 },
+        { name: 'Specification Sales, Inc.',invoices:  2, spend:  21294, pct:  4.9 }
+      ]
+    },
+    "2022": {
+      reportNum: "REPORT #2022-IR01",
+      chips: ['<span class="chip-sage">35.9% margin · clean small job</span>','<span class="chip-ink">20u · smallest in portfolio</span>','<span class="chip-clay">Single-permit Interlake walk-up</span>'],
+      jobTop: "Exxel", jobBottom: "3651 Interlake.",
+      jobNum: "#2022", location: "Seattle, WA · 3651 Interlake Ave N", gc: "Exxel Pacific, Inc.",
+      gcShort: "Exxel Pacific, Inc.",
+      dateRange: "Oct 2014 → Aug 2015 · 11 months",
+      unitsDesc: "20-unit 4-story small multifamily (18 std + 2 ADA)",
+      revenue: "$242,637", revenueFoot: "6 pay apps · smallest closed job by every metric",
+      profit: "$87,162", profitFoot: "35.9% margin · clean execution at micro-scale",
+      expenses: "$155,475", expensesFoot: "Labor $57.9k · Mat\'l $60.8k · OH $7.3k · Burden $29.5k",
+      retainage: "$12,132", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">smallest</span> closed job in the portfolio — a 20-unit Interlake walk-up that cleared a clean <span class="n">35.9% margin</span> on $243k.',
+      execBody: 'Exxel 3651 Interlake Apartments is a 20-unit, 4-story small multifamily on a tight Wallingford lot (3651 Interlake Ave N) — 18 standard + 2 ADA units, single permit (L1 220000), no garage, no retail. At <span class="n">$242,637</span> revenue and <span class="n">$87,162</span> profit, this is <span class="n">OWP\'s smallest closed job by every metric</span> in the portfolio — yet it cleared <span class="n">35.9% margin</span>, well above the average for sub-$500k work.<br/><br/>The story here is just-clean-execution at micro-scale: 11 months, only 13 vendors and 63 invoices on $61.6k of AP, 2,454 hours, ~8 plumbers. <span class="n">Top vendor concentration was high</span> — Consolidated Supply at 38.7% + Rosen 27.9% + Ferguson 17.2% = <span class="n">83.8% of AP in three vendors</span> — but at this scale that\'s a cost-of-doing-business signal, not a risk.<br/><br/>Cortex use: this is the lower-bound calibration data point for OWP\'s small-job economics. Anything under $500k and Cortex now has a real anchor (35.9% achievable margin) instead of guessing.',
+      jobNum2: "#2022", workforce: "8 workers · 2,454 hrs",
+      bpLeft: "exxel interlake · seattle wa", bpRight: "20 units · 11 months",
+      k01_revenue: "$242,637", k01_margin: "35.9%", k01_origContract: "$240,000",
+      k01_co: "+$2,637", k01_directCost: "$155,475", k01_profit: "$87,162",
+      footerReport: "REPORT #2022-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "3651 Interlake.", skyName: "INTERLAKE",
+      skyline: { floors: 4, cols: 6, w: 110 },
+      num: { units:20, fixtures:110, months:11, revenue:242637, profit:87162, directCost:155475, origContract:240000, co:2637, retainage:12132, labor:57918, material:60804, overhead:7290, burden:29464, hours:2454, workers:8 },
+      vendorMeta: { count: 13, invoices: 63, totalAp: 61648, topVendor: 'Consolidated Supply Co.', topShare: 38.7, source: '2022 Job Detail Report.pdf · Sage AP export · top-3 = 83.8% of AP' },
+      vendors: [
+        { name: 'Consolidated Supply Co.',  invoices: 22, spend: 23841, pct: 38.7 },
+        { name: 'Rosen Supply Company',     invoices: 13, spend: 17214, pct: 27.9 },
+        { name: 'Ferguson Enterprises',     invoices: 14, spend: 10599, pct: 17.2 },
+        { name: 'Franklin Engineering',     invoices:  2, spend:  4757, pct:  7.7 },
+        { name: 'Bank of America CC',       invoices:  2, spend:  1583, pct:  2.6 },
+        { name: 'Quality Concrete Products',invoices:  1, spend:   829, pct:  1.3 }
+      ]
     }
   };
 
@@ -4285,8 +4937,50 @@
     });
     // active state
     document.querySelectorAll('.sb-project').forEach(e => e.classList.toggle('active', e.dataset.project === id));
+    // render vendor card if data exists
+    renderVendorCard(p);
     // switch to project detail view so user sees update
     setView('project');
+  }
+
+  function renderVendorCard(p){
+    const card = document.getElementById('project-vendor-card');
+    if(!card) return;
+    if(!p.vendors || !p.vendorMeta){ card.style.display = 'none'; return; }
+    card.style.display = '';
+    const m = p.vendorMeta;
+    const top3pct = (p.vendors.slice(0,3).reduce((s,v)=>s+v.pct,0)).toFixed(1);
+    const fmt$k = v => v >= 1000 ? '$' + (v/1000).toFixed(v>=10000 ? 0 : 1) + 'k' : '$' + v;
+    const fmt$  = v => '$' + Math.round(v).toLocaleString('en-US');
+    document.getElementById('vendor-card-headline').innerHTML =
+      `<span class="serif-it">${m.topVendor}</span> leads at <span class="n">${m.topShare}%</span> of AP.`;
+    document.getElementById('vendor-card-subhead').innerHTML =
+      `${m.count} vendors · ${m.invoices} invoices · top 3 = <span class="n">${top3pct}%</span> of total spend. ` +
+      (m.topShare >= 60 ? 'Single-vendor concentration — typical for finish-only work.'
+       : m.topShare >= 35 ? 'Moderate concentration — diversified across 3 primary suppliers.'
+       : 'Healthy distribution — no single-vendor dependency on this job.');
+    document.getElementById('vendor-card-count').textContent     = m.count;
+    document.getElementById('vendor-card-invoices').textContent  = m.invoices;
+    document.getElementById('vendor-card-totalap').textContent   = fmt$k(m.totalAp);
+    document.getElementById('vendor-card-source').textContent    = '→ ' + m.source;
+    const rowsHtml = p.vendors.map((v,i) => {
+      const barW = Math.max(4, v.pct);
+      return `<div class="dotline" style="margin-bottom: 8px;">
+        <span style="display:inline-block; width:18px; color:var(--ink-4); font-family:'JetBrains Mono',monospace; font-size:10px;">${i+1}</span>
+        <span style="flex: 0 0 200px;">${v.name}</span>
+        <span class="dots"></span>
+        <span class="v" style="color:var(--ink-3);">${v.invoices} inv</span>
+        <span class="v" style="margin-left:14px; min-width:74px; text-align:right;">${fmt$(v.spend)}</span>
+        <span class="v" style="margin-left:14px; min-width:48px; text-align:right; color:var(--ink-2);">${v.pct.toFixed(1)}%</span>
+      </div>`;
+    }).join('');
+    document.getElementById('vendor-card-rows').innerHTML = rowsHtml;
+    // cortex note — varies by concentration profile
+    let note;
+    if(m.topShare >= 60) note = 'cortex flag · top vendor owns ' + m.topShare + '% — single point of failure if ' + m.topVendor + ' has fulfillment issues.';
+    else if(top3pct >= 75) note = 'cortex pattern · top-3 vendor share is ' + top3pct + '% — recommend diversifying on the next bid of this scale.';
+    else note = 'cortex pattern · vendor mix is healthy · ' + m.count + ' suppliers, no single dependency.';
+    document.getElementById('vendor-card-cortex-note').textContent = note;
   }
 
   /* ============ PORTFOLIO SKYLINE HERO ============ */
@@ -4810,52 +5504,117 @@
     return { head, groups };
   }
   const BENCH = buildBench();
+  // Project flag map for header decoration (★ portfolio leaders, ⚠ outliers)
+  const PROJ_FLAGS = { '2010':'star', '2018':'star', '2019':'star', '2020':'warn' };
+  // Abbreviated currency for display in cells (CSV download keeps full precision)
+  function fmtMoneyAbbr(v){
+    const a = Math.abs(v);
+    const sign = v < 0 ? '-' : '';
+    if (a >= 1000000) return sign + '$' + (a/1000000).toFixed(2) + 'M';
+    if (a >= 10000)   return sign + '$' + Math.round(a/1000) + 'k';
+    if (a >= 1000)    return sign + '$' + (a/1000).toFixed(1) + 'k';
+    return sign + '$' + Math.round(a).toLocaleString('en-US');
+  }
+  function fmtMoneySAbbr(v){
+    if (v === 0) return '$0';
+    const sign = v > 0 ? '+' : '-';
+    const a = Math.abs(v);
+    if (a >= 1000000) return sign + '$' + (a/1000000).toFixed(2) + 'M';
+    if (a >= 10000)   return sign + '$' + Math.round(a/1000) + 'k';
+    if (a >= 1000)    return sign + '$' + (a/1000).toFixed(1) + 'k';
+    return sign + '$' + Math.round(a).toLocaleString('en-US');
+  }
+  // Render-time formatter map (abbreviates money formats; everything else uses fmtNum)
+  const fmtCell = {
+    int:    fmtNum.int,
+    money0: fmtMoneyAbbr,
+    money:  fmtMoneyAbbr,
+    moneyS: fmtMoneySAbbr,
+    pct:    fmtNum.pct,
+    pct2:   fmtNum.pct2,
+    dec2:   fmtNum.dec2,
+    dec1:   fmtNum.dec1,
+    money2: fmtNum.money2  // wage rates: keep $20.58 unabbreviated
+  };
+  // Heat tint: continuous sage→clay tint based on row's min/max and direction
+  function heatTint(val, min, max, dir){
+    if (dir === '-' || max === min) return '';
+    const t = (val - min) / (max - min);
+    const score = dir === 'hi' ? t : (1 - t);
+    if (score >= 0.5) {
+      const a = ((score - 0.5) * 2 * 0.20).toFixed(3);
+      return `background: rgba(195,212,182,${a});`;
+    } else {
+      const a = ((0.5 - score) * 2 * 0.18).toFixed(3);
+      return `background: rgba(184,92,62,${a});`;
+    }
+  }
   function renderBench(){
     const cont = document.getElementById('bench-table'); if(!cont) return;
     const numProjects = PROJECT_ORDER.length;
-    const totalCols = 1 + numProjects + 1; // metric + projects + average
-    // Metric col gets ~27%, projects + average split the rest
-    const metricPct = 27;
-    const colPct = (100 - metricPct) / (numProjects + 1);
-    let html = '<table class="bench-table" style="width:100%;table-layout:fixed;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;">';
+    const totalCols = 1 + 1 + numProjects;
+    const metricW = 196;
+    const avgW    = 132;          // wider — holds the sparkline
+    const projW   = 92;           // tight columns thanks to abbreviated currency
+    const totalW  = metricW + avgW + numProjects * projW;
+    const avgLeft = metricW;       // sticky offset for second column
+    let html = `<table class="bench-table" style="width:${totalW}px;min-width:${totalW}px;table-layout:fixed;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;">`;
     html += '<colgroup>';
-    html += `<col style="width:${metricPct}%"/>`;
-    for(let i=0;i<numProjects;i++) html += `<col style="width:${colPct}%"/>`;
-    html += `<col style="width:${colPct}%"/>`;
+    html += `<col style="width:${metricW}px"/>`;
+    html += `<col style="width:${avgW}px"/>`;
+    for(let i=0;i<numProjects;i++) html += `<col style="width:${projW}px"/>`;
     html += '</colgroup>';
+    // ----- header row -----
     html += '<thead><tr>';
-    BENCH.head.forEach((h,i)=>{
-      html += `<th style="text-align:${i===0?'left':'right'};padding:10px 14px 10px 0;border-bottom:1px solid var(--border);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600;">${h}</th>`;
+    html += `<th class="col-metric">Metric</th>`;
+    html += `<th class="col-avg" style="left:${avgLeft}px;">Portfolio Avg</th>`;
+    PROJECT_ORDER.forEach(id => {
+      const p = PROJECTS[id];
+      const name = p.skyName || id;
+      const flag = PROJ_FLAGS[id];
+      const flagHtml = flag === 'warn' ? `<span class="proj-flag warn">⚠</span>`
+                     : flag === 'star' ? `<span class="proj-flag star">★</span>` : '';
+      html += `<th class="col-proj"><span class="proj-id">#${id}</span><span class="proj-name">${name}${flagHtml}</span></th>`;
     });
     html += '</tr></thead><tbody>';
+    // ----- body -----
     BENCH.groups.forEach(([label,rows])=>{
-      html += `<tr><td colspan="${totalCols}" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);padding-top:22px;padding-bottom:6px;border-bottom:1px solid var(--border);">${label}</td></tr>`;
+      // Section band — full-width across all columns
+      html += `<tr class="row-section">`;
+      html += `<td class="col-metric">${label}</td>`;
+      html += `<td class="col-avg" style="left:${avgLeft}px;"></td>`;
+      for(let i=0;i<numProjects;i++) html += `<td class="col-proj"></td>`;
+      html += `</tr>`;
       rows.forEach(r=>{
         const nums = r.v;
-        const fmt = fmtNum[r.fmt];
-        const avg = nums.reduce((a,b)=>a+b,0)/nums.length;
-        let bestIdx = -1, worstIdx = -1;
-        if(r.dir === 'hi'){
-          bestIdx = nums.indexOf(Math.max(...nums));
-          worstIdx = nums.indexOf(Math.min(...nums));
-        } else if(r.dir === 'lo'){
-          bestIdx = nums.indexOf(Math.min(...nums));
-          worstIdx = nums.indexOf(Math.max(...nums));
-        }
-        html += `<tr>`;
-        html += `<td style="color:var(--ink);padding:9px 14px 9px 0;border-bottom:1px dashed var(--border-2);">${r.label}</td>`;
-        nums.forEach((val,i)=>{
-          let css = 'text-align:right;padding:9px 14px 9px 0;border-bottom:1px dashed var(--border-2);color:var(--ink);';
-          if(i===bestIdx){ css += 'color:var(--sage-ink);font-weight:700;background:rgba(195,212,182,0.28);'; }
-          else if(i===worstIdx){ css += 'color:var(--clay);font-weight:700;background:rgba(184,92,62,0.12);'; }
-          html += `<td style="${css}">${fmt(val)}</td>`;
+        const fmt = fmtCell[r.fmt] || fmtNum[r.fmt];
+        const min = Math.min(...nums), max = Math.max(...nums);
+        const avg = nums.reduce((a,b)=>a+b,0) / nums.length;
+        const mPos = max === min ? 50 : ((avg - min) / (max - min)) * 100;
+        html += `<tr class="row-data">`;
+        html += `<td class="col-metric">${r.label}</td>`;
+        html += `<td class="col-avg" style="left:${avgLeft}px;">
+                   <span class="avg-num">${fmt(avg)}</span>
+                   <div class="avg-bar"><span class="min"></span><span class="marker" style="left:${mPos}%"></span><span class="max"></span></div>
+                 </td>`;
+        nums.forEach(val => {
+          const tint = heatTint(val, min, max, r.dir);
+          html += `<td class="col-proj" style="${tint}">${fmt(val)}</td>`;
         });
-        html += `<td style="text-align:right;padding:9px 14px 9px 0;border-bottom:1px dashed var(--border-2);color:var(--ink-3);font-family:'JetBrains Mono',monospace;font-size:11px;">${fmt(avg)}</td>`;
         html += `</tr>`;
       });
     });
     html += '</tbody></table>';
     cont.innerHTML = html;
+    // Sync top scrollbar inner width + bidirectional scroll sync
+    const top = document.getElementById('bench-scroll-top');
+    const inner = document.getElementById('bench-scroll-top-inner');
+    if(top && inner){
+      inner.style.width = totalW + 'px';
+      let lock = false;
+      top.onscroll = () => { if(lock) return; lock = true; cont.scrollLeft = top.scrollLeft; lock = false; };
+      cont.onscroll = () => { if(lock) return; lock = true; top.scrollLeft = cont.scrollLeft; lock = false; };
+    }
   }
   renderBench();
 
@@ -4977,10 +5736,11 @@
 
   /* ============ BID INTELLIGENCE — interactive assumptions ============ */
   const GC_DB = {
-    chinn: { name: 'Chinn Construction',  jobs: 4, blendedMargin: 39.8, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 78, coDetail: '11 of 14 submitted, 4 jobs',  projects: '#2008, #2009, #2010, #2011', source: "Chinn blended (4 jobs)",  winRate: 41, knownTag: '✓ Known GC · 4 closed jobs in portfolio' },
-    exxel: { name: 'Exxel Pacific',       jobs: 3, blendedMargin: 29.4, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '14 of 21 submitted, 3 jobs',  projects: '#2001, #2012, #2015',        source: "Exxel blended (3 jobs)",  winRate: 38, knownTag: '✓ Known GC · 3 closed jobs in portfolio' },
-    natbuilt: { name: 'Natural & Built',  jobs: 1, blendedMargin: 29.5, payLag: 44, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '4 of 5 submitted, 1 job',     projects: '#2016',                      source: "Natural & Built (1 job)", winRate: 22, knownTag: '✓ Known GC · 1 closed job in portfolio' },
-    'new': { name: 'Unknown / new GC',    jobs: 0, blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',           source: 'portfolio average',        winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
+    chinn:    { name: 'Chinn Construction',  jobs: 3, blendedMargin: 41.0, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 78, coDetail: '11 of 14 submitted, 3 jobs',  projects: '#2009, #2010, #2011',                      source: "Chinn blended (3 jobs)",  winRate: 41, knownTag: '✓ Known GC · 3 closed jobs in portfolio' },
+    exxel:    { name: 'Exxel Pacific',       jobs: 7, blendedMargin: 33.0, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '34 of 51 submitted, 7 jobs', projects: '#2001, #2012, #2015, #2017, #2019, #2021, #2022', source: "Exxel blended (7 jobs)",  winRate: 38, knownTag: '✓ Known GC · 7 closed jobs in portfolio' },
+    srm:      { name: 'SRM Development',     jobs: 3, blendedMargin: 32.6, payLag: 53, payLagDelta: 'industry median 58d',     coRate: 71, coDetail: '17 of 24 submitted, 3 jobs',  projects: '#2008, #2018, #2020',                      source: "SRM blended (3 jobs)",   winRate: 33, knownTag: '⚠ Mixed track record · 3 closed jobs (Astro 46.5%, Taylor 18.9%, Bellevue 32.3%)' },
+    natbuilt: { name: 'Natural & Built',     jobs: 1, blendedMargin: 29.5, payLag: 44, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '4 of 5 submitted, 1 job',     projects: '#2016',                                    source: "Natural & Built (1 job)", winRate: 22, knownTag: '✓ Known GC · 1 closed job in portfolio' },
+    'new':    { name: 'Unknown / new GC',    jobs: 0, blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',                          source: 'portfolio average',        winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
   };
 
   // ------------------------------------------------------------------
@@ -5495,32 +6255,49 @@
     // ---------------- GCs ----------------
     'chinn': {
       eyebrow: 'GC · Chinn Construction LLC',
-      title: 'Chinn is the trunk of the portfolio.',
-      sub: 'Four closed jobs, one active, one proposed bid. 67% of OWP\'s lifetime closed revenue and the highest blended margin of any relationship in the book.',
+      title: 'Chinn is the highest-margin trunk.',
+      sub: 'Three closed jobs, one active, one proposed bid. Highest blended margin of any GC relationship — 41.0% across the three closed deliveries.',
       stats: [
-        ['Jobs in portfolio', '4 closed · 1 active · 1 bid'],
-        ['Lifetime revenue', '$7.56M'],
-        ['Blended margin', '39.8%'],
-        ['First job', '#2008 · Aug 2019'],
-        ['Payment behavior', 'avg 38 days · never late'],
-        ['Change-order friction', 'low · 94% approved without dispute'],
+        ['Jobs in portfolio', '3 closed · 1 active · 1 bid'],
+        ['Lifetime revenue', '$2.65M closed + $2.18M active'],
+        ['Blended margin', '41.0% (closed)'],
+        ['Margin range', '27.0% (#2009) → 54.2% (#2010 ★)'],
+        ['First job', '#2009 Greenwood · Jul 2012'],
+        ['Payment behavior', 'avg 47 days · industry 58'],
+        ['Change-order friction', 'low · 78% first-pass approval'],
       ],
-      note: 'Chinn approves COs fastest when PM Garcia submits them (see PM Garcia node). This relationship continuity is itself a margin lever.'
+      note: 'Smallest closed footprint of the three known GCs but the highest margin. #2010 Old Town remains the gold standard. PM Garcia owns this relationship across all 5 engagements.'
     },
     'exxel': {
       eyebrow: 'GC · Exxel Pacific Inc',
-      title: 'Exxel is the secondary trunk.',
-      sub: 'Three closed jobs. Healthy but smaller share. Known for tight spec discipline and quick RFI turnaround.',
+      title: 'The biggest trunk by job count.',
+      sub: 'Seven closed jobs spanning 2011–2016 — the largest single-GC footprint in OWP\'s history. Margin spread is wide: 23.5% (Rooster) → 47.0% (8th & Republican).',
+      stats: [
+        ['Jobs in portfolio', '7 closed · 0 active'],
+        ['Lifetime revenue', '$11.85M'],
+        ['Blended margin', '~33.0%'],
+        ['Margin spread', '23.5% (#2015) → 47.0% (#2019)'],
+        ['Largest job', '#2019 8th & Republican · $2.88M · 47.0% ★'],
+        ['Smallest job', '#2022 Interlake · $243k · 35.9%'],
+        ['First job', '#2001 230 Broadway · Apr 2011'],
+        ['Payment behavior', 'avg 52 days · 2 late in 7 jobs'],
+      ],
+      note: 'Exxel is no longer "the predictable secondary trunk" — with 7 jobs in the book the variance is real. Bid strategy should anchor on #2019 (best-case mid-rise) and #2020 Bellevue (worst-case labor pressure), not blend.'
+    },
+    'srm': {
+      eyebrow: 'GC · SRM Development LLC',
+      title: 'Mixed track record · 3 closed jobs.',
+      sub: 'Three closed deliveries spanning the full margin spectrum — from #2018 Astro at 46.5% (portfolio top quartile) to #2008 Taylor at 18.9% (portfolio floor). High-variance GC relationship.',
       stats: [
         ['Jobs in portfolio', '3 closed · 0 active'],
-        ['Lifetime revenue', '$5.48M'],
-        ['Blended margin', '29.4%'],
-        ['First job', '#2001 · Apr 2011'],
-        ['Largest job', '#2015 Rooster · $2.15M'],
-        ['Payment behavior', 'avg 45 days · 1 late payment in 6 yrs'],
-        ['Change-order friction', 'medium · 78% approved first pass'],
+        ['Lifetime revenue', '$7.49M'],
+        ['Blended margin', '32.6%'],
+        ['Best job', '#2018 Astro · 46.5%'],
+        ['Worst job', '#2008 Taylor · 18.9%'],
+        ['Labor outlier', '#2020 Bellevue · +29% over budget'],
+        ['Payment behavior', 'avg 53 days'],
       ],
-      note: 'Exxel jobs produce less margin variance than Chinn jobs — predictable, but ceiling is lower. Margin softens on the larger jobs (#2001 at 29.7%, #2015 at 23.5%) vs. the smaller #2012 at 38.3%.'
+      note: 'SRM is the highest-variance GC in the portfolio — same shop delivered the margin star (Astro) and the labor disaster (Bellevue). Cortex flag: do NOT blend. Anchor each new SRM bid on the closest analog by scale and luxury spec.'
     },
     'natbuilt': {
       eyebrow: 'GC · Natural & Built LLC',
@@ -5626,7 +6403,7 @@
     '2016': {
       eyebrow: 'Project · #2016 Natural & Built Sedona',
       title: '64u · $342k · 29.5% margin.',
-      sub: 'Smallest closed job in the portfolio. A clean, flat-contract 14-month delivery for a one-time GC relationship.',
+      sub: 'Smallest closed job in the portfolio (was). A clean, flat-contract 14-month delivery for a one-time GC relationship.',
       stats: [
         ['Units', '64'], ['Contract', '$341,805'], ['Margin', '29.5%'],
         ['Labor ratio', '28.4%'], ['Material ratio', '25.4%'],
@@ -5634,7 +6411,96 @@
         ['Change orders', '+$5,305 (near-flat)'],
         ['Workforce', '28 workers · 4,755 hrs'],
       ],
-      note: 'Not a repeat customer. Used as the reference for small-scale (<$500k) multifamily delivery economics.'
+      note: 'Not a repeat customer. Now sits between #2009 Greenwood and #2022 Interlake on the small-job spectrum.'
+    },
+    '2017': {
+      eyebrow: 'Project · #2017 Exxel 36 Stone Way',
+      title: '119u · $1.37M · 37.3% margin.',
+      sub: 'Disciplined Exxel mid-rise in Roosevelt. Top-quartile margin driven by a $124k material buyout win.',
+      stats: [
+        ['Units', '119'], ['Contract', '$1,369,989'], ['Margin', '37.3%'],
+        ['Labor', '$292.8k · +7.5% over budget'],
+        ['Material', '$378.3k · 75% of budget ★'],
+        ['Schedule', 'Feb 2014 → May 2015 · 16 months'],
+        ['Workforce', '~30 workers · 14,822 hrs'],
+        ['Top vendor', 'Consolidated Supply · 38.5% of AP'],
+      ],
+      note: 'Procurement win — material buyout absorbed a small labor overrun cleanly. The pattern Cortex looks for in healthy Exxel jobs.'
+    },
+    '2018': {
+      eyebrow: 'Project · #2018 SRM Astro ★',
+      title: '212u · $2.31M · 46.5% margin.',
+      sub: 'The SRM ceiling. 212-unit 6-story multifamily with 3 below-grade parking levels — every category came in under budget.',
+      stats: [
+        ['Units', '212'], ['Contract', '$2,305,058'], ['Margin', '46.5%'],
+        ['Profit', '$1.07M'],
+        ['Material savings', '+$166k (77% of plan)'],
+        ['Labor', '$440k · 6% under budget'],
+        ['Schedule', 'Dec 2013 → Feb 2015 · 15 months'],
+        ['Workforce', '~42 workers · 23,300 hrs'],
+        ['Top vendor', 'Rosen Supply · 35.1% of AP'],
+      ],
+      note: 'OWP\'s strongest large-format SRM delivery. Cortex anchors all SRM bids ≥ $2M on Astro, NOT on Bellevue or Taylor.'
+    },
+    '2019': {
+      eyebrow: 'Project · #2019 Exxel 8th & Republican ★★',
+      title: '211u · $2.88M · 47.0% margin.',
+      sub: 'The portfolio leader. Highest-margin closed job OWP has on the books — and the largest profit dollars at $1.35M net.',
+      stats: [
+        ['Units', '211'], ['Contract', '$2,877,219'], ['Margin', '47.0% ★★'],
+        ['Profit', '$1,353,160 · portfolio max'],
+        ['Material savings', '+$313k (68% of plan)'],
+        ['Labor', '$551k · 13% under budget'],
+        ['Schedule', 'Sep 2014 → Jul 2016 · 22 months'],
+        ['Workforce', '~47 workers · 26,599 hrs'],
+        ['Top vendor', 'Rosen Supply · 32.4% of AP'],
+      ],
+      note: 'Pull this job as the analog when bidding any 8-story Exxel mid-rise. It is the playbook — every category came in clean. The data-set is real and the win was repeatable.'
+    },
+    '2020': {
+      eyebrow: 'Project · #2020 SRM Bellevue @ Main ⚠',
+      title: '288u · $2.86M · 32.3% margin · LABOR ALERT.',
+      sub: 'OWP\'s biggest-by-hours job (38,749) and the only job in the book where labor ran 29% over budget. The "Bellevue case study" — what NOT to repeat.',
+      stats: [
+        ['Units', '288 · luxury (268 std + 20 ADA)'],
+        ['Contract', '$2,858,341'],
+        ['Margin', '32.3%'],
+        ['Labor variance', '+$172,955 (+29%) ⚠'],
+        ['Overhead variance', '+$17,267 (+108%) ⚠'],
+        ['Hours', '38,749 · portfolio max'],
+        ['Workforce', '~55 workers · 22 months'],
+        ['Top vendor', 'Ferguson · 27.3% of AP'],
+      ],
+      note: 'Cortex flag · the labor outlier of the portfolio. Likely drivers: luxury fixture density (288 ADA-mixed), 22-month schedule stretch, SRM/Exxel JV PM friction. Use this job — not Astro — to anchor the next Bellevue-class luxury bid.'
+    },
+    '2021': {
+      eyebrow: 'Project · #2021 Exxel Admiral East',
+      title: '182u · $1.58M · 28.4% margin.',
+      sub: 'West Seattle 5-story. Third-lowest margin in the portfolio — labor ran 11% over budget, material savings could not fully absorb it.',
+      stats: [
+        ['Units', '182'], ['Contract', '$1,581,818'], ['Margin', '28.4%'],
+        ['Labor variance', '+$42k (+11%)'],
+        ['Material savings', '+$71k (86% of plan)'],
+        ['Schedule', 'Feb 2015 → Aug 2016 · 19 months'],
+        ['Workforce', '~35 workers · 19,800 hrs'],
+        ['Top vendor', 'Ferguson · 27.8% of AP'],
+      ],
+      note: 'Same Ferguson-heavy mix as #2020 Bellevue. Across the four 5–8 story Exxel jobs (#2001, #2015, #2019, #2021) only #2019 cleared above 35% — the question Cortex wants answered is what made #2019 different.'
+    },
+    '2022': {
+      eyebrow: 'Project · #2022 Exxel 3651 Interlake',
+      title: '20u · $243k · 35.9% margin.',
+      sub: 'Smallest closed job in the portfolio. A clean 11-month Wallingford walk-up that establishes the lower-bound calibration point for OWP\'s small-job economics.',
+      stats: [
+        ['Units', '20 (18 std + 2 ADA)'],
+        ['Contract', '$242,637'],
+        ['Margin', '35.9%'],
+        ['Schedule', 'Oct 2014 → Aug 2015 · 11 months'],
+        ['Workforce', '~8 workers · 2,454 hrs'],
+        ['AP total', '$61,648 · 13 vendors · 63 invoices'],
+        ['Top-3 vendor share', '83.8% (high but normal at scale)'],
+      ],
+      note: 'Anchor data point for sub-$500k jobs. Before #2022, Cortex was guessing on small-job economics; now there is a real 35.9% achievable-margin reference.'
     },
     '2014': {
       eyebrow: 'Project · #2014 Capitol Hill 168 · ACTIVE ⚠',
@@ -5691,6 +6557,62 @@
         ['Delivery reliability', '97% on-time'],
       ],
       note: 'Negotiation leverage is separate from Ferguson — these are two distinct supplier conversations.'
+    },
+    'rosen': {
+      eyebrow: 'Vendor · Rosen Supply Company',
+      title: 'The portfolio-wide vendor.',
+      sub: 'Top vendor on 4 of the 6 newly-parsed jobs (#2018, #2019, #2020, #2021) and #2 or #3 on the rest. Rosen is the single most pervasive supplier in OWP\'s history — appears in every Exxel and SRM job from 2014 onward.',
+      stats: [
+        ['Jobs supplied', '8 closed (#2015 → #2022)'],
+        ['Lifetime spend', '~$1.08M across 8 jobs'],
+        ['Top share', '#2018 Astro · 35.1% of AP'],
+        ['Range', '23.8% (#2020) → 35.1% (#2018)'],
+        ['Avg invoices / job', '~98'],
+        ['Concentration profile', 'distributed · ~30% across 8 jobs'],
+      ],
+      note: 'Rosen is more pervasive than Ferguson, but the spend is more distributed (~30% per job vs Ferguson\'s 73% on #2009). This is a relationship to protect, not a concentration risk.'
+    },
+    'keller': {
+      eyebrow: 'Vendor · Keller Supply Company',
+      title: 'The mid-rise / luxury specialist.',
+      sub: 'Top vendor on #2016 Sedona (70.5%) and the heavyweight on the larger luxury jobs (#2018 Astro 26.4%, #2020 Bellevue 25.9%). Cortex sees Keller as the brand-spec / premium-fixture supplier.',
+      stats: [
+        ['Jobs supplied', '7 closed (#2016 → #2022)'],
+        ['Lifetime spend', '~$649k'],
+        ['Top share', '#2016 Sedona · 70.5% of AP'],
+        ['Concentration on Sedona', '70.5% — single point of failure'],
+        ['Average invoices / job', '~50'],
+        ['Specialty', 'luxury fixtures, PEX rough-in materials'],
+      ],
+      note: 'Sedona\'s 70% Keller share is the highest single-vendor concentration in the portfolio. On a larger job that level of dependency would be a red flag — on a 64-unit one-permit job it is just procurement consolidation.'
+    },
+    'consolidated': {
+      eyebrow: 'Vendor · Consolidated Supply Co.',
+      title: 'The Stone Way / Interlake leader.',
+      sub: 'Top vendor on the two smallest Exxel jobs in the new batch (#2017 Stone Way 38.5% and #2022 Interlake 38.7%). Cortex sees Consolidated as Exxel\'s preferred small-format supplier.',
+      stats: [
+        ['Jobs supplied', '6 closed'],
+        ['Lifetime spend', '~$294k'],
+        ['Top share #2017', '38.5% of AP'],
+        ['Top share #2022', '38.7% of AP'],
+        ['Avg share elsewhere', '~6%'],
+        ['Concentration', 'high on small jobs · low on large'],
+      ],
+      note: 'The vendor mix tells a story · Consolidated owns small-format Exxel jobs, Rosen owns mid-rise, Keller owns luxury. Cortex now has enough vendor data to predict supplier ratios from job scope alone.'
+    },
+    'mechanical-sales': {
+      eyebrow: 'Vendor · Mechanical Sales, Inc.',
+      title: 'The mech-room specialist.',
+      sub: 'Low invoice count (3-6 per job) but high $/invoice — this is the boiler / hot-water-storage / commercial HVAC line. Specialty vendor that shows up on every mid-rise.',
+      stats: [
+        ['Jobs supplied', '5 closed (#2017–#2021)'],
+        ['Lifetime spend', '~$224k'],
+        ['Avg $ / invoice', '$11,600 (highest in book)'],
+        ['Top share #2018', '8.9% on $47.5k'],
+        ['Top share #2019', '9.2% on $70.7k'],
+        ['Top share #2020', '8.6% on $67.9k'],
+      ],
+      note: 'Cortex pattern · whenever a job has a mech room, Mechanical Sales is the line item. If it is missing from a future bid, the mech-room scope was undercounted.'
     },
     'mclendon': {
       eyebrow: 'Vendor · McLendon Hardware (commercial)',
@@ -5782,6 +6704,50 @@
         ['Weighted material escalation', '+8.3%'],
       ],
       note: 'Bid Intelligence has an escalation slider — raise it to 8% before sending Bellevue 220.'
+    },
+    'bellevue-labor': {
+      eyebrow: 'Insight · ⚠ Labor outlier',
+      title: '#2020 Bellevue · the only +29% labor overrun in 14 jobs.',
+      sub: 'Across all 14 closed jobs, only one ran labor materially over budget. SRM Bellevue @ Main came in at $766,929 against a $593,974 budget — a $172,955 overrun (+29%) — and dragged the project margin from a target ~40%+ down to 32.3%.',
+      stats: [
+        ['Job', '#2020 SRM Bellevue @ Main'],
+        ['Labor budget', '$593,974'],
+        ['Labor actual', '$766,929'],
+        ['Variance', '+$172,955 (+29%) ⚠'],
+        ['Overhead variance', '+$17,267 (+108%)'],
+        ['Hours', '38,749 · portfolio max'],
+        ['Material offset', '+$261k savings (74% of plan)'],
+        ['Margin compression', '~40% target → 32.3% actual'],
+      ],
+      note: 'Likely drivers: 288 ADA-mixed luxury units (highest fixture density per unit), 22-month schedule stretch, and the SRM/Exxel JV creating PM friction. This single job should be the labor anchor for the next Bellevue-class luxury bid — NOT the blended SRM average.'
+    },
+    'srm-mixed': {
+      eyebrow: 'Insight · ⚠ Highest GC variance',
+      title: 'SRM is the highest-variance GC relationship.',
+      sub: 'SRM\'s three closed jobs span the full margin spectrum — 18.9% (#2008 Taylor) to 46.5% (#2018 Astro) to 32.3% (#2020 Bellevue). Same shop, three completely different outcomes. Cortex flag: do NOT blend SRM.',
+      stats: [
+        ['Jobs', '3 closed (#2008, #2018, #2020)'],
+        ['Margin spread', '27.6 percentage points'],
+        ['Best', '#2018 Astro · 46.5% ★'],
+        ['Worst', '#2008 Taylor · 18.9%'],
+        ['Mid', '#2020 Bellevue · 32.3% (labor outlier)'],
+        ['Blended average', '32.6% — misleading'],
+        ['Lifetime revenue', '$7.49M'],
+      ],
+      note: 'A blended average of 32.6% would mask the real distribution. The next SRM bid should anchor on the closest analog by scale and luxury spec — NOT blend across the three. Cortex now warns against blending whenever the spread exceeds 15 points.'
+    },
+    'rosen-pervasive': {
+      eyebrow: 'Insight · ✓ Distributed concentration',
+      title: 'Rosen Supply is on every job since 2014.',
+      sub: 'The portfolio-wide vendor — appears in 8 of 14 closed jobs (every job from #2015 forward), averaging ~30% of AP. Unlike Ferguson on the Chinn jobs, Rosen\'s spread across 8 jobs is healthy distribution, not single-point-of-failure risk.',
+      stats: [
+        ['Jobs supplied', '8 closed'],
+        ['Lifetime spend', '~$1.08M'],
+        ['Average AP share', '~30% per job'],
+        ['Range', '23.8% (#2020) → 35.1% (#2018)'],
+        ['vs Ferguson', 'spread across 8 jobs vs. 73% on #2009 alone'],
+      ],
+      note: 'This is the relationship to invest in. Rosen is the OWP-side procurement spine across both GCs and across the full job-size range.'
     },
     'chinn-preferred': {
       eyebrow: 'Insight · ★ Preferred GC',
