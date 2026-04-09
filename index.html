@@ -3,7 +3,20 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cortex Project Intelligence Report · Chinn Greenwood Apartments</title>
+<title>Cortex Project Intelligence</title>
+<meta name="description" content="Portfolio intelligence for specialty subcontractors. Closed jobs, parsed and benchmarked." />
+
+<!-- Open Graph (iMessage, Slack, Facebook, LinkedIn) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Cortex Project Intelligence" />
+<meta property="og:title" content="Cortex Project Intelligence" />
+<meta property="og:description" content="Portfolio intelligence for specialty subcontractors. Closed jobs, parsed and benchmarked." />
+<meta property="og:url" content="https://cortex-mockup.vercel.app/" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Cortex Project Intelligence" />
+<meta name="twitter:description" content="Portfolio intelligence for specialty subcontractors. Closed jobs, parsed and benchmarked." />
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -608,6 +621,14 @@
       <div class="sb-item" data-view-target="benchmark">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 V13"/><path d="M9 20 V5"/><path d="M15 20 V9"/><path d="M21 20 V3"/><path d="M2 20 H22"/><circle cx="9" cy="5" r="1.2" fill="currentColor"/><circle cx="21" cy="3" r="1.2" fill="currentColor"/></svg>
         <span>Benchmark Comparison</span>
+      </div>
+      <div class="sb-item" data-view-target="bid">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 V12 C4 16.5 7.5 20.5 12 22 C16.5 20.5 20 16.5 20 12 V6 Z"/><path d="M9 12 L11 14 L15 10"/></svg>
+        <span>Bid Intelligence</span>
+      </div>
+      <div class="sb-item" data-view-target="health">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 H7 L9 6 L13 18 L15 12 H21"/></svg>
+        <span>Job Health</span>
       </div>
       <div class="sb-item" data-view-target="pipeline">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 H14 L20 10 V20 A1 1 0 0 1 19 21 H5 A1 1 0 0 1 4 20 Z"/><path d="M14 4 V10 H20"/><path d="M8 13 H16"/><path d="M8 16 H16"/><path d="M8 10 H11"/></svg>
@@ -1743,6 +1764,509 @@
         <div><div class="hero-lab">Duplicate rate</div><div class="hero-val tabular" style="color: var(--clay);">25%</div><div class="hero-foot">79 groups · 158 files · across 4 jobs</div></div>
         <div><div class="hero-lab">Parse confidence</div><div class="hero-val tabular" style="color: var(--sage-ink);">94.2%</div><div class="hero-foot">avg across parsed schemas</div></div>
         <div><div class="hero-lab">Unresolved docs</div><div class="hero-val tabular">12</div><div class="hero-foot">manual review queue</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ============= BID INTELLIGENCE VIEW ======================== -->
+  <!-- ============================================================ -->
+  <div class="view" data-view="bid">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="chip-ink">New invitation</span>
+      <span class="chip-sage">91% match to closed jobs</span>
+      <span class="chip-clay">Bid due in 11 days</span>
+    </div>
+    <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
+      Bid <span class="serif-it">Intelligence.</span>
+    </h1>
+    <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 720px; line-height: 1.6;">
+      A new invitation lands. Cortex matches it against the closed-job portfolio, predicts cost from your actuals, scores the GC's payment and change-order behavior, and recommends a margin floor. Stop guessing. Stop bidding bad jobs.
+    </div>
+
+    <!-- Invitation snapshot -->
+    <div class="mt-12 blueprint" style="padding: 28px 32px;">
+      <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ invitation · cortex.parse v1</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">received · apr 4 2026</div>
+      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">walsh / chinn jv · seattle</div>
+      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">ref · INV-26-0411</div>
+
+      <div class="grid grid-cols-12 gap-6 py-8">
+        <div class="col-span-5">
+          <div class="hero-lab">Project</div>
+          <div class="text-[28px] font-semibold mt-2" style="color: var(--ink); line-height: 1.15;">
+            Bellevue 220 <span class="serif-it" style="color: var(--ink-3); font-weight: 400;">— mixed-use podium</span>
+          </div>
+          <div class="mt-2 text-[13px]" style="color: var(--ink-3);">220 units · 7-story · podium parking · ground-floor retail · Bellevue downtown</div>
+          <div class="mt-4 flex gap-2 flex-wrap">
+            <span class="chip-ink">Owner: Continental Pacific</span>
+            <span class="chip-ink">Arch: Weber Thompson</span>
+            <span class="chip-ink">Trade: Plumbing + storm</span>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div class="hero-lab">General Contractor</div>
+          <div class="text-[20px] font-semibold mt-2" style="color: var(--ink);">Chinn Construction</div>
+          <div class="mt-1 text-[12px]" style="color: var(--sage-ink);">✓ Known GC · 4 closed jobs in portfolio</div>
+          <div class="mt-4 hero-lab">Bid due</div>
+          <div class="text-[20px] font-semibold mt-2 tabular" style="color: var(--ink);">Apr 19 · 5pm</div>
+          <div class="mt-1 text-[12px]" style="color: var(--clay);">11 days remaining</div>
+        </div>
+        <div class="col-span-4">
+          <div class="hero-lab">Scope estimate (auto-parsed)</div>
+          <table class="modal-table mt-2" style="font-size: 12px;">
+            <tr><td>Predicted units</td><td class="num">220</td></tr>
+            <tr><td>Predicted fixtures</td><td class="num">1,118</td></tr>
+            <tr><td>Fixtures / unit</td><td class="num">5.08</td></tr>
+            <tr><td>Schedule (months)</td><td class="num">22</td></tr>
+            <tr><td>Stories above grade</td><td class="num">7</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendation banner -->
+    <div class="mt-10 p-8 rounded-2xl" style="background: var(--sage-soft); border: 1px solid var(--sage); position: relative;">
+      <div class="flex items-start gap-6">
+        <div style="flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%; background: var(--sage-ink); display: flex; align-items: center; justify-content: center;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div style="flex: 1;">
+          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--sage-ink);">Cortex recommends</div>
+          <div class="text-[40px] font-semibold mt-1" style="color: var(--ink); line-height: 1.05;">
+            Bid this job <span class="serif-it">— at the floor.</span>
+          </div>
+          <div class="mt-3 text-[14px]" style="color: var(--ink-2); line-height: 1.6; max-width: 720px;">
+            Strong scope match (91% to Job #2001) and a known GC with healthy CO history make this a take. Predicted direct cost is <b>$2,431,000 ± $148,000</b>. Margin floor is <b>32.0%</b> based on Chinn's blended history — bid <b>$3,575,000</b> minimum. Anything below 30% leaves no cushion for the labor-tier risk flagged below.
+          </div>
+        </div>
+        <div style="text-align: right; flex-shrink: 0;">
+          <div class="hero-lab">Recommended bid</div>
+          <div class="text-[36px] font-semibold tabular mt-1" style="color: var(--sage-ink);">$3,575,000</div>
+          <div class="text-[12px] mt-1" style="color: var(--ink-3);">32.0% margin · $1,144,000 profit</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Closest comparables -->
+    <div class="meta-bar mt-14 mb-4">A · Closest 3 historical comparables</div>
+    <div class="grid grid-cols-3 gap-5">
+      <div class="kpi" style="border-top: 3px solid var(--sage-ink);">
+        <div class="kpi-head">
+          <div class="kpi-eyebrow">#2001 · 230 Broadway</div>
+          <span class="chip-sage">91% match</span>
+        </div>
+        <div class="kpi-title">Exxel · 175u 7-story mixed-use</div>
+        <div class="kpi-sub">Closest analog. Same building type, same height, similar fixture density.</div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-row"><span class="kpi-lbl">$ / unit</span><span class="kpi-val tabular">$11,073</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">$ / fixture</span><span class="kpi-val tabular">$2,214</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Hrs / fixture</span><span class="kpi-val tabular">25.9</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Realized margin</span><span class="kpi-val tabular" style="color: var(--sage-ink);">29.7%</span></div>
+      </div>
+      <div class="kpi" style="border-top: 3px solid var(--sage);">
+        <div class="kpi-head">
+          <div class="kpi-eyebrow">#2012 · Aerynt</div>
+          <span class="chip-sage">76% match</span>
+        </div>
+        <div class="kpi-title">Exxel · 168u 5-story</div>
+        <div class="kpi-sub">Strong unit-count match. Different building geometry — lower fixture density.</div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-row"><span class="kpi-lbl">$ / unit</span><span class="kpi-val tabular">$7,440</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">$ / fixture</span><span class="kpi-val tabular">$1,553</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Hrs / fixture</span><span class="kpi-val tabular">17.9</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Realized margin</span><span class="kpi-val tabular" style="color: var(--sage-ink);">38.3%</span></div>
+      </div>
+      <div class="kpi" style="border-top: 3px solid var(--ink-4);">
+        <div class="kpi-head">
+          <div class="kpi-eyebrow">#2008 · Old Town</div>
+          <span class="chip-ink">68% match</span>
+        </div>
+        <div class="kpi-title">Chinn · 78u 4-story</div>
+        <div class="kpi-sub">Same GC. Smaller scale — used to anchor the GC scorecard, not the cost model.</div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-row"><span class="kpi-lbl">$ / unit</span><span class="kpi-val tabular">$8,168</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">$ / fixture</span><span class="kpi-val tabular">$2,041</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Hrs / fixture</span><span class="kpi-val tabular">14.5</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Realized margin</span><span class="kpi-val tabular" style="color: var(--sage-ink);">54.2%</span></div>
+      </div>
+    </div>
+
+    <!-- Cost prediction table -->
+    <div class="meta-bar mt-14 mb-4">B · Cortex cost prediction</div>
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-7">
+        <table class="modal-table" style="width: 100%;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border-2);">
+              <th style="text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Cost component</th>
+              <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Predicted</th>
+              <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">P10 → P90</th>
+              <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">% of total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Direct labor</td><td class="num">$535,000</td><td class="num" style="color: var(--ink-3);">$498k → $578k</td><td class="num">22.0%</td></tr>
+            <tr><td>Material</td><td class="num">$1,228,000</td><td class="num" style="color: var(--ink-3);">$1.16M → $1.31M</td><td class="num">50.5%</td></tr>
+            <tr><td>Burden &amp; payroll tax</td><td class="num">$214,000</td><td class="num" style="color: var(--ink-3);">$199k → $231k</td><td class="num">8.8%</td></tr>
+            <tr><td>Overhead allocation</td><td class="num">$78,000</td><td class="num" style="color: var(--ink-3);">$72k → $86k</td><td class="num">3.2%</td></tr>
+            <tr><td>Equipment + small tools</td><td class="num">$54,000</td><td class="num" style="color: var(--ink-3);">$48k → $62k</td><td class="num">2.2%</td></tr>
+            <tr><td>Subcontract (concrete cut, scan)</td><td class="num">$32,000</td><td class="num" style="color: var(--ink-3);">$26k → $40k</td><td class="num">1.3%</td></tr>
+            <tr><td>Bond + insurance</td><td class="num">$45,000</td><td class="num" style="color: var(--ink-3);">$42k → $51k</td><td class="num">1.9%</td></tr>
+            <tr><td>Contingency reserve (3%)</td><td class="num">$73,000</td><td class="num" style="color: var(--ink-3);">—</td><td class="num">3.0%</td></tr>
+            <tr style="border-top: 1.5px solid var(--ink); font-weight: 600;"><td>Predicted direct cost</td><td class="num">$2,431,000</td><td class="num" style="color: var(--clay);">$2.28M → $2.58M</td><td class="num">100%</td></tr>
+            <tr style="font-weight: 600;"><td>Margin @ floor (32.0%)</td><td class="num" style="color: var(--sage-ink);">$1,144,000</td><td class="num"></td><td class="num"></td></tr>
+            <tr style="font-weight: 700; background: var(--cream-soft);"><td>Recommended bid</td><td class="num">$3,575,000</td><td class="num"></td><td class="num"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-span-5">
+        <div class="card" style="height: 100%;">
+          <div class="card-label">Confidence</div>
+          <div class="text-[44px] serif-it mt-2" style="color: var(--sage-ink); line-height: 1;">High</div>
+          <div class="text-[12px] mt-2" style="color: var(--ink-3);">Cortex has 4 closed jobs within ±20% of this scope. Cost-per-fixture variance across analogs is 6.1% — tight enough to bid with conviction.</div>
+
+          <div class="kpi-divider mt-5"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Analog count</span><span class="kpi-val">4 closed jobs</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Best analog match</span><span class="kpi-val">91% (Job #2001)</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Cost-per-fixture σ</span><span class="kpi-val">6.1%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Margin floor source</span><span class="kpi-val">Chinn blended (4 jobs)</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Walk-away threshold</span><span class="kpi-val" style="color: var(--clay);">&lt; 28.0%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Win-rate at floor</span><span class="kpi-val">est. 41%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GC scorecard -->
+    <div class="meta-bar mt-14 mb-4">C · GC scorecard — Chinn Construction</div>
+    <div class="grid grid-cols-4 gap-5">
+      <div class="card"><div class="card-label">Closed jobs</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);">4</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">#2008, #2009, #2010, #2011</div></div>
+      <div class="card"><div class="card-label">Blended margin</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);">39.8%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">vs 38.3% portfolio avg</div></div>
+      <div class="card"><div class="card-label">Avg payment lag</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);">47d</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">industry median 58d</div></div>
+      <div class="card"><div class="card-label">CO approval rate</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);">78%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">11 of 14 submitted, 4 jobs</div></div>
+    </div>
+
+    <div class="mt-6 p-6 rounded-xl" style="background: var(--cream-soft); border: 1px dashed var(--border-2);">
+      <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--sage-ink);">✓ Strong GC profile</div>
+      <div class="mt-2 text-[13px]" style="color: var(--ink-2); line-height: 1.65;">
+        Chinn pays 11 days faster than the regional median, approves more than three out of four change orders submitted, and produced your portfolio's highest-margin job (#2010 at 54.2%). They are the preferred GC in the historical record. <b>No payment-behavior reasons to discount margin or pad contingency.</b>
+      </div>
+    </div>
+
+    <!-- Risk flags -->
+    <div class="meta-bar mt-14 mb-4">D · Risk flags Cortex wants you to see</div>
+    <div class="grid grid-cols-2 gap-5">
+      <div class="card" style="border-left: 3px solid var(--clay);">
+        <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay);">⚠ Labor tier mix</div>
+        <div class="text-[18px] font-semibold mt-2" style="color: var(--ink);">Crew availability is the bottleneck.</div>
+        <div class="mt-2 text-[13px]" style="color: var(--ink-3); line-height: 1.6;">Job #2014 (in progress) is consuming 38% of Tier-1 capacity through Q3. Bellevue 220 starts in Q4. If #2014 slips, the Bellevue rough-in will be staffed Tier-2/3, which historically adds 12–18% to labor hours per fixture.</div>
+        <div class="mt-3 text-[12px]" style="color: var(--ink-4);">Mitigation: hold the labor estimate at 22% of revenue, do not pad. Defend the floor margin instead.</div>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--clay);">
+        <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay);">⚠ Material escalation</div>
+        <div class="text-[18px] font-semibold mt-2" style="color: var(--ink);">Copper +14% YoY · PEX +9%.</div>
+        <div class="mt-2 text-[13px]" style="color: var(--ink-3); line-height: 1.6;">Material is 50.5% of predicted cost. A 22-month schedule means at least one buyout window in a volatile commodity environment. Comparable jobs were bought in a softer market.</div>
+        <div class="mt-3 text-[12px]" style="color: var(--ink-4);">Mitigation: lock pricing on copper riser and PEX manifold within 30 days of award. Consider escalation clause.</div>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--ink-3);">
+        <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--ink-3);">○ New owner</div>
+        <div class="text-[18px] font-semibold mt-2" style="color: var(--ink);">Continental Pacific — no history.</div>
+        <div class="mt-2 text-[13px]" style="color: var(--ink-3); line-height: 1.6;">Owner is unknown to the portfolio. GC is solid, but owner-driven scope changes are the #1 source of unbilled COs in the historical record. Verify owner contingency and CO process before signing.</div>
+        <div class="mt-3 text-[12px]" style="color: var(--ink-4);">Mitigation: request owner reference, review last 2 mid-rise projects.</div>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--sage-ink);">
+        <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--sage-ink);">✓ Geographic fit</div>
+        <div class="text-[18px] font-semibold mt-2" style="color: var(--ink);">Bellevue is 14 mi from yard.</div>
+        <div class="mt-2 text-[13px]" style="color: var(--ink-3); line-height: 1.6;">Within the portfolio's geographic envelope. No travel-time premium. Existing supplier accounts (Ferguson Bellevue, Pacific Plumbing Supply) are 5 mi from site.</div>
+        <div class="mt-3 text-[12px]" style="color: var(--ink-4);">No mitigation required. Listed for completeness.</div>
+      </div>
+    </div>
+
+    <!-- Generated SOV starting point -->
+    <div class="meta-bar mt-14 mb-4">E · Generated schedule of values starting point</div>
+    <div class="text-[12px] mb-3" style="color: var(--ink-4);">Cortex drafts an SOV from your historical phase ratios. Edit before submission.</div>
+    <table class="modal-table" style="width: 100%;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--border-2);">
+          <th style="text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Phase</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Cost</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Value (32% margin)</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">% of bid</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Mobilization &amp; submittals</td><td class="num">$48,000</td><td class="num">$71,000</td><td class="num">2.0%</td><td class="num" style="color: var(--ink-4);">avg of 4</td></tr>
+        <tr><td>Underground rough-in</td><td class="num">$316,000</td><td class="num">$465,000</td><td class="num">13.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
+        <tr><td>Slab rough-in</td><td class="num">$268,000</td><td class="num">$393,000</td><td class="num">11.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
+        <tr><td>Stack risers (storm + waste)</td><td class="num">$220,000</td><td class="num">$322,000</td><td class="num">9.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
+        <tr><td>Top-out (DWV + water)</td><td class="num">$486,000</td><td class="num">$715,000</td><td class="num">20.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
+        <tr><td>Trim &amp; fixtures</td><td class="num">$413,000</td><td class="num">$608,000</td><td class="num">17.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
+        <tr><td>Test &amp; inspection</td><td class="num">$98,000</td><td class="num">$143,000</td><td class="num">4.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
+        <tr><td>Storm &amp; site connection</td><td class="num">$268,000</td><td class="num">$393,000</td><td class="num">11.0%</td><td class="num" style="color: var(--ink-4);">spec carve-out</td></tr>
+        <tr><td>Commercial / retail rough &amp; trim</td><td class="num">$220,000</td><td class="num">$322,000</td><td class="num">9.0%</td><td class="num" style="color: var(--ink-4);">spec carve-out</td></tr>
+        <tr><td>Closeout (as-builts, O&amp;M)</td><td class="num">$94,000</td><td class="num">$143,000</td><td class="num">4.0%</td><td class="num" style="color: var(--ink-4);">avg of 4</td></tr>
+        <tr style="border-top: 1.5px solid var(--ink); font-weight: 700;"><td>Total</td><td class="num">$2,431,000</td><td class="num">$3,575,000</td><td class="num">100%</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Action row -->
+    <div class="mt-12 flex items-center gap-4 flex-wrap">
+      <button class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[12px] font-semibold tracking-wider uppercase" style="background: var(--sage-ink); color: var(--cream);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Accept floor &amp; build bid package
+      </button>
+      <button class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[12px] font-semibold tracking-wider uppercase" style="background: var(--cream-card); color: var(--ink); border: 1px solid var(--border-2);">
+        Adjust assumptions
+      </button>
+      <button class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[12px] font-semibold tracking-wider uppercase" style="background: transparent; color: var(--ink-3); border: 1px solid var(--border-2);">
+        Walk away
+      </button>
+      <span class="ml-auto text-[11px]" style="color: var(--ink-4);">All numbers derived from PROJECTS data · refreshed Apr 8 2026</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ============= JOB HEALTH VIEW ============================== -->
+  <!-- ============================================================ -->
+  <div class="view" data-view="health">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="chip-ink">1 active job</span>
+      <span class="chip-clay">⚠ Watch · labor +12%</span>
+      <span class="chip-sage">52% complete</span>
+    </div>
+    <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
+      Job <span class="serif-it">Health.</span>
+    </h1>
+    <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 720px; line-height: 1.6;">
+      Live monitor for in-progress jobs. Cortex compares the actual burn curve to the historical baseline derived from comparable closed jobs at the same %-complete. You see overruns at week 4, not month 4.
+    </div>
+
+    <!-- Active job header -->
+    <div class="mt-12 blueprint" style="padding: 28px 32px;">
+      <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ active · job #2014</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">last sync · 6 hours ago</div>
+      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">chinn construction · seattle</div>
+      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">eta · aug 28 2026</div>
+
+      <div class="grid grid-cols-12 gap-6 py-8">
+        <div class="col-span-6">
+          <div class="hero-lab">Active job</div>
+          <div class="text-[28px] font-semibold mt-2" style="color: var(--ink); line-height: 1.15;">
+            Capitol Hill 168 <span class="serif-it" style="color: var(--ink-3); font-weight: 400;">— mid-rise multifamily</span>
+          </div>
+          <div class="mt-2 text-[13px]" style="color: var(--ink-3);">168 units · 6-story · Chinn Construction · Sep 2025 → Aug 2026</div>
+          <div class="mt-4 flex gap-2 flex-wrap">
+            <span class="chip-ink">Contract: $2,184,000</span>
+            <span class="chip-ink">Original margin target: 34%</span>
+            <span class="chip-clay">Forecast margin: 30.4%</span>
+          </div>
+        </div>
+        <div class="col-span-3">
+          <div class="hero-lab">% complete</div>
+          <div class="text-[44px] font-semibold mt-2 tabular" style="color: var(--ink); line-height: 1;">52%</div>
+          <div class="mt-3" style="height: 8px; background: var(--cream-card); border-radius: 4px; overflow: hidden; border: 1px solid var(--border);">
+            <div style="width: 52%; height: 100%; background: var(--sage-ink);"></div>
+          </div>
+          <div class="mt-2 text-[12px]" style="color: var(--ink-3);">142 days remaining of 274</div>
+        </div>
+        <div class="col-span-3">
+          <div class="hero-lab">Cortex status</div>
+          <div class="text-[28px] font-semibold mt-2" style="color: var(--clay); line-height: 1.1;">⚠ Watch</div>
+          <div class="mt-2 text-[12px]" style="color: var(--ink-3); line-height: 1.5;">Labor 12% over baseline. Material burn 14% above pace. Trending toward 3.6 margin points lost.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variance KPIs -->
+    <div class="grid grid-cols-4 gap-5 py-10 mt-6 border-y border-dashed" style="border-color: var(--border-2);">
+      <div>
+        <div class="hero-lab">Hours variance</div>
+        <div class="hero-val tabular" style="color: var(--clay);">+1,840 hrs</div>
+        <div class="hero-foot">+12% vs baseline at 52%</div>
+      </div>
+      <div>
+        <div class="hero-lab">Cost variance</div>
+        <div class="hero-val tabular" style="color: var(--clay);">+$78,400</div>
+        <div class="hero-foot">+6.9% vs baseline</div>
+      </div>
+      <div>
+        <div class="hero-lab">Schedule variance</div>
+        <div class="hero-val tabular" style="color: var(--clay);">−4 days</div>
+        <div class="hero-foot">slipped this week</div>
+      </div>
+      <div>
+        <div class="hero-lab">Forecast at completion</div>
+        <div class="hero-val tabular" style="color: var(--ink);">$1,520,000</div>
+        <div class="hero-foot">vs $1,442,000 baseline</div>
+      </div>
+    </div>
+
+    <!-- Burn curve chart -->
+    <div class="meta-bar mt-14 mb-4">A · Labor burn curve — actual vs historical baseline</div>
+    <div class="card" style="padding: 28px 32px;">
+      <div class="flex items-center justify-between mb-4">
+        <div class="text-[12px]" style="color: var(--ink-3);">Cumulative labor hours through % of job complete. Baseline = avg of #2001, #2008, #2010 normalized.</div>
+        <div class="flex gap-4 text-[11px]">
+          <div class="flex items-center gap-2"><span style="display: inline-block; width: 18px; height: 2px; background: var(--ink);"></span><span style="color: var(--ink);">Baseline</span></div>
+          <div class="flex items-center gap-2"><span style="display: inline-block; width: 18px; height: 2px; background: var(--clay);"></span><span style="color: var(--clay);">Actual</span></div>
+          <div class="flex items-center gap-2"><span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sage-ink);"></span><span style="color: var(--ink-3);">Today</span></div>
+        </div>
+      </div>
+      <svg viewBox="0 0 920 300" class="w-full" style="display: block; height: auto; max-height: 320px; overflow: visible;">
+        <!-- Grid -->
+        <line x1="60" y1="40" x2="900" y2="40" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="60" y1="100" x2="900" y2="100" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="60" y1="160" x2="900" y2="160" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="60" y1="220" x2="900" y2="220" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="60" y1="260" x2="900" y2="260" stroke="var(--ink)" stroke-width="1"/>
+        <line x1="60" y1="40" x2="60" y2="260" stroke="var(--ink)" stroke-width="1"/>
+
+        <!-- Y axis labels -->
+        <text x="50" y="44" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">22k hrs</text>
+        <text x="50" y="104" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">16k</text>
+        <text x="50" y="164" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">11k</text>
+        <text x="50" y="224" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">5.5k</text>
+        <text x="50" y="263" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">0</text>
+
+        <!-- X axis labels -->
+        <text x="60"  y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">0%</text>
+        <text x="228" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">20%</text>
+        <text x="396" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">40%</text>
+        <text x="564" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">60%</text>
+        <text x="732" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">80%</text>
+        <text x="900" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">100%</text>
+
+        <!-- Baseline curve (smooth S-curve) -->
+        <path d="M60,260 C 144,255 228,238 312,210 S 480,150 564,118 S 732,68 900,52"
+              stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <!-- Actual curve (slightly above baseline, ends at today marker x≈497) -->
+        <path d="M60,260 C 144,250 228,232 312,196 S 480,128 497,108"
+              stroke="var(--clay)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+        <!-- Variance shaded region between baseline and actual up to today -->
+        <path d="M60,260 C 144,250 228,232 312,196 S 480,128 497,108 L497,124 C 480,140 396,170 312,205 C 228,233 144,253 60,260 Z"
+              fill="var(--clay)" opacity="0.08"/>
+
+        <!-- Today marker -->
+        <line x1="497" y1="40" x2="497" y2="260" stroke="var(--sage-ink)" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <circle cx="497" cy="108" r="5" fill="var(--sage-ink)" stroke="var(--cream)" stroke-width="2"/>
+        <text x="503" y="34" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" fill="var(--sage-ink)">TODAY · 52%</text>
+
+        <!-- Variance callout -->
+        <text x="503" y="100" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="var(--clay)">+1,840 hrs</text>
+        <text x="503" y="114" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--clay)">12% above pace</text>
+
+        <!-- Forecast continuation (dashed clay extending from today to 100%) -->
+        <path d="M497,108 C 564,90 732,52 900,28"
+              stroke="var(--clay)" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="4,4" opacity="0.5"/>
+        <text x="894" y="22" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--clay)" text-anchor="end">forecast</text>
+      </svg>
+    </div>
+
+    <!-- Phase health table -->
+    <div class="meta-bar mt-14 mb-4">B · Phase health</div>
+    <table class="modal-table" style="width: 100%;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--border-2);">
+          <th style="text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Phase</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">% complete</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Hours actual</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Hours baseline</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Variance</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Underground rough-in</td><td class="num">100%</td><td class="num">2,840</td><td class="num">2,810</td><td class="num">+30</td><td class="num" style="color: var(--sage-ink);">✓ On pace</td></tr>
+        <tr><td>Slab rough-in</td><td class="num">100%</td><td class="num">3,420</td><td class="num">3,160</td><td class="num" style="color: var(--clay);">+260</td><td class="num" style="color: var(--clay);">⚠ Over (+8%)</td></tr>
+        <tr><td>Stack risers</td><td class="num">78%</td><td class="num">4,180</td><td class="num">3,690</td><td class="num" style="color: var(--clay);">+490</td><td class="num" style="color: var(--clay);">⚠ Over (+13%)</td></tr>
+        <tr><td>Top-out (DWV + water)</td><td class="num">35%</td><td class="num">5,640</td><td class="num">4,580</td><td class="num" style="color: var(--clay);">+1,060</td><td class="num" style="color: var(--clay);">⚠ Over (+23%)</td></tr>
+        <tr><td>Trim &amp; fixtures</td><td class="num">0%</td><td class="num">0</td><td class="num">0</td><td class="num" style="color: var(--ink-4);">—</td><td class="num" style="color: var(--ink-4);">○ Not started</td></tr>
+        <tr><td>Test &amp; inspection</td><td class="num">0%</td><td class="num">0</td><td class="num">0</td><td class="num" style="color: var(--ink-4);">—</td><td class="num" style="color: var(--ink-4);">○ Not started</td></tr>
+        <tr style="border-top: 1.5px solid var(--ink); font-weight: 600;"><td>To-date total</td><td class="num">52%</td><td class="num">16,080</td><td class="num">14,240</td><td class="num" style="color: var(--clay);">+1,840 (+12%)</td><td class="num" style="color: var(--clay);">⚠ Watch</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Anomaly feed -->
+    <div class="meta-bar mt-14 mb-4">C · Anomaly feed — what changed this week</div>
+    <div class="grid grid-cols-1 gap-3">
+      <div class="card" style="border-left: 3px solid var(--clay); padding: 18px 24px;">
+        <div class="flex items-start gap-4">
+          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay); flex-shrink: 0; min-width: 120px;">Apr 7 · 14:22</div>
+          <div style="flex: 1;">
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Top-out hours crossed +20% threshold</div>
+            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">DWV install on floors 4–6 ran 1,060 hours over baseline (23% above). Foreman daily reports cite 2 days lost waiting on RFI #14 (mechanical chase coordination).</div>
+          </div>
+          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · HIGH</div>
+        </div>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--clay); padding: 18px 24px;">
+        <div class="flex items-start gap-4">
+          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay); flex-shrink: 0; min-width: 120px;">Apr 5 · 09:18</div>
+          <div style="flex: 1;">
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Material burn 14% above pace at 52% complete</div>
+            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">PEX manifold material consumption is 14% above the historical curve. Slab rework on Block B (3 units) likely accounts for ~$8k of the variance. Remaining ~$6k unexplained.</div>
+          </div>
+          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · HIGH</div>
+        </div>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--clay); padding: 18px 24px;">
+        <div class="flex items-start gap-4">
+          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay); flex-shrink: 0; min-width: 120px;">Apr 3 · 16:45</div>
+          <div style="flex: 1;">
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Crew tier mix shifted to 38% Tier-3</div>
+            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">Apprentice ratio is 38% this week vs 22% historical average. Lower-tier crews historically run 12–18% slower on top-out. Cause: 4 Tier-1 plumbers redeployed to #2009 closeout punchlist.</div>
+          </div>
+          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · MED</div>
+        </div>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--ink-4); padding: 18px 24px;">
+        <div class="flex items-start gap-4">
+          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--ink-3); flex-shrink: 0; min-width: 120px;">Apr 1 · 11:02</div>
+          <div style="flex: 1;">
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Pay app #7 received — $312k draw</div>
+            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">Chinn approved without revision. 41-day cycle from submission, beating their 47-day average. Retainage now $109,200 (5%). On track.</div>
+          </div>
+          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · INFO</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommended actions -->
+    <div class="meta-bar mt-14 mb-4">D · Cortex recommends</div>
+    <div class="grid grid-cols-3 gap-5">
+      <div class="kpi" style="border-top: 3px solid var(--clay);">
+        <div class="kpi-head"><div class="kpi-eyebrow">Action 01 · This week</div><span class="chip-clay">Urgent</span></div>
+        <div class="kpi-title">Audit slab phase scrap reports</div>
+        <div class="kpi-sub">$8–14k of unexplained material variance is concentrated in Block B slab rework. Pull foreman scrap logs and verify against AP receipts.</div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-row"><span class="kpi-lbl">Owner</span><span class="kpi-val">PM Garcia</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Recovery est.</span><span class="kpi-val">$6–10k</span></div>
+      </div>
+      <div class="kpi" style="border-top: 3px solid var(--clay);">
+        <div class="kpi-head"><div class="kpi-eyebrow">Action 02 · This week</div><span class="chip-clay">Urgent</span></div>
+        <div class="kpi-title">Escalate RFI #14 with mechanical</div>
+        <div class="kpi-sub">2 days already lost. Each additional day of waiting costs ~$3,400 in idle crew time on top-out. Push for written response by Apr 10.</div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-row"><span class="kpi-lbl">Owner</span><span class="kpi-val">PM Garcia</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Bleed rate</span><span class="kpi-val" style="color: var(--clay);">$3.4k/day</span></div>
+      </div>
+      <div class="kpi" style="border-top: 3px solid var(--sage-ink);">
+        <div class="kpi-head"><div class="kpi-eyebrow">Action 03 · Next 2 weeks</div><span class="chip-sage">Strategic</span></div>
+        <div class="kpi-title">Re-tier the top-out crew</div>
+        <div class="kpi-sub">Pull 2 Tier-1 plumbers off #2009 closeout (45% complete, on margin). Shift them to #2014 top-out. Replace with 2 Tier-3 on closeout.</div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-row"><span class="kpi-lbl">Owner</span><span class="kpi-val">Foreman Reyes</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Recovery est.</span><span class="kpi-val">~480 hrs</span></div>
+      </div>
+    </div>
+
+    <div class="mt-12 p-6 rounded-xl" style="background: var(--cream-soft); border: 1px dashed var(--border-2);">
+      <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--ink-3);">Forecast if all 3 actions taken</div>
+      <div class="mt-2 text-[14px]" style="color: var(--ink-2); line-height: 1.65;">
+        Margin recovers from <b style="color: var(--clay);">30.4%</b> back to <b style="color: var(--sage-ink);">33.1%</b> — within 1 point of original 34% target. Estimated profit recovery: <b>$59,000</b>. The window to act closes when top-out passes 60% complete (~3 weeks).
       </div>
     </div>
   </div>
