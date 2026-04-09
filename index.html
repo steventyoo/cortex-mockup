@@ -2501,6 +2501,15 @@
       Live monitor for in-progress jobs. Cortex compares the actual burn curve to the historical baseline derived from comparable closed jobs at the same %-complete. You see overruns at week 4, not month 4.
     </div>
 
+    <!-- View variant toggle: Classic (current) vs Signals (new 3-layer) -->
+    <div class="mt-8 inline-flex items-center gap-1 p-1 rounded-full" style="background: var(--cream-soft); border: 1px solid var(--border-2);">
+      <button type="button" class="health-tab is-active" data-variant="classic" style="padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: var(--ink); color: var(--cream);">Classic v1</button>
+      <button type="button" class="health-tab" data-variant="signals" style="padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: transparent; color: var(--ink-3);">Signal-driven v2 <span style="color: var(--clay); margin-left: 4px;">new</span></button>
+    </div>
+
+    <!-- ============ CLASSIC VARIANT (preserved) ============ -->
+    <div data-health-variant="classic">
+
     <!-- Active job header -->
     <div class="mt-12 blueprint" style="padding: 28px 32px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ active · job #2014</div>
@@ -2563,7 +2572,7 @@
 
     <!-- Burn curve chart -->
     <div class="meta-bar mt-14 mb-4">A · Labor burn curve — actual vs historical baseline</div>
-    <div class="card" style="padding: 28px 32px;">
+    <div class="card" style="padding: 28px 32px; background: var(--cream-soft);">
       <div class="flex items-center justify-between mb-4">
         <div class="text-[12px]" style="color: var(--ink-3);">Cumulative labor hours through % of job complete. Baseline = avg of #2001, #2008, #2010 normalized.</div>
         <div class="flex gap-4 text-[11px]">
@@ -2573,6 +2582,8 @@
         </div>
       </div>
       <svg viewBox="0 0 920 300" class="w-full" style="display: block; height: auto; max-height: 320px; overflow: visible;">
+        <!-- Plot area background -->
+        <rect x="60" y="40" width="840" height="220" fill="var(--paper)" stroke="var(--border)" stroke-width="0.5" rx="4"/>
         <!-- Grid -->
         <line x1="60" y1="40" x2="900" y2="40" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
         <line x1="60" y1="100" x2="900" y2="100" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
@@ -2726,6 +2737,19 @@
       <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--ink-3);">Forecast if all 3 actions taken</div>
       <div class="mt-2 text-[14px]" style="color: var(--ink-2); line-height: 1.65;">
         Margin recovers from <b style="color: var(--clay);">30.4%</b> back to <b style="color: var(--sage-ink);">33.1%</b> — within 1 point of original 34% target. Estimated profit recovery: <b>$59,000</b>. The window to act closes when top-out passes 60% complete (~3 weeks).
+      </div>
+    </div>
+
+    </div><!-- /classic variant -->
+
+    <!-- ============ SIGNAL-DRIVEN VARIANT (3-layer architecture) ============ -->
+    <div data-health-variant="signals" style="display: none;">
+      <div class="mt-12 p-10 rounded-2xl text-center" style="background: var(--cream-soft); border: 1px dashed var(--border-2);">
+        <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay);">Coming next</div>
+        <div class="mt-3 text-[22px] font-semibold serif-it" style="color: var(--ink);">Signal-driven Job Health</div>
+        <div class="mt-3 text-[13px]" style="color: var(--ink-3); max-width: 560px; margin: 0 auto; line-height: 1.6;">
+          Rebuilt around the Axiomic 3-layer signal architecture: Layer 1 firing-now events, Layer 2 patterns building, Layer 3 counterparty baseline. Awaiting your scope decision (option A vs B from the previous turn) before I generate the signal data.
+        </div>
       </div>
     </div>
   </div>
@@ -3877,6 +3901,22 @@
     document.querySelectorAll('.sb-item').forEach(el => el.classList.toggle('active', el.dataset.viewTarget === v));
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
+
+  // Job Health view variant toggle (Classic v1 / Signal-driven v2)
+  document.querySelectorAll('.health-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const variant = btn.dataset.variant;
+      document.querySelectorAll('.health-tab').forEach(b => {
+        const on = b.dataset.variant === variant;
+        b.classList.toggle('is-active', on);
+        b.style.background = on ? 'var(--ink)' : 'transparent';
+        b.style.color      = on ? 'var(--cream)' : 'var(--ink-3)';
+      });
+      document.querySelectorAll('[data-health-variant]').forEach(el => {
+        el.style.display = (el.dataset.healthVariant === variant) ? '' : 'none';
+      });
+    });
+  });
 
   document.querySelectorAll('.sb-item').forEach(el => {
     el.addEventListener('click', () => { setView(el.dataset.viewTarget); document.body.classList.remove('nav-open'); });
