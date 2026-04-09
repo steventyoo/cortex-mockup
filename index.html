@@ -463,10 +463,11 @@
   .sb-status.bidding { background: #d9b341; box-shadow: 0 0 0 2px rgba(217,179,65,0.22); }
   @keyframes sb-pulse { 0%,100% { box-shadow: 0 0 0 2px rgba(74,143,95,0.20); } 50% { box-shadow: 0 0 0 4px rgba(74,143,95,0.10); } }
   .sb-user {
-    position: absolute; left: 22px; right: 22px; bottom: 28px;
+    position: fixed; left: 22px; bottom: 28px; width: 224px;
     padding-top: 20px; border-top: 1px solid var(--border);
     font-size: 13.5px; color: var(--ink-2);
     background: var(--cream);
+    z-index: 20;
   }
   .sb-user .n { font-size: 12px; color: var(--ink-4); margin-top: 3px; }
 
