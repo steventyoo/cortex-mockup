@@ -23,9 +23,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream:        #F5F1EB;   /* Claude paper */
+    --cream:        #F5F1EB;   /* Claude paper · sidebar */
+    --paper:        #FBF7ED;   /* main body — lighter off-white */
     --cream-soft:   #FAF7F1;
-    --cream-card:   #FBF8F2;
+    --cream-card:   #FEFBF4;   /* cards pop slightly lighter than paper */
     --ink:          #1F1E1D;   /* Claude ink — warm near-black */
     --ink-2:        #2E2C2A;
     --ink-3:        #6B6762;
@@ -42,7 +43,7 @@
 
   html, body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--cream);
+    background: var(--paper);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     letter-spacing: -0.005em;
@@ -564,8 +565,7 @@
   .mobile-scrim {
     display: none;
     position: fixed; inset: 0; z-index: 150;
-    background: rgba(31,30,29,0.35);
-    backdrop-filter: blur(2px);
+    background: rgba(31,30,29,0.42);
   }
   body.nav-open .mobile-scrim { display: block; }
 
