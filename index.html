@@ -405,22 +405,19 @@
     padding: 34px 22px 28px;
     border-right: 1px solid var(--border);
     background: var(--cream);
+    overflow: hidden;
   }
-  .sidebar > .sb-brand,
-  .sidebar > .sb-label,
-  .sidebar > .sb-nav { flex-shrink: 0; }
-  .sidebar #sidebar-projects {
+  .sidebar > .sb-scroll {
     flex: 1 1 0;
     min-height: 0;
     overflow-y: auto;
     margin-right: -10px; padding-right: 8px;
-    /* leave room for the absolutely-positioned user block below */
-    padding-bottom: 84px;
+    display: flex; flex-direction: column;
   }
-  .sidebar #sidebar-projects::-webkit-scrollbar { width: 6px; }
-  .sidebar #sidebar-projects::-webkit-scrollbar-track { background: transparent; }
-  .sidebar #sidebar-projects::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
-  .sidebar #sidebar-projects::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+  .sidebar > .sb-scroll::-webkit-scrollbar { width: 6px; }
+  .sidebar > .sb-scroll::-webkit-scrollbar-track { background: transparent; }
+  .sidebar > .sb-scroll::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+  .sidebar > .sb-scroll::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
   .sb-brand { display: flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); padding-bottom: 26px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
   .sb-brand svg { flex-shrink: 0; }
   .sb-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-4); padding: 0 8px; margin-bottom: 10px; }
@@ -463,11 +460,11 @@
   .sb-status.bidding { background: #d9b341; box-shadow: 0 0 0 2px rgba(217,179,65,0.22); }
   @keyframes sb-pulse { 0%,100% { box-shadow: 0 0 0 2px rgba(74,143,95,0.20); } 50% { box-shadow: 0 0 0 4px rgba(74,143,95,0.10); } }
   .sb-user {
-    position: fixed; left: 22px; bottom: 28px; width: 224px;
-    padding-top: 20px; border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    padding-top: 20px; margin-top: 16px;
+    border-top: 1px solid var(--border);
     font-size: 13.5px; color: var(--ink-2);
     background: var(--cream);
-    z-index: 20;
   }
   .sb-user .n { font-size: 12px; color: var(--ink-4); margin-top: 3px; }
 
@@ -708,6 +705,7 @@
 
   <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar">
+   <div class="sb-scroll">
     <div class="sb-brand">
       <svg id="cortex-logo" class="cortex-mark" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L4 22 L12 17 L20 22 Z"/></svg>
       <span>Cortex</span>
@@ -751,6 +749,7 @@
 
     <div class="sb-label">Projects</div>
     <div id="sidebar-projects" style="display: flex; flex-direction: column;"></div>
+   </div>
 
     <div class="sb-user">
       <div class="serif-it" style="font-size: 16px;">Steven Yoo</div>
