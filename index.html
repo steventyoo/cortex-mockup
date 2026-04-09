@@ -2931,13 +2931,407 @@
 
     <!-- ============ SIGNAL-DRIVEN VARIANT (3-layer architecture) ============ -->
     <div data-health-variant="signals" style="display: none;">
-      <div class="mt-12 p-10 rounded-2xl text-center" style="background: var(--cream-soft); border: 1px dashed var(--border-2);">
-        <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay);">Coming next</div>
-        <div class="mt-3 text-[22px] font-semibold serif-it" style="color: var(--ink);">Signal-driven Job Health</div>
-        <div class="mt-3 text-[13px]" style="color: var(--ink-3); max-width: 560px; margin: 0 auto; line-height: 1.6;">
-          Rebuilt around the Axiomic 3-layer signal architecture: Layer 1 firing-now events, Layer 2 patterns building, Layer 3 counterparty baseline. Awaiting your scope decision (option A vs B from the previous turn) before I generate the signal data.
+
+      <!-- =================================================== -->
+      <!-- SCOPE BANNER                                        -->
+      <!-- =================================================== -->
+      <div class="card mt-10" style="padding: 28px 34px; background: var(--cream-soft); border-left: 3px solid var(--clay);">
+        <div class="meta-bar">Scope · #2014 Capitol Hill 168</div>
+        <div class="text-[17px] mt-3" style="color: var(--ink); line-height: 1.55; max-width: 900px;">
+          168-unit, 6-story <b>Type VA wood frame over concrete podium</b> mixed-use in Capitol Hill — Chinn Construction GC, plumbing rough-in ~60% complete on floors 2–4, trim phase starts in 6 weeks. Podium parking and ground-floor retail complicate stack routing and waste main tie-ins.
+        </div>
+        <div class="flex gap-3 mt-5 flex-wrap">
+          <span class="chip-clay">Day 132 of 274 · 52% complete</span>
+          <span class="chip-ink">$2.18M contract</span>
+          <span class="chip-clay">Forecast margin 30.4% (orig 34%)</span>
+          <span class="chip-ink">142 days remaining</span>
+          <span class="chip-ink">Chinn · PM Garcia</span>
         </div>
       </div>
+
+      <!-- =================================================== -->
+      <!-- COMPOSITE SIGNAL ROLL-UP                            -->
+      <!-- =================================================== -->
+      <div class="grid grid-cols-4 gap-5 mt-10">
+        <div class="card" style="padding: 22px 24px;">
+          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Layer 1 · firing now</div>
+          <div class="text-[46px] serif-it mt-2" style="color: var(--clay); line-height: 1;">6</div>
+          <div class="text-[11px] mt-1" style="color: var(--ink-3);">4 alerts · 2 watch · 5–21 day lead</div>
+        </div>
+        <div class="card" style="padding: 22px 24px;">
+          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Layer 2 · patterns</div>
+          <div class="text-[46px] serif-it mt-2" style="color: var(--clay); line-height: 1;">5</div>
+          <div class="text-[11px] mt-1" style="color: var(--ink-3);">3 drifting · 2 stable · weeks–months</div>
+        </div>
+        <div class="card" style="padding: 22px 24px;">
+          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Layer 3 · counterparty</div>
+          <div class="text-[46px] serif-it mt-2" style="color: var(--sage-ink); line-height: 1;">5</div>
+          <div class="text-[11px] mt-1" style="color: var(--ink-3);">4 clean · 1 soft drift · pre-award</div>
+        </div>
+        <div class="card" style="padding: 22px 24px; background: var(--cream-soft); border-left: 3px solid var(--clay);">
+          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Composite score</div>
+          <div class="text-[46px] serif-it mt-2" style="color: var(--clay); line-height: 1;">63<span style="font-size: 22px; color: var(--ink-4);">/100</span></div>
+          <div class="text-[11px] mt-1" style="color: var(--ink-3);">watch-list · recoverable with action</div>
+        </div>
+      </div>
+
+      <!-- =================================================== -->
+      <!-- LAYER 1 — DIRECT DOCUMENT EVENTS                    -->
+      <!-- =================================================== -->
+      <div class="mt-14 rule-solid pt-8">
+        <div class="flex items-baseline justify-between mb-2">
+          <div class="meta-bar">Layer 1 — Direct Document Events</div>
+          <div class="text-[11px] tabular" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">firing now · 5–21 day lead · parsed from live doc pipeline</div>
+        </div>
+        <div class="text-[13px] mt-2 mb-7" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
+          What Cortex is watching in real-time as RFIs, ASIs, submittals, inspection reports, COs, and daily reports land in the ingest queue. These fire <i>before</i> they show up in a JCR — that's the lead time.
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+
+          <!-- Signal 1.1 -->
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">RFI velocity spike — stack routing</div>
+              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              <b style="color: var(--clay);">8 RFIs in 14 days</b> on podium-to-L2 waste main tie-ins — <b>2.3×</b> the baseline rate for comparable Chinn jobs at this phase. Routing conflicts at the podium-slab transition are the driver.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">8 RFIs · 3 sketches</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">~18 days ahead of JCR impact</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">+$14–22k rework</span></div>
+            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
+              <b style="color: var(--clay);">Action:</b> Escalate to Chinn PM Garcia for coordination meeting with structural. Cost the rework before it becomes a T&amp;M dispute.
+            </div>
+          </div>
+
+          <!-- Signal 1.2 -->
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">ASI cascade — L3/L4 partitions</div>
+              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              <b style="color: var(--clay);">3 ASIs in 9 days</b> modifying L3/L4 unit partition layouts. Fixture rough-in on floors 3 and 4 is already installed per the original plans — rework is baked in.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">ASI #14, #15, #16</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">~21 days ahead of JCR</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">+$31k rework · 4–6 days schedule</span></div>
+            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
+              <b style="color: var(--clay);">Action:</b> Document the as-built conflict photographically, submit CO this week. Garcia has a 4.2-day CO cycle — beat the trim-phase start date.
+            </div>
+          </div>
+
+          <!-- Signal 1.3 -->
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Inspection fail — L2 DWV rough-in</div>
+              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Seattle DCI inspector flagged <b style="color: var(--clay);">cleanout access</b> on floor 2 DWV rough-in — failed first inspection. Re-inspect scheduled +3 days.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">Inspection report #I-24-0408</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">immediate (already affecting schedule)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">−3 days schedule float</span></div>
+            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
+              <b style="color: var(--clay);">Action:</b> Foreman Reyes has the cleanout spec from #2011 — mirror that detail on L3/L4 pre-inspection to prevent repeat.
+            </div>
+          </div>
+
+          <!-- Signal 1.4 -->
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">CO backlog aging</div>
+              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              <b style="color: var(--clay);">$47k in COs submitted, not yet approved</b>, oldest aging 18 days. Garcia's historical first-pass rate on Chinn is 94% — this is unusual.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">CO #008, #009, #010</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">cash flow impact ~15 days</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">$47k float · working capital drag</span></div>
+            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
+              <b style="color: var(--clay);">Action:</b> Garcia is distracted by the Bellevue 220 bid prep — ping him directly this week with the aging summary.
+            </div>
+          </div>
+
+          <!-- Signal 1.5 -->
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Submittal rejection loop — waste fittings</div>
+              <span class="chip-ink" style="flex-shrink: 0;">◐ watch</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Waste main fittings submittal rejected <b>twice</b> for spec compliance (Charlotte Pipe sub vs. specified brand). Third submission pending architect review.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">Submittal #22-03 rev C</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">5 days to trim-phase material need</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val">potential crew stand-down if not cleared</span></div>
+            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
+              <b style="color: var(--clay);">Action:</b> Accept spec brand (+$3.8k material cost) rather than risk trim stand-down costing $12k+/day.
+            </div>
+          </div>
+
+          <!-- Signal 1.6 -->
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Daily report labor delta</div>
+              <span class="chip-ink" style="flex-shrink: 0;">◐ watch</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Foreman Reyes added <b>+2 plumbers</b> to the rough-in crew 10 days ago without a formal CO. Daily reports confirm the extra labor but the burden isn't flowing through the original budget.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">Daily reports Mar 28–Apr 7</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">~10 days ahead of next JCR cycle</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val">+$18k unbudgeted labor (already +12% baseline)</span></div>
+            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
+              <b style="color: var(--clay);">Action:</b> Confirm with Reyes whether the +2 is covering the ASI rework (bill as CO) or pulling schedule (absorb).
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =================================================== -->
+      <!-- LAYER 2 — PATTERN-BASED                             -->
+      <!-- =================================================== -->
+      <div class="mt-14 rule-solid pt-8">
+        <div class="flex items-baseline justify-between mb-2">
+          <div class="meta-bar">Layer 2 — Pattern-Based signals</div>
+          <div class="text-[11px] tabular" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">weeks–months · trend-vs-baseline · built from cross-job history</div>
+        </div>
+        <div class="text-[13px] mt-2 mb-7" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
+          Not any single document — the shape of many documents over time compared to what closed-job analogs looked like at the same phase.
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Labor burn curve divergence</div>
+              <span class="chip-clay" style="flex-shrink: 0;">⚠ drifting</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Actual hrs/fixture trending <b style="color: var(--clay);">+14% above #2009 analog</b> at the same % complete. The gap has widened over the last 6 weeks — it's not a one-phase blip, it's a slope.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Baseline analog</span><span class="kpi-val">#2009 Greenwood</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Current delta</span><span class="kpi-val" style="color: var(--clay);">+14% hrs/fx</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">6-week trajectory</span><span class="kpi-val" style="color: var(--clay);">widening ~0.5%/week</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Projected EAC variance</span><span class="kpi-val" style="color: var(--clay);">+$78k by closeout</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Schedule float erosion</div>
+              <span class="chip-clay" style="flex-shrink: 0;">⚠ drifting</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Critical-path float dropped from <b>11 days → 3 days</b> in 6 weeks. Podium tie-in delays (Signal 1.1) and the failed L2 inspection (1.3) are the two biggest contributors.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">6 weeks ago</span><span class="kpi-val">11 days float</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Now</span><span class="kpi-val" style="color: var(--clay);">3 days float</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Trend</span><span class="kpi-val" style="color: var(--clay);">−1.3 days/week</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Projected breach</span><span class="kpi-val" style="color: var(--clay);">~2 weeks at current rate</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Ferguson delivery reliability drop</div>
+              <span class="chip-clay" style="flex-shrink: 0;">⚠ drifting</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Ferguson on-time delivery dropped from <b>97% (portfolio avg) → 82% on #2014</b>. The Ferguson concentration flag in Atlas is starting to cash in.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Portfolio baseline</span><span class="kpi-val">97% on-time</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">This job</span><span class="kpi-val" style="color: var(--clay);">82% on-time</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Late deliveries last 30d</span><span class="kpi-val" style="color: var(--clay);">4 of 22 POs</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Mitigation available</span><span class="kpi-val">McLendon (hot-ship +3.2%)</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Crew composition shift</div>
+              <span class="chip-ink" style="flex-shrink: 0;">◐ stable</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Tier-1 Crew Alpha is down to <b>6 of 8 members</b> on this job — 2 rotated to Bellevue 220 pre-award prep. Productivity still within tolerance, but the margin-of-safety is thinner than the #2010 baseline.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Crew Alpha on-site</span><span class="kpi-val">6 of 8</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Productivity index</span><span class="kpi-val">1.14 (vs. 1.18 full roster)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Headcount makeup</span><span class="kpi-val">2 tier-2 rotating through</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Material ordering cadence</div>
+              <span class="chip-sage" style="flex-shrink: 0;">✓ stable</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              PEX-A ordering cadence matches the <b>#2010 Old Town rhythm</b> — steady, pull-based, low buffer stock. Material burn aligned with rough-in progress.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Matching analog</span><span class="kpi-val" style="color: var(--sage-ink);">#2010 Old Town ★</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Inventory buffer</span><span class="kpi-val">2.1 days (healthy)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Waste factor</span><span class="kpi-val">3.8% (portfolio avg 4.2%)</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =================================================== -->
+      <!-- LAYER 3 — COUNTERPARTY INTELLIGENCE                 -->
+      <!-- =================================================== -->
+      <div class="mt-14 rule-solid pt-8">
+        <div class="flex items-baseline justify-between mb-2">
+          <div class="meta-bar">Layer 3 — Counterparty Intelligence</div>
+          <div class="text-[11px] tabular" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">infinite lookback · the baseline for this GC and its ecosystem</div>
+        </div>
+        <div class="text-[13px] mt-2 mb-7" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
+          Who you're working with — their payment rhythm, dispute history, CO approval behavior, liquidity signals. This layer existed before the job started; it frames how to read every Layer 1 and Layer 2 signal.
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Chinn payment rhythm</div>
+              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Historical average <b style="color: var(--sage-ink);">38 days</b> to pay on pay apps across 4 closed jobs. Current #2014 average is 41 days — still inside the comfort band, mild drift worth watching.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Portfolio avg</span><span class="kpi-val">38 days</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">This job avg</span><span class="kpi-val">41 days</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Late payments ever</span><span class="kpi-val" style="color: var(--sage-ink);">0 over 6 yrs</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">PM Garcia CO approval rate</div>
+              <span class="chip-ink" style="flex-shrink: 0;">◐ soft drift</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Garcia's lifetime first-pass CO approval rate on Chinn work is <b>94%</b>. On #2014 it's <b>89%</b> — still healthy, but the softening correlates with his Bellevue 220 bid-prep load.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lifetime rate</span><span class="kpi-val">94% first-pass</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">#2014 rate</span><span class="kpi-val">89%</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Driver</span><span class="kpi-val">competing Bellevue 220 bid</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Chinn dispute history</div>
+              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              <b style="color: var(--sage-ink);">Zero formal disputes</b> across 4 closed Chinn jobs. No liens filed, no arbitration events, no back-charges exceeding $5k. The trunk relationship is clean.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Closed jobs</span><span class="kpi-val">4</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Disputes</span><span class="kpi-val" style="color: var(--sage-ink);">0</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Back-charges &gt;$5k</span><span class="kpi-val" style="color: var(--sage-ink);">0</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">GC liquidity proxy</div>
+              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              No red flags from public lien searches, UCC filings, or news events. Chinn's sibling projects in Cortex's external index all show normal payment behavior to other subs.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Lien filings (12mo)</span><span class="kpi-val" style="color: var(--sage-ink);">0 against Chinn</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Sibling project signals</span><span class="kpi-val" style="color: var(--sage-ink);">3 active · all nominal</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Last public event</span><span class="kpi-val">none</span></div>
+          </div>
+
+          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
+            <div class="flex items-start justify-between mb-2">
+              <div class="text-[15px] font-semibold" style="color: var(--ink);">Attention crossover</div>
+              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
+            </div>
+            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
+              Chinn is also running the Bellevue 220 bid process. Garcia's split attention is a risk, but the graph shows no contractual overlap or resource conflict with this job's crew — <i>except</i> the 2 Tier-1 Alpha rotations in Layer 2.
+            </div>
+            <div class="kpi-divider"></div>
+            <div class="kpi-row"><span class="kpi-lbl">Concurrent Chinn activity</span><span class="kpi-val">Bellevue 220 bid prep</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Resource overlap</span><span class="kpi-val">2 Crew Alpha rotations</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Downstream risk</span><span class="kpi-val">low if bid awarded, mod if lost</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =================================================== -->
+      <!-- SYNTHESIS / PRIORITIZED ACTION LIST                 -->
+      <!-- =================================================== -->
+      <div class="mt-14 rule-solid pt-8">
+        <div class="meta-bar mb-4">What Cortex recommends this week</div>
+        <div class="text-[13px] mb-6" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
+          The signals above, ordered by payback — highest-leverage action first.
+        </div>
+
+        <div class="finding">
+          <div class="text-[22px] serif-it" style="color: var(--clay);">01</div>
+          <div>
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Submit the ASI #14–16 change order before Friday.</div>
+            <div class="finding-body">$31k rework + 4–6 schedule days is the biggest single bleed. Garcia's 4.2-day CO cycle gives you time — but only if it lands this week, before he's heads-down on Bellevue 220.</div>
+          </div>
+          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 1.2 · 3.2</div>
+        </div>
+
+        <div class="finding">
+          <div class="text-[22px] serif-it" style="color: var(--clay);">02</div>
+          <div>
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Accept the spec-brand waste fittings — absorb the $3.8k.</div>
+            <div class="finding-body">A trim-phase stand-down costs $12k+/day. Paying the brand premium is cheap insurance against Signal 1.5 tipping into a schedule breach.</div>
+          </div>
+          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signal 1.5</div>
+        </div>
+
+        <div class="finding">
+          <div class="text-[22px] serif-it" style="color: var(--clay);">03</div>
+          <div>
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Shift 20% of remaining material spend to McLendon.</div>
+            <div class="finding-body">Ferguson on-time dropped to 82% — the concentration flag is cashing in. McLendon costs 3.2% more but preserves float and hedges the remaining rough-in.</div>
+          </div>
+          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signal 2.3</div>
+        </div>
+
+        <div class="finding">
+          <div class="text-[22px] serif-it" style="color: var(--clay);">04</div>
+          <div>
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Push a direct status ping to Garcia on the $47k CO backlog.</div>
+            <div class="finding-body">Garcia is distracted by Bellevue 220. The relationship is still clean (Layer 3) — this is a <i>nudge</i>, not an escalation. Named account owner + short message.</div>
+          </div>
+          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 1.4 · 3.2</div>
+        </div>
+
+        <div class="finding">
+          <div class="text-[22px] serif-it" style="color: var(--ink-3);">05</div>
+          <div>
+            <div class="text-[14px] font-semibold" style="color: var(--ink);">Lock the remaining 2 Crew Alpha members to #2014 through trim.</div>
+            <div class="finding-body">Productivity is within tolerance now, but labor burn (Signal 2.1) is already +14% — losing more of the fixed-asset crew to Bellevue prep would turn a watch into an alert.</div>
+          </div>
+          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 2.1 · 2.4</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
