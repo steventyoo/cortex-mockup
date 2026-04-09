@@ -9,17 +9,27 @@
 // Or via dashboard: Workers & Pages → Create → paste this file → Settings →
 // Variables → Add variable (encrypt) → ANTHROPIC_KEY = sk-ant-...
 
-// Comma-separated list of origins allowed to call this worker.
+// Origins allowed to call this worker. Exact strings OR regex patterns.
 // Lock this down to your deployed site(s) so random people can't drain your key.
 const ALLOWED_ORIGINS = [
   'https://steventyoo.github.io',
+  'https://cortex-mockup.vercel.app',
   'http://localhost:8000',
   'http://127.0.0.1:8000',
   'null', // file:// origins send "null"
 ];
+const ALLOWED_ORIGIN_PATTERNS = [
+  // Vercel preview deployments: cortex-mockup-<hash>-<team>.vercel.app
+  /^https:\/\/cortex-mockup(-[a-z0-9-]+)?\.vercel\.app$/,
+];
+
+function isAllowed(origin) {
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  return ALLOWED_ORIGIN_PATTERNS.some((re) => re.test(origin));
+}
 
 function corsHeaders(origin) {
-  const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  const allow = isAllowed(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
     'access-control-allow-origin': allow,
     'access-control-allow-methods': 'POST, OPTIONS',
