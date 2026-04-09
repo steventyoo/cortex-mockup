@@ -400,11 +400,27 @@
   .shell { display: grid; grid-template-columns: 268px minmax(0, 1280px); gap: 0; min-height: 100vh; }
   .sidebar {
     position: sticky; top: 0; align-self: start;
-    height: 100vh; overflow-y: auto;
+    height: 100vh;
+    display: flex; flex-direction: column;
     padding: 34px 22px 28px;
     border-right: 1px solid var(--border);
     background: var(--cream);
   }
+  .sidebar > .sb-brand,
+  .sidebar > .sb-label,
+  .sidebar > .sb-nav,
+  .sidebar > .sb-user { flex-shrink: 0; }
+  .sidebar #sidebar-projects {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    margin-right: -10px; padding-right: 8px;
+  }
+  .sb-user { flex-shrink: 0; }
+  .sidebar #sidebar-projects::-webkit-scrollbar { width: 6px; }
+  .sidebar #sidebar-projects::-webkit-scrollbar-track { background: transparent; }
+  .sidebar #sidebar-projects::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+  .sidebar #sidebar-projects::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
   .sb-brand { display: flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); padding-bottom: 26px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
   .sb-brand svg { flex-shrink: 0; }
   .sb-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-4); padding: 0 8px; margin-bottom: 10px; }
