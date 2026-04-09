@@ -1818,21 +1818,21 @@
   <div class="view" data-view="pipeline">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">Ingestion status</span>
-      <span class="chip-sage">6 projects parsed</span>
+      <span class="chip-sage">8 projects parsed</span>
       <span class="chip-clay">79 duplicate groups</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Document <span class="serif-it">Pipeline.</span>
     </h1>
     <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 680px; line-height: 1.6;">
-      Raw documents flow through Cortex in four stages — ingest, classify, parse, and index. This view shows the current state of every file across all four OWP jobs.
+      Raw documents flow through Cortex in four stages — ingest, classify, parse, and index. This view shows the current state of every file across all eight OWP closed jobs.
     </div>
 
     <div class="grid grid-cols-4 gap-5 mt-12">
       <div class="card">
         <div class="card-label">Stage 01 · Ingested</div>
         <div class="text-[52px] serif-it mt-3" style="color: var(--ink);">1,042</div>
-        <div class="text-[12px] mt-1" style="color: var(--ink-3);">raw files across 4 jobs</div>
+        <div class="text-[12px] mt-1" style="color: var(--ink-3);">raw files across 8 jobs</div>
         <div class="kpi-divider"></div>
         <div class="kpi-row"><span class="kpi-lbl">Chinn Greenwood</span><span class="kpi-val">317</span></div>
         <div class="kpi-row"><span class="kpi-lbl">Chinn Old Town</span><span class="kpi-val">248</span></div>
@@ -2029,13 +2029,61 @@
           <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Dec 02, 2025</span></div>
         </div>
 
+        <!-- #2015 Exxel Rooster -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2015 · exxel · closed</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Rooster Apartments</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">197 units · $2.15M final · 23.5% margin</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">partial · 11 unresolved</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">524</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">418</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--clay);">376</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">58</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val" style="color: var(--clay);">31 groups · 68 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val">90.4%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val" style="color: var(--clay);">11 · COP docs, hose bib + gas heater</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
+        <!-- #2016 Natural & Built Sedona -->
+        <div class="card" style="padding: 24px 26px;">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">#2016 · natural&built · closed</div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Sedona Apartments</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">64 units · $342k final · 29.5% margin</div>
+            </div>
+            <span class="chip-sage" style="flex-shrink: 0;">✓ fully parsed</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">142</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">131</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">126</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">47</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Duplicates</span><span class="kpi-val">6 · 11 files</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val" style="color: var(--sage-ink);">96.1%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val">0 · first N&amp;B job, clean</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 09, 2026</span></div>
+        </div>
+
       </div>
     </div>
 
     <div class="mt-14 rule-solid pt-8">
       <div class="meta-bar mb-3">Pipeline health</div>
       <div class="grid grid-cols-3 gap-8 mt-4">
-        <div><div class="hero-lab">Duplicate rate</div><div class="hero-val tabular" style="color: var(--clay);">25%</div><div class="hero-foot">79 groups · 158 files · across 4 jobs</div></div>
+        <div><div class="hero-lab">Duplicate rate</div><div class="hero-val tabular" style="color: var(--clay);">24%</div><div class="hero-foot">103 groups · 214 files · across 8 jobs</div></div>
         <div><div class="hero-lab">Parse confidence</div><div class="hero-val tabular" style="color: var(--sage-ink);">94.2%</div><div class="hero-foot">avg across parsed schemas</div></div>
         <div><div class="hero-lab">Unresolved docs</div><div class="hero-val tabular">12</div><div class="hero-foot">manual review queue</div></div>
       </div>
@@ -2047,8 +2095,8 @@
   <!-- ============================================================ -->
   <div class="view" data-view="atlas">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">21 nodes · 47 edges</span>
-      <span class="chip-sage">6 closed · 1 active · 1 proposed</span>
+      <span class="chip-ink">24 nodes · 51 edges</span>
+      <span class="chip-sage">8 closed · 1 active · 1 proposed</span>
       <span class="chip-clay">3 hidden patterns surfaced</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
@@ -2072,7 +2120,7 @@
     <!-- The graph -->
     <div class="mt-6 blueprint" style="padding: 28px 24px 36px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 02 / portfolio graph</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 21 · edges · 47</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 24 · edges · 51</div>
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s.</div>
       <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
 
@@ -2092,9 +2140,13 @@
         <line x1="200" y1="100" x2="600" y2="270" stroke="var(--ink)" stroke-width="1.4"/>
         <line x1="200" y1="100" x2="600" y2="110" stroke="var(--ink)" stroke-width="1.4"/>
 
-        <!-- Exxel → its 2 closed jobs -->
+        <!-- Exxel → its 3 closed jobs -->
         <line x1="1040" y1="100" x2="920" y2="290" stroke="var(--ink)" stroke-width="1.4"/>
         <line x1="1040" y1="100" x2="1080" y2="280" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="1040" y1="100" x2="1010" y2="400" stroke="var(--ink)" stroke-width="1.4"/>
+
+        <!-- Natural & Built → its 1 closed job -->
+        <line x1="460" y1="90" x2="470" y2="210" stroke="var(--ink)" stroke-width="1.2"/>
 
         <!-- Comparable / "would-bid" edges (clay, dashed) — Bellevue 220 ↔ analogs -->
         <line x1="600" y1="110" x2="920" y2="290" stroke="var(--clay)" stroke-width="1.6" stroke-dasharray="5,4"/>
@@ -2154,7 +2206,7 @@
         <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="exxel" style="cursor: pointer;">
           <rect x="1014" y="74" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
           <text x="1040" y="105" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">EXXEL</text>
-          <text x="1040" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 2 jobs</text>
+          <text x="1040" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 3 jobs</text>
         </g>
 
         <!-- Project nodes: closed jobs (Chinn cluster, left) -->
@@ -2197,8 +2249,32 @@
         <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2012" style="cursor: pointer;">
           <circle cx="1080" cy="280" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
           <text x="1080" y="284" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2012</text>
-          <text x="1080" y="312" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Aerynt</text>
+          <text x="1080" y="312" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">8th Ave</text>
           <text x="1080" y="325" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">163u · 38.3%</text>
+        </g>
+
+        <!-- #2015 Exxel Rooster — below Exxel cluster -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2015" style="cursor: pointer;">
+          <circle cx="1010" cy="400" r="18" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="1010" y="404" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2015</text>
+          <text x="1010" y="432" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Rooster</text>
+          <text x="1010" y="445" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">197u · 23.5%</text>
+        </g>
+
+        <!-- Natural & Built GC — new cluster top-center -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="natbuilt" style="cursor: pointer;">
+          <rect x="434" y="64" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="460" y="88" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">NATURAL</text>
+          <text x="460" y="100" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">&amp; BUILT</text>
+          <text x="460" y="138" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 1 job</text>
+        </g>
+
+        <!-- #2016 Natural & Built Sedona -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2016" style="cursor: pointer;">
+          <circle cx="470" cy="210" r="14" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="470" y="214" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2016</text>
+          <text x="470" y="238" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Sedona</text>
+          <text x="470" y="251" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">64u · 29.5%</text>
         </g>
 
         <!-- Active job (clay outline) -->
@@ -3970,7 +4046,7 @@
   /* ============ PROJECT DATA (real — from OWP_4Way_Comparison.xlsx) ============ */
   // Order in which projects appear in the sidebar / portfolio / benchmark.
   // Add a project ID here once its PROJECTS entry exists, and every view picks it up.
-  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012"];
+  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016"];
 
   const PROJECTS = {
     "2001": {
@@ -4106,6 +4182,52 @@
       sbName: "8th Ave.", skyName: "8TH AVE",
       skyline: { floors: 5, cols: 14, w: 256 },
       num: { units:163, fixtures:816, months:17, revenue:1391455, profit:533274, directCost:858181, origContract:1394655, co:0, retainage:69573, labor:291281, material:390711, overhead:27553, burden:148886, hours:14607, workers:28 }
+    },
+    "2015": {
+      reportNum: "REPORT #2015-IR01",
+      chips: ['<span class="chip-sage">Largest Exxel job · $2.15M</span>','<span class="chip-ink">53 workers · portfolio max</span>','<span class="chip-clay">23.5% margin · tight</span>'],
+      jobTop: "Exxel", jobBottom: "Rooster Apts.",
+      jobNum: "#2015", location: "Seattle, WA · 900 NE 65th St (Roosevelt)", gc: "Exxel Pacific, Inc.",
+      gcShort: "Exxel Pacific, Inc.",
+      dateRange: "Mar 2014 → Nov 2015 · 21 months",
+      unitsDesc: "197-unit mixed-use mid-rise",
+      revenue: "$2,146,708", revenueFoot: "16 pay apps · +$144,423 in COs · 2nd largest job",
+      profit: "$505,124", profitFoot: "23.5% margin · labor-heavy delivery",
+      expenses: "$1,641,584", expensesFoot: "Labor $881.4k (loaded) · Mat\'l $690.4k · GL $69.8k",
+      retainage: "$103,985", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">largest</span> Exxel Pacific delivery in the portfolio — Rooster ran <span class="n">21 months</span>, logged <span class="n">25,956 hours</span> across <span class="n">53 workers</span>, and closed at <span class="n">23.5% margin</span> on $2.15M.',
+      execBody: 'Exxel Rooster is a 197-unit, 7-story mixed-use mid-rise in Seattle\'s Roosevelt neighborhood (900 NE 65th) — the second-largest closed job in the portfolio by revenue and the <span class="n">largest by crew size</span> at 53 unique workers. Over 21 months and 16 pay apps, OWP billed <span class="n">$2,146,708</span> against a $2,002,285 original contract — the contract grew <span class="n">+$144,423</span> through additive change orders (including hose bib, gas heater, and replumbing COPs).<br/><br/>The <span class="n">23.5% margin</span> is the second-lowest in the portfolio (above only #2008 SRM Taylor\'s 18.9%). The story is labor density: <span class="n">132 hours per unit</span> — the highest in the portfolio among the large mid-rise jobs — and a fully-loaded wage of <span class="n">$33.96/hr</span>. Material buyout ran $690.4k (32.2% of revenue) and the GL line carried $69.8k. The crew included ADA-compliant residential trim across 236 bathrooms plus a substantial commons package (2 boilers, hot water storage, commercial HVAC, garage drainage).',
+      jobNum2: "#2015", workforce: "53 workers · 25,956 hrs",
+      bpLeft: "exxel rooster · seattle wa", bpRight: "197 units · 21 months",
+      k01_revenue: "$2,146,708", k01_margin: "23.5%", k01_origContract: "$2,002,285",
+      k01_co: "+$144,423", k01_directCost: "$1,641,584", k01_profit: "$505,124",
+      footerReport: "REPORT #2015-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "Rooster Apts.", skyName: "ROOSTER",
+      skyline: { floors: 7, cols: 15, w: 264 },
+      num: { units:197, fixtures:1250, months:21, revenue:2146708, profit:505124, directCost:1641584, origContract:2002285, co:144423, retainage:103985, labor:512198, material:690359, overhead:69822, burden:369205, hours:25956, workers:53 }
+    },
+    "2016": {
+      reportNum: "REPORT #2016-IR01",
+      chips: ['<span class="chip-sage">Smallest closed job · $342k</span>','<span class="chip-ink">First Natural & Built job</span>','<span class="chip-clay">29.5% margin · clean delivery</span>'],
+      jobTop: "Natural & Built", jobBottom: "Sedona Apts.",
+      jobNum: "#2016", location: "Seattle, WA · 8512 20th Ave NE", gc: "Natural & Built, LLC",
+      gcShort: "Natural & Built",
+      dateRange: "Nov 2013 → Dec 2014 · 14 months",
+      unitsDesc: "64-unit · 6-story multifamily",
+      revenue: "$341,805", revenueFoot: "8 pay apps · +$5,305 in COs (near-flat contract)",
+      profit: "$100,795", profitFoot: "29.5% margin · tight small-job execution",
+      expenses: "$241,010", expensesFoot: "Labor $147.8k (loaded) · Mat\'l $86.9k · GL $6.3k",
+      retainage: "$17,090", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">smallest</span> closed job in the portfolio — a 14-month, 64-unit Natural & Built delivery that cleared a clean <span class="n">29.5% margin</span> on $341k.',
+      execBody: 'Natural & Built Sedona is the smallest closed job on the books — a <span class="n">6-story multifamily</span> at 8512 20th Ave NE (Ravenna / Roosevelt), owner Sedona Holdings, LLC. The King County plumbing permit (#5101400394, New Construction, Multi-Family) records <span class="n">267 total fixtures</span>, and per-level Keller trim invoices confirm <span class="n">64 residential units</span> across five residential floors (L2–L6: 16/8/16/16/8) with Level 1 reserved for commercial and amenity space.<br/><br/>Over 14 months and <span class="n">8 pay apps</span>, OWP billed <span class="n">$341,805</span> against a $336,500 original contract — just <span class="n">+$5,305</span> in additive change orders, effectively a flat-contract delivery. Despite the small scale, the job cleared a respectable <span class="n">29.5% margin</span> ($100,795 net profit on $241k in direct cost). Labor ran loaded at $147.8k (<span class="n">4,755 hours · 28 workers</span>), material buyout was $86.9k, and the GL overhead line carried just $6.3k. At <span class="n">$31.09/hr fully-loaded</span>, the crew economics match the rest of the portfolio.',
+      jobNum2: "#2016", workforce: "28 workers · 4,755 hrs",
+      bpLeft: "natural & built sedona · seattle wa", bpRight: "64 units · 14 months",
+      k01_revenue: "$341,805", k01_margin: "29.5%", k01_origContract: "$336,500",
+      k01_co: "+$5,305", k01_directCost: "$241,010", k01_profit: "$100,795",
+      footerReport: "REPORT #2016-IR01 · Generated April 9, 2026 · v0.1",
+      sbName: "Sedona Apts.", skyName: "SEDONA",
+      skyline: { floors: 6, cols: 8, w: 140 },
+      num: { units:64, fixtures:267, months:14, revenue:341805, profit:100795, directCost:241010, origContract:336500, co:5305, retainage:17090, labor:97231, material:86915, overhead:6279, burden:50585, hours:4755, workers:28 }
     }
   };
 
@@ -4789,8 +4911,9 @@
   /* ============ BID INTELLIGENCE — interactive assumptions ============ */
   const GC_DB = {
     chinn: { name: 'Chinn Construction',  jobs: 4, blendedMargin: 39.8, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 78, coDetail: '11 of 14 submitted, 4 jobs',  projects: '#2008, #2009, #2010, #2011', source: "Chinn blended (4 jobs)",  winRate: 41, knownTag: '✓ Known GC · 4 closed jobs in portfolio' },
-    exxel: { name: 'Exxel Pacific',       jobs: 2, blendedMargin: 34.0, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '8 of 12 submitted, 2 jobs',   projects: '#2001, #2012',               source: "Exxel blended (2 jobs)",  winRate: 38, knownTag: '✓ Known GC · 2 closed jobs in portfolio' },
-    'new': { name: 'Unknown / new GC',    jobs: 0, blendedMargin: 38.3, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',           source: 'portfolio average',        winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
+    exxel: { name: 'Exxel Pacific',       jobs: 3, blendedMargin: 29.4, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '14 of 21 submitted, 3 jobs',  projects: '#2001, #2012, #2015',        source: "Exxel blended (3 jobs)",  winRate: 38, knownTag: '✓ Known GC · 3 closed jobs in portfolio' },
+    natbuilt: { name: 'Natural & Built',  jobs: 1, blendedMargin: 29.5, payLag: 44, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '4 of 5 submitted, 1 job',     projects: '#2016',                      source: "Natural & Built (1 job)", winRate: 22, knownTag: '✓ Known GC · 1 closed job in portfolio' },
+    'new': { name: 'Unknown / new GC',    jobs: 0, blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',           source: 'portfolio average',        winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
   };
 
   // ------------------------------------------------------------------
@@ -5320,16 +5443,31 @@
     'exxel': {
       eyebrow: 'GC · Exxel Pacific Inc',
       title: 'Exxel is the secondary trunk.',
-      sub: 'Two closed jobs. Healthy but smaller share. Known for tight spec discipline and quick RFI turnaround.',
+      sub: 'Three closed jobs. Healthy but smaller share. Known for tight spec discipline and quick RFI turnaround.',
       stats: [
-        ['Jobs in portfolio', '2 closed · 0 active'],
-        ['Lifetime revenue', '$3.33M'],
-        ['Blended margin', '34.0%'],
-        ['First job', '#2001 · Oct 2018'],
+        ['Jobs in portfolio', '3 closed · 0 active'],
+        ['Lifetime revenue', '$5.48M'],
+        ['Blended margin', '29.4%'],
+        ['First job', '#2001 · Apr 2011'],
+        ['Largest job', '#2015 Rooster · $2.15M'],
         ['Payment behavior', 'avg 45 days · 1 late payment in 6 yrs'],
         ['Change-order friction', 'medium · 78% approved first pass'],
       ],
-      note: 'Exxel jobs produce less margin variance than Chinn jobs — predictable, but ceiling is lower.'
+      note: 'Exxel jobs produce less margin variance than Chinn jobs — predictable, but ceiling is lower. Margin softens on the larger jobs (#2001 at 29.7%, #2015 at 23.5%) vs. the smaller #2012 at 38.3%.'
+    },
+    'natbuilt': {
+      eyebrow: 'GC · Natural & Built LLC',
+      title: 'Single-job relationship.',
+      sub: 'One closed job — #2016 Sedona Apartments (2013–2014). Clean execution, flat contract, first and only engagement to date.',
+      stats: [
+        ['Jobs in portfolio', '1 closed · 0 active'],
+        ['Lifetime revenue', '$341,805'],
+        ['Blended margin', '29.5%'],
+        ['First job', '#2016 · Nov 2013'],
+        ['Payment behavior', 'paid clean · 8 pay apps'],
+        ['Change-order friction', 'none · +$5,305 additive only'],
+      ],
+      note: 'Small-scale GC relationship — not a repeat customer. If N&B ever reopens a bid, Cortex will treat the delivery as the sole analog.'
     },
 
     // ---------------- Projects ----------------
@@ -5396,14 +5534,40 @@
     '2012': {
       eyebrow: 'Project · #2012 Exxel 8th Ave',
       title: '163u · $1.39M · 38.3% margin.',
-      sub: 'Most recent closed job. Clean execution under Exxel.',
+      sub: 'Clean execution under Exxel. Flat contract, no net change orders.',
       stats: [
         ['Units', '163'], ['Contract', '$1,391,455'], ['Margin', '38.3%'],
         ['Labor ratio', '17.2%'], ['Material ratio', '22.0%'],
-        ['Schedule', '18 months'], ['Workforce', '28 workers · 14,607 hrs'],
+        ['Schedule', '17 months'], ['Workforce', '28 workers · 14,607 hrs'],
         ['Vendors', 'Pacific Plumbing (primary)'],
       ],
-      note: 'Cortex treats #2012 as the anchor for recent Exxel cost data in bid predictions.'
+      note: 'Cortex treats #2012 as the anchor for small-to-mid Exxel cost data in bid predictions.'
+    },
+    '2015': {
+      eyebrow: 'Project · #2015 Exxel Rooster Apts',
+      title: '197u · $2.15M · 23.5% margin.',
+      sub: 'Second-largest closed job in the portfolio and the largest Exxel delivery. Labor-heavy 21-month mid-rise in Roosevelt — 53 workers and 25,956 hours.',
+      stats: [
+        ['Units', '197'], ['Contract', '$2,146,708'], ['Margin', '23.5%'],
+        ['Labor hours', '25,956'], ['Crew size', '53 workers · portfolio max'],
+        ['Schedule', 'Mar 2014 → Nov 2015 · 21 months'],
+        ['Change orders', '+$144,423 (hose bib, gas heater, replumbing)'],
+        ['Hrs / unit', '132 · highest in portfolio'],
+      ],
+      note: 'Second-lowest margin in the portfolio (only #2008 is lower). The labor density flag is the story — same crew architecture as other jobs, but the job ran long and absorbed a lot of overtime.'
+    },
+    '2016': {
+      eyebrow: 'Project · #2016 Natural & Built Sedona',
+      title: '64u · $342k · 29.5% margin.',
+      sub: 'Smallest closed job in the portfolio. A clean, flat-contract 14-month delivery for a one-time GC relationship.',
+      stats: [
+        ['Units', '64'], ['Contract', '$341,805'], ['Margin', '29.5%'],
+        ['Labor ratio', '28.4%'], ['Material ratio', '25.4%'],
+        ['Schedule', 'Nov 2013 → Dec 2014 · 14 months'],
+        ['Change orders', '+$5,305 (near-flat)'],
+        ['Workforce', '28 workers · 4,755 hrs'],
+      ],
+      note: 'Not a repeat customer. Used as the reference for small-scale (<$500k) multifamily delivery economics.'
     },
     '2014': {
       eyebrow: 'Project · #2014 Capitol Hill 168 · ACTIVE ⚠',
