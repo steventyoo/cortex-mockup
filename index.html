@@ -330,6 +330,34 @@
   }
   .bid-input:focus { border-color: var(--ink); }
   select.bid-input { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%231F1E1D' stroke-width='1.6'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .cortex-info {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1px solid var(--clay); background: var(--paper); color: var(--clay);
+    font-family: var(--serif); font-style: italic; font-size: 11px; line-height: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; padding: 0; transition: all 0.15s ease;
+  }
+  .cortex-info:hover { background: var(--clay); color: var(--paper); }
+  .cortex-popover {
+    position: fixed; z-index: 200; max-width: 360px;
+    background: var(--paper); border: 1px solid var(--border-2);
+    border-left: 3px solid var(--clay); border-radius: 10px;
+    padding: 14px 16px; box-shadow: 0 12px 32px rgba(31,30,29,0.18);
+    font-size: 12px; line-height: 1.6; color: var(--ink-2);
+  }
+  .cortex-popover-eyebrow {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--clay); font-weight: 600; margin-bottom: 6px;
+  }
+  .cortex-popover-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .csv-export-btn {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 600; color: var(--ink-3);
+    background: transparent; border: 1px solid var(--border-2);
+    padding: 5px 10px; border-radius: 999px; cursor: pointer;
+    transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .csv-export-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .bid-slider {
     width: 100%;
     margin-top: 18px;
@@ -2192,11 +2220,11 @@
         <div class="col-span-4">
           <div class="hero-lab">Scope estimate (auto-parsed)</div>
           <table class="modal-table mt-2" style="font-size: 12px;">
-            <tr><td>Predicted units</td><td class="num" id="bid-scope-units">220</td></tr>
             <tr><td>Predicted fixtures</td><td class="num" id="bid-scope-fixtures">1,118</td></tr>
-            <tr><td>Fixtures / unit</td><td class="num" id="bid-scope-fpu">5.08</td></tr>
             <tr><td>Schedule (months)</td><td class="num" id="bid-scope-months">22</td></tr>
             <tr><td>Stories above grade</td><td class="num">7</td></tr>
+            <tr><td>Building type</td><td class="num">Mid-rise mixed-use</td></tr>
+            <tr><td>Parking</td><td class="num">Structured, 2 levels</td></tr>
           </table>
         </div>
       </div>
@@ -2205,21 +2233,23 @@
     <!-- Assumptions card -->
     <div class="meta-bar mt-12 mb-4">Adjust assumptions <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 11px;">— everything below recomputes live</span></div>
     <div class="card" id="bid-assumptions-card" style="padding: 28px 32px;">
-      <div class="grid grid-cols-4 gap-6">
+      <div class="grid grid-cols-3 gap-6">
         <div>
-          <div class="hero-lab">Units</div>
-          <input type="number" id="bid-units" value="220" min="20" max="600" step="1" class="bid-input" />
+          <div class="hero-lab">Predicted fixtures</div>
+          <input type="number" id="bid-fixtures" value="1118" min="50" max="6000" step="1" class="bid-input" />
         </div>
         <div>
-          <div class="hero-lab">Fixtures / unit</div>
-          <input type="number" id="bid-fpu" value="5.08" min="2" max="10" step="0.05" class="bid-input" />
-        </div>
-        <div>
-          <div class="hero-lab">Schedule (months)</div>
+          <div class="hero-lab flex items-center gap-2">
+            <span>Schedule (months)</span>
+            <button type="button" class="cortex-info" data-info="schedule" aria-label="Why this number?">i</button>
+          </div>
           <input type="number" id="bid-months" value="22" min="6" max="48" step="1" class="bid-input" />
         </div>
         <div>
-          <div class="hero-lab">Cost per fixture (base)</div>
+          <div class="hero-lab flex items-center gap-2">
+            <span>Cost per fixture (base)</span>
+            <button type="button" class="cortex-info" data-info="cpf" aria-label="Why this number?">i</button>
+          </div>
           <input type="number" id="bid-cpf" value="1550" min="400" max="2500" step="10" class="bid-input" />
         </div>
       </div>
@@ -2235,8 +2265,8 @@
         </div>
         <div>
           <div class="hero-lab">Margin floor — <span id="bid-margin-display" class="tabular" style="color: var(--ink); font-weight: 700;">32.0%</span></div>
-          <input type="range" id="bid-margin" value="32" min="22" max="48" step="0.5" class="bid-slider" />
-          <div class="flex justify-between text-[10px] mt-1" style="color: var(--ink-4);"><span>22%</span><span>48%</span></div>
+          <input type="range" id="bid-margin" value="32" min="0" max="100" step="0.5" class="bid-slider" />
+          <div class="flex justify-between text-[10px] mt-1" style="color: var(--ink-4);"><span>0%</span><span>100%</span></div>
         </div>
         <div>
           <div class="hero-lab">Contingency reserve — <span id="bid-cont-display" class="tabular" style="color: var(--ink); font-weight: 700;">3.0%</span></div>
@@ -2332,7 +2362,13 @@
     </div>
 
     <!-- Cost prediction table -->
-    <div class="meta-bar mt-14 mb-4">C · Cortex cost prediction</div>
+    <div class="meta-bar mt-14 mb-4 flex items-center justify-between">
+      <span>C · Cortex cost prediction</span>
+      <button type="button" class="csv-export-btn" id="bid-cost-export">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+    </div>
     <div class="grid grid-cols-12 gap-6">
       <div class="col-span-7">
         <table class="modal-table" style="width: 100%;">
@@ -2412,7 +2448,13 @@
     </div>
 
     <!-- Generated SOV starting point -->
-    <div class="meta-bar mt-14 mb-4">F · Generated schedule of values starting point</div>
+    <div class="meta-bar mt-14 mb-4 flex items-center justify-between">
+      <span>F · Generated schedule of values starting point</span>
+      <button type="button" class="csv-export-btn" id="bid-sov-export">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+    </div>
     <div class="text-[12px] mb-3" style="color: var(--ink-4);">Cortex drafts an SOV from your historical phase ratios. Edit before submission.</div>
     <table class="modal-table" style="width: 100%;">
       <thead>
@@ -4197,7 +4239,7 @@
     { label: 'Payroll burden &amp; taxes',                  codes: ['995','998'] }
   ];
 
-  const BID_DEFAULTS = { units: 220, fpu: 5.08, months: 22, cpf: 1550, gc: 'chinn', margin: 32.0, cont: 3.0, esc: 0.0 };
+  const BID_DEFAULTS = { fixtures: 1118, months: 22, cpf: 1550, gc: 'chinn', margin: 32.0, cont: 3.0, esc: 0.0 };
   let BID = Object.assign({}, BID_DEFAULTS);
 
   // Scale tiers — Cortex picks the anchor cpf based on project scope.
@@ -4225,7 +4267,7 @@
   // Compute per-code predicted $ and roll-up totals.
   // scale = user cpf / portfolio mean cpf — scales every code proportionally.
   function computeBid() {
-    const totalFixtures = BID.units * BID.fpu;
+    const totalFixtures = BID.fixtures;
     const tier          = tierForFixtures(totalFixtures);
     const scale         = BID.cpf / PORTFOLIO_PF_BASE;
 
@@ -4279,9 +4321,7 @@
     set('bid-esc-display',    bidFmtPct(BID.esc));
 
     // Invitation snapshot — scope estimate
-    set('bid-scope-units',    BID.units.toLocaleString('en-US'));
     set('bid-scope-fixtures', bidFmtInt(c.totalFixtures));
-    set('bid-scope-fpu',      BID.fpu.toFixed(2));
     set('bid-scope-months',   BID.months);
 
     // Invitation snapshot — GC
@@ -4331,7 +4371,7 @@
         <div>
           <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Scope tier detection</div>
           <div style="margin-top: 2px;">
-            ${BID.units.toLocaleString('en-US')} units × ${BID.fpu.toFixed(2)} fx/unit = <b>${bidFmtInt(c.totalFixtures)} fixtures</b>,
+            <b>${bidFmtInt(c.totalFixtures)} fixtures</b> (sub-supplied takeoff),
             ${BID.months}-month schedule.
             → Tier match: <b style="color: var(--ink);">${tier.label}</b> — analogs ${tier.analogs}.
             <span style="color: var(--ink-4);">${tier.note}</span>
@@ -4467,10 +4507,9 @@
         if (!isNaN(v)) { BID[key] = v; renderBid(); }
       });
     };
-    bind('bid-units',  'units',  true);
-    bind('bid-fpu',    'fpu',    false);
-    bind('bid-months', 'months', true);
-    bind('bid-cpf',    'cpf',    true);
+    bind('bid-fixtures', 'fixtures', true);
+    bind('bid-months',   'months',   true);
+    bind('bid-cpf',      'cpf',      true);
     bind('bid-margin', 'margin', false);
     bind('bid-cont',   'cont',   false);
     bind('bid-esc',    'esc',    false);
@@ -4482,17 +4521,143 @@
     if (reset) reset.addEventListener('click', () => {
       BID = Object.assign({}, BID_DEFAULTS);
       const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
-      setVal('bid-units',  BID.units);
-      setVal('bid-fpu',    BID.fpu);
-      setVal('bid-months', BID.months);
-      setVal('bid-cpf',    BID.cpf);
-      setVal('bid-margin', BID.margin);
-      setVal('bid-cont',   BID.cont);
-      setVal('bid-esc',    BID.esc);
-      setVal('bid-gc',     BID.gc);
+      setVal('bid-fixtures', BID.fixtures);
+      setVal('bid-months',   BID.months);
+      setVal('bid-cpf',      BID.cpf);
+      setVal('bid-margin',   BID.margin);
+      setVal('bid-cont',     BID.cont);
+      setVal('bid-esc',      BID.esc);
+      setVal('bid-gc',       BID.gc);
       renderBid();
     });
   }
+
+  // ---------- Cortex info popovers (schedule + cpf "i" buttons) ----------
+  let bidPopover = null;
+  function closeBidPopover() {
+    if (bidPopover) { bidPopover.remove(); bidPopover = null; }
+    document.removeEventListener('click', popoverOutsideClick, true);
+  }
+  function popoverOutsideClick(e) {
+    if (bidPopover && !bidPopover.contains(e.target) && !e.target.closest('.cortex-info')) {
+      closeBidPopover();
+    }
+  }
+  function openBidPopover(btn, kind) {
+    closeBidPopover();
+    const c = computeBid();
+    const gc = GC_DB[BID.gc];
+    let eyebrow, title, body;
+    if (kind === 'schedule') {
+      eyebrow = 'Cortex reasoning · Schedule';
+      title = `${BID.months}-month schedule fits the tier`;
+      body = `Comparable mid-rise jobs in the portfolio averaged <b>20–24 months</b> from mobilization to punchlist. ${BID.months}mo lands inside that band.<br><br>Risk tied to schedule: a ${BID.months}-month window means at least one commodity buyout cycle. Copper is +14% YoY — every additional month lengthens material escalation exposure by ~0.6% on the rough-in line.<br><br><b>Lock copper riser + PEX manifold pricing within 30 days of award</b> to defuse this.`;
+    } else if (kind === 'cpf') {
+      eyebrow = 'Cortex reasoning · Cost per fixture';
+      title  = `Anchored at $${c.tier.cpf.toLocaleString('en-US')}/fx (${c.tier.label.toLowerCase()})`;
+      body = `Code-level parse from the 4 smaller production jobs (#2009–#2012) gives a mean of <b>$${PORTFOLIO_PF_BASE}/fx cost</b>. But the closest scope comparables in the card above (#2001, #2008) ran <b>$1,535–$1,557/fx cost</b> — almost 2× the parsed base.<br><br>I anchored the default at <b>$${c.tier.cpf.toLocaleString('en-US')}/fx</b> based on the tier match (${c.tier.analogs}). The per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios across labor / material / overhead / burden.<br><br>Slider runs $400–$2,500 — drop it for production-scope work, raise it for luxury / high-spec.`;
+    }
+    const pop = document.createElement('div');
+    pop.className = 'cortex-popover';
+    pop.innerHTML = `<div class="cortex-popover-eyebrow">${eyebrow}</div><div class="cortex-popover-title">${title}</div><div>${body}</div>`;
+    document.body.appendChild(pop);
+    const r = btn.getBoundingClientRect();
+    let left = r.left;
+    let top  = r.bottom + 8;
+    // keep inside viewport
+    requestAnimationFrame(() => {
+      const pr = pop.getBoundingClientRect();
+      if (left + pr.width > window.innerWidth - 16) left = window.innerWidth - pr.width - 16;
+      if (left < 16) left = 16;
+      if (top + pr.height > window.innerHeight - 16) top = r.top - pr.height - 8;
+      pop.style.left = left + 'px';
+      pop.style.top  = top  + 'px';
+    });
+    bidPopover = pop;
+    setTimeout(() => document.addEventListener('click', popoverOutsideClick, true), 0);
+  }
+  document.querySelectorAll('.cortex-info').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const kind = btn.getAttribute('data-info');
+      if (bidPopover) { closeBidPopover(); return; }
+      openBidPopover(btn, kind);
+    });
+  });
+  window.addEventListener('resize', closeBidPopover);
+  window.addEventListener('scroll', closeBidPopover, true);
+
+  // ---------- CSV export (Section C cost prediction + Section F SOV) ----------
+  function csvCell(v) {
+    const s = String(v == null ? '' : v);
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  function downloadCsv(filename, rows) {
+    const blob = new Blob([rows.map(r => r.map(csvCell).join(',')).join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function exportCostCsv() {
+    const c = computeBid();
+    const rows = [
+      ['Cortex cost prediction'],
+      ['Generated', new Date().toISOString().slice(0,10)],
+      ['Predicted fixtures', c.totalFixtures],
+      ['Schedule (months)', BID.months],
+      ['Cost per fixture (base)', BID.cpf],
+      ['Scope tier', c.tier.label],
+      ['Tier analogs', c.tier.analogs],
+      ['GC', GC_DB[BID.gc].name],
+      [],
+      ['Code', 'Description', 'Category', 'N', 'Sigma %', 'Predicted $', 'Low $', 'High $', '% of base direct']
+    ];
+    c.codeRows.forEach(r => {
+      rows.push([r.code, r.desc.replace(/&amp;/g,'&'), r.cat, r.n, r.sigma.toFixed(1), Math.round(r.predicted), Math.round(r.low), Math.round(r.high), ((r.predicted/c.baseDirect)*100).toFixed(2)]);
+    });
+    rows.push([]);
+    ['labor','material','overhead','burden'].forEach(k => {
+      const t = c.catTotals[k]; if (!t) return;
+      rows.push([CAT_META[k].label + ' subtotal', '', k, '', '', Math.round(t.sum), Math.round(t.low), Math.round(t.high), ((t.sum/c.baseDirect)*100).toFixed(2)]);
+    });
+    rows.push([]);
+    rows.push(['Base direct cost', '', '', '', '', Math.round(c.baseDirect)]);
+    rows.push([`Contingency reserve (${BID.cont}%)`, '', '', '', '', Math.round(c.contingency)]);
+    rows.push([`Material escalation (${BID.esc}%)`, '', '', '', '', Math.round(c.escalation)]);
+    rows.push(['Predicted direct cost', '', '', '', '', Math.round(c.totalCost)]);
+    rows.push([`Margin @ floor (${BID.margin}%)`, '', '', '', '', Math.round(c.profit)]);
+    rows.push(['Recommended bid', '', '', '', '', Math.round(c.recommendedBid)]);
+    downloadCsv('cortex_cost_prediction.csv', rows);
+  }
+  function exportSovCsv() {
+    const c = computeBid();
+    const codeById = {}; c.codeRows.forEach(r => { codeById[r.code] = r; });
+    const rows = [
+      ['Schedule of values starting point'],
+      ['Generated', new Date().toISOString().slice(0,10)],
+      ['Predicted fixtures', c.totalFixtures],
+      ['Recommended bid', Math.round(c.recommendedBid)],
+      ['Margin @ floor', BID.margin + '%'],
+      [],
+      ['Phase', 'Cost $', `Value @ ${BID.margin}% margin $`, '% of bid', 'Source cost codes']
+    ];
+    SOV_PHASES.forEach(phase => {
+      let phaseBase = 0;
+      phase.codes.forEach(code => { if (codeById[code]) phaseBase += codeById[code].predicted; });
+      const phaseTotal = phaseBase * (c.totalCost / c.baseDirect);
+      const phaseValue = phaseBase * (c.recommendedBid / c.baseDirect);
+      const pct = c.recommendedBid > 0 ? (phaseValue / c.recommendedBid) * 100 : 0;
+      rows.push([phase.label.replace(/&amp;/g,'&'), Math.round(phaseTotal), Math.round(phaseValue), pct.toFixed(2), phase.codes.join(' ')]);
+    });
+    rows.push(['Total', Math.round(c.totalCost), Math.round(c.recommendedBid), '100.00', '']);
+    downloadCsv('cortex_sov_starting_point.csv', rows);
+  }
+  const costExportBtn = document.getElementById('bid-cost-export');
+  if (costExportBtn) costExportBtn.addEventListener('click', exportCostCsv);
+  const sovExportBtn = document.getElementById('bid-sov-export');
+  if (sovExportBtn) sovExportBtn.addEventListener('click', exportSovCsv);
 
   wireBidInputs();
   renderBid();
