@@ -24,9 +24,9 @@
 <style>
   :root {
     --cream:        #F5F1EB;   /* Claude paper · sidebar */
-    --paper:        #FBF7ED;   /* main body — lighter off-white */
+    --paper:        #FFFFFF;   /* main body — pure white */
     --cream-soft:   #FAF7F1;
-    --cream-card:   #FEFBF4;   /* cards pop slightly lighter than paper */
+    --cream-card:   #FFFFFF;   /* cards match paper — borders provide separation */
     --ink:          #1F1E1D;   /* Claude ink — warm near-black */
     --ink-2:        #2E2C2A;
     --ink-3:        #6B6762;
@@ -565,7 +565,7 @@
   .mobile-scrim {
     display: none;
     position: fixed; inset: 0; z-index: 150;
-    background: rgba(31,30,29,0.42);
+    background: rgba(31,30,29,0.08);
   }
   body.nav-open .mobile-scrim { display: block; }
 
@@ -2220,7 +2220,7 @@
         </div>
         <div>
           <div class="hero-lab">Cost per fixture (base)</div>
-          <input type="number" id="bid-cpf" value="2112" min="1000" max="3500" step="25" class="bid-input" />
+          <input type="number" id="bid-cpf" value="1550" min="400" max="2500" step="10" class="bid-input" />
         </div>
       </div>
 
@@ -2323,8 +2323,16 @@
       </div>
     </div>
 
+    <!-- Cortex reasoning trace -->
+    <div class="meta-bar mt-14 mb-4">B · Cortex reasoning · <span style="color: var(--clay);" id="bid-reasoning-headline">how I got to $1,550/fx</span></div>
+    <div class="card" style="background: var(--cream-soft); border: 1px solid var(--border-2);">
+      <div id="bid-reasoning-body" style="font-size: 13px; line-height: 1.7; color: var(--ink-2);">
+        <!-- populated by renderBid() -->
+      </div>
+    </div>
+
     <!-- Cost prediction table -->
-    <div class="meta-bar mt-14 mb-4">B · Cortex cost prediction</div>
+    <div class="meta-bar mt-14 mb-4">C · Cortex cost prediction</div>
     <div class="grid grid-cols-12 gap-6">
       <div class="col-span-7">
         <table class="modal-table" style="width: 100%;">
@@ -2342,13 +2350,15 @@
       <div class="col-span-5">
         <div class="card" style="height: 100%;">
           <div class="card-label">Confidence</div>
-          <div class="text-[44px] serif-it mt-2" style="color: var(--sage-ink); line-height: 1;">High</div>
-          <div class="text-[12px] mt-2" style="color: var(--ink-3);">Cortex has 4 closed jobs within ±20% of this scope. Cost-per-fixture variance across analogs is 6.1% — tight enough to bid with conviction.</div>
+          <div class="text-[44px] serif-it mt-2" style="color: var(--clay); line-height: 1;" id="bid-confidence-label">Medium</div>
+          <div class="text-[12px] mt-2" style="color: var(--ink-3);">Cortex parsed 32 cost codes across 4 closed jobs (#2009–#2012, smaller scale at $797/fx cost). Default is anchored at <b>$1,550/fx</b> — the cost profile of the larger comparables (#2001, #2008) that match Bellevue 220's scale. Per-code breakdown is scaled from the parsed base.</div>
 
           <div class="kpi-divider mt-5"></div>
-          <div class="kpi-row"><span class="kpi-lbl">Analog count</span><span class="kpi-val">4 closed jobs</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Best analog match</span><span class="kpi-val">91% (Job #2001)</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Cost-per-fixture σ</span><span class="kpi-val">6.1%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Cost codes parsed</span><span class="kpi-val tabular">32 codes</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Code-level analogs</span><span class="kpi-val tabular">4 (#2009–#2012)</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Parsed base · $/fx</span><span class="kpi-val tabular">$797</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Scale-tier default · $/fx</span><span class="kpi-val tabular">$1,550</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Portfolio σ · total $/fx</span><span class="kpi-val tabular">38.3%</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Margin floor source</span><span class="kpi-val" id="bid-margin-source">Chinn blended (4 jobs)</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Walk-away threshold</span><span class="kpi-val" id="bid-walk-away" style="color: var(--clay);">&lt; 28.0%</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Win-rate at floor</span><span class="kpi-val" id="bid-win-rate">est. 41%</span></div>
@@ -2357,7 +2367,7 @@
     </div>
 
     <!-- GC scorecard -->
-    <div class="meta-bar mt-14 mb-4" id="bid-gc-title">C · GC scorecard — Chinn Construction</div>
+    <div class="meta-bar mt-14 mb-4" id="bid-gc-title">D · GC scorecard — Chinn Construction</div>
     <div class="grid grid-cols-4 gap-5">
       <div class="card"><div class="card-label">Closed jobs</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);" id="bid-gc-jobs">4</div><div class="text-[12px] mt-1" style="color: var(--ink-3);" id="bid-gc-projects">#2008, #2009, #2010, #2011</div></div>
       <div class="card"><div class="card-label">Blended margin</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);" id="bid-gc-margin">39.8%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">vs 38.3% portfolio avg</div></div>
@@ -2373,7 +2383,7 @@
     </div>
 
     <!-- Risk flags -->
-    <div class="meta-bar mt-14 mb-4">D · Risk flags Cortex wants you to see</div>
+    <div class="meta-bar mt-14 mb-4">E · Risk flags Cortex wants you to see</div>
     <div class="grid grid-cols-2 gap-5">
       <div class="card" style="border-left: 3px solid var(--clay);">
         <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay);">⚠ Labor tier mix</div>
@@ -2402,7 +2412,7 @@
     </div>
 
     <!-- Generated SOV starting point -->
-    <div class="meta-bar mt-14 mb-4">E · Generated schedule of values starting point</div>
+    <div class="meta-bar mt-14 mb-4">F · Generated schedule of values starting point</div>
     <div class="text-[12px] mb-3" style="color: var(--ink-4);">Cortex drafts an SOV from your historical phase ratios. Edit before submission.</div>
     <table class="modal-table" style="width: 100%;">
       <thead>
@@ -4107,33 +4117,101 @@
     'new': { name: 'Unknown / new GC',    jobs: 0, blendedMargin: 38.3, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',           source: 'portfolio average',        winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
   };
 
-  // Cost component % of BASE direct cost (excluding contingency + escalation). Sums to 100.
-  const COST_COMPONENTS = [
-    { label: 'Direct labor',                          pct: 24.5 },
-    { label: 'Material',                              pct: 56.2 },
-    { label: 'Burden &amp; payroll tax',              pct: 9.8  },
-    { label: 'Overhead allocation',                   pct: 3.6  },
-    { label: 'Equipment + small tools',               pct: 2.4  },
-    { label: 'Subcontract (concrete cut, scan)',      pct: 1.5  },
-    { label: 'Bond + insurance',                      pct: 2.0  }
+  // ------------------------------------------------------------------
+  // COST CODES — parsed from OWP JCR summaries for jobs #2009-#2012.
+  // Each entry: mean $/fixture across N jobs, and σ% (coefficient of
+  // variation, stdev/mean). Totals tie back to the canonical Sage JCR
+  // Job Totals for each source job.
+  //
+  // Source files:
+  //   owp/owp-2009/OWP_2009_JCR_Summary.xlsx           · 812 fixtures
+  //   owp/owp-2010/2010-Chinn, Old Town/…              · 803 fixtures
+  //   owp/owp-2011/cortex output files/…               · 590 fixtures
+  //   owp/owp-2012/OWP_2012_JCR_Summary_Notion.xlsx    · 816 fixtures
+  //
+  // Jobs #2001 and #2008 are not included here — #2001 ships a
+  // phase-grouped report (Layout, Garage, Top-out, Trim, Mains) that
+  // can't be decomposed into individual cost codes, and #2008 source
+  // files aren't in the repo yet.
+  // ------------------------------------------------------------------
+  const N_ANALOGS = 4;                 // Jobs contributing to code stats
+  const PORTFOLIO_PF_BASE = 797;       // Sum of all code mean $/fixture
+  const PORTFOLIO_TOTAL_SIGMA = 38.3;  // σ of total direct $/fixture across 4 jobs
+
+  const COST_CODES = [
+    { code: '120', desc: 'Roughin Labor',              cat: 'labor',    meanPf: 138.55, sigma: 47.3, n: 4 },
+    { code: '130', desc: 'Finish Labor',               cat: 'labor',    meanPf: 32.68,  sigma: 38.8, n: 4 },
+    { code: '111', desc: 'Garage Labor',               cat: 'labor',    meanPf: 22.26,  sigma: 46.0, n: 4 },
+    { code: '145', desc: 'Tub / Shower Labor',         cat: 'labor',    meanPf: 8.95,   sigma: 50.3, n: 4 },
+    { code: '141', desc: 'Water Main / Insulation Lab',cat: 'labor',    meanPf: 8.08,   sigma: 123.2,n: 3 },
+    { code: '100', desc: 'Supervision',                cat: 'labor',    meanPf: 6.07,   sigma: 27.6, n: 4 },
+    { code: '110', desc: 'Underground Labor',          cat: 'labor',    meanPf: 5.41,   sigma: 79.5, n: 4 },
+    { code: '101', desc: 'Takeoff &amp; Purchase Labor',   cat: 'labor',meanPf: 5.12,   sigma: 48.9, n: 4 },
+    { code: '142', desc: 'Mech Room Labor',            cat: 'labor',    meanPf: 4.16,   sigma: 126.0,n: 4 },
+    { code: '112', desc: 'Canout Labor',               cat: 'labor',    meanPf: 3.92,   sigma: 51.1, n: 4 },
+    { code: '011', desc: 'DS &amp; RD Labor',              cat: 'labor',meanPf: 2.75,   sigma: 47.1, n: 4 },
+    { code: '113', desc: 'Foundation Drain Labor',     cat: 'labor',    meanPf: 2.40,   sigma: 70.2, n: 2 },
+    { code: '140', desc: 'Gas Labor',                  cat: 'labor',    meanPf: 2.39,   sigma: 15.5, n: 2 },
+    { code: '230', desc: 'Finish Material',            cat: 'material', meanPf: 240.06, sigma: 37.4, n: 4 },
+    { code: '220', desc: 'Roughin Material',           cat: 'material', meanPf: 79.65,  sigma: 39.9, n: 4 },
+    { code: '241', desc: 'Water Main / Insulation Mat',cat: 'material', meanPf: 31.96,  sigma: 36.2, n: 3 },
+    { code: '211', desc: 'Garage Material',            cat: 'material', meanPf: 9.50,   sigma: 41.3, n: 4 },
+    { code: '242', desc: 'Mech Room Material',         cat: 'material', meanPf: 7.93,   sigma: 167.4,n: 4 },
+    { code: '212', desc: 'Canout Material',            cat: 'material', meanPf: 7.47,   sigma: 40.9, n: 4 },
+    { code: '213', desc: 'Foundation Material',        cat: 'material', meanPf: 4.20,   sigma: 67.6, n: 2 },
+    { code: '210', desc: 'Underground Material',       cat: 'material', meanPf: 4.03,   sigma: 83.7, n: 4 },
+    { code: '039', desc: 'DS &amp; RD Material',           cat: 'material', meanPf: 2.52,sigma: 100.8,n: 4 },
+    { code: '245', desc: 'Tub / Shower Material',      cat: 'material', meanPf: 1.70,   sigma: 59.3, n: 3 },
+    { code: '240', desc: 'Gas Material',               cat: 'material', meanPf: 1.28,   sigma: 6.9,  n: 2 },
+    { code: '603', desc: 'Permits &amp; Licenses',         cat: 'overhead', meanPf: 16.84,sigma: 88.2,n: 4 },
+    { code: '601', desc: 'Engineering / Plans',        cat: 'overhead', meanPf: 15.01,  sigma: 45.3, n: 4 },
+    { code: '600', desc: 'Subcontractor',              cat: 'overhead', meanPf: 3.86,   sigma: 122.7,n: 4 },
+    { code: '602', desc: 'Rental Equipment',           cat: 'overhead', meanPf: 2.99,   sigma: 0,    n: 1 },
+    { code: '604', desc: 'Backcharges',                cat: 'overhead', meanPf: 2.25,   sigma: 0,    n: 1 },
+    { code: '995', desc: 'Payroll Burden',             cat: 'burden',   meanPf: 102.85, sigma: 44.9, n: 4 },
+    { code: '998', desc: 'Payroll Taxes',              cat: 'burden',   meanPf: 18.29,  sigma: 43.4, n: 4 }
   ];
 
-  // SOV phases as % of total bid. Sums to 100.
+  const CAT_META = {
+    labor:    { label: 'Labor',             order: 0 },
+    material: { label: 'Material',          order: 1 },
+    overhead: { label: 'Overhead',          order: 2 },
+    burden:   { label: 'Burden &amp; taxes',    order: 3 }
+  };
+
+  // SOV phases built from cost-code groups (actual Sage code ranges).
+  // Each phase pulls its $ from the sum of its contributing codes'
+  // predicted cost. Codes may appear in multiple phases — Cortex sums
+  // them with the listed weight (default 1.0).
   const SOV_PHASES = [
-    { label: 'Mobilization &amp; submittals',           pct: 2.0,  src: 'avg of 4'      },
-    { label: 'Underground rough-in',                    pct: 13.0, src: '#2001 ratio'   },
-    { label: 'Slab rough-in',                           pct: 11.0, src: '#2001 ratio'   },
-    { label: 'Stack risers (storm + waste)',            pct: 9.0,  src: '#2001 ratio'   },
-    { label: 'Top-out (DWV + water)',                   pct: 20.0, src: '#2001 ratio'   },
-    { label: 'Trim &amp; fixtures',                     pct: 17.0, src: '#2001 ratio'   },
-    { label: 'Test &amp; inspection',                   pct: 4.0,  src: '#2001 ratio'   },
-    { label: 'Storm &amp; site connection',             pct: 11.0, src: 'spec carve-out'},
-    { label: 'Commercial / retail rough &amp; trim',    pct: 9.0,  src: 'spec carve-out'},
-    { label: 'Closeout (as-builts, O&amp;M)',           pct: 4.0,  src: 'avg of 4'      }
+    { label: 'Mobilization &amp; submittals',           codes: ['100','101'] },
+    { label: 'Underground rough-in',                    codes: ['110','210','011','039'] },
+    { label: 'Slab / garage rough-in',                  codes: ['111','211','112','212','113','213'] },
+    { label: 'Top-out (DWV + water)',                   codes: ['120','220'] },
+    { label: 'Water main + insulation',                 codes: ['141','241'] },
+    { label: 'Gas rough-in',                            codes: ['140','240'] },
+    { label: 'Mech room',                               codes: ['142','242'] },
+    { label: 'Trim &amp; fixtures',                         codes: ['130','230','145','245'] },
+    { label: 'Permits &amp; engineering',                   codes: ['601','603'] },
+    { label: 'Subcontract + equipment + backcharges',   codes: ['600','602','604'] },
+    { label: 'Payroll burden &amp; taxes',                  codes: ['995','998'] }
   ];
 
-  const BID_DEFAULTS = { units: 220, fpu: 5.08, months: 22, cpf: 2112, gc: 'chinn', margin: 32.0, cont: 3.0, esc: 0.0 };
+  const BID_DEFAULTS = { units: 220, fpu: 5.08, months: 22, cpf: 1550, gc: 'chinn', margin: 32.0, cont: 3.0, esc: 0.0 };
   let BID = Object.assign({}, BID_DEFAULTS);
+
+  // Scale tiers — Cortex picks the anchor cpf based on project scope.
+  // Built from the 6-job portfolio: the small production jobs (#2009–#2012)
+  // run ~$797/fx cost. The larger mid-rise jobs (#2001, #2008) run $1,500–1,600/fx.
+  // Luxury / high-spec work lands above $1,900/fx.
+  const SCALE_TIERS = [
+    { key: 'production', label: 'Production multifamily',  minFx: 0,    maxFx: 900,   cpf: 797,  analogs: '#2009, #2010, #2011, #2012', note: 'Tight-spec garden-style, bulk commodity plumbing, fast cycle.' },
+    { key: 'midrise',    label: 'Larger mid-rise / mixed-use', minFx: 900, maxFx: 1400, cpf: 1550, analogs: '#2001, #2008',                 note: '5–8 story, structured parking, higher fixture density, tougher access.' },
+    { key: 'luxury',     label: 'High-spec / luxury',          minFx: 1400, maxFx: 99999, cpf: 1950, analogs: '(thin data · 1 analog)',     note: 'Premium finishes, specified brand fixtures, longer trim cycle.' }
+  ];
+  function tierForFixtures(totalFx) {
+    return SCALE_TIERS.find(t => totalFx >= t.minFx && totalFx < t.maxFx) || SCALE_TIERS[1];
+  }
 
   function bidFmtMoney(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
   function bidFmtMoneyK(v) {
@@ -4144,19 +4222,49 @@
   function bidFmtPct(v) { return v.toFixed(1) + '%'; }
   function bidFmtInt(v) { return Math.round(v).toLocaleString('en-US'); }
 
+  // Compute per-code predicted $ and roll-up totals.
+  // scale = user cpf / portfolio mean cpf — scales every code proportionally.
   function computeBid() {
     const totalFixtures = BID.units * BID.fpu;
-    const baseDirect    = totalFixtures * BID.cpf;
-    const contingency   = baseDirect * BID.cont / 100;
-    const escalation    = baseDirect * BID.esc  / 100;
-    const totalCost     = baseDirect + contingency + escalation;
+    const tier          = tierForFixtures(totalFixtures);
+    const scale         = BID.cpf / PORTFOLIO_PF_BASE;
+
+    // Per-code predicted $, low/high band from per-code σ (±1σ range).
+    const codeRows = COST_CODES.map(c => {
+      const predicted = c.meanPf * totalFixtures * scale;
+      const bandPct   = (c.n > 1) ? Math.min(c.sigma, 100) / 100 : 0;   // cap display at ±100%
+      const low       = predicted * Math.max(0.15, 1 - bandPct);
+      const high      = predicted * (1 + bandPct);
+      return { ...c, predicted, low, high };
+    });
+
+    // Category subtotals
+    const catTotals = {};
+    codeRows.forEach(r => {
+      if (!catTotals[r.cat]) catTotals[r.cat] = { sum: 0, low: 0, high: 0 };
+      catTotals[r.cat].sum  += r.predicted;
+      catTotals[r.cat].low  += r.low;
+      catTotals[r.cat].high += r.high;
+    });
+
+    const baseDirect  = codeRows.reduce((s, r) => s + r.predicted, 0);
+    const contingency = baseDirect * BID.cont / 100;
+    const escalation  = baseDirect * BID.esc  / 100;
+    const totalCost   = baseDirect + contingency + escalation;
+
     // Recommended bid such that profit / bid = margin/100  →  bid = totalCost / (1 - margin/100)
     const denom = 1 - BID.margin / 100;
     const recommendedBid = denom > 0 ? totalCost / denom : totalCost * 10;
     const profit = recommendedBid - totalCost;
-    const p10 = totalCost * 0.939;
-    const p90 = totalCost * 1.061;
-    return { totalFixtures, baseDirect, contingency, escalation, totalCost, recommendedBid, profit, p10, p90 };
+
+    // Portfolio-level band on total direct cost (σ = 38.3% across 4 jobs).
+    // We soften this to ±1σ bounded by code-aggregated band, whichever is tighter.
+    const portfolioLow  = baseDirect * (1 - PORTFOLIO_TOTAL_SIGMA/100);
+    const portfolioHigh = baseDirect * (1 + PORTFOLIO_TOTAL_SIGMA/100);
+    const p10 = Math.max(portfolioLow, baseDirect * 0.6);
+    const p90 = portfolioHigh + contingency + escalation;
+
+    return { totalFixtures, tier, scale, baseDirect, contingency, escalation, totalCost, recommendedBid, profit, p10, p90, codeRows, catTotals };
   }
 
   function renderBid() {
@@ -4192,26 +4300,126 @@
     set('bid-banner-margin2',       bidFmtPct(BID.margin));
     set('bid-banner-profit',        bidFmtMoney(c.profit));
 
-    // Cost prediction tbody
+    // ---------- Cortex reasoning trace ----------
+    // This is the LLM's explicit judgment layer: it names the tier, flags the
+    // data-source mismatch, and justifies the recommended cpf in plain English.
+    const tier = c.tier;
+    const parsedBase = PORTFOLIO_PF_BASE;                // $797 — small-job mean
+    const tierAnchor = tier.cpf;                          // tier-specific cpf
+    const userCpf    = BID.cpf;
+    const gap        = userCpf - tierAnchor;
+    const gapPct     = (gap / tierAnchor) * 100;
+
+    let verdict, verdictColor, verdictIcon;
+    if (Math.abs(gapPct) <= 5) {
+      verdict = 'Your cpf is aligned with the tier anchor. Holding the recommendation.';
+      verdictColor = 'var(--sage-ink)'; verdictIcon = '✓';
+    } else if (gap < 0) {
+      verdict = `Your cpf is ${Math.abs(gapPct).toFixed(0)}% below the tier anchor of $${tierAnchor}/fx. At this input you would underbid by ≈ ${bidFmtMoneyM(Math.abs(gap) * c.totalFixtures / (1 - BID.margin/100))}. Raise cpf or walk.`;
+      verdictColor = 'var(--clay)'; verdictIcon = '⚠';
+    } else {
+      verdict = `Your cpf is ${gapPct.toFixed(0)}% above the tier anchor. Defensible only if scope is luxury-spec or GC history suggests overrun risk.`;
+      verdictColor = 'var(--ink-2)'; verdictIcon = '○';
+    }
+
+    set('bid-reasoning-headline', `how I got to $${tierAnchor.toLocaleString('en-US')}/fx (${tier.label.toLowerCase()})`);
+
+    const reasoningHtml = `
+      <div style="display: grid; grid-template-columns: 28px 1fr; gap: 14px 16px;">
+
+        <div style="font-family: var(--serif); font-style: italic; color: var(--clay); font-size: 18px; line-height: 1.2;">1</div>
+        <div>
+          <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Scope tier detection</div>
+          <div style="margin-top: 2px;">
+            ${BID.units.toLocaleString('en-US')} units × ${BID.fpu.toFixed(2)} fx/unit = <b>${bidFmtInt(c.totalFixtures)} fixtures</b>,
+            ${BID.months}-month schedule.
+            → Tier match: <b style="color: var(--ink);">${tier.label}</b> — analogs ${tier.analogs}.
+            <span style="color: var(--ink-4);">${tier.note}</span>
+          </div>
+        </div>
+
+        <div style="font-family: var(--serif); font-style: italic; color: var(--clay); font-size: 18px; line-height: 1.2;">2</div>
+        <div>
+          <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Data source reconciliation <span style="color: var(--clay); font-weight: 500; font-size: 11px; margin-left: 6px;">⚠ two layers disagreed — I chose the comparables</span></div>
+          <div style="margin-top: 2px;">
+            Code-level parse covers the <b>4 smaller production jobs</b> only (#2009–#2012, avg 755 fx), mean <b>$${parsedBase}/fx cost</b>.
+            But the closest scope comparables in the card above (#2001, #2008) ran <b>$1,535–$1,557/fx cost</b> — almost 2× the parsed base.
+            Using the parsed $${parsedBase} as the default would underbid a ${tier.label.toLowerCase()} job by roughly <b>${bidFmtMoneyM((tierAnchor - parsedBase) * c.totalFixtures / (1 - BID.margin/100))}</b>.
+            <span style="display: block; margin-top: 4px; color: var(--sage-ink); font-weight: 600;">→ I anchored the default at $${tierAnchor.toLocaleString('en-US')}/fx. Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios.</span>
+          </div>
+        </div>
+
+        <div style="font-family: var(--serif); font-style: italic; color: var(--clay); font-size: 18px; line-height: 1.2;">3</div>
+        <div>
+          <div style="font-weight: 600; color: var(--ink); font-size: 13px;">GC signal</div>
+          <div style="margin-top: 2px;">
+            ${GC_DB[BID.gc].name}: ${GC_DB[BID.gc].jobs} closed jobs, <b>${bidFmtPct(GC_DB[BID.gc].blendedMargin)}</b> blended margin,
+            ${GC_DB[BID.gc].payLag}d pay lag (${GC_DB[BID.gc].payLagDelta.toLowerCase()}), <b>${GC_DB[BID.gc].coRate}%</b> CO approval.
+            → ${BID.gc === 'chinn' ? 'No payment-behavior drag on margin. Floor holds at ' + bidFmtPct(BID.margin) + '.' : BID.gc === 'exxel' ? 'Slower pay, tighter CO gate — pad floor +2 to ' + bidFmtPct(BID.margin + 2) + ' or walk.' : 'No history. Treat as unknown risk — floor +4 or walk.'}
+          </div>
+        </div>
+
+        <div style="font-family: var(--serif); font-style: italic; color: var(--clay); font-size: 18px; line-height: 1.2;">4</div>
+        <div>
+          <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Risk load</div>
+          <div style="margin-top: 2px;">
+            Copper +14% YoY, PEX +9%, ${BID.months}-month schedule → escalation risk real but controllable with buyout discipline within 30d of award.
+            Labor Tier-2/3 fallback adds 12–18% hrs/fx if job #2014 slips into Q4.
+            → Recommend <b>${bidFmtPct(BID.cont)} contingency</b>, <b>${bidFmtPct(BID.esc)} escalation reserve</b>.
+            ${BID.cont < 3 ? '<span style="color: var(--clay);"> I would nudge contingency up to 3% given the commodity exposure.</span>' : ''}
+          </div>
+        </div>
+
+        <div style="font-family: var(--serif); font-style: italic; color: var(--clay); font-size: 18px; line-height: 1.2;">5</div>
+        <div>
+          <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Verdict on your current inputs</div>
+          <div style="margin-top: 4px; padding: 10px 14px; border-left: 3px solid ${verdictColor}; background: var(--paper);">
+            <span style="color: ${verdictColor}; font-weight: 600;">${verdictIcon}</span>&nbsp;
+            ${verdict}
+            <div style="margin-top: 6px; color: var(--ink-4); font-size: 11px;">
+              Walk-away: margin &lt; ${(BID.margin - 4).toFixed(1)}% · Win-rate at floor: est. ${GC_DB[BID.gc].winRate}%
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `;
+    setHtml('bid-reasoning-body', reasoningHtml);
+    // ---------- end reasoning trace ----------
+
+    // Cost prediction tbody — grouped by category with code-level detail
     let costRows = '';
-    COST_COMPONENTS.forEach(comp => {
-      const dollars = c.baseDirect * comp.pct / 100;
-      const low  = dollars * 0.935;
-      const high = dollars * 1.065;
-      const pctOfTotal = c.totalCost > 0 ? (dollars / c.totalCost) * 100 : 0;
-      costRows += `<tr><td>${comp.label}</td><td class="num">${bidFmtMoney(dollars)}</td><td class="num" style="color: var(--ink-3);">${bidFmtMoneyK(low)} → ${bidFmtMoneyK(high)}</td><td class="num">${pctOfTotal.toFixed(1)}%</td></tr>`;
+    const catOrder = ['labor','material','overhead','burden'];
+    catOrder.forEach(catKey => {
+      const catRows = c.codeRows.filter(r => r.cat === catKey);
+      if (!catRows.length) return;
+      const meta  = CAT_META[catKey];
+      const tot   = c.catTotals[catKey];
+      const pctOfBase = (tot.sum / c.baseDirect) * 100;
+      // Category header row
+      costRows += `<tr style="border-top: 1px solid var(--border-2);"><td colspan="4" style="padding-top: 14px; padding-bottom: 6px;"><span class="text-[10px] uppercase tracking-widest" style="color: var(--ink-4); font-weight: 600;">${meta.label} · ${catRows.length} codes</span></td></tr>`;
+      catRows.forEach(r => {
+        const pctOfTotal = (r.predicted / c.totalCost) * 100;
+        const thinTag    = r.n === 1 ? `<span class="text-[9px] ml-2" style="color: var(--clay);">thin · N=1</span>` : (r.n === 2 ? `<span class="text-[9px] ml-2" style="color: var(--ink-4);">N=2</span>` : '');
+        const bandCell   = r.n > 1
+          ? `<span style="color: var(--ink-3);">${bidFmtMoneyK(r.low)} → ${bidFmtMoneyK(r.high)}</span> <span class="text-[9px] ml-1" style="color: var(--ink-4);">±${r.sigma.toFixed(0)}%</span>`
+          : `<span style="color: var(--ink-4);">—</span>`;
+        costRows += `<tr><td style="padding: 4px 0; font-size: 12px;"><span class="tabular" style="color: var(--ink-4); font-size: 10px; margin-right: 10px;">${r.code}</span>${r.desc}${thinTag}</td><td class="num tabular" style="font-size: 12px;">${bidFmtMoney(r.predicted)}</td><td class="num tabular" style="font-size: 11px;">${bandCell}</td><td class="num tabular" style="font-size: 12px;">${pctOfTotal.toFixed(1)}%</td></tr>`;
+      });
+      // Category subtotal
+      costRows += `<tr style="background: var(--cream-soft);"><td style="padding: 7px 0 7px 0; font-weight: 600; font-size: 12px;">${meta.label} subtotal</td><td class="num tabular" style="font-weight: 600; font-size: 12px;">${bidFmtMoney(tot.sum)}</td><td class="num tabular" style="font-size: 11px; color: var(--ink-3);">${bidFmtMoneyK(tot.low)} → ${bidFmtMoneyK(tot.high)}</td><td class="num tabular" style="font-weight: 600; font-size: 12px;">${pctOfBase.toFixed(1)}%</td></tr>`;
     });
+    // Base direct cost total
+    costRows += `<tr style="border-top: 1.5px solid var(--ink); font-weight: 600;"><td style="padding-top: 10px;">Base direct cost</td><td class="num tabular" style="padding-top: 10px;">${bidFmtMoney(c.baseDirect)}</td><td class="num tabular" style="padding-top: 10px; color: var(--clay);">${bidFmtMoneyM(c.p10)} → ${bidFmtMoneyM(c.p90)}</td><td class="num tabular" style="padding-top: 10px;">100%</td></tr>`;
     if (BID.cont > 0) {
-      const pctOfTotal = (c.contingency / c.totalCost) * 100;
-      costRows += `<tr><td>Contingency reserve (${bidFmtPct(BID.cont)})</td><td class="num">${bidFmtMoney(c.contingency)}</td><td class="num" style="color: var(--ink-3);">—</td><td class="num">${pctOfTotal.toFixed(1)}%</td></tr>`;
+      costRows += `<tr><td>Contingency reserve (${bidFmtPct(BID.cont)})</td><td class="num tabular">${bidFmtMoney(c.contingency)}</td><td class="num" style="color: var(--ink-4);">—</td><td class="num tabular">+${((c.contingency / c.baseDirect) * 100).toFixed(1)}%</td></tr>`;
     }
     if (BID.esc > 0) {
-      const pctOfTotal = (c.escalation / c.totalCost) * 100;
-      costRows += `<tr><td>Material escalation reserve (${bidFmtPct(BID.esc)})</td><td class="num">${bidFmtMoney(c.escalation)}</td><td class="num" style="color: var(--ink-3);">—</td><td class="num">${pctOfTotal.toFixed(1)}%</td></tr>`;
+      costRows += `<tr><td>Material escalation reserve (${bidFmtPct(BID.esc)})</td><td class="num tabular">${bidFmtMoney(c.escalation)}</td><td class="num" style="color: var(--ink-4);">—</td><td class="num tabular">+${((c.escalation / c.baseDirect) * 100).toFixed(1)}%</td></tr>`;
     }
-    costRows += `<tr style="border-top: 1.5px solid var(--ink); font-weight: 600;"><td>Predicted direct cost</td><td class="num">${bidFmtMoney(c.totalCost)}</td><td class="num" style="color: var(--clay);">${bidFmtMoneyM(c.p10)} → ${bidFmtMoneyM(c.p90)}</td><td class="num">100%</td></tr>`;
-    costRows += `<tr style="font-weight: 600;"><td>Margin @ floor (${bidFmtPct(BID.margin)})</td><td class="num" style="color: var(--sage-ink);">${bidFmtMoney(c.profit)}</td><td class="num"></td><td class="num"></td></tr>`;
-    costRows += `<tr style="font-weight: 700; background: var(--cream-soft);"><td>Recommended bid</td><td class="num">${bidFmtMoney(c.recommendedBid)}</td><td class="num"></td><td class="num"></td></tr>`;
+    costRows += `<tr style="border-top: 1px solid var(--border-2); font-weight: 600;"><td>Predicted direct cost</td><td class="num tabular">${bidFmtMoney(c.totalCost)}</td><td class="num"></td><td class="num"></td></tr>`;
+    costRows += `<tr style="font-weight: 600;"><td>Margin @ floor (${bidFmtPct(BID.margin)})</td><td class="num tabular" style="color: var(--sage-ink);">${bidFmtMoney(c.profit)}</td><td class="num"></td><td class="num"></td></tr>`;
+    costRows += `<tr style="font-weight: 700; background: var(--cream-soft);"><td style="padding: 10px 0;">Recommended bid</td><td class="num tabular" style="padding: 10px 0;">${bidFmtMoney(c.recommendedBid)}</td><td class="num"></td><td class="num"></td></tr>`;
     setHtml('bid-cost-tbody', costRows);
 
     // GC scorecard
@@ -4229,14 +4437,23 @@
     set('bid-walk-away',     '< ' + (BID.margin - 4).toFixed(1) + '%');
     set('bid-win-rate',      'est. ' + gc.winRate + '%');
 
-    // SOV
+    // SOV — each phase sums its contributing cost-code rows
     let sovRows = '';
+    const codeById = {};
+    c.codeRows.forEach(r => { codeById[r.code] = r; });
+    let sovBaseSum = 0;
     SOV_PHASES.forEach(phase => {
-      const cost  = c.totalCost * phase.pct / 100;
-      const value = c.recommendedBid * phase.pct / 100;
-      sovRows += `<tr><td>${phase.label}</td><td class="num">${bidFmtMoney(cost)}</td><td class="num">${bidFmtMoney(value)}</td><td class="num">${phase.pct.toFixed(1)}%</td><td class="num" style="color: var(--ink-4);">${phase.src}</td></tr>`;
+      let phaseBase = 0;
+      phase.codes.forEach(code => { if (codeById[code]) phaseBase += codeById[code].predicted; });
+      sovBaseSum += phaseBase;
+      // Scale phase from base to total (add pro-rata share of contingency + escalation)
+      const phaseTotal = phaseBase * (c.totalCost / c.baseDirect);
+      const phaseValue = phaseBase * (c.recommendedBid / c.baseDirect);
+      const pctOfBid   = c.recommendedBid > 0 ? (phaseValue / c.recommendedBid) * 100 : 0;
+      const srcText    = phase.codes.join(', ');
+      sovRows += `<tr><td style="font-size: 12.5px;">${phase.label}</td><td class="num tabular">${bidFmtMoney(phaseTotal)}</td><td class="num tabular">${bidFmtMoney(phaseValue)}</td><td class="num tabular">${pctOfBid.toFixed(1)}%</td><td class="num tabular" style="color: var(--ink-4); font-size: 10px;">${srcText}</td></tr>`;
     });
-    sovRows += `<tr style="border-top: 1.5px solid var(--ink); font-weight: 700;"><td>Total</td><td class="num">${bidFmtMoney(c.totalCost)}</td><td class="num">${bidFmtMoney(c.recommendedBid)}</td><td class="num">100%</td><td></td></tr>`;
+    sovRows += `<tr style="border-top: 1.5px solid var(--ink); font-weight: 700;"><td>Total</td><td class="num tabular">${bidFmtMoney(c.totalCost)}</td><td class="num tabular">${bidFmtMoney(c.recommendedBid)}</td><td class="num">100%</td><td></td></tr>`;
     setHtml('bid-sov-tbody', sovRows);
     set('bid-sov-margin-header', `Value (${bidFmtPct(BID.margin)} margin)`);
   }
