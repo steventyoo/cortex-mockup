@@ -324,7 +324,7 @@
   .bench-cell .n { font-size: 10px; color: var(--ink-3); margin-top: 2px; }
 
   /* --- Shell (sidebar + main) --- */
-  .shell { display: grid; grid-template-columns: 248px 1fr; gap: 0; max-width: 1528px; margin: 0 auto; min-height: 100vh; }
+  .shell { display: grid; grid-template-columns: 248px minmax(0, 1280px); gap: 0; min-height: 100vh; }
   .sidebar {
     position: sticky; top: 0; align-self: start;
     height: 100vh; overflow-y: auto;
@@ -621,6 +621,10 @@
       <div class="sb-item" data-view-target="benchmark">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 V13"/><path d="M9 20 V5"/><path d="M15 20 V9"/><path d="M21 20 V3"/><path d="M2 20 H22"/><circle cx="9" cy="5" r="1.2" fill="currentColor"/><circle cx="21" cy="3" r="1.2" fill="currentColor"/></svg>
         <span>Benchmark Comparison</span>
+      </div>
+      <div class="sb-item" data-view-target="atlas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="12" cy="12" r="2"/><line x1="7.4" y1="7.4" x2="10.6" y2="10.6"/><line x1="16.6" y1="7.4" x2="13.4" y2="10.6"/><line x1="7.4" y1="16.6" x2="10.6" y2="13.4"/><line x1="16.6" y1="16.6" x2="13.4" y2="13.4"/></svg>
+        <span>Atlas</span>
       </div>
       <div class="sb-item" data-view-target="bid">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 V12 C4 16.5 7.5 20.5 12 22 C16.5 20.5 20 16.5 20 12 V6 Z"/><path d="M9 12 L11 14 L15 10"/></svg>
@@ -1764,6 +1768,324 @@
         <div><div class="hero-lab">Duplicate rate</div><div class="hero-val tabular" style="color: var(--clay);">25%</div><div class="hero-foot">79 groups · 158 files · across 4 jobs</div></div>
         <div><div class="hero-lab">Parse confidence</div><div class="hero-val tabular" style="color: var(--sage-ink);">94.2%</div><div class="hero-foot">avg across parsed schemas</div></div>
         <div><div class="hero-lab">Unresolved docs</div><div class="hero-val tabular">12</div><div class="hero-foot">manual review queue</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ============= ATLAS VIEW =================================== -->
+  <!-- ============================================================ -->
+  <div class="view" data-view="atlas">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="chip-ink">21 nodes · 47 edges</span>
+      <span class="chip-sage">6 closed · 1 active · 1 proposed</span>
+      <span class="chip-clay">3 hidden patterns surfaced</span>
+    </div>
+    <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
+      Project <span class="serif-it">Atlas.</span>
+    </h1>
+    <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 720px; line-height: 1.6;">
+      Every job, the GCs that hired them, the vendors who supplied them, the crews who built them — and the lines between them. The patterns Cortex sees that you can't from a spreadsheet. Static layout, click any node for the full record.
+    </div>
+
+    <!-- Filter pills -->
+    <div class="mt-10 flex items-center gap-3 flex-wrap">
+      <span class="chip-ink" style="background: var(--ink); color: var(--cream); cursor: pointer;">All</span>
+      <span class="chip-ink" style="cursor: pointer;">Projects only</span>
+      <span class="chip-ink" style="cursor: pointer;">+ GCs</span>
+      <span class="chip-ink" style="cursor: pointer;">+ Vendors</span>
+      <span class="chip-ink" style="cursor: pointer;">+ Crew</span>
+      <span class="chip-ink" style="cursor: pointer;">+ Insights</span>
+      <span style="margin-left: auto; font-size: 11px; color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">layout · static · cortex.atlas v0.1</span>
+    </div>
+
+    <!-- The graph -->
+    <div class="mt-6 blueprint" style="padding: 28px 24px 36px;">
+      <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 02 / portfolio graph</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 21 · edges · 47</div>
+      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s.</div>
+      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
+
+      <svg viewBox="0 0 1240 760" class="w-full" style="display: block; height: auto; max-height: 720px; overflow: visible; margin-top: 14px;">
+        <defs>
+          <marker id="atlas-dot" viewBox="-2 -2 4 4" refX="0" refY="0" markerWidth="3" markerHeight="3"><circle r="1.5" fill="var(--ink-3)"/></marker>
+        </defs>
+
+        <!-- ========== EDGES (drawn first so nodes overlap them) ========== -->
+
+        <!-- Strong solid: GC → projects -->
+        <!-- Chinn → its 4 closed jobs + 2014 active + Bellevue 220 proposed -->
+        <line x1="200" y1="100" x2="130" y2="290" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="200" y1="100" x2="270" y2="250" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="200" y1="100" x2="170" y2="380" stroke="var(--ink)" stroke-width="1.1"/>
+        <line x1="200" y1="100" x2="320" y2="360" stroke="var(--ink)" stroke-width="1.1"/>
+        <line x1="200" y1="100" x2="600" y2="270" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="200" y1="100" x2="600" y2="110" stroke="var(--ink)" stroke-width="1.4"/>
+
+        <!-- Exxel → its 2 closed jobs -->
+        <line x1="1040" y1="100" x2="920" y2="290" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="1040" y1="100" x2="1080" y2="280" stroke="var(--ink)" stroke-width="1.4"/>
+
+        <!-- Comparable / "would-bid" edges (clay, dashed) — Bellevue 220 ↔ analogs -->
+        <line x1="600" y1="110" x2="920" y2="290" stroke="var(--clay)" stroke-width="1.6" stroke-dasharray="5,4"/>
+        <line x1="600" y1="110" x2="1080" y2="280" stroke="var(--clay)" stroke-width="1.0" stroke-dasharray="5,4"/>
+        <line x1="600" y1="110" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.8" stroke-dasharray="5,4"/>
+
+        <!-- Vendor → projects (dashed ink-3) -->
+        <line x1="130" y1="540" x2="130" y2="290" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="130" y1="540" x2="270" y2="250" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="130" y1="540" x2="170" y2="380" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="270" y1="600" x2="920" y2="290" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="270" y1="600" x2="1080" y2="280" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="200" y1="460" x2="320" y2="360" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="200" y1="460" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+
+        <!-- Crew/PM → projects (dashed ink-3) -->
+        <line x1="520" y1="540" x2="130" y2="290" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="2,3"/>
+        <line x1="520" y1="540" x2="270" y2="250" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="2,3"/>
+        <line x1="520" y1="540" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="2,3"/>
+
+        <line x1="660" y1="590" x2="130" y2="290" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
+        <line x1="660" y1="590" x2="270" y2="250" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
+        <line x1="660" y1="590" x2="320" y2="360" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
+        <line x1="660" y1="590" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
+
+        <line x1="440" y1="620" x2="170" y2="380" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
+        <line x1="440" y1="620" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
+
+        <!-- Insight nodes → connected entities (dotted clay) -->
+        <line x1="880" y1="540" x2="130" y2="540" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
+        <line x1="880" y1="540" x2="130" y2="290" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
+        <line x1="880" y1="540" x2="270" y2="250" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
+
+        <line x1="1020" y1="480" x2="130" y2="290" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="1020" y1="480" x2="270" y2="250" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="1020" y1="480" x2="170" y2="380" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="1020" y1="480" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="1020" y1="480" x2="920" y2="290" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+
+        <line x1="980" y1="620" x2="600" y2="110" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
+        <line x1="980" y1="620" x2="600" y2="270" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
+
+        <line x1="380" y1="540" x2="130" y2="290" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="380" y1="540" x2="270" y2="250" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="380" y1="540" x2="170" y2="380" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+        <line x1="380" y1="540" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
+
+        <!-- ========== NODES ========== -->
+
+        <!-- GC nodes: rounded squares, ink fill -->
+        <g style="cursor: pointer;">
+          <rect x="174" y="74" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="200" y="105" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">CHINN</text>
+          <text x="200" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 4 jobs</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <rect x="1014" y="74" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="1040" y="105" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">EXXEL</text>
+          <text x="1040" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 2 jobs</text>
+        </g>
+
+        <!-- Project nodes: closed jobs (Chinn cluster, left) -->
+        <g style="cursor: pointer;">
+          <circle cx="130" cy="290" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="130" y="294" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2009</text>
+          <text x="130" y="320" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Greenwood</text>
+          <text x="130" y="333" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">168u · 27.0%</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <circle cx="270" cy="250" r="18" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="270" y="254" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2010</text>
+          <text x="270" y="282" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Old Town</text>
+          <text x="270" y="295" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">165u · 54.2% ★</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <circle cx="170" cy="380" r="15" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="170" y="384" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2011</text>
+          <text x="170" y="408" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Barrett Park</text>
+          <text x="170" y="421" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">117u · 38.2%</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <circle cx="320" cy="360" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="320" y="364" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2008</text>
+          <text x="320" y="388" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Taylor</text>
+          <text x="320" y="401" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">258u · 39.4%</text>
+        </g>
+
+        <!-- Project nodes: closed jobs (Exxel cluster, right) -->
+        <g style="cursor: pointer;">
+          <circle cx="920" cy="290" r="18" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2.2"/>
+          <text x="920" y="294" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2001</text>
+          <text x="920" y="322" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">230 Broadway</text>
+          <text x="920" y="335" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">175u · 29.7%</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <circle cx="1080" cy="280" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="1080" y="284" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2012</text>
+          <text x="1080" y="312" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Aerynt</text>
+          <text x="1080" y="325" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">163u · 38.3%</text>
+        </g>
+
+        <!-- Active job (clay outline) -->
+        <g style="cursor: pointer;">
+          <circle cx="600" cy="270" r="20" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2.8"/>
+          <text x="600" y="266" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--clay)" text-anchor="middle">ACTIVE</text>
+          <text x="600" y="278" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2014</text>
+          <text x="600" y="306" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Capitol Hill 168</text>
+          <text x="600" y="319" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">52% · ⚠ watch</text>
+        </g>
+
+        <!-- Proposed bid (dashed outline) -->
+        <g style="cursor: pointer;">
+          <circle cx="600" cy="110" r="20" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="4,3"/>
+          <text x="600" y="106" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink-3)" text-anchor="middle">PROPOSED</text>
+          <text x="600" y="118" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">220u</text>
+          <text x="600" y="148" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="var(--ink)" text-anchor="middle">Bellevue 220</text>
+          <text x="600" y="161" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">$3.58M @ 32.0%</text>
+        </g>
+
+        <!-- Vendor nodes: triangles, clay stroke -->
+        <g style="cursor: pointer;">
+          <polygon points="130,524 144,548 116,548" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="130" y="572" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Ferguson</text>
+          <text x="130" y="585" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 3 jobs</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <polygon points="270,584 282,605 258,605" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="270" y="624" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Pacific Plumbing</text>
+          <text x="270" y="637" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 2 jobs</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <polygon points="200,444 212,464 188,464" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="200" y="438" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">McLendon</text>
+          <text x="200" y="425" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 2 jobs</text>
+        </g>
+
+        <!-- Crew/PM nodes: diamonds, ink-3 stroke -->
+        <g style="cursor: pointer;">
+          <polygon points="520,524 538,540 520,556 502,540" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="520" y="580" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Tier-1 Crew Alpha</text>
+          <text x="520" y="593" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">8 plumbers · 4 jobs</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <polygon points="660,576 676,590 660,604 644,590" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="660" y="628" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">PM Garcia</text>
+          <text x="660" y="641" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">project mgr · all chinn</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <polygon points="440,606 456,620 440,634 424,620" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2"/>
+          <text x="440" y="660" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Foreman Reyes</text>
+          <text x="440" y="673" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">field foreman · 2 jobs</text>
+        </g>
+
+        <!-- Insight nodes: small clay circles -->
+        <g style="cursor: pointer;">
+          <circle cx="880" cy="540" r="11" fill="var(--clay)" fill-opacity="0.18" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="880" y="544" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--clay)" text-anchor="middle">!</text>
+          <text x="880" y="568" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--clay)" text-anchor="middle">Ferguson concentration</text>
+          <text x="880" y="581" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">single point of failure</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <circle cx="1020" cy="480" r="9" fill="var(--clay)" fill-opacity="0.18" stroke="var(--clay)" stroke-width="1.4"/>
+          <text x="1020" y="484" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--clay)" text-anchor="middle">i</text>
+          <text x="1020" y="506" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--sage-ink)" text-anchor="middle">Wage stability</text>
+          <text x="1020" y="519" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">$0.80 spread · 5 jobs</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <circle cx="980" cy="620" r="10" fill="var(--clay)" fill-opacity="0.18" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="980" y="624" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--clay)" text-anchor="middle">!</text>
+          <text x="980" y="648" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--clay)" text-anchor="middle">Material escalation Q2</text>
+          <text x="980" y="661" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">copper +14% · pex +9%</text>
+        </g>
+
+        <g style="cursor: pointer;">
+          <circle cx="380" cy="540" r="9" fill="var(--clay)" fill-opacity="0.18" stroke="var(--sage-ink)" stroke-width="1.5"/>
+          <text x="380" y="544" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--sage-ink)" text-anchor="middle">★</text>
+          <text x="380" y="566" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--sage-ink)" text-anchor="middle">Chinn = preferred GC</text>
+          <text x="380" y="579" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">39.8% blended margin</text>
+        </g>
+
+        <!-- Corner crosshairs -->
+        <g stroke="var(--ink-3)" stroke-width="0.6">
+          <line x1="35" y1="40" x2="45" y2="40"/><line x1="40" y1="35" x2="40" y2="45"/>
+          <line x1="1195" y1="40" x2="1205" y2="40"/><line x1="1200" y1="35" x2="1200" y2="45"/>
+          <line x1="35" y1="720" x2="45" y2="720"/><line x1="40" y1="715" x2="40" y2="725"/>
+          <line x1="1195" y1="720" x2="1205" y2="720"/><line x1="1200" y1="715" x2="1200" y2="725"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Legend -->
+    <div class="grid grid-cols-5 gap-4 mt-6">
+      <div class="card" style="padding: 14px 16px;">
+        <div class="flex items-center gap-3">
+          <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/></svg>
+          <div><div class="text-[12px] font-semibold" style="color: var(--ink);">Project</div><div class="text-[10px]" style="color: var(--ink-4);">closed job</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="flex items-center gap-3">
+          <svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="16" rx="3" fill="var(--ink)"/></svg>
+          <div><div class="text-[12px] font-semibold" style="color: var(--ink);">GC</div><div class="text-[10px]" style="color: var(--ink-4);">general contractor</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="flex items-center gap-3">
+          <svg width="20" height="20" viewBox="0 0 20 20"><polygon points="10,3 17,17 3,17" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="1.8"/></svg>
+          <div><div class="text-[12px] font-semibold" style="color: var(--ink);">Vendor</div><div class="text-[10px]" style="color: var(--ink-4);">material supplier</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="flex items-center gap-3">
+          <svg width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 18,10 10,18 2,10" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="1.8"/></svg>
+          <div><div class="text-[12px] font-semibold" style="color: var(--ink);">Crew / PM</div><div class="text-[10px]" style="color: var(--ink-4);">people</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="flex items-center gap-3">
+          <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5" fill="var(--clay)" fill-opacity="0.18" stroke="var(--clay)" stroke-width="1.6"/></svg>
+          <div><div class="text-[12px] font-semibold" style="color: var(--ink);">Insight</div><div class="text-[10px]" style="color: var(--ink-4);">pattern Cortex sees</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What the graph reveals -->
+    <div class="meta-bar mt-14 mb-4">What the graph reveals</div>
+    <div class="grid grid-cols-2 gap-x-12 gap-y-6 text-[13px]" style="color: var(--ink-2); line-height: 1.65;">
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--clay);">⚠ Single point of failure</div>
+        <b style="color: var(--ink);">Ferguson is concentrated.</b> Three Chinn jobs (#2009 at 73% material share, #2010 at 41%, #2011 at 38%) source the majority of their material from one vendor. If Ferguson has a fulfillment problem, three projects feel it simultaneously. The graph makes the radius of that risk visible — diversify on the next bid.
+      </div>
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--sage-ink);">✓ Trunk relationship</div>
+        <b style="color: var(--ink);">Chinn is the trunk.</b> 4 of 6 closed jobs, the active job, and the proposed bid all hang off one node. Chinn is not just a customer — they are <i>the</i> portfolio. Worth a quarterly relationship review and a named account owner.
+      </div>
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--ink-3);">○ Hidden continuity</div>
+        <b style="color: var(--ink);">PM Garcia is on every Chinn job.</b> Including #2014. The relationship continuity is itself a margin lever — Chinn approves COs faster when Garcia submits them. Not in any spreadsheet. Visible as a star in the graph.
+      </div>
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--clay);">⚠ Inheritance</div>
+        <b style="color: var(--ink);">Bellevue 220 inherits #2001's risk profile.</b> Same scale, same building type, same fixture density. The clay edge in the graph is Cortex saying: this bid is essentially a re-run of #2001. Use #2001 as the baseline, not the average of all 6 jobs.
+      </div>
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--sage-ink);">✓ Crew is a fixed asset</div>
+        <b style="color: var(--ink);">Tier-1 Crew Alpha = same 8 plumbers across 4 jobs.</b> They are why your fully-loaded wage spans only $1.22 across the portfolio — and why the productivity ratchet works at all. Lose one of them and the next bid's labor estimate moves more than you'd expect.
+      </div>
+      <div>
+        <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--ink-3);">○ Vendor segregation</div>
+        <b style="color: var(--ink);">Vendors split along GC lines.</b> Ferguson and McLendon serve Chinn jobs. Pacific Plumbing serves Exxel jobs. There's no overlap — meaning your supplier negotiations are effectively two separate conversations. Consolidating could yield 4–7% on material spend.
       </div>
     </div>
   </div>
