@@ -4612,11 +4612,31 @@
   refreshKeyIndicator();
 
   /* ============ VIEW SWITCHER ============ */
-  function setView(v){
+  function setView(v, opts){
+    opts = opts || {};
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('active', el.dataset.view === v));
     document.querySelectorAll('.sb-item').forEach(el => el.classList.toggle('active', el.dataset.viewTarget === v));
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    if (!opts.skipScroll) window.scrollTo({top: 0, behavior: 'smooth'});
+    if (!opts.skipHash) {
+      const newHash = '#' + v;
+      if (location.hash !== newHash) history.replaceState(null, '', newHash);
+    }
   }
+
+  // Restore view from URL hash on load so refresh preserves the current page.
+  (function restoreViewFromHash(){
+    const v = (location.hash || '').replace(/^#/, '');
+    if (!v) return;
+    if (document.querySelector('.view[data-view="' + v + '"]')) {
+      setView(v, { skipScroll: true, skipHash: true });
+    }
+  })();
+  window.addEventListener('hashchange', () => {
+    const v = (location.hash || '').replace(/^#/, '') || 'home';
+    if (document.querySelector('.view[data-view="' + v + '"]')) {
+      setView(v, { skipScroll: true, skipHash: true });
+    }
+  });
 
   // Job Health view variant toggle (Classic v1 / Signal-driven v2)
   document.querySelectorAll('.health-tab').forEach(btn => {
