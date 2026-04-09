@@ -4054,6 +4054,20 @@
   // Add a project ID here once its PROJECTS entry exists, and every view picks it up.
   const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016"];
 
+  // Project stages — add ids to bidding/active as those jobs are entered.
+  // Closed jobs flow through PROJECT_ORDER so totals stay in sync.
+  // Defined here (before renderSkyline) so stageOf() can read it.
+  const PROJECT_STAGES = {
+    bidding: [],
+    active:  [],
+    closed:  PROJECT_ORDER
+  };
+  const STAGE_META = {
+    bidding: { label: 'Bidding', empty: '— no live bids' },
+    active:  { label: 'Active',  empty: '— no jobs in progress' },
+    closed:  { label: 'Closed',  empty: '— no closed jobs yet' }
+  };
+
   const PROJECTS = {
     "2001": {
       reportNum: "REPORT #2001-IR01",
@@ -4909,20 +4923,6 @@
     const b = document.getElementById('home-portfolio-grid'); if(b) b.innerHTML = html;
   }
   renderPortfolio();
-
-  /* ============ SIDEBAR PROJECTS ============ */
-  // Project stages — add ids to bidding/active as those jobs are entered.
-  // Closed jobs flow through PROJECT_ORDER so totals stay in sync.
-  const PROJECT_STAGES = {
-    bidding: [],
-    active:  [],
-    closed:  PROJECT_ORDER
-  };
-  const STAGE_META = {
-    bidding: { label: 'Bidding', empty: '— no live bids' },
-    active:  { label: 'Active',  empty: '— no jobs in progress' },
-    closed:  { label: 'Closed',  empty: '— no closed jobs yet' }
-  };
 
   function renderSidebar(){
     const cont = document.getElementById('sidebar-projects'); if(!cont) return;
