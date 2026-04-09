@@ -619,28 +619,7 @@
     </div>
 
     <div class="sb-label">Projects</div>
-    <div style="display: flex; flex-direction: column;">
-      <div class="sb-project" data-project="2009">
-        <div class="sb-pnum">JOB #2009</div>
-        <div class="sb-pname"><b>Chinn</b> <span class="serif-it">Greenwood Apts.</span></div>
-        <div class="sb-psub">Chinn · Seattle · 168u</div>
-      </div>
-      <div class="sb-project" data-project="2010">
-        <div class="sb-pnum">JOB #2010</div>
-        <div class="sb-pname"><b>Chinn</b> <span class="serif-it">Old Town.</span></div>
-        <div class="sb-psub">Chinn · Seattle · 165u</div>
-      </div>
-      <div class="sb-project" data-project="2011">
-        <div class="sb-pnum">JOB #2011</div>
-        <div class="sb-pname"><b>Chinn</b> <span class="serif-it">Barrett Park.</span></div>
-        <div class="sb-psub">Chinn · Seattle · 117u</div>
-      </div>
-      <div class="sb-project" data-project="2012">
-        <div class="sb-pnum">JOB #2012</div>
-        <div class="sb-pname"><b>Exxel</b> <span class="serif-it">8th Ave.</span></div>
-        <div class="sb-psub">Exxel · Seattle · 163u</div>
-      </div>
-    </div>
+    <div id="sidebar-projects" style="display: flex; flex-direction: column;"></div>
 
     <div class="sb-user">
       <div class="serif-it" style="font-size: 14px;">Steven Yoo</div>
@@ -680,7 +659,7 @@
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 01 / the portfolio — elevation</div>
       <div class="blueprint-corner" style="top: 12px; right: 14px;">scale · n.t.s.</div>
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">seattle · one way plumbing llc</div>
-      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">4 jobs · 613 units · $4.04m</div>
+      <div class="blueprint-corner" data-tot="skylineCorner" style="bottom: 12px; right: 14px;">4 jobs · 613 units · $4.04m</div>
       <div id="skyline-svg-wrap"></div>
     </div>
 
@@ -1624,25 +1603,25 @@
   <!-- ============================================================ -->
   <div class="view" data-view="portfolio">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">4 projects</span>
-      <span class="chip-sage">$4.04M total revenue</span>
-      <span class="chip-clay">$1.72M combined profit</span>
+      <span class="chip-ink"><span data-tot="jobs">4</span> projects</span>
+      <span class="chip-sage"><span data-tot="revenueShort">$4.04m</span> total revenue</span>
+      <span class="chip-clay"><span data-tot="profitShort">$1.72M</span> combined profit</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Portfolio <span class="serif-it">Overview.</span>
     </h1>
     <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 680px; line-height: 1.6;">
-      Four closed specialty plumbing jobs ingested into Cortex. Three with Chinn Construction, one with Exxel Pacific. All Seattle multifamily. Click any project to open its full intelligence report.
+      Closed specialty plumbing jobs ingested into Cortex — Seattle multifamily and mixed-use across Chinn Construction and Exxel Pacific. Click any project to open its full intelligence report.
     </div>
 
     <div class="grid grid-cols-4 gap-8 py-10 mt-12 border-y border-dashed" style="border-color: var(--border-2);">
-      <div><div class="hero-lab">Total Revenue</div><div class="hero-val tabular">$4,041,906</div><div class="hero-foot">across 4 closed jobs</div></div>
-      <div><div class="hero-lab">Combined Profit</div><div class="hero-val tabular" style="color: var(--sage-ink);">$1,723,813</div><div class="hero-foot">42.6% blended margin</div></div>
-      <div><div class="hero-lab">Total Units</div><div class="hero-val tabular">613</div><div class="hero-foot">3,021 plumbing fixtures</div></div>
-      <div><div class="hero-lab">Total Labor Hours</div><div class="hero-val tabular">35,927</div><div class="hero-foot">104 unique workers</div></div>
+      <div><div class="hero-lab">Total Revenue</div><div class="hero-val tabular" data-tot="revenue">$4,041,906</div><div class="hero-foot" data-tot="revenueFoot">across 4 closed jobs</div></div>
+      <div><div class="hero-lab">Combined Profit</div><div class="hero-val tabular" style="color: var(--sage-ink);" data-tot="profit">$1,723,813</div><div class="hero-foot" data-tot="profitFoot">42.6% blended margin</div></div>
+      <div><div class="hero-lab">Total Units</div><div class="hero-val tabular" data-tot="units">613</div><div class="hero-foot" data-tot="unitsFoot">3,021 plumbing fixtures</div></div>
+      <div><div class="hero-lab">Total Labor Hours</div><div class="hero-val tabular" data-tot="hours">35,927</div><div class="hero-foot" data-tot="hoursFoot">104 unique workers</div></div>
     </div>
 
-    <div class="meta-bar mt-14 mb-4">The four projects</div>
+    <div class="meta-bar mt-14 mb-4">The portfolio</div>
     <div class="grid grid-cols-4 gap-5 items-stretch" id="portfolio-grid">
       <!-- populated by JS render -->
     </div>
@@ -2387,7 +2366,57 @@
   document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 
   /* ============ PROJECT DATA (real — from OWP_4Way_Comparison.xlsx) ============ */
+  // Order in which projects appear in the sidebar / portfolio / benchmark.
+  // Add a project ID here once its PROJECTS entry exists, and every view picks it up.
+  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012"];
+
   const PROJECTS = {
+    "2001": {
+      reportNum: "REPORT #2001-IR01",
+      chips: ['<span class="chip-sage">Labor intensity leader</span>','<span class="chip-ink">Earliest closed job</span>','<span class="chip-clay">29.7% margin</span>'],
+      jobTop: "Exxel", jobBottom: "230 Broadway.",
+      jobNum: "#2001", location: "Seattle, WA · 230 Broadway", gc: "Exxel Pacific (RDMSRMB230, LLC)",
+      gcShort: "Exxel Pacific, Inc.",
+      dateRange: "Apr 2011 → Dec 2012 · 21 months",
+      unitsDesc: "175-unit mixed-use mid-rise",
+      revenue: "$1,937,784", revenueFoot: "largest closed job · +$87,514 in change orders",
+      profit: "$575,481", profitFoot: "29.7% margin · labor-heavy delivery",
+      expenses: "$1,362,303", expensesFoot: "Labor $426.1k · Mat'l $703.5k · OH+Burden $232.7k",
+      retainage: "$96,889", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">earliest</span> closed job — a 7-story mixed-use mid-rise that ran <span class="n">heavy on labor</span> but still cleared 29.7% on $1.94M.',
+      execBody: 'Exxel 230 Broadway is the oldest closed job in the portfolio — a 21-month delivery on a 7-story mixed-use mid-rise (parking levels P1-P3, commercial at grade, residential L1-L7). At <span class="n">$1,937,784</span> in final revenue and <span class="n">$575,481</span> in net profit, it is the largest job in the portfolio by both top and bottom line — but the <span class="n">29.7% margin</span> is the lowest of the five.<br/><br/>The story is labor intensity. The crew logged <span class="n">22,653 hours</span> across 27 unique workers — more hours than any other closed job, and 55% above #2012 Exxel 8th Ave on a similar contract scale. Material spend ran $703.5k vs. base labor at $426.1k for a labor-to-material ratio of 0.61. The contract grew <span class="n">+$87,514</span> through additive change orders against a $1.85M original.',
+      jobNum2: "#2001", workforce: "27 workers · 22,653 hrs",
+      bpLeft: "exxel 230 broadway · seattle wa", bpRight: "175 units · 21 months",
+      k01_revenue: "$1,937,784", k01_margin: "29.7%", k01_origContract: "$1,850,270",
+      k01_co: "+$87,514", k01_directCost: "$1,362,303", k01_profit: "$575,481",
+      footerReport: "REPORT #2001-IR01 · Generated April 8, 2026 · v0.1",
+      sbName: "230 Broadway.", skyName: "230 BWAY",
+      skyline: { floors: 7, cols: 14, w: 268 },
+      num: { units:175, fixtures:875, months:21, revenue:1937784, profit:575481, directCost:1362303, origContract:1850270, co:87514, retainage:96889, labor:426070, material:703459, overhead:62345, burden:170428, hours:22653, workers:27 }
+    },
+    "2008": {
+      reportNum: "REPORT #2008-IR01",
+      chips: ['<span class="chip-sage">Largest revenue · $2.33M</span>','<span class="chip-ink">Most ambitious · 258 units</span>','<span class="chip-clay">Lowest margin · 18.9%</span>'],
+      jobTop: "SRM", jobBottom: "101 Taylor.",
+      jobNum: "#2008", location: "Seattle, WA · 101 Taylor Ave N", gc: "SRM Development, LLC",
+      gcShort: "SRM Development, LLC",
+      dateRange: "Aug 2012 → Dec 2014 · 29 months",
+      unitsDesc: "258-unit mixed-use mid-rise",
+      revenue: "$2,327,698", revenueFoot: "largest closed job · 24 pay apps · +$72,717 in COs",
+      profit: "$441,004", profitFoot: "18.9% margin · portfolio floor",
+      expenses: "$1,886,694", expensesFoot: "Labor $945.8k (loaded) · Mat'l $907.0k · GL $33.9k",
+      retainage: "$116,385", retainageFoot: "5% of revenue",
+      execHeadline: 'The <span class="serif-it">biggest</span> job OWP has ever closed — 258 units, 10 stories, 29 months, $2.33M — delivered at a <span class="n">portfolio-floor 18.9% margin</span>.',
+      execBody: 'SRM 101 Taylor is the largest closed job in the portfolio by every volume metric: <span class="n">$2,327,698</span> in final revenue, <span class="n">258 residential units</span>, <span class="n">30,682 labor hours</span>, and a <span class="n">29-month</span> delivery — a 10-story mixed-use mid-rise in Seattle\'s Uptown (Lower Queen Anne), with two levels of parking and roughly 1,230 plumbing fixtures.<br/><br/>Despite the scale, the job cleared only <span class="n">18.9% margin</span> — the lowest of the six closed jobs and 10+ points below the portfolio average. Labor absorbed <span class="n">$945.8k</span> fully-loaded (burden rolled into the PR line in the Sage export), AP material ran <span class="n">$907.0k</span>, and GL carried $33.9k. The crew of <span class="n">50 unique workers</span> — the largest headcount in the portfolio — averaged a $30.83/hr loaded wage. The contract grew a modest <span class="n">+$72,717</span> across <span class="n">11 change orders</span> against a $2,256,200 original.',
+      jobNum2: "#2008", workforce: "50 workers · 30,682 hrs",
+      bpLeft: "srm 101 taylor · seattle wa", bpRight: "258 units · 29 months",
+      k01_revenue: "$2,327,698", k01_margin: "18.9%", k01_origContract: "$2,256,200",
+      k01_co: "+$72,717", k01_directCost: "$1,886,694", k01_profit: "$441,004",
+      footerReport: "REPORT #2008-IR01 · Generated April 8, 2026 · v0.1",
+      sbName: "101 Taylor.", skyName: "101 TAYLOR",
+      skyline: { floors: 10, cols: 16, w: 288 },
+      num: { units:258, fixtures:1230, months:29, revenue:2327698, profit:441004, directCost:1886694, origContract:2256200, co:72717, retainage:116385, labor:945796, material:907042, overhead:33856, burden:0, hours:30682, workers:50 }
+    },
     "2009": {
       reportNum: "REPORT #2009-IR02",
       chips: ['<span class="chip-sage">Strong margin · 7 pts above industry</span>','<span class="chip-ink">Closed · Retainage pending</span>','<span class="chip-clay">18.6% Cortex coverage</span>'],
@@ -2405,7 +2434,10 @@
       bpLeft: "chinn greenwood ave · seattle wa", bpRight: "168 units · 16 months",
       k01_revenue: "$394,208", k01_margin: "27.0%", k01_origContract: "$384,900",
       k01_co: "+$9,308", k01_directCost: "$287,899", k01_profit: "$106,309",
-      footerReport: "REPORT #2009-IR02 · Generated April 8, 2026 · v0.2"
+      footerReport: "REPORT #2009-IR02 · Generated April 8, 2026 · v0.2",
+      sbName: "Greenwood Apts.", skyName: "GREENWOOD",
+      skyline: { floors: 4, cols: 14, w: 232 },
+      num: { units:168, fixtures:812, months:16, revenue:394208, profit:106309, directCost:287899, origContract:384900, co:9308, retainage:19710, labor:84672, material:151032, overhead:11236, burden:40991, hours:4116, workers:23 }
     },
     "2010": {
       reportNum: "REPORT #2010-IR01",
@@ -2424,7 +2456,10 @@
       bpLeft: "chinn old town · seattle wa", bpRight: "165 units · 24 months",
       k01_revenue: "$1,386,419", k01_margin: "54.2%", k01_origContract: "$1,469,800",
       k01_co: "-$83,381", k01_directCost: "$635,149", k01_profit: "$751,270",
-      footerReport: "REPORT #2010-IR01 · Generated April 8, 2026 · v0.1"
+      footerReport: "REPORT #2010-IR01 · Generated April 8, 2026 · v0.1",
+      sbName: "Old Town.", skyName: "OLD TOWN",
+      skyline: { floors: 6, cols: 13, w: 252 },
+      num: { units:165, fixtures:803, months:24, revenue:1386419, profit:751270, directCost:635149, origContract:1469800, co:-83381, retainage:69321, labor:202950, material:283470, overhead:45336, burden:103981, hours:10260, workers:22 }
     },
     "2011": {
       reportNum: "REPORT #2011-IR01",
@@ -2443,7 +2478,10 @@
       bpLeft: "chinn barrett park · seattle wa", bpRight: "117 units · 17 months",
       k01_revenue: "$869,824", k01_margin: "38.3%", k01_origContract: "$813,050",
       k01_co: "+$56,774", k01_directCost: "$536,863", k01_profit: "$332,960",
-      footerReport: "REPORT #2011-IR01 · Generated April 8, 2026 · v0.1"
+      footerReport: "REPORT #2011-IR01 · Generated April 8, 2026 · v0.1",
+      sbName: "Barrett Park.", skyName: "BARRETT PK",
+      skyline: { floors: 3, cols: 10, w: 178 },
+      num: { units:117, fixtures:590, months:17, revenue:869824, profit:332960, directCost:536863, origContract:813050, co:56774, retainage:43491, labor:142857, material:294957, overhead:26182, burden:73065, hours:6944, workers:31 }
     },
     "2012": {
       reportNum: "REPORT #2012-IR01",
@@ -2462,9 +2500,38 @@
       bpLeft: "exxel 8th ave · seattle wa", bpRight: "163 units · 17 months",
       k01_revenue: "$1,391,455", k01_margin: "38.3%", k01_origContract: "$1,394,655",
       k01_co: "$0", k01_directCost: "$858,181", k01_profit: "$533,274",
-      footerReport: "REPORT #2012-IR01 · Generated April 8, 2026 · v0.1"
+      footerReport: "REPORT #2012-IR01 · Generated April 8, 2026 · v0.1",
+      sbName: "8th Ave.", skyName: "8TH AVE",
+      skyline: { floors: 5, cols: 14, w: 256 },
+      num: { units:163, fixtures:816, months:17, revenue:1391455, profit:533274, directCost:858181, origContract:1394655, co:0, retainage:69573, labor:291281, material:390711, overhead:27553, burden:148886, hours:14607, workers:28 }
     }
   };
+
+  /* ============ DERIVED PORTFOLIO TOTALS ============ */
+  // All hardcoded "4 jobs · 613 units · $4.04m" type strings derive from PROJECTS
+  // via these helpers. Add a project to PROJECT_ORDER and these auto-update.
+  function projList(){ return PROJECT_ORDER.map(id => PROJECTS[id]); }
+  function sumNum(field){ return projList().reduce((s,p)=>s+(p.num[field]||0), 0); }
+  const TOTALS = {
+    get jobs(){ return PROJECT_ORDER.length; },
+    get revenue(){ return sumNum('revenue'); },
+    get profit(){ return sumNum('profit'); },
+    get directCost(){ return sumNum('directCost'); },
+    get units(){ return sumNum('units'); },
+    get fixtures(){ return sumNum('fixtures'); },
+    get hours(){ return sumNum('hours'); },
+    get workers(){ return sumNum('workers'); },
+    get retainage(){ return sumNum('retainage'); },
+    get margin(){ return this.profit / this.revenue; }
+  };
+  function fmtMoneyShort(v){
+    if(v >= 1e6) return '$' + (v/1e6).toFixed(2).replace(/\.?0+$/,'') + 'M';
+    if(v >= 1e3) return '$' + Math.round(v/1e3) + 'K';
+    return '$' + Math.round(v);
+  }
+  function fmtMoneyFull(v){ return '$' + Math.round(v).toLocaleString('en-US'); }
+  function fmtPct(v){ return (v*100).toFixed(1) + '%'; }
+  function fmtInt(v){ return v.toLocaleString('en-US'); }
 
   function applyProject(id){
     const p = PROJECTS[id]; if(!p) return;
@@ -2479,12 +2546,22 @@
   }
 
   /* ============ PORTFOLIO SKYLINE HERO ============ */
-  const SKYLINE = [
-    { id: "2009", top: "CHINN", bottom: "GREENWOOD",  meta: "168u · 16mo · $394K",   floors: 4, cols: 14, w: 232 },
-    { id: "2010", top: "CHINN", bottom: "OLD TOWN",   meta: "165u · 24mo · $1.39M",  floors: 6, cols: 13, w: 252 },
-    { id: "2011", top: "CHINN", bottom: "BARRETT PK", meta: "117u · 17mo · $870K",   floors: 3, cols: 10, w: 178 },
-    { id: "2012", top: "EXXEL", bottom: "8TH AVE",    meta: "163u · 17mo · $1.39M",  floors: 5, cols: 14, w: 256 }
-  ];
+  // Derived from PROJECTS — adding to PROJECT_ORDER inserts a building.
+  function getSkyline(){
+    return PROJECT_ORDER.map(id => {
+      const p = PROJECTS[id];
+      return {
+        id,
+        top: p.jobTop.toUpperCase(),
+        bottom: p.skyName,
+        meta: `${p.num.units}u · ${p.num.months}mo · ${fmtMoneyShort(p.num.revenue)}`,
+        floors: p.skyline.floors,
+        cols:   p.skyline.cols,
+        w:      p.skyline.w
+      };
+    });
+  }
+  const SKYLINE = getSkyline();
 
   function renderSkyline(){
     const wrap = document.getElementById('skyline-svg-wrap'); if(!wrap) return;
@@ -2682,15 +2759,15 @@
   // Build the grounding context from PROJECTS + BENCH
   function buildContext(){
     const lines = [];
-    lines.push("You are Cortex, an intelligence assistant for One Way Plumbing LLC — a specialty plumbing subcontractor based in Seattle. You answer questions about the four closed jobs in the portfolio below. Answer in the same editorial tone as an intelligence report: direct, numerate, no hedging. Lead with the answer. Use **bold** for key numbers and names. Keep responses concise (2–4 short paragraphs unless the user asks for depth). When you cite a number, cite it exactly from the data. Do not invent data that isn't below.");
+    lines.push(`You are Cortex, an intelligence assistant for One Way Plumbing LLC — a specialty plumbing subcontractor based in Seattle. You answer questions about the ${TOTALS.jobs} closed jobs in the portfolio below. Answer in the same editorial tone as an intelligence report: direct, numerate, no hedging. Lead with the answer. Use **bold** for key numbers and names. Keep responses concise (2–4 short paragraphs unless the user asks for depth). When you cite a number, cite it exactly from the data. Do not invent data that isn't below.`);
     lines.push("");
     lines.push("## Portfolio summary");
-    lines.push("- 4 closed specialty plumbing jobs · $4,041,906 total revenue · $1,723,813 combined profit · 42.6% blended margin");
-    lines.push("- 613 units · 3,021 plumbing fixtures · 35,927 total labor hours · 104 unique workers");
-    lines.push("- 1,042 raw files ingested · 5 of 13 schemas parsed · 64 queryable fields");
+    lines.push(`- ${TOTALS.jobs} closed specialty plumbing jobs · ${fmtMoneyFull(TOTALS.revenue)} total revenue · ${fmtMoneyFull(TOTALS.profit)} combined profit · ${fmtPct(TOTALS.margin)} blended margin`);
+    lines.push(`- ${fmtInt(TOTALS.units)} units · ${fmtInt(TOTALS.fixtures)} plumbing fixtures · ${fmtInt(TOTALS.hours)} total labor hours · ${TOTALS.workers} unique workers`);
     lines.push("");
     lines.push("## Project records");
-    Object.entries(PROJECTS).forEach(([id, p]) => {
+    PROJECT_ORDER.forEach(id => {
+      const p = PROJECTS[id];
       lines.push(`### Job #${id} · ${p.jobTop} ${p.jobBottom}`);
       lines.push(`- GC: ${p.gc} · Location: ${p.location} · Duration: ${p.dateRange} · Units: ${p.unitsDesc}`);
       lines.push(`- Revenue: ${p.revenue} (${p.revenueFoot})`);
@@ -2816,9 +2893,7 @@
   document.querySelectorAll('.sb-item').forEach(el => {
     el.addEventListener('click', () => { setView(el.dataset.viewTarget); document.body.classList.remove('nav-open'); });
   });
-  document.querySelectorAll('.sb-project').forEach(el => {
-    el.addEventListener('click', () => { applyProject(el.dataset.project); document.body.classList.remove('nav-open'); });
-  });
+  // .sb-project click handlers are bound by renderSidebar() since the elements are dynamic.
 
   /* ============ BENCHMARK TABLE ============ */
   // fmt: 'int' | 'money' | 'money0' | 'pct' | 'dec2' | 'dec1'
@@ -2834,71 +2909,93 @@
     dec1:   v => v.toFixed(1),
     money2: v => '$' + v.toFixed(2)
   };
-  const BENCH = {
-    head: ["Metric","2009 Greenwood","2010 Old Town","2011 Barrett","2012 Exxel","Average"],
-    groups: [
-      ["A · Project Scale", [
-        {label:"Unit Count",          v:[168,165,117,163],               fmt:'int', dir:'-'},
-        {label:"Total Fixtures",      v:[812,803,590,816],               fmt:'int', dir:'-'},
-        {label:"Duration (months)",   v:[16,24,17,17],                   fmt:'int', dir:'lo'},
-        {label:"Fixtures / Unit",     v:[4.83,4.87,5.04,5.01],           fmt:'dec2',dir:'-'}
-      ]],
-      ["B · Top-Line Financial", [
-        {label:"Revenue",             v:[394208,1386419,869824,1391455], fmt:'money',dir:'hi'},
-        {label:"Net Profit",          v:[106309,751270,332960,533274],   fmt:'money',dir:'hi'},
-        {label:"Direct Cost",         v:[287899,635149,536863,858181],   fmt:'money',dir:'-'},
-        {label:"Gross Margin",        v:[0.270,0.542,0.383,0.383],       fmt:'pct', dir:'hi'},
-        {label:"Change Orders",       v:[9308,-83381,56774,0],           fmt:'moneyS',dir:'-'},
-        {label:"Retainage",           v:[19710,69321,43491,69573],       fmt:'money',dir:'-'}
-      ]],
-      ["C · Per-Unit Economics", [
-        {label:"Revenue / Unit",      v:[2346,8403,7434,8537],           fmt:'money',dir:'hi'},
-        {label:"Profit / Unit",       v:[633,4553,2846,3272],            fmt:'money',dir:'hi'},
-        {label:"Direct Cost / Unit",  v:[1714,3849,4589,5265],           fmt:'money',dir:'lo'},
-        {label:"Labor Cost / Unit",   v:[504,1230,1221,1787],            fmt:'money',dir:'lo'},
-        {label:"Material Cost / Unit",v:[899,1718,2521,2397],            fmt:'money',dir:'lo'},
-        {label:"Hours / Unit",        v:[24.5,62.2,59.4,89.6],           fmt:'dec1',dir:'lo'}
-      ]],
-      ["D · Per-Fixture Economics", [
-        {label:"Revenue / Fixture",   v:[485,1727,1474,1705],            fmt:'money',dir:'hi'},
-        {label:"Profit / Fixture",    v:[131,936,564,654],               fmt:'money',dir:'hi'},
-        {label:"Direct Cost / Fixture",v:[355,791,910,1052],             fmt:'money',dir:'lo'},
-        {label:"Labor / Fixture",     v:[104,253,242,357],               fmt:'money',dir:'lo'},
-        {label:"Material / Fixture",  v:[186,353,500,479],               fmt:'money',dir:'lo'},
-        {label:"Hours / Fixture",     v:[5.07,12.78,11.77,17.90],        fmt:'dec2',dir:'lo'}
-      ]],
-      ["E · Labor & Productivity", [
-        {label:"Total Labor Hours",   v:[4116,10260,6944,14607],         fmt:'int', dir:'-'},
-        {label:"Total Workers",       v:[23,22,31,28],                   fmt:'int', dir:'-'},
-        {label:"Blended Gross Wage",  v:[20.58,19.78,20.58,19.94],       fmt:'money2',dir:'-'},
-        {label:"Fully-Loaded Wage",   v:[30.51,29.86,31.08,30.12],       fmt:'money2',dir:'-'},
-        {label:"Revenue / Hour",      v:[95.77,135.13,125.26,95.26],     fmt:'money2',dir:'hi'},
-        {label:"Profit / Hour",       v:[25.83,73.22,47.95,36.51],       fmt:'money2',dir:'hi'},
-        {label:"Hours / Worker",      v:[179,466,224,522],               fmt:'int', dir:'-'}
-      ]],
-      ["F · Cost Mix (% of Revenue)", [
-        {label:"Labor % of Revenue",  v:[0.215,0.146,0.164,0.209],       fmt:'pct', dir:'lo'},
-        {label:"Material % of Revenue",v:[0.383,0.204,0.339,0.281],      fmt:'pct', dir:'lo'},
-        {label:"Overhead % of Revenue",v:[0.0285,0.0327,0.0301,0.0198],  fmt:'pct2',dir:'lo'},
-        {label:"Burden % of Revenue", v:[0.104,0.075,0.084,0.107],       fmt:'pct', dir:'lo'},
-        {label:"Labor : Material Ratio",v:[0.56,0.72,0.48,0.75],         fmt:'dec2',dir:'-'}
-      ]],
-      ["G · Throughput (per month)", [
-        {label:"Revenue / Month",     v:[24638,57767,51166,81850],       fmt:'money',dir:'hi'},
-        {label:"Units / Month",       v:[10.5,6.9,6.9,9.6],              fmt:'dec1',dir:'hi'},
-        {label:"Fixtures / Month",    v:[50.8,33.5,34.7,48.0],           fmt:'dec1',dir:'hi'},
-        {label:"Hours / Month",       v:[257,428,408,859],               fmt:'int', dir:'-'},
-        {label:"Profit / Month",      v:[6644,31303,19586,31369],        fmt:'money',dir:'hi'}
-      ]]
-    ]
-  };
+  // Metric definitions — `get` is called per project to derive the value.
+  // Adding a project to PROJECT_ORDER auto-extends every column in the table.
+  const BENCH_METRICS = [
+    ["A · Project Scale", [
+      {label:"Unit Count",            get:p=>p.num.units,                                fmt:'int',   dir:'-'},
+      {label:"Total Fixtures",        get:p=>p.num.fixtures,                             fmt:'int',   dir:'-'},
+      {label:"Duration (months)",     get:p=>p.num.months,                               fmt:'int',   dir:'lo'},
+      {label:"Fixtures / Unit",       get:p=>p.num.fixtures/p.num.units,                 fmt:'dec2',  dir:'-'}
+    ]],
+    ["B · Top-Line Financial", [
+      {label:"Revenue",               get:p=>p.num.revenue,                              fmt:'money', dir:'hi'},
+      {label:"Net Profit",            get:p=>p.num.profit,                               fmt:'money', dir:'hi'},
+      {label:"Direct Cost",           get:p=>p.num.directCost,                           fmt:'money', dir:'-'},
+      {label:"Gross Margin",          get:p=>p.num.profit/p.num.revenue,                 fmt:'pct',   dir:'hi'},
+      {label:"Change Orders",         get:p=>p.num.co,                                   fmt:'moneyS',dir:'-'},
+      {label:"Retainage",             get:p=>p.num.retainage,                            fmt:'money', dir:'-'}
+    ]],
+    ["C · Per-Unit Economics", [
+      {label:"Revenue / Unit",        get:p=>p.num.revenue/p.num.units,                  fmt:'money', dir:'hi'},
+      {label:"Profit / Unit",         get:p=>p.num.profit/p.num.units,                   fmt:'money', dir:'hi'},
+      {label:"Direct Cost / Unit",    get:p=>p.num.directCost/p.num.units,               fmt:'money', dir:'lo'},
+      {label:"Labor Cost / Unit",     get:p=>p.num.labor/p.num.units,                    fmt:'money', dir:'lo'},
+      {label:"Material Cost / Unit",  get:p=>p.num.material/p.num.units,                 fmt:'money', dir:'lo'},
+      {label:"Hours / Unit",          get:p=>p.num.hours/p.num.units,                    fmt:'dec1',  dir:'lo'}
+    ]],
+    ["D · Per-Fixture Economics", [
+      {label:"Revenue / Fixture",     get:p=>p.num.revenue/p.num.fixtures,               fmt:'money', dir:'hi'},
+      {label:"Profit / Fixture",      get:p=>p.num.profit/p.num.fixtures,                fmt:'money', dir:'hi'},
+      {label:"Direct Cost / Fixture", get:p=>p.num.directCost/p.num.fixtures,            fmt:'money', dir:'lo'},
+      {label:"Labor / Fixture",       get:p=>p.num.labor/p.num.fixtures,                 fmt:'money', dir:'lo'},
+      {label:"Material / Fixture",    get:p=>p.num.material/p.num.fixtures,              fmt:'money', dir:'lo'},
+      {label:"Hours / Fixture",       get:p=>p.num.hours/p.num.fixtures,                 fmt:'dec2',  dir:'lo'}
+    ]],
+    ["E · Labor & Productivity", [
+      {label:"Total Labor Hours",     get:p=>p.num.hours,                                fmt:'int',   dir:'-'},
+      {label:"Total Workers",         get:p=>p.num.workers,                              fmt:'int',   dir:'-'},
+      {label:"Blended Gross Wage",    get:p=>p.num.labor/p.num.hours,                    fmt:'money2',dir:'-'},
+      {label:"Fully-Loaded Wage",     get:p=>(p.num.labor+p.num.burden)/p.num.hours,     fmt:'money2',dir:'-'},
+      {label:"Revenue / Hour",        get:p=>p.num.revenue/p.num.hours,                  fmt:'money2',dir:'hi'},
+      {label:"Profit / Hour",         get:p=>p.num.profit/p.num.hours,                   fmt:'money2',dir:'hi'},
+      {label:"Hours / Worker",        get:p=>p.num.hours/p.num.workers,                  fmt:'int',   dir:'-'}
+    ]],
+    ["F · Cost Mix (% of Revenue)", [
+      {label:"Labor % of Revenue",    get:p=>p.num.labor/p.num.revenue,                  fmt:'pct',   dir:'lo'},
+      {label:"Material % of Revenue", get:p=>p.num.material/p.num.revenue,               fmt:'pct',   dir:'lo'},
+      {label:"Overhead % of Revenue", get:p=>p.num.overhead/p.num.revenue,               fmt:'pct2',  dir:'lo'},
+      {label:"Burden % of Revenue",   get:p=>p.num.burden/p.num.revenue,                 fmt:'pct',   dir:'lo'},
+      {label:"Labor : Material Ratio",get:p=>p.num.labor/p.num.material,                 fmt:'dec2',  dir:'-'}
+    ]],
+    ["G · Throughput (per month)", [
+      {label:"Revenue / Month",       get:p=>p.num.revenue/p.num.months,                 fmt:'money', dir:'hi'},
+      {label:"Units / Month",         get:p=>p.num.units/p.num.months,                   fmt:'dec1',  dir:'hi'},
+      {label:"Fixtures / Month",      get:p=>p.num.fixtures/p.num.months,                fmt:'dec1',  dir:'hi'},
+      {label:"Hours / Month",         get:p=>p.num.hours/p.num.months,                   fmt:'int',   dir:'-'},
+      {label:"Profit / Month",        get:p=>p.num.profit/p.num.months,                  fmt:'money', dir:'hi'}
+    ]]
+  ];
+
+  // Build the legacy BENCH shape (head + groups[].rows[].v[]) so renderBench
+  // and the CSV exporter don't need to change.
+  function buildBench(){
+    const head = ["Metric", ...PROJECT_ORDER.map(id => {
+      const p = PROJECTS[id];
+      // Short column header: "2001 230 Bway"
+      const short = p.skyName.replace(/\s+/g,' ').toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+      return `${id} ${short}`;
+    }), "Average"];
+    const groups = BENCH_METRICS.map(([label, rows]) => [label, rows.map(r => ({
+      label: r.label,
+      v: PROJECT_ORDER.map(id => r.get(PROJECTS[id])),
+      fmt: r.fmt,
+      dir: r.dir
+    }))]);
+    return { head, groups };
+  }
+  const BENCH = buildBench();
   function renderBench(){
     const cont = document.getElementById('bench-table'); if(!cont) return;
-    const colPct = 14.5; // 4 projects + avg at 14.5% each, metric col = 42%
+    const numProjects = PROJECT_ORDER.length;
+    const totalCols = 1 + numProjects + 1; // metric + projects + average
+    // Metric col gets ~27%, projects + average split the rest
+    const metricPct = 27;
+    const colPct = (100 - metricPct) / (numProjects + 1);
     let html = '<table class="bench-table" style="width:100%;table-layout:fixed;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;">';
     html += '<colgroup>';
-    html += '<col style="width:27%"/>';
-    for(let i=0;i<4;i++) html += `<col style="width:${colPct}%"/>`;
+    html += `<col style="width:${metricPct}%"/>`;
+    for(let i=0;i<numProjects;i++) html += `<col style="width:${colPct}%"/>`;
     html += `<col style="width:${colPct}%"/>`;
     html += '</colgroup>';
     html += '<thead><tr>';
@@ -2907,7 +3004,7 @@
     });
     html += '</tr></thead><tbody>';
     BENCH.groups.forEach(([label,rows])=>{
-      html += `<tr><td colspan="6" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);padding-top:22px;padding-bottom:6px;border-bottom:1px solid var(--border);">${label}</td></tr>`;
+      html += `<tr><td colspan="${totalCols}" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);padding-top:22px;padding-bottom:6px;border-bottom:1px solid var(--border);">${label}</td></tr>`;
       rows.forEach(r=>{
         const nums = r.v;
         const fmt = fmtNum[r.fmt];
@@ -2996,12 +3093,54 @@
     </div>`;
   }
   function renderPortfolio(){
-    const order = ["2009","2010","2011","2012"];
-    const html = order.map(portfolioCardHTML).join('');
+    const html = PROJECT_ORDER.map(portfolioCardHTML).join('');
     const a = document.getElementById('portfolio-grid'); if(a) a.innerHTML = html;
     const b = document.getElementById('home-portfolio-grid'); if(b) b.innerHTML = html;
   }
   renderPortfolio();
+
+  /* ============ SIDEBAR PROJECTS ============ */
+  function renderSidebar(){
+    const cont = document.getElementById('sidebar-projects'); if(!cont) return;
+    cont.innerHTML = PROJECT_ORDER.map(id => {
+      const p = PROJECTS[id];
+      const gcWord = p.gcShort.split(' ')[0];
+      return `<div class="sb-project" data-project="${id}">
+        <div class="sb-pnum">JOB #${id}</div>
+        <div class="sb-pname"><b>${p.jobTop}</b> <span class="serif-it">${p.sbName}</span></div>
+        <div class="sb-psub">${gcWord} · Seattle · ${p.num.units}u</div>
+      </div>`;
+    }).join('');
+    // Re-attach click handlers since the elements were just rebuilt
+    cont.querySelectorAll('.sb-project').forEach(el => {
+      el.addEventListener('click', () => { applyProject(el.dataset.project); document.body.classList.remove('nav-open'); });
+    });
+  }
+  renderSidebar();
+
+  /* ============ PORTFOLIO TOTALS INJECTOR ============ */
+  // Replaces hardcoded "4 jobs · 613 units · $4.04m" type strings on load.
+  function injectTotals(){
+    const set = (sel, val) => document.querySelectorAll(sel).forEach(el => el.textContent = val);
+    const setHtml = (sel, val) => document.querySelectorAll(sel).forEach(el => el.innerHTML = val);
+    set('[data-tot="jobs"]',         TOTALS.jobs);
+    set('[data-tot="revenue"]',      fmtMoneyFull(TOTALS.revenue));
+    set('[data-tot="revenueShort"]', fmtMoneyShort(TOTALS.revenue).replace('M','m'));
+    set('[data-tot="profit"]',       fmtMoneyFull(TOTALS.profit));
+    set('[data-tot="profitShort"]',  fmtMoneyShort(TOTALS.profit));
+    set('[data-tot="margin"]',       fmtPct(TOTALS.margin));
+    set('[data-tot="units"]',        fmtInt(TOTALS.units));
+    set('[data-tot="fixtures"]',     fmtInt(TOTALS.fixtures));
+    set('[data-tot="hours"]',        fmtInt(TOTALS.hours));
+    set('[data-tot="workers"]',      fmtInt(TOTALS.workers));
+    setHtml('[data-tot="skylineCorner"]',
+      `${TOTALS.jobs} jobs · ${fmtInt(TOTALS.units)} units · ${fmtMoneyShort(TOTALS.revenue).replace('M','m')}`);
+    setHtml('[data-tot="profitFoot"]',  `${fmtPct(TOTALS.margin)} blended margin`);
+    setHtml('[data-tot="revenueFoot"]', `across ${TOTALS.jobs} closed jobs`);
+    setHtml('[data-tot="unitsFoot"]',   `${fmtInt(TOTALS.fixtures)} plumbing fixtures`);
+    setHtml('[data-tot="hoursFoot"]',   `${TOTALS.workers} unique workers`);
+  }
+  injectTotals();
 </script>
 </body>
 </html>
