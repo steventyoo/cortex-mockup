@@ -312,6 +312,50 @@
   }
   .insight-body { font-size: 12px; color: var(--ink-2); line-height: 1.55; }
 
+  /* Bid Intelligence — assumption inputs */
+  .bid-input {
+    width: 100%;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    padding: 12px 14px;
+    background: var(--cream-card);
+    border: 1px solid var(--border-2);
+    border-radius: 10px;
+    color: var(--ink);
+    outline: none;
+    font-weight: 600;
+    box-sizing: border-box;
+  }
+  .bid-input:focus { border-color: var(--ink); }
+  select.bid-input { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%231F1E1D' stroke-width='1.6'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .bid-slider {
+    width: 100%;
+    margin-top: 18px;
+    -webkit-appearance: none; appearance: none;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+  }
+  .bid-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px;
+    background: var(--ink);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+  .bid-slider::-moz-range-thumb {
+    width: 18px; height: 18px;
+    background: var(--ink);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+
   .bench-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 22px;
   }
@@ -2128,8 +2172,8 @@
         </div>
         <div class="col-span-3">
           <div class="hero-lab">General Contractor</div>
-          <div class="text-[20px] font-semibold mt-2" style="color: var(--ink);">Chinn Construction</div>
-          <div class="mt-1 text-[12px]" style="color: var(--sage-ink);">✓ Known GC · 4 closed jobs in portfolio</div>
+          <div class="text-[20px] font-semibold mt-2" style="color: var(--ink);" id="bid-banner-gc">Chinn Construction</div>
+          <div class="mt-1 text-[12px]" style="color: var(--sage-ink);" id="bid-banner-gc-tag">✓ Known GC · 4 closed jobs in portfolio</div>
           <div class="mt-4 hero-lab">Bid due</div>
           <div class="text-[20px] font-semibold mt-2 tabular" style="color: var(--ink);">Apr 19 · 5pm</div>
           <div class="mt-1 text-[12px]" style="color: var(--clay);">11 days remaining</div>
@@ -2137,13 +2181,67 @@
         <div class="col-span-4">
           <div class="hero-lab">Scope estimate (auto-parsed)</div>
           <table class="modal-table mt-2" style="font-size: 12px;">
-            <tr><td>Predicted units</td><td class="num">220</td></tr>
-            <tr><td>Predicted fixtures</td><td class="num">1,118</td></tr>
-            <tr><td>Fixtures / unit</td><td class="num">5.08</td></tr>
-            <tr><td>Schedule (months)</td><td class="num">22</td></tr>
+            <tr><td>Predicted units</td><td class="num" id="bid-scope-units">220</td></tr>
+            <tr><td>Predicted fixtures</td><td class="num" id="bid-scope-fixtures">1,118</td></tr>
+            <tr><td>Fixtures / unit</td><td class="num" id="bid-scope-fpu">5.08</td></tr>
+            <tr><td>Schedule (months)</td><td class="num" id="bid-scope-months">22</td></tr>
             <tr><td>Stories above grade</td><td class="num">7</td></tr>
           </table>
         </div>
+      </div>
+    </div>
+
+    <!-- Assumptions card -->
+    <div class="meta-bar mt-12 mb-4">Adjust assumptions <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 11px;">— everything below recomputes live</span></div>
+    <div class="card" id="bid-assumptions-card" style="padding: 28px 32px;">
+      <div class="grid grid-cols-4 gap-6">
+        <div>
+          <div class="hero-lab">Units</div>
+          <input type="number" id="bid-units" value="220" min="20" max="600" step="1" class="bid-input" />
+        </div>
+        <div>
+          <div class="hero-lab">Fixtures / unit</div>
+          <input type="number" id="bid-fpu" value="5.08" min="2" max="10" step="0.05" class="bid-input" />
+        </div>
+        <div>
+          <div class="hero-lab">Schedule (months)</div>
+          <input type="number" id="bid-months" value="22" min="6" max="48" step="1" class="bid-input" />
+        </div>
+        <div>
+          <div class="hero-lab">Cost per fixture (base)</div>
+          <input type="number" id="bid-cpf" value="2112" min="1000" max="3500" step="25" class="bid-input" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-6 mt-6">
+        <div>
+          <div class="hero-lab">General contractor</div>
+          <select id="bid-gc" class="bid-input">
+            <option value="chinn">Chinn — 4 jobs · 39.8% blended</option>
+            <option value="exxel">Exxel — 2 jobs · 34.0% blended</option>
+            <option value="new">New / unknown — no history</option>
+          </select>
+        </div>
+        <div>
+          <div class="hero-lab">Margin floor — <span id="bid-margin-display" class="tabular" style="color: var(--ink); font-weight: 700;">32.0%</span></div>
+          <input type="range" id="bid-margin" value="32" min="22" max="48" step="0.5" class="bid-slider" />
+          <div class="flex justify-between text-[10px] mt-1" style="color: var(--ink-4);"><span>22%</span><span>48%</span></div>
+        </div>
+        <div>
+          <div class="hero-lab">Contingency reserve — <span id="bid-cont-display" class="tabular" style="color: var(--ink); font-weight: 700;">3.0%</span></div>
+          <input type="range" id="bid-cont" value="3" min="0" max="10" step="0.5" class="bid-slider" />
+          <div class="flex justify-between text-[10px] mt-1" style="color: var(--ink-4);"><span>0%</span><span>10%</span></div>
+        </div>
+        <div>
+          <div class="hero-lab">Material escalation — <span id="bid-esc-display" class="tabular" style="color: var(--ink); font-weight: 700;">0.0%</span></div>
+          <input type="range" id="bid-esc" value="0" min="0" max="10" step="0.5" class="bid-slider" />
+          <div class="flex justify-between text-[10px] mt-1" style="color: var(--ink-4);"><span>0%</span><span>10%</span></div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-5 flex items-center justify-between flex-wrap gap-3" style="border-top: 1px dashed var(--border-2);">
+        <div class="text-[11px]" style="color: var(--ink-4);">All downstream tables (cost prediction, GC scorecard, SOV) update live as you change inputs.</div>
+        <button id="bid-reset" class="text-[11px] font-semibold tracking-wider uppercase" style="background: transparent; color: var(--ink-3); border: 1px solid var(--border-2); padding: 8px 14px; border-radius: 999px; cursor: pointer;">Reset to Cortex defaults</button>
       </div>
     </div>
 
@@ -2159,13 +2257,13 @@
             Bid this job <span class="serif-it">— at the floor.</span>
           </div>
           <div class="mt-3 text-[14px]" style="color: var(--ink-2); line-height: 1.6; max-width: 720px;">
-            Strong scope match (91% to Job #2001) and a known GC with healthy CO history make this a take. Predicted direct cost is <b>$2,431,000 ± $148,000</b>. Margin floor is <b>32.0%</b> based on Chinn's blended history — bid <b>$3,575,000</b> minimum. Anything below 30% leaves no cushion for the labor-tier risk flagged below.
+            Strong scope match (91% to Job #2001) and a known GC with healthy CO history make this a take. Predicted direct cost is <b><span id="bid-banner-cost">$2,431,000</span> ± <span id="bid-banner-band">$148,000</span></b>. Margin floor is <b><span id="bid-banner-margin">32.0%</span></b> based on <span id="bid-banner-margin-source">Chinn's</span> blended history — bid <b><span id="bid-banner-bid">$3,575,000</span></b> minimum.
           </div>
         </div>
         <div style="text-align: right; flex-shrink: 0;">
           <div class="hero-lab">Recommended bid</div>
-          <div class="text-[36px] font-semibold tabular mt-1" style="color: var(--sage-ink);">$3,575,000</div>
-          <div class="text-[12px] mt-1" style="color: var(--ink-3);">32.0% margin · $1,144,000 profit</div>
+          <div class="text-[36px] font-semibold tabular mt-1" style="color: var(--sage-ink);" id="bid-banner-bid-large">$3,575,000</div>
+          <div class="text-[12px] mt-1" style="color: var(--ink-3);"><span id="bid-banner-margin2">32.0%</span> margin · <span id="bid-banner-profit">$1,144,000</span> profit</div>
         </div>
       </div>
     </div>
@@ -2227,19 +2325,7 @@
               <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">% of total</th>
             </tr>
           </thead>
-          <tbody>
-            <tr><td>Direct labor</td><td class="num">$535,000</td><td class="num" style="color: var(--ink-3);">$498k → $578k</td><td class="num">22.0%</td></tr>
-            <tr><td>Material</td><td class="num">$1,228,000</td><td class="num" style="color: var(--ink-3);">$1.16M → $1.31M</td><td class="num">50.5%</td></tr>
-            <tr><td>Burden &amp; payroll tax</td><td class="num">$214,000</td><td class="num" style="color: var(--ink-3);">$199k → $231k</td><td class="num">8.8%</td></tr>
-            <tr><td>Overhead allocation</td><td class="num">$78,000</td><td class="num" style="color: var(--ink-3);">$72k → $86k</td><td class="num">3.2%</td></tr>
-            <tr><td>Equipment + small tools</td><td class="num">$54,000</td><td class="num" style="color: var(--ink-3);">$48k → $62k</td><td class="num">2.2%</td></tr>
-            <tr><td>Subcontract (concrete cut, scan)</td><td class="num">$32,000</td><td class="num" style="color: var(--ink-3);">$26k → $40k</td><td class="num">1.3%</td></tr>
-            <tr><td>Bond + insurance</td><td class="num">$45,000</td><td class="num" style="color: var(--ink-3);">$42k → $51k</td><td class="num">1.9%</td></tr>
-            <tr><td>Contingency reserve (3%)</td><td class="num">$73,000</td><td class="num" style="color: var(--ink-3);">—</td><td class="num">3.0%</td></tr>
-            <tr style="border-top: 1.5px solid var(--ink); font-weight: 600;"><td>Predicted direct cost</td><td class="num">$2,431,000</td><td class="num" style="color: var(--clay);">$2.28M → $2.58M</td><td class="num">100%</td></tr>
-            <tr style="font-weight: 600;"><td>Margin @ floor (32.0%)</td><td class="num" style="color: var(--sage-ink);">$1,144,000</td><td class="num"></td><td class="num"></td></tr>
-            <tr style="font-weight: 700; background: var(--cream-soft);"><td>Recommended bid</td><td class="num">$3,575,000</td><td class="num"></td><td class="num"></td></tr>
-          </tbody>
+          <tbody id="bid-cost-tbody"><!-- populated by renderBid() --></tbody>
         </table>
       </div>
       <div class="col-span-5">
@@ -2252,20 +2338,20 @@
           <div class="kpi-row"><span class="kpi-lbl">Analog count</span><span class="kpi-val">4 closed jobs</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Best analog match</span><span class="kpi-val">91% (Job #2001)</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Cost-per-fixture σ</span><span class="kpi-val">6.1%</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Margin floor source</span><span class="kpi-val">Chinn blended (4 jobs)</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Walk-away threshold</span><span class="kpi-val" style="color: var(--clay);">&lt; 28.0%</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Win-rate at floor</span><span class="kpi-val">est. 41%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Margin floor source</span><span class="kpi-val" id="bid-margin-source">Chinn blended (4 jobs)</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Walk-away threshold</span><span class="kpi-val" id="bid-walk-away" style="color: var(--clay);">&lt; 28.0%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Win-rate at floor</span><span class="kpi-val" id="bid-win-rate">est. 41%</span></div>
         </div>
       </div>
     </div>
 
     <!-- GC scorecard -->
-    <div class="meta-bar mt-14 mb-4">C · GC scorecard — Chinn Construction</div>
+    <div class="meta-bar mt-14 mb-4" id="bid-gc-title">C · GC scorecard — Chinn Construction</div>
     <div class="grid grid-cols-4 gap-5">
-      <div class="card"><div class="card-label">Closed jobs</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);">4</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">#2008, #2009, #2010, #2011</div></div>
-      <div class="card"><div class="card-label">Blended margin</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);">39.8%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">vs 38.3% portfolio avg</div></div>
-      <div class="card"><div class="card-label">Avg payment lag</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);">47d</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">industry median 58d</div></div>
-      <div class="card"><div class="card-label">CO approval rate</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);">78%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">11 of 14 submitted, 4 jobs</div></div>
+      <div class="card"><div class="card-label">Closed jobs</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);" id="bid-gc-jobs">4</div><div class="text-[12px] mt-1" style="color: var(--ink-3);" id="bid-gc-projects">#2008, #2009, #2010, #2011</div></div>
+      <div class="card"><div class="card-label">Blended margin</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);" id="bid-gc-margin">39.8%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">vs 38.3% portfolio avg</div></div>
+      <div class="card"><div class="card-label">Avg payment lag</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);" id="bid-gc-paylag">47d</div><div class="text-[12px] mt-1" style="color: var(--ink-3);" id="bid-gc-paylag-delta">industry median 58d</div></div>
+      <div class="card"><div class="card-label">CO approval rate</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);" id="bid-gc-corate">78%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);" id="bid-gc-co-detail">11 of 14 submitted, 4 jobs</div></div>
     </div>
 
     <div class="mt-6 p-6 rounded-xl" style="background: var(--cream-soft); border: 1px dashed var(--border-2);">
@@ -2312,24 +2398,12 @@
         <tr style="border-bottom: 1px solid var(--border-2);">
           <th style="text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Phase</th>
           <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Cost</th>
-          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Value (32% margin)</th>
+          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;" id="bid-sov-margin-header">Value (32.0% margin)</th>
           <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">% of bid</th>
           <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Source</th>
         </tr>
       </thead>
-      <tbody>
-        <tr><td>Mobilization &amp; submittals</td><td class="num">$48,000</td><td class="num">$71,000</td><td class="num">2.0%</td><td class="num" style="color: var(--ink-4);">avg of 4</td></tr>
-        <tr><td>Underground rough-in</td><td class="num">$316,000</td><td class="num">$465,000</td><td class="num">13.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
-        <tr><td>Slab rough-in</td><td class="num">$268,000</td><td class="num">$393,000</td><td class="num">11.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
-        <tr><td>Stack risers (storm + waste)</td><td class="num">$220,000</td><td class="num">$322,000</td><td class="num">9.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
-        <tr><td>Top-out (DWV + water)</td><td class="num">$486,000</td><td class="num">$715,000</td><td class="num">20.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
-        <tr><td>Trim &amp; fixtures</td><td class="num">$413,000</td><td class="num">$608,000</td><td class="num">17.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
-        <tr><td>Test &amp; inspection</td><td class="num">$98,000</td><td class="num">$143,000</td><td class="num">4.0%</td><td class="num" style="color: var(--ink-4);">#2001 ratio</td></tr>
-        <tr><td>Storm &amp; site connection</td><td class="num">$268,000</td><td class="num">$393,000</td><td class="num">11.0%</td><td class="num" style="color: var(--ink-4);">spec carve-out</td></tr>
-        <tr><td>Commercial / retail rough &amp; trim</td><td class="num">$220,000</td><td class="num">$322,000</td><td class="num">9.0%</td><td class="num" style="color: var(--ink-4);">spec carve-out</td></tr>
-        <tr><td>Closeout (as-builts, O&amp;M)</td><td class="num">$94,000</td><td class="num">$143,000</td><td class="num">4.0%</td><td class="num" style="color: var(--ink-4);">avg of 4</td></tr>
-        <tr style="border-top: 1.5px solid var(--ink); font-weight: 700;"><td>Total</td><td class="num">$2,431,000</td><td class="num">$3,575,000</td><td class="num">100%</td><td></td></tr>
-      </tbody>
+      <tbody id="bid-sov-tbody"><!-- populated by renderBid() --></tbody>
     </table>
 
     <!-- Action row -->
@@ -2338,8 +2412,8 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         Accept floor &amp; build bid package
       </button>
-      <button class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[12px] font-semibold tracking-wider uppercase" style="background: var(--cream-card); color: var(--ink); border: 1px solid var(--border-2);">
-        Adjust assumptions
+      <button onclick="document.getElementById('bid-assumptions-card').scrollIntoView({behavior:'smooth', block:'start'});" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[12px] font-semibold tracking-wider uppercase" style="background: var(--cream-card); color: var(--ink); border: 1px solid var(--border-2); cursor: pointer;">
+        Adjust assumptions ↑
       </button>
       <button class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[12px] font-semibold tracking-wider uppercase" style="background: transparent; color: var(--ink-3); border: 1px solid var(--border-2);">
         Walk away
@@ -3992,6 +4066,186 @@
     setHtml('[data-tot="hoursFoot"]',   `${TOTALS.workers} unique workers`);
   }
   injectTotals();
+
+  /* ============ BID INTELLIGENCE — interactive assumptions ============ */
+  const GC_DB = {
+    chinn: { name: 'Chinn Construction',  jobs: 4, blendedMargin: 39.8, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 78, coDetail: '11 of 14 submitted, 4 jobs',  projects: '#2008, #2009, #2010, #2011', source: "Chinn blended (4 jobs)",  winRate: 41, knownTag: '✓ Known GC · 4 closed jobs in portfolio' },
+    exxel: { name: 'Exxel Pacific',       jobs: 2, blendedMargin: 34.0, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '8 of 12 submitted, 2 jobs',   projects: '#2001, #2012',               source: "Exxel blended (2 jobs)",  winRate: 38, knownTag: '✓ Known GC · 2 closed jobs in portfolio' },
+    'new': { name: 'Unknown / new GC',    jobs: 0, blendedMargin: 38.3, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',           source: 'portfolio average',        winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
+  };
+
+  // Cost component % of BASE direct cost (excluding contingency + escalation). Sums to 100.
+  const COST_COMPONENTS = [
+    { label: 'Direct labor',                          pct: 24.5 },
+    { label: 'Material',                              pct: 56.2 },
+    { label: 'Burden &amp; payroll tax',              pct: 9.8  },
+    { label: 'Overhead allocation',                   pct: 3.6  },
+    { label: 'Equipment + small tools',               pct: 2.4  },
+    { label: 'Subcontract (concrete cut, scan)',      pct: 1.5  },
+    { label: 'Bond + insurance',                      pct: 2.0  }
+  ];
+
+  // SOV phases as % of total bid. Sums to 100.
+  const SOV_PHASES = [
+    { label: 'Mobilization &amp; submittals',           pct: 2.0,  src: 'avg of 4'      },
+    { label: 'Underground rough-in',                    pct: 13.0, src: '#2001 ratio'   },
+    { label: 'Slab rough-in',                           pct: 11.0, src: '#2001 ratio'   },
+    { label: 'Stack risers (storm + waste)',            pct: 9.0,  src: '#2001 ratio'   },
+    { label: 'Top-out (DWV + water)',                   pct: 20.0, src: '#2001 ratio'   },
+    { label: 'Trim &amp; fixtures',                     pct: 17.0, src: '#2001 ratio'   },
+    { label: 'Test &amp; inspection',                   pct: 4.0,  src: '#2001 ratio'   },
+    { label: 'Storm &amp; site connection',             pct: 11.0, src: 'spec carve-out'},
+    { label: 'Commercial / retail rough &amp; trim',    pct: 9.0,  src: 'spec carve-out'},
+    { label: 'Closeout (as-builts, O&amp;M)',           pct: 4.0,  src: 'avg of 4'      }
+  ];
+
+  const BID_DEFAULTS = { units: 220, fpu: 5.08, months: 22, cpf: 2112, gc: 'chinn', margin: 32.0, cont: 3.0, esc: 0.0 };
+  let BID = Object.assign({}, BID_DEFAULTS);
+
+  function bidFmtMoney(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+  function bidFmtMoneyK(v) {
+    if (Math.abs(v) >= 1000000) return '$' + (v/1000000).toFixed(2) + 'M';
+    return '$' + Math.round(v/1000).toLocaleString('en-US') + 'k';
+  }
+  function bidFmtMoneyM(v) { return '$' + (v/1000000).toFixed(2) + 'M'; }
+  function bidFmtPct(v) { return v.toFixed(1) + '%'; }
+  function bidFmtInt(v) { return Math.round(v).toLocaleString('en-US'); }
+
+  function computeBid() {
+    const totalFixtures = BID.units * BID.fpu;
+    const baseDirect    = totalFixtures * BID.cpf;
+    const contingency   = baseDirect * BID.cont / 100;
+    const escalation    = baseDirect * BID.esc  / 100;
+    const totalCost     = baseDirect + contingency + escalation;
+    // Recommended bid such that profit / bid = margin/100  →  bid = totalCost / (1 - margin/100)
+    const denom = 1 - BID.margin / 100;
+    const recommendedBid = denom > 0 ? totalCost / denom : totalCost * 10;
+    const profit = recommendedBid - totalCost;
+    const p10 = totalCost * 0.939;
+    const p90 = totalCost * 1.061;
+    return { totalFixtures, baseDirect, contingency, escalation, totalCost, recommendedBid, profit, p10, p90 };
+  }
+
+  function renderBid() {
+    const c  = computeBid();
+    const gc = GC_DB[BID.gc];
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    const setHtml = (id, v) => { const el = document.getElementById(id); if (el) el.innerHTML = v; };
+
+    // Assumption display labels
+    set('bid-margin-display', bidFmtPct(BID.margin));
+    set('bid-cont-display',   bidFmtPct(BID.cont));
+    set('bid-esc-display',    bidFmtPct(BID.esc));
+
+    // Invitation snapshot — scope estimate
+    set('bid-scope-units',    BID.units.toLocaleString('en-US'));
+    set('bid-scope-fixtures', bidFmtInt(c.totalFixtures));
+    set('bid-scope-fpu',      BID.fpu.toFixed(2));
+    set('bid-scope-months',   BID.months);
+
+    // Invitation snapshot — GC
+    set('bid-banner-gc',     gc.name);
+    set('bid-banner-gc-tag', gc.knownTag);
+    const gcTagEl = document.getElementById('bid-banner-gc-tag');
+    if (gcTagEl) gcTagEl.style.color = (BID.gc === 'new') ? 'var(--clay)' : 'var(--sage-ink)';
+
+    // Recommendation banner
+    set('bid-banner-cost',          bidFmtMoney(c.totalCost));
+    set('bid-banner-band',          bidFmtMoney((c.p90 - c.p10) / 2));
+    set('bid-banner-margin',        bidFmtPct(BID.margin));
+    set('bid-banner-margin-source', gc.name.split(' ')[0] + "'s");
+    set('bid-banner-bid',           bidFmtMoney(c.recommendedBid));
+    set('bid-banner-bid-large',     bidFmtMoney(c.recommendedBid));
+    set('bid-banner-margin2',       bidFmtPct(BID.margin));
+    set('bid-banner-profit',        bidFmtMoney(c.profit));
+
+    // Cost prediction tbody
+    let costRows = '';
+    COST_COMPONENTS.forEach(comp => {
+      const dollars = c.baseDirect * comp.pct / 100;
+      const low  = dollars * 0.935;
+      const high = dollars * 1.065;
+      const pctOfTotal = c.totalCost > 0 ? (dollars / c.totalCost) * 100 : 0;
+      costRows += `<tr><td>${comp.label}</td><td class="num">${bidFmtMoney(dollars)}</td><td class="num" style="color: var(--ink-3);">${bidFmtMoneyK(low)} → ${bidFmtMoneyK(high)}</td><td class="num">${pctOfTotal.toFixed(1)}%</td></tr>`;
+    });
+    if (BID.cont > 0) {
+      const pctOfTotal = (c.contingency / c.totalCost) * 100;
+      costRows += `<tr><td>Contingency reserve (${bidFmtPct(BID.cont)})</td><td class="num">${bidFmtMoney(c.contingency)}</td><td class="num" style="color: var(--ink-3);">—</td><td class="num">${pctOfTotal.toFixed(1)}%</td></tr>`;
+    }
+    if (BID.esc > 0) {
+      const pctOfTotal = (c.escalation / c.totalCost) * 100;
+      costRows += `<tr><td>Material escalation reserve (${bidFmtPct(BID.esc)})</td><td class="num">${bidFmtMoney(c.escalation)}</td><td class="num" style="color: var(--ink-3);">—</td><td class="num">${pctOfTotal.toFixed(1)}%</td></tr>`;
+    }
+    costRows += `<tr style="border-top: 1.5px solid var(--ink); font-weight: 600;"><td>Predicted direct cost</td><td class="num">${bidFmtMoney(c.totalCost)}</td><td class="num" style="color: var(--clay);">${bidFmtMoneyM(c.p10)} → ${bidFmtMoneyM(c.p90)}</td><td class="num">100%</td></tr>`;
+    costRows += `<tr style="font-weight: 600;"><td>Margin @ floor (${bidFmtPct(BID.margin)})</td><td class="num" style="color: var(--sage-ink);">${bidFmtMoney(c.profit)}</td><td class="num"></td><td class="num"></td></tr>`;
+    costRows += `<tr style="font-weight: 700; background: var(--cream-soft);"><td>Recommended bid</td><td class="num">${bidFmtMoney(c.recommendedBid)}</td><td class="num"></td><td class="num"></td></tr>`;
+    setHtml('bid-cost-tbody', costRows);
+
+    // GC scorecard
+    set('bid-gc-title',        `C · GC scorecard — ${gc.name}`);
+    set('bid-gc-jobs',         gc.jobs);
+    set('bid-gc-projects',     gc.projects);
+    set('bid-gc-margin',       bidFmtPct(gc.blendedMargin));
+    set('bid-gc-paylag',       gc.payLag + 'd');
+    set('bid-gc-paylag-delta', gc.payLagDelta);
+    set('bid-gc-corate',       gc.coRate + '%');
+    set('bid-gc-co-detail',    gc.coDetail);
+
+    // Confidence card
+    set('bid-margin-source', gc.source);
+    set('bid-walk-away',     '< ' + (BID.margin - 4).toFixed(1) + '%');
+    set('bid-win-rate',      'est. ' + gc.winRate + '%');
+
+    // SOV
+    let sovRows = '';
+    SOV_PHASES.forEach(phase => {
+      const cost  = c.totalCost * phase.pct / 100;
+      const value = c.recommendedBid * phase.pct / 100;
+      sovRows += `<tr><td>${phase.label}</td><td class="num">${bidFmtMoney(cost)}</td><td class="num">${bidFmtMoney(value)}</td><td class="num">${phase.pct.toFixed(1)}%</td><td class="num" style="color: var(--ink-4);">${phase.src}</td></tr>`;
+    });
+    sovRows += `<tr style="border-top: 1.5px solid var(--ink); font-weight: 700;"><td>Total</td><td class="num">${bidFmtMoney(c.totalCost)}</td><td class="num">${bidFmtMoney(c.recommendedBid)}</td><td class="num">100%</td><td></td></tr>`;
+    setHtml('bid-sov-tbody', sovRows);
+    set('bid-sov-margin-header', `Value (${bidFmtPct(BID.margin)} margin)`);
+  }
+
+  function wireBidInputs() {
+    const bind = (id, key, asInt) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', () => {
+        const v = asInt ? parseInt(el.value, 10) : parseFloat(el.value);
+        if (!isNaN(v)) { BID[key] = v; renderBid(); }
+      });
+    };
+    bind('bid-units',  'units',  true);
+    bind('bid-fpu',    'fpu',    false);
+    bind('bid-months', 'months', true);
+    bind('bid-cpf',    'cpf',    true);
+    bind('bid-margin', 'margin', false);
+    bind('bid-cont',   'cont',   false);
+    bind('bid-esc',    'esc',    false);
+
+    const gcSel = document.getElementById('bid-gc');
+    if (gcSel) gcSel.addEventListener('change', () => { BID.gc = gcSel.value; renderBid(); });
+
+    const reset = document.getElementById('bid-reset');
+    if (reset) reset.addEventListener('click', () => {
+      BID = Object.assign({}, BID_DEFAULTS);
+      const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+      setVal('bid-units',  BID.units);
+      setVal('bid-fpu',    BID.fpu);
+      setVal('bid-months', BID.months);
+      setVal('bid-cpf',    BID.cpf);
+      setVal('bid-margin', BID.margin);
+      setVal('bid-cont',   BID.cont);
+      setVal('bid-esc',    BID.esc);
+      setVal('bid-gc',     BID.gc);
+      renderBid();
+    });
+  }
+
+  wireBidInputs();
+  renderBid();
 </script>
 </body>
 </html>
