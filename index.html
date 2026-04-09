@@ -394,18 +394,29 @@
   .sb-item.active svg { color: var(--cream); }
   .sb-divider { height: 1px; background: var(--border); margin: 6px 0 20px; }
   .sb-project {
-    padding: 12px 14px; border-radius: 10px;
+    padding: 6px 10px; border-radius: 6px;
     cursor: pointer;
     border: 1px solid transparent;
-    margin-bottom: 4px;
-    transition: background .15s ease, border-color .15s ease;
+    margin-bottom: 1px;
+    display: flex; align-items: center; gap: 8px;
+    transition: background .12s ease, border-color .12s ease;
+    min-width: 0;
   }
   .sb-project:hover { background: var(--cream-soft); }
   .sb-project.active { background: var(--cream-soft); border-color: var(--border-2); }
   .sb-project.active .sb-pnum { color: var(--clay); }
-  .sb-pnum { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; color: var(--ink-4); }
-  .sb-pname { font-size: 13.5px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; margin-top: 4px; line-height: 1.2; }
-  .sb-psub { font-size: 10.5px; color: var(--ink-3); margin-top: 3px; }
+  .sb-pnum { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.06em; color: var(--ink-4); flex-shrink: 0; }
+  .sb-pname { font-size: 12px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; line-height: 1.2; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  .sb-pname b { font-weight: 600; color: var(--ink-2); margin-right: 3px; font-size: 10.5px; }
+  .sb-stage-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-4); padding: 0 10px; margin: 12px 0 5px; display: flex; align-items: center; justify-content: space-between; }
+  .sb-stage-label:first-child { margin-top: 0; }
+  .sb-stage-label .sb-stage-count { color: var(--ink-3); font-weight: 600; }
+  .sb-stage-empty { padding: 4px 10px 6px; font-size: 10px; color: var(--ink-4); font-style: italic; }
+  .sb-status { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sb-status.closed  { background: var(--ink); }
+  .sb-status.active  { background: #4a8f5f; box-shadow: 0 0 0 2px rgba(74,143,95,0.20); animation: sb-pulse 2.4s ease-in-out infinite; }
+  .sb-status.bidding { background: #d9b341; box-shadow: 0 0 0 2px rgba(217,179,65,0.22); }
+  @keyframes sb-pulse { 0%,100% { box-shadow: 0 0 0 2px rgba(74,143,95,0.20); } 50% { box-shadow: 0 0 0 4px rgba(74,143,95,0.10); } }
   .sb-user { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-2); }
   .sb-user .n { font-size: 10.5px; color: var(--ink-4); margin-top: 3px; }
 
@@ -4025,16 +4036,38 @@
   renderPortfolio();
 
   /* ============ SIDEBAR PROJECTS ============ */
+  // Project stages — add ids to bidding/active as those jobs are entered.
+  // Closed jobs flow through PROJECT_ORDER so totals stay in sync.
+  const PROJECT_STAGES = {
+    bidding: [],
+    active:  [],
+    closed:  PROJECT_ORDER
+  };
+  const STAGE_META = {
+    bidding: { label: 'Bidding', empty: '— no live bids' },
+    active:  { label: 'Active',  empty: '— no jobs in progress' },
+    closed:  { label: 'Closed',  empty: '— no closed jobs yet' }
+  };
+
   function renderSidebar(){
     const cont = document.getElementById('sidebar-projects'); if(!cont) return;
-    cont.innerHTML = PROJECT_ORDER.map(id => {
+    const stageOrder = ['bidding','active','closed'];
+    const cardHtml = (id, stage) => {
       const p = PROJECTS[id];
-      const gcWord = p.gcShort.split(' ')[0];
-      return `<div class="sb-project" data-project="${id}">
-        <div class="sb-pnum">JOB #${id}</div>
-        <div class="sb-pname"><b>${p.jobTop}</b> <span class="serif-it">${p.sbName}</span></div>
-        <div class="sb-psub">${gcWord} · Seattle · ${p.num.units}u</div>
+      return `<div class="sb-project" data-project="${id}" title="${p.jobTop} · ${p.sbName.replace(/\.$/,'')} · ${p.num.units}u">
+        <span class="sb-status ${stage}"></span>
+        <span class="sb-pnum">#${id}</span>
+        <span class="sb-pname"><b>${p.jobTop}</b><span class="serif-it">${p.sbName}</span></span>
       </div>`;
+    };
+    cont.innerHTML = stageOrder.map(stage => {
+      const ids = PROJECT_STAGES[stage] || [];
+      const meta = STAGE_META[stage];
+      const header = `<div class="sb-stage-label"><span><span class="sb-status ${stage}" style="margin-right:7px;vertical-align:middle;"></span>${meta.label}</span><span class="sb-stage-count">${ids.length}</span></div>`;
+      const body = ids.length
+        ? ids.map(id => cardHtml(id, stage)).join('')
+        : `<div class="sb-stage-empty">${meta.empty}</div>`;
+      return header + body;
     }).join('');
     // Re-attach click handlers since the elements were just rebuilt
     cont.querySelectorAll('.sb-project').forEach(el => {
