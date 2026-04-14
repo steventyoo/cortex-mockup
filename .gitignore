@@ -50,4 +50,23 @@ owp/owp-2025/2025-Exxel, The Cora/Brett Harrison/
 owp/owp-2025/2025-Exxel, The Cora/DROPBOX FILES FROM GUYS TABLETS/
 owp/owp-2025/2025-Exxel, The Cora/PO_s/
 
+# owp-2023 Legacy Apts — keep only essentials (JDR, Cortex outputs, Change Orders, Billing)
+# Exclude duplicate working-copy folders, bulky architectural/dropbox/invoice sets
+owp/owp-2023/2023-Chinn, Legacy Apartments 2/
+owp/owp-2023/2023-Chinn, Legacy Apartments 3/
+owp/owp-2023/2023-Chinn, Legacy Apartments 4/
+owp/owp-2023/2023-Chinn, Legacy Apartments/Plans/
+owp/owp-2023/2023-Chinn, Legacy Apartments/Invoices/
+owp/owp-2023/2023-Chinn, Legacy Apartments/Submittals/
+owp/owp-2023/2023-Chinn, Legacy Apartments/DROPBOX FILES FROM TABLETS/
+owp/owp-2023/2023-Chinn, Legacy Apartments/PO_s/
+owp/owp-2023/2023-Chinn, Legacy Apartments/O&M_s/
+owp/owp-2023/2023-Chinn, Legacy Apartments/ASI-RFI/
+owp/owp-2023/2023-Chinn, Legacy Apartments/Brett Legacy Mercer Island/
+owp/owp-2023/2023-Chinn, Legacy Apartments/Franklin Mercer Island/
+owp/owp-2023/2023-Chinn, Legacy Apartments/Photos/
+# oversized single PDFs
+owp/**/Legacy contract OCR_d.pdf
+owp/**/*GMP*.pdf
+
 .vercel
