@@ -1111,7 +1111,7 @@
           <div class="mt-3 flex items-center justify-between">
             <div class="flex items-center gap-2 text-[11px]" style="color: var(--ink-4);">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <span>Grounded on 16 projects · 2,418 files · 64 fields</span>
+              <span>Grounded on 17 projects · 2,418 files · 64 fields</span>
             </div>
             <button id="home-prompt-send" onclick="sendPrompt()" class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
               Send ▸
@@ -2087,7 +2087,7 @@
       <div class="bench-toolbar">
         <div class="bench-toolbar-l">
           <span class="bench-title">The Full Table</span>
-          <span class="chip-ink">16 projects</span>
+          <span class="chip-ink">17 projects</span>
           <span class="chip-sage">#2010 wins 15 categories</span>
           <span class="chip-clay">#2020 ⚠ labor +29%</span>
         </div>
@@ -2121,7 +2121,7 @@
   <div class="view" data-view="pipeline">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">Ingestion status</span>
-      <span class="chip-sage">16 projects parsed</span>
+      <span class="chip-sage">17 projects parsed</span>
       <span class="chip-clay">187 duplicate groups</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
@@ -2543,7 +2543,7 @@
   <div class="view" data-view="atlas">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">38 nodes · 82 edges</span>
-      <span class="chip-sage">16 closed · 1 active · 1 proposed</span>
+      <span class="chip-sage">17 closed · 1 active · 1 proposed</span>
       <span class="chip-clay">6 hidden patterns surfaced</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
@@ -5120,7 +5120,7 @@
   /* ============ PROJECT DATA (real — from OWP_4Way_Comparison.xlsx) ============ */
   // Order in which projects appear in the sidebar / portfolio / benchmark.
   // Add a project ID here once its PROJECTS entry exists, and every view picks it up.
-  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016","2017","2018","2019","2020","2021","2022","2023","2025"];
+  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"];
 
   // Project stages — add ids to bidding/active as those jobs are entered.
   // Closed jobs flow through PROJECT_ORDER so totals stay in sync.
@@ -5617,6 +5617,42 @@
         { name: 'Duraseal, Inc.', invoices: 1, spend: 3860, pct: 0.6 }
       ]
     },
+    "2024": {
+      reportNum: "REPORT #2024-IR01",
+      chips: ['<span class="chip-sage">48.9% margin · exceptional</span>','<span class="chip-ink">116u senior-living · 15 months</span>','<span class="chip-clay">+2.74% CO growth · clean COR pricing</span>'],
+      jobTop: "SRM", jobBottom: "Ballard Merrill Gardens.",
+      jobNum: "#2024", location: "Seattle, WA · 5601 24th Ave NW (Ballard)", gc: "SRM Development / Merrill Gardens at Ballard, LLC",
+      gcShort: "SRM / Merrill Gardens",
+      dateRange: "May 2015 → Aug 2016 · 15 months",
+      unitsDesc: "116-unit Merrill Gardens at Ballard — senior-living MF + amenity",
+      revenue: "$1,811,843", revenueFoot: "16 billings + retainage release · ties to JDR",
+      profit: "$886,408", profitFoot: "48.9% margin · exceptional for senior-living MF",
+      expenses: "$925,435", expensesFoot: "Labor $379.8k · Mat\'l $336.5k · Sub/OH $12.4k · Burden $196.7k",
+      retainage: "$90,592", retainageFoot: "5.0% · still open 9+ yrs post-closeout",
+      execHeadline: 'The <span class="serif-it">exceptional</span> delivery — Ballard Merrill Gardens cleared <span class="n">48.9% margin</span> on $1.81M, driven by a 74% finish-material under-run.',
+      execBody: 'SRM, Ballard Merrill Gardens is a 116-unit senior-living plumbing job for Merrill Gardens at Ballard, LLC (Spokane-HQ SRM Development) at 5601 24th Ave NW. <span class="n">$1,763,480</span> base Lump Sum contract (signed 21-Apr-2015 + 9.6% WSST = $1.93M gross) plus <span class="n">+$48,363</span> in 8 executed COs (+2.74%) = <span class="n">$1,811,843</span> final. 16 pay apps + retainage release row over 15 months, May 2015 → Aug 2016.<br/><br/>The story is a disciplined rough-in combined with a <span class="n">stellar finish-material procurement win</span>. Code 120 Rough-in Labor came in <span class="n">-13.9% under</span> ($164k actual vs $191k revised — <span class="n">$26,470 savings</span>). Code 230 Finish Material landed <span class="n">-74.3% under</span> ($71k vs $276k — a <span class="n">$205,461 swing</span>). Combined, these two wins absorbed a 149% mech-room material blowout (+$45,764 on code 242 boilers/storage tank from Mechanical Sales POs) and a fully-unbudgeted $20,595 condensation-drain labor bucket (code 143). <span class="n">40 workers · 17,061 hrs · 282 AP invoices across 24 vendors</span>.<br/><br/><span class="n">Cortex pattern</span>: CO documentation quality is HIGH — 17 CORs priced line-item in the outstanding-COR XLSX, cleanly rolled into 8 executed COs. Only 52 ASI-RFIs for a 116-unit senior project (moderate). Retainage <span class="n">$90,592</span> still open on the 04/03/2026 JDR — 9+ years after last billing. Write-off candidate alongside #2023 Legacy and #2025 Cora.',
+      jobNum2: "#2024", workforce: "40 workers · 17,061 hrs",
+      bpLeft: "srm ballard merrill gardens · seattle wa", bpRight: "116 units · 15 months",
+      k01_revenue: "$1,811,843", k01_margin: "48.9%", k01_origContract: "$1,763,480",
+      k01_co: "+$48,363", k01_directCost: "$925,435", k01_profit: "$886,408",
+      footerReport: "REPORT #2024-IR01 · Generated April 14, 2026 · v0.1",
+      sbName: "Ballard MG.", skyName: "BALLARD MG",
+      skyline: { floors: 7, cols: 12, w: 200 },
+      num: { units:116, fixtures:840, months:15, revenue:1811843, profit:886408, directCost:925435, origContract:1763480, co:48363, retainage:90592, labor:379758, material:336538, overhead:12404, burden:196735, hours:17061, workers:40 },
+      vendorMeta: { count: 24, invoices: 282, totalAp: 299677, topVendor: 'Rosen Supply MG-Ballard', topShare: 34.1, source: 'OWP_2024_JCR_Cortex_v2.xlsx · Sage AP export' },
+      vendors: [
+        { name: 'Rosen Supply MG-Ballard', invoices: 99, spend: 102072, pct: 34.1 },
+        { name: 'Keller Supply MG-Ballard', invoices: 90, spend: 80438, pct: 26.8 },
+        { name: 'Mechanical Sales, Inc.', invoices: 6, spend: 37099, pct: 12.4 },
+        { name: 'Ferguson Enterprises MG-Ballard', invoices: 29, spend: 22824, pct: 7.6 },
+        { name: 'Consolidated Supply MG-Ballard', invoices: 9, spend: 21645, pct: 7.2 },
+        { name: 'Quality Concrete Products', invoices: 4, spend: 11655, pct: 3.9 },
+        { name: 'Bank of America CC', invoices: 9, spend: 7148, pct: 2.4 },
+        { name: 'Keller Supply Company', invoices: 7, spend: 5234, pct: 1.7 },
+        { name: 'HD Fowler Company', invoices: 1, spend: 3591, pct: 1.2 },
+        { name: 'United Rentals, Inc.', invoices: 3, spend: 1948, pct: 0.7 }
+      ]
+    },
     "2025": {
       reportNum: "REPORT #2025-IR01",
       chips: ['<span class="chip-sage">The Cora · 7-story Seattle</span>','<span class="chip-ink">80u · 19 months</span>','<span class="chip-clay">$1.20M · 16 pay apps clean</span>'],
@@ -5863,6 +5899,22 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   PROJECTS['2025'].insights = [["MARGIN PROFILE","Net profit of $385,243 on $1,202,633 revenue = 32.0% gross margin \u2014 +3.6 pts above #2021 Admiral despite smaller scale."],["CONTRACT GROWTH","Base $1,179,300 + 6 approved CO\'s ($23,333 net) = $1,202,633. A dozen additional CORs rolled forward to Parsonage job due to Cora budget pressure."],["PAY APP CADENCE","16 clean pay apps Feb 2016 \u2192 Aug 2017 \u2014 5% retainage throughout. App #8 (Dec 2016) was the big swing at $424k (roughin topout month)."],["VENDOR MIX","Keller 31% + Rosen 24% + Consolidated 16% = 71% concentration in three \u2014 a typical Exxel Seattle mid-rise material mix."],["CO DISCIPLINE","Only 6 approved CO\'s on a 19-month job. Scope capture was tight; cancellations were pushed forward to Parsonage rather than re-priced mid-stream."],["PROJECT SCALE","80 units \u00b7 ~420 fixtures \u00b7 19 months. Revenue/unit $15,033, hours/unit 140, profit/unit $4,816."],["FIXTURE DENSITY","~420 fixtures / 80 units = 5.25 fixtures/unit \u2014 above portfolio median (4.7). Driven by rooftop BBQ + amenity plumbing."]];
   PROJECTS['2025'].changeLog = [["CO-01","CO","2016-11-18","Unit AC upgrade \u2014 washing machine condensate adapter","Exxel",700,0],["COR-02","COR","2016-03-30","Added Foundation Drainage (RFI-001) \u2014 CANCELLED","Exxel",0,0],["COR-03r1","COR","2016-11-16","Activity Room Revisions per ASI-002 \u2014 approved with CO#4","Exxel",2140,0],["COR-04","COR","2016-12-03","Trench Drain at Garage Entrances (RFI-055)","Exxel",1109,0],["COR-05","COR","2016-12-03","Added Planter Drain (RFI-049)","Exxel",1924,0],["COR-06","COR","2017-01-05","Wall Hung Lavs in Common Baths (RFI-063)","Exxel",1357,0],["COR-07","COR","2017-01-27","Exterior Trench Drains on 1st Ave","Exxel",7881,0],["COR-08","COR","2017-02-09","RFI-065.1 Added Gas Outlet boxes \u2014 rooftop BBQ/firepit","Exxel",5620,0],["COR-09","COR","2017-02-20","Install Meter Jumper on Cold Side","Exxel",607,0],["CO-04","CO","2017-03-08","Gas Permit for Temp Heat","Exxel",650,0],["COR-11","COR","2017-03-22","Credit for residential lav substitute (Toto \u2192 Lenova)","Exxel",-1971,0],["COR-12r1","COR","2017-04-25","Common Area Sink & Icemaker Pump (revised per RFI-112.1)","Exxel",1215,0],["COR-13","COR","2017-06-08","Trench Drain Reinstall \u2014 rolled forward to Parsonage","Exxel",0,0],["COR-FIRE","COR","2017-10-26","Fire rated valve boxes \u2014 CANCELLED","Exxel",0,0]];
   PROJECTS['2025'].rootCauses = [["Design clarification",5,16111,"Designer"],["Owner directive",3,2050,"Owner/GC"],["Field condition",2,1924,"Mixed"],["Scope substitution",1,-1971,"Designer"],["Cancelled / rolled forward",3,0,"Mixed"]];
+  PROJECTS['2023'].changeMeta = {"total": 11, "costImpact": 301869, "types": {"CO": 5, "CO Aggregate": 1, "CO Numbering Gap": 1, "RFI/ASI": 1, "Invoice": 2, "Retainage": 1}};
+  PROJECTS['2023'].responsibility = [["Chinn (GC)", 6, 301869], ["OWP (Sub)", 2, 56119], ["VIA Architecture", 1, 0], ["Unresolved (archive)", 2, 0]];
+  PROJECTS['2023'].predictiveSignals = [["RFI volume (ASI-RFI folder)", "125 docs", "<100 for large job", "ELEVATED"], ["ASI Count", "7 (ASI-07/09/10/14/16/25/26)", "<10", "HEALTHY"], ["Change Order PDFs", "5 \u2014 all image-only scans", "Searchable PDF", "CRITICAL"], ["CO Numbering Gap", "11\u219219 (6+ missing)", "Continuous", "CRITICAL"], ["Contract Drift", "+$301,869 / +12.2%", "<5%", "ELEVATED"], ["T&M Event Count", "0", "<2", "HEALTHY"], ["Backcharge Count", "0", "<3", "HEALTHY"], ["Retainage Outstanding", "$138,568 \u00b7 9+ yrs", "0 at closeout", "CRITICAL"], ["Net $ Impact (all events)", "+$301,869", "<$50K", "ELEVATED"]];
+  PROJECTS['2025'].changeMeta = {"total": 14, "costImpact": 23333, "types": {"COR": 12, "CO": 2}};
+  PROJECTS['2025'].responsibility = [["Designer (RFI-driven)", 6, 14140], ["Owner/GC (Exxel)", 3, 2050], ["Mixed (field/coord)", 5, 1924]];
+  PROJECTS['2025'].predictiveSignals = [["RFI volume", "30 (18 primary + 12 dropbox)", "<40 for mid-size", "HEALTHY"], ["ASI Count", "1", "<5", "HEALTHY"], ["Change Order Count", "6 approved", "<10", "HEALTHY"], ["COR Cancellation Rate", "3 of 14 (21%)", "<25%", "HEALTHY"], ["Contract Drift", "+$23,333 / +2.0%", "<5%", "HEALTHY"], ["T&M Event Count", "0", "<2", "HEALTHY"], ["Backcharge Count", "0", "<3", "HEALTHY"], ["Submittal resubmissions", "2 (COR-03r1, COR-12r1)", "<5", "HEALTHY"], ["Retainage Outstanding", "$60,132 \u00b7 8+ yrs", "0 at closeout", "CRITICAL"], ["Net $ Impact (all events)", "+$23,333", "<$50K", "HEALTHY"]];
+  PROJECTS['2024'].sovData = {"originalContract":1763480,"changeOrders":48363,"finalContract":1811843,"retainage":90592,"netPaid":1721251};
+  PROJECTS['2024'].payApps = [[1,"2015-05-19",114100,5705,108395,114100,0.0630],[2,"2015-06-25",19000,950,18050,133100,0.0735],[3,"2015-07-23",25700,1285,24415,158800,0.0877],[4,"2015-08-25",89950,4497.5,85452.5,248750,0.1373],[5,"2015-09-25",321150,16057.5,305092.5,569900,0.3146],[6,"2015-10-22",446910,22345.5,424564.5,1016810,0.5612],[7,"2015-11-23",156760,7838,148922,1173570,0.6477],[8,"2015-12-18",231660,11583,220077,1405230,0.7755],[9,"2016-01-22",141050,7052.5,134997.5,1546280,0.8533],[10,"2016-02-25",59829,2991.45,56837.55,1606109,0.8864],[11,"2016-03-18",49480,2474,47006,1655589,0.9138],[12,"2016-04-25",56998,2849.9,54148.1,1712587,0.9452],[13,"2016-05-24",55020,2751,52269,1767607,0.9755],[14,"2016-06-24",40252,2012.6,38239.4,1807859,0.9978],[15,"2016-06-24",40769,2038.45,38730.55,1808628,0.9982],[16,"2016-07-20",732,36.6,695.4,1809360,0.9986],[17,"2016-08-22",2735,136.75,2598.25,1812095,1.0000]];
+  PROJECTS['2024'].allVendors = [["Rosen Supply MG-Ballard", 99, 102072, 34.1], ["Keller Supply MG-Ballard", 90, 80438, 26.8], ["Mechanical Sales, Inc.", 6, 37099, 12.4], ["Ferguson Enterprises MG-Ballard", 29, 22824, 7.6], ["Consolidated Supply MG-Ballard", 9, 21645, 7.2], ["Quality Concrete Products, Inc.", 4, 11655, 3.9], ["Bank of America CC", 9, 7148, 2.4], ["Keller Supply Company", 7, 5234, 1.7], ["HD Fowler Company", 1, 3591, 1.2], ["United Rentals, Inc.", 3, 1948, 0.7], ["Scan2Core, Inc.", 2, 1514, 0.5], ["Franklin Engineering", 1, 1021, 0.3], ["Kele, Inc \u2014 MI Controls", 1, 848, 0.3], ["C.M. Hoskins Company", 2, 716, 0.2], ["Ferguson #3007", 1, 390, 0.1]];
+  PROJECTS['2024'].phases = [["Supervision", "100", 420, 2.5, 2.46], ["Takeoff & Purchasing", "101", 185, 1.1, 1.08], ["Underground", "110", 315, 1.8, 1.85], ["Garage", "111", 1125, 6.6, 6.59], ["Canout", "112", 520, 3.0, 3.05], ["Roughin", "120", 8731, 51.2, 51.18], ["Finish", "130", 2350, 13.8, 13.77], ["Gas", "140", 410, 2.4, 2.40], ["Water Main / Insulation", "141", 695, 4.1, 4.08], ["Mech Room", "142", 395, 2.3, 2.32], ["Condensation Drains", "143", 1020, 6.0, 5.98]];
+  PROJECTS['2024'].insights = [["MARGIN PROFILE","Net profit $886,408 on $1,811,843 revenue = 48.9% gross margin \u2014 materially above typical senior-living plumbing (25\u201332%). Exceptional outlier."],["LABOR-HEAVY EXECUTION","Labor $379,758 (21.0% of rev) across 17,061 hrs and 40 workers. Rough-in (120) = 8,731 hrs = 51% of labor."],["ROUGH-IN UNDER BUDGET","Code 120 Rough-in Labor: $164,177 actual vs $190,647 revised = -$26,470 (-13.9%). Disciplined field productivity \u2014 rare favorable variance on the largest bucket."],["CONDENSATION DRAINS ANOMALY","Code 143 Condensation Drains Labor: $20,595 actual vs $46 revised (44,681% over). Entire bucket was unbudgeted \u2014 scope absorbed without CO re-baseline."],["MECH-ROOM MATERIAL BLOWOUT","Code 242 Mech Room Material: $76,386 actual vs $30,622 revised = +$45,764 (+149%). Mechanical Sales boiler/storage-tank POs drove the overrun."],["FINISH MATERIAL UNDER-RUN","Code 230 Finish Material: $70,944 actual vs $276,405 revised = -$205,461 (-74.3% under). Primary profit driver \u2014 absorbed both overruns and still delivered 48.9% margin."],["BURDEN-HEAVY","Payroll Burden $167,599 + Taxes $29,137 = $196,735 = 51.8% of gross labor. Burden multiplier 1.52x \u2014 standard OWP."],["VENDOR CONCENTRATION","Top vendor Rosen Supply MG-Ballard ($102,072 / 34%). Rosen + Keller = 61% of AP. 24 vendors total, 282 invoices, $299,677 AP."],["CO DOCUMENT QUALITY","Original $1,763,480 \u2192 Final $1,811,843 = +$48,363 (+2.74%). 17 CORs priced line-item in outstanding-COR XLSX, rolled into 8 executed COs. Best-in-class documentation."],["RETAINAGE OUTSTANDING","Retainage $90,592 still open on JDR dated 04/03/2026 \u2014 9+ years after last billing 08/22/2016. Write-off / dispute candidate."],["PROJECT SCALE","116 units \u00b7 ~840 fixtures \u00b7 15 months. Revenue/unit $15,619, profit/unit $7,641. Premium senior-living benchmark."]];
+  PROJECTS['2024'].changeLog = [["COR-02","COR","2016-01-11","COR-02: RFI-061 ADDED EYEWASH STATIONS (rolled into CO#1)","MGB",3015,0],["COR-FX","COR","2016-01-11","COR-FX: ALTERNATE FIXTURE PRICING (rolled into CO#1)","MGB",653,0],["COR-05","COR","2016-01-11","COR-05: UPGRADED P-17 SINK (rolled into CO#1)","MGB",161,0],["COR-06-R1","COR","2016-02-18","COR-06-R1: ASI-039-R1 Kitchen Equipment Changes (rolled into CO#2)","MGB",1107,0],["COR-04","COR","2016-02-18","COR-04: CHANGE OUT CAST IRON 90\u2019S (rolled into CO#3)","MGB",9302,0],["COR-09","COR","2016-02-18","COR-09: Undermount Kitchen & Bar Sinks (rolled into CO#3)","MGB",6842,0],["COR-01","COR","2016-04-20","COR-01: RFI-074 ADD AUTOWASH BOX (rolled into CO#4)","MGB",637,0],["COR-03","COR","2016-04-20","COR-03: RFI-122 MOVE KITCHEN STACKS (rolled into CO#4)","MGB",2012,0],["COR-07","COR","2016-04-20","COR-07: RFI-159 Condenser Rack Drain (rolled into CO#4)","MGB",271,0],["COR-08","COR","2016-04-20","COR-08: RFI-162 Added Drinking Fountain (rolled into CO#4)","MGB",2020,0],["COR-10","COR","2016-04-20","COR-10: RFI-175 Added Sink (rolled into CO#4)","MGB",933,0],["COR-11","COR","2016-04-20","COR-11: Stolen Fittings & Valves (rolled into CO#4)","MGB",1772,0],["COR-12","COR","2016-04-20","COR-12: ASI-045 Level 7 Suite Revision (rolled into CO#4)","MGB",21954,0],["COR-KV","COR","2016-06-24","COR-Kitchen Vent: Move Vent for Kitchen Exhaust (rolled into CO#6)","MGB",517,0],["COR-15","COR","2016-07-14","COR-15: Sink Changes (rolled into CO#7)","MGB",732,0],["COR-14","COR","2016-08-19","COR-14: Attic Stock (rolled into CO#8)","MGB",690,0],["COR-16","COR","2016-08-19","COR-16: Eyewash Stations (rolled into CO#8)","MGB",2045,0],["COR-CANCELLED","COR","2015-12-11","MGB - COR-06 ASI-039 Kitchen Equipment (CANCELLED \u2014 superseded by COR-06-R1)","MGB",0,0],["CO-GAP","Memo","\u2014","CO Reconciliation: Documented CORs $54,663 > JDR-implied $48,363 by $6,300 (WSST net/gross variance + repriced/cancelled items)","OWP",6300,0],["ASI-024","ASI","2016","ASI-024: Overtime \u2014 Joe Barnhart (gas main relocation)","Urbal Architecture",4232,0],["ASI-039","ASI","2016-01","ASI-039: Kitchen Equipment Changes (revised to R1, COR-06-R1)","Urbal Architecture",1107,0],["ASI-045","ASI","2016-04","ASI-045: Level 7 Suite Revision","Urbal Architecture",21954,0]];
+  PROJECTS['2024'].rootCauses = [["Design clarification (RFI-driven)",9,17033,"Designer"],["Owner directive (scope adds)",4,26274,"Owner/GC"],["Field condition",2,2289,"Mixed"],["Scope substitution / cancelled",2,0,"Designer"],["Documentation reconciliation",1,6300,"Mixed"],["ASI (architect-directed)",3,27293,"Designer"],["Field theft / loss",1,1772,"Sub (OWP)"]];
+  PROJECTS['2024'].responsibility = [["Designer (Urbal)", 12, 44326], ["Owner/GC (SRM/MGB)", 7, 15968], ["Sub (OWP)", 1, 1772], ["Mixed (field/coord/recon)", 2, 8589]];
+  PROJECTS['2024'].changeMeta = {"total": 22, "costImpact": 48363, "types": {"COR": 18, "ASI": 3, "Memo": 1}};
+  PROJECTS['2024'].predictiveSignals = [["ASI-RFI Count", "52", "<75 for ~116u senior MF", "HEALTHY"], ["ASI Count", "7 (007/010/014/016/024/025/026/033/039/045)", "<10", "HEALTHY"], ["Documented CO Count", "8 executed (17 CORs priced)", "all CORs priced", "HEALTHY"], ["Contract Growth %", "+2.74%", "<5%", "HEALTHY"], ["CO Value Traceability", "HIGH \u2014 COR line-item pricing XLSX", "all readable", "HEALTHY"], ["Labor Cost % of Revenue", "21.0%", "<30%", "HEALTHY"], ["Rough-in Budget Variance", "-13.9% UNDER", "\u00b110%", "HEALTHY"], ["Mech Room Material Variance", "+149% OVER", "\u00b110%", "CRITICAL"], ["Condensation Drains Unbudgeted", "$20,596 vs $46 rev", "budgeted", "ELEVATED"], ["Worker Concentration (top-1)", "10.1% (Castaneda, Gustavo)", "<25%", "HEALTHY"], ["PO Volume", "138+ (102 completed + 36 scheduled)", ">75 for 116u MF", "HEALTHY"], ["Permit Completeness", "8 of 8", ">=5", "HEALTHY"], ["Retainage Outstanding", "$90,592 \u00b7 9+ yrs open", "0 at closeout", "CRITICAL"], ["Net $ Impact (all events)", "+$48,363", "<$75K", "HEALTHY"]];
 
   // ============ CHANGE LOG / ROOT CAUSE / PREDICTIVE SIGNALS (v2) ============
   PROJECTS['2001'].changeLog = [["ASI-023", "ASI", "2012-01-26", "Fireplace ventilation \u2014 intake/exhaust vent locations + steel fireplace surround (L1/P1 lobbies)", "Runberg Architecture (Frances Nelson)", 0, 0], ["ASI-024", "ASI", "2012-01-31", "Deck partitions + column removal at L3 & L4", "Runberg Architecture (Frances Nelson)", 0, 0], ["ASI-027", "ASI", "2012-02-02", "Roof deck redesign \u2014 framing coordination + gas fixture layout (Owner-requested)", "Runberg Architecture (Michele Wang)", 0, 0], ["ASI-029", "ASI", "2012-02-15", "Dog run details on roof deck \u2014 fencing, drainage, irrigation, waterproofing", "Runberg Architecture (Michele Wang)", 0, 0], ["ASI-030", "ASI", "2012-02-13", "Paver layout changes for VE options on roof deck", "Runberg Architecture (Michele Wang)", 0, 0], ["ASI-031", "ASI", "2012-02-20", "West trash room coiling door width increase to 15 ft (P165)", "Runberg Architecture (Michele Wang)", 0, 0], ["ASI-033", "ASI", "2012-02-20", "Roof deck planting layout changes (Owner)", "Runberg Architecture (Michele Wang)", 0, 0], ["CO-004", "CO", "2012-01-25", "CO #4 referenced in Pay App #10 (cost embedded in binary .xls)", "SRM", 0, 0], ["CO-007", "CO", "2012-07-25", "CO #7 referenced in Pay App #16 (cost embedded in binary .xls)", "SRM", 0, 0], ["CO-008", "CO", "2012-08-25", "CO #8 referenced in Pay App #17 (cost embedded in binary .xls)", "SRM", 0, 0], ["DOC-GAP-CO-LOG", "Memo", "2012", "GAP: No master CO register with detailed cost/schedule impact. CO4/7/8 only referenced in pay-app filenames; amounts emb", "OWP", 0, 0], ["DOC-GAP-RFI", "Memo", "2012", "GAP: No standalone RFI log or submittal register found in directory; cycle metrics not computable.", "OWP", 0, 0], ["DOC-GAP-CONTRACT", "Memo", "2012", "GAP: Original vs final contract values embedded only in binary Excel files (SRM 230 contract price summary.xls, AGGREGAT", "OWP", 0, 0]];
@@ -6563,7 +6615,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
       // Cost impact formatting
       const costImpact = cm.costImpact;
-      const costStr = costImpact === 0 ? '$0' : (costImpact > 0 ? '+' : '') + '$' + Math.abs(costImpact).toLocaleString();
+      const costStr = costImpact === 0 ? '$0' : (costImpact > 0 ? '+$' : '\u2212$') + Math.abs(costImpact).toLocaleString();
       const costColor = costImpact > 0 ? 'var(--sage)' : costImpact < 0 ? 'var(--clay)' : 'var(--ink-3)';
 
       // Build event timeline dots - group by type
@@ -7579,7 +7631,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         svg += `<text x="${x}" y="${badgeY}" text-anchor="middle" font-size="8" font-family="'JetBrains Mono',monospace" fill="#B85C3E" font-weight="700" letter-spacing="0.1em">▼ WORST</text>`;
       }
 
-      // Project label below axis — rotated for 16 projects
+      // Project label below axis — rotated for 17 projects
       const name = p ? (p.skyName || id) : id;
       svg += `<line x1="${x}" y1="${H - padB}" x2="${x}" y2="${H - padB + 4}" stroke="#A4A09A" stroke-width="0.8"/>`;
       svg += `<text x="${x}" y="${H - padB + 16}" text-anchor="end" font-size="8.5" font-family="'JetBrains Mono',monospace" fill="#6B6762" letter-spacing="0.02em" transform="rotate(-40,${x},${H - padB + 16})">#${id} ${name}</text>`;
@@ -7596,7 +7648,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     panel.className = 'bench-metric-chart';
     panel.innerHTML = `
       <div class="blueprint-corner" style="top:10px; left:14px;">◢ fig. / ${rd.section.toLowerCase()}</div>
-      <div class="blueprint-corner" style="top:10px; right:40px;">16 projects</div>
+      <div class="blueprint-corner" style="top:10px; right:40px;">17 projects</div>
       <div class="chart-close" onclick="this.parentElement.remove(); document.querySelectorAll('.bench-graph-btn.active').forEach(b=>b.classList.remove('active'));">×</div>
       <div class="chart-header" style="margin-top:8px;">${rd.label}</div>
       ${svg}
@@ -8690,6 +8742,20 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         ['Retainage', '$138,568 open 9+ yrs post-closeout'],
       ],
       note: 'CO# jumps 11→19 in the folder — 6+ COs likely missing from the archive. Retainage release is a cleanup candidate when Chinn reviews old AR.'
+    },
+    '2024': {
+      eyebrow: 'Project · #2024 SRM Ballard Merrill Gardens',
+      title: '116u · $1.81M · 48.9% margin.',
+      sub: 'Ballard senior-living plumbing for SRM/Merrill Gardens. Portfolio-best margin — a $205k finish-material procurement win absorbed a 149% mech-room blowout and $20k of unbudgeted condensation-drain scope.',
+      stats: [
+        ['Units', '116 (senior-living + amenity)'], ['Contract', '$1,811,843'], ['Margin', '48.9%'],
+        ['Schedule', 'May 2015 → Aug 2016 · 15 months'],
+        ['Workforce', '40 workers · 17,061 hrs'],
+        ['CO net', '+$48,363 (+2.74%) · 8 executed COs · 17 CORs priced line-item'],
+        ['Top vendor', 'Rosen MG-Ballard · 34.1% of AP'],
+        ['Retainage', '$90,592 open 9+ yrs post-closeout'],
+      ],
+      note: 'Best-in-class CO documentation in the portfolio — line-item COR pricing XLSX, clean roll-up into 8 executed COs. The 48.9% margin is an outlier anchor for senior-living bids.'
     },
     '2025': {
       eyebrow: 'Project · #2025 Exxel The Cora',
