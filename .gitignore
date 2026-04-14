@@ -31,3 +31,23 @@ out/
 # Misc
 *.log
 .cache/
+
+# OWP project files — exclude bloat that can't go to GitHub
+# (zips, jobsite videos, photo dumps, large architectural plan sets).
+# Keeps Job Detail Reports, contracts, invoices, xlsx summaries, and cortex outputs.
+owp/**/*.zip
+owp/**/*.mov
+owp/**/*.MOV
+owp/**/Photos/
+owp/**/Plans/
+
+# owp-2025 The Cora — keep only essentials (JDR, Billing SOV, COR_s, cortex refs)
+# Exclude the 2 duplicate working-copy folders and bulky architectural / dropbox sets
+owp/owp-2025/2025-Exxel, The Cora 2/
+owp/owp-2025/2025-Exxel, The Cora 3/
+owp/owp-2025/2025-Exxel, The Cora/Franklin Harrison/
+owp/owp-2025/2025-Exxel, The Cora/Brett Harrison/
+owp/owp-2025/2025-Exxel, The Cora/DROPBOX FILES FROM GUYS TABLETS/
+owp/owp-2025/2025-Exxel, The Cora/PO_s/
+
+.vercel
