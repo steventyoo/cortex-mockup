@@ -1346,6 +1346,10 @@
           <div class="rule-dashed"></div>
           <div class="flex justify-between"><span style="color: var(--ink-3);">GC</span><span data-f="gcShort">Chinn Construction, LLC</span></div>
           <div class="rule-dashed"></div>
+          <div class="flex justify-between"><span style="color: var(--ink-3);">Units</span><span class="tabular" data-f="metaUnits">168</span></div>
+          <div class="rule-dashed"></div>
+          <div class="flex justify-between"><span style="color: var(--ink-3);">Fixtures</span><span class="tabular" data-f="metaFixtures">812</span></div>
+          <div class="rule-dashed"></div>
           <div class="flex justify-between"><span style="color: var(--ink-3);">Workforce</span><span data-f="workforce">23 workers · 4,116 hrs</span></div>
           <div class="rule-dashed"></div>
           <div class="flex justify-between"><span style="color: var(--ink-3);">Permit</span><span>Issued · final billing</span></div>
@@ -6546,6 +6550,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // ── Section V header ──
     const secV = document.getElementById('section-v-sub');
     if (secV) secV.textContent = `three cards \u00b7 insights, changes & benchmarks`;
+
+    // ── Project Metadata card: Units + Fixtures ──
+    document.querySelectorAll('[data-f="metaUnits"]').forEach(el => { el.textContent = fmt(n.units); });
+    document.querySelectorAll('[data-f="metaFixtures"]').forEach(el => { el.textContent = fmt(n.fixtures); });
 
     // ── Card 06: Crew & Labor (full innerHTML) ──
     const c06 = document.getElementById('card-06');
