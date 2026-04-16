@@ -1141,10 +1141,12 @@
 
         <!-- Response area -->
         <div id="home-response" class="mt-10" style="display: none;">
+          <div id="home-transcript"></div>
           <div class="meta-bar mb-3" id="home-response-label">Cortex · thinking…</div>
           <div id="home-response-body" class="text-[15px]" style="color: var(--ink-2); line-height: 1.75; max-width: 100%;"></div>
-          <div class="mt-6 flex items-center gap-3">
-            <button onclick="resetPrompt()" class="text-[11px] mono" style="color: var(--clay);">↺ New question</button>
+          <div class="mt-6 flex items-center gap-4">
+            <button onclick="resetPrompt()" class="text-[11px] mono" style="color: var(--clay);">↺ New conversation</button>
+            <span class="text-[11px] mono" style="color: var(--ink-4);" id="home-turn-count"></span>
           </div>
         </div>
       </div>
@@ -7691,10 +7693,44 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const input = document.getElementById('home-prompt-input');
     if(input){ input.value = btn.textContent.trim(); input.focus(); }
   }
+  // Continuous dialogue history for the home Cortex chat
+  let homeHistory = []; // [{role:'user'|'assistant', content:'…'}]
+
+  function renderHomeTranscript(){
+    const tx = document.getElementById('home-transcript');
+    const turnCount = document.getElementById('home-turn-count');
+    if(!tx) return;
+    // Render all but the LAST assistant turn (that one goes in the live response-body)
+    const pairs = [];
+    for (let i = 0; i < homeHistory.length; i++) {
+      pairs.push(homeHistory[i]);
+    }
+    // Drop the trailing assistant if present (shown live below)
+    let trail = pairs;
+    if (trail.length && trail[trail.length-1].role === 'assistant') trail = trail.slice(0, -1);
+    // Drop the trailing user too if present (shown live via label)
+    if (trail.length && trail[trail.length-1].role === 'user') trail = trail.slice(0, -1);
+    tx.innerHTML = trail.map(m => {
+      if (m.role === 'user') {
+        return `<div class="mt-6 mb-2 pb-3" style="border-bottom: 1px dashed var(--border-2);"><div class="mono text-[10px] uppercase tracking-wider mb-1" style="color: var(--ink-4);">You</div><div class="text-[15px]" style="color: var(--ink); font-weight: 500;">${m.content.replace(/</g,'&lt;').replace(/\n/g,'<br/>')}</div></div>`;
+      } else {
+        return `<div class="mb-6"><div class="mono text-[10px] uppercase tracking-wider mb-2" style="color: var(--ink-4);">Cortex</div><div class="text-[15px]" style="color: var(--ink-2); line-height: 1.75;">${mdToHtml(m.content)}</div></div>`;
+      }
+    }).join('');
+    // Turn counter (pairs, not total messages)
+    const pairCount = Math.floor(homeHistory.filter(m => m.role === 'assistant').length);
+    if (turnCount) turnCount.textContent = pairCount > 1 ? `${pairCount} turns in this conversation` : '';
+  }
+
   function resetPrompt(){
     const resp  = document.getElementById('home-response');
     const input = document.getElementById('home-prompt-input');
     const chips = document.getElementById('home-prompt-chips');
+    const tx    = document.getElementById('home-transcript');
+    const turnCount = document.getElementById('home-turn-count');
+    homeHistory = [];
+    if(tx) tx.innerHTML = '';
+    if(turnCount) turnCount.textContent = '';
     if(resp)  resp.style.display = 'none';
     if(chips) chips.style.display = '';
     if(input){ input.value = ''; input.focus(); }
@@ -7839,9 +7875,17 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
     if(chips) chips.style.display = 'none';
     resp.style.display = '';
-    label.innerHTML = '<span style="display:inline-flex; align-items:center; gap:8px;"><svg class="cortex-mark thinking" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M12 2 L4 22 L12 17 L20 22 Z"/></svg>Cortex · thinking…</span>';
+
+    // Append user turn to history, then render prior transcript (excluding this unanswered turn)
+    homeHistory.push({ role: 'user', content: question });
+    renderHomeTranscript();
+
+    // Show the user's current question in the live label area
+    const escQ = question.replace(/</g,'&lt;').replace(/\n/g,'<br/>');
+    label.innerHTML = `<div class="mono text-[10px] uppercase tracking-wider mb-1" style="color: var(--ink-4);">You</div><div class="text-[15px] mb-4" style="color: var(--ink); font-weight: 500;">${escQ}</div><span style="display:inline-flex; align-items:center; gap:8px;"><svg class="cortex-mark thinking" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M12 2 L4 22 L12 17 L20 22 Z"/></svg>Cortex · thinking…</span>`;
     body.innerHTML = '<div class="mono" style="font-size: 11px; color: var(--ink-4);">Calling ' + getModel() + '…</div>';
     send.disabled = true; send.style.opacity = '0.6';
+    input.value = '';
 
     try {
       const url = proxy ? CORTEX_PROXY_URL : 'https://api.anthropic.com/v1/messages';
@@ -7851,6 +7895,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         headers['anthropic-version'] = '2023-06-01';
         headers['anthropic-dangerous-direct-browser-access'] = 'true';
       }
+      // Send the FULL conversation history so Claude has prior-turn context
       const res = await fetch(url, {
         method: 'POST',
         headers,
@@ -7858,7 +7903,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
           model: getModel(),
           max_tokens: 2048,
           system: buildContext(),
-          messages: [{ role: 'user', content: question }]
+          messages: homeHistory.map(m => ({ role: m.role, content: m.content }))
         })
       });
 
@@ -7871,14 +7916,24 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
       const data = await res.json();
       const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n\n');
-      label.textContent = 'Cortex · ' + getModel();
+      homeHistory.push({ role: 'assistant', content: text || '(empty response)' });
+
+      label.innerHTML = `<div class="mono text-[10px] uppercase tracking-wider mb-1" style="color: var(--ink-4);">You</div><div class="text-[15px] mb-4" style="color: var(--ink); font-weight: 500;">${escQ}</div><span>Cortex · ${getModel()}</span>`;
       body.innerHTML = mdToHtml(text || '(empty response)');
+      // Update turn counter
+      const turnCount = document.getElementById('home-turn-count');
+      const pairCount = homeHistory.filter(m => m.role === 'assistant').length;
+      if (turnCount) turnCount.textContent = pairCount > 1 ? `${pairCount} turns in this conversation` : '';
     } catch(err){
+      // Pop the failed user turn so it doesn't poison future calls
+      homeHistory.pop();
+      renderHomeTranscript();
       label.textContent = 'Cortex · error';
       body.innerHTML = '<div style="color: var(--clay);"><b>Request failed.</b> ' + String(err.message || err) + '</div>' +
                        '<div class="mt-3 text-[12px]" style="color: var(--ink-3);">Check that your API key is valid and has access to the selected model. Click the key badge in the top right to update it.</div>';
     } finally {
       send.disabled = false; send.style.opacity = '1';
+      input.focus();
     }
   }
 
