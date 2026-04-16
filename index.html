@@ -7751,6 +7751,55 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     lines.push("- Wage structure is remarkably stable: blended gross wage spans just $0.80 across all four jobs ($19.78 → $20.58).");
     lines.push("- Chinn is the preferred GC (3 of 4 jobs). Blended Chinn margin: 39.8%. Exxel: 38.3%.");
     lines.push("- #2009 has the cleanest PO discipline: 102% of material spend covered by 49 POs. #2012 tracks material via AP only — no PO discipline.");
+    lines.push("");
+
+    // ── Workforce: aggregate crewRoster across all projects ──
+    // Each row: [name, hours, gross_pay, blended_wage, tier]
+    const workerAgg = {}; // name -> { hours, gross, jobs: Set, tiers: Set }
+    PROJECT_ORDER.forEach(id => {
+      const p = PROJECTS[id];
+      if (!p || !p.crewRoster) return;
+      p.crewRoster.forEach(w => {
+        const [name, hrs, gross, wage, tier] = w;
+        if (!name) return;
+        if (!workerAgg[name]) workerAgg[name] = { hours: 0, gross: 0, jobs: new Set(), tiers: new Set() };
+        workerAgg[name].hours += (hrs || 0);
+        workerAgg[name].gross += (gross || 0);
+        workerAgg[name].jobs.add(id);
+        if (tier) workerAgg[name].tiers.add(tier);
+      });
+    });
+    const workersSorted = Object.entries(workerAgg)
+      .map(([name, v]) => ({
+        name,
+        hours: v.hours,
+        gross: v.gross,
+        jobCount: v.jobs.size,
+        jobs: Array.from(v.jobs).sort().join(','),
+        tier: Array.from(v.tiers).join('/') || '—',
+        blended: v.hours > 0 ? (v.gross / v.hours) : 0
+      }))
+      .sort((a, b) => b.hours - a.hours);
+
+    const totalWorkerHours = workersSorted.reduce((s, w) => s + w.hours, 0);
+    lines.push(`## Portfolio workforce (${workersSorted.length} unique workers across all jobs)`);
+    lines.push(`Aggregated from per-project crew rosters. Format: Name — total hours · $total gross · blended $/hr · tier · # jobs · job IDs.`);
+    workersSorted.slice(0, 80).forEach((w, i) => {
+      const pct = totalWorkerHours > 0 ? ((w.hours / totalWorkerHours) * 100).toFixed(1) : '0.0';
+      lines.push(`${i+1}. **${w.name}** — ${Math.round(w.hours).toLocaleString()} hrs (${pct}%) · $${Math.round(w.gross).toLocaleString()} gross · $${w.blended.toFixed(2)}/hr · ${w.tier} · ${w.jobCount} job${w.jobCount>1?'s':''} (${w.jobs})`);
+    });
+    lines.push("");
+
+    // Per-project top crew (so project-specific crew questions work)
+    lines.push("## Top crew per project (top 5 by hours)");
+    PROJECT_ORDER.forEach(id => {
+      const p = PROJECTS[id];
+      if (!p || !p.crewRoster || p.crewRoster.length === 0) return;
+      const top = p.crewRoster.slice(0, 5)
+        .map(w => `${w[0]} (${Math.round(w[1])} hrs · $${(w[3]||0).toFixed(2)}/hr · ${w[4]||'—'})`)
+        .join('; ');
+      lines.push(`- #${id}: ${top}`);
+    });
     return lines.join("\n");
   }
 
@@ -7807,7 +7856,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         headers,
         body: JSON.stringify({
           model: getModel(),
-          max_tokens: 1024,
+          max_tokens: 2048,
           system: buildContext(),
           messages: [{ role: 'user', content: question }]
         })
@@ -9882,7 +9931,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         headers,
         body: JSON.stringify({
           model: getModel(),
-          max_tokens: 1024,
+          max_tokens: 2048,
           system: _miniBuildSystem(),
           messages: _miniHistory.map(m => ({ role: m.role, content: m.content }))
         })
