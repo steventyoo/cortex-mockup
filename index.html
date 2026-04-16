@@ -1141,13 +1141,13 @@
 
         <!-- Response area -->
         <div id="home-response" class="mt-10" style="display: none;">
-          <div id="home-transcript"></div>
           <div class="meta-bar mb-3" id="home-response-label">Cortex · thinking…</div>
           <div id="home-response-body" class="text-[15px]" style="color: var(--ink-2); line-height: 1.75; max-width: 100%;"></div>
           <div class="mt-6 flex items-center gap-4">
             <button onclick="resetPrompt()" class="text-[11px] mono" style="color: var(--clay);">↺ New conversation</button>
             <span class="text-[11px] mono" style="color: var(--ink-4);" id="home-turn-count"></span>
           </div>
+          <div id="home-transcript" class="mt-8"></div>
         </div>
       </div>
 
@@ -7700,24 +7700,23 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const tx = document.getElementById('home-transcript');
     const turnCount = document.getElementById('home-turn-count');
     if(!tx) return;
-    // Render all but the LAST assistant turn (that one goes in the live response-body)
-    const pairs = [];
-    for (let i = 0; i < homeHistory.length; i++) {
-      pairs.push(homeHistory[i]);
-    }
-    // Drop the trailing assistant if present (shown live below)
-    let trail = pairs;
+    // History: [u1, a1, u2, a2, ...]. The live current turn (trailing user or user+assistant)
+    // is shown in the response-body area above. Everything BEFORE that goes in the transcript.
+    let trail = homeHistory.slice();
     if (trail.length && trail[trail.length-1].role === 'assistant') trail = trail.slice(0, -1);
-    // Drop the trailing user too if present (shown live via label)
     if (trail.length && trail[trail.length-1].role === 'user') trail = trail.slice(0, -1);
-    tx.innerHTML = trail.map(m => {
-      if (m.role === 'user') {
-        return `<div class="mt-6 mb-2 pb-3" style="border-bottom: 1px dashed var(--border-2);"><div class="mono text-[10px] uppercase tracking-wider mb-1" style="color: var(--ink-4);">You</div><div class="text-[15px]" style="color: var(--ink); font-weight: 500;">${m.content.replace(/</g,'&lt;').replace(/\n/g,'<br/>')}</div></div>`;
-      } else {
-        return `<div class="mb-6"><div class="mono text-[10px] uppercase tracking-wider mb-2" style="color: var(--ink-4);">Cortex</div><div class="text-[15px]" style="color: var(--ink-2); line-height: 1.75;">${mdToHtml(m.content)}</div></div>`;
-      }
+    // Group into (user, assistant) pairs so we can render newest pair first
+    const pairs = [];
+    for (let i = 0; i < trail.length; i += 2) {
+      pairs.push({ user: trail[i], assistant: trail[i+1] });
+    }
+    pairs.reverse(); // newest pair first
+    tx.innerHTML = pairs.map(p => {
+      const u = p.user ? `<div class="mt-6 mb-2 pb-3" style="border-bottom: 1px dashed var(--border-2);"><div class="mono text-[10px] uppercase tracking-wider mb-1" style="color: var(--ink-4);">You</div><div class="text-[15px]" style="color: var(--ink); font-weight: 500;">${p.user.content.replace(/</g,'&lt;').replace(/\n/g,'<br/>')}</div></div>` : '';
+      const a = p.assistant ? `<div class="mb-6"><div class="mono text-[10px] uppercase tracking-wider mb-2" style="color: var(--ink-4);">Cortex</div><div class="text-[15px]" style="color: var(--ink-2); line-height: 1.75;">${mdToHtml(p.assistant.content)}</div></div>` : '';
+      // Within a pair keep user-prompt above its answer
+      return u + a;
     }).join('');
-    // Turn counter (pairs, not total messages)
     const pairCount = Math.floor(homeHistory.filter(m => m.role === 'assistant').length);
     if (turnCount) turnCount.textContent = pairCount > 1 ? `${pairCount} turns in this conversation` : '';
   }
