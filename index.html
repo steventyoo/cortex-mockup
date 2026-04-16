@@ -2661,15 +2661,13 @@
       <span class="chip-ink atlas-filter" data-atlas-filter="project" style="cursor: pointer;">Projects only</span>
       <span class="chip-ink atlas-filter" data-atlas-filter="gc" style="cursor: pointer;">+ GCs</span>
       <span class="chip-ink atlas-filter" data-atlas-filter="vendor" style="cursor: pointer;">+ Vendors</span>
-      <span class="chip-ink atlas-filter" data-atlas-filter="crew" style="cursor: pointer;">+ Crew</span>
-      <span class="chip-ink atlas-filter" data-atlas-filter="insight" style="cursor: pointer;">+ Insights</span>
       <span style="margin-left: auto; font-size: 11px; color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">layout · static · cortex.atlas v0.1</span>
     </div>
 
     <!-- The graph -->
     <div class="mt-6 blueprint" style="padding: 28px 24px 36px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 02 / portfolio graph</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 38 · edges · 82</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 37 · edges · 61</div>
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s.</div>
       <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
 
@@ -2710,38 +2708,6 @@
         <line x1="270" y1="600" x2="1080" y2="280" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
         <line x1="200" y1="460" x2="320" y2="360" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
         <line x1="200" y1="460" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
-
-        <!-- Crew/PM → projects (dashed ink-3) -->
-        <line x1="520" y1="540" x2="130" y2="290" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="2,3"/>
-        <line x1="520" y1="540" x2="270" y2="250" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="2,3"/>
-        <line x1="520" y1="540" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="2,3"/>
-
-        <line x1="660" y1="590" x2="130" y2="290" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
-        <line x1="660" y1="590" x2="270" y2="250" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
-        <line x1="660" y1="590" x2="320" y2="360" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
-        <line x1="660" y1="590" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
-
-        <line x1="440" y1="620" x2="170" y2="380" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
-        <line x1="440" y1="620" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.8" stroke-dasharray="2,3"/>
-
-        <!-- Insight nodes → connected entities (dotted clay) -->
-        <line x1="880" y1="540" x2="130" y2="540" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
-        <line x1="880" y1="540" x2="130" y2="290" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
-        <line x1="880" y1="540" x2="270" y2="250" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
-
-        <line x1="1020" y1="480" x2="130" y2="290" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="1020" y1="480" x2="270" y2="250" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="1020" y1="480" x2="170" y2="380" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="1020" y1="480" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="1020" y1="480" x2="920" y2="290" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-
-        <line x1="980" y1="620" x2="600" y2="110" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
-        <line x1="980" y1="620" x2="600" y2="270" stroke="var(--clay)" stroke-width="0.7" stroke-dasharray="1,4"/>
-
-        <line x1="380" y1="540" x2="130" y2="290" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="380" y1="540" x2="270" y2="250" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="380" y1="540" x2="170" y2="380" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="380" y1="540" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
 
         <!-- ========== NODES ========== -->
 
@@ -3053,32 +3019,6 @@
         <line x1="130" y1="540" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
         <line x1="130" y1="540" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
 
-        <!-- ⚠ Bellevue labor signal node — clay clusters around #2020 -->
-        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="bellevue-labor" style="cursor: pointer;">
-          <circle cx="1100" cy="640" r="9" fill="rgba(184,92,62,0.08)" stroke="var(--clay)" stroke-width="1.4" stroke-dasharray="2,1.6"/>
-          <text x="1100" y="643" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="var(--clay)" text-anchor="middle">⚠</text>
-          <text x="1100" y="668" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--clay)" text-anchor="middle">labor outlier</text>
-        </g>
-        <line x1="1100" y1="640" x2="980" y2="850" stroke="var(--clay)" stroke-width="0.8" stroke-dasharray="1,4"/>
-
-        <!-- ⚠ SRM mixed-track signal node — between SRM nodes -->
-        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="srm-mixed" style="cursor: pointer;">
-          <circle cx="700" cy="780" r="9" fill="rgba(184,92,62,0.08)" stroke="var(--clay)" stroke-width="1.4" stroke-dasharray="2,1.6"/>
-          <text x="700" y="783" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="var(--clay)" text-anchor="middle">⚠</text>
-          <text x="700" y="808" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--clay)" text-anchor="middle">do not blend SRM</text>
-        </g>
-        <line x1="700" y1="780" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="700" y1="780" x2="600" y2="850" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-        <line x1="700" y1="780" x2="980" y2="850" stroke="var(--clay)" stroke-width="0.6" stroke-dasharray="1,4"/>
-
-        <!-- ✓ Rosen pervasive signal -->
-        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="rosen-pervasive" style="cursor: pointer;">
-          <circle cx="500" cy="610" r="8" fill="rgba(108,134,86,0.10)" stroke="var(--sage-ink)" stroke-width="1.4" stroke-dasharray="2,1.6"/>
-          <text x="500" y="614" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="var(--sage-ink)" text-anchor="middle">✓</text>
-          <text x="500" y="638" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--sage-ink)" text-anchor="middle">portfolio-wide vendor</text>
-        </g>
-        <line x1="500" y1="610" x2="500" y2="654" stroke="var(--sage-ink)" stroke-width="0.7" stroke-dasharray="1,4"/>
-
         <!-- Active job (clay outline) -->
         <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2014" style="cursor: pointer;">
           <circle cx="600" cy="270" r="20" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2.8"/>
@@ -3116,54 +3056,6 @@
           <text x="200" y="425" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 2 jobs</text>
         </g>
 
-        <!-- Crew/PM nodes: diamonds, ink-3 stroke -->
-        <g class="atlas-node" data-atlas-cat="crew" data-atlas-node="crew-alpha" style="cursor: pointer;">
-          <polygon points="520,524 538,540 520,556 502,540" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2"/>
-          <text x="520" y="580" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Tier-1 Crew Alpha</text>
-          <text x="520" y="593" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">8 plumbers · 4 jobs</text>
-        </g>
-
-        <g class="atlas-node" data-atlas-cat="crew" data-atlas-node="pm-garcia" style="cursor: pointer;">
-          <polygon points="660,576 676,590 660,604 644,590" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2"/>
-          <text x="660" y="628" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">PM Garcia</text>
-          <text x="660" y="641" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">project mgr · all chinn</text>
-        </g>
-
-        <g class="atlas-node" data-atlas-cat="crew" data-atlas-node="foreman-reyes" style="cursor: pointer;">
-          <polygon points="440,606 456,620 440,634 424,620" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2"/>
-          <text x="440" y="660" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Foreman Reyes</text>
-          <text x="440" y="673" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">field foreman · 2 jobs</text>
-        </g>
-
-        <!-- Insight nodes: small clay circles -->
-        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="ferguson-conc" style="cursor: pointer;">
-          <circle cx="880" cy="540" r="11" fill="var(--clay)" fill-opacity="0.18" stroke="var(--clay)" stroke-width="1.5"/>
-          <text x="880" y="544" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--clay)" text-anchor="middle">!</text>
-          <text x="880" y="568" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--clay)" text-anchor="middle">Ferguson concentration</text>
-          <text x="880" y="581" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">single point of failure</text>
-        </g>
-
-        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="wage-stability" style="cursor: pointer;">
-          <circle cx="1020" cy="480" r="9" fill="var(--clay)" fill-opacity="0.18" stroke="var(--clay)" stroke-width="1.4"/>
-          <text x="1020" y="484" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--clay)" text-anchor="middle">i</text>
-          <text x="1020" y="506" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--sage-ink)" text-anchor="middle">Wage stability</text>
-          <text x="1020" y="519" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">$0.80 spread · 5 jobs</text>
-        </g>
-
-        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="material-escalation" style="cursor: pointer;">
-          <circle cx="980" cy="620" r="10" fill="var(--clay)" fill-opacity="0.18" stroke="var(--clay)" stroke-width="1.5"/>
-          <text x="980" y="624" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--clay)" text-anchor="middle">!</text>
-          <text x="980" y="648" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--clay)" text-anchor="middle">Material escalation Q2</text>
-          <text x="980" y="661" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">copper +14% · pex +9%</text>
-        </g>
-
-        <g class="atlas-node" data-atlas-cat="insight" data-atlas-node="chinn-preferred" style="cursor: pointer;">
-          <circle cx="380" cy="540" r="9" fill="var(--clay)" fill-opacity="0.18" stroke="var(--sage-ink)" stroke-width="1.5"/>
-          <text x="380" y="544" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--sage-ink)" text-anchor="middle">★</text>
-          <text x="380" y="566" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--sage-ink)" text-anchor="middle">Chinn = preferred GC</text>
-          <text x="380" y="579" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">39.8% blended margin</text>
-        </g>
-
         <!-- Corner crosshairs -->
         <g stroke="var(--ink-3)" stroke-width="0.6">
           <line x1="35" y1="40" x2="45" y2="40"/><line x1="40" y1="35" x2="40" y2="45"/>
@@ -3172,6 +3064,103 @@
           <line x1="1195" y1="720" x2="1205" y2="720"/><line x1="1200" y1="715" x2="1200" y2="725"/>
         </g>
       </svg>
+    </div>
+
+    <!-- Cortex Observations -->
+    <div class="mt-8">
+      <div class="meta-bar mb-3">Cortex Observations</div>
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">⚠</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Bellevue labor outlier</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">#2020 Bellevue ran labor +29% over budget; 288u Pillar SRM mid-rise.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">◆</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">SRM mix · do not blend</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">SRM portfolio is 3 jobs across distinct programs (high-rise, mid-rise, senior). Don't average their KPIs.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">★</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Rosen Supply · pervasive</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">Top vendor on 8 jobs across 3 GCs. Consider portfolio-level pricing leverage.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">⚠</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Ferguson concentration</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">Single point of failure on 3 jobs (~$160k+ each). Diversify on next bid.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">◆</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Wage stability</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">$0.80 wage spread across 5 jobs · same crew tier mix.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">⚠</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Material escalation Q2</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">Copper +14%, PEX +9% during Q2 spike — pricing locked in advance on #2017/#2018.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">★</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Chinn = preferred GC</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">59.8% blended margin across 4 Chinn jobs · highest sustained GC profitability.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">◆</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Tier-1 Crew Alpha</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">8-plumber high-output crew · stable across 4 jobs.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">◆</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">PM Garcia</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">Project manager spans all Chinn jobs.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 16px;">
+          <div class="flex items-start gap-3">
+            <span style="font-size: 18px; line-height: 1; color: var(--clay);">◆</span>
+            <div>
+              <div class="text-[12px] font-semibold" style="color: var(--ink);">Foreman Reyes</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3); line-height: 1.45;">Field foreman across 2 jobs.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Legend -->
