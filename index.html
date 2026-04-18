@@ -8127,10 +8127,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     });
     // active state
     document.querySelectorAll('.sb-project').forEach(e => e.classList.toggle('active', e.dataset.project === id));
-    // render vendor card if data exists
-    // renderVendorCard removed — vendor data now in card-09 modal
-    // render all computable numbers from PROJECTS[id].num
-    renderProjectNums(id);
+    // Render computable numbers from PROJECTS[id].num — wrapped so an exception
+    // here (e.g. missing field on a LIVE project) can't block the view switch.
+    try { renderProjectNums(id); }
+    catch (e) { console.warn('renderProjectNums failed for #' + id, e); }
     // switch to project detail view so user sees update
     setView('project');
   }
@@ -8143,11 +8143,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     if (!p || !p.num) return;
     const n = p.num;
 
-    // ── Formatters ──
-    const fmt  = v => v.toLocaleString();
-    const fmtM = v => '$' + Math.round(v).toLocaleString();
-    const fmtD = (v, d) => v.toFixed(d === undefined ? 1 : d);
-    const fmtP = v => (v * 100).toFixed(1) + '%';
+    // ── Formatters ── (null-safe: LIVE projects may leave some num fields null)
+    const fmt  = v => (v == null || isNaN(v)) ? '—' : v.toLocaleString();
+    const fmtM = v => (v == null || isNaN(v)) ? '—' : '$' + Math.round(v).toLocaleString();
+    const fmtD = (v, d) => (v == null || isNaN(v)) ? '—' : v.toFixed(d === undefined ? 1 : d);
+    const fmtP = v => (v == null || isNaN(v)) ? '—' : (v * 100).toFixed(1) + '%';
 
     // ── Computed metrics ──
     const blendedWage = n.hours > 0 ? n.labor / n.hours : 0;
