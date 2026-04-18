@@ -2256,7 +2256,7 @@
   <div class="view" data-view="pipeline">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">Ingestion status</span>
-      <span class="chip-sage">31 projects parsed</span>
+      <span class="chip-sage">31 closed parsed + 1 LIVE</span>
       <span class="chip-clay">187 duplicate groups</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
@@ -3064,6 +3064,30 @@
           <div class="kpi-row"><span class="kpi-lbl">Parse confidence</span><span class="kpi-val" style="color: var(--sage-ink);">94.6%</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val" style="color: var(--clay);">1 · retainage aging</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 17, 2026</span></div>
+        </div>
+
+        <!-- #2104 BMDC Big 1410 — LIVE / in-progress -->
+        <div class="card" style="padding: 24px 26px; border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--clay); font-family: 'JetBrains Mono', monospace; font-weight: 700;">#2104 · bmdc · <span style="background: var(--clay); color: var(--cream); padding: 1px 6px; border-radius: 2px; font-size: 9px; letter-spacing: 0.08em; margin-left: 2px;">LIVE</span></div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Big 1410 Apartments</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">24 units · $1.20M contract · 99.76% billed · in trim</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">⚠ in progress · AP posting</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">248</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">221</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">203</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">partial</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Live SOVs ingested</span><span class="kpi-val">18 of 18 monthly pay apps</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Change orders</span><span class="kpi-val">4 executed ($52.7k) · 1 cancelled</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val" style="color: var(--clay);">3 · final vendor ledger at closeout</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 18, 2026 (daily)</span></div>
         </div>
 
       </div>
@@ -9701,30 +9725,36 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   /* ============ PORTFOLIO GRID ============ */
   function portfolioCardHTML(id){
     const p = PROJECTS[id];
-    return `<div class="kpi" style="cursor:pointer; height:100%;" onclick="applyProject('${id}')">
+    const isLive = (PROJECT_STAGES.active || []).includes(id);
+    const borderStyle = isLive ? 'border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);' : '';
+    const liveChip = isLive ? `<span style="display:inline-block; background: var(--clay); color: var(--cream); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; padding: 2px 7px; border-radius: 3px; vertical-align: middle; margin-left: 8px;">LIVE</span>` : '';
+    const ctaText  = isLive ? 'Open live report →' : 'Open report →';
+    return `<div class="kpi" style="cursor:pointer; height:100%; ${borderStyle}" onclick="applyProject('${id}')">
       <div>
-        <div class="kpi-eyebrow">JOB ${p.jobNum} · ${id}</div>
+        <div class="kpi-eyebrow">JOB ${p.jobNum} · ${id}${liveChip}</div>
         <div class="kpi-title" style="margin-top:12px; min-height:54px; line-height:1.22;"><b>${p.jobTop}</b> <span class="serif-it">${p.jobBottom}</span></div>
         <div class="kpi-sub" style="min-height:36px;">${p.gcShort} · ${p.location}</div>
         <div class="kpi-divider"></div>
         <div class="flex items-baseline justify-between">
-          <div><div class="kpi-val-big italic">${p.revenue}</div><div class="hero-lab mt-2">Revenue</div></div>
-          <div class="text-right"><div class="kpi-val-big italic" style="color:var(--sage-ink);">${p.k01_margin}</div><div class="hero-lab mt-2">Margin</div></div>
+          <div><div class="kpi-val-big italic">${p.revenue}</div><div class="hero-lab mt-2">${isLive ? 'Revenue (billed)' : 'Revenue'}</div></div>
+          <div class="text-right"><div class="kpi-val-big italic" style="color:var(--sage-ink);">${p.k01_margin}</div><div class="hero-lab mt-2">${isLive ? 'Forecast margin' : 'Margin'}</div></div>
         </div>
         <div class="kpi-divider"></div>
-        <div class="kpi-row"><span class="kpi-lbl">Net profit</span><span class="kpi-val" style="color:var(--sage-ink);">${p.profit}</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">${isLive ? 'Forecast profit' : 'Net profit'}</span><span class="kpi-val" style="color:var(--sage-ink);">${p.profit}</span></div>
         <div class="kpi-row"><span class="kpi-lbl">Direct cost</span><span class="kpi-val">${p.k01_directCost}</span></div>
         <div class="kpi-row"><span class="kpi-lbl">Change orders</span><span class="kpi-val">${p.k01_co}</span></div>
         <div class="kpi-row"><span class="kpi-lbl">Workforce</span><span class="kpi-val">${p.workforce}</span></div>
       </div>
       <div style="margin-top:auto; padding-top:18px;">
         <div style="border-top:1px dashed var(--border-2); margin-bottom:14px;"></div>
-        <div class="text-[11px] mono" style="color:var(--clay);">Open report →</div>
+        <div class="text-[11px] mono" style="color:var(--clay);">${ctaText}</div>
       </div>
     </div>`;
   }
   function renderPortfolio(){
-    const html = PROJECT_ORDER.map(portfolioCardHTML).join('');
+    // Active (LIVE) projects first, then closed in chronological order.
+    const activeIds = (PROJECT_STAGES.active || []).filter(id => PROJECTS[id]);
+    const html = [...activeIds, ...PROJECT_ORDER].map(portfolioCardHTML).join('');
     const a = document.getElementById('portfolio-grid'); if(a) a.innerHTML = html;
     const b = document.getElementById('home-portfolio-grid'); if(b) b.innerHTML = html;
   }
