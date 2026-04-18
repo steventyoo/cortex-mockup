@@ -987,6 +987,100 @@
 </style>
 </head>
 <body>
+
+<!-- ============ CORTEX GATE · simple client-side password overlay ============ -->
+<!-- Mockup-level protection only. Password is in-source, view-source bypasses.
+     Upgrade to Vercel Deployment Protection (Pro plan) or Edge Middleware
+     Basic-Auth for real protection. -->
+<style>
+  #cortex-gate {
+    position: fixed; inset: 0; z-index: 999999;
+    background: #F5F1EB; color: #1F1E1D;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: -0.005em;
+  }
+  #cortex-gate.ok { display: none; }
+  .cortex-gate-card {
+    width: min(92vw, 420px);
+    background: #FFFFFF; border: 1px solid #D2CCC0; border-radius: 14px;
+    padding: 38px 38px 34px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .cortex-gate-logo {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 22px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: #6B6762;
+  }
+  .cortex-gate-logo svg { width: 18px; height: 18px; }
+  .cortex-gate-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 34px; line-height: 1.05; margin-bottom: 6px; color: #1F1E1D;
+  }
+  .cortex-gate-sub {
+    font-size: 13px; color: #6B6762; line-height: 1.5; margin-bottom: 22px;
+  }
+  #cortex-gate-input {
+    width: 100%; padding: 12px 14px; font-size: 15px;
+    border: 1px solid #D2CCC0; border-radius: 8px;
+    background: #FAF7F1; color: #1F1E1D; outline: none; margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em;
+  }
+  #cortex-gate-input:focus { border-color: #1F1E1D; background: #FFFFFF; }
+  #cortex-gate-btn {
+    width: 100%; padding: 11px 14px; font-size: 12px;
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    background: #1F1E1D; color: #F5F1EB; border: none; border-radius: 999px;
+    cursor: pointer; transition: background 0.15s ease;
+  }
+  #cortex-gate-btn:hover { background: #000; }
+  #cortex-gate-err {
+    color: #B85C3E; font-size: 12px; margin-top: 10px; min-height: 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+<div id="cortex-gate" role="dialog" aria-modal="true">
+  <div class="cortex-gate-card">
+    <div class="cortex-gate-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L4 22 L12 17 L20 22 Z"/></svg>
+      <span>Cortex · One Way Plumbing</span>
+    </div>
+    <div class="cortex-gate-title">Preview <span style="font-style:italic;">access</span>.</div>
+    <div class="cortex-gate-sub">This mockup is password-protected. Enter the passphrase shared with you to continue.</div>
+    <input id="cortex-gate-input" type="password" placeholder="passphrase" autocomplete="off" autofocus />
+    <button id="cortex-gate-btn">Enter</button>
+    <div id="cortex-gate-err"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY = 'cortex_gate_ok_v1';
+  var PW  = 'cortex2026';
+  var gate = document.getElementById('cortex-gate');
+  if (sessionStorage.getItem(KEY) === '1' || localStorage.getItem(KEY) === '1') {
+    gate.classList.add('ok');
+    return;
+  }
+  document.body.style.overflow = 'hidden';
+  var input = document.getElementById('cortex-gate-input');
+  var btn   = document.getElementById('cortex-gate-btn');
+  var err   = document.getElementById('cortex-gate-err');
+  function tryUnlock(){
+    if (input.value === PW) {
+      sessionStorage.setItem(KEY, '1');
+      localStorage.setItem(KEY, '1'); // remember across tabs
+      gate.classList.add('ok');
+      document.body.style.overflow = '';
+    } else {
+      err.textContent = '× incorrect passphrase';
+      input.value = ''; input.focus();
+    }
+  }
+  btn.addEventListener('click', tryUnlock);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') tryUnlock(); });
+})();
+</script>
+<!-- ============ END CORTEX GATE ============ -->
+
 <div class="ruler-bg"></div>
 
 <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">
