@@ -3750,8 +3750,15 @@
         <div>
           <div class="hero-lab">General contractor</div>
           <select id="bid-gc" class="bid-input">
-            <option value="chinn">Chinn — 4 jobs · 39.8% blended</option>
-            <option value="exxel">Exxel — 2 jobs · 34.0% blended</option>
+            <option value="exxel">Exxel Pacific — 13 jobs</option>
+            <option value="srm">SRM Development — 5 jobs</option>
+            <option value="chinn">Chinn Construction — 4 jobs</option>
+            <option value="compass">Compass Harbor — 3 jobs</option>
+            <option value="natbuilt">Natural &amp; Built — 2 jobs</option>
+            <option value="blueprint">Blueprint Capital — 2 jobs</option>
+            <option value="synergy">Synergy Construction — 1 job</option>
+            <option value="marpac">Marpac — 1 job</option>
+            <option value="shelter">Shelter Holdings — 1 job</option>
             <option value="new">New / unknown — no history</option>
           </select>
         </div>
@@ -9714,11 +9721,16 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
   /* ============ BID INTELLIGENCE — interactive assumptions ============ */
   const GC_DB = {
-    chinn:    { name: 'Chinn Construction',  jobs: 3, blendedMargin: 41.0, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 78, coDetail: '11 of 14 submitted, 3 jobs',  projects: '#2009, #2010, #2011',                      source: "Chinn blended (3 jobs)",  winRate: 41, knownTag: '✓ Known GC · 3 closed jobs in portfolio' },
-    exxel:    { name: 'Exxel Pacific',       jobs: 7, blendedMargin: 33.0, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '34 of 51 submitted, 7 jobs', projects: '#2001, #2012, #2015, #2017, #2019, #2021, #2022', source: "Exxel blended (7 jobs)",  winRate: 38, knownTag: '✓ Known GC · 7 closed jobs in portfolio' },
-    srm:      { name: 'SRM Development',     jobs: 3, blendedMargin: 32.6, payLag: 53, payLagDelta: 'industry median 58d',     coRate: 71, coDetail: '17 of 24 submitted, 3 jobs',  projects: '#2008, #2018, #2020',                      source: "SRM blended (3 jobs)",   winRate: 33, knownTag: '⚠ Mixed track record · 3 closed jobs (Astro 46.5%, Taylor 22.3%, Bellevue 32.3%)' },
-    natbuilt: { name: 'Natural & Built',     jobs: 1, blendedMargin: 29.5, payLag: 44, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '4 of 5 submitted, 1 job',     projects: '#2016',                                    source: "Natural & Built (1 job)", winRate: 22, knownTag: '✓ Known GC · 1 closed job in portfolio' },
-    'new':    { name: 'Unknown / new GC',    jobs: 0, blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',                          source: 'portfolio average',        winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
+    chinn:    { name: 'Chinn Construction',  jobs: 4,  blendedMargin: 39.8, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 78, coDetail: '11 of 14 submitted, 4 jobs', projects: '#2009, #2010, #2011, #2023',                                                                        source: "Chinn blended (4 jobs)",         winRate: 41, knownTag: '✓ Known GC · 4 closed jobs in portfolio' },
+    exxel:    { name: 'Exxel Pacific',       jobs: 13, blendedMargin: 34.0, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '34 of 51 submitted, 13 jobs', projects: '#2001, #2012, #2015, #2017, #2019, #2021, #2022, #2025, #2027, #2028, #2029, #2030, #2031, #2036', source: "Exxel blended (13 jobs)",        winRate: 38, knownTag: '✓ Known GC · 13 closed jobs in portfolio' },
+    srm:      { name: 'SRM Development',     jobs: 5,  blendedMargin: 32.6, payLag: 53, payLagDelta: 'industry median 58d',     coRate: 71, coDetail: '17 of 24 submitted, 5 jobs',  projects: '#2001, #2008, #2018, #2020, #2024',                                                                 source: "SRM blended (5 jobs)",           winRate: 33, knownTag: '⚠ Mixed track record · 5 closed jobs (spread Astro 46.5% → Taylor 22.3%)' },
+    natbuilt: { name: 'Natural & Built',     jobs: 2,  blendedMargin: 39.6, payLag: 44, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '4 of 5 submitted, 2 jobs',     projects: '#2016, #2035',                                                                                      source: "Natural & Built blended (2 jobs)", winRate: 24, knownTag: '✓ Known GC · 2 closed jobs in portfolio' },
+    compass:  { name: 'Compass Harbor',      jobs: 3,  blendedMargin: 37.0, payLag: 72, payLagDelta: 'slow · 7+ yr retainage tail', coRate: 60, coDetail: '13 of 18 submitted, 3 jobs',projects: '#2033, #2034, #2038',                                                                               source: "Compass blended (3 jobs)",       winRate: 28, knownTag: '⚠ OCIP wrap · long retainage tail (7+ yrs), 3 closed jobs' },
+    blueprint:{ name: 'Blueprint Capital',   jobs: 2,  blendedMargin: 33.6, payLag: 55, payLagDelta: 'industry median 58d',     coRate: 62, coDetail: '8 of 13 submitted, 2 jobs',    projects: '#2032, #2040',                                                                                      source: "Blueprint blended (2 jobs)",     winRate: 25, knownTag: '✓ Known GC · 2 closed jobs in portfolio' },
+    synergy:  { name: 'Synergy Construction',jobs: 1,  blendedMargin: 33.4, payLag: 58, payLagDelta: 'thin data · 1 job',       coRate: 55, coDetail: 'thin data, 1 job',             projects: '#2026',                                                                                             source: "Synergy (1 job)",                winRate: 22, knownTag: '⚠ Thin data · only 1 closed job in portfolio' },
+    marpac:   { name: 'Marpac',              jobs: 1,  blendedMargin: 41.4, payLag: 50, payLagDelta: 'thin data · 1 job',       coRate: 67, coDetail: 'thin data, 1 job',             projects: '#2037',                                                                                             source: "Marpac (1 job)",                 winRate: 24, knownTag: '⚠ Thin data · only 1 closed job, strong margin on #2037' },
+    shelter:  { name: 'Shelter Holdings',    jobs: 1,  blendedMargin: 64.4, payLag: 45, payLagDelta: 'thin data · 1 HOA job',   coRate: 100, coDetail: 'no COs, 1 HOA gas job',       projects: '#2039',                                                                                             source: "Shelter (1 HOA job)",            winRate: 20, knownTag: '⚠ Thin data · HOA remediation work only (#2039)' },
+    'new':    { name: 'Unknown / new GC',    jobs: 0,  blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',                                                                                  source: 'portfolio average',              winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
   };
 
   // ------------------------------------------------------------------
@@ -10474,6 +10486,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
           <div class="kpi-row"><span class="kpi-lbl">$ / fixture</span><span class="kpi-val tabular">${perFx ? '$' + Math.round(perFx).toLocaleString() : '—'}</span></div>
           <div class="kpi-row"><span class="kpi-lbl">$ / fx @ 2026</span><span class="kpi-val tabular" style="color: var(--clay);">${escalated ? '$' + Math.round(escalated).toLocaleString() : '—'}</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Realized margin</span><span class="kpi-val tabular" style="color: var(--sage-ink);">${marginPct!=null ? marginPct.toFixed(1) + '%' : '—'}</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Contract</span><span class="kpi-val tabular">${rev ? bidFmtMoney(rev) : '—'}</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Total cost</span><span class="kpi-val tabular">${direct ? bidFmtMoney(direct) : '—'}</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Net profit</span><span class="kpi-val tabular">${n.profit ? bidFmtMoney(n.profit) : '—'}</span></div>
         </div>`;
       }).join('');
@@ -10618,6 +10632,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const isMidRise = /mid-rise|highrise|high-rise/.test(desc);
       const storiesGuess = /\b(\d)-story\b/.exec(desc)?.[1] || '—';
       const gcShort = (p.gcShort || p.gc || '—').split(',')[0].split(' (')[0];
+      const compYear         = projYear(p) || 2020;
+      const compContract     = nA.revenue || nA.origContract || 0;
+      const compContract2026 = compContract ? escalateTo2026(compContract, compYear) : 0;
       const attrs = [
         { label: 'Units',              bid: '220',                                   comp: (nA.units||'—') + '' },
         { label: 'Fixtures (predicted)', bid: c.totalFixtures.toLocaleString(),      comp: anchor.fx.toLocaleString() },
@@ -10628,6 +10645,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         { label: 'Schedule',           bid: BID.months + ' mo',                      comp: (nA.months ? nA.months + ' mo' : '—') },
         { label: 'GC',                 bid: gc.name,                                 comp: gcShort },
         { label: 'Geography',          bid: 'Bellevue downtown',                     comp: (p.location || '').split(',')[0] || 'Seattle metro' },
+        { label: 'Contract price',     bid: bidFmtMoney(c.recommendedBid) + ' <span style="color:var(--ink-4); font-size:10.5px;">(2026 $)</span>', comp: compContract ? bidFmtMoney(compContract) + ' <span style="color:var(--ink-4); font-size:10.5px;">(' + compYear + ' $)</span>' : '—' },
+        { label: 'Contract price @ 2026', bid: bidFmtMoney(c.recommendedBid),        comp: compContract2026 ? bidFmtMoney(compContract2026) + ' <span style="color:var(--clay); font-size:10.5px;">(+' + ((Math.pow(1.035, 2026 - compYear) - 1) * 100).toFixed(1) + '% esc.)</span>' : '—' },
       ];
       const matrixRows = attrs.map(a => {
         const same = (String(a.bid).toLowerCase() === String(a.comp).toLowerCase());
