@@ -1175,7 +1175,6 @@
     <div class="blueprint mb-12" id="skyline-hero" style="padding: 28px 36px 36px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 01 / the portfolio — elevation</div>
       <div class="blueprint-corner" style="top: 12px; right: 14px;">scale · n.t.s.</div>
-      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">seattle · one way plumbing llc</div>
       <div class="blueprint-corner" data-tot="skylineCorner" style="bottom: 12px; right: 14px;">4 jobs · 613 units · $4.04m</div>
       <div id="skyline-svg-wrap"></div>
     </div>
@@ -8593,8 +8592,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   /* ============ PORTFOLIO SKYLINE HERO ============ */
   // Derived from PROJECTS — adding to PROJECT_ORDER inserts a building.
   function getSkyline(){
-    // Closed jobs (via PROJECT_ORDER) + active jobs appended on the right.
-    const ids = [...PROJECT_ORDER, ...(PROJECT_STAGES.active || []).filter(id => PROJECTS[id])];
+    // Live jobs on the far left (most current), followed by bidding, then closed
+    // jobs in chronological order (oldest \u2192 newest via PROJECT_ORDER).
+    const active  = (PROJECT_STAGES.active  || []).filter(id => PROJECTS[id]);
+    const bidding = (PROJECT_STAGES.bidding || []).filter(id => PROJECTS[id]);
+    const ids = [...active, ...bidding, ...PROJECT_ORDER];
     return ids.map(id => {
       const p = PROJECTS[id];
       return {
