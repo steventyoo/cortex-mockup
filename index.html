@@ -9083,16 +9083,33 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   }
 
   // Restore view from URL hash on load so refresh preserves the current page.
+  // Helper: project / live-project views need a project context. If the hash
+  // restores to one of those views without an active selection, default to
+  // the first applicable project so the user doesn't see an empty template.
+  function _restoreProjectContext(v) {
+    if (v === 'live-project') {
+      const firstActive = (PROJECT_STAGES.active || [])[0];
+      if (firstActive && PROJECTS[firstActive]) { applyProject(firstActive); return true; }
+    }
+    if (v === 'project') {
+      const firstClosed = (PROJECT_STAGES.closed || PROJECT_ORDER || [])[0];
+      if (firstClosed && PROJECTS[firstClosed]) { applyProject(firstClosed); return true; }
+    }
+    return false;
+  }
   (function restoreViewFromHash(){
     const v = (location.hash || '').replace(/^#/, '');
     if (!v) return;
     if (document.querySelector('.view[data-view="' + v + '"]')) {
+      // For project/live-project hashes, route through applyProject so data populates.
+      if (_restoreProjectContext(v)) return;
       setView(v, { skipScroll: true, skipHash: true });
     }
   })();
   window.addEventListener('hashchange', () => {
     const v = (location.hash || '').replace(/^#/, '') || 'home';
     if (document.querySelector('.view[data-view="' + v + '"]')) {
+      if (_restoreProjectContext(v)) return;
       setView(v, { skipScroll: true, skipHash: true });
     }
   });
