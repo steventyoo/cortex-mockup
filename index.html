@@ -10487,8 +10487,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
           <div class="kpi-row"><span class="kpi-lbl">$ / fx @ 2026</span><span class="kpi-val tabular" style="color: var(--clay);">${escalated ? '$' + Math.round(escalated).toLocaleString() : '—'}</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Realized margin</span><span class="kpi-val tabular" style="color: var(--sage-ink);">${marginPct!=null ? marginPct.toFixed(1) + '%' : '—'}</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Contract</span><span class="kpi-val tabular">${rev ? bidFmtMoney(rev) : '—'}</span></div>
+          <div class="kpi-row"><span class="kpi-lbl" style="font-size:10.5px; color:var(--ink-4); padding-left:12px;">→ @ 2026</span><span class="kpi-val tabular" style="color: var(--clay);">${rev ? bidFmtMoney(escalateTo2026(rev, year)) : '—'}</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Total cost</span><span class="kpi-val tabular">${direct ? bidFmtMoney(direct) : '—'}</span></div>
+          <div class="kpi-row"><span class="kpi-lbl" style="font-size:10.5px; color:var(--ink-4); padding-left:12px;">→ @ 2026</span><span class="kpi-val tabular" style="color: var(--clay);">${direct ? bidFmtMoney(escalateTo2026(direct, year)) : '—'}</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Net profit</span><span class="kpi-val tabular">${n.profit ? bidFmtMoney(n.profit) : '—'}</span></div>
+          <div class="kpi-row"><span class="kpi-lbl" style="font-size:10.5px; color:var(--ink-4); padding-left:12px;">→ @ 2026</span><span class="kpi-val tabular" style="color: var(--clay);">${n.profit ? bidFmtMoney(escalateTo2026(n.profit, year)) : '—'}</span></div>
         </div>`;
       }).join('');
       compsEl.innerHTML = `
