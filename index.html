@@ -2132,7 +2132,7 @@
     <div class="mt-14"><div class="meta-bar mb-4">A · Labor burn curve — actual vs historical baseline</div>
       <div class="card" style="padding: 20px;">
         <div class="text-[11px]" style="color: var(--ink-3);" data-lf="burnNote">Cumulative labor hours through % of job complete. Baseline = avg of comparable closed jobs normalized.</div>
-        <div id="live-burn-svg" style="margin-top: 16px; height: 280px;"></div>
+        <div id="live-burn-svg" style="margin-top: 16px; width: 100%; height: 280px; max-height: 280px; overflow: hidden;"></div>
         <div class="flex items-center gap-4 mt-2 text-[10px] uppercase tracking-wider" style="color: var(--ink-4);">
           <span><span style="display:inline-block; width:14px; height:2px; background: var(--ink); vertical-align: middle;"></span> Baseline</span>
           <span><span style="display:inline-block; width:14px; height:2px; background: var(--clay); vertical-align: middle;"></span> Actual</span>
@@ -7743,7 +7743,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const xFor = pct => padL + (pct / 100) * plotW;
     const yFor = hrs => padT + (1 - hrs / maxHrs) * plotH;
 
-    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%; height:auto; display:block;" preserveAspectRatio="xMidYMid meet">';
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%; height:100%; display:block;" preserveAspectRatio="none">';
     svg += '<rect x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="none" stroke="var(--border-2)" stroke-width="0.8"/>';
     for (let i = 1; i < 5; i++) {
       const y = padT + (i/5) * plotH;
