@@ -3739,10 +3739,11 @@
         </div>
         <div>
           <div class="hero-lab flex items-center gap-2">
-            <span>Contract $ / fixture (2026 $)</span>
+            <span>Direct cost $ / fixture (2026 $)</span>
             <button type="button" class="cortex-info" data-info="cpf" aria-label="Why this number?">i</button>
           </div>
           <input type="number" id="bid-cpf" value="1550" min="400" max="3500" step="10" class="bid-input" />
+          <div class="text-[10.5px] mt-1" style="color: var(--ink-4); font-style: italic;">→ derived contract: <span id="bid-derived-contract-pf" class="mono" style="color: var(--clay); font-style: normal;">—</span>/fx</div>
         </div>
       </div>
 
@@ -3928,7 +3929,7 @@
         <div class="card" style="height: 100%;">
           <div class="card-label">Confidence</div>
           <div class="text-[44px] serif-it mt-2" style="color: var(--clay); line-height: 1;" id="bid-confidence-label">Medium</div>
-          <div class="text-[12px] mt-2" style="color: var(--ink-3);">Cortex parsed 32 cost codes across 4 closed jobs (#2009–#2012, smaller scale ≈ <b>$1,290/fx contract</b> in 2026 $). Default is anchored at <b>$1,550/fx</b> — the scope profile of the larger comparables (#2001, #2008) that match Bellevue 220's fixture count. All anchors expressed in 2026 $ (escalated 3.5%/yr).</div>
+          <div class="text-[12px] mt-2" style="color: var(--ink-3);">Cortex parsed 32 cost codes across 4 closed jobs (#2009–#2012, smaller scale ≈ <b>$1,290/fx direct cost</b> in 2026 $). Default is anchored at <b>$1,550/fx direct cost</b> — the scope profile of the larger comparables (#2001, #2008) that match Bellevue 220's fixture count. All figures are direct cost in 2026 $ (escalated 3.5%/yr); contingency + escalation + margin are applied separately to derive the contract bid price.</div>
 
           <div class="kpi-divider mt-5"></div>
           <div class="kpi-row"><span class="kpi-lbl">Cost codes parsed</span><span class="kpi-val tabular">32 codes</span></div>
@@ -9916,6 +9917,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     set('bid-banner-bid-large',     bidFmtMoney(c.recommendedBid));
     set('bid-banner-margin2',       bidFmtPct(BID.margin));
     set('bid-banner-profit',        bidFmtMoney(c.profit));
+    // Derived contract $/fx readout (shown under the cost-per-fixture slider)
+    const derivedContractPf = c.totalFixtures > 0 ? c.recommendedBid / c.totalFixtures : 0;
+    set('bid-derived-contract-pf', '$' + Math.round(derivedContractPf).toLocaleString('en-US'));
 
     // ---------- Cortex reasoning trace ----------
     // This is the LLM's explicit judgment layer: it names the tier, flags the
@@ -9959,10 +9963,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         <div>
           <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Data source reconciliation <span style="color: var(--clay); font-weight: 500; font-size: 11px; margin-left: 6px;">⚠ two layers disagreed — I chose the comparables</span></div>
           <div style="margin-top: 2px;">
-            Code-level parse covers the <b>4 smaller production jobs</b> only (#2009–#2012, avg 755 fx), mean contract $${parsedBase}/fx nominal <span style="color: var(--ink-4);">(≈ <b>$1,290/fx in 2026 $</b> after 3.5%/yr escalation over ~13 yrs)</span>.
-            Closest scope comparables in the card above (#2001 at $1,613/fx, #2008 at $1,304/fx nominal) escalate to roughly <b>$2,100–$2,700/fx in 2026 $</b> — almost 2× the smaller-job base.
+            Code-level parse covers the <b>4 smaller production jobs</b> only (#2009–#2012, avg 755 fx), mean direct cost $${parsedBase}/fx nominal <span style="color: var(--ink-4);">(≈ <b>$1,290/fx in 2026 $</b> after 3.5%/yr escalation over ~13 yrs)</span>.
+            Closest scope comparables (#2001, #2008) ran higher — their direct cost per fixture in 2026 $ sits in the <b>$1,500–$1,700/fx</b> band — the production-job base understates the mid-rise scope.
             Using the nominal $${parsedBase} as the default would underbid a ${tier.label.toLowerCase()} job by roughly <b>${bidFmtMoneyM((tierAnchor - parsedBase) * c.totalFixtures / (1 - BID.margin/100))}</b>.
-            <span style="display: block; margin-top: 4px; color: var(--sage-ink); font-weight: 600;">→ I anchored the default at $${tierAnchor.toLocaleString('en-US')}/fx (2026 $). Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios across labor / material / overhead / burden.</span>
+            <span style="display: block; margin-top: 4px; color: var(--sage-ink); font-weight: 600;">→ Anchored the direct-cost default at $${tierAnchor.toLocaleString('en-US')}/fx (2026 $). Contingency, escalation, and margin are applied on top to derive the contract bid. Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios across labor / material / overhead / burden.</span>
           </div>
         </div>
 
@@ -10555,7 +10559,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
               <div class="kpi-row"><span class="kpi-lbl">Realized margin</span><span class="kpi-val tabular" style="color: var(--sage-ink);">${marginA!=null ? marginA.toFixed(1)+'%' : '—'}</span></div>
             </div>
             <div class="mt-3 text-[11px]" style="color: var(--ink-3); line-height: 1.6;">
-              Cortex scales this comp's actual mix by ×${c.scale.toFixed(2)} (ratio of your tier contract $${c.tier.cpf}/fx in 2026 $ to the portfolio nominal base $${PORTFOLIO_PF_BASE}/fx) to produce the predicted buildup in Section C.
+              Cortex scales this comp's actual mix by ×${c.scale.toFixed(2)} (ratio of your tier direct cost anchor $${c.tier.cpf}/fx in 2026 $ to the portfolio nominal base $${PORTFOLIO_PF_BASE}/fx) to produce the predicted buildup in Section C. Margin and escalation are applied separately to reach the contract bid.
             </div>
           </div>
         </div>`;
@@ -10771,9 +10775,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       title = `${BID.months}-month schedule fits the tier`;
       body = `Comparable mid-rise jobs in the portfolio averaged <b>20–24 months</b> from mobilization to punchlist. ${BID.months}mo lands inside that band.<br><br>Risk tied to schedule: a ${BID.months}-month window means at least one commodity buyout cycle. Copper is +14% YoY — every additional month lengthens material escalation exposure by ~0.6% on the rough-in line.<br><br><b>Lock copper riser + PEX manifold pricing within 30 days of award</b> to defuse this.`;
     } else if (kind === 'cpf') {
-      eyebrow = 'Cortex reasoning · Contract $ / fixture';
+      eyebrow = 'Cortex reasoning · Direct cost $ / fixture';
       title  = `Anchored at $${c.tier.cpf.toLocaleString('en-US')}/fx in 2026 $ (${c.tier.label.toLowerCase()})`;
-      body = `Code-level parse from the 4 smaller production jobs (#2009–#2012) gives a mean of <b>$${PORTFOLIO_PF_BASE}/fx nominal</b> (≈ $1,290/fx in 2026 $ after 3.5%/yr escalation).<br><br>Closest scope comparables in the card above — <b>#2001</b> ($1,613/fx nominal in 2011) and <b>#2008</b> ($1,304/fx nominal in 2012) — escalate to <b>~$2,100–$2,700/fx in 2026 $</b>, almost 2× the smaller-job base.<br><br>I anchored the default at <b>$${c.tier.cpf.toLocaleString('en-US')}/fx (2026 $)</b> based on the tier match (${c.tier.analogs}). The per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios across labor / material / overhead / burden.<br><br>Slider runs $400–$3,500 — drop it for production-scope work, raise it for luxury / high-spec. All figures in 2026 $.`;
+      body = `<b>This slider is the direct cost anchor, not the bid price.</b> Cortex takes your cpf × fixtures to scale the per-code cost codes (labor/material/overhead/burden), then adds contingency + escalation + margin on top to derive the recommended contract bid. The contract $/fx that comes out the other side is higher than what you input here.<br><br>Code-level parse from the 4 smaller production jobs (#2009–#2012) gives a mean of <b>$${PORTFOLIO_PF_BASE}/fx direct cost nominal</b> (≈ $1,290/fx in 2026 $ after 3.5%/yr escalation).<br><br>Closest scope comparables (#2001, #2008) run roughly <b>$1,500–$1,700/fx direct cost in 2026 $</b> — the production-job base understates mid-rise scope.<br><br>Anchored default <b>$${c.tier.cpf.toLocaleString('en-US')}/fx (2026 $)</b> based on the tier match (${c.tier.analogs}). Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios.<br><br>Slider runs $400–$3,500. Drop it for production-scope work, raise it for luxury / high-spec.`;
     }
     const pop = document.createElement('div');
     pop.className = 'cortex-popover';
