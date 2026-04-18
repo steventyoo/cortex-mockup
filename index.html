@@ -2179,18 +2179,26 @@
 
     <div class="mt-12 p-5 rounded-xl" style="background: var(--cream-card); border: 1px solid var(--border-2);">
       <div class="flex items-center justify-between flex-wrap gap-4">
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 flex-wrap">
+          <!-- Mode toggle: Actual (default) vs Adjusted -->
           <div>
+            <div class="hero-lab" style="font-size: 10px;">Dollar view</div>
+            <div id="bench-mode-toggle" class="flex items-center mt-2 p-1 rounded-full" style="background: var(--cream-soft); border: 1px solid var(--border-2);">
+              <button type="button" class="bench-mode-pill is-active" data-bench-mode="actual" style="padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: none; cursor: pointer; background: var(--ink); color: var(--cream);">● Actual $</button>
+              <button type="button" class="bench-mode-pill" data-bench-mode="adjusted" style="padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: none; cursor: pointer; background: transparent; color: var(--ink-3);">○ Adjusted</button>
+            </div>
+          </div>
+          <div style="border-left: 1px solid var(--border-2); height: 42px; margin: 0 8px;"></div>
+          <div id="bench-adj-controls" style="opacity: 0.45; pointer-events: none; transition: opacity 0.15s ease;">
             <div class="hero-lab" style="font-size: 10px;">Adjust dollars to year</div>
             <div class="flex items-center gap-3 mt-2">
               <span class="mono text-[11px]" style="color: var(--ink-4);">2011</span>
-              <input id="bench-year-slider" type="range" min="2011" max="2026" value="2026" step="1" style="width: 280px;" />
+              <input id="bench-year-slider" type="range" min="2011" max="2026" value="2026" step="1" style="width: 240px;" />
               <span class="mono text-[11px]" style="color: var(--ink-4);">2026</span>
               <span id="bench-year-label" class="mono text-[12px] font-semibold" style="color: var(--clay); margin-left: 12px;">2026 (today)</span>
             </div>
           </div>
-          <div style="border-left: 1px solid var(--border-2); height: 42px; margin: 0 8px;"></div>
-          <div>
+          <div id="bench-idx-controls" style="opacity: 0.45; pointer-events: none; transition: opacity 0.15s ease;">
             <div class="hero-lab" style="font-size: 10px;">Inflation index</div>
             <select id="bench-index-select" class="mono text-[12px] mt-2" style="background: var(--cream); border: 1px solid var(--border-2); border-radius: 6px; padding: 6px 10px; color: var(--ink); cursor: pointer;">
               <option value="BCI" selected>ENR BCI · Building Cost (default)</option>
@@ -2205,8 +2213,8 @@
           <button id="bench-reset" class="text-[11px] mono" style="color: var(--ink-3); padding: 6px 10px;">↺ Reset</button>
         </div>
       </div>
-      <div class="text-[11px] mt-3" style="color: var(--ink-4); line-height: 1.5; max-width: 780px;">
-        Slide to adjust all dollar figures in the table below to a target year. Ratios (margins, percentages, hours) are unchanged. Hover any adjusted cell to see the original value and the adjustment factor applied.
+      <div class="text-[11px] mt-3" style="color: var(--ink-4); line-height: 1.5; max-width: 860px;">
+        <span id="bench-mode-help"><b style="color: var(--ink-2);">Actual $:</b> values shown exactly as recorded on each project's JDR (nominal dollars, not cross-era comparable). Click <b>Adjusted</b> to scale older jobs into today's dollars for apples-to-apples comparison.</span>
       </div>
     </div>
 
@@ -9188,6 +9196,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
   let _benchYear = 2026;
   let _benchIndex = 'BCI';
+  let _benchMode = 'actual';  // 'actual' (default) or 'adjusted'
 
   // Metric definitions — `get` is called per project to derive the value.
   // Adding a project to PROJECT_ORDER auto-extends every column in the table.
@@ -9259,7 +9268,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const groups = BENCH_METRICS.map(([label, rows]) => [label, rows.map(r => {
       const raw = PROJECT_ORDER.map(id => r.get(PROJECTS[id]));
       const years = PROJECT_ORDER.map(id => benchProjectYear(PROJECTS[id]));
-      const factors = PROJECT_ORDER.map((id, i) => (r.adj && _benchYear !== years[i])
+      // Inflation only applies in 'adjusted' mode; in 'actual' mode factors are all 1.
+      const factors = PROJECT_ORDER.map((id, i) => (_benchMode === 'adjusted' && r.adj && _benchYear !== years[i])
         ? benchInflationFactor(years[i], _benchYear, _benchIndex) : 1);
       const v = raw.map((val, i) => val * factors[i]);
       return {
@@ -9416,30 +9426,87 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   }
   renderBench();
 
-  // Inflation slider + index wiring
+  // Inflation slider + index + mode-toggle wiring
   (function wireBenchControls(){
-    const slider = document.getElementById('bench-year-slider');
-    const sel    = document.getElementById('bench-index-select');
-    const label  = document.getElementById('bench-year-label');
-    const chip   = document.getElementById('bench-adj-status');
-    const reset  = document.getElementById('bench-reset');
+    const slider    = document.getElementById('bench-year-slider');
+    const sel       = document.getElementById('bench-index-select');
+    const label     = document.getElementById('bench-year-label');
+    const chip      = document.getElementById('bench-adj-status');
+    const reset     = document.getElementById('bench-reset');
+    const pills     = document.querySelectorAll('.bench-mode-pill');
+    const adjCtrls  = document.getElementById('bench-adj-controls');
+    const idxCtrls  = document.getElementById('bench-idx-controls');
+    const helpText  = document.getElementById('bench-mode-help');
     if (!slider || !sel) return;
+
+    function setModeStyles() {
+      // Pill active/inactive
+      pills.forEach(p => {
+        const on = p.getAttribute('data-bench-mode') === _benchMode;
+        p.classList.toggle('is-active', on);
+        p.style.background = on ? 'var(--ink)' : 'transparent';
+        p.style.color      = on ? 'var(--cream)' : 'var(--ink-3)';
+      });
+      // Enable/disable the slider + dropdown sections
+      const enabled = (_benchMode === 'adjusted');
+      [adjCtrls, idxCtrls].forEach(el => {
+        if (!el) return;
+        el.style.opacity = enabled ? '1' : '0.45';
+        el.style.pointerEvents = enabled ? 'auto' : 'none';
+      });
+      slider.disabled = !enabled;
+      sel.disabled    = !enabled;
+      // Helper line copy
+      if (helpText) {
+        helpText.innerHTML = enabled
+          ? '<b style="color: var(--ink-2);">Adjusted:</b> dollar figures scaled to the target year using the selected inflation index. Ratios (margins, percentages, hours) are unchanged. Hover any adjusted cell to see the original value and the factor applied.'
+          : '<b style="color: var(--ink-2);">Actual $:</b> values shown exactly as recorded on each project\'s JDR (nominal dollars, not cross-era comparable). Click <b>Adjusted</b> to scale older jobs into today\'s dollars for apples-to-apples comparison.';
+      }
+      // Top-right status chip
+      if (chip) {
+        const showChip = enabled && _benchYear !== 2026;
+        chip.style.display = showChip ? '' : 'none';
+        if (showChip) chip.textContent = `Adjusted to ${_benchYear}`;
+      }
+    }
 
     function rerender(){
       _benchYear  = parseInt(slider.value, 10);
       _benchIndex = sel.value;
       const labelText = _benchYear === 2026 ? '2026 (today)' : `${_benchYear}`;
       if (label) label.textContent = labelText;
-      if (chip)  chip.style.display = (_benchYear === 2026 ? 'none' : '');
+      setModeStyles();
       BENCH = buildBench();
       renderBench();
     }
-    slider.addEventListener('input', rerender);
-    sel.addEventListener('change', rerender);
-    if (reset) reset.addEventListener('click', () => {
-      slider.value = 2026; sel.value = 'BCI';
+
+    // Pill toggle: switch between actual / adjusted
+    pills.forEach(p => {
+      p.addEventListener('click', () => {
+        _benchMode = p.getAttribute('data-bench-mode') || 'actual';
+        rerender();
+      });
+    });
+
+    // Slider / dropdown change — also flip to 'adjusted' automatically
+    slider.addEventListener('input', () => {
+      _benchMode = 'adjusted';
       rerender();
     });
+    sel.addEventListener('change', () => {
+      _benchMode = 'adjusted';
+      rerender();
+    });
+
+    if (reset) reset.addEventListener('click', () => {
+      _benchMode = 'actual';
+      slider.value = 2026;
+      sel.value    = 'BCI';
+      rerender();
+    });
+
+    // Initial paint — sets the disabled state + help copy on load.
+    setModeStyles();
   })();
 
   /* ============ BENCHMARK METRIC CHART (click-to-expand) ============ */
