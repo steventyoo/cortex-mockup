@@ -12541,8 +12541,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   const _origSetView = setView;
   setView = function(v, opts){
     _origSetView(v, opts);
-    document.body.classList.toggle('cortex-mini-on', v === 'project');
-    if (v !== 'project') closeCortexMini();
+    // Cortex mini chat is available on both closed-project and live-project detail views
+    const projectView = (v === 'project' || v === 'live-project');
+    document.body.classList.toggle('cortex-mini-on', projectView);
+    if (!projectView) closeCortexMini();
   };
   // Hook into applyProject so the chat always reflects the latest project.
   const _origApplyProject = applyProject;
@@ -12553,7 +12555,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   // Re-expose the wrapped version globally so all click paths hit the same fn
   window.applyProject = applyProject;
   // If the page restored straight to a project view via hash, sync now.
-  if (document.querySelector('.view[data-view="project"].active')) {
+  if (document.querySelector('.view[data-view="project"].active') || document.querySelector('.view[data-view="live-project"].active')) {
     document.body.classList.add('cortex-mini-on');
   }
   // Wire input handlers for the mini chat — must wait for the panel HTML below
