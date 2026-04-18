@@ -2256,7 +2256,7 @@
   <div class="view" data-view="pipeline">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">Ingestion status</span>
-      <span class="chip-sage">31 closed parsed + 1 LIVE</span>
+      <span class="chip-sage">31 closed parsed + 3 LIVE</span>
       <span class="chip-clay">187 duplicate groups</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
@@ -3090,6 +3090,54 @@
           <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 18, 2026 (daily)</span></div>
         </div>
 
+        <!-- #2111 Compass Northgate M3 — LIVE / in-progress -->
+        <div class="card" style="padding: 24px 26px; border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--clay); font-family: 'JetBrains Mono', monospace; font-weight: 700;">#2111 · compass · <span style="background: var(--clay); color: var(--cream); padding: 1px 6px; border-radius: 2px; font-size: 9px; letter-spacing: 0.08em; margin-left: 2px;">LIVE</span></div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Northgate Station M3</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">186 units · $4.51M contract · 48.8% billed · roughin</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">⚠ in progress · monthly SOV</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">637</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">572</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">521</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">partial</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Live SOVs ingested</span><span class="kpi-val">7 of 7 monthly pay apps</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Change orders</span><span class="kpi-val">7 executed ($89.9k) · 7 CORs pending</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val" style="color: var(--clay);">2 · COR#15 ASI 36 pricing</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 18, 2026 (daily)</span></div>
+        </div>
+
+        <!-- #2112 BMDC Big 3 — LIVE / in-progress -->
+        <div class="card" style="padding: 24px 26px; border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--clay); font-family: 'JetBrains Mono', monospace; font-weight: 700;">#2112 · bmdc · <span style="background: var(--clay); color: var(--cream); padding: 1px 6px; border-radius: 2px; font-size: 9px; letter-spacing: 0.08em; margin-left: 2px;">LIVE</span></div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Big 3 Apartments</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">20 units · $0.70M contract · 74.4% billed · trim</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">⚠ in progress · monthly SOV</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">459</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">413</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">378</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">partial</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Live SOVs ingested</span><span class="kpi-val">9 of 9 monthly pay apps</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Change orders</span><span class="kpi-val">9 executed ($32.3k) · 1 COR pending</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Unresolved</span><span class="kpi-val" style="color: var(--clay);">2 · icemakers, disposals rejected</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 18, 2026 (daily)</span></div>
+        </div>
+
       </div>
     </div>
 
@@ -3108,8 +3156,8 @@
   <!-- ============================================================ -->
   <div class="view" data-view="atlas">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">52 nodes · 79 edges</span>
-      <span class="chip-sage">32 closed · 1 active · 1 proposed</span>
+      <span class="chip-ink">56 nodes · 83 edges</span>
+      <span class="chip-sage">32 closed · 3 active · 1 proposed</span>
       <span class="chip-clay">6 hidden patterns surfaced</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
@@ -3131,7 +3179,7 @@
     <!-- The graph -->
     <div class="mt-6 blueprint" style="padding: 28px 24px 36px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 02 / portfolio graph</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 50 · edges · 77</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 52 · edges · 79</div>
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s. · scroll →</div>
       <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
 
@@ -3426,11 +3474,20 @@
           <text x="1286" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 2 jobs</text>
         </g>
 
-        <!-- COMPASS GC (2 jobs: #2033 Vuecrest + #2034 Park Lane) -->
+        <!-- COMPASS GC (4 jobs: #2033, #2034, #2038 closed + #2111 live) -->
         <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="compass" style="cursor: pointer;">
-          <rect x="1400" y="74" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <rect x="1400" y="74" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.5"/>
           <text x="1426" y="105" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">COMPASS</text>
-          <text x="1426" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 3 jobs</text>
+          <text x="1426" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 4 jobs (1 live)</text>
+        </g>
+
+        <!-- #2111 Compass Northgate M3 (186u · LIVE) — solid clay edge -->
+        <line x1="1426" y1="126" x2="1410" y2="250" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2111" style="cursor: pointer;">
+          <circle cx="1410" cy="250" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1410" y="254" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2111</text>
+          <text x="1410" y="276" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Northgate M3</text>
+          <text x="1410" y="288" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">186u · LIVE</text>
         </g>
 
         <!-- #2032 Blueprint Luna Apts-Roosevelt (71u · 45.2% margin) -->
@@ -3515,11 +3572,11 @@
           <text x="1220" y="418" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">55u · 35.2%</text>
         </g>
 
-        <!-- ============== NEW GC NODE: BMDC (#2104 live) ============== -->
+        <!-- ============== NEW GC NODE: BMDC (2 jobs live — #2104 + #2112) ============== -->
         <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="bmdc" style="cursor: pointer;">
           <rect x="1680" y="74" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
           <text x="1706" y="106" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">BMDC</text>
-          <text x="1706" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 1 job (live)</text>
+          <text x="1706" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 2 jobs (live)</text>
         </g>
 
         <!-- #2104 BMDC Big 1410 (24u · LIVE) — bmdc GC · clay stroke, solid edge -->
@@ -3529,6 +3586,15 @@
           <text x="1700" y="214" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2104</text>
           <text x="1700" y="236" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Big 1410</text>
           <text x="1700" y="248" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">24u · LIVE</text>
+        </g>
+
+        <!-- #2112 BMDC Big 3 (20u · LIVE) — bmdc GC · clay stroke, solid edge -->
+        <line x1="1706" y1="126" x2="1640" y2="340" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2112" style="cursor: pointer;">
+          <circle cx="1640" cy="340" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1640" y="344" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2112</text>
+          <text x="1640" y="366" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Big 3</text>
+          <text x="1640" y="378" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">20u · LIVE</text>
         </g>
 
         <!-- Vendor edges: Rosen → 2023/2024/2026 (top vendor all three) · Keller → 2024/2025 · Consolidated → 2023/2026 · Ferguson → 2023 · Mech Sales → 2024 -->
@@ -4263,9 +4329,9 @@
   <!-- ============================================================ -->
   <div class="view" data-view="health">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">1 active job</span>
+      <span class="chip-ink">3 active jobs</span>
       <span class="chip-clay">⚠ Watch · labor +12%</span>
-      <span class="chip-sage">52% complete</span>
+      <span class="chip-sage">48–100% complete</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Job <span class="serif-it">Health.</span>
@@ -6041,7 +6107,7 @@
   // Defined here (before renderSkyline) so stageOf() can read it.
   const PROJECT_STAGES = {
     bidding: [],
-    active:  ["2104"],
+    active:  ["2104","2111","2112"],
     closed:  PROJECT_ORDER
   };
   const STAGE_META = {
@@ -7075,6 +7141,103 @@
         { name: "Rosen Supply Company, Inc.", invoices: 16, spend: 9330.63, pct: 6.0 },
       ]
     },
+    "2111": {
+      reportNum: "REPORT #2111-LIVE01 \u00b7 ACTIVE",
+      chips: [
+        "<span class=\"chip-clay\">\u26a0 ACTIVE \u00b7 48.8% billed</span>",
+        "<span class=\"chip-ink\">Compass Northgate M3 \u00b7 roughin phase \u00b7 186u \u00b7 6 stories</span>",
+        "<span class=\"chip-sage\">7 executed COs net +$89,892 (+2.0%) \u00b7 forecast ~29% margin</span>"
+      ],
+      jobTop: "Compass", jobBottom: "Northgate M3.",
+      jobNum: "#2111", location: "10523 5th Ave NE \u00b7 Seattle WA 98125 (Northgate Station PH 2)", gc: "Compass General Construction I, LLC",
+      gcShort: "Compass General",
+      dateRange: "Apr 2025 \u2192 est. Q4 2026 \u00b7 12 months in progress",
+      unitsDesc: "186-unit \u00b7 6 stories + basement \u00b7 L1 retail/amenity + L2\u2013L6 residential",
+      status: 'active',
+
+      // ---- LIVE hero fields ----
+      pctComplete: 48.8,
+      pctCompleteLabel: "48.8% billed",
+      contractOrig: "$4,422,970",
+      contractRevised: "$4,512,862",
+      coPct: "+2.0%",
+      billedToDate: "$2,280,568",
+      earnedLessRetention: "$2,093,485",
+      balanceToFinish: "$2,419,377",
+
+      // ---- Standard schema fields (live/forecast snapshot) ----
+      revenue: "$4,512,862", revenueFoot: "current contract \u00b7 $4.42M base + $89.9k COs \u00b7 live project",
+      profit: "~$1,296,000", profitFoot: "forecast \u00b7 ~28.7% margin at completion \u00b7 live project",
+      expenses: "~$3,217,000", expensesFoot: "forecast direct cost \u00b7 $1.08M booked YTD \u00b7 trim not started",
+      retainage: "$110,183", retainageFoot: "5.0% \u00b7 active retention held by GC",
+      execHeadline: "Compass Northgate M3 is <span class=\"n\">in the roughin phase</span> at <span class=\"n\">48.8% billed</span> and projects to <span class=\"n\">~29% forecast margin</span> at closeout.",
+      execBody: "Northgate M3 is an <span class=\"n\">ACTIVE</span> plumbing job for <span class=\"n\">Compass General Construction I</span> \u2014 a <span class=\"n\">new variant GC</span> for OWP (distinct from the Compass Harbor entity on #2033/2034/2038) \u2014 running since <span class=\"n\">Apr 2025</span>. 186-unit, 6-story + basement mixed-use at <span class=\"n\">10523 5th Ave NE</span> in Northgate Station Phase 2 (L1 retail/amenity + L2\u2013L6 residential).<br/><br/>Original <span class=\"n\">$4,422,970</span> contract \u2192 revised <span class=\"n\">$4,512,862</span> via 7 executed COs (net <span class=\"n\">+$89,892</span> / +2.0%): COR#3 Unit Riser Shutoff Valves $26,130, COR#13 ASI 32 Rework $14,603, COR#2 Domestic Water Meter $10,892, COR#5 Condensate Material $7,484, COR#9 Elevator Pit Drainage $6,928, COR#12 Retail Stubs $5,057, COR#14 ASI 34 Credit -$484. <span class=\"n\">COR#15 ASI 36 pending at $14,793</span>.<br/><br/><span class=\"n\">$2,280,568</span> billed to date = <span class=\"n\">48.8% complete</span>. Earned less retention <span class=\"n\">$2,093,485</span>. Retention outstanding <span class=\"n\">$110,183</span> (5%). Balance to finish + retention <span class=\"n\">$2,419,377</span>.<br/><br/>OWP also carries a separate <span class=\"n\">$76,900 Professional Services Agreement</span> for plumbing design & engineering (Franklin Engineering as sub) \u2014 this is rolled into the Sage budget but billed outside the SOV.<br/><br/><span class=\"n\">Current gross margin</span>: 52.4% on work-in-place (inflated early-stage; trim $836k budget only 5% spent). <span class=\"n\">Forecast at completion</span>: ~28.7% margin using original budget basis (+CO net). <span class=\"n\">Flag</span>: 110 Underground Labor +57% over, 601 Engineering +32% over ($123k actual vs $93k budget).",
+      jobNum2: "#2111", workforce: "RI Foreman in progress \u00b7 live project \u00b7 full crew roster at closeout",
+      bpLeft: "compass northgate m3 \u00b7 seattle wa \u00b7 ACTIVE", bpRight: "186 units \u00b7 12 months in \u00b7 48.8% billed",
+      k01_revenue: "$4,512,862", k01_margin: "~28.7% (forecast)", k01_origContract: "$4,422,970",
+      k01_co: "+$89,892", k01_directCost: "~$3,217,000 (forecast)", k01_profit: "~$1,296,000 (forecast)",
+      footerReport: "REPORT #2111-LIVE01 \u00b7 Live snapshot Apr 18, 2026 \u00b7 v0.1",
+      sbName: "Northgate M3.", skyName: "NGS M3",
+      skyline: { floors: 6, cols: 22, w: 440 },
+      num: { units: 186, fixtures: 930, months: 12, revenue: 4512862, profit: 1296000, directCost: 3217000, origContract: 4422970, co: 89892, retainage: 110183, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      vendorMeta: { count: 10, invoices: null, totalAp: 347646, topVendor: 'Consolidated Supply Co.', topShare: 38.2, source: "Live project \u00b7 JDR export thru 3-31-26 \u00b7 full vendor ledger at closeout" },
+      vendors: [
+        { name: 'Consolidated Supply Co.', invoices: null, spend: 132682, pct: 38.2 },
+        { name: 'Franklin Engineering', invoices: null, spend: 123073, pct: 35.4 },
+        { name: 'Bank of America CC', invoices: null, spend: 39594, pct: 11.4 },
+        { name: 'Rosen Supply Kirkland', invoices: null, spend: 34578, pct: 9.9 },
+        { name: 'Pioneer Energy Management', invoices: null, spend: 11420, pct: 3.3 }
+      ]
+    },
+    "2112": {
+      reportNum: "REPORT #2112-LIVE01 \u00b7 ACTIVE",
+      chips: [
+        "<span class=\"chip-clay\">\u26a0 ACTIVE \u00b7 74.4% billed</span>",
+        "<span class=\"chip-ink\">BMDC Big 3 \u00b7 trim imminent \u00b7 20u \u00b7 6 stories</span>",
+        "<span class=\"chip-sage\">9 executed COs net +$32,345 (+4.9%) \u00b7 forecast ~30% margin</span>"
+      ],
+      jobTop: "BMDC", jobBottom: "Big 3.",
+      jobNum: "#2112", location: "125 15th Ave \u00b7 Seattle WA 98122 (Capitol Hill)", gc: "BMDC Services",
+      gcShort: "BMDC",
+      dateRange: "May 2025 \u2192 Jul 2026 (expected) \u00b7 11 months in progress",
+      unitsDesc: "20-unit \u00b7 6 stories + basement \u00b7 compact Capitol Hill infill",
+      status: 'active',
+
+      // ---- LIVE hero fields ----
+      pctComplete: 74.4,
+      pctCompleteLabel: "74.4% billed",
+      contractOrig: "$664,082",
+      contractRevised: "$696,427",
+      coPct: "+4.9%",
+      billedToDate: "$518,063",
+      earnedLessRetention: "$492,160",
+      balanceToFinish: "$204,267",
+
+      // ---- Standard schema fields (live/forecast snapshot) ----
+      revenue: "$696,427", revenueFoot: "current contract \u00b7 $664.1k base + $32.3k COs \u00b7 live project",
+      profit: "~$206,000", profitFoot: "forecast \u00b7 ~29.6% margin at completion \u00b7 live project",
+      expenses: "~$490,000", expensesFoot: "forecast direct cost \u00b7 $257k booked YTD \u00b7 142 Mech Rm not started",
+      retainage: "$25,903", retainageFoot: "5.0% \u00b7 active retention held by GC",
+      execHeadline: "BMDC Big 3 is <span class=\"n\">74.4% billed</span> on a compact 20-unit Capitol Hill infill and tracks to a <span class=\"n\">~30% forecast margin</span> at closeout.",
+      execBody: "Big 3 Apartments is an <span class=\"n\">ACTIVE</span> plumbing job for <span class=\"n\">BMDC Services</span> \u2014 OWP's second BMDC job (after #2104) \u2014 running since <span class=\"n\">May 2025</span> with expected closeout <span class=\"n\">Jul 2026</span>. Compact 20-unit, 6-story + basement infill at <span class=\"n\">125 15th Ave</span> in Capitol Hill (Robison Engineering as architect of record).<br/><br/>Contract decomposition from BMDC Value Breakdown: Base Bid $630,000 + Condensate Drains $11,500 + Matte Black Flush Levers $1,120 + Water Metering System $20,100 + Temp Water $1,362 = <span class=\"n\">$664,082</span> original \u2192 revised <span class=\"n\">$696,427</span> via 9 executed COs (net <span class=\"n\">+$32,345</span> / +4.9%).<br/><br/>Top executed COs: COR#2 Sump Pumps $10,443, COR#4 Tub Change $7,492, COR#7 Roof Hydrants $3,680, COR#2 Booster Pump $3,411, COR#6 PRV Add $2,077, COR#5 Garbage Disposals $1,560. <span class=\"n\">Developer rejected</span> garbage disposal pushbutton switches ($3,710), 1/2hp disposals ($1,820), and icemakers.<br/><br/><span class=\"n\">$518,063</span> billed to date = <span class=\"n\">74.4% complete</span>. Earned less retention <span class=\"n\">$492,160</span>. Retention outstanding <span class=\"n\">$25,903</span> (5%). Balance to finish + retention <span class=\"n\">$204,267</span>.<br/><br/><span class=\"n\">Current gross margin</span>: 50.5% on work-in-place. <span class=\"n\">Forecast at completion</span>: ~29.6% margin using budget basis +CO net. <span class=\"n\">Flag</span>: 100 Supervision +81% over, 101 Takeoff +77% over, 142 Mech Room Labor only 1% spent ($536/$49,500 \u2014 hasn't started, drives remaining variance).",
+      jobNum2: "#2112", workforce: "RI Foreman in progress \u00b7 live project \u00b7 full crew roster at closeout",
+      bpLeft: "bmdc big 3 \u00b7 seattle wa \u00b7 ACTIVE", bpRight: "20 units \u00b7 11 months in \u00b7 74.4% billed",
+      k01_revenue: "$696,427", k01_margin: "~29.6% (forecast)", k01_origContract: "$664,082",
+      k01_co: "+$32,345", k01_directCost: "~$490,000 (forecast)", k01_profit: "~$206,000 (forecast)",
+      footerReport: "REPORT #2112-LIVE01 \u00b7 Live snapshot Apr 18, 2026 \u00b7 v0.1",
+      sbName: "Big 3.", skyName: "BIG 3",
+      skyline: { floors: 6, cols: 5, w: 110 },
+      num: { units: 20, fixtures: 100, months: 11, revenue: 696427, profit: 206000, directCost: 490000, origContract: 664082, co: 32345, retainage: 25903, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      vendorMeta: { count: 10, invoices: null, totalAp: 69772, topVendor: 'Consolidated Supply Co.', topShare: 41.1, source: "Live project \u00b7 JDR export thru 3-31-26 \u00b7 full vendor ledger at closeout" },
+      vendors: [
+        { name: 'Consolidated Supply Co.', invoices: null, spend: 28664, pct: 41.1 },
+        { name: 'Rosen Supply Kirkland', invoices: null, spend: 13385, pct: 19.2 },
+        { name: 'Keller Supply Company', invoices: null, spend: 10735, pct: 15.4 },
+        { name: 'California Hydronics Corp', invoices: null, spend: 7290, pct: 10.4 },
+        { name: 'Bank of America CC', invoices: null, spend: 3676, pct: 5.3 },
+        { name: 'Ferguson Enterprises', invoices: null, spend: 2841, pct: 4.1 }
+      ]
+    },
     "2104": {
       reportNum: "REPORT #2104-LIVE01 \u00b7 ACTIVE",
       chips: [
@@ -7152,7 +7315,9 @@
     "2037": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Marpac</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Evan Chan</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Doyle Gustafson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Rick / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">MYSA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">MYSA University Apartments LP</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div></div>", "jobInfoUnits": 122},
     "2038": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass Harbor</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Justin Anderson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Kurt Weagant</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Karl Clocksin</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Thaddeus / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Continental</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">2nd & John Apartments</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Wrap (OCIP)</div></div></div>", "jobInfoUnits": 80},
     "2040": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Andrew Withnell</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Mike Sanderson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Kyle Stenson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Garrett / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Brooklyn 65 LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div></div>", "jobInfoUnits": 55},
-    "2104": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">BMDC Services</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tommy / Ben</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 99.76% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jul 2024</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Apr 2026</div></div></div>", "jobInfoUnits": 24}
+    "2104": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">BMDC Services</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tommy / Ben</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 99.76% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jul 2024</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Apr 2026</div></div></div>", "jobInfoUnits": 24},
+    "2111": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass General Construction I</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Northgate Station Residential M2 M3 LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 48.8% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Apr 2025</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Q4 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">CPL / GGLO</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div></div>", "jobInfoUnits": 186},
+    "2112": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">BMDC Services</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 74.4% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">May 2025</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jul 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Robison Engineering</div></div></div>", "jobInfoUnits": 20}
   };
   Object.keys(PROJECT_TEAMS).forEach(function(id){
     if (PROJECTS[id]) Object.assign(PROJECTS[id], PROJECT_TEAMS[id]);
@@ -9985,12 +10150,12 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     exxel:    { name: 'Exxel Pacific',       jobs: 13, blendedMargin: 34.0, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '34 of 51 submitted, 13 jobs', projects: '#2001, #2012, #2015, #2017, #2019, #2021, #2022, #2025, #2027, #2028, #2029, #2030, #2031, #2036', source: "Exxel blended (13 jobs)",        winRate: 38, knownTag: '✓ Known GC · 13 closed jobs in portfolio' },
     srm:      { name: 'SRM Development',     jobs: 5,  blendedMargin: 32.6, payLag: 53, payLagDelta: 'industry median 58d',     coRate: 71, coDetail: '17 of 24 submitted, 5 jobs',  projects: '#2001, #2008, #2018, #2020, #2024',                                                                 source: "SRM blended (5 jobs)",           winRate: 33, knownTag: '⚠ Mixed track record · 5 closed jobs (spread Astro 46.5% → Taylor 22.3%)' },
     natbuilt: { name: 'Natural & Built',     jobs: 2,  blendedMargin: 39.6, payLag: 44, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '4 of 5 submitted, 2 jobs',     projects: '#2016, #2035',                                                                                      source: "Natural & Built blended (2 jobs)", winRate: 24, knownTag: '✓ Known GC · 2 closed jobs in portfolio' },
-    compass:  { name: 'Compass Harbor',      jobs: 3,  blendedMargin: 37.0, payLag: 72, payLagDelta: 'slow · 7+ yr retainage tail', coRate: 60, coDetail: '13 of 18 submitted, 3 jobs',projects: '#2033, #2034, #2038',                                                                               source: "Compass blended (3 jobs)",       winRate: 28, knownTag: '⚠ OCIP wrap · long retainage tail (7+ yrs), 3 closed jobs' },
+    compass:  { name: 'Compass Harbor',      jobs: 4,  blendedMargin: 37.0, payLag: 72, payLagDelta: 'slow · 7+ yr retainage tail', coRate: 60, coDetail: '13 of 18 submitted, 4 jobs',projects: '#2033, #2034, #2038, #2111 (live)',                                                                 source: "Compass blended (4 jobs, 1 live)", winRate: 28, knownTag: '⚠ OCIP wrap · long retainage tail (7+ yrs), 3 closed + 1 live' },
     blueprint:{ name: 'Blueprint Capital',   jobs: 2,  blendedMargin: 33.6, payLag: 55, payLagDelta: 'industry median 58d',     coRate: 62, coDetail: '8 of 13 submitted, 2 jobs',    projects: '#2032, #2040',                                                                                      source: "Blueprint blended (2 jobs)",     winRate: 25, knownTag: '✓ Known GC · 2 closed jobs in portfolio' },
     synergy:  { name: 'Synergy Construction',jobs: 1,  blendedMargin: 33.4, payLag: 58, payLagDelta: 'thin data · 1 job',       coRate: 55, coDetail: 'thin data, 1 job',             projects: '#2026',                                                                                             source: "Synergy (1 job)",                winRate: 22, knownTag: '⚠ Thin data · only 1 closed job in portfolio' },
     marpac:   { name: 'Marpac',              jobs: 1,  blendedMargin: 41.4, payLag: 50, payLagDelta: 'thin data · 1 job',       coRate: 67, coDetail: 'thin data, 1 job',             projects: '#2037',                                                                                             source: "Marpac (1 job)",                 winRate: 24, knownTag: '⚠ Thin data · only 1 closed job, strong margin on #2037' },
     shelter:  { name: 'Shelter Holdings',    jobs: 1,  blendedMargin: 64.4, payLag: 45, payLagDelta: 'thin data · 1 HOA job',   coRate: 100, coDetail: 'no COs, 1 HOA gas job',       projects: '#2039',                                                                                             source: "Shelter (1 HOA job)",            winRate: 20, knownTag: '⚠ Thin data · HOA remediation work only (#2039)' },
-    bmdc:     { name: 'BMDC Services',       jobs: 1,  blendedMargin: 32.0, payLag: 55, payLagDelta: 'thin data · 1 live job',  coRate: 80, coDetail: '4 of 5 submitted, 1 live job', projects: '#2104 (live)',                                                                                    source: "BMDC (1 live job)",              winRate: 24, knownTag: '⚠ Thin data · first BMDC job still in progress (#2104)' },
+    bmdc:     { name: 'BMDC Services',       jobs: 2,  blendedMargin: 31.0, payLag: 55, payLagDelta: 'thin data · 2 live jobs', coRate: 80, coDetail: '13 of 14 submitted, 2 live jobs', projects: '#2104 (live), #2112 (live)',                                                                    source: "BMDC (2 live jobs)",             winRate: 24, knownTag: '⚠ Thin data · both BMDC jobs still in progress (#2104, #2112)' },
     'new':    { name: 'Unknown / new GC',    jobs: 0,  blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',                                                                                  source: 'portfolio average',              winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
   };
 
@@ -11164,6 +11329,14 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       units: 24, fixtures: 120, origContract: 1143800, co: 52749, finalContract: 1196549,
       directCost: null, profit: null, margin: 32.0, status: 'active',
       note: '99.76% billed · in trim · forecast margin 32% pending closeout' },
+    { id: '2111', year: 2025, project: 'Northgate M3', gc: 'Compass General Construction I',
+      units: 186, fixtures: 930, origContract: 4422970, co: 89892, finalContract: 4512862,
+      directCost: null, profit: null, margin: 28.7, status: 'active',
+      note: '48.8% billed · roughin phase · forecast margin ~29% pending closeout' },
+    { id: '2112', year: 2025, project: 'Big 3 Apartments', gc: 'BMDC Services',
+      units: 20, fixtures: 100, origContract: 664082, co: 32345, finalContract: 696427,
+      directCost: null, profit: null, margin: 29.6, status: 'active',
+      note: '74.4% billed · trim imminent · forecast margin ~30% pending closeout' },
     { id: 'B-Bel220', year: 2026, project: 'Bellevue 220 (pending)', gc: 'Chinn + Walsh JV',
       units: 220, fixtures: 1118, origContract: 2618675, co: 0, finalContract: null,
       directCost: null, profit: null, margin: 32.0, status: 'bidding',
