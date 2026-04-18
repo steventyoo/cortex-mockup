@@ -1120,10 +1120,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 6 V12 C4 16.5 7.5 20.5 12 22 C16.5 20.5 20 16.5 20 12 V6 Z"/><path d="M9 12 L11 14 L15 10"/></svg>
         <span>Bid Intelligence</span>
       </div>
-      <div class="sb-item" data-view-target="health">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 H7 L9 6 L13 18 L15 12 H21"/></svg>
-        <span>Job Health</span>
-      </div>
       <div class="sb-item" data-view-target="pipeline">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 H14 L20 10 V20 A1 1 0 0 1 19 21 H5 A1 1 0 0 1 4 20 Z"/><path d="M14 4 V10 H20"/><path d="M8 13 H16"/><path d="M8 16 H16"/><path d="M8 10 H11"/></svg>
         <span>Document Pipeline</span>
@@ -2068,6 +2064,108 @@
   </div>
 
   </div> <!-- /view: project -->
+
+  <!-- ============================================================ -->
+  <!-- ============= LIVE PROJECT DASHBOARD VIEW ================== -->
+  <!-- ============================================================ -->
+  <div class="view" data-view="live-project">
+    <!-- Hero band -->
+    <div class="blueprint" style="padding: 24px 28px; border: 1.5px solid var(--clay); background: rgba(184,92,62,0.05);">
+      <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ ACTIVE · JOB <span data-lf="jobNum">#XXXX</span></div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">last sync · <span data-lf="lastSync">—</span></div>
+
+      <div class="grid grid-cols-4 gap-6 mt-6">
+        <div>
+          <div class="hero-lab">Active job</div>
+          <div class="text-[28px] font-semibold mt-2" style="color: var(--ink); line-height: 1.15;" data-lf="title"></div>
+          <div class="text-[12px] mt-2" style="color: var(--ink-3);" data-lf="subtitle"></div>
+          <div class="mt-3 flex gap-2 flex-wrap">
+            <span class="chip-ink" data-lf="chipContract"></span>
+            <span class="chip-ink" data-lf="chipOrigMargin"></span>
+            <span class="chip-clay" data-lf="chipForecastMargin"></span>
+          </div>
+        </div>
+        <div>
+          <div class="hero-lab">% complete</div>
+          <div class="text-[60px] font-semibold serif-it mt-1" style="color: var(--ink);" data-lf="pctComplete"></div>
+          <div class="w-full h-1 rounded bg-gray-200 mt-1" style="background: var(--cream-soft);"><div id="live-pct-bar" style="height: 100%; background: var(--sage-ink); border-radius: 99px; transition: width 0.4s;"></div></div>
+          <div class="text-[11px] mono mt-2" style="color: var(--ink-3);" data-lf="pctSub"></div>
+        </div>
+        <div>
+          <div class="hero-lab">Cortex status</div>
+          <div class="text-[26px] font-semibold serif-it mt-1" data-lf="cortexStatus"></div>
+          <div class="text-[12px] mt-2" style="color: var(--ink-3); line-height: 1.5;" data-lf="cortexStatusBody"></div>
+        </div>
+        <div>
+          <div class="hero-lab">ETA</div>
+          <div class="text-[20px] font-semibold mt-1" style="color: var(--ink);" data-lf="eta"></div>
+          <div class="text-[12px] mono mt-2" style="color: var(--ink-3);" data-lf="etaSub"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variance strip -->
+    <div class="grid grid-cols-4 gap-6 mt-8 pt-6 border-t border-dashed" style="border-color: var(--border-2);">
+      <div>
+        <div class="hero-lab">Hours variance</div>
+        <div class="text-[36px] serif-it tabular" style="color: var(--clay); line-height: 1.1;" data-lf="hoursVar"></div>
+        <div class="text-[11px] mono mt-1" style="color: var(--ink-3);" data-lf="hoursVarSub"></div>
+      </div>
+      <div>
+        <div class="hero-lab">Cost variance</div>
+        <div class="text-[36px] serif-it tabular" style="color: var(--clay); line-height: 1.1;" data-lf="costVar"></div>
+        <div class="text-[11px] mono mt-1" style="color: var(--ink-3);" data-lf="costVarSub"></div>
+      </div>
+      <div>
+        <div class="hero-lab">Schedule variance</div>
+        <div class="text-[36px] serif-it tabular" style="color: var(--clay); line-height: 1.1;" data-lf="schedVar"></div>
+        <div class="text-[11px] mono mt-1" style="color: var(--ink-3);" data-lf="schedVarSub"></div>
+      </div>
+      <div>
+        <div class="hero-lab">Forecast at completion</div>
+        <div class="text-[36px] serif-it tabular" style="color: var(--ink); line-height: 1.1;" data-lf="forecastEac"></div>
+        <div class="text-[11px] mono mt-1" style="color: var(--ink-3);" data-lf="forecastEacSub"></div>
+      </div>
+    </div>
+
+    <!-- Section A: Labor burn curve -->
+    <div class="mt-14"><div class="meta-bar mb-4">A · Labor burn curve — actual vs historical baseline</div>
+      <div class="card" style="padding: 20px;">
+        <div class="text-[11px]" style="color: var(--ink-3);" data-lf="burnNote">Cumulative labor hours through % of job complete. Baseline = avg of comparable closed jobs normalized.</div>
+        <div id="live-burn-svg" style="margin-top: 16px; height: 280px;"></div>
+        <div class="flex items-center gap-4 mt-2 text-[10px] uppercase tracking-wider" style="color: var(--ink-4);">
+          <span><span style="display:inline-block; width:14px; height:2px; background: var(--ink); vertical-align: middle;"></span> Baseline</span>
+          <span><span style="display:inline-block; width:14px; height:2px; background: var(--clay); vertical-align: middle;"></span> Actual</span>
+          <span><span style="display:inline-block; width:8px; height:8px; border-radius: 50%; background: var(--ink);"></span> Today</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section B: Phase health -->
+    <div class="mt-14"><div class="meta-bar mb-4">B · Phase health</div>
+      <table class="modal-table" style="width: 100%; font-size: 12px;">
+        <thead><tr style="border-bottom: 1px solid var(--border-2);">
+          <th style="text-align: left; padding: 10px 12px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);">Phase</th>
+          <th style="text-align: right; padding: 10px 12px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);">% complete</th>
+          <th style="text-align: right; padding: 10px 12px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);">Hours actual</th>
+          <th style="text-align: right; padding: 10px 12px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);">Hours baseline</th>
+          <th style="text-align: right; padding: 10px 12px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);">Variance</th>
+          <th style="text-align: right; padding: 10px 12px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4);">Status</th>
+        </tr></thead>
+        <tbody id="live-phase-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- Section C: Anomaly feed -->
+    <div class="mt-14"><div class="meta-bar mb-4">C · Anomaly feed — what changed this week</div>
+      <div id="live-anomaly-list" class="grid grid-cols-1 gap-3"></div>
+    </div>
+
+    <!-- Section D: Cortex recommends -->
+    <div class="mt-14"><div class="meta-bar mb-4">D · Cortex recommends</div>
+      <div id="live-recommend-grid" class="grid grid-cols-3 gap-5"></div>
+    </div>
+  </div> <!-- /view: live-project -->
 
   <!-- ============================================================ -->
   <!-- ============= PORTFOLIO OVERVIEW VIEW ====================== -->
@@ -4322,669 +4420,6 @@
       </div>
     </div>
 
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- ============= JOB HEALTH VIEW ============================== -->
-  <!-- ============================================================ -->
-  <div class="view" data-view="health">
-    <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">3 active jobs</span>
-      <span class="chip-clay">⚠ Watch · labor +12%</span>
-      <span class="chip-sage">48–100% complete</span>
-    </div>
-    <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
-      Job <span class="serif-it">Health.</span>
-    </h1>
-    <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 720px; line-height: 1.6;">
-      Live monitor for in-progress jobs. Cortex compares the actual burn curve to the historical baseline derived from comparable closed jobs at the same %-complete. You see overruns at week 4, not month 4.
-    </div>
-
-    <!-- View variant toggle: Classic (current) vs Signals (new 3-layer) -->
-    <div class="mt-8 inline-flex items-center gap-1 p-1 rounded-full" style="background: var(--cream-soft); border: 1px solid var(--border-2);">
-      <button type="button" class="health-tab is-active" data-variant="classic" style="padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: var(--ink); color: var(--cream);">Classic v1</button>
-      <button type="button" class="health-tab" data-variant="signals" style="padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: transparent; color: var(--ink-3);">Signal-driven v2 <span style="color: var(--clay); margin-left: 4px;">new</span></button>
-    </div>
-
-    <!-- ============ CLASSIC VARIANT (preserved) ============ -->
-    <div data-health-variant="classic">
-
-    <!-- Active job header -->
-    <div class="mt-12 blueprint" style="padding: 28px 32px;">
-      <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ active · job #2014</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">last sync · 6 hours ago</div>
-      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">chinn construction · seattle</div>
-      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">eta · aug 28 2026</div>
-
-      <div class="grid grid-cols-12 gap-6 py-8">
-        <div class="col-span-6">
-          <div class="hero-lab">Active job</div>
-          <div class="text-[28px] font-semibold mt-2" style="color: var(--ink); line-height: 1.15;">
-            Capitol Hill 168 <span class="serif-it" style="color: var(--ink-3); font-weight: 400;">— mid-rise multifamily</span>
-          </div>
-          <div class="mt-2 text-[13px]" style="color: var(--ink-3);">168 units · 6-story · Chinn Construction · Sep 2025 → Aug 2026</div>
-          <div class="mt-4 flex gap-2 flex-wrap">
-            <span class="chip-ink">Contract: $2,184,000</span>
-            <span class="chip-ink">Original margin target: 34%</span>
-            <span class="chip-clay">Forecast margin: 30.4%</span>
-          </div>
-        </div>
-        <div class="col-span-3">
-          <div class="hero-lab">% complete</div>
-          <div class="text-[44px] font-semibold mt-2 tabular" style="color: var(--ink); line-height: 1;">52%</div>
-          <div class="mt-3" style="height: 8px; background: var(--cream-card); border-radius: 4px; overflow: hidden; border: 1px solid var(--border);">
-            <div style="width: 52%; height: 100%; background: var(--sage-ink);"></div>
-          </div>
-          <div class="mt-2 text-[12px]" style="color: var(--ink-3);">142 days remaining of 274</div>
-        </div>
-        <div class="col-span-3">
-          <div class="hero-lab">Cortex status</div>
-          <div class="text-[28px] font-semibold mt-2" style="color: var(--clay); line-height: 1.1;">⚠ Watch</div>
-          <div class="mt-2 text-[12px]" style="color: var(--ink-3); line-height: 1.5;">Labor 12% over baseline. Material burn 14% above pace. Trending toward 3.6 margin points lost.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Variance KPIs -->
-    <div class="grid grid-cols-4 gap-5 py-10 mt-6 border-y border-dashed" style="border-color: var(--border-2);">
-      <div>
-        <div class="hero-lab">Hours variance</div>
-        <div class="hero-val tabular" style="color: var(--clay);">+1,840 hrs</div>
-        <div class="hero-foot">+12% vs baseline at 52%</div>
-      </div>
-      <div>
-        <div class="hero-lab">Cost variance</div>
-        <div class="hero-val tabular" style="color: var(--clay);">+$78,400</div>
-        <div class="hero-foot">+6.9% vs baseline</div>
-      </div>
-      <div>
-        <div class="hero-lab">Schedule variance</div>
-        <div class="hero-val tabular" style="color: var(--clay);">−4 days</div>
-        <div class="hero-foot">slipped this week</div>
-      </div>
-      <div>
-        <div class="hero-lab">Forecast at completion</div>
-        <div class="hero-val tabular" style="color: var(--ink);">$1,520,000</div>
-        <div class="hero-foot">vs $1,442,000 baseline</div>
-      </div>
-    </div>
-
-    <!-- Burn curve chart -->
-    <div class="meta-bar mt-14 mb-4">A · Labor burn curve — actual vs historical baseline</div>
-    <div class="card" style="padding: 28px 32px; background: var(--cream-soft);">
-      <div class="flex items-center justify-between mb-4">
-        <div class="text-[12px]" style="color: var(--ink-3);">Cumulative labor hours through % of job complete. Baseline = avg of #2001, #2008, #2010 normalized.</div>
-        <div class="flex gap-4 text-[11px]">
-          <div class="flex items-center gap-2"><span style="display: inline-block; width: 18px; height: 2px; background: var(--ink);"></span><span style="color: var(--ink);">Baseline</span></div>
-          <div class="flex items-center gap-2"><span style="display: inline-block; width: 18px; height: 2px; background: var(--clay);"></span><span style="color: var(--clay);">Actual</span></div>
-          <div class="flex items-center gap-2"><span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sage-ink);"></span><span style="color: var(--ink-3);">Today</span></div>
-        </div>
-      </div>
-      <svg viewBox="0 0 920 300" class="w-full" style="display: block; height: auto; max-height: 320px; overflow: visible;">
-        <!-- Plot area background -->
-        <rect x="60" y="40" width="840" height="220" fill="var(--paper)" stroke="var(--border)" stroke-width="0.5" rx="4"/>
-        <!-- Grid -->
-        <line x1="60" y1="40" x2="900" y2="40" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
-        <line x1="60" y1="100" x2="900" y2="100" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
-        <line x1="60" y1="160" x2="900" y2="160" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
-        <line x1="60" y1="220" x2="900" y2="220" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,3"/>
-        <line x1="60" y1="260" x2="900" y2="260" stroke="var(--ink)" stroke-width="1"/>
-        <line x1="60" y1="40" x2="60" y2="260" stroke="var(--ink)" stroke-width="1"/>
-
-        <!-- Y axis labels -->
-        <text x="50" y="44" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">22k hrs</text>
-        <text x="50" y="104" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">16k</text>
-        <text x="50" y="164" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">11k</text>
-        <text x="50" y="224" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">5.5k</text>
-        <text x="50" y="263" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end">0</text>
-
-        <!-- X axis labels -->
-        <text x="60"  y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">0%</text>
-        <text x="228" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">20%</text>
-        <text x="396" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">40%</text>
-        <text x="564" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">60%</text>
-        <text x="732" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">80%</text>
-        <text x="900" y="278" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle">100%</text>
-
-        <!-- Baseline curve (smooth S-curve) -->
-        <path d="M60,260 C 144,255 228,238 312,210 S 480,150 564,118 S 732,68 900,52"
-              stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-        <!-- Actual curve (slightly above baseline, ends at today marker x≈497) -->
-        <path d="M60,260 C 144,250 228,232 312,196 S 480,128 497,108"
-              stroke="var(--clay)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-        <!-- Variance shaded region between baseline and actual up to today -->
-        <path d="M60,260 C 144,250 228,232 312,196 S 480,128 497,108 L497,124 C 480,140 396,170 312,205 C 228,233 144,253 60,260 Z"
-              fill="var(--clay)" opacity="0.08"/>
-
-        <!-- Today marker -->
-        <line x1="497" y1="40" x2="497" y2="260" stroke="var(--sage-ink)" stroke-width="0.8" stroke-dasharray="3,3"/>
-        <circle cx="497" cy="108" r="5" fill="var(--sage-ink)" stroke="var(--cream)" stroke-width="2"/>
-        <text x="503" y="34" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" fill="var(--sage-ink)">TODAY · 52%</text>
-
-        <!-- Variance callout -->
-        <text x="503" y="100" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="var(--clay)">+1,840 hrs</text>
-        <text x="503" y="114" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--clay)">12% above pace</text>
-
-        <!-- Forecast continuation (dashed clay extending from today to 100%) -->
-        <path d="M497,108 C 564,90 732,52 900,28"
-              stroke="var(--clay)" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="4,4" opacity="0.5"/>
-        <text x="894" y="22" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--clay)" text-anchor="end">forecast</text>
-      </svg>
-    </div>
-
-    <!-- Phase health table -->
-    <div class="meta-bar mt-14 mb-4">B · Phase health</div>
-    <table class="modal-table" style="width: 100%;">
-      <thead>
-        <tr style="border-bottom: 1px solid var(--border-2);">
-          <th style="text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Phase</th>
-          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">% complete</th>
-          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Hours actual</th>
-          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Hours baseline</th>
-          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Variance</th>
-          <th style="text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding-bottom: 8px;">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Underground rough-in</td><td class="num">100%</td><td class="num">2,840</td><td class="num">2,810</td><td class="num">+30</td><td class="num" style="color: var(--sage-ink);">✓ On pace</td></tr>
-        <tr><td>Slab rough-in</td><td class="num">100%</td><td class="num">3,420</td><td class="num">3,160</td><td class="num" style="color: var(--clay);">+260</td><td class="num" style="color: var(--clay);">⚠ Over (+8%)</td></tr>
-        <tr><td>Stack risers</td><td class="num">78%</td><td class="num">4,180</td><td class="num">3,690</td><td class="num" style="color: var(--clay);">+490</td><td class="num" style="color: var(--clay);">⚠ Over (+13%)</td></tr>
-        <tr><td>Top-out (DWV + water)</td><td class="num">35%</td><td class="num">5,640</td><td class="num">4,580</td><td class="num" style="color: var(--clay);">+1,060</td><td class="num" style="color: var(--clay);">⚠ Over (+23%)</td></tr>
-        <tr><td>Trim &amp; fixtures</td><td class="num">0%</td><td class="num">0</td><td class="num">0</td><td class="num" style="color: var(--ink-4);">—</td><td class="num" style="color: var(--ink-4);">○ Not started</td></tr>
-        <tr><td>Test &amp; inspection</td><td class="num">0%</td><td class="num">0</td><td class="num">0</td><td class="num" style="color: var(--ink-4);">—</td><td class="num" style="color: var(--ink-4);">○ Not started</td></tr>
-        <tr style="border-top: 1.5px solid var(--ink); font-weight: 600;"><td>To-date total</td><td class="num">52%</td><td class="num">16,080</td><td class="num">14,240</td><td class="num" style="color: var(--clay);">+1,840 (+12%)</td><td class="num" style="color: var(--clay);">⚠ Watch</td></tr>
-      </tbody>
-    </table>
-
-    <!-- Anomaly feed -->
-    <div class="meta-bar mt-14 mb-4">C · Anomaly feed — what changed this week</div>
-    <div class="grid grid-cols-1 gap-3">
-      <div class="card" style="border-left: 3px solid var(--clay); padding: 18px 24px;">
-        <div class="flex items-start gap-4">
-          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay); flex-shrink: 0; min-width: 120px;">Apr 7 · 14:22</div>
-          <div style="flex: 1;">
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Top-out hours crossed +20% threshold</div>
-            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">DWV install on floors 4–6 ran 1,060 hours over baseline (23% above). Foreman daily reports cite 2 days lost waiting on RFI #14 (mechanical chase coordination).</div>
-          </div>
-          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · HIGH</div>
-        </div>
-      </div>
-      <div class="card" style="border-left: 3px solid var(--clay); padding: 18px 24px;">
-        <div class="flex items-start gap-4">
-          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay); flex-shrink: 0; min-width: 120px;">Apr 5 · 09:18</div>
-          <div style="flex: 1;">
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Material burn 14% above pace at 52% complete</div>
-            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">PEX manifold material consumption is 14% above the historical curve. Slab rework on Block B (3 units) likely accounts for ~$8k of the variance. Remaining ~$6k unexplained.</div>
-          </div>
-          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · HIGH</div>
-        </div>
-      </div>
-      <div class="card" style="border-left: 3px solid var(--clay); padding: 18px 24px;">
-        <div class="flex items-start gap-4">
-          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay); flex-shrink: 0; min-width: 120px;">Apr 3 · 16:45</div>
-          <div style="flex: 1;">
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Crew tier mix shifted to 38% Tier-3</div>
-            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">Apprentice ratio is 38% this week vs 22% historical average. Lower-tier crews historically run 12–18% slower on top-out. Cause: 4 Tier-1 plumbers redeployed to #2009 closeout punchlist.</div>
-          </div>
-          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · MED</div>
-        </div>
-      </div>
-      <div class="card" style="border-left: 3px solid var(--ink-4); padding: 18px 24px;">
-        <div class="flex items-start gap-4">
-          <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--ink-3); flex-shrink: 0; min-width: 120px;">Apr 1 · 11:02</div>
-          <div style="flex: 1;">
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Pay app #7 received — $312k draw</div>
-            <div class="mt-1 text-[12px]" style="color: var(--ink-3); line-height: 1.6;">Chinn approved without revision. 41-day cycle from submission, beating their 47-day average. Retainage now $109,200 (5%). On track.</div>
-          </div>
-          <div class="text-[11px]" style="color: var(--ink-4); flex-shrink: 0;">Severity · INFO</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recommended actions -->
-    <div class="meta-bar mt-14 mb-4">D · Cortex recommends</div>
-    <div class="grid grid-cols-3 gap-5">
-      <div class="kpi" style="border-top: 3px solid var(--clay);">
-        <div class="kpi-head"><div class="kpi-eyebrow">Action 01 · This week</div><span class="chip-clay">Urgent</span></div>
-        <div class="kpi-title">Audit slab phase scrap reports</div>
-        <div class="kpi-sub">$8–14k of unexplained material variance is concentrated in Block B slab rework. Pull foreman scrap logs and verify against AP receipts.</div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-row"><span class="kpi-lbl">Owner</span><span class="kpi-val">PM Garcia</span></div>
-        <div class="kpi-row"><span class="kpi-lbl">Recovery est.</span><span class="kpi-val">$6–10k</span></div>
-      </div>
-      <div class="kpi" style="border-top: 3px solid var(--clay);">
-        <div class="kpi-head"><div class="kpi-eyebrow">Action 02 · This week</div><span class="chip-clay">Urgent</span></div>
-        <div class="kpi-title">Escalate RFI #14 with mechanical</div>
-        <div class="kpi-sub">2 days already lost. Each additional day of waiting costs ~$3,400 in idle crew time on top-out. Push for written response by Apr 10.</div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-row"><span class="kpi-lbl">Owner</span><span class="kpi-val">PM Garcia</span></div>
-        <div class="kpi-row"><span class="kpi-lbl">Bleed rate</span><span class="kpi-val" style="color: var(--clay);">$3.4k/day</span></div>
-      </div>
-      <div class="kpi" style="border-top: 3px solid var(--sage-ink);">
-        <div class="kpi-head"><div class="kpi-eyebrow">Action 03 · Next 2 weeks</div><span class="chip-sage">Strategic</span></div>
-        <div class="kpi-title">Re-tier the top-out crew</div>
-        <div class="kpi-sub">Pull 2 Tier-1 plumbers off #2009 closeout (45% complete, on margin). Shift them to #2014 top-out. Replace with 2 Tier-3 on closeout.</div>
-        <div class="kpi-divider"></div>
-        <div class="kpi-row"><span class="kpi-lbl">Owner</span><span class="kpi-val">Foreman Reyes</span></div>
-        <div class="kpi-row"><span class="kpi-lbl">Recovery est.</span><span class="kpi-val">~480 hrs</span></div>
-      </div>
-    </div>
-
-    <div class="mt-12 p-6 rounded-xl" style="background: var(--cream-soft); border: 1px dashed var(--border-2);">
-      <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--ink-3);">Forecast if all 3 actions taken</div>
-      <div class="mt-2 text-[14px]" style="color: var(--ink-2); line-height: 1.65;">
-        Margin recovers from <b style="color: var(--clay);">30.4%</b> back to <b style="color: var(--sage-ink);">33.1%</b> — within 1 point of original 34% target. Estimated profit recovery: <b>$59,000</b>. The window to act closes when top-out passes 60% complete (~3 weeks).
-      </div>
-    </div>
-
-    </div><!-- /classic variant -->
-
-    <!-- ============ SIGNAL-DRIVEN VARIANT (3-layer architecture) ============ -->
-    <div data-health-variant="signals" style="display: none;">
-
-      <!-- =================================================== -->
-      <!-- SCOPE BANNER                                        -->
-      <!-- =================================================== -->
-      <div class="card mt-10" style="padding: 28px 34px; background: var(--cream-soft); border-left: 3px solid var(--clay);">
-        <div class="meta-bar">Scope · #2014 Capitol Hill 168</div>
-        <div class="text-[17px] mt-3" style="color: var(--ink); line-height: 1.55; max-width: 900px;">
-          168-unit, 6-story <b>Type VA wood frame over concrete podium</b> mixed-use in Capitol Hill — Chinn Construction GC, plumbing rough-in ~60% complete on floors 2–4, trim phase starts in 6 weeks. Podium parking and ground-floor retail complicate stack routing and waste main tie-ins.
-        </div>
-        <div class="flex gap-3 mt-5 flex-wrap">
-          <span class="chip-clay">Day 132 of 274 · 52% complete</span>
-          <span class="chip-ink">$2.18M contract</span>
-          <span class="chip-clay">Forecast margin 30.4% (orig 34%)</span>
-          <span class="chip-ink">142 days remaining</span>
-          <span class="chip-ink">Chinn · PM Garcia</span>
-        </div>
-      </div>
-
-      <!-- =================================================== -->
-      <!-- COMPOSITE SIGNAL ROLL-UP                            -->
-      <!-- =================================================== -->
-      <div class="grid grid-cols-4 gap-5 mt-10">
-        <div class="card" style="padding: 22px 24px;">
-          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Layer 1 · firing now</div>
-          <div class="text-[46px] serif-it mt-2" style="color: var(--clay); line-height: 1;">6</div>
-          <div class="text-[11px] mt-1" style="color: var(--ink-3);">4 alerts · 2 watch · 5–21 day lead</div>
-        </div>
-        <div class="card" style="padding: 22px 24px;">
-          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Layer 2 · patterns</div>
-          <div class="text-[46px] serif-it mt-2" style="color: var(--clay); line-height: 1;">5</div>
-          <div class="text-[11px] mt-1" style="color: var(--ink-3);">3 drifting · 2 stable · weeks–months</div>
-        </div>
-        <div class="card" style="padding: 22px 24px;">
-          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Layer 3 · counterparty</div>
-          <div class="text-[46px] serif-it mt-2" style="color: var(--sage-ink); line-height: 1;">5</div>
-          <div class="text-[11px] mt-1" style="color: var(--ink-3);">4 clean · 1 soft drift · pre-award</div>
-        </div>
-        <div class="card" style="padding: 22px 24px; background: var(--cream-soft); border-left: 3px solid var(--clay);">
-          <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">Composite score</div>
-          <div class="text-[46px] serif-it mt-2" style="color: var(--clay); line-height: 1;">63<span style="font-size: 22px; color: var(--ink-4);">/100</span></div>
-          <div class="text-[11px] mt-1" style="color: var(--ink-3);">watch-list · recoverable with action</div>
-        </div>
-      </div>
-
-      <!-- =================================================== -->
-      <!-- LAYER 1 — DIRECT DOCUMENT EVENTS                    -->
-      <!-- =================================================== -->
-      <div class="mt-14 rule-solid pt-8">
-        <div class="flex items-baseline justify-between mb-2">
-          <div class="meta-bar">Layer 1 — Direct Document Events</div>
-          <div class="text-[11px] tabular" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">firing now · 5–21 day lead · parsed from live doc pipeline</div>
-        </div>
-        <div class="text-[13px] mt-2 mb-7" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
-          What Cortex is watching in real-time as RFIs, ASIs, submittals, inspection reports, COs, and daily reports land in the ingest queue. These fire <i>before</i> they show up in a JCR — that's the lead time.
-        </div>
-
-        <div class="grid grid-cols-2 gap-5">
-
-          <!-- Signal 1.1 -->
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">RFI velocity spike — stack routing</div>
-              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              <b style="color: var(--clay);">8 RFIs in 14 days</b> on podium-to-L2 waste main tie-ins — <b>2.3×</b> the baseline rate for comparable Chinn jobs at this phase. Routing conflicts at the podium-slab transition are the driver.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">8 RFIs · 3 sketches</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">~18 days ahead of JCR impact</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">+$14–22k rework</span></div>
-            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
-              <b style="color: var(--clay);">Action:</b> Escalate to Chinn PM Garcia for coordination meeting with structural. Cost the rework before it becomes a T&amp;M dispute.
-            </div>
-          </div>
-
-          <!-- Signal 1.2 -->
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">ASI cascade — L3/L4 partitions</div>
-              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              <b style="color: var(--clay);">3 ASIs in 9 days</b> modifying L3/L4 unit partition layouts. Fixture rough-in on floors 3 and 4 is already installed per the original plans — rework is baked in.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">ASI #14, #15, #16</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">~21 days ahead of JCR</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">+$31k rework · 4–6 days schedule</span></div>
-            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
-              <b style="color: var(--clay);">Action:</b> Document the as-built conflict photographically, submit CO this week. Garcia has a 4.2-day CO cycle — beat the trim-phase start date.
-            </div>
-          </div>
-
-          <!-- Signal 1.3 -->
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Inspection fail — L2 DWV rough-in</div>
-              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Seattle DCI inspector flagged <b style="color: var(--clay);">cleanout access</b> on floor 2 DWV rough-in — failed first inspection. Re-inspect scheduled +3 days.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">Inspection report #I-24-0408</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">immediate (already affecting schedule)</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">−3 days schedule float</span></div>
-            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
-              <b style="color: var(--clay);">Action:</b> Foreman Reyes has the cleanout spec from #2011 — mirror that detail on L3/L4 pre-inspection to prevent repeat.
-            </div>
-          </div>
-
-          <!-- Signal 1.4 -->
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">CO backlog aging</div>
-              <span class="chip-clay" style="flex-shrink: 0;">⚠ alert</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              <b style="color: var(--clay);">$47k in COs submitted, not yet approved</b>, oldest aging 18 days. Garcia's historical first-pass rate on Chinn is 94% — this is unusual.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">CO #008, #009, #010</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">cash flow impact ~15 days</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">$47k float · working capital drag</span></div>
-            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
-              <b style="color: var(--clay);">Action:</b> Garcia is distracted by the Bellevue 220 bid prep — ping him directly this week with the aging summary.
-            </div>
-          </div>
-
-          <!-- Signal 1.5 -->
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Submittal rejection loop — waste fittings</div>
-              <span class="chip-ink" style="flex-shrink: 0;">◐ watch</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Waste main fittings submittal rejected <b>twice</b> for spec compliance (Charlotte Pipe sub vs. specified brand). Third submission pending architect review.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">Submittal #22-03 rev C</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">5 days to trim-phase material need</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val">potential crew stand-down if not cleared</span></div>
-            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
-              <b style="color: var(--clay);">Action:</b> Accept spec brand (+$3.8k material cost) rather than risk trim stand-down costing $12k+/day.
-            </div>
-          </div>
-
-          <!-- Signal 1.6 -->
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Daily report labor delta</div>
-              <span class="chip-ink" style="flex-shrink: 0;">◐ watch</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Foreman Reyes added <b>+2 plumbers</b> to the rough-in crew 10 days ago without a formal CO. Daily reports confirm the extra labor but the burden isn't flowing through the original budget.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Documents</span><span class="kpi-val">Daily reports Mar 28–Apr 7</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">~10 days ahead of next JCR cycle</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val">+$18k unbudgeted labor (already +12% baseline)</span></div>
-            <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
-              <b style="color: var(--clay);">Action:</b> Confirm with Reyes whether the +2 is covering the ASI rework (bill as CO) or pulling schedule (absorb).
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- =================================================== -->
-      <!-- LAYER 2 — PATTERN-BASED                             -->
-      <!-- =================================================== -->
-      <div class="mt-14 rule-solid pt-8">
-        <div class="flex items-baseline justify-between mb-2">
-          <div class="meta-bar">Layer 2 — Pattern-Based signals</div>
-          <div class="text-[11px] tabular" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">weeks–months · trend-vs-baseline · built from cross-job history</div>
-        </div>
-        <div class="text-[13px] mt-2 mb-7" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
-          Not any single document — the shape of many documents over time compared to what closed-job analogs looked like at the same phase.
-        </div>
-
-        <div class="grid grid-cols-2 gap-5">
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Labor burn curve divergence</div>
-              <span class="chip-clay" style="flex-shrink: 0;">⚠ drifting</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Actual hrs/fixture trending <b style="color: var(--clay);">+14% above #2009 analog</b> at the same % complete. The gap has widened over the last 6 weeks — it's not a one-phase blip, it's a slope.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Baseline analog</span><span class="kpi-val">#2009 Greenwood</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Current delta</span><span class="kpi-val" style="color: var(--clay);">+14% hrs/fx</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">6-week trajectory</span><span class="kpi-val" style="color: var(--clay);">widening ~0.5%/week</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Projected EAC variance</span><span class="kpi-val" style="color: var(--clay);">+$78k by closeout</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Schedule float erosion</div>
-              <span class="chip-clay" style="flex-shrink: 0;">⚠ drifting</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Critical-path float dropped from <b>11 days → 3 days</b> in 6 weeks. Podium tie-in delays (Signal 1.1) and the failed L2 inspection (1.3) are the two biggest contributors.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">6 weeks ago</span><span class="kpi-val">11 days float</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Now</span><span class="kpi-val" style="color: var(--clay);">3 days float</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Trend</span><span class="kpi-val" style="color: var(--clay);">−1.3 days/week</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Projected breach</span><span class="kpi-val" style="color: var(--clay);">~2 weeks at current rate</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--clay);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Ferguson delivery reliability drop</div>
-              <span class="chip-clay" style="flex-shrink: 0;">⚠ drifting</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Ferguson on-time delivery dropped from <b>97% (portfolio avg) → 82% on #2014</b>. The Ferguson concentration flag in Atlas is starting to cash in.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Portfolio baseline</span><span class="kpi-val">97% on-time</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">This job</span><span class="kpi-val" style="color: var(--clay);">82% on-time</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Late deliveries last 30d</span><span class="kpi-val" style="color: var(--clay);">4 of 22 POs</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Mitigation available</span><span class="kpi-val">McLendon (hot-ship +3.2%)</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Crew composition shift</div>
-              <span class="chip-ink" style="flex-shrink: 0;">◐ stable</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Tier-1 Crew Alpha is down to <b>6 of 8 members</b> on this job — 2 rotated to Bellevue 220 pre-award prep. Productivity still within tolerance, but the margin-of-safety is thinner than the #2010 baseline.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Crew Alpha on-site</span><span class="kpi-val">6 of 8</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Productivity index</span><span class="kpi-val">1.14 (vs. 1.18 full roster)</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Headcount makeup</span><span class="kpi-val">2 tier-2 rotating through</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Material ordering cadence</div>
-              <span class="chip-sage" style="flex-shrink: 0;">✓ stable</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              PEX-A ordering cadence matches the <b>#2010 Old Town rhythm</b> — steady, pull-based, low buffer stock. Material burn aligned with rough-in progress.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Matching analog</span><span class="kpi-val" style="color: var(--sage-ink);">#2010 Old Town ★</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Inventory buffer</span><span class="kpi-val">2.1 days (healthy)</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Waste factor</span><span class="kpi-val">3.8% (portfolio avg 4.2%)</span></div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- =================================================== -->
-      <!-- LAYER 3 — COUNTERPARTY INTELLIGENCE                 -->
-      <!-- =================================================== -->
-      <div class="mt-14 rule-solid pt-8">
-        <div class="flex items-baseline justify-between mb-2">
-          <div class="meta-bar">Layer 3 — Counterparty Intelligence</div>
-          <div class="text-[11px] tabular" style="color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">infinite lookback · the baseline for this GC and its ecosystem</div>
-        </div>
-        <div class="text-[13px] mt-2 mb-7" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
-          Who you're working with — their payment rhythm, dispute history, CO approval behavior, liquidity signals. This layer existed before the job started; it frames how to read every Layer 1 and Layer 2 signal.
-        </div>
-
-        <div class="grid grid-cols-2 gap-5">
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Chinn payment rhythm</div>
-              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Historical average <b style="color: var(--sage-ink);">38 days</b> to pay on pay apps across 4 closed jobs. Current #2014 average is 41 days — still inside the comfort band, mild drift worth watching.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Portfolio avg</span><span class="kpi-val">38 days</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">This job avg</span><span class="kpi-val">41 days</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Late payments ever</span><span class="kpi-val" style="color: var(--sage-ink);">0 over 6 yrs</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--ink-3);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">PM Garcia CO approval rate</div>
-              <span class="chip-ink" style="flex-shrink: 0;">◐ soft drift</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Garcia's lifetime first-pass CO approval rate on Chinn work is <b>94%</b>. On #2014 it's <b>89%</b> — still healthy, but the softening correlates with his Bellevue 220 bid-prep load.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lifetime rate</span><span class="kpi-val">94% first-pass</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">#2014 rate</span><span class="kpi-val">89%</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Driver</span><span class="kpi-val">competing Bellevue 220 bid</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Chinn dispute history</div>
-              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              <b style="color: var(--sage-ink);">Zero formal disputes</b> across 4 closed Chinn jobs. No liens filed, no arbitration events, no back-charges exceeding $5k. The trunk relationship is clean.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Closed jobs</span><span class="kpi-val">4</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Disputes</span><span class="kpi-val" style="color: var(--sage-ink);">0</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Back-charges &gt;$5k</span><span class="kpi-val" style="color: var(--sage-ink);">0</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">GC liquidity proxy</div>
-              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              No red flags from public lien searches, UCC filings, or news events. Chinn's sibling projects in Cortex's external index all show normal payment behavior to other subs.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Lien filings (12mo)</span><span class="kpi-val" style="color: var(--sage-ink);">0 against Chinn</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Sibling project signals</span><span class="kpi-val" style="color: var(--sage-ink);">3 active · all nominal</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Last public event</span><span class="kpi-val">none</span></div>
-          </div>
-
-          <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
-            <div class="flex items-start justify-between mb-2">
-              <div class="text-[15px] font-semibold" style="color: var(--ink);">Attention crossover</div>
-              <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
-            </div>
-            <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Chinn is also running the Bellevue 220 bid process. Garcia's split attention is a risk, but the graph shows no contractual overlap or resource conflict with this job's crew — <i>except</i> the 2 Tier-1 Alpha rotations in Layer 2.
-            </div>
-            <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Concurrent Chinn activity</span><span class="kpi-val">Bellevue 220 bid prep</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Resource overlap</span><span class="kpi-val">2 Crew Alpha rotations</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Downstream risk</span><span class="kpi-val">low if bid awarded, mod if lost</span></div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- =================================================== -->
-      <!-- SYNTHESIS / PRIORITIZED ACTION LIST                 -->
-      <!-- =================================================== -->
-      <div class="mt-14 rule-solid pt-8">
-        <div class="meta-bar mb-4">What Cortex recommends this week</div>
-        <div class="text-[13px] mb-6" style="color: var(--ink-3); max-width: 720px; line-height: 1.55;">
-          The signals above, ordered by payback — highest-leverage action first.
-        </div>
-
-        <div class="finding">
-          <div class="text-[22px] serif-it" style="color: var(--clay);">01</div>
-          <div>
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Submit the ASI #14–16 change order before Friday.</div>
-            <div class="finding-body">$31k rework + 4–6 schedule days is the biggest single bleed. Garcia's 4.2-day CO cycle gives you time — but only if it lands this week, before he's heads-down on Bellevue 220.</div>
-          </div>
-          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 1.2 · 3.2</div>
-        </div>
-
-        <div class="finding">
-          <div class="text-[22px] serif-it" style="color: var(--clay);">02</div>
-          <div>
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Accept the spec-brand waste fittings — absorb the $3.8k.</div>
-            <div class="finding-body">A trim-phase stand-down costs $12k+/day. Paying the brand premium is cheap insurance against Signal 1.5 tipping into a schedule breach.</div>
-          </div>
-          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signal 1.5</div>
-        </div>
-
-        <div class="finding">
-          <div class="text-[22px] serif-it" style="color: var(--clay);">03</div>
-          <div>
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Shift 20% of remaining material spend to McLendon.</div>
-            <div class="finding-body">Ferguson on-time dropped to 82% — the concentration flag is cashing in. McLendon costs 3.2% more but preserves float and hedges the remaining rough-in.</div>
-          </div>
-          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signal 2.3</div>
-        </div>
-
-        <div class="finding">
-          <div class="text-[22px] serif-it" style="color: var(--clay);">04</div>
-          <div>
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Push a direct status ping to Garcia on the $47k CO backlog.</div>
-            <div class="finding-body">Garcia is distracted by Bellevue 220. The relationship is still clean (Layer 3) — this is a <i>nudge</i>, not an escalation. Named account owner + short message.</div>
-          </div>
-          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 1.4 · 3.2</div>
-        </div>
-
-        <div class="finding">
-          <div class="text-[22px] serif-it" style="color: var(--ink-3);">05</div>
-          <div>
-            <div class="text-[14px] font-semibold" style="color: var(--ink);">Lock the remaining 2 Crew Alpha members to #2014 through trim.</div>
-            <div class="finding-body">Productivity is within tolerance now, but labor burn (Signal 2.1) is already +14% — losing more of the fixed-asset crew to Bellevue prep would turn a watch into an alert.</div>
-          </div>
-          <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 2.1 · 2.4</div>
-        </div>
-      </div>
-
-    </div>
   </div>
 
   <!-- ============================================================ -->
@@ -7330,6 +6765,153 @@
     }
   });
 
+  // ============ LIVE PROJECT DASHBOARD DATA (active jobs only) ============
+  if (PROJECTS['2104']) PROJECTS['2104'].live = {
+    lastSync: '6 hrs ago',
+    title: 'Big 1410 Apartments',
+    subtitle: '24 units \u00b7 5 stories \u00b7 BMDC Services \u00b7 Jul 2024 \u2192 May 2026',
+    chipContract: 'Contract: $1,196,549',
+    chipOrigMargin: 'Original margin target: 30%',
+    chipForecastMargin: '\u25cf Forecast margin: 32.0%',
+    pctComplete: '99.76%',
+    pctSub: '2 days remaining of 658',
+    cortexStatus: '\u2713 On pace',
+    cortexStatusBody: 'Labor 2% under baseline. Material burn tracking exactly to plan. Trim crew rebalancing from sibling job cushioned the final push.',
+    eta: 'May 2, 2026',
+    etaSub: '2 days remaining',
+    hoursVar: '+80 hrs',
+    hoursVarSub: '+1.6% vs baseline',
+    costVar: '-$8,400',
+    costVarSub: '-0.9% vs baseline',
+    schedVar: '-1 day',
+    schedVarSub: 'ahead of plan',
+    forecastEac: '$383,000',
+    forecastEacSub: 'vs $378,500 baseline',
+    burnCurve: [
+      {pct: 0, actual: 0, baseline: 0},
+      {pct: 10, actual: 380, baseline: 360},
+      {pct: 25, actual: 1020, baseline: 1000},
+      {pct: 50, actual: 2100, baseline: 2080},
+      {pct: 75, actual: 3320, baseline: 3300},
+      {pct: 90, actual: 4180, baseline: 4170},
+      {pct: 99.76, actual: 4720, baseline: 4640}
+    ],
+    phases: [
+      {phase:'Underground rough-in', pct:100, actual:680, baseline:660, status:'on'},
+      {phase:'Slab rough-in',        pct:100, actual:520, baseline:510, status:'on'},
+      {phase:'Stack risers',         pct:100, actual:840, baseline:840, status:'on'},
+      {phase:'Top-out (DWV + water)',pct:100, actual:1480, baseline:1460, status:'on'},
+      {phase:'Trim & fixtures',      pct:80,  actual:1120, baseline:1080, status:'watch'},
+      {phase:'Test & inspection',    pct:15,  actual:80,  baseline:90,  status:'on'}
+    ],
+    anomalies: [
+      {date:'Apr 17 \u00b7 14:22', title:'Pay app #18 received \u2014 $12.9k draw', body:'Final monthly billing before closeout pay app. 100% of original contract work complete. Retention $59.7k held.', severity:'INFO'},
+      {date:'Apr 10 \u00b7 09:45', title:'CO#05 Booster Pump finalized', body:'+$39,200 added. Executed 90 days after initial COR#5 submission. Credit structure based on original domestic water pump scope.', severity:'INFO'},
+      {date:'Apr 02 \u00b7 16:12', title:'L5 unit kits complete', body:'All 20 upper-level unit tubs/showers installed. Lower-tier crew released to #2112 sibling job.', severity:'INFO'},
+      {date:'Mar 15 \u00b7 08:30', title:'Final inspection scheduled May 12', body:'City gas + DWV + water-main inspections coordinated for same day. BMDC PM confirmed jurisdictional signoff path.', severity:'INFO'}
+    ],
+    recommends: [
+      {urgency:'urgent', label:'ACTION 01 \u00b7 THIS WEEK', title:'Prep final pay app #19 + closeout package', body:'Warranty letter, as-builts, O&M manuals, final lien waivers. Submit by Apr 25 to release retention per BMDC closeout SLA.', owner:'Tommy Booth', ownerLabel:'Owner', extra:'Retention release target', extraVal:'$59,687'},
+      {urgency:'strategic', label:'ACTION 02 \u00b7 NEXT 60 DAYS', title:'Track retention release pursuit', body:'BMDC historical retention cycle is 45-60 days post-closeout. Confirm closeout acceptance, then follow up at day 30, day 45, day 60.', owner:'OWP Admin', ownerLabel:'Owner', extra:'Cash recovery', extraVal:'$59,687 \u00b7 target Jul 15'},
+      {urgency:'strategic', label:'ACTION 03 \u00b7 THIS WEEK', title:'Punch-list close-out', body:'Trim crew tagged 12 items from final walkthrough. 11 cosmetic (day-of fixes), 1 pipe support revision on L3 requires 2 hours.', owner:'Tommy Booth', ownerLabel:'Owner', extra:'Effort', extraVal:'~14 hrs'}
+    ]
+  };
+
+  if (PROJECTS['2111']) PROJECTS['2111'].live = {
+    lastSync: '4 hrs ago',
+    title: 'Compass Northgate M3',
+    subtitle: '186 units \u00b7 6 stories + basement \u00b7 Compass General \u00b7 Oct 2025 \u2192 est. Q4 2026',
+    chipContract: 'Contract: $4,512,862',
+    chipOrigMargin: 'Original margin target: 32%',
+    chipForecastMargin: '\u26a0 Forecast margin: 28.7%',
+    pctComplete: '48.8%',
+    pctSub: '282 days remaining of 550',
+    cortexStatus: '\u26a0 Watch',
+    cortexStatusBody: 'Underground labor +57% over revised budget. Franklin engineering spend +32%. RFI #14 is bleeding idle crew time \u2014 escalation urgency high.',
+    eta: 'Nov 14, 2026',
+    etaSub: 'tracking 2 days late',
+    hoursVar: '+480 hrs',
+    hoursVarSub: '+9% vs baseline',
+    costVar: '+$18,200',
+    costVarSub: '+0.4% vs baseline',
+    schedVar: '-2 days',
+    schedVarSub: 'slipped this week',
+    forecastEac: '$1,296,000',
+    forecastEacSub: 'vs $1,443,000 baseline',
+    burnCurve: [
+      {pct: 0, actual: 0, baseline: 0},
+      {pct: 10, actual: 1120, baseline: 1000},
+      {pct: 25, actual: 2850, baseline: 2650},
+      {pct: 40, actual: 4680, baseline: 4400},
+      {pct: 48.8, actual: 5680, baseline: 5200}
+    ],
+    phases: [
+      {phase:'Underground rough-in',  pct:100, actual:2850, baseline:2350, status:'over'},
+      {phase:'Slab rough-in',         pct:100, actual:1680, baseline:1640, status:'on'},
+      {phase:'Stack risers',          pct:65,  actual:1150, baseline:1040, status:'watch'},
+      {phase:'Top-out (DWV + water)', pct:22,  actual:380,  baseline:360,  status:'on'},
+      {phase:'Trim & fixtures',       pct:0,   actual:0,    baseline:0,    status:'notstarted'},
+      {phase:'Test & inspection',     pct:0,   actual:0,    baseline:0,    status:'notstarted'}
+    ],
+    anomalies: [
+      {date:'Apr 18 \u00b7 10:15', title:'110 Underground Labor +57% over revised budget', body:'Actual $287k vs revised budget $183k. Concentrated in CMU sleeve installation \u2014 sleeves had to be redrilled on 3 podium segments after as-built discrepancy found in L1 slab.', severity:'HIGH'},
+      {date:'Apr 12 \u00b7 14:32', title:'Engineering spend $123k \u2014 32% over $93k budget', body:'Franklin Engineering consulting running long. Design support on submittal rejections (fixture schedule revisions) exceeded initial scope. Scope-creep conversation needed before top-out.', severity:'HIGH'},
+      {date:'Apr 08 \u00b7 09:04', title:'RFI #14 mechanical chase coordination \u2014 2 days idle', body:'Plumbing stack vs HVAC duct routing conflict on L3. 2 Tier-1 crew sitting on L3 top-out. Mechanical sub slow to respond. Estimated idle cost $3,400/day.', severity:'HIGH'},
+      {date:'Apr 01 \u00b7 11:02', title:'Pay app #12 received \u2014 $312k draw', body:'41-day cycle from submission. Compass approved without revision. Retention now $110k (5%). Cycle is 6 days better than historical Compass avg (47d).', severity:'INFO'}
+    ],
+    recommends: [
+      {urgency:'urgent', label:'ACTION 01 \u00b7 THIS WEEK', title:'Audit 110 Underground Labor variance', body:'$104k of overage concentrated in CMU sleeve rework across 3 podium segments. Pull the daily reports from the rework weeks and confirm whether it was scope growth, as-built error, or scheduling inefficiency. Establish basis for back-charge conversation with Compass.', owner:'PM Garcia', ownerLabel:'Owner', extra:'Recovery est.', extraVal:'$40\u201360k'},
+      {urgency:'urgent', label:'ACTION 02 \u00b7 THIS WEEK', title:'Escalate RFI #14 with mechanical', body:'2 days already lost. Each additional day of waiting costs ~$3,400 in idle crew time on top-out. Push for written response by Apr 22 or escalate to Compass GC for formal CM resolution.', owner:'PM Garcia', ownerLabel:'Owner', extra:'Bleed rate', extraVal:'$3.4k/day'},
+      {urgency:'strategic', label:'ACTION 03 \u00b7 NEXT 2 WEEKS', title:'Evaluate Franklin engineering scope before top-out', body:'Engineering spend is ~32% over budget already and top-out hasn\u2019t started. If current rate continues, final engineering spend lands at $165\u2013180k vs $93k budget. Either negotiate fee cap, change vendor for trim-phase support, or accept and document.', owner:'Victor (RI Foreman)', ownerLabel:'Owner', extra:'Exposure', extraVal:'$50\u201380k'}
+    ]
+  };
+
+  if (PROJECTS['2112']) PROJECTS['2112'].live = {
+    lastSync: '5 hrs ago',
+    title: 'BMDC BIG3',
+    subtitle: '20 units \u00b7 BMDC Services \u00b7 Jul 2025 \u2192 est. Oct 2026',
+    chipContract: 'Contract: $696,427',
+    chipOrigMargin: 'Original margin target: 28%',
+    chipForecastMargin: '\u25cf Forecast margin: 30.2%',
+    pctComplete: '74.4%',
+    pctSub: '194 days remaining of 458',
+    cortexStatus: '\u2713 On pace',
+    cortexStatusBody: 'Tight execution on a small job. CO#05 booster pump executed at $39.2k added (same spec as sibling #2104). Trim crew consolidation working as planned.',
+    eta: 'Oct 27, 2026',
+    etaSub: 'on schedule',
+    hoursVar: '+40 hrs',
+    hoursVarSub: '+2% vs baseline',
+    costVar: '-$1,800',
+    costVarSub: 'on budget',
+    schedVar: '0 days',
+    schedVarSub: 'on plan',
+    forecastEac: '$210,400',
+    forecastEacSub: 'vs $187,000 baseline',
+    burnCurve: [
+      {pct: 0, actual: 0, baseline: 0},
+      {pct: 15, actual: 320, baseline: 310},
+      {pct: 35, actual: 780, baseline: 760},
+      {pct: 55, actual: 1250, baseline: 1230},
+      {pct: 74.4, actual: 1720, baseline: 1680}
+    ],
+    phases: [
+      {phase:'Underground rough-in', pct:100, actual:420, baseline:410, status:'on'},
+      {phase:'Rough-in',             pct:100, actual:840, baseline:820, status:'on'},
+      {phase:'Trim & fixtures',      pct:45,  actual:380, baseline:380, status:'on'},
+      {phase:'Test & inspection',    pct:0,   actual:0,   baseline:0,   status:'notstarted'}
+    ],
+    anomalies: [
+      {date:'Apr 17 \u00b7 13:08', title:'CO#05 Booster Pump executed \u2014 $39.2k added', body:'Same spec as #2104 sibling job (parallel procurement). Executed 38 days after COR submission.', severity:'INFO'},
+      {date:'Apr 02 \u00b7 10:45', title:'Pay app #9 received \u2014 $33.7k draw', body:'74% billed. Retention $25.9k (5%). BMDC cycle consistent at ~32 days.', severity:'INFO'},
+      {date:'Mar 20 \u00b7 16:30', title:'Trim phase started \u2014 all rough-in inspections passed', body:'Water, gas, DWV all first-pass. 5 units tubbed as of end of week. No rework.', severity:'INFO'}
+    ],
+    recommends: [
+      {urgency:'strategic', label:'ACTION 01 \u00b7 THIS WEEK', title:'Share trim crew with #2104 Big 1410', body:'Both BMDC jobs in trim phase. Tommy can cycle 2 Tier-1 plumbers between sites \u2014 #2104 is in final 2 weeks, #2112 has 5 months ahead. Consolidation reduces idle time between jobs.', owner:'Tommy Booth', ownerLabel:'Owner', extra:'Efficiency gain', extraVal:'~80 hrs recovered'},
+      {urgency:'strategic', label:'ACTION 02 \u00b7 THIS WEEK', title:'Prep vendor closeout list', body:'AP still posting \u2014 6 active vendors. Compile final PO reconciliation so retention release can start minute after Oct closeout.', owner:'OWP Admin', ownerLabel:'Owner', extra:'Cash forecast', extraVal:'$25,903 retention'},
+      {urgency:'strategic', label:'ACTION 03 \u00b7 NEXT 4 WEEKS', title:'Confirm warranty walkthrough scheduling', body:'Small 20-unit job \u2014 warranty walkthrough can be a single afternoon. Get BMDC PM to confirm target date + HOA representative attendance.', owner:'Tommy Booth', ownerLabel:'Owner', extra:'Effort', extraVal:'Half day'}
+    ]
+  };
+
   // ============ INJECTED JCR DATA (crew, vendors, phases, cost codes, insights) ============
   // Project 2001
   PROJECTS['2001'].crewRoster = [["Hubbard, Robert W", 2221.0, 69758, 31.41, "Senior"], ["McCabe, Thomas C", 1824.5, 23718, 13.0, "Apprentice"], ["Sepulveda Gonzalez, Alfredo", 1720.5, 37851, 22.0, "Mid"], ["Barnhart, Joseph N", 1558.0, 38797, 24.9, "Mid"], ["Ross, Kelli M", 1451.0, 38118, 26.27, "Mid"], ["Hubbard, Dustin R", 1338.5, 13480, 10.07, "Apprentice"], ["Palma Vides, Hugo", 1338.0, 33450, 25.0, "Mid"], ["Reed, Reuben H", 1302.0, 32550, 25.0, "Mid"], ["Quintanilla, Esteban R", 1231.5, 35714, 29.0, "Mid"], ["Sanders, Allen O", 1170.5, 28092, 24.0, "Mid"], ["Castro Hernandez, Carlos E", 1157.5, 24926, 21.53, "Mid"], ["Mazil, Antonio", 884.8, 10617, 12.0, "Apprentice"], ["Cortes Mendiola, Victor H", 778.5, 14792, 19.0, "Mid"], ["Gerard, Jeffrey S", 733.0, 23119, 31.54, "Senior"], ["Soto Cruz, Jovani", 629.0, 6290, 10.0, "Apprentice"], ["Meza Fuentes, Erick A", 619.5, 7764, 12.53, "Apprentice"], ["Veley, Nathaniel S", 486.0, 9113, 18.75, "Mid"], ["Slaton, Justin T", 411.0, 4110, 10.0, "Apprentice"], ["Bravo, Manuel D", 288.0, 2880, 10.0, "Apprentice"], ["Paco Leyva, Orlando", 262.0, 2622, 10.01, "Apprentice"], ["Arreola, Israel A", 248.0, 2480, 10.0, "Apprentice"], ["Gerard, Jordan E", 220.2, 2202, 10.0, "Apprentice"], ["Waites, Thaddeus Z", 182.0, 4368, 24.0, "Mid"], ["Michelman, Joshua M", 172.5, 1725, 10.0, "Apprentice"], ["Morelos, Silverio", 53.0, 1510, 28.49, "Mid"], ["Outson, Tyler C", 27.5, 275, 10.0, "Apprentice"], ["Rivera Romera, Arturo", 8.0, 96, 12.0, "Apprentice"]];
@@ -8127,12 +7709,150 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     });
     // active state
     document.querySelectorAll('.sb-project').forEach(e => e.classList.toggle('active', e.dataset.project === id));
-    // Render computable numbers from PROJECTS[id].num — wrapped so an exception
-    // here (e.g. missing field on a LIVE project) can't block the view switch.
-    try { renderProjectNums(id); }
-    catch (e) { console.warn('renderProjectNums failed for #' + id, e); }
-    // switch to project detail view so user sees update
-    setView('project');
+
+    const isActive = (typeof PROJECT_STAGES !== 'undefined') && (PROJECT_STAGES.active || []).includes(id);
+
+    if (isActive && p.live) {
+      try { renderLiveProject(id); }
+      catch (e) { console.warn('renderLiveProject failed for #' + id, e); }
+      try { renderProjectNums(id); }
+      catch (e) { console.warn('renderProjectNums failed for #' + id, e); }
+      setView('live-project');
+    } else {
+      // Render computable numbers from PROJECTS[id].num — wrapped so an exception
+      // here (e.g. missing field on a LIVE project) can't block the view switch.
+      try { renderProjectNums(id); }
+      catch (e) { console.warn('renderProjectNums failed for #' + id, e); }
+      setView('project');
+    }
+  }
+
+  /* ============ LIVE PROJECT DASHBOARD RENDERER ============ */
+  function buildBurnCurveSvg(points, currentPct) {
+    if (!points || points.length < 2) return '';
+    const W = 800, H = 280, padL = 48, padR = 24, padT = 12, padB = 32;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+    const maxHrs = Math.max.apply(null, points.reduce((a,p)=>{a.push(p.actual, p.baseline); return a;}, [])) * 1.05;
+    const xFor = pct => padL + (pct / 100) * plotW;
+    const yFor = hrs => padT + (1 - hrs / maxHrs) * plotH;
+
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%; height:auto; display:block;" preserveAspectRatio="xMidYMid meet">';
+    svg += '<rect x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="none" stroke="var(--border-2)" stroke-width="0.8"/>';
+    for (let i = 1; i < 5; i++) {
+      const y = padT + (i/5) * plotH;
+      svg += '<line x1="' + padL + '" y1="' + y + '" x2="' + (padL+plotW) + '" y2="' + y + '" stroke="var(--border-2)" stroke-dasharray="2 3" opacity="0.5"/>';
+    }
+    for (let i = 0; i <= 5; i++) {
+      const x = padL + (i/5) * plotW;
+      svg += '<text x="' + x + '" y="' + (padT+plotH+16) + '" text-anchor="middle" font-size="9" font-family="monospace" fill="var(--ink-4)">' + (i*20) + '%</text>';
+    }
+    let bPath = 'M ' + points.map(p => xFor(p.pct) + ' ' + yFor(p.baseline)).join(' L ');
+    svg += '<path d="' + bPath + '" fill="none" stroke="var(--ink)" stroke-width="2"/>';
+    let aPath = 'M ' + points.map(p => xFor(p.pct) + ' ' + yFor(p.actual)).join(' L ');
+    svg += '<path d="' + aPath + '" fill="none" stroke="var(--clay)" stroke-width="2" stroke-dasharray="4 3"/>';
+    if (currentPct < 100) {
+      const last = points[points.length-1];
+      const forecastHrs = last.actual + (maxHrs - last.actual) * 0.8;
+      svg += '<path d="M ' + xFor(last.pct) + ' ' + yFor(last.actual) + ' L ' + xFor(100) + ' ' + yFor(forecastHrs) + '" fill="none" stroke="var(--clay)" stroke-width="1.5" stroke-dasharray="2 4" opacity="0.6"/>';
+      svg += '<text x="' + (xFor(100)-4) + '" y="' + (yFor(forecastHrs)-6) + '" text-anchor="end" font-size="9" fill="var(--clay)" font-style="italic">Forecast</text>';
+    }
+    if (currentPct != null && !isNaN(currentPct)) {
+      const todayX = xFor(currentPct);
+      const todayPt = points[points.length-1];
+      svg += '<line x1="' + todayX + '" y1="' + padT + '" x2="' + todayX + '" y2="' + (padT+plotH) + '" stroke="var(--ink)" stroke-dasharray="2 2" opacity="0.4"/>';
+      svg += '<circle cx="' + todayX + '" cy="' + yFor(todayPt.actual) + '" r="5" fill="var(--ink)" stroke="var(--cream)" stroke-width="2"/>';
+      svg += '<text x="' + (todayX+10) + '" y="' + (padT+14) + '" font-size="10" font-weight="600" fill="var(--ink)">Today · ' + currentPct.toFixed(1) + '%</text>';
+    }
+    svg += '</svg>';
+    return svg;
+  }
+
+  function renderLiveProject(id) {
+    const p = PROJECTS[id]; if (!p || !p.live) return;
+    const L = p.live;
+    const view = document.querySelector('.view[data-view="live-project"]');
+    if (!view) return;
+
+    // jobNum from top-level
+    const jobNumEl = view.querySelector('[data-lf="jobNum"]');
+    if (jobNumEl) jobNumEl.textContent = p.jobNum || ('#' + id);
+
+    view.querySelectorAll('[data-lf]').forEach(el => {
+      const k = el.getAttribute('data-lf');
+      if (k === 'jobNum') return;
+      if (L[k] !== undefined) el.textContent = L[k];
+    });
+    const cs = view.querySelector('[data-lf="cortexStatus"]');
+    if (cs) {
+      cs.style.color = /on pace|\u2713/i.test(L.cortexStatus || '') ? 'var(--sage-ink)' : 'var(--clay)';
+    }
+    const pctNum = parseFloat(String(L.pctComplete).replace(/[^\d.]/g, ''));
+    const bar = document.getElementById('live-pct-bar');
+    if (bar) bar.style.width = (isNaN(pctNum) ? 0 : Math.min(100, pctNum)) + '%';
+
+    const burnHost = document.getElementById('live-burn-svg');
+    if (burnHost && L.burnCurve) burnHost.innerHTML = buildBurnCurveSvg(L.burnCurve, pctNum);
+
+    const phaseTbody = document.getElementById('live-phase-tbody');
+    if (phaseTbody && L.phases) {
+      phaseTbody.innerHTML = L.phases.map(ph => {
+        const variance = ph.actual - ph.baseline;
+        const variancePct = ph.baseline > 0 ? ((variance/ph.baseline)*100).toFixed(1) : '0';
+        const statusMap = {
+          'on':        {label: '\u2713 On pace',    color: 'var(--sage-ink)'},
+          'watch':     {label: '\u26a0 Watch',       color: 'var(--clay)'},
+          'over':      {label: '\u26a0 Over',        color: 'var(--clay)'},
+          'notstarted':{label: '\u25cb Not started', color: 'var(--ink-4)'}
+        };
+        const s = statusMap[ph.status] || statusMap.on;
+        const varStr = ph.baseline > 0 ? ((variance >= 0 ? '+' : '') + variance + ' (' + variancePct + '%)') : '\u2014';
+        const varColor = variance > 20 ? 'var(--clay)' : variance < -20 ? 'var(--sage-ink)' : 'var(--ink-3)';
+        return '<tr style="border-top: 1px solid var(--border-2);">' +
+          '<td style="padding: 10px 12px;">' + ph.phase + '</td>' +
+          '<td class="tabular" style="padding: 10px 12px; text-align: right;">' + ph.pct + '%</td>' +
+          '<td class="tabular" style="padding: 10px 12px; text-align: right;">' + ph.actual.toLocaleString() + '</td>' +
+          '<td class="tabular" style="padding: 10px 12px; text-align: right;">' + ph.baseline.toLocaleString() + '</td>' +
+          '<td class="tabular" style="padding: 10px 12px; text-align: right; color: ' + varColor + ';">' + varStr + '</td>' +
+          '<td style="padding: 10px 12px; text-align: right; color: ' + s.color + ';">' + s.label + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    const anomHost = document.getElementById('live-anomaly-list');
+    if (anomHost && L.anomalies) {
+      anomHost.innerHTML = L.anomalies.map(a => {
+        const sevColor = a.severity === 'HIGH' ? 'var(--clay)' : a.severity === 'MED' ? '#B78840' : 'var(--ink-4)';
+        return '<div class="card" style="padding: 16px 22px; border-left: 3px solid ' + sevColor + ';">' +
+          '<div class="flex items-start justify-between gap-6">' +
+            '<div>' +
+              '<div class="text-[11px] mono tabular tracking-wider" style="color: var(--ink-4);">' + a.date + '</div>' +
+              '<div class="text-[14px] font-semibold mt-1" style="color: var(--ink);">' + a.title + '</div>' +
+              '<div class="text-[12.5px] mt-1" style="color: var(--ink-2); line-height: 1.55;">' + a.body + '</div>' +
+            '</div>' +
+            '<div class="text-[10px] mono tabular" style="color: ' + sevColor + '; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;">Severity · ' + a.severity + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    const recHost = document.getElementById('live-recommend-grid');
+    if (recHost && L.recommends) {
+      recHost.innerHTML = L.recommends.map(r => {
+        const urgColor = r.urgency === 'urgent' ? 'var(--clay)' : 'var(--sage-ink)';
+        const urgLabel = r.urgency === 'urgent' ? '\u25cf Urgent' : '\u25cf Strategic';
+        return '<div class="card" style="padding: 22px 24px; border-top: 2px solid ' + urgColor + ';">' +
+          '<div class="flex items-center justify-between">' +
+            '<div class="text-[10px] mono tracking-widest uppercase" style="color: var(--ink-4);">' + r.label + '</div>' +
+            '<span style="font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: ' + urgColor + ';">' + urgLabel + '</span>' +
+          '</div>' +
+          '<div class="text-[15px] font-semibold mt-3" style="color: var(--ink); line-height: 1.3;">' + r.title + '</div>' +
+          '<div class="text-[12px] mt-2" style="color: var(--ink-2); line-height: 1.55;">' + r.body + '</div>' +
+          '<div class="kpi-divider mt-4"></div>' +
+          '<div class="kpi-row"><span class="kpi-lbl">' + r.ownerLabel + '</span><span class="kpi-val">' + r.owner + '</span></div>' +
+          '<div class="kpi-row"><span class="kpi-lbl">' + r.extra + '</span><span class="kpi-val" style="color: ' + urgColor + ';">' + r.extraVal + '</span></div>' +
+        '</div>';
+      }).join('');
+    }
   }
 
   /* ============ DYNAMIC PROJECT NUMBERS ============ */
@@ -9306,22 +9026,6 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     if (document.querySelector('.view[data-view="' + v + '"]')) {
       setView(v, { skipScroll: true, skipHash: true });
     }
-  });
-
-  // Job Health view variant toggle (Classic v1 / Signal-driven v2)
-  document.querySelectorAll('.health-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const variant = btn.dataset.variant;
-      document.querySelectorAll('.health-tab').forEach(b => {
-        const on = b.dataset.variant === variant;
-        b.classList.toggle('is-active', on);
-        b.style.background = on ? 'var(--ink)' : 'transparent';
-        b.style.color      = on ? 'var(--cream)' : 'var(--ink-3)';
-      });
-      document.querySelectorAll('[data-health-variant]').forEach(el => {
-        el.style.display = (el.dataset.healthVariant === variant) ? '' : 'none';
-      });
-    });
   });
 
   document.querySelectorAll('.sb-item').forEach(el => {
