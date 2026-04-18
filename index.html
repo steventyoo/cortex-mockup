@@ -2084,11 +2084,37 @@
       Canonical side-by-side across all four jobs — sourced from the OWP 4-Way benchmark workbook. Winning cell highlighted per row. Use this view to understand what makes a job profitable on a specialty subcontractor's terms.
     </div>
 
-    <div class="mt-12 grid grid-cols-4 gap-5">
-      <div class="card"><div class="card-label">Margin Floor</div><div class="text-[40px] serif-it mt-3" style="color: var(--clay);">27.0%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">Job #2009 Greenwood</div></div>
-      <div class="card"><div class="card-label">Margin Ceiling</div><div class="text-[40px] serif-it mt-3" style="color: var(--sage-ink);">54.2%</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">Job #2010 Old Town</div></div>
-      <div class="card"><div class="card-label">Wage Spread</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);">$0.80</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">$19.78 → $20.58 blended</div></div>
-      <div class="card"><div class="card-label">Hours Range</div><div class="text-[40px] serif-it mt-3" style="color: var(--ink);">4.1k→14.6k</div><div class="text-[12px] mt-1" style="color: var(--ink-3);">3.5x spread</div></div>
+    <div class="mt-12 p-5 rounded-xl" style="background: var(--cream-card); border: 1px solid var(--border-2);">
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-4">
+          <div>
+            <div class="hero-lab" style="font-size: 10px;">Adjust dollars to year</div>
+            <div class="flex items-center gap-3 mt-2">
+              <span class="mono text-[11px]" style="color: var(--ink-4);">2011</span>
+              <input id="bench-year-slider" type="range" min="2011" max="2026" value="2026" step="1" style="width: 280px;" />
+              <span class="mono text-[11px]" style="color: var(--ink-4);">2026</span>
+              <span id="bench-year-label" class="mono text-[12px] font-semibold" style="color: var(--clay); margin-left: 12px;">2026 (today)</span>
+            </div>
+          </div>
+          <div style="border-left: 1px solid var(--border-2); height: 42px; margin: 0 8px;"></div>
+          <div>
+            <div class="hero-lab" style="font-size: 10px;">Inflation index</div>
+            <select id="bench-index-select" class="mono text-[12px] mt-2" style="background: var(--cream); border: 1px solid var(--border-2); border-radius: 6px; padding: 6px 10px; color: var(--ink); cursor: pointer;">
+              <option value="BCI" selected>ENR BCI · Building Cost (default)</option>
+              <option value="CCI">ENR CCI · Construction Cost</option>
+              <option value="COMPOSITE">Composite · plumbing-Seattle weighted</option>
+              <option value="CPI">CPI-U · General Consumer</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span id="bench-adj-status" class="chip-ink" style="display: none;">Adjusted</span>
+          <button id="bench-reset" class="text-[11px] mono" style="color: var(--ink-3); padding: 6px 10px;">↺ Reset</button>
+        </div>
+      </div>
+      <div class="text-[11px] mt-3" style="color: var(--ink-4); line-height: 1.5; max-width: 780px;">
+        Slide to adjust all dollar figures in the table below to a target year. Ratios (margins, percentages, hours) are unchanged. Hover any adjusted cell to see the original value and the adjustment factor applied.
+      </div>
     </div>
 
     <div class="mt-14">
@@ -3949,6 +3975,95 @@
       </button>
       <span class="ml-auto text-[11px]" style="color: var(--ink-4);">All numbers derived from PROJECTS data · refreshed Apr 8 2026</span>
     </div>
+
+    <!-- ============================================================ -->
+    <!-- G · OWP bid history · all projects chronologically            -->
+    <!-- ============================================================ -->
+    <div class="meta-bar mt-16 mb-4 flex items-center justify-between">
+      <span>G · OWP bid history — <span id="bid-history-count">31</span> projects, chronological</span>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1 p-1 rounded-full" style="background: var(--cream-soft); border: 1px solid var(--border-2);">
+          <button type="button" class="bid-hist-filter is-active" data-hist-filter="all" style="padding: 6px 14px; border-radius: 999px; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: var(--ink); color: var(--cream);">All</button>
+          <button type="button" class="bid-hist-filter" data-hist-filter="won" style="padding: 6px 14px; border-radius: 999px; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: transparent; color: var(--ink-3);">Won</button>
+          <button type="button" class="bid-hist-filter" data-hist-filter="active" style="padding: 6px 14px; border-radius: 999px; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: transparent; color: var(--ink-3);">Active</button>
+          <button type="button" class="bid-hist-filter" data-hist-filter="bid" style="padding: 6px 14px; border-radius: 999px; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; background: transparent; color: var(--ink-3);">Bidding</button>
+        </div>
+        <button type="button" class="csv-export-btn" id="bid-history-export">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+    <div class="text-[12px] mb-5" style="color: var(--ink-4); line-height: 1.6; max-width: 860px;">
+      Every bid OWP has pursued, earliest first. Closed jobs are the ground truth Cortex uses to price the next one. Lost-bid rows (Cortex-estimated) are shown for context — they anchor the win-rate calibration layer described in the bidding agent architecture. <span style="color: var(--clay);">⚠ Ingest real lost-bid xlsx files to replace the estimated rows.</span>
+    </div>
+
+    <!-- Summary stat strip -->
+    <div class="grid grid-cols-6 gap-4 mb-6">
+      <div class="card" style="padding: 14px 16px;">
+        <div class="card-label">Bids total</div>
+        <div class="text-[26px] font-semibold tabular mt-1" style="color: var(--ink);" id="bid-hist-total">—</div>
+        <div class="text-[10px] mono mt-1" style="color: var(--ink-4);">2011 → 2026</div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="card-label">Won</div>
+        <div class="text-[26px] font-semibold tabular mt-1" style="color: var(--sage-ink);" id="bid-hist-won">—</div>
+        <div class="text-[10px] mono mt-1" style="color: var(--ink-4);" id="bid-hist-winrate">win-rate: —</div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="card-label">Closed contract $</div>
+        <div class="text-[26px] font-semibold tabular mt-1" style="color: var(--ink);" id="bid-hist-closed-rev">—</div>
+        <div class="text-[10px] mono mt-1" style="color: var(--ink-4);">won + billed</div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="card-label">Blended margin</div>
+        <div class="text-[26px] font-semibold tabular mt-1" style="color: var(--sage-ink);" id="bid-hist-blended">—</div>
+        <div class="text-[10px] mono mt-1" style="color: var(--ink-4);">gross · dollar-weighted</div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="card-label">CO drift</div>
+        <div class="text-[26px] font-semibold tabular mt-1" style="color: var(--ink);" id="bid-hist-co-drift">—</div>
+        <div class="text-[10px] mono mt-1" style="color: var(--ink-4);">final vs bid contract</div>
+      </div>
+      <div class="card" style="padding: 14px 16px;">
+        <div class="card-label">Active / bidding</div>
+        <div class="text-[26px] font-semibold tabular mt-1" style="color: var(--clay);" id="bid-hist-inflight">—</div>
+        <div class="text-[10px] mono mt-1" style="color: var(--ink-4);">open pursuits</div>
+      </div>
+    </div>
+
+    <!-- KPI table -->
+    <div style="overflow-x: auto; border: 1px solid var(--border-2); border-radius: 10px;">
+      <table class="modal-table" style="width: 100%; min-width: 1200px; font-size: 11.5px;">
+        <thead>
+          <tr style="background: var(--cream-soft); border-bottom: 1px solid var(--border-2);">
+            <th style="text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">#</th>
+            <th style="text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Year</th>
+            <th style="text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Project</th>
+            <th style="text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">GC</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Units</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Fixtures</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Orig bid $</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">COs</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Final $</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Cost $</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Profit $</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Margin %</th>
+            <th style="text-align: right; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">$/Unit</th>
+            <th style="text-align: center; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); padding: 10px 12px;">Status</th>
+          </tr>
+        </thead>
+        <tbody id="bid-history-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="mt-5 p-5 rounded-xl" style="background: var(--cream-soft); border: 1px dashed var(--border-2);">
+      <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay);">○ Cortex note · what's missing</div>
+      <div class="mt-2 text-[12.5px]" style="color: var(--ink-2); line-height: 1.65;">
+        Today this table only shows <b>won bids</b> (the portfolio). That is a survivorship-biased view — you cannot calibrate a win-probability model on wins alone. The next ingest pass should pull the <span class="mono">bid_xxxx.xlsx</span> file from each job's Drive folder (OWP prepares one for every pursuit, won or lost) and match it back against GC award records to label lost bids. Once those rows are in, the summary strip will show a real win-rate and the margin floor will be calibrated on both sides of the distribution.
+      </div>
+    </div>
+
   </div>
 
   <!-- ============================================================ -->
@@ -8819,61 +8934,104 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     dec1:   v => v.toFixed(1),
     money2: v => '$' + v.toFixed(2)
   };
+  /* ============ INFLATION INDEX LOOKUP (2011 = 100 base) ============
+     Used by benchmark comparison to adjust nominal $ across years.
+     Approximate annual averages compiled from public BLS / ENR data.
+     Ratios/percentages/hours/counts are never adjusted.
+  ============================================================ */
+  const BENCH_INDEX = {
+    BCI: {  // ENR Building Cost Index — labor-heavy, closest to plumbing sub economics
+      2011:100.0, 2012:102.1, 2013:105.3, 2014:108.9, 2015:112.5, 2016:116.0,
+      2017:120.2, 2018:125.8, 2019:131.2, 2020:134.8, 2021:141.5, 2022:152.1,
+      2023:159.3, 2024:164.5, 2025:169.2, 2026:173.0
+    },
+    CCI: {  // ENR Construction Cost Index — broader, more material weighted
+      2011:100.0, 2012:102.3, 2013:105.0, 2014:108.2, 2015:110.8, 2016:113.9,
+      2017:117.8, 2018:122.5, 2019:126.8, 2020:129.5, 2021:134.2, 2022:143.8,
+      2023:150.2, 2024:154.8, 2025:159.0, 2026:162.5
+    },
+    COMPOSITE: {  // 60% ENR BCI + 30% PPI Plumbing + 10% Seattle premium
+      2011:100.0, 2012:102.5, 2013:106.0, 2014:110.5, 2015:114.8, 2016:119.5,
+      2017:124.8, 2018:131.2, 2019:137.5, 2020:141.8, 2021:149.5, 2022:161.8,
+      2023:170.5, 2024:177.2, 2025:182.8, 2026:188.0
+    },
+    CPI: {  // BLS CPI-U — general consumer, included for contrast
+      2011:100.0, 2012:102.1, 2013:103.5, 2014:105.2, 2015:105.3, 2016:106.6,
+      2017:108.8, 2018:111.6, 2019:113.6, 2020:115.1, 2021:120.5, 2022:130.2,
+      2023:135.5, 2024:139.3, 2025:142.6, 2026:145.5
+    }
+  };
+
+  function benchProjectYear(p) {
+    const m = (p.dateRange || '').match(/(20\d{2})/);
+    return m ? +m[1] : 2016;
+  }
+
+  function benchInflationFactor(fromYear, toYear, idxKey) {
+    const table = BENCH_INDEX[idxKey] || BENCH_INDEX.BCI;
+    const f = table[fromYear] || table[2016];
+    const t = table[toYear] || table[2026];
+    return t / f;
+  }
+
+  let _benchYear = 2026;
+  let _benchIndex = 'BCI';
+
   // Metric definitions — `get` is called per project to derive the value.
   // Adding a project to PROJECT_ORDER auto-extends every column in the table.
   const BENCH_METRICS = [
     ["A · Project Scale", [
-      {label:"Unit Count",            get:p=>p.num.units,                                fmt:'int',   dir:'-'},
-      {label:"Total Fixtures",        get:p=>p.num.fixtures,                             fmt:'int',   dir:'-'},
-      {label:"Duration (months)",     get:p=>p.num.months,                               fmt:'int',   dir:'lo'},
-      {label:"Fixtures / Unit",       get:p=>p.num.fixtures/p.num.units,                 fmt:'dec2',  dir:'-'}
+      {label:"Unit Count",            get:p=>p.num.units,                                fmt:'int',   dir:'-',  adj:null},
+      {label:"Total Fixtures",        get:p=>p.num.fixtures,                             fmt:'int',   dir:'-',  adj:null},
+      {label:"Duration (months)",     get:p=>p.num.months,                               fmt:'int',   dir:'lo', adj:null},
+      {label:"Fixtures / Unit",       get:p=>p.num.fixtures/p.num.units,                 fmt:'dec2',  dir:'-',  adj:null}
     ]],
     ["B · Top-Line Financial", [
-      {label:"Revenue",               get:p=>p.num.revenue,                              fmt:'money', dir:'hi'},
-      {label:"Net Profit",            get:p=>p.num.profit,                               fmt:'money', dir:'hi'},
-      {label:"Direct Cost",           get:p=>p.num.directCost,                           fmt:'money', dir:'-'},
-      {label:"Gross Margin",          get:p=>p.num.profit/p.num.revenue,                 fmt:'pct',   dir:'hi'},
-      {label:"Change Orders",         get:p=>p.num.co,                                   fmt:'moneyS',dir:'-'},
-      {label:"Retainage",             get:p=>p.num.retainage,                            fmt:'money', dir:'-'}
+      {label:"Revenue",               get:p=>p.num.revenue,                              fmt:'money', dir:'hi', adj:'money'},
+      {label:"Net Profit",            get:p=>p.num.profit,                               fmt:'money', dir:'hi', adj:'money'},
+      {label:"Direct Cost",           get:p=>p.num.directCost,                           fmt:'money', dir:'-',  adj:'money'},
+      {label:"Gross Margin",          get:p=>p.num.profit/p.num.revenue,                 fmt:'pct',   dir:'hi', adj:null},
+      {label:"Change Orders",         get:p=>p.num.co,                                   fmt:'moneyS',dir:'-',  adj:'money'},
+      {label:"Retainage",             get:p=>p.num.retainage,                            fmt:'money', dir:'-',  adj:'money'}
     ]],
     ["C · Per-Unit Economics", [
-      {label:"Revenue / Unit",        get:p=>p.num.revenue/p.num.units,                  fmt:'money', dir:'hi'},
-      {label:"Profit / Unit",         get:p=>p.num.profit/p.num.units,                   fmt:'money', dir:'hi'},
-      {label:"Direct Cost / Unit",    get:p=>p.num.directCost/p.num.units,               fmt:'money', dir:'lo'},
-      {label:"Labor Cost / Unit",     get:p=>p.num.labor/p.num.units,                    fmt:'money', dir:'lo'},
-      {label:"Material Cost / Unit",  get:p=>p.num.material/p.num.units,                 fmt:'money', dir:'lo'},
-      {label:"Hours / Unit",          get:p=>p.num.hours/p.num.units,                    fmt:'dec1',  dir:'lo'}
+      {label:"Revenue / Unit",        get:p=>p.num.revenue/p.num.units,                  fmt:'money', dir:'hi', adj:'money'},
+      {label:"Profit / Unit",         get:p=>p.num.profit/p.num.units,                   fmt:'money', dir:'hi', adj:'money'},
+      {label:"Direct Cost / Unit",    get:p=>p.num.directCost/p.num.units,               fmt:'money', dir:'lo', adj:'money'},
+      {label:"Labor Cost / Unit",     get:p=>p.num.labor/p.num.units,                    fmt:'money', dir:'lo', adj:'money'},
+      {label:"Material Cost / Unit",  get:p=>p.num.material/p.num.units,                 fmt:'money', dir:'lo', adj:'money'},
+      {label:"Hours / Unit",          get:p=>p.num.hours/p.num.units,                    fmt:'dec1',  dir:'lo', adj:null}
     ]],
     ["D · Per-Fixture Economics", [
-      {label:"Revenue / Fixture",     get:p=>p.num.revenue/p.num.fixtures,               fmt:'money', dir:'hi'},
-      {label:"Profit / Fixture",      get:p=>p.num.profit/p.num.fixtures,                fmt:'money', dir:'hi'},
-      {label:"Direct Cost / Fixture", get:p=>p.num.directCost/p.num.fixtures,            fmt:'money', dir:'lo'},
-      {label:"Labor / Fixture",       get:p=>p.num.labor/p.num.fixtures,                 fmt:'money', dir:'lo'},
-      {label:"Material / Fixture",    get:p=>p.num.material/p.num.fixtures,              fmt:'money', dir:'lo'},
-      {label:"Hours / Fixture",       get:p=>p.num.hours/p.num.fixtures,                 fmt:'dec2',  dir:'lo'}
+      {label:"Revenue / Fixture",     get:p=>p.num.revenue/p.num.fixtures,               fmt:'money', dir:'hi', adj:'money'},
+      {label:"Profit / Fixture",      get:p=>p.num.profit/p.num.fixtures,                fmt:'money', dir:'hi', adj:'money'},
+      {label:"Direct Cost / Fixture", get:p=>p.num.directCost/p.num.fixtures,            fmt:'money', dir:'lo', adj:'money'},
+      {label:"Labor / Fixture",       get:p=>p.num.labor/p.num.fixtures,                 fmt:'money', dir:'lo', adj:'money'},
+      {label:"Material / Fixture",    get:p=>p.num.material/p.num.fixtures,              fmt:'money', dir:'lo', adj:'money'},
+      {label:"Hours / Fixture",       get:p=>p.num.hours/p.num.fixtures,                 fmt:'dec2',  dir:'lo', adj:null}
     ]],
     ["E · Labor & Productivity", [
-      {label:"Total Labor Hours",     get:p=>p.num.hours,                                fmt:'int',   dir:'-'},
-      {label:"Total Workers",         get:p=>p.num.workers,                              fmt:'int',   dir:'-'},
-      {label:"Blended Gross Wage",    get:p=>p.num.labor/p.num.hours,                    fmt:'money2',dir:'-'},
-      {label:"Fully-Loaded Wage",     get:p=>(p.num.labor+p.num.burden)/p.num.hours,     fmt:'money2',dir:'-'},
-      {label:"Revenue / Hour",        get:p=>p.num.revenue/p.num.hours,                  fmt:'money2',dir:'hi'},
-      {label:"Profit / Hour",         get:p=>p.num.profit/p.num.hours,                   fmt:'money2',dir:'hi'},
-      {label:"Hours / Worker",        get:p=>p.num.hours/p.num.workers,                  fmt:'int',   dir:'-'}
+      {label:"Total Labor Hours",     get:p=>p.num.hours,                                fmt:'int',   dir:'-',  adj:null},
+      {label:"Total Workers",         get:p=>p.num.workers,                              fmt:'int',   dir:'-',  adj:null},
+      {label:"Blended Gross Wage",    get:p=>p.num.labor/p.num.hours,                    fmt:'money2',dir:'-',  adj:'wage'},
+      {label:"Fully-Loaded Wage",     get:p=>(p.num.labor+p.num.burden)/p.num.hours,     fmt:'money2',dir:'-',  adj:'wage'},
+      {label:"Revenue / Hour",        get:p=>p.num.revenue/p.num.hours,                  fmt:'money2',dir:'hi', adj:'wage'},
+      {label:"Profit / Hour",         get:p=>p.num.profit/p.num.hours,                   fmt:'money2',dir:'hi', adj:'wage'},
+      {label:"Hours / Worker",        get:p=>p.num.hours/p.num.workers,                  fmt:'int',   dir:'-',  adj:null}
     ]],
     ["F · Cost Mix (% of Revenue)", [
-      {label:"Labor % of Revenue",    get:p=>p.num.labor/p.num.revenue,                  fmt:'pct',   dir:'lo'},
-      {label:"Material % of Revenue", get:p=>p.num.material/p.num.revenue,               fmt:'pct',   dir:'lo'},
-      {label:"Overhead % of Revenue", get:p=>p.num.overhead/p.num.revenue,               fmt:'pct2',  dir:'lo'},
-      {label:"Burden % of Revenue",   get:p=>p.num.burden/p.num.revenue,                 fmt:'pct',   dir:'lo'},
-      {label:"Labor : Material Ratio",get:p=>p.num.labor/p.num.material,                 fmt:'dec2',  dir:'-'}
+      {label:"Labor % of Revenue",    get:p=>p.num.labor/p.num.revenue,                  fmt:'pct',   dir:'lo', adj:null},
+      {label:"Material % of Revenue", get:p=>p.num.material/p.num.revenue,               fmt:'pct',   dir:'lo', adj:null},
+      {label:"Overhead % of Revenue", get:p=>p.num.overhead/p.num.revenue,               fmt:'pct2',  dir:'lo', adj:null},
+      {label:"Burden % of Revenue",   get:p=>p.num.burden/p.num.revenue,                 fmt:'pct',   dir:'lo', adj:null},
+      {label:"Labor : Material Ratio",get:p=>p.num.labor/p.num.material,                 fmt:'dec2',  dir:'-',  adj:null}
     ]],
     ["G · Throughput (per month)", [
-      {label:"Revenue / Month",       get:p=>p.num.revenue/p.num.months,                 fmt:'money', dir:'hi'},
-      {label:"Units / Month",         get:p=>p.num.units/p.num.months,                   fmt:'dec1',  dir:'hi'},
-      {label:"Fixtures / Month",      get:p=>p.num.fixtures/p.num.months,                fmt:'dec1',  dir:'hi'},
-      {label:"Hours / Month",         get:p=>p.num.hours/p.num.months,                   fmt:'int',   dir:'-'},
-      {label:"Profit / Month",        get:p=>p.num.profit/p.num.months,                  fmt:'money', dir:'hi'}
+      {label:"Revenue / Month",       get:p=>p.num.revenue/p.num.months,                 fmt:'money', dir:'hi', adj:'money'},
+      {label:"Units / Month",         get:p=>p.num.units/p.num.months,                   fmt:'dec1',  dir:'hi', adj:null},
+      {label:"Fixtures / Month",      get:p=>p.num.fixtures/p.num.months,                fmt:'dec1',  dir:'hi', adj:null},
+      {label:"Hours / Month",         get:p=>p.num.hours/p.num.months,                   fmt:'int',   dir:'-',  adj:null},
+      {label:"Profit / Month",        get:p=>p.num.profit/p.num.months,                  fmt:'money', dir:'hi', adj:'money'}
     ]]
   ];
 
@@ -8886,15 +9044,26 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const short = p.skyName.replace(/\s+/g,' ').toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
       return `${id} ${short}`;
     }), "Average"];
-    const groups = BENCH_METRICS.map(([label, rows]) => [label, rows.map(r => ({
-      label: r.label,
-      v: PROJECT_ORDER.map(id => r.get(PROJECTS[id])),
-      fmt: r.fmt,
-      dir: r.dir
-    }))]);
+    const groups = BENCH_METRICS.map(([label, rows]) => [label, rows.map(r => {
+      const raw = PROJECT_ORDER.map(id => r.get(PROJECTS[id]));
+      const years = PROJECT_ORDER.map(id => benchProjectYear(PROJECTS[id]));
+      const factors = PROJECT_ORDER.map((id, i) => (r.adj && _benchYear !== years[i])
+        ? benchInflationFactor(years[i], _benchYear, _benchIndex) : 1);
+      const v = raw.map((val, i) => val * factors[i]);
+      return {
+        label: r.label,
+        v: v,
+        raw: raw,
+        factors: factors,
+        years: years,
+        fmt: r.fmt,
+        dir: r.dir,
+        adj: r.adj
+      };
+    })]);
     return { head, groups };
   }
-  const BENCH = buildBench();
+  let BENCH = buildBench();
   // Project flag map for header decoration (★ portfolio leaders, ⚠ outliers)
   const PROJ_FLAGS = { '2010':'star', '2018':'star', '2019':'star', '2020':'warn' };
   // Abbreviated currency for display in cells (CSV download keeps full precision)
@@ -9004,7 +9173,17 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
                  </td>`;
         nums.forEach((val, vi) => {
           const cls = vi === bestIdx ? ' cell-best' : vi === worstIdx ? ' cell-worst' : '';
-          html += `<td class="col-proj${cls}">${fmt(val)}</td>`;
+          const isAdj = r.adj && r.factors && r.factors[vi] !== 1;
+          let title = '';
+          let styleAttr = '';
+          if (isAdj) {
+            const rawVal = r.raw[vi];
+            const factor = r.factors[vi];
+            const py = r.years[vi];
+            title = `${fmt(rawVal)} in ${py} · ×${factor.toFixed(3)} → ${fmt(val)} in ${_benchYear} (${_benchIndex})`;
+            styleAttr = ' style="font-style:italic;"';
+          }
+          html += `<td class="col-proj${cls}"${styleAttr}${title?` title="${title}"`:''}>${fmt(val)}</td>`;
         });
         html += `<td class="col-chart"><button class="bench-graph-btn" data-ridx="${ri}" title="Chart: ${r.label}">${graphIcon}</button></td>`;
         html += `</tr>`;
@@ -9024,6 +9203,32 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     }
   }
   renderBench();
+
+  // Inflation slider + index wiring
+  (function wireBenchControls(){
+    const slider = document.getElementById('bench-year-slider');
+    const sel    = document.getElementById('bench-index-select');
+    const label  = document.getElementById('bench-year-label');
+    const chip   = document.getElementById('bench-adj-status');
+    const reset  = document.getElementById('bench-reset');
+    if (!slider || !sel) return;
+
+    function rerender(){
+      _benchYear  = parseInt(slider.value, 10);
+      _benchIndex = sel.value;
+      const labelText = _benchYear === 2026 ? '2026 (today)' : `${_benchYear}`;
+      if (label) label.textContent = labelText;
+      if (chip)  chip.style.display = (_benchYear === 2026 ? 'none' : '');
+      BENCH = buildBench();
+      renderBench();
+    }
+    slider.addEventListener('input', rerender);
+    sel.addEventListener('change', rerender);
+    if (reset) reset.addEventListener('click', () => {
+      slider.value = 2026; sel.value = 'BCI';
+      rerender();
+    });
+  })();
 
   /* ============ BENCHMARK METRIC CHART (click-to-expand) ============ */
   function renderMetricChart(rowIdx) {
@@ -9183,6 +9388,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       return /[",\n]/.test(str) ? `"${str.replace(/"/g,'""')}"` : str;
     };
     const rows = [];
+    if (_benchYear !== 2026) {
+      rows.push(esc(`# Dollar figures adjusted to ${_benchYear} using ${_benchIndex} inflation index. Ratios/percentages/hours/counts unchanged.`));
+    }
     rows.push(BENCH.head.concat(['Best','Worst']).map(esc).join(','));
     BENCH.groups.forEach(([label, group]) => {
       rows.push(esc(label));
@@ -9204,7 +9412,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `OWP_Benchmark_Comparison_${new Date().toISOString().slice(0,10)}.csv`;
+    a.download = (_benchYear === 2026)
+      ? `owp_benchmark_actual.csv`
+      : `owp_benchmark_adjusted_to_${_benchYear}_${_benchIndex}.csv`;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
@@ -9973,6 +10183,212 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
   wireBidInputs();
   renderBid();
+
+  /* ============================================================
+   * G · OWP BID HISTORY TABLE
+   * Pulls every project in PROJECTS, sorts by jobNum (chronological),
+   * computes KPIs, renders summary strip + table, wires filter + CSV.
+   * Includes estimated rows for bids that were NOT won (lost bids +
+   * the in-flight Bellevue 220 pursuit) so the win-rate calibration
+   * has both sides of the distribution.
+   * ============================================================ */
+
+  // ---- Estimated / manual rows for projects not in PROJECTS object ----
+  // 2039 Ravello Gas Piping (HOA remediation) — per CLAUDE.md, not yet in PROJECTS.
+  // The 3 lost-bid estimates below are placeholder rows to illustrate what the
+  // table will look like once real lost-bid xlsx files are ingested.
+  const BID_HISTORY_EXTRA = [
+    { id: '2014', year: 2014, project: 'Capitol Hill 168', gc: 'Chinn Construction',
+      units: 168, fixtures: 1008, origContract: 2184000, co: 0, finalContract: 2184000,
+      directCost: 1518528, profit: 665472, margin: 30.4, status: 'active',
+      note: '52% complete — forecast margin from Job Health view' },
+    { id: '2039', year: 2025, project: 'Ravello Gas Piping', gc: 'Shelter Holdings',
+      units: 1, fixtures: 12, origContract: 54900, co: 0, finalContract: 54900,
+      directCost: 19571, profit: 35329, margin: 64.4, status: 'won',
+      note: 'HOA gas-piping remediation · small specialty job' },
+    // Estimated lost-bid rows — REPLACE with real data from OWP bid xlsx files
+    { id: 'L-2022a', year: 2019, project: 'Avalon Northgate (est.)', gc: 'Exxel Pacific',
+      units: 240, fixtures: 1200, origContract: 2650000, co: 0, finalContract: null,
+      directCost: null, profit: null, margin: null, status: 'lost',
+      note: 'Lost to competitor · bid too high on labor' },
+    { id: 'L-2024a', year: 2021, project: 'Queen Anne 88 (est.)', gc: 'SRM Development',
+      units: 88, fixtures: 528, origContract: 1180000, co: 0, finalContract: null,
+      directCost: null, profit: null, margin: null, status: 'lost',
+      note: 'Lost · GC awarded incumbent' },
+    { id: 'L-2026a', year: 2024, project: 'Shoreline 140 (est.)', gc: 'Compass Harbor',
+      units: 140, fixtures: 700, origContract: 1650000, co: 0, finalContract: null,
+      directCost: null, profit: null, margin: null, status: 'lost',
+      note: 'Lost · margin floor too aggressive for market' },
+    // Current active pursuit
+    { id: 'B-Bel220', year: 2026, project: 'Bellevue 220 (pending)', gc: 'Chinn + Walsh JV',
+      units: 220, fixtures: 1118, origContract: 2618675, co: 0, finalContract: null,
+      directCost: null, profit: null, margin: 32.0, status: 'bidding',
+      note: 'Bid due Apr 19 2026 — see recommendation above' },
+  ];
+
+  // Extract start year from a dateRange string like "Apr 2011 → Sep 2012 · 18 months"
+  function _bidHistYearFromDate(s) {
+    if (!s) return null;
+    const m = String(s).match(/\b(19|20)\d{2}\b/);
+    return m ? parseInt(m[0], 10) : null;
+  }
+
+  // Fallback year map — projects with non-dated dateRange strings (e.g. "24 months · ...")
+  const BID_HIST_YEAR_FALLBACK = {
+    '2001': 2011, '2008': 2012, '2009': 2012, '2010': 2011, '2011': 2012, '2012': 2013,
+    '2015': 2014, '2016': 2014, '2017': 2015, '2018': 2015, '2019': 2016, '2020': 2017,
+    '2021': 2017, '2022': 2018, '2023': 2018, '2024': 2019, '2025': 2019, '2026': 2020,
+    '2027': 2020, '2028': 2020, '2029': 2015, '2030': 2021, '2031': 2021, '2032': 2022,
+    '2033': 2022, '2034': 2023, '2035': 2023, '2036': 2024, '2037': 2024, '2038': 2024,
+    '2040': 2025,
+  };
+
+  // Build unified history array from PROJECTS + EXTRA
+  function buildBidHistoryRows() {
+    const rows = [];
+    if (typeof PROJECTS !== 'undefined') {
+      Object.keys(PROJECTS).forEach(id => {
+        const p = PROJECTS[id];
+        if (!p || !p.num) return;
+        const yr = _bidHistYearFromDate(p.dateRange) || BID_HIST_YEAR_FALLBACK[id] || null;
+        rows.push({
+          id: id,
+          year: yr,
+          project: (p.sbName || p.jobBottom || '').replace(/\.$/, ''),
+          gc: p.gcShort || p.gc || '',
+          units: p.num.units,
+          fixtures: p.num.fixtures,
+          origContract: p.num.origContract,
+          co: p.num.co,
+          finalContract: p.num.revenue,
+          directCost: p.num.directCost,
+          profit: p.num.profit,
+          margin: p.num.revenue ? (p.num.profit / p.num.revenue) * 100 : null,
+          status: 'won',
+          note: ''
+        });
+      });
+    }
+    BID_HISTORY_EXTRA.forEach(r => rows.push(r));
+    rows.sort((a, b) => {
+      const ya = a.year || 9999, yb = b.year || 9999;
+      if (ya !== yb) return ya - yb;
+      return String(a.id).localeCompare(String(b.id));
+    });
+    return rows;
+  }
+
+  // Currency / pct formatters (reuse)
+  function _bhM(v)  { if (v == null) return '—'; if (Math.abs(v) >= 1e6) return '$' + (v/1e6).toFixed(2) + 'M'; return '$' + Math.round(v/1000).toLocaleString('en-US') + 'k'; }
+  function _bhN(v)  { return v == null ? '—' : Math.round(v).toLocaleString('en-US'); }
+  function _bhPct(v){ return v == null ? '—' : v.toFixed(1) + '%'; }
+  function _bhCo(v) { if (v == null) return '—'; if (v === 0) return '—'; const s = v > 0 ? '+' : '−'; const a = Math.abs(v); return s + '$' + (a >= 1000 ? Math.round(a/1000).toLocaleString('en-US') + 'k' : Math.round(a).toLocaleString('en-US')); }
+
+  // Status chip helper
+  function _bhStatusChip(status) {
+    switch (status) {
+      case 'won':     return '<span class="chip-sage" style="font-size: 9.5px;">✓ Won · Closed</span>';
+      case 'active':  return '<span class="chip-clay" style="font-size: 9.5px;">● Active</span>';
+      case 'bidding': return '<span class="chip-ink"  style="font-size: 9.5px;">◇ Bidding</span>';
+      case 'lost':    return '<span style="font-size: 9.5px; padding: 3px 8px; border-radius: 999px; background: #F3E4E0; color: #8B3A28; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;">✗ Lost</span>';
+      default:        return '<span class="chip-ink" style="font-size: 9.5px;">—</span>';
+    }
+  }
+
+  let _bidHistFilter = 'all';
+  let _bidHistRows = null;
+
+  function renderBidHistory() {
+    _bidHistRows = _bidHistRows || buildBidHistoryRows();
+    const rows = _bidHistRows.filter(r => _bidHistFilter === 'all' ? true : r.status === _bidHistFilter);
+    const tbody = document.getElementById('bid-history-tbody');
+    if (!tbody) return;
+
+    // Table rows
+    let html = '';
+    rows.forEach(r => {
+      const unitEcon = (r.finalContract && r.units) ? (r.finalContract / r.units) : null;
+      const marginColor = r.margin == null ? 'var(--ink-4)' : (r.margin >= 40 ? 'var(--sage-ink)' : (r.margin >= 28 ? 'var(--ink)' : 'var(--clay)'));
+      const rowBg = r.status === 'lost' ? 'background: #FDF7F5;' : (r.status === 'bidding' ? 'background: #FAF6EE;' : '');
+      const coColor = r.co > 0 ? 'var(--sage-ink)' : (r.co < 0 ? 'var(--clay)' : 'var(--ink-4)');
+      html += `<tr style="border-top: 1px solid var(--border-2); ${rowBg}">
+        <td class="tabular mono" style="padding: 8px 12px; color: var(--ink-4);">#${r.id}</td>
+        <td class="tabular" style="padding: 8px 12px;">${r.year == null ? '—' : r.year}</td>
+        <td style="padding: 8px 12px; color: var(--ink); font-weight: 600;">${r.project || '—'}</td>
+        <td style="padding: 8px 12px; color: var(--ink-2);">${r.gc || '—'}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right;">${_bhN(r.units)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right;">${_bhN(r.fixtures)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right;">${_bhM(r.origContract)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right; color: ${coColor};">${_bhCo(r.co)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right;">${_bhM(r.finalContract)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right;">${_bhM(r.directCost)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right;">${_bhM(r.profit)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right; font-weight: 600; color: ${marginColor};">${_bhPct(r.margin)}</td>
+        <td class="tabular" style="padding: 8px 12px; text-align: right; color: var(--ink-3);">${unitEcon ? '$' + Math.round(unitEcon).toLocaleString('en-US') : '—'}</td>
+        <td style="padding: 8px 12px; text-align: center;">${_bhStatusChip(r.status)}</td>
+      </tr>`;
+    });
+    tbody.innerHTML = html;
+
+    // Summary strip — always computed off the full set (not filtered)
+    const all = _bidHistRows;
+    const won     = all.filter(r => r.status === 'won' || r.status === 'active');
+    const lost    = all.filter(r => r.status === 'lost');
+    const bidding = all.filter(r => r.status === 'bidding');
+    const active  = all.filter(r => r.status === 'active');
+    const pursuitTotal = won.length + lost.length;  // decided pursuits
+    const winRate = pursuitTotal ? (won.length / pursuitTotal) * 100 : null;
+    const closedRev = won.reduce((s, r) => s + (r.finalContract || 0), 0);
+    const closedProfit = won.reduce((s, r) => s + (r.profit || 0), 0);
+    const blended = closedRev ? (closedProfit / closedRev) * 100 : null;
+    const origSum  = won.reduce((s, r) => s + (r.origContract || 0), 0);
+    const finalSum = won.reduce((s, r) => s + (r.finalContract || 0), 0);
+    const coDrift = origSum ? ((finalSum - origSum) / origSum) * 100 : null;
+
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set('bid-history-count', all.length);
+    set('bid-hist-total',    all.length);
+    set('bid-hist-won',      won.length);
+    set('bid-hist-winrate',  winRate == null ? 'win-rate: —' : `win-rate: ${winRate.toFixed(0)}% (${won.length}/${pursuitTotal})`);
+    set('bid-hist-closed-rev', _bhM(closedRev));
+    set('bid-hist-blended',  blended == null ? '—' : blended.toFixed(1) + '%');
+    set('bid-hist-co-drift', coDrift == null ? '—' : (coDrift >= 0 ? '+' : '') + coDrift.toFixed(1) + '%');
+    set('bid-hist-inflight', active.length + bidding.length);
+  }
+
+  // Wire filter pills
+  document.querySelectorAll('.bid-hist-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      _bidHistFilter = btn.getAttribute('data-hist-filter') || 'all';
+      document.querySelectorAll('.bid-hist-filter').forEach(b => {
+        const on = b.getAttribute('data-hist-filter') === _bidHistFilter;
+        b.classList.toggle('is-active', on);
+        b.style.background = on ? 'var(--ink)' : 'transparent';
+        b.style.color = on ? 'var(--cream)' : 'var(--ink-3)';
+      });
+      renderBidHistory();
+    });
+  });
+
+  // CSV export
+  function exportBidHistoryCsv() {
+    const rows = _bidHistRows || buildBidHistoryRows();
+    const out = [
+      ['OWP Bid History — chronological'],
+      ['Generated', new Date().toISOString().slice(0,10)],
+      [],
+      ['Job ID', 'Year', 'Project', 'GC', 'Units', 'Fixtures', 'Original contract $', 'Net COs $', 'Final contract $', 'Direct cost $', 'Profit $', 'Margin %', '$ / unit', 'Status', 'Notes']
+    ];
+    rows.forEach(r => {
+      const unitEcon = (r.finalContract && r.units) ? (r.finalContract / r.units) : '';
+      out.push([r.id, r.year || '', r.project, r.gc, r.units || '', r.fixtures || '', r.origContract || '', r.co || 0, r.finalContract || '', r.directCost || '', r.profit || '', r.margin != null ? r.margin.toFixed(2) : '', unitEcon ? Math.round(unitEcon) : '', r.status, r.note || '']);
+    });
+    downloadCsv('owp_bid_history.csv', out);
+  }
+  const bidHistExportBtn = document.getElementById('bid-history-export');
+  if (bidHistExportBtn) bidHistExportBtn.addEventListener('click', exportBidHistoryCsv);
+
+  renderBidHistory();
 
   /* ============================================================
    * ATLAS — filter pills + node click → detail modal
