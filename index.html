@@ -7702,30 +7702,37 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
   function applyProject(id){
     _currentProjectId = id;
-    const p = PROJECTS[id]; if(!p) return;
-    document.querySelectorAll('[data-f]').forEach(el => {
-      const k = el.getAttribute('data-f');
-      if(p[k] !== undefined){ el.innerHTML = p[k]; }
-    });
-    // active state
-    document.querySelectorAll('.sb-project').forEach(e => e.classList.toggle('active', e.dataset.project === id));
+    const p = PROJECTS[id]; if(!p) { console.warn('applyProject: no PROJECTS[' + id + ']'); return; }
 
     const isActive = (typeof PROJECT_STAGES !== 'undefined') && (PROJECT_STAGES.active || []).includes(id);
+    const targetView = (isActive && p.live) ? 'live-project' : 'project';
 
-    if (isActive && p.live) {
+    // 1. SWITCH VIEW FIRST so navigation always happens, even if rendering throws
+    try { setView(targetView); }
+    catch (e) { console.error('setView failed', e); }
+
+    // 2. Then attempt to populate / render — wrapped in try/catch
+    try {
+      document.querySelectorAll('[data-f]').forEach(el => {
+        const k = el.getAttribute('data-f');
+        if(p[k] !== undefined){ el.innerHTML = p[k]; }
+      });
+    } catch (e) { console.warn('data-f bind failed for #' + id, e); }
+
+    try {
+      document.querySelectorAll('.sb-project').forEach(e => e.classList.toggle('active', e.dataset.project === id));
+    } catch (e) { /* ignore */ }
+
+    if (targetView === 'live-project') {
       try { renderLiveProject(id); }
       catch (e) { console.warn('renderLiveProject failed for #' + id, e); }
-      try { renderProjectNums(id); }
-      catch (e) { console.warn('renderProjectNums failed for #' + id, e); }
-      setView('live-project');
-    } else {
-      // Render computable numbers from PROJECTS[id].num — wrapped so an exception
-      // here (e.g. missing field on a LIVE project) can't block the view switch.
-      try { renderProjectNums(id); }
-      catch (e) { console.warn('renderProjectNums failed for #' + id, e); }
-      setView('project');
     }
+
+    try { renderProjectNums(id); }
+    catch (e) { console.warn('renderProjectNums failed for #' + id, e); }
   }
+  // Expose globally so onclick handlers in static HTML can find it
+  window.applyProject = applyProject;
 
   /* ============ LIVE PROJECT DASHBOARD RENDERER ============ */
   function buildBurnCurveSvg(points, currentPct) {
@@ -12453,8 +12460,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   const _origApplyProject = applyProject;
   applyProject = function(id){
     _origApplyProject(id);
-    updateCortexMiniForProject(PROJECTS[id], id);
+    try { updateCortexMiniForProject(PROJECTS[id], id); } catch (e) { /* mini chat update non-critical */ }
   };
+  // Re-expose the wrapped version globally so all click paths hit the same fn
+  window.applyProject = applyProject;
   // If the page restored straight to a project view via hash, sync now.
   if (document.querySelector('.view[data-view="project"].active')) {
     document.body.classList.add('cortex-mini-on');
