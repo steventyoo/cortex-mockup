@@ -7735,6 +7735,25 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   window.applyProject = applyProject;
 
   /* ============ LIVE PROJECT DASHBOARD RENDERER ============ */
+  /* Reusable graph-paper grid pattern, drop into any SVG.
+     Usage:  svg += graphPaper(uniqueId, plotX, plotY, plotW, plotH); */
+  function graphPaper(id, x, y, w, h) {
+    // Two-tier grid: minor cells ~ w/40 wide, major every 5 minor.
+    const minor = Math.max(8, w/40);
+    const major = minor * 5;
+    return ''
+      + '<defs>'
+      +   '<pattern id="gp-min-' + id + '" width="' + minor + '" height="' + minor + '" patternUnits="userSpaceOnUse">'
+      +     '<path d="M ' + minor + ' 0 L 0 0 0 ' + minor + '" fill="none" stroke="#1F1E1D" stroke-width="0.3" opacity="0.06"/>'
+      +   '</pattern>'
+      +   '<pattern id="gp-maj-' + id + '" width="' + major + '" height="' + major + '" patternUnits="userSpaceOnUse">'
+      +     '<path d="M ' + major + ' 0 L 0 0 0 ' + major + '" fill="none" stroke="#1F1E1D" stroke-width="0.5" opacity="0.13"/>'
+      +   '</pattern>'
+      + '</defs>'
+      + '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="url(#gp-min-' + id + ')"/>'
+      + '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="url(#gp-maj-' + id + ')"/>';
+  }
+
   function buildBurnCurveSvg(points, currentPct) {
     if (!points || points.length < 2) return '';
     // Match the throughput chart proportions / padding.
@@ -7753,6 +7772,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const yFor = hrs => padT + (1 - hrs / maxHrs) * chartH;
 
     let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:100%;display:block;" preserveAspectRatio="xMidYMid meet" fill="none">';
+
+    // ── Graph paper background (under everything) ──
+    svg += graphPaper('burn-' + currentPct.toFixed(0).replace(/\D/g,'x'), padL, padT, chartW, chartH);
 
     // ── Y-axis grid lines + labels (5 ticks, hours) ──
     for (let i = 0; i <= 5; i++) {
@@ -9539,6 +9561,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // Build SVG
     let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:${W}px;height:${H}px;display:block;margin:0 auto;" fill="none">`;
 
+    // Graph paper background
+    svg += graphPaper('thru-' + rowIdx, padL, padT, chartW, chartH);
+
     // Y-axis grid lines (5 ticks)
     for (let i = 0; i <= 5; i++) {
       const v = yMin + (yRange * i / 5);
@@ -10410,6 +10435,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
     // Grid + axes
     svgInner += `<rect x="${padL}" y="${padT}" width="${plotW}" height="${plotH}" fill="var(--paper)" stroke="var(--border-2)" stroke-width="1"/>`;
+    // Graph paper background (under the plot, above the white fill)
+    svgInner += graphPaper('wc', padL, padT, plotW, plotH);
     // Y grid (P in 20% increments)
     for (let i = 0; i <= 5; i++) {
       const y = padT + (i / 5) * plotH;
