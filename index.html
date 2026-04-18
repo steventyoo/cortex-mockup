@@ -2983,7 +2983,7 @@
   <!-- ============================================================ -->
   <div class="view" data-view="atlas">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">50 nodes · 78 edges</span>
+      <span class="chip-ink">52 nodes · 79 edges</span>
       <span class="chip-sage">32 closed · 1 active · 1 proposed</span>
       <span class="chip-clay">6 hidden patterns surfaced</span>
     </div>
@@ -3006,7 +3006,7 @@
     <!-- The graph -->
     <div class="mt-6 blueprint" style="padding: 28px 24px 36px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 02 / portfolio graph</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 48 · edges · 76</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 50 · edges · 77</div>
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s. · scroll →</div>
       <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
 
@@ -3390,6 +3390,22 @@
           <text x="1220" y="418" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">55u · 35.2%</text>
         </g>
 
+        <!-- ============== NEW GC NODE: BMDC (#2104 live) ============== -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="bmdc" style="cursor: pointer;">
+          <rect x="1680" y="74" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
+          <text x="1706" y="106" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">BMDC</text>
+          <text x="1706" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 1 job (live)</text>
+        </g>
+
+        <!-- #2104 BMDC Big 1410 (24u · LIVE) — bmdc GC · clay stroke, solid edge -->
+        <line x1="1706" y1="126" x2="1700" y2="210" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2104" style="cursor: pointer;">
+          <circle cx="1700" cy="210" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1700" y="214" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2104</text>
+          <text x="1700" y="236" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Big 1410</text>
+          <text x="1700" y="248" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">24u · LIVE</text>
+        </g>
+
         <!-- Vendor edges: Rosen → 2023/2024/2026 (top vendor all three) · Keller → 2024/2025 · Consolidated → 2023/2026 · Ferguson → 2023 · Mech Sales → 2024 -->
         <line x1="500" y1="654" x2="70"  y2="780" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
         <line x1="500" y1="654" x2="700" y2="870" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
@@ -3760,6 +3776,7 @@
             <option value="synergy">Synergy Construction — 1 job</option>
             <option value="marpac">Marpac — 1 job</option>
             <option value="shelter">Shelter Holdings — 1 job</option>
+            <option value="bmdc">BMDC Services — 1 job (live)</option>
             <option value="new">New / unknown — no history</option>
           </select>
         </div>
@@ -5899,7 +5916,7 @@
   // Defined here (before renderSkyline) so stageOf() can read it.
   const PROJECT_STAGES = {
     bidding: [],
-    active:  [],
+    active:  ["2104"],
     closed:  PROJECT_ORDER
   };
   const STAGE_META = {
@@ -6932,6 +6949,48 @@
         { name: "Rosen Supply Kirkland", invoices: 20, spend: 13591.59, pct: 8.8 },
         { name: "Rosen Supply Company, Inc.", invoices: 16, spend: 9330.63, pct: 6.0 },
       ]
+    },
+    "2104": {
+      reportNum: "REPORT #2104-LIVE01 \u00b7 ACTIVE",
+      chips: [
+        "<span class=\"chip-clay\">\u26a0 ACTIVE \u00b7 99.76% billed</span>",
+        "<span class=\"chip-ink\">BMDC Big 1410 \u00b7 in trim \u00b7 24u \u00b7 5 stories</span>",
+        "<span class=\"chip-sage\">4 executed COs net +$52,749 (+4.6%) \u00b7 forecast 32% margin</span>"
+      ],
+      jobTop: "BMDC", jobBottom: "Big 1410",
+      jobNum: "#2104", location: "1410 E Howell St \u00b7 Seattle WA 98122 (Capitol Hill)", gc: "BMDC Services",
+      gcShort: "BMDC",
+      dateRange: "Jul 2024 \u2192 Apr 2026 (expected) \u00b7 22 months in progress",
+      unitsDesc: "24-unit \u00b7 5 stories \u00b7 L1 retail/amenity + L2\u2013L5 residential",
+      status: 'active',
+
+      // ---- LIVE hero fields ----
+      pctComplete: 99.76,
+      pctCompleteLabel: "99.76% billed",
+      contractOrig: "$1,143,800",
+      contractRevised: "$1,196,549",
+      coPct: "+4.6%",
+      billedToDate: "$1,193,734",
+      earnedLessRetention: "$1,134,047",
+      balanceToFinish: "$62,502",
+
+      // ---- Standard schema fields (live/forecast snapshot) ----
+      revenue: "$1,196,549", revenueFoot: "current contract \u00b7 $1.14M base + $52.7k COs \u00b7 live project",
+      profit: "~$383,000", profitFoot: "forecast \u00b7 ~32% margin pending closeout \u00b7 live project",
+      expenses: "~$813,000", expensesFoot: "forecast direct cost \u00b7 live project \u00b7 AP still posting",
+      retainage: "$59,687", retainageFoot: "5.0% \u00b7 active retention held by GC",
+      execHeadline: "BMDC Big 1410 is <span class=\"n\">in the trim phase</span> at <span class=\"n\">99.76% billed</span> and tracks to a <span class=\"n\">~32% forecast margin</span> at closeout.",
+      execBody: "Big 1410 is an <span class=\"n\">ACTIVE</span> plumbing job for <span class=\"n\">BMDC Services</span> \u2014 a <span class=\"n\">NEW GC</span> for OWP \u2014 running since <span class=\"n\">Jul 2024</span> with expected closeout <span class=\"n\">Apr 2026</span> (22 months in progress). 24-unit, 5-story mixed-use at <span class=\"n\">1410 E Howell St</span> in Capitol Hill (L1 retail/amenity, L2\u2013L5 residential).<br/><br/>Original <span class=\"n\">$1,143,800</span> contract \u2192 revised <span class=\"n\">$1,196,549</span> via 4 executed COs (net <span class=\"n\">+$52,749</span> / +4.6%): CO#05 Booster Pump $39,200, CO#04 Irrigation $2,573, CO#03 Overflows $7,164, CO#02 Core Drilling $3,812. CO#01 Condensate Piping was cancelled (in-scope).<br/><br/><span class=\"n\">$1,193,734</span> billed to date = <span class=\"n\">99.76% complete</span>. Total earned less retention <span class=\"n\">$1,134,047</span>. Retention outstanding <span class=\"n\">$59,687</span> (5%). Balance to finish + retention <span class=\"n\">$62,502</span>.<br/><br/><span class=\"n\">Supervision</span>: RI Foreman Tommy / Ben. Insurance: Not Wrap.<br/><br/><span class=\"n\">Forecast</span>: direct cost / profit / margin are live projections using OWP's <span class=\"n\">BMDC-comparable plumbing mid-rise average (~32% margin)</span> as placeholder \u2014 full vendor ledger and crew roster finalize at closeout.",
+      jobNum2: "#2104", workforce: "RI Foreman Tommy / Ben \u00b7 live project",
+      bpLeft: "bmdc big 1410 \u00b7 seattle wa \u00b7 ACTIVE", bpRight: "24 units \u00b7 22 months \u00b7 99.76% billed",
+      k01_revenue: "$1,196,549", k01_margin: "~32% (forecast)", k01_origContract: "$1,143,800",
+      k01_co: "+$52,749", k01_directCost: "~$813,000 (forecast)", k01_profit: "~$383,000 (forecast)",
+      footerReport: "REPORT #2104-LIVE01 \u00b7 Live snapshot Apr 18, 2026 \u00b7 v0.1",
+      sbName: "Big 1410.", skyName: "BIG 1410",
+      skyline: { floors: 5, cols: 6, w: 120 },
+      num: { units: 24, fixtures: 120, months: 22, revenue: 1196549, profit: 383000, directCost: 813000, origContract: 1143800, co: 52749, retainage: 59686.70, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "Live project \u00b7 AP still posting \u00b7 full vendor data at closeout" },
+      vendors: []
     }
   };
 
@@ -6967,7 +7026,8 @@
     "2036": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">David Strid</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Shon Geer</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jose Tapia</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Gustavo</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific Westridge LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div></div>", "jobInfoUnits": 31},
     "2037": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Marpac</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Evan Chan</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Doyle Gustafson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Rick / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">MYSA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">MYSA University Apartments LP</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div></div>", "jobInfoUnits": 122},
     "2038": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass Harbor</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Justin Anderson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Kurt Weagant</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Karl Clocksin</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Thaddeus / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Continental</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">2nd & John Apartments</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Wrap (OCIP)</div></div></div>", "jobInfoUnits": 80},
-    "2040": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Andrew Withnell</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Mike Sanderson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Kyle Stenson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Garrett / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Brooklyn 65 LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div></div>", "jobInfoUnits": 55}
+    "2040": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Andrew Withnell</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Mike Sanderson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Kyle Stenson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Garrett / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Trim Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Al</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Brooklyn 65 LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div></div>", "jobInfoUnits": 55},
+    "2104": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">BMDC Services</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tommy / Ben</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 99.76% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jul 2024</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Apr 2026</div></div></div>", "jobInfoUnits": 24}
   };
   Object.keys(PROJECT_TEAMS).forEach(function(id){
     if (PROJECTS[id]) Object.assign(PROJECTS[id], PROJECT_TEAMS[id]);
@@ -8439,7 +8499,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   /* ============ PORTFOLIO SKYLINE HERO ============ */
   // Derived from PROJECTS — adding to PROJECT_ORDER inserts a building.
   function getSkyline(){
-    return PROJECT_ORDER.map(id => {
+    // Closed jobs (via PROJECT_ORDER) + active jobs appended on the right.
+    const ids = [...PROJECT_ORDER, ...(PROJECT_STAGES.active || []).filter(id => PROJECTS[id])];
+    return ids.map(id => {
       const p = PROJECTS[id];
       return {
         id,
@@ -9732,6 +9794,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     synergy:  { name: 'Synergy Construction',jobs: 1,  blendedMargin: 33.4, payLag: 58, payLagDelta: 'thin data · 1 job',       coRate: 55, coDetail: 'thin data, 1 job',             projects: '#2026',                                                                                             source: "Synergy (1 job)",                winRate: 22, knownTag: '⚠ Thin data · only 1 closed job in portfolio' },
     marpac:   { name: 'Marpac',              jobs: 1,  blendedMargin: 41.4, payLag: 50, payLagDelta: 'thin data · 1 job',       coRate: 67, coDetail: 'thin data, 1 job',             projects: '#2037',                                                                                             source: "Marpac (1 job)",                 winRate: 24, knownTag: '⚠ Thin data · only 1 closed job, strong margin on #2037' },
     shelter:  { name: 'Shelter Holdings',    jobs: 1,  blendedMargin: 64.4, payLag: 45, payLagDelta: 'thin data · 1 HOA job',   coRate: 100, coDetail: 'no COs, 1 HOA gas job',       projects: '#2039',                                                                                             source: "Shelter (1 HOA job)",            winRate: 20, knownTag: '⚠ Thin data · HOA remediation work only (#2039)' },
+    bmdc:     { name: 'BMDC Services',       jobs: 1,  blendedMargin: 32.0, payLag: 55, payLagDelta: 'thin data · 1 live job',  coRate: 80, coDetail: '4 of 5 submitted, 1 live job', projects: '#2104 (live)',                                                                                    source: "BMDC (1 live job)",              winRate: 24, knownTag: '⚠ Thin data · first BMDC job still in progress (#2104)' },
     'new':    { name: 'Unknown / new GC',    jobs: 0,  blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',                                                                                  source: 'portfolio average',              winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
   };
 
@@ -10901,6 +10964,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   const BID_HISTORY_EXTRA = [
     // #2014 Capitol Hill 168 removed per user — job not active
     // #2039 Ravello Gas Piping removed earlier (incomplete data)
+    { id: '2104', year: 2024, project: 'Big 1410 Apartments', gc: 'BMDC Services',
+      units: 24, fixtures: 120, origContract: 1143800, co: 52749, finalContract: 1196549,
+      directCost: null, profit: null, margin: 32.0, status: 'active',
+      note: '99.76% billed · in trim · forecast margin 32% pending closeout' },
     { id: 'B-Bel220', year: 2026, project: 'Bellevue 220 (pending)', gc: 'Chinn + Walsh JV',
       units: 220, fixtures: 1118, origContract: 2618675, co: 0, finalContract: null,
       directCost: null, profit: null, margin: 32.0, status: 'bidding',
