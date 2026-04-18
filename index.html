@@ -8464,7 +8464,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const wrap = document.getElementById('skyline-svg-wrap'); if(!wrap) return;
 
     const SCALE = 0.78;             // uniform shrink so the hero takes less vertical real estate
-    const VBH = Math.round(340 * SCALE);
+    const VBH = Math.round(362 * SCALE);  // bumped +22 to fit 3-line labels below each building
     const ground = Math.round(286 * SCALE);  // ground-line y (extra room for status chip above roof)
     const floorH = 24 * SCALE;       // floor height
     const padL = 88, padR = 88;
@@ -8567,10 +8567,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         }
       }
 
-      // Building label block below ground line
+      // Building label block below ground line — 3 lines: #id · GC · project name
       const lx = x + bw/2;
-      svg += `<text x="${lx}" y="${ground+22}" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--ink)" text-anchor="middle" letter-spacing="0.4">${b.top} <tspan font-family="Instrument Serif, Georgia, serif" font-style="italic" font-weight="400" font-size="12">${b.bottom.toLowerCase().replace(/^\w/, m => m.toUpperCase())}</tspan></text>`;
-      svg += `<text x="${lx}" y="${ground+34}" font-family="JetBrains Mono, monospace" font-size="7.5" fill="var(--ink-4)" text-anchor="middle" letter-spacing="1">#${b.id} · ${b.meta}</text>`;
+      svg += `<text x="${lx}" y="${ground+18}" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" fill="var(--ink-3)" text-anchor="middle" letter-spacing="0.8">#${b.id}</text>`;
+      svg += `<text x="${lx}" y="${ground+30}" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--ink)" text-anchor="middle" letter-spacing="0.6">${b.top}</text>`;
+      svg += `<text x="${lx}" y="${ground+43}" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-weight="400" font-size="11.5" fill="var(--ink-2)" text-anchor="middle">${b.bottom.toLowerCase().replace(/^\w/, m => m.toUpperCase())}</text>`;
 
       // Floor-count callout on the left side of the building
       svg += `<text x="${x-8}" y="${top + h/2 + 3}" font-family="JetBrains Mono, monospace" font-size="7.5" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">${b.floors}F</text>`;
