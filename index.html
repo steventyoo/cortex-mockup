@@ -9141,7 +9141,14 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
           rect.setAttribute('fill', rect.getAttribute('data-base-fill'));
         }
       });
-      g.addEventListener('click', () => applyProject(g.dataset.project));
+      g.addEventListener('click', () => {
+        const id = g.dataset.project;
+        const isActive = (PROJECT_STAGES.active || []).includes(id);
+        const isBidding = (PROJECT_STAGES.bidding || []).includes(id);
+        const target = isActive ? 'health' : (isBidding ? 'bid' : 'project');
+        try { setView(target); } catch (e) { console.error('skyline setView failed', e); }
+        try { applyProject(id); } catch (e) { console.error('skyline applyProject failed', e); }
+      });
     });
   }
   renderSkyline();
@@ -10135,9 +10142,20 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         : `<div class="sb-stage-empty">${meta.empty}</div>`;
       return header + body;
     }).join('');
-    // Re-attach click handlers since the elements were just rebuilt
+    // Re-attach click handlers since the elements were just rebuilt.
+    // Belt-and-suspenders: call setView directly FIRST based on stage,
+    // then applyProject. If applyProject errors for any reason, at least
+    // the view still switches.
     cont.querySelectorAll('.sb-project').forEach(el => {
-      el.addEventListener('click', () => { applyProject(el.dataset.project); document.body.classList.remove('nav-open'); });
+      el.addEventListener('click', () => {
+        const id = el.dataset.project;
+        const isActive = (PROJECT_STAGES.active || []).includes(id);
+        const isBidding = (PROJECT_STAGES.bidding || []).includes(id);
+        const target = isActive ? 'health' : (isBidding ? 'bid' : 'project');
+        try { setView(target); } catch (e) { console.error('sb-project setView failed', e); }
+        try { applyProject(id); } catch (e) { console.error('sb-project applyProject failed', e); }
+        document.body.classList.remove('nav-open');
+      });
     });
   }
   renderSidebar();
