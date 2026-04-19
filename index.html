@@ -8270,10 +8270,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     _currentProjectId = id;
     const p = PROJECTS[id]; if(!p) { console.warn('applyProject: no PROJECTS[' + id + ']'); return; }
 
-    const isActive = (typeof PROJECT_STAGES !== 'undefined') && (PROJECT_STAGES.active || []).includes(id);
-    // Active jobs route to the Job Health view (the live-monitor dashboard);
-    // closed jobs route to the closed-project report view.
-    const targetView = isActive ? 'health' : 'project';
+    // All projects (active, bidding, closed) route to the per-project
+    // detail view. Job Health is its own separate workspace tab.
+    const targetView = 'project';
 
     // SWITCH VIEW FIRST so navigation always happens, even if rendering throws
     try { setView(targetView); } catch (e) { console.error('setView failed', e); }
@@ -9143,10 +9142,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       });
       g.addEventListener('click', () => {
         const id = g.dataset.project;
-        const isActive = (PROJECT_STAGES.active || []).includes(id);
-        const isBidding = (PROJECT_STAGES.bidding || []).includes(id);
-        const target = isActive ? 'health' : (isBidding ? 'bid' : 'project');
-        try { setView(target); } catch (e) { console.error('skyline setView failed', e); }
+        try { setView('project'); } catch (e) { console.error('skyline setView failed', e); }
         try { applyProject(id); } catch (e) { console.error('skyline applyProject failed', e); }
       });
     });
@@ -10126,10 +10122,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   // attributes in the rendered sidebar HTML can reach it directly.
   window.__sbProjectClick = function(id){
     try {
-      const isActive = (PROJECT_STAGES.active || []).includes(id);
-      const isBidding = (PROJECT_STAGES.bidding || []).includes(id);
-      const target = isActive ? 'health' : (isBidding ? 'bid' : 'project');
-      try { setView(target); } catch (e) { console.error('sb setView failed', e); }
+      // Every project — active, bidding, or closed — routes to the per-project
+      // detail view. The Job Health workspace stays as its own sidebar tab.
+      try { setView('project'); } catch (e) { console.error('sb setView failed', e); }
       try { applyProject(id); } catch (e) { console.error('sb applyProject failed', e); }
       document.body.classList.remove('nav-open');
     } catch (e) { console.error('__sbProjectClick outer', e); }
