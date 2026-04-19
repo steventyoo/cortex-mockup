@@ -10122,12 +10122,25 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   }
   renderPortfolio();
 
+  // Global click handler for sidebar project cards. Exposed so inline onclick=
+  // attributes in the rendered sidebar HTML can reach it directly.
+  window.__sbProjectClick = function(id){
+    try {
+      const isActive = (PROJECT_STAGES.active || []).includes(id);
+      const isBidding = (PROJECT_STAGES.bidding || []).includes(id);
+      const target = isActive ? 'health' : (isBidding ? 'bid' : 'project');
+      try { setView(target); } catch (e) { console.error('sb setView failed', e); }
+      try { applyProject(id); } catch (e) { console.error('sb applyProject failed', e); }
+      document.body.classList.remove('nav-open');
+    } catch (e) { console.error('__sbProjectClick outer', e); }
+  };
+
   function renderSidebar(){
     const cont = document.getElementById('sidebar-projects'); if(!cont) return;
     const stageOrder = ['bidding','active','closed'];
     const cardHtml = (id, stage) => {
       const p = PROJECTS[id];
-      return `<div class="sb-project" data-project="${id}" title="${p.jobTop} · ${p.sbName.replace(/\.$/,'')} · ${p.num.units}u">
+      return `<div class="sb-project" data-project="${id}" onclick="window.__sbProjectClick('${id}')" title="${p.jobTop} · ${p.sbName.replace(/\.$/,'')} · ${p.num.units}u">
         <span class="sb-status ${stage}"></span>
         <span class="sb-pnum">#${id}</span>
         <span class="sb-pname"><b>${p.jobTop}</b><span class="serif-it">${p.sbName}</span></span>
@@ -10142,21 +10155,6 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         : `<div class="sb-stage-empty">${meta.empty}</div>`;
       return header + body;
     }).join('');
-    // Re-attach click handlers since the elements were just rebuilt.
-    // Belt-and-suspenders: call setView directly FIRST based on stage,
-    // then applyProject. If applyProject errors for any reason, at least
-    // the view still switches.
-    cont.querySelectorAll('.sb-project').forEach(el => {
-      el.addEventListener('click', () => {
-        const id = el.dataset.project;
-        const isActive = (PROJECT_STAGES.active || []).includes(id);
-        const isBidding = (PROJECT_STAGES.bidding || []).includes(id);
-        const target = isActive ? 'health' : (isBidding ? 'bid' : 'project');
-        try { setView(target); } catch (e) { console.error('sb-project setView failed', e); }
-        try { applyProject(id); } catch (e) { console.error('sb-project applyProject failed', e); }
-        document.body.classList.remove('nav-open');
-      });
-    });
   }
   renderSidebar();
 
