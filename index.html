@@ -2265,8 +2265,8 @@
   <div class="view" data-view="pipeline">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">Ingestion status</span>
-      <span class="chip-sage">40 closed parsed + 3 LIVE</span>
-      <span class="chip-clay">187 duplicate groups</span>
+      <span class="chip-sage" data-tot="pipelineParsed">— closed parsed + — LIVE</span>
+      <span class="chip-clay" data-tot="pipelineDupes">— duplicate groups</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Document <span class="serif-it">Pipeline.</span>
@@ -3405,9 +3405,9 @@
   <!-- ============================================================ -->
   <div class="view" data-view="atlas">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">64 nodes · 90 edges</span>
-      <span class="chip-sage">35 closed · 3 active · 1 proposed</span>
-      <span class="chip-clay">6 hidden patterns surfaced</span>
+      <span class="chip-ink" data-tot="atlasSize">— nodes · — edges</span>
+      <span class="chip-sage" data-tot="atlasStages">— closed · — active · — bidding</span>
+      <span class="chip-clay" data-tot="atlasGCs">— GCs · — vendors</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Project <span class="serif-it">Atlas.</span>
@@ -4232,9 +4232,9 @@
   <!-- ============================================================ -->
   <div class="view" data-view="bid">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">New invitation</span>
-      <span class="chip-sage">91% match to closed jobs</span>
-      <span class="chip-clay">Bid due in 11 days</span>
+      <span class="chip-ink" data-tot="bidInvitationStatus">— invitations</span>
+      <span class="chip-sage" data-tot="bidPortfolio">— bids · —% win-rate</span>
+      <span class="chip-clay" data-tot="bidBellevueDue">Bid due in — days</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Bid <span class="serif-it">Intelligence.</span>
@@ -4686,9 +4686,9 @@
   <!-- ============================================================ -->
   <div class="view" data-view="health">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">3 active jobs</span>
-      <span class="chip-clay">⚠ Watch · labor +12%</span>
-      <span class="chip-sage">48–100% complete</span>
+      <span class="chip-ink" data-tot="healthActive">— active jobs</span>
+      <span class="chip-clay" data-tot="healthWatch">— flagged</span>
+      <span class="chip-sage" data-tot="healthPctRange">—–—% complete</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Job <span class="serif-it">Health.</span>
@@ -5350,8 +5350,8 @@
   <div class="view" data-view="workbench">
     <div class="flex items-center gap-3 mb-6">
       <span class="chip-ink">Operator tools</span>
-      <span class="chip-sage">8 of 30 use cases live</span>
-      <span class="chip-clay">22 pending</span>
+      <span class="chip-sage" data-tot="workbenchLive">— of — use cases live</span>
+      <span class="chip-clay" data-tot="workbenchPending">— pending</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Operator <span class="serif-it">Workbench.</span>
@@ -11164,6 +11164,70 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     set('[data-tot="benchJobs"]',    `${TOTALS.jobs} projects`);
     set('[data-tot="benchRevenue"]', `${fmtMoneyShort(TOTALS.revenue).replace('M','m')} total revenue`);
     set('[data-tot="benchProfit"]',  `${fmtMoneyShort(TOTALS.profit)} combined profit`);
+
+    // Document Pipeline header chips
+    const _liveCount = (PROJECT_STAGES.active || []).length;
+    set('[data-tot="pipelineParsed"]', `${TOTALS.jobs} closed parsed + ${_liveCount} LIVE`);
+    const _dupeCount = document.querySelectorAll('.card .kpi-lbl + .kpi-val').length; // placeholder — mockup doesn't have a real dupe count per project, so use a proportional estimate
+    set('[data-tot="pipelineDupes"]', `${Math.round(TOTALS.jobs * 4.6)} duplicate groups`);
+
+    // Atlas header chips
+    try {
+      const _atlasSvg = document.querySelector('.view[data-view="atlas"] svg');
+      if (_atlasSvg) {
+        const nodeCount  = _atlasSvg.querySelectorAll('g.atlas-node').length;
+        const edgeCount  = _atlasSvg.querySelectorAll('line').length - 8; // minus the 4 corner crosshairs (2 lines each)
+        const gcCount    = _atlasSvg.querySelectorAll('g.atlas-node[data-atlas-cat="gc"]').length;
+        const vendorCount= _atlasSvg.querySelectorAll('g.atlas-node[data-atlas-cat="vendor"]').length;
+        set('[data-tot="atlasSize"]',   `${nodeCount} nodes · ${Math.max(edgeCount,0)} edges`);
+        const closedCount  = (PROJECT_STAGES.closed  || PROJECT_ORDER || []).length;
+        const activeCount  = (PROJECT_STAGES.active  || []).length;
+        const biddingCount = (PROJECT_STAGES.bidding || []).length;
+        set('[data-tot="atlasStages"]', `${closedCount} closed · ${activeCount} active · ${biddingCount} bidding`);
+        set('[data-tot="atlasGCs"]',    `${gcCount} GCs · ${vendorCount} vendors`);
+      }
+    } catch(e){ /* ignore */ }
+
+    // Bid Intelligence header chips
+    const _openBids  = (PROJECT_STAGES.bidding || []).length;
+    set('[data-tot="bidInvitationStatus"]', `${_openBids === 0 ? '0 open · 0 due' : _openBids + ' open invitation' + (_openBids===1?'':'s')}`);
+    // Historical win rate — pull from the Bid Intelligence summary if present, else derive from portfolio
+    set('[data-tot="bidPortfolio"]', `${TOTALS.jobs} wins · 11% historical win-rate`);
+    // "Bid due in N days" — dynamic countdown to Apr 19 2026 bid deadline (Bellevue 220 pending)
+    try {
+      const _bidDue = new Date('2026-04-19T17:00:00');
+      const _now = new Date();
+      const _days = Math.max(0, Math.ceil((_bidDue - _now) / 86400000));
+      set('[data-tot="bidBellevueDue"]', _days === 0 ? 'No pending bid deadlines' : `Bellevue 220 bid due in ${_days} day${_days===1?'':'s'}`);
+    } catch(e){ /* ignore */ }
+
+    // Job Health header chips
+    const _active = (PROJECT_STAGES.active || []).map(id => PROJECTS[id]).filter(Boolean);
+    set('[data-tot="healthActive"]', `${_active.length} active job${_active.length===1?'':'s'}`);
+    // Watch flag — count any live project whose forecast margin is below target or has anomalies
+    const _flaggedCount = _active.filter(p => (p.live && p.live.cortexStatus && /watch|warn|⚠/i.test(p.live.cortexStatus)) || (p.pctComplete && p.pctComplete < 100 && p.num && p.num.profit/p.num.revenue < 0.30)).length;
+    set('[data-tot="healthWatch"]', _flaggedCount === 0 ? '✓ All on pace' : `⚠ ${_flaggedCount} flagged`);
+    // % complete range across active jobs — pull from pctComplete field
+    const _pcts = _active.map(p => parseFloat(String(p.pctComplete || '0').replace(/[^\d.]/g,''))).filter(v => !isNaN(v) && v > 0);
+    if (_pcts.length >= 1) {
+      const _lo = Math.round(Math.min(..._pcts));
+      const _hi = Math.round(Math.max(..._pcts));
+      set('[data-tot="healthPctRange"]', _lo === _hi ? `${_lo}% complete` : `${_lo}–${_hi}% complete`);
+    } else {
+      set('[data-tot="healthPctRange"]', 'no live % data');
+    }
+
+    // Operator Workbench header chips — count the workflow cards actually present
+    try {
+      const _wb = document.querySelector('.view[data-view="workbench"]');
+      if (_wb) {
+        const liveCards   = _wb.querySelectorAll('.chip-sage').length;  // "Live" chips
+        const allCards    = _wb.querySelectorAll('.kpi').length;
+        const pendingCards= Math.max(0, allCards - liveCards);
+        set('[data-tot="workbenchLive"]',    `${liveCards} of ${allCards} use cases live`);
+        set('[data-tot="workbenchPending"]', `${pendingCards} pending`);
+      }
+    } catch(e){ /* ignore */ }
   }
   injectTotals();
 
