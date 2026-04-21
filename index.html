@@ -1209,13 +1209,8 @@
           </div>
         </div>
 
-        <!-- Suggested prompts -->
-        <div id="home-prompt-chips" class="mt-5 flex flex-wrap justify-center gap-2">
-          <button onclick="fillPrompt(this)" class="prompt-chip">Why did #2009 labor run over budget?</button>
-          <button onclick="fillPrompt(this)" class="prompt-chip">Benchmark this new bid against my last 4 jobs.</button>
-          <button onclick="fillPrompt(this)" class="prompt-chip">Which vendors own the most of my material spend?</button>
-          <button onclick="fillPrompt(this)" class="prompt-chip">Draft a JCR narrative for Barrett Park.</button>
-        </div>
+        <!-- Suggested prompts — hidden; retained in DOM because JS toggles display on reset -->
+        <div id="home-prompt-chips" class="mt-5 flex flex-wrap justify-center gap-2" style="display:none;"></div>
 
         <!-- API key banner (shown when no key is set) -->
         <div id="home-key-banner" class="mt-6 flex items-center justify-between gap-4" style="background: var(--clay-soft); border: 1px solid #E8C6B2; border-radius: 12px; padding: 14px 18px;">
