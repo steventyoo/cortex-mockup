@@ -1235,10 +1235,30 @@
         </div>
       </div>
 
-      <!-- Tiny footer hint -->
-      <div class="mt-16 text-[11px] mono" style="color: var(--ink-4);">
-        ↖ or open <button onclick="setView('portfolio')" style="color: var(--clay); text-decoration: underline; text-underline-offset: 3px;">the portfolio</button> · <button onclick="setView('benchmark')" style="color: var(--clay); text-decoration: underline; text-underline-offset: 3px;">the benchmark</button> · <button onclick="applyProject('2009')" style="color: var(--clay); text-decoration: underline; text-underline-offset: 3px;">a live project report</button>
+      <!-- Footer quick-nav — workspaces + sample reports -->
+      <div class="mt-16 text-[11px] mono" style="color: var(--ink-4); line-height: 1.9;">
+        <div style="margin-bottom: 6px;">
+          <span style="color: var(--ink-3); margin-right: 6px;">↖ workspaces</span>
+          <button onclick="setView('portfolio')" class="footer-nav-link">portfolio overview</button> ·
+          <button onclick="setView('benchmark')" class="footer-nav-link">benchmark comparison</button> ·
+          <button onclick="setView('atlas')" class="footer-nav-link">atlas</button> ·
+          <button onclick="setView('bid')" class="footer-nav-link">bid intelligence</button> ·
+          <button onclick="setView('health')" class="footer-nav-link">job health</button> ·
+          <button onclick="setView('pipeline')" class="footer-nav-link">document pipeline</button> ·
+          <button onclick="setView('workbench')" class="footer-nav-link">operator workbench</button>
+        </div>
+        <div>
+          <span style="color: var(--ink-3); margin-right: 6px;">↖ sample reports</span>
+          <button onclick="applyProject('2104')" class="footer-nav-link">#2104 a live job (BMDC Big 1410)</button> ·
+          <button onclick="applyProject('2010')" class="footer-nav-link">#2010 margin outlier (Old Town, 54.2%)</button> ·
+          <button onclick="applyProject('2020')" class="footer-nav-link">#2020 labor flag (Bellevue, +29%)</button> ·
+          <button onclick="applyProject('2031')" class="footer-nav-link">#2031 portfolio leader (Issaquah Gateway, 53.2%)</button>
+        </div>
       </div>
+      <style>
+        .footer-nav-link { color: var(--clay); text-decoration: underline; text-underline-offset: 3px; background: transparent; border: none; padding: 0; font: inherit; cursor: pointer; }
+        .footer-nav-link:hover { color: var(--ink); }
+      </style>
     </div>
 
   </div> <!-- /view: home -->
