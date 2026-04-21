@@ -2148,11 +2148,18 @@
       <div class="blueprint-corner" style="top:12px; right:14px;">portfolio scatter</div>
       <div class="card-label mb-3" style="margin-top:18px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> Margin Trend</div>
       <div id="pf-scatter-chart" style="width:100%; overflow-x:auto;"></div>
-      <div class="flex items-center gap-5 mt-3" style="font-size:10px; color:var(--ink-4);">
+      <div class="flex items-center gap-4 flex-wrap mt-3" style="font-size:10px; color:var(--ink-4);">
         <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#5B7FA8;margin-right:4px;vertical-align:middle;"></span>Exxel Pacific</span>
-        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--clay);margin-right:4px;vertical-align:middle;"></span>SRM Development</span>
-        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--sage-ink);margin-right:4px;vertical-align:middle;"></span>Chinn Construction</span>
-        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--ink-4);margin-right:4px;vertical-align:middle;"></span>Natural & Built</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#B85C3E;margin-right:4px;vertical-align:middle;"></span>SRM Development</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3F5A32;margin-right:4px;vertical-align:middle;"></span>Chinn Construction</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#A4A09A;margin-right:4px;vertical-align:middle;"></span>Natural &amp; Built</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#2C5F77;margin-right:4px;vertical-align:middle;"></span>Compass</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7C5E9F;margin-right:4px;vertical-align:middle;"></span>Synergy</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#B8944E;margin-right:4px;vertical-align:middle;"></span>Blueprint</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#B56B7C;margin-right:4px;vertical-align:middle;"></span>GRE</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7A8840;margin-right:4px;vertical-align:middle;"></span>Marpac</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3F3A36;margin-right:4px;vertical-align:middle;"></span>Shelter Holdings</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7C5B3F;margin-right:4px;vertical-align:middle;"></span>BMDC <span style="color:var(--clay);">· live</span></span>
       </div>
     </div>
 
@@ -10827,10 +10834,17 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const p = PROJECTS[id];
       if (!p) return '#1F1E1D';
       const g = (p.gcShort || p.gc || '').toLowerCase();
-      if (g.includes('exxel')) return '#5B7FA8';
-      if (g.includes('srm')) return '#B85C3E';
-      if (g.includes('chinn')) return '#3F5A32';
-      if (g.includes('natural')) return '#A4A09A';
+      if (g.includes('exxel'))     return '#5B7FA8';
+      if (g.includes('srm'))       return '#B85C3E';
+      if (g.includes('chinn'))     return '#3F5A32';
+      if (g.includes('natural'))   return '#A4A09A';
+      if (g.includes('compass'))   return '#2C5F77';
+      if (g.includes('synergy'))   return '#7C5E9F';
+      if (g.includes('blueprint')) return '#B8944E';
+      if (g.includes('gre'))       return '#B56B7C';
+      if (g.includes('marpac'))    return '#7A8840';
+      if (g.includes('shelter'))   return '#3F3A36';
+      if (g.includes('bmdc'))      return '#7C5B3F';
       return '#1F1E1D';
     };
 
@@ -11154,10 +11168,17 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const gcColor = (gc) => {
       if(!gc) return '#5B7FA8';
       const g = gc.toLowerCase();
-      if(g.includes('exxel')) return '#5B7FA8';
-      if(g.includes('srm') || g.includes('srmqa')) return '#B85C3E';
-      if(g.includes('chinn')) return '#3F5A32';
-      if(g.includes('natural')) return '#A4A09A';
+      if(g.includes('exxel'))     return '#5B7FA8'; // slate blue
+      if(g.includes('srm'))       return '#B85C3E'; // clay
+      if(g.includes('chinn'))     return '#3F5A32'; // sage
+      if(g.includes('natural'))   return '#A4A09A'; // warm gray
+      if(g.includes('compass'))   return '#2C5F77'; // deep teal
+      if(g.includes('synergy'))   return '#7C5E9F'; // plum
+      if(g.includes('blueprint')) return '#B8944E'; // ochre
+      if(g.includes('gre'))       return '#B56B7C'; // dusty rose
+      if(g.includes('marpac'))    return '#7A8840'; // olive
+      if(g.includes('shelter'))   return '#3F3A36'; // charcoal
+      if(g.includes('bmdc'))      return '#7C5B3F'; // warm brown (LIVE)
       return '#5B7FA8';
     };
 
