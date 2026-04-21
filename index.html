@@ -10546,6 +10546,66 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       {label:"Fixtures / Month",      get:p=>p.num.fixtures/p.num.months,                fmt:'dec1',  dir:'hi', adj:null},
       {label:"Hours / Month",         get:p=>p.num.hours/p.num.months,                   fmt:'int',   dir:'-',  adj:null},
       {label:"Profit / Month",        get:p=>p.num.profit/p.num.months,                  fmt:'money', dir:'hi', adj:'money'}
+    ]],
+    ["H · Cashflow & Contract", [
+      {label:"Avg Pay App Draw",      get:p=>{
+        const pa = p.payApps || [];
+        if (!pa.length) return 0;
+        return pa.reduce((s,r)=>s + (Number(r[2])||0), 0) / pa.length;
+      },                                                                                  fmt:'money', dir:'hi', adj:'money'},
+      {label:"Pay App Count",         get:p=>(p.payApps || []).length,                    fmt:'int',   dir:'-',  adj:null},
+      {label:"Retention % of Revenue",get:p=>p.num.revenue>0 ? p.num.retainage/p.num.revenue : 0, fmt:'pct', dir:'lo', adj:null},
+      {label:"CO % of Original",      get:p=>p.num.origContract>0 ? p.num.co/p.num.origContract : 0, fmt:'pct', dir:'-', adj:null}
+    ]],
+    ["I · Vendor Concentration", [
+      {label:"Top Vendor % of AP",    get:p=>{
+        const vm = p.vendorMeta || {}; return (vm.topShare || 0) / 100;
+      },                                                                                  fmt:'pct',   dir:'lo', adj:null},
+      {label:"Top 4 Vendors % of AP", get:p=>{
+        const v = p.allVendors || p.vendors || [];
+        if (!v.length) return 0;
+        const top4 = v.slice(0, 4).reduce((s,r)=>s + (Array.isArray(r) ? (r[3]||0) : (r.pct||0)), 0);
+        return top4 / 100;
+      },                                                                                  fmt:'pct',   dir:'lo', adj:null},
+      {label:"Total Vendor Count",    get:p=>{
+        const vm = p.vendorMeta || {};
+        return vm.count || (p.allVendors || p.vendors || []).length;
+      },                                                                                  fmt:'int',   dir:'-',  adj:null},
+      {label:"AP $ / Fixture",        get:p=>{
+        const vm = p.vendorMeta || {};
+        const ap = vm.totalAp || 0;
+        return p.num.fixtures > 0 ? ap / p.num.fixtures : 0;
+      },                                                                                  fmt:'money', dir:'-',  adj:'money'}
+    ]],
+    ["J · Crew Composition", [
+      {label:"Top Worker % of Hours", get:p=>{
+        const cr = p.crewRoster || [];
+        if (!cr.length) return 0;
+        const top = Number(cr[0][1]) || 0;
+        const total = cr.reduce((s,r)=>s + (Number(r[1])||0), 0);
+        return total > 0 ? top / total : 0;
+      },                                                                                  fmt:'pct',   dir:'lo', adj:null},
+      {label:"Senior Tier % of Hours",get:p=>{
+        const cr = p.crewRoster || [];
+        if (!cr.length) return 0;
+        const total = cr.reduce((s,r)=>s + (Number(r[1])||0), 0);
+        const senior = cr.filter(r=>String(r[4]||'').toLowerCase().startsWith('senior')).reduce((s,r)=>s + (Number(r[1])||0), 0);
+        return total > 0 ? senior / total : 0;
+      },                                                                                  fmt:'pct',   dir:'-',  adj:null},
+      {label:"Mid Tier % of Hours",   get:p=>{
+        const cr = p.crewRoster || [];
+        if (!cr.length) return 0;
+        const total = cr.reduce((s,r)=>s + (Number(r[1])||0), 0);
+        const mid = cr.filter(r=>String(r[4]||'').toLowerCase().startsWith('mid')).reduce((s,r)=>s + (Number(r[1])||0), 0);
+        return total > 0 ? mid / total : 0;
+      },                                                                                  fmt:'pct',   dir:'-',  adj:null},
+      {label:"Apprentice Tier % of Hours", get:p=>{
+        const cr = p.crewRoster || [];
+        if (!cr.length) return 0;
+        const total = cr.reduce((s,r)=>s + (Number(r[1])||0), 0);
+        const app = cr.filter(r=>String(r[4]||'').toLowerCase().startsWith('apprentice')).reduce((s,r)=>s + (Number(r[1])||0), 0);
+        return total > 0 ? app / total : 0;
+      },                                                                                  fmt:'pct',   dir:'-',  adj:null}
     ]]
   ];
 
