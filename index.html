@@ -2174,6 +2174,11 @@
   <!-- ============= BENCHMARK COMPARISON VIEW ==================== -->
   <!-- ============================================================ -->
   <div class="view" data-view="benchmark">
+    <div class="flex items-center gap-3 mb-6 flex-wrap">
+      <span class="chip-ink" data-tot="benchJobs">— projects</span>
+      <span class="chip-sage" data-tot="benchRevenue">$— total revenue</span>
+      <span class="chip-clay" data-tot="benchProfit">$— combined profit</span>
+    </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Benchmark <span class="serif-it">Comparison.</span>
     </h1>
@@ -11155,6 +11160,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     setHtml('[data-tot="revenueFoot"]', `across ${TOTALS.jobs} closed jobs`);
     setHtml('[data-tot="unitsFoot"]',   `${fmtInt(TOTALS.fixtures)} plumbing fixtures`);
     setHtml('[data-tot="hoursFoot"]',   `${TOTALS.workers} unique workers`);
+    // Benchmark Comparison header chips (dynamic)
+    set('[data-tot="benchJobs"]',    `${TOTALS.jobs} projects`);
+    set('[data-tot="benchRevenue"]', `${fmtMoneyShort(TOTALS.revenue).replace('M','m')} total revenue`);
+    set('[data-tot="benchProfit"]',  `${fmtMoneyShort(TOTALS.profit)} combined profit`);
   }
   injectTotals();
 
