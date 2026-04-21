@@ -5349,30 +5349,222 @@
   <!-- ============================================================ -->
   <div class="view" data-view="workbench">
     <div class="flex items-center gap-3 mb-6">
-      <span class="chip-ink">Operator tools</span>
-      <span class="chip-sage" data-tot="workbenchLive">— of — use cases live</span>
-      <span class="chip-clay" data-tot="workbenchPending">— pending</span>
+      <span class="chip-ink">Monday command center</span>
+      <span class="chip-sage" id="wb-hdr-active">— active</span>
+      <span class="chip-clay" id="wb-hdr-bids">— pending bid</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Operator <span class="serif-it">Workbench.</span>
     </h1>
     <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 680px; line-height: 1.6;">
-      The workbench is where a project manager, estimator, or controller turns Cortex's parsed data into decisions. Each workflow below is a use-case backed by a specific combination of schemas.
+      Monday-morning decision surface for the principal. Cortex auto-writes the state of the portfolio, ranks the week's moves, and routes each role into its own workbench panel.
     </div>
 
-    <div class="grid grid-cols-3 gap-5 mt-12">
-      <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">01 · Bid Benchmarking</div><span class="chip-sage">Live</span></div><div class="kpi-title">How does this bid compare to the last four jobs?</div><div class="kpi-sub">Pulls blended wage, hours/fixture, material spend/unit from closed jobs.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">JCR, Takeoff</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;2s</span></div></div>
-      <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">02 · Margin Attribution</div><span class="chip-sage">Live</span></div><div class="kpi-title">Why is this job's margin what it is?</div><div class="kpi-sub">Decomposes variance across labor, material, overhead, burden, and change orders.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">JCR, Pay App, PO</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;3s</span></div></div>
-      <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">03 · Vendor Concentration</div><span class="chip-sage">Live</span></div><div class="kpi-title">Which vendors own which jobs?</div><div class="kpi-sub">Rolls up AP by vendor with invoice count and concentration risk flags.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">AP, PO</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;1s</span></div></div>
-      <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">04 · Crew Tier Analysis</div><span class="chip-sage">Live</span></div><div class="kpi-title">What's our tier mix and who's efficient?</div><div class="kpi-sub">Groups workers by wage band, reports hours and output per tier.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">Payroll, JCR</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;2s</span></div></div>
-      <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">05 · Pay App Tracker</div><span class="chip-sage">Live</span></div><div class="kpi-title">Where are we on billings and retainage?</div><div class="kpi-sub">SOV snapshot with retainage ledger and next-draw forecast.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">Pay App, SOV</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;1s</span></div></div>
-      <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">06 · Change Order Trail</div><span class="chip-clay">Pending</span></div><div class="kpi-title">What's the contract drift story?</div><div class="kpi-sub">Requires Change Order schema ingestion — on the roadmap.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Blocker</span><span class="kpi-val" style="color: var(--clay);">Schema missing</span></div><div class="kpi-row"><span class="kpi-lbl">Eta</span><span class="kpi-val">Q2</span></div></div>
+    <!-- ============ HERO · STATE OF OWP ============ -->
+    <div class="card mt-10" id="wb-hero" style="border-left: 3px solid var(--ink);">
+      <div class="meta-bar mb-3" id="wb-hero-label">STATE OF OWP · —</div>
+      <div class="text-[18px] serif-it" style="color: var(--ink-3); line-height: 1.55; margin-bottom: 14px;" id="wb-hero-lede">—</div>
+      <div class="text-[13.5px]" style="color: var(--ink-2); line-height: 1.75;" id="wb-hero-body">—</div>
     </div>
 
+    <!-- ============ THIS WEEK · 3 ACTION CARDS ============ -->
+    <div class="mt-12">
+      <div class="meta-bar mb-4">This week · prioritized</div>
+      <div class="grid grid-cols-3 gap-5" id="wb-this-week">
+        <!-- URGENT -->
+        <div class="card" style="border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);">
+          <div class="flex items-center gap-2 mb-3">
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--clay);">
+              <span style="width:8px; height:8px; border-radius:999px; background:var(--clay); display:inline-block;"></span>URGENT
+            </span>
+            <span class="text-[11px]" style="color: var(--ink-4);" id="wb-bid-countdown">3 days out</span>
+          </div>
+          <div class="text-[15px] font-semibold" style="color: var(--ink); line-height: 1.35;">Bellevue 220 bid closes Friday Apr 24</div>
+          <div class="text-[13px] mt-3" style="color: var(--ink-2); line-height: 1.65;">
+            Cortex recommends <b style="color:var(--ink);">$2.66M bid</b> at 32% margin floor, 2.5% contingency, 2% escalation. P(win) <b style="color:var(--ink);">54%</b>, E[profit] <b style="color:var(--ink);">$450k</b>. Chinn + Walsh JV as GC; 91% scope match to closed Chinn work. You're currently inside the tier-2 mid-rise band.
+          </div>
+          <div class="text-[10.5px] mt-4 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-4); letter-spacing: 0.04em; line-height: 1.55;">
+            Data basis · Chinn comparables #2009/#2010/#2011/#2023 + Bellevue 220 invitation parsed 4/4
+          </div>
+          <div class="mt-4 flex items-center gap-3">
+            <button onclick="setView('bid')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream); cursor: pointer; border: none;">Open bid detail →</button>
+            <button class="text-[11px]" style="background: transparent; color: var(--ink-3); border: none; cursor: pointer; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 3px;">defer 1 day</button>
+          </div>
+        </div>
+
+        <!-- FOLLOW UP -->
+        <div class="card" style="border: 1.5px solid #B78840; background: rgba(183,136,64,0.04);">
+          <div class="flex items-center gap-2 mb-3">
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#B78840;">
+              <span style="width:8px; height:8px; border-radius:999px; background:#B78840; opacity:0.55; display:inline-block;"></span>FOLLOW UP
+            </span>
+            <span class="text-[11px]" style="color: var(--ink-4);">this week</span>
+          </div>
+          <div class="text-[15px] font-semibold" style="color: var(--ink); line-height: 1.35;">Retention aging — 13 years on #2001 230 Broadway</div>
+          <div class="text-[13px] mt-3" style="color: var(--ink-2); line-height: 1.65;">
+            <b style="color:var(--ink);">$96,889</b> retention held by SRM since 2013. Never formally pursued. 4 other closed jobs also have retention outstanding >10 years totaling <b style="color:var(--ink);" id="wb-old-ret-total">$271,482</b>. Batch collection letter recommended.
+          </div>
+          <div class="text-[10.5px] mt-4 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-4); letter-spacing: 0.04em; line-height: 1.55;">
+            Data basis · Portfolio retention ledger, filtered retainage > $50k AND closeout > 10 years ago
+          </div>
+          <div class="mt-4 flex items-center gap-3">
+            <button onclick="alert('Draft collection letter workflow — v2 feature.')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream); cursor: pointer; border: none;">Draft collection letters →</button>
+            <button class="text-[11px]" style="background: transparent; color: var(--ink-3); border: none; cursor: pointer; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 3px;">schedule next Mon</button>
+          </div>
+        </div>
+
+        <!-- ROUTINE -->
+        <div class="card" style="border: 1.5px solid var(--sage-ink); background: rgba(63,90,50,0.04);">
+          <div class="flex items-center gap-2 mb-3">
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--sage-ink);">
+              <span style="width:8px; height:8px; border-radius:999px; border:1.5px solid var(--sage-ink); background:transparent; display:inline-block;"></span>ROUTINE
+            </span>
+            <span class="text-[11px]" style="color: var(--ink-4);">no deadline</span>
+          </div>
+          <div class="text-[15px] font-semibold" style="color: var(--ink); line-height: 1.35;">Pay app #18 for #2104 Big 1410 ready</div>
+          <div class="text-[13px] mt-3" style="color: var(--ink-2); line-height: 1.65;">
+            Final pay app draft prepped — <b style="color:var(--ink);">$12.9k</b> for April closeout work, 100% billed. SRM/BMDC historical approval cycle: 32 days. Retention release target 60 days post-closeout = <b style="color:var(--ink);">mid-July $59,687</b>.
+          </div>
+          <div class="text-[10.5px] mt-4 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-4); letter-spacing: 0.04em; line-height: 1.55;">
+            Data basis · #2104 SOV + BMDC historical draw cadence
+          </div>
+          <div class="mt-4 flex items-center gap-3">
+            <button onclick="applyProject('2104')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream); cursor: pointer; border: none;">Review pay app →</button>
+            <button class="text-[11px]" style="background: transparent; color: var(--ink-3); border: none; cursor: pointer; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 3px;">assign to Tommy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PERSONA TABS ============ -->
+    <div class="mt-14">
+      <div class="meta-bar mb-3">Persona</div>
+      <div class="persona-tabs" style="display:flex; gap:1px; padding:3px; background:var(--cream-soft); border:1px solid var(--border-2); border-radius:999px; width:fit-content;">
+        <button class="persona-tab is-active" data-persona="principal" onclick="wbSwitchPersona('principal')" style="padding:8px 18px; border:none; border-radius:999px; font-size:11.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--ink); color:var(--cream);">Principal</button>
+        <button class="persona-tab" data-persona="estimator" onclick="wbSwitchPersona('estimator')" style="padding:8px 18px; border:none; border-radius:999px; font-size:11.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink-3);">Estimator</button>
+        <button class="persona-tab" data-persona="controller" onclick="wbSwitchPersona('controller')" style="padding:8px 18px; border:none; border-radius:999px; font-size:11.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink-3);">Controller</button>
+        <button class="persona-tab" data-persona="field" onclick="wbSwitchPersona('field')" style="padding:8px 18px; border:none; border-radius:999px; font-size:11.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink-3);">Field Ops</button>
+      </div>
+    </div>
+
+    <!-- ============ PRINCIPAL PANEL ============ -->
+    <div data-persona-panel="principal" class="mt-8">
+      <!-- 4a. Portfolio pulse -->
+      <div class="grid grid-cols-4 gap-4">
+        <div class="card">
+          <div class="card-label">Blended margin</div>
+          <div class="text-[32px] font-semibold mt-2" style="color: var(--ink); font-variant-numeric: tabular-nums;" id="wb-k-margin">—</div>
+          <div class="text-[12px] mt-1" style="color: var(--sage-ink);">↑ 2.1 pts vs last 10 jobs</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Active backlog</div>
+          <div class="text-[32px] font-semibold mt-2" style="color: var(--ink); font-variant-numeric: tabular-nums;" id="wb-k-backlog">—</div>
+          <div class="text-[12px] mt-1" style="color: var(--ink-3);" id="wb-k-backlog-sub">— jobs · — billed</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Next bid deadline</div>
+          <div class="text-[32px] font-semibold mt-2" style="color: var(--ink); font-variant-numeric: tabular-nums;" id="wb-k-bid-days">—</div>
+          <div class="text-[12px] mt-1" style="color: var(--ink-3);" id="wb-k-bid-sub">Bellevue 220 · Apr 24</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Retention outstanding</div>
+          <div class="text-[32px] font-semibold mt-2" style="color: var(--ink); font-variant-numeric: tabular-nums;" id="wb-k-ret">—</div>
+          <div class="text-[12px] mt-1" style="color: var(--ink-3);" id="wb-k-ret-sub">— jobs with retainage</div>
+        </div>
+      </div>
+
+      <!-- 4b. Bid pipeline -->
+      <div class="mt-10">
+        <div class="meta-bar mb-3">Bid pipeline</div>
+        <div class="card" style="padding: 18px 22px;">
+          <table class="modal-table">
+            <thead>
+              <tr><th>Project</th><th>GC</th><th>Due</th><th class="num">Cortex rec</th><th class="num">P(win)</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b style="color:var(--ink);">Bellevue 220</b></td>
+                <td>Chinn + Walsh JV</td>
+                <td id="wb-bid-due">Apr 24 · 3 days</td>
+                <td class="num">$2.66M</td>
+                <td class="num">54%</td>
+                <td><span class="chip-clay">Pending review</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 4c. Retention aging -->
+      <div class="mt-10">
+        <div class="meta-bar mb-3">Retention aging · oldest first</div>
+        <div class="card" style="padding: 18px 22px;">
+          <table class="modal-table">
+            <thead>
+              <tr><th>Project</th><th>GC</th><th class="num">Retention</th><th class="num">Age</th><th>Last pursued</th></tr>
+            </thead>
+            <tbody id="wb-ret-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 4d. GC performance ranking -->
+      <div class="mt-10">
+        <div class="meta-bar mb-3">GC performance ranking</div>
+        <div class="card" style="padding: 18px 22px;">
+          <table class="modal-table">
+            <thead>
+              <tr><th>GC</th><th class="num">Jobs</th><th class="num">Blended margin</th><th class="num">Avg CO drift</th><th class="num">Avg retention age</th></tr>
+            </thead>
+            <tbody id="wb-gc-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ OTHER PERSONAS · PLACEHOLDERS ============ -->
+    <div data-persona-panel="estimator" class="mt-8" style="display:none;">
+      <div class="card" style="text-align:center; padding: 56px 24px;">
+        <div class="meta-bar mb-3" style="justify-content:center;">Coming in v2</div>
+        <div class="text-[18px] serif-it" style="color: var(--ink-2);">Mockup persona for the estimator.</div>
+        <div class="text-[13px] mt-3" style="color: var(--ink-3); max-width: 520px; margin: 0 auto; line-height: 1.65;">
+          Will surface bid comparables, unit/fixture norms by scope tier, crew availability against pursuit pipeline, and Cortex-generated bid drafts ready for markup.
+        </div>
+      </div>
+    </div>
+    <div data-persona-panel="controller" class="mt-8" style="display:none;">
+      <div class="card" style="text-align:center; padding: 56px 24px;">
+        <div class="meta-bar mb-3" style="justify-content:center;">Coming in v2</div>
+        <div class="text-[18px] serif-it" style="color: var(--ink-2);">Mockup persona for the controller.</div>
+        <div class="text-[13px] mt-3" style="color: var(--ink-3); max-width: 520px; margin: 0 auto; line-height: 1.65;">
+          Will surface AR aging, pay app status across active jobs, retention recovery queue, AP concentration by vendor, and cash-forecast deltas vs plan.
+        </div>
+      </div>
+    </div>
+    <div data-persona-panel="field" class="mt-8" style="display:none;">
+      <div class="card" style="text-align:center; padding: 56px 24px;">
+        <div class="meta-bar mb-3" style="justify-content:center;">Coming in v2</div>
+        <div class="text-[18px] serif-it" style="color: var(--ink-2);">Mockup persona for field ops.</div>
+        <div class="text-[13px] mt-3" style="color: var(--ink-3); max-width: 520px; margin: 0 auto; line-height: 1.65;">
+          Will surface crew deployment per active job, weekly hours-burn vs baseline, foreman check-ins, RFI/submittal bottlenecks, and next-week re-tier recommendations.
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CORTEX TOOLS · COLLAPSIBLE FOOTER ============ -->
     <div class="mt-14 rule-solid pt-8">
-      <div class="meta-bar mb-3">Coverage roadmap</div>
-      <div class="text-[13px]" style="color: var(--ink-3); line-height: 1.7;">
-        Cortex currently surfaces <b style="color: var(--ink);">8 of 30</b> planned workflows. Unlocking the next 22 requires ingesting Change Order, RFI, Daily Report, Submittal Log, Inspection, Warranty, and Closeout schemas. The 8 live workflows cover the financial and operational core of a specialty subcontractor's job close.
+      <button id="wb-tools-toggle" onclick="(function(){var p=document.getElementById('wb-tools-panel');var t=document.getElementById('wb-tools-arrow');var open=p.style.display!=='none';p.style.display=open?'none':'block';t.textContent=open?'▸':'▾';})()" class="flex items-center gap-2" style="background: transparent; border: none; color: var(--ink-3); cursor: pointer; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; padding: 0;">
+        <span id="wb-tools-arrow">▸</span><span>Cortex capabilities (6 tools)</span>
+      </button>
+      <div id="wb-tools-panel" style="display:none; margin-top: 18px;">
+        <div class="grid grid-cols-3 gap-5">
+          <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">01 · Bid Benchmarking</div><span class="chip-sage">Live</span></div><div class="kpi-title">How does this bid compare to the last four jobs?</div><div class="kpi-sub">Pulls blended wage, hours/fixture, material spend/unit from closed jobs.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">JCR, Takeoff</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;2s</span></div></div>
+          <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">02 · Margin Attribution</div><span class="chip-sage">Live</span></div><div class="kpi-title">Why is this job's margin what it is?</div><div class="kpi-sub">Decomposes variance across labor, material, overhead, burden, and change orders.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">JCR, Pay App, PO</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;3s</span></div></div>
+          <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">03 · Vendor Concentration</div><span class="chip-sage">Live</span></div><div class="kpi-title">Which vendors own which jobs?</div><div class="kpi-sub">Rolls up AP by vendor with invoice count and concentration risk flags.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">AP, PO</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;1s</span></div></div>
+          <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">04 · Crew Tier Analysis</div><span class="chip-sage">Live</span></div><div class="kpi-title">What's our tier mix and who's efficient?</div><div class="kpi-sub">Groups workers by wage band, reports hours and output per tier.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">Payroll, JCR</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;2s</span></div></div>
+          <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">05 · Pay App Tracker</div><span class="chip-sage">Live</span></div><div class="kpi-title">Where are we on billings and retainage?</div><div class="kpi-sub">SOV snapshot with retainage ledger and next-draw forecast.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Schemas used</span><span class="kpi-val">Pay App, SOV</span></div><div class="kpi-row"><span class="kpi-lbl">Runtime</span><span class="kpi-val">&lt;1s</span></div></div>
+          <div class="kpi"><div class="kpi-head"><div class="kpi-eyebrow">06 · Change Order Trail</div><span class="chip-clay">Pending</span></div><div class="kpi-title">What's the contract drift story?</div><div class="kpi-sub">Requires Change Order schema ingestion — on the roadmap.</div><div class="kpi-divider"></div><div class="kpi-row"><span class="kpi-lbl">Blocker</span><span class="kpi-val" style="color: var(--clay);">Schema missing</span></div><div class="kpi-row"><span class="kpi-lbl">Eta</span><span class="kpi-val">Q2</span></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -11217,19 +11409,164 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       set('[data-tot="healthPctRange"]', 'no live % data');
     }
 
-    // Operator Workbench header chips — count the workflow cards actually present
+    // Operator Workbench header chips
     try {
       const _wb = document.querySelector('.view[data-view="workbench"]');
       if (_wb) {
-        const liveCards   = _wb.querySelectorAll('.chip-sage').length;  // "Live" chips
-        const allCards    = _wb.querySelectorAll('.kpi').length;
-        const pendingCards= Math.max(0, allCards - liveCards);
-        set('[data-tot="workbenchLive"]',    `${liveCards} of ${allCards} use cases live`);
-        set('[data-tot="workbenchPending"]', `${pendingCards} pending`);
+        const activeN  = (PROJECT_STAGES.active  || []).length;
+        const biddingN = 1; // Bellevue 220 (mockup pursuit, not yet in PROJECT_STAGES.bidding)
+        const hdrA = document.getElementById('wb-hdr-active');
+        const hdrB = document.getElementById('wb-hdr-bids');
+        if (hdrA) hdrA.textContent = `${activeN} active`;
+        if (hdrB) hdrB.textContent = `${biddingN} pending bid`;
       }
     } catch(e){ /* ignore */ }
   }
   injectTotals();
+
+  /* ============ OPERATOR WORKBENCH · PRINCIPAL VIEW ============ */
+  function wbSwitchPersona(p) {
+    document.querySelectorAll('.persona-tab').forEach(btn => {
+      const active = btn.dataset.persona === p;
+      btn.classList.toggle('is-active', active);
+      btn.style.background = active ? 'var(--ink)' : 'transparent';
+      btn.style.color = active ? 'var(--cream)' : 'var(--ink-3)';
+    });
+    document.querySelectorAll('[data-persona-panel]').forEach(panel => {
+      panel.style.display = panel.dataset.personaPanel === p ? '' : 'none';
+    });
+  }
+
+  function renderOperatorWorkbench() {
+    const wb = document.querySelector('.view[data-view="workbench"]');
+    if (!wb) return;
+
+    const today = new Date(2026, 3, 20); // Mon Apr 20, 2026 (month 0-indexed)
+    const bidDeadline = new Date(2026, 3, 24);
+    const daysToBid = Math.max(0, Math.ceil((bidDeadline - today) / (1000*60*60*24)));
+    const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const monNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const dateLabel = `${dayNames[today.getDay()]} ${monNames[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
+
+    // Hero label + paragraph
+    const closedN = (PROJECT_STAGES.closed || PROJECT_ORDER || []).length;
+    const activeIds = (PROJECT_STAGES.active || []).filter(id => PROJECTS[id]);
+    const activeN = activeIds.length;
+    const closedRev = PROJECT_ORDER
+      .filter(id => !(PROJECT_STAGES.active || []).includes(id))
+      .reduce((s, id) => s + (PROJECTS[id]?.num?.revenue || 0), 0);
+    const closedProfit = PROJECT_ORDER
+      .filter(id => !(PROJECT_STAGES.active || []).includes(id))
+      .reduce((s, id) => s + (PROJECTS[id]?.num?.profit || 0), 0);
+    const blendedMargin = closedRev ? closedProfit / closedRev : 0;
+    const backlog = activeIds.reduce((s, id) => s + (PROJECTS[id]?.num?.revenue || 0), 0);
+    const retTotal = PROJECT_ORDER.reduce((s, id) => s + (PROJECTS[id]?.num?.retainage || 0), 0);
+
+    const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    const setHtml = (id, v) => { const el = document.getElementById(id); if (el) el.innerHTML = v; };
+
+    setTxt('wb-hero-label', `STATE OF OWP · ${dateLabel.toUpperCase()}`);
+    setHtml('wb-hero-lede',
+      `Cortex is tracking <b style="color:var(--ink); font-style:normal;">${closedN} closed plumbing jobs</b> (${fmtMoneyShort(closedRev)} cumulative revenue, ${(blendedMargin*100).toFixed(1)}% blended margin) + <b style="color:var(--ink); font-style:normal;">${activeN} active</b> (${fmtMoneyShort(backlog)} backlog at ~58% weighted billing) + <b style="color:var(--ink); font-style:normal;">1 pending bid</b> (Bellevue 220, due Fri 4/24).`
+    );
+    setHtml('wb-hero-body',
+      `<b style="color:var(--ink);">Noteworthy this week:</b> Bellevue 220 bid closes Friday — Cortex recommends <b style="color:var(--ink);">$2.66M</b> (P(win) 54% at 32% margin floor). <b style="color:var(--ink);">#2111 Northgate M3</b> labor tracking +9% over baseline; crew re-tier needed by next Tuesday or forecast margin drops from 29% → 23%. <b style="color:var(--ink);">#2104 Big 1410</b> is 99.8% billed — final pay app ready for submission.<br/><br/>` +
+      `<b style="color:var(--clay);">Cash position flag:</b> retention on #2001 230 Broadway (<b style="color:var(--ink);">$96,889</b>) has been outstanding 13 years. Never pursued. Total portfolio retention outstanding: <b style="color:var(--ink);">${fmtMoneyFull(retTotal)}</b>. Draft follow-up?`
+    );
+
+    // Countdown chip on URGENT card
+    setTxt('wb-bid-countdown', `${daysToBid} day${daysToBid===1?'':'s'} out`);
+    setTxt('wb-bid-due', `Apr 24 · ${daysToBid} days`);
+
+    // Portfolio pulse KPIs
+    setTxt('wb-k-margin', `${(blendedMargin*100).toFixed(1)}%`);
+    setTxt('wb-k-backlog', fmtMoneyShort(backlog));
+    setTxt('wb-k-backlog-sub', `${activeN} jobs · ~58% billed wtd avg`);
+    setTxt('wb-k-bid-days', `${daysToBid}d`);
+    setTxt('wb-k-bid-sub', `Bellevue 220 · Apr 24`);
+    setTxt('wb-k-ret', fmtMoneyShort(retTotal));
+    const retJobs = PROJECT_ORDER.filter(id => (PROJECTS[id]?.num?.retainage || 0) > 0).length;
+    setTxt('wb-k-ret-sub', `${retJobs} jobs with retainage`);
+
+    // Retention aging — derive closeout year from dateRange
+    const yearRx = /(\d{4})(?!.*\d{4})/; // last 4-digit year in string
+    const ageRows = PROJECT_ORDER.map(id => {
+      const p = PROJECTS[id]; if (!p) return null;
+      const ret = p.num?.retainage || 0;
+      if (ret <= 0) return null;
+      if ((PROJECT_STAGES.active || []).includes(id)) return null; // closed only
+      const dr = p.dateRange || '';
+      const m = dr.match(yearRx);
+      const closeYear = m ? parseInt(m[1]) : (2026 - 10);
+      const age = Math.max(0, 2026 - closeYear);
+      return { id, name: p.sbName || p.jobBottom || id, gc: p.gcShort || p.gc || '—', ret, age, closeYear };
+    }).filter(Boolean).sort((a,b) => b.age - a.age).slice(0, 10);
+
+    const retBody = document.getElementById('wb-ret-tbody');
+    if (retBody) {
+      retBody.innerHTML = ageRows.map(r =>
+        `<tr>
+          <td><b style="color:var(--ink);">#${r.id}</b> ${r.name.replace(/\.$/, '')}</td>
+          <td>${r.gc}</td>
+          <td class="num">${fmtMoneyFull(r.ret)}</td>
+          <td class="num">${r.age} yr${r.age===1?'':'s'}</td>
+          <td style="color: var(--ink-3);">Never</td>
+        </tr>`
+      ).join('');
+    }
+
+    // Old retention total (>10 yrs old) — update card body
+    const oldRetTotal = ageRows.filter(r => r.age >= 10 && r.id !== '2001').reduce((s,r) => s + r.ret, 0);
+    setTxt('wb-old-ret-total', fmtMoneyFull(oldRetTotal));
+
+    // GC performance ranking
+    const gcAgg = {};
+    PROJECT_ORDER.forEach(id => {
+      const p = PROJECTS[id]; if (!p) return;
+      if ((PROJECT_STAGES.active || []).includes(id)) return; // closed only
+      const gc = p.gcShort || p.gc || 'Unknown';
+      if (!gcAgg[gc]) gcAgg[gc] = { jobs:0, rev:0, profit:0, coSum:0, ocSum:0, retSum:0, ageSum:0, ageN:0 };
+      const a = gcAgg[gc];
+      a.jobs++;
+      a.rev += p.num?.revenue || 0;
+      a.profit += p.num?.profit || 0;
+      a.coSum += p.num?.co || 0;
+      a.ocSum += p.num?.origContract || 0;
+      if ((p.num?.retainage || 0) > 0) {
+        const dr = p.dateRange || '';
+        const m = dr.match(yearRx);
+        if (m) { a.ageSum += Math.max(0, 2026 - parseInt(m[1])); a.ageN++; }
+        a.retSum += p.num.retainage;
+      }
+    });
+    const gcRows = Object.entries(gcAgg)
+      .filter(([,a]) => a.jobs >= 1)
+      .map(([gc, a]) => ({
+        gc: gc.length > 32 ? gc.slice(0, 30) + '…' : gc,
+        jobs: a.jobs,
+        margin: a.rev ? a.profit / a.rev : 0,
+        coDrift: a.ocSum ? a.coSum / a.ocSum : 0,
+        avgAge: a.ageN ? a.ageSum / a.ageN : null
+      }))
+      .sort((a,b) => b.margin - a.margin);
+
+    const gcBody = document.getElementById('wb-gc-tbody');
+    if (gcBody) {
+      gcBody.innerHTML = gcRows.map(r => {
+        const driftCls = r.coDrift > 0 ? 'pos' : (r.coDrift < 0 ? 'neg' : '');
+        const driftStr = (r.coDrift >= 0 ? '+' : '') + (r.coDrift*100).toFixed(1) + '%';
+        const ageStr = r.avgAge == null ? '—' : `${r.avgAge.toFixed(1)} yrs`;
+        return `<tr>
+          <td><b style="color:var(--ink);">${r.gc}</b></td>
+          <td class="num">${r.jobs}</td>
+          <td class="num">${(r.margin*100).toFixed(1)}%</td>
+          <td class="num ${driftCls}">${driftStr}</td>
+          <td class="num">${ageStr}</td>
+        </tr>`;
+      }).join('');
+    }
+  }
+  renderOperatorWorkbench();
 
   /* ============ PORTFOLIO DASHBOARD — economics + scatter ============ */
   function renderPortfolioDashboard(){
