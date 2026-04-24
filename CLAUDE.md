@@ -4,7 +4,7 @@
 > Last updated: 2026-04-24
 
 ## Active/live projects (last updated 2026-04-24)
-Ten live projects are now wired into the dashboard (status: 'active'):
+Eleven live projects are now wired into the dashboard (status: 'active'):
 
 - **#2098 Chinn Trailside 2** (170 units · $6.92M · 100% billed · retention-release · forecast 25% margin · retention $345k)
 - **#2103 Compass General Northgate M2** (234 units · $6.63M · 99.75% billed · trim/punch · forecast 21.9% vs 28% target · retention $305k)
@@ -16,6 +16,7 @@ Ten live projects are now wired into the dashboard (status: 'active'):
 - **#2116 SRM The V** (194 units · 7-story Seattle · $3.26M · GMP executed Feb 24, 2026 · SRM Spokane · Erik Benzel PM (same as #2020) · NYL owner · ECE MEP · COR#2 in flight · heat pump upsize +$142.8k pending)
 - **#2117 Ravenna Partners Lachlan** (~104 units · 8-story + penthouse · 3421 Woodland Park Ave N Seattle · design/DD · **NEW GC Ravenna Partners** (owner-GC) · Franklin Engineering MEP · job ticket Jan 14 2026 · $11k design-phase expenses · gas water heating · standard COI)
 - **#2118 Exxel Edmonds Behar** (409 units · 6-story + 2 towers + 3 below-grade · Edmonds WA · **$7.18M total plumbing budget** — OWP's largest live-pipeline bid · 22-month bid history Mar 2024 → Jan 2026 · Robison design contract signed Mar 16, 2026 ($125k) · Tommy Booth PM Exxel · **no JDR yet** — data.json is a stub, parse script tolerates missing PDF · will auto-populate when Sage publishes a JDR)
+- **#2119 Exxel The Frank (508 Fremont)** (earliest live-pipeline project · Exxel Pacific · Graham developer · Michael Fisher PM (Bellingham) · Seattle WA · **pre-bid / mockup-only phase** · only $4,700 mockup-install proposal Nov 13 2024 · Exxel bid set received but OWP full proposal pending · no JDR, no contract value yet · stub data.json matching 2118 pattern)
 
 Added 2026-04-23: #2098 and #2103 (both via the same `build/notionize/parse_XXXX.py` pipeline as 2104/2111/2112, output in `owp/owp-<id>-live/cortex output files/`). Both ship the full `.live` block (burnCurve, phases, anomalies, recommends) alongside the hero fields.
 
@@ -33,6 +34,8 @@ Added 2026-04-24 (third batch — 2117/2118): **#2117 Ravenna Partners Lachlan**
 
 Ravenna Partners becomes OWP's 11th GC in the dashboard (joining Chinn/SRM/Exxel/Compass/BMDC/Blueprint/Natural & Built/Marpac/Shelter/Holland/GRE). 2117/2118 folders originally had spaces ("owp-2117 live", "owp-2118 live") — renamed to hyphen form to match dashboardize.py convention.
 
+Added 2026-04-24 (fourth batch — 2119): **#2119 Exxel Pacific, The Frank (508 Fremont)** — earliest-stage project in entire live pipeline. No Sage JDR yet; no full OWP construction bid yet. Only a $4,700 mockup-install proposal sent Nov 13, 2024 to Michael Fisher (Exxel Bellingham PM). Exxel bid set received per email reminder; OWP's full plumbing proposal + bid sheet are pending. Developer identified as Graham (per GDrive folder naming). Same "pre-bid mockup" pattern as #2113 Yonder. data.json is a stub matching v2.2 schema; build/notionize still produce the 17-tab + 2-tab outputs cleanly. Output: 17-tab JCR (17.8KB) + 2-tab Notion (6.7KB), zero formula errors. Folder originally "owp-2119 live" (space); renamed to hyphen form.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
@@ -41,8 +44,8 @@ Live project pipeline is nearly identical to closed-job pipeline but:
 - Separate `PROJECTS['XXXX'].live = { ... }` block with `burnCurve`, `phases`, `anomalies`, `recommends` arrays — required for Job Health view to render (burn-curve chart, phase ladder, anomaly feed, action cards)
 - PROJECT_TEAMS entries use clay-colored Status field like "ACTIVE · 48.8% billed"
 - Document Pipeline cards use LIVE pattern: `border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);` with "LIVE" chip in kicker
-- Atlas view chip shows `10 active` now (was 8)
-- Job Health view chip shows `10 active jobs` now (was 8)
+- Atlas view chip shows `11 active` now (was 10)
+- Job Health view chip shows `11 active jobs` now (was 10)
 
 Live build scripts: `/sessions/gracious-relaxed-pascal/mnt/cortex-mockup/owp/owp-<id>-live/cortex output files/build_<id>.py` + `notionize_<id>.py` (same code with different META dict). Output: 17-tab JCR + 2-tab Notion summary, zero formula errors verified.
 

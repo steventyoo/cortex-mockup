@@ -1104,6 +1104,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 L12 3 L21 10 V20 A1 1 0 0 1 20 21 H14 V14 H10 V21 H4 A1 1 0 0 1 3 20 Z"/></svg>
         <span>Home</span>
       </div>
+      <div class="sb-item" data-view-target="flightdeck">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+        <span>Live Projects</span>
+      </div>
       <div class="sb-item" data-view-target="portfolio">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.2"/><rect x="14" y="3" width="7" height="5" rx="1.2"/><rect x="14" y="12" width="7" height="9" rx="1.2"/><rect x="3" y="16" width="7" height="5" rx="1.2"/></svg>
         <span>Portfolio Overview</span>
@@ -1238,6 +1242,7 @@
       <!-- Footer quick-nav — workspaces (single line, no wrap) -->
       <div class="mt-16 text-[10.5px] mono" style="color: var(--ink-4); white-space: nowrap; overflow-x: auto;">
         ↖ or open
+        <button onclick="setView('flightdeck')" class="footer-nav-link">live projects</button> ·
         <button onclick="setView('portfolio')" class="footer-nav-link">portfolio</button> ·
         <button onclick="setView('benchmark')" class="footer-nav-link">benchmark</button> ·
         <button onclick="setView('atlas')" class="footer-nav-link">atlas</button> ·
@@ -1253,6 +1258,86 @@
     </div>
 
   </div> <!-- /view: home -->
+
+  <!-- ============================================================ -->
+  <!-- ================= LIVE PROJECTS · FLIGHT DECK ============== -->
+  <!-- ============================================================ -->
+  <div class="view" data-view="flightdeck">
+
+    <!-- TOP META BAR -->
+    <div class="flex items-center justify-between mb-10">
+      <div class="flex items-center gap-3">
+        <span class="font-semibold tracking-tight text-[13px] uppercase" style="color: var(--ink); letter-spacing: 0.08em;">One Way Plumbing LLC</span>
+        <span style="color: var(--border-2);">|</span>
+        <span class="meta-bar">Live Projects · Portfolio Flight Deck</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px]" style="color: var(--ink-3);">
+        <span class="mono" data-tot="liveSummary">10 live · $38.3M · peak 125 workers</span>
+      </div>
+    </div>
+
+    <!-- HERO LABEL -->
+    <div class="flex items-center gap-3 mb-6">
+      <span class="chip-ink">Monday · Apr 24, 2026</span>
+      <span class="chip-sage">Portfolio Flight Deck · real-time</span>
+      <span class="chip-clay" id="fd-watch-chip">—</span>
+    </div>
+    <h1 class="text-[68px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
+      Live <span class="serif-it">Projects.</span>
+    </h1>
+    <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 720px; line-height: 1.6;">
+      Monday-morning command view of every active job — schedule posture, forecast margin, and the crew curve. Click any row to drop into the full project report.
+    </div>
+
+    <!-- ============ 1. PORTFOLIO PULSE KPI ROW ============ -->
+    <div class="blueprint mt-10 mb-10" style="padding: 28px 24px 24px;">
+      <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 01 / portfolio pulse</div>
+      <div class="blueprint-corner" style="top: 10px; right: 14px;">scale · live snapshot</div>
+      <div class="grid grid-cols-6 gap-5 mt-6" id="fd-kpi-row">
+        <!-- filled by renderLiveProjects() -->
+      </div>
+    </div>
+
+    <!-- ============ 2. GANTT + HEALTH STACK ============ -->
+    <div style="display: flex; gap: 24px; align-items: stretch;">
+
+      <!-- LEFT — Gantt -->
+      <div class="blueprint" style="flex: 2; padding: 24px 20px 24px; min-width: 0;">
+        <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 02 / schedule matrix — apr 2026 → sep 2027</div>
+        <div class="blueprint-corner" style="top: 10px; right: 14px;">18 months · 10 jobs</div>
+        <div id="fd-gantt-wrap" style="margin-top: 30px; overflow-x: auto;">
+          <!-- rendered by JS -->
+        </div>
+        <div class="mt-4 flex flex-wrap items-center gap-3 text-[10px] mono" style="color: var(--ink-4);">
+          <span><span style="display:inline-block;width:10px;height:10px;background:#EFE8D8;border:1px solid #D6CBB2;vertical-align:middle;margin-right:4px;"></span>GW · ground work</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:#D6E4C9;border:1px solid #B6C8A4;vertical-align:middle;margin-right:4px;"></span>PT · pre-top-out</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:#8FB27B;vertical-align:middle;margin-right:4px;"></span>RI · rough-in</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:rgba(184,92,62,0.32);border:1px solid rgba(184,92,62,0.5);vertical-align:middle;margin-right:4px;"></span>TRIM</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:#7A3A24;vertical-align:middle;margin-right:4px;"></span>CLOSE · retention</span>
+        </div>
+      </div>
+
+      <!-- RIGHT — Health Stack -->
+      <div class="blueprint" style="flex: 1; padding: 24px 20px; min-width: 320px;">
+        <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 03 / health stack</div>
+        <div class="blueprint-corner" style="top: 10px; right: 14px;">sorted · risk desc</div>
+        <div id="fd-health-stack" style="margin-top: 30px; display: flex; flex-direction: column; gap: 8px;">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ 3. TOTAL MANPOWER FORECAST CURVE ============ -->
+    <div class="blueprint mt-10" style="padding: 24px 20px 24px;">
+      <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 04 / total manpower forecast — stacked by gc color</div>
+      <div class="blueprint-corner" style="top: 10px; right: 14px;" id="fd-manpower-peak">peak · —</div>
+      <div id="fd-manpower-wrap" style="margin-top: 30px;">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+  </div> <!-- /view: flightdeck -->
 
   <!-- ========= PROJECT REPORT VIEW ========= -->
   <div class="view" data-view="project">
@@ -3564,6 +3649,31 @@
           <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 24, 2026</span></div>
         </div>
 
+        <!-- #2119 Exxel The Frank \u2014 LIVE / pre-bid mockup -->
+        <div class="card" style="padding: 24px 26px; border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--clay); font-family: 'JetBrains Mono', monospace; font-weight: 700;">#2119 \u00b7 exxel \u00b7 <span style="background: var(--clay); color: var(--cream); padding: 1px 6px; border-radius: 2px; font-size: 9px; letter-spacing: 0.08em; margin-left: 2px;">LIVE</span></div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">The Frank (508 Fremont)</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">Multifamily \u00b7 Exxel Pacific \u00b7 Graham developer \u00b7 pre-bid / mockup-only</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">\u25cb pre-bid / mockup</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">8</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">7</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">6</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">pre-bid</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Mockup proposal</span><span class="kpi-val">$4,700 \u00b7 Nov 13, 2024</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Bid status</span><span class="kpi-val">Exxel bid set received \u00b7 OWP proposal pending</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Exxel subcontract sample</span><span class="kpi-val">Folder filed on Drive (standard Exxel template)</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Outstanding</span><span class="kpi-val" style="color: var(--clay);">Full OWP proposal \u00b7 bid sheet \u00b7 unit/fixture counts</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 24, 2026</span></div>
+        </div>
+
       </div>
     </div>
 
@@ -3605,7 +3715,7 @@
     <!-- The graph -->
     <div class="mt-6 blueprint" style="padding: 28px 24px 36px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ fig. 02 / portfolio graph</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 70 · edges · 96</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">nodes · 71 · edges · 97</div>
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s. · scroll →</div>
       <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
 
@@ -4311,6 +4421,16 @@
           <text x="960" y="314" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2118</text>
           <text x="960" y="336" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Edmonds Behar</text>
           <text x="960" y="348" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">409u \u00b7 LIVE \u00b7 bid</text>
+        </g>
+
+
+        <!-- #2119 Exxel The Frank (TBD units \u00b7 LIVE \u00b7 pre-bid mockup) \u2014 exxel GC \u00b7 clay stroke, solid edge -->
+        <line x1="806" y1="112" x2="1040" y2="310" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2119" style="cursor: pointer;">
+          <circle cx="1040" cy="310" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1040" y="314" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2119</text>
+          <text x="1040" y="336" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">The Frank</text>
+          <text x="1040" y="348" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">mockup \u00b7 pre-bid</text>
         </g>
 
         <!-- Corner crosshairs -->
@@ -6914,7 +7034,7 @@
   // Defined here (before renderSkyline) so stageOf() can read it.
   const PROJECT_STAGES = {
     bidding: [],
-    active:  ["2098","2103","2104","2111","2112","2114","2115","2116","2117","2118"],
+    active:  ["2098","2103","2104","2111","2112","2114","2115","2116","2117","2118","2119"],
     closed:  PROJECT_ORDER
   };
   const STAGE_META = {
@@ -8742,6 +8862,46 @@
       num: { units: 409, fixtures: null, months: null, revenue: 7183400, profit: null, directCost: null, origContract: 7183400, co: 0, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: 0, invoices: 0, totalAp: 0, topVendor: '\u2014', topShare: null, source: "Bidding/design phase \u00b7 no vendors yet (Robison on separate design contract)" },
       vendors: []
+    },
+    "2119": {
+      reportNum: "REPORT #2119-LIVE01 \u00b7 PRE-BID / MOCKUP",
+      chips: [
+        "<span class=\"chip-clay\">\u25cb PRE-BID \u00b7 mockup-only \u00b7 no full bid yet</span>",
+        "<span class=\"chip-ink\">Exxel The Frank \u00b7 508 Fremont Seattle \u00b7 Graham developer</span>",
+        "<span class=\"chip-sage\">$4,700 mockup proposal (Nov 13, 2024) \u00b7 earliest live-pipeline project</span>"
+      ],
+      jobTop: "Exxel", jobBottom: "The Frank.",
+      jobNum: "#2119", location: "508 Fremont, Seattle, WA", gc: "Exxel Pacific, Inc.",
+      gcShort: "Exxel",
+      dateRange: "Nov 13, 2024 mockup proposal \u2192 bid set received \u2192 full proposal pending",
+      unitsDesc: "multifamily \u00b7 details TBD \u00b7 mockup-fixture phase",
+      status: 'active',
+
+      pctComplete: 0,
+      pctCompleteLabel: "0% billed \u00b7 pre-bid mockup phase",
+      contractOrig: "TBD",
+      contractRevised: "TBD",
+      coPct: "0%",
+      billedToDate: "$0",
+      earnedLessRetention: "$0",
+      balanceToFinish: "TBD",
+
+      revenue: "TBD", revenueFoot: "no full bid yet \u00b7 mockup proposal $4,700 only",
+      profit: "TBD", profitFoot: "forecast established at full bid / subcontract execution",
+      expenses: "$0", expensesFoot: "no Sage activity yet \u00b7 mockup proposal not yet booked",
+      retainage: "$0", retainageFoot: "pre-bid phase \u00b7 5% will accrue at field work",
+      execHeadline: "The Frank is a <span class=\"n\">pre-bid mockup engagement</span> with Exxel Pacific at 508 Fremont. OWP's <span class=\"n\">earliest-stage</span> live-pipeline project.",
+      execBody: "The Frank at 508 Fremont is an <span class=\"n\">early bidding engagement</span> with <span class=\"n\">Exxel Pacific</span> (Michael Fisher, PM \u2014 Bellingham office). Developer is <span class=\"n\">Graham</span>. Multifamily building, details TBD.<br/><br/><span class=\"n\">Nov 13, 2024</span>: OWP submitted a $4,700 mockup-install proposal to Michael Fisher (install-only, no permits/design/piping). Fixture spec: Toto CST244EF ADA toilet, Lenova PU-01-W undermount lav w/ Symmons matte black faucet, Maax Rubix 6632 tub, Symmons matte black tub/shower trim, Lenova LS18304 kitchen sink w/ Symmons matte black faucet. Unit count, fixture count, and contract value are <span class=\"n\">all pending full OWP proposal</span>.<br/><br/><span class=\"n\">Status</span>: Exxel bid set received (per email from Exxel to OWP). OWP full plumbing proposal and bid sheet not yet filed to Drive. No Sage JDR.<br/><br/><span class=\"n\">Cortex status</span>: <span class=\"n\">\u25cb Pre-bid mockup</span> \u2014 same pattern as #2113 Yonder (also mockup-only). Next milestone: receive full Exxel bid package, publish OWP plumbing proposal, land contract value.",
+      jobNum2: "#2119", workforce: "Pre-bid \u00b7 no OWP labor posted yet",
+      bpLeft: "exxel the frank \u00b7 508 fremont seattle \u00b7 PRE-BID", bpRight: "mockup only \u00b7 $4,700 proposal Nov 13, 2024",
+      k01_revenue: "TBD", k01_margin: "TBD (pre-bid)", k01_origContract: "TBD",
+      k01_co: "0 (no COs)", k01_directCost: "TBD", k01_profit: "TBD",
+      footerReport: "REPORT #2119-LIVE01 \u00b7 Live snapshot Apr 24, 2026 \u00b7 v0.1 \u00b7 pre-bid/mockup",
+      sbName: "The Frank.", skyName: "THE FRANK",
+      skyline: { floors: 5, cols: 10, w: 220 },
+      num: { units: null, fixtures: null, months: null, revenue: null, profit: null, directCost: null, origContract: null, co: 0, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      vendorMeta: { count: 0, invoices: 0, totalAp: 0, topVendor: '\u2014', topShare: null, source: "Pre-bid phase \u00b7 no vendors yet" },
+      vendors: []
     }
   };
 
@@ -8797,6 +8957,7 @@
     "2116": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">SRM Construction, Inc.</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Erik Benzel (Spokane)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">NYL (per GMP contract)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Emerald City Engineers (ECE)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 pre-construction</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Seattle, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GMP Contract</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Executed Feb 24, 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Bid Date</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Sep 13, 2025</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Project Type</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">7-story multifamily</div></div></div>", "jobInfoUnits": 194},
     "2117": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Ravenna Partners</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Ravenna Partners (owner-GC)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 design / DD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">3421 Woodland Park Ave N, Seattle</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Feb 2026 (takeoff)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Ticket</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jan 14, 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Water Heat</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Gas (3x 100gal, 199mbh)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Project Type</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">8-story + penthouse studios</div></div></div>", "jobInfoUnits": 104},
     "2118": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific, Inc.</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tommy Booth (Bellingham)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Robison Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Designer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jeff MacGillivray</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 bidding / design</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Edmonds, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Design Contract</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Signed Mar 16, 2026 ($125k Robison)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Latest Bid</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jan 16, 2026 ($7.18M total)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Project Type</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">6-story, 2 towers, 3 below-grade, 409u</div></div></div>", "jobInfoUnits": 409},
+    "2119": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific, Inc.</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Michael Fisher (Bellingham)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Graham</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">PRE-BID \u00b7 mockup only</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">508 Fremont, Seattle, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Mockup Proposal</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$4,700 \u00b7 Nov 13, 2024</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Bid Status</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Bid set received \u00b7 OWP proposal pending</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Project Type</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Multifamily (TBD)</div></div></div>", "jobInfoUnits": null},
     "2050": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Scott Miller</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Pat McCabe / Brett</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Steve Garka</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Garrett / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">12 Madison Investment LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">2100 E Madison St, Seattle</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div></div>", "jobInfoUnits": 50},
   };
   Object.keys(PROJECT_TEAMS).forEach(function(id){
@@ -9301,6 +9462,53 @@
     ]
   };
 
+
+  if (PROJECTS['2119']) PROJECTS['2119'].live = {
+    lastSync: '1 day ago',
+    title: 'The Frank (508 Fremont)',
+    subtitle: 'Multifamily \u00b7 Exxel Pacific \u00b7 508 Fremont Seattle \u00b7 pre-bid mockup only',
+    chipContract: 'Contract: TBD (pre-bid)',
+    chipOrigMargin: 'Margin target: TBD',
+    chipForecastMargin: '\u25cb Forecast margin: TBD',
+    pctComplete: '0%',
+    pctSub: 'pre-bid mockup \u00b7 $4,700 mockup proposal only',
+    cortexStatus: '\u25cb Pre-bid / mockup',
+    cortexStatusBody: 'Earliest-stage live-pipeline project. Nov 13, 2024 mockup-install proposal to Michael Fisher (Exxel Bellingham) for $4,700. Exxel bid set received per email reminder; OWP full plumbing proposal + bid sheet not yet filed to Drive. No Sage JDR. Same pattern as #2113 Yonder (mockup-only). Developer is Graham.',
+    eta: 'TBD',
+    etaSub: 'schedule pending full bid submission',
+    hoursVar: '\u2014',
+    hoursVarSub: 'no Sage activity yet',
+    costVar: '$0',
+    costVarSub: 'mockup proposal unbooked',
+    schedVar: '\u2014',
+    schedVarSub: 'schedule TBD',
+    forecastEac: 'TBD',
+    forecastEacSub: 'forecast locks at full-bid submission',
+    burnCurve: [
+      {pct: 0, actual: 0, baseline: 0}
+    ],
+    phases: [
+      {phase:'Mockup proposal',       pct:100, actual:0, baseline:0, status:'on'},
+      {phase:'Bid set received',      pct:50,  actual:0, baseline:0, status:'watch'},
+      {phase:'Full OWP bid submission',pct:0,  actual:0, baseline:0, status:'notstarted'},
+      {phase:'Subcontract execution', pct:0,   actual:0, baseline:0, status:'notstarted'},
+      {phase:'Design / DD',           pct:0,   actual:0, baseline:0, status:'notstarted'},
+      {phase:'Underground rough-in',  pct:0,   actual:0, baseline:0, status:'notstarted'},
+      {phase:'Roughin',               pct:0,   actual:0, baseline:0, status:'notstarted'},
+      {phase:'Trim & fixtures',       pct:0,   actual:0, baseline:0, status:'notstarted'}
+    ],
+    anomalies: [
+      {date:'Nov 13, 2024', title:'Mockup proposal submitted to Exxel', body:'OWP submitted $4,700 proposal to Michael Fisher for mockup fixture install (install-only, no permits/design/piping/meters). Specified: Toto CST244EF toilet, Lenova PU-01-W undermount lav + Symmons matte black lav faucet, Maax Rubix 6632 tub, Symmons matte black tub/shower trim, Lenova LS18304 SS kitchen sink w/ Symmons matte black kitchen faucet. If full contract awarded, mockup proposal is voided.', severity:'INFO'},
+      {date:'Pre-Apr 2026', title:'Exxel bid set received by OWP', body:'Email reminder from Exxel Pacific to OWP flagged a bid package for The Frank (508 Fremont). OWP pending full plumbing proposal submission.', severity:'INFO'},
+      {date:'Apr 3, 2026', title:'No Sage JDR published', body:'Pre-bid phase \u2014 no Sage accounting activity. Will post once OWP receives construction subcontract.', severity:'INFO'}
+    ],
+    recommends: [
+      {urgency:'urgent', label:'ACTION 01 \u00b7 THIS MONTH', title:'Submit full OWP plumbing proposal to Exxel', body:'Bid set received. OWP needs to publish a full plumbing proposal + bid sheet for The Frank with unit count, fixture count, and construction dollar figure. Same pattern as prior Exxel jobs (#2012, #2015, #2017 etc.).', owner:'Estimating', ownerLabel:'Owner', extra:'Deliverable', extraVal:'Proposal + bid sheet'},
+      {urgency:'urgent', label:'ACTION 02 \u00b7 THIS MONTH', title:'Capture project specs from Exxel bid set', body:'Unit count, fixture count, GMP set date, MEP engineer, architect \u2014 all need to be extracted from the Exxel bid set and filed to Drive. Then the Cortex META for 2119 can be enriched beyond the mockup proposal.', owner:'OWP Admin', ownerLabel:'Owner', extra:'Enrichment', extraVal:'META fields'},
+      {urgency:'strategic', label:'ACTION 03 \u00b7 NEXT QUARTER', title:'Watch for subcontract signal from Michael Fisher', body:'Same Exxel PM as #2015 Portage Bay / #2025 Cora. Strong prior relationship. If subcontract converts, this is OWP\u2019s 12th Exxel engagement. Track win probability and close any bid-package gaps.', owner:'Estimating', ownerLabel:'Owner', extra:'Pipeline value', extraVal:'Exxel continuity'}
+    ]
+  };
+
   // ============ INJECTED JCR DATA (crew, vendors, phases, cost codes, insights) ============
 
   // ── LIVE PROJECT DATA ARRAYS (generated by dashboardize.py) ──
@@ -9547,6 +9755,32 @@
     Object.assign(PROJECTS['2118'].vendorMeta, {count:0,invoices:0,totalAp:0,topVendor:"\u2014",topShare:0});
   }
   PROJECTS['2118'].vendors = [];
+
+  // ── #2119 data arrays (auto-generated by dashboardize.py) ──
+  PROJECTS['2119'].crewRoster = [];
+  PROJECTS['2119'].tierDist = [];
+  PROJECTS['2119'].wageStats = {"bl":0,"fl":0,"bm":1,"mn":0,"mx":0,"ah":0};
+  PROJECTS['2119'].allVendors = [];
+  PROJECTS['2119'].phases = [];
+  PROJECTS['2119'].costCodes = [];
+  PROJECTS['2119'].costCats = [];
+  PROJECTS['2119'].insights = [["MARGIN PROFILE","Net profit of $0 on $0 revenue = 0.0% gross margin. Direct cost $0 absorbs 100.0% of revenue."],["ROUGHIN DOMINANCE","Code 120 Roughin Labor = 0 hrs (0% of all labor) and $0 actual. Code 230 Finish Material = $0."],["BUDGET DELIVERY","Revised expense budget was $0; actual direct cost $0 \u2192 $0 variance (+0.0%)."],["CONTRACT GROWTH","net +$0 (+0.0%)."],["BURDEN RATIO","Burden codes 995 + 998 = $0 on $0 labor base = 0.0%. Outside OWP's typical 48\u201350% labor burden."],["PROJECT SCALE","1 units \u00b7 \u2014 fixtures. Revenue/unit $0, hours/unit 0.0, profit/unit $0."],["PRODUCTIVITY","Blended labor rate $0.00/hr. Revenue/hour $0. Profit/hour $0."],["CO PROFILE","0 executed COs, 0 CORs. Net CO impact $0 (+0.0%)."]];
+  PROJECTS['2119'].bva = [];
+  PROJECTS['2119'].sovData = {"originalContract":0,"changeOrders":0,"finalContract":0,"retainage":0,"netPaid":0};
+  PROJECTS['2119'].payApps = [];
+  PROJECTS['2119'].changeLog = [];
+  PROJECTS['2119'].rootCauses = [];
+  PROJECTS['2119'].responsibility = [];
+  PROJECTS['2119'].predictiveSignals = [["BVA Critical Flags","0","<2","HEALTHY"],["BVA Over Flags","0","<5","HEALTHY"],["Change Order Count","0","<10","HEALTHY"],["Retention Held","$0","<6%","HEALTHY"],["Forecast Margin","0.0%",">25%","ELEVATED"]];
+  PROJECTS['2119'].changeMeta = {"total":0,"costImpact":0,"types":{}};
+  // num field patches
+  if (PROJECTS['2119'].num) {
+    Object.assign(PROJECTS['2119'].num, {labor:0,material:0,overhead:0,burden:0,hours:0,workers:0});
+  }
+  if (PROJECTS['2119'].vendorMeta) {
+    Object.assign(PROJECTS['2119'].vendorMeta, {count:0,invoices:0,totalAp:0,topVendor:"\u2014",topShare:0});
+  }
+  PROJECTS['2119'].vendors = [];
 
 
   // Project 2001
@@ -12599,6 +12833,411 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     } catch(e){ /* ignore */ }
   }
   injectTotals();
+
+  /* ============ LIVE PROJECTS · FLIGHT DECK ============ */
+  const FLIGHT_DECK_IDS = ["2098","2103","2104","2111","2112","2114","2115","2116","2117","2118"];
+  const FD_MONTHS = (function(){
+    // 18 months: Apr 2026 → Sep 2027
+    const out = []; const names = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    let y = 2026, m = 3; // April = index 3
+    for (let i = 0; i < 18; i++) {
+      out.push({ y: y, m: m, label: names[m], year: y });
+      m++; if (m > 11) { m = 0; y++; }
+    }
+    return out;
+  })();
+  const FD_TODAY = { y: 2026, m: 3 }; // Apr 2026
+
+  function _fdParseMoney(s) {
+    if (s == null) return 0;
+    if (typeof s === 'number') return s;
+    const m = String(s).match(/[\d,]+(?:\.\d+)?/);
+    if (!m) return 0;
+    return parseFloat(m[0].replace(/,/g,'')) || 0;
+  }
+  function _fdParseMarginPct(s) {
+    if (s == null) return null;
+    const str = String(s);
+    const m = str.match(/(\d+(?:\.\d+)?)\s*%/);
+    if (!m) return null;
+    return parseFloat(m[1]);
+  }
+  function _fdParseDateRange(s) {
+    // Returns { startMonthIdx, endMonthIdx } relative to FD_MONTHS. null if not found.
+    if (!s) return null;
+    const monMap = { JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11 };
+    const monthYearRe = /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+(\d{4})/gi;
+    const matches = [];
+    let mm;
+    while ((mm = monthYearRe.exec(s)) !== null) {
+      matches.push({ y: parseInt(mm[2]), m: monMap[mm[1].substr(0,3).toUpperCase()] });
+    }
+    if (!matches.length) return null;
+    const toIdx = ({y,m}) => {
+      // absolute month-from-epoch
+      return y * 12 + m;
+    };
+    const firstAbs = Math.min(...matches.map(toIdx));
+    const lastAbs  = Math.max(...matches.map(toIdx));
+    const baseAbs  = FD_MONTHS[0].y * 12 + FD_MONTHS[0].m;
+    const endAbs   = FD_MONTHS[FD_MONTHS.length-1].y * 12 + FD_MONTHS[FD_MONTHS.length-1].m;
+    // Clip into window
+    return {
+      startIdx: Math.max(0, Math.min(17, firstAbs - baseAbs)),
+      endIdx:   Math.max(0, Math.min(17, lastAbs  - baseAbs)),
+      startAbs: firstAbs,
+      endAbs:   lastAbs,
+      baseAbs:  baseAbs,
+      endAbs2:  endAbs
+    };
+  }
+
+  function _fdPhaseFromPct(pct) {
+    if (pct == null || isNaN(pct)) return 'GW';
+    if (pct >= 95) return 'CLOSE';
+    if (pct >= 65) return 'TRIM';
+    if (pct >= 20) return 'RI';
+    if (pct >= 5)  return 'PT';
+    return 'GW';
+  }
+  const FD_PHASE_COLORS = {
+    GW:    { bg: '#EFE8D8', fg: '#6B5A3A', br: '#D6CBB2' },
+    PT:    { bg: '#D6E4C9', fg: '#3F5A32', br: '#B6C8A4' },
+    RI:    { bg: '#8FB27B', fg: '#1F2E14', br: '#6E8F5A' },
+    TRIM:  { bg: 'rgba(184,92,62,0.32)', fg: '#7A3A24', br: 'rgba(184,92,62,0.6)' },
+    CLOSE: { bg: '#7A3A24', fg: '#F4EFE4', br: '#4E2414' },
+    BLANK: { bg: 'transparent', fg: '#B8AD9D', br: 'rgba(31,30,29,0.08)' }
+  };
+
+  /* Build a plausible phase strip across 18 months for one project. */
+  function _fdPhaseStrip(p) {
+    const strip = new Array(18).fill(null); // null = out-of-window blank
+    const pct = (typeof p.pctComplete === 'number') ? p.pctComplete : null;
+    const dr  = _fdParseDateRange(p.dateRange || '');
+    let startIdx = 0, endIdx = 17;
+    if (dr) { startIdx = dr.startIdx; endIdx = dr.endIdx; }
+    // Ensure at least 6-month visible span
+    if (endIdx - startIdx < 5) {
+      if (pct != null && pct >= 90) { // nearing close — anchor at window start
+        startIdx = 0; endIdx = Math.min(3, 17);
+      } else if (pct != null && pct < 5) {
+        startIdx = Math.max(0, 2); endIdx = Math.min(17, startIdx + 14);
+      } else {
+        endIdx = Math.min(17, startIdx + 8);
+      }
+    }
+    // Current phase sits around "today" (idx 0 = Apr 2026)
+    const curPhase = _fdPhaseFromPct(pct);
+    // Walk from startIdx to endIdx, progressing through phases
+    const order = ['GW','PT','RI','TRIM','CLOSE'];
+    const curOrd = order.indexOf(curPhase);
+    const span = endIdx - startIdx + 1;
+    // Anchor: current month (idx 0, i.e. Apr 2026) should be curPhase.
+    // We'll build phases by dividing remaining spans around anchor.
+    // Simple approach: spread phases evenly, but shift so Apr 2026 lands in curPhase.
+    // Compute phase boundaries proportional to their index in 'order' (5 phases).
+    // Start earliest visible phase = max(0, curOrd - Math.floor(anchorOffset/span*5))
+    const anchorIdx = Math.max(startIdx, Math.min(endIdx, 0)); // Apr 2026 in window
+    const monthsBeforeAnchor = anchorIdx - startIdx;
+    const monthsAfterAnchor = endIdx - anchorIdx;
+    // Phases before curPhase fit into monthsBeforeAnchor; phases >= curPhase fit into monthsAfterAnchor+1.
+    const before = order.slice(0, curOrd);         // e.g. [GW, PT] if cur=RI
+    const after  = order.slice(curOrd);            // [RI, TRIM, CLOSE]
+    let idx = startIdx;
+    if (before.length > 0) {
+      const slot = Math.max(1, Math.floor(monthsBeforeAnchor / before.length));
+      for (let i = 0; i < before.length; i++) {
+        const len = (i === before.length - 1) ? Math.max(1, anchorIdx - idx) : slot;
+        for (let j = 0; j < len && idx < anchorIdx; j++) strip[idx++] = before[i];
+      }
+    }
+    // Anchor + after
+    const afterSpan = endIdx - anchorIdx + 1;
+    const slot2 = Math.max(1, Math.floor(afterSpan / after.length));
+    for (let i = 0; i < after.length; i++) {
+      const isLast = (i === after.length - 1);
+      const len = isLast ? (endIdx - idx + 1) : slot2;
+      for (let j = 0; j < len && idx <= endIdx; j++) strip[idx++] = after[i];
+    }
+    // If pre-construction (pct == 0 or null), force entire span to be GW/PT
+    if (pct != null && pct < 1) {
+      for (let i = startIdx; i <= endIdx; i++) strip[i] = (i - startIdx < Math.ceil(span * 0.4)) ? 'GW' : 'PT';
+    }
+    return { strip: strip, startIdx: startIdx, endIdx: endIdx };
+  }
+
+  /* Risk score heuristic */
+  function _fdRiskScore(p) {
+    let s = 0;
+    const fm = _fdParseMarginPct(p.k01_margin);
+    if (fm != null) {
+      if (fm < 20) s += 3;
+      else if (fm < 25) s += 2;
+    } else {
+      s += 0.5;
+    }
+    const critN = Array.isArray(p.bva) ? p.bva.filter(r => Array.isArray(r) && r[7] === 'CRITICAL').length : 0;
+    s += critN;
+    const coPct = parseFloat(String(p.coPct || '0').replace(/[^\d.\-]/g,''));
+    if (!isNaN(coPct) && coPct > 5) s += 1;
+    if (p.pctComplete === 100) s += 1; // retention held
+    if (p.pctComplete != null && p.pctComplete < 5) s += 0.5;
+    return s;
+  }
+  function _fdRiskBadge(score) {
+    if (score >= 4) return { label: 'OFF TRACK', cls: 'chip-clay', color: '#B85C3E' };
+    if (score >= 2) return { label: 'WATCH',     cls: 'chip-ink',  color: '#B8944E' };
+    return { label: 'ON TRACK', cls: 'chip-sage', color: '#3F5A32' };
+  }
+
+  /* GC color (local copy) */
+  function _fdGcColor(id) {
+    const p = PROJECTS[id];
+    if (!p) return '#1F1E1D';
+    const g = (p.gcShort || p.gc || '').toLowerCase();
+    if (g.includes('exxel'))     return '#5B7FA8';
+    if (g.includes('srm'))       return '#B85C3E';
+    if (g.includes('chinn'))     return '#3F5A32';
+    if (g.includes('natural'))   return '#A4A09A';
+    if (g.includes('compass'))   return '#2C5F77';
+    if (g.includes('synergy'))   return '#7C5E9F';
+    if (g.includes('blueprint')) return '#B8944E';
+    if (g.includes('gre'))       return '#B56B7C';
+    if (g.includes('marpac'))    return '#7A8840';
+    if (g.includes('shelter'))   return '#3F3A36';
+    if (g.includes('bmdc'))      return '#7C5B3F';
+    if (g.includes('holland'))   return '#4A6B8A';
+    if (g.includes('ravenna'))   return '#8E6B3F';
+    return '#1F1E1D';
+  }
+
+  function renderLiveProjects() {
+    const view = document.querySelector('.view[data-view="flightdeck"]');
+    if (!view) return;
+    const rows = FLIGHT_DECK_IDS.map(id => PROJECTS[id]).filter(Boolean);
+    if (rows.length === 0) return;
+
+    // --- Compute pulse totals ---
+    let totalContract = 0, totalBilled = 0, totalRetention = 0, marginWeight = 0, marginSum = 0;
+    rows.forEach((p, idx) => {
+      const id = FLIGHT_DECK_IDS[idx];
+      const c = _fdParseMoney(p.contractRevised || p.contractOrig || p.revenue);
+      const b = _fdParseMoney(p.billedToDate);
+      const r = _fdParseMoney(p.retainage);
+      totalContract += c;
+      totalBilled += b;
+      totalRetention += r;
+      const fm = _fdParseMarginPct(p.k01_margin);
+      if (fm != null && c > 0) { marginWeight += c; marginSum += fm * c; }
+    });
+    const blendedMargin = marginWeight > 0 ? (marginSum / marginWeight) : null;
+
+    // --- Manpower curves (synthesize) ---
+    // Each project: peak = p.num.workers or 20, ramp up from start → peak at ~65% of span → taper to trim end.
+    const fmtShortM = (v) => '$' + (v/1e6).toFixed(1) + 'M';
+    const fmtIntLocal = (v) => Math.round(v).toLocaleString();
+    const projectCurves = rows.map((p, idx) => {
+      const id = FLIGHT_DECK_IDS[idx];
+      const ps = _fdPhaseStrip(p);
+      const peak = (p.num && p.num.workers) ? p.num.workers : 20;
+      const arr = new Array(18).fill(0);
+      const span = ps.endIdx - ps.startIdx + 1;
+      const peakMo = ps.startIdx + Math.floor(span * 0.6);
+      for (let i = ps.startIdx; i <= ps.endIdx; i++) {
+        let ratio;
+        if (i <= peakMo) {
+          ratio = (i - ps.startIdx + 1) / (peakMo - ps.startIdx + 1);
+        } else {
+          ratio = 1 - 0.7 * (i - peakMo) / Math.max(1, ps.endIdx - peakMo);
+        }
+        arr[i] = Math.max(2, Math.round(peak * ratio * 0.85));
+      }
+      return { id: id, color: _fdGcColor(id), peak: peak, strip: ps.strip, startIdx: ps.startIdx, endIdx: ps.endIdx, curve: arr };
+    });
+    // Total manpower per month
+    const totalByMo = new Array(18).fill(0);
+    projectCurves.forEach(pc => pc.curve.forEach((v, i) => totalByMo[i] += v));
+    const peakTotal = Math.max(...totalByMo);
+    const peakIdx   = totalByMo.indexOf(peakTotal);
+    const peakMonthLabel = FD_MONTHS[peakIdx] ? (FD_MONTHS[peakIdx].label + ' ' + FD_MONTHS[peakIdx].year) : '—';
+
+    // --- KPI row ---
+    const kpiRow = view.querySelector('#fd-kpi-row');
+    if (kpiRow) {
+      const kpi = (lbl, big, foot) => `
+        <div class="card" style="padding:22px 18px;">
+          <div class="kpi-lbl" style="font-size:9.5px;">${lbl}</div>
+          <div class="kpi-val-big italic" style="font-size:32px; color:var(--ink); margin-top:6px;">${big}</div>
+          <div class="mono" style="font-size:10px; color:var(--ink-4); margin-top:4px; letter-spacing:0.04em;">${foot}</div>
+        </div>`;
+      kpiRow.innerHTML = [
+        kpi('ACTIVE JOBS',      rows.length + ' live',                'sampled Apr 24, 2026'),
+        kpi('TOTAL CONTRACT',   fmtShortM(totalContract) + ' combined','revised basis'),
+        kpi('BILLED TO DATE',   fmtShortM(totalBilled),                Math.round(totalBilled/totalContract*100) + '% of contract'),
+        kpi('RETENTION HELD',   fmtShortM(totalRetention) + ' outstanding', '5% · GC-held'),
+        kpi('PEAK MANPOWER',    peakTotal + ' workers',                peakMonthLabel),
+        kpi('BLENDED FORECAST MARGIN', (blendedMargin != null ? blendedMargin.toFixed(1) + '%' : '—') + ' weighted', 'contract-weighted')
+      ].join('');
+    }
+
+    // --- Sort rows by pctComplete desc for Gantt ---
+    const ganttOrder = FLIGHT_DECK_IDS.slice().sort((a, b) => {
+      const pa = PROJECTS[a].pctComplete || 0;
+      const pb = PROJECTS[b].pctComplete || 0;
+      return pb - pa;
+    });
+
+    // --- Gantt ---
+    const ganttWrap = view.querySelector('#fd-gantt-wrap');
+    if (ganttWrap) {
+      const cellW = 40, cellH = 30, labelW = 240;
+      let html = '<table style="border-collapse:collapse; font-size:10px; font-family:Inter,sans-serif; width: auto;">';
+      // Header row
+      html += '<thead><tr><th style="width:' + labelW + 'px; text-align:left; padding:4px 8px; border-bottom:1px solid var(--border-2); position:sticky; left:0; background:var(--cream-card); z-index:2;">';
+      html += '<span class="mono" style="font-size:9px; letter-spacing:0.08em; color:var(--ink-4); text-transform:uppercase;">JOB · NAME · GC · UNITS</span></th>';
+      FD_MONTHS.forEach(mo => {
+        html += '<th style="width:' + cellW + 'px; padding:2px 0; border-bottom:1px solid var(--border-2); font-weight:500;"><span class="mono" style="font-size:9px; color:var(--ink-4);">' + mo.label + '<br/>' + String(mo.year).slice(2) + '</span></th>';
+      });
+      html += '</tr></thead><tbody>';
+      ganttOrder.forEach(id => {
+        const p = PROJECTS[id];
+        const ps = _fdPhaseStrip(p);
+        const unitsN = (p.num && p.num.units) ? p.num.units + 'u' : '—';
+        const name = (p.jobBottom || '').replace(/\.$/, '');
+        html += '<tr class="fd-gantt-row" data-pid="' + id + '" style="cursor:pointer;">';
+        html += '<td style="padding:4px 8px; border-bottom:1px solid rgba(31,30,29,0.06); position:sticky; left:0; background:var(--cream-card); z-index:1;">';
+        html += '<span class="mono" style="font-size:10px; color:var(--ink-3);">#' + id + '</span> ';
+        html += '<span style="font-weight:500; color:var(--ink);">' + name + '</span> · ';
+        html += '<span style="color:' + _fdGcColor(id) + '; font-weight:500;">' + (p.gcShort || p.gc || '—') + '</span> · ';
+        html += '<span class="mono" style="color:var(--ink-4); font-size:10px;">' + unitsN + '</span>';
+        html += '</td>';
+        for (let i = 0; i < 18; i++) {
+          const ph = ps.strip[i];
+          const col = ph ? FD_PHASE_COLORS[ph] : FD_PHASE_COLORS.BLANK;
+          const content = ph || '';
+          html += '<td style="width:' + cellW + 'px; height:' + cellH + 'px; padding:0; border:1px solid ' + col.br + '; text-align:center; background:' + col.bg + '; color:' + col.fg + '; font-family:\"JetBrains Mono\",monospace; font-size:9.5px; font-weight:600; letter-spacing:0.04em;">';
+          html += content;
+          html += '</td>';
+        }
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      ganttWrap.innerHTML = html;
+      ganttWrap.querySelectorAll('.fd-gantt-row').forEach(tr => {
+        tr.addEventListener('click', () => { try { applyProject(tr.dataset.pid); } catch(e){} });
+      });
+    }
+
+    // --- Health stack ---
+    const healthWrap = view.querySelector('#fd-health-stack');
+    if (healthWrap) {
+      const scored = FLIGHT_DECK_IDS.map(id => {
+        const p = PROJECTS[id];
+        const score = _fdRiskScore(p);
+        const fm = _fdParseMarginPct(p.k01_margin);
+        const critN = Array.isArray(p.bva) ? p.bva.filter(r => Array.isArray(r) && r[7] === 'CRITICAL').length : 0;
+        return { id: id, p: p, score: score, fm: fm, critN: critN };
+      }).sort((a,b) => b.score - a.score);
+
+      const target = 25;
+      let html = '';
+      scored.forEach(row => {
+        const { id, p, score, fm, critN } = row;
+        const badge = _fdRiskBadge(score);
+        const fmStr = fm != null ? fm.toFixed(1) + '%' : '—';
+        const vsTarget = fm != null ? (fm - target) : null;
+        const barColor = (fm != null && fm >= target) ? '#8FB27B' : '#B85C3E';
+        const barW = fm != null ? Math.max(4, Math.min(100, fm * 2.5)) : 0;
+        const name = (p.jobBottom || '').replace(/\.$/, '');
+        const sub = [];
+        if (critN > 0) sub.push(critN + ' critical bva flag' + (critN === 1 ? '' : 's'));
+        if (vsTarget != null) sub.push(vsTarget >= 0 ? ('+' + vsTarget.toFixed(1) + 'pts vs 25% target') : (vsTarget.toFixed(1) + 'pts vs 25% target'));
+        if (!sub.length) sub.push(p.pctCompleteLabel || 'live project');
+
+        html += '<div class="fd-health-row" data-pid="' + id + '" style="cursor:pointer; padding:10px 12px; border:1px solid var(--border-2); border-radius:8px; background:var(--cream-card); display:flex; flex-direction:column; gap:4px;">';
+        html += '<div style="display:flex; justify-content:space-between; align-items:center;">';
+        html += '<span class="mono" style="font-size:10px; color:var(--ink-3);">#' + id + ' · <span style="color:var(--ink); font-family:Inter,sans-serif;">' + name + '</span> · <span style="color:' + _fdGcColor(id) + ';">' + (p.gcShort || p.gc) + '</span></span>';
+        html += '<span class="' + badge.cls + '" style="font-size:9px;">' + badge.label + '</span>';
+        html += '</div>';
+        html += '<div style="display:flex; align-items:center; gap:10px;">';
+        html += '<span class="serif-it" style="font-size:22px; color:var(--ink); line-height:1;">' + fmStr + '</span>';
+        html += '<span style="font-size:10px; color:var(--ink-4); letter-spacing:0.04em;">forecast margin</span>';
+        html += '<div style="flex:1; height:6px; background:rgba(31,30,29,0.06); border-radius:3px; position:relative; overflow:hidden; margin-left:6px;">';
+        html += '<div style="position:absolute; left:0; top:0; height:100%; width:' + barW + '%; background:' + barColor + ';"></div>';
+        html += '<div style="position:absolute; left:' + (target*2.5) + '%; top:-2px; width:1px; height:10px; background:var(--ink-3);"></div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="mono" style="font-size:9.5px; color:var(--ink-4); letter-spacing:0.03em;">' + sub.join(' · ') + '</div>';
+        html += '</div>';
+      });
+      healthWrap.innerHTML = html;
+      healthWrap.querySelectorAll('.fd-health-row').forEach(el => {
+        el.addEventListener('click', () => { try { applyProject(el.dataset.pid); } catch(e){} });
+      });
+      // Update watch chip on hero
+      const offN = scored.filter(r => r.score >= 4).length;
+      const watchN = scored.filter(r => r.score >= 2 && r.score < 4).length;
+      const watchChip = document.getElementById('fd-watch-chip');
+      if (watchChip) watchChip.textContent = offN + ' off-track · ' + watchN + ' watch';
+    }
+
+    // --- Manpower curve SVG ---
+    const manWrap = view.querySelector('#fd-manpower-wrap');
+    if (manWrap) {
+      const W = 1000, H = 180, padL = 40, padR = 20, padT = 16, padB = 32;
+      const chartW = W - padL - padR, chartH = H - padT - padB;
+      const maxY = Math.max(peakTotal * 1.15, 10);
+      const cw = chartW / 18;
+      let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%; height:' + H + 'px; display:block;" preserveAspectRatio="none">';
+      svg += graphPaper('fd-man', padL, padT, chartW, chartH);
+      // Stacked bars per month
+      for (let i = 0; i < 18; i++) {
+        let yCursor = padT + chartH;
+        projectCurves.forEach(pc => {
+          const v = pc.curve[i];
+          if (v > 0) {
+            const h = (v / maxY) * chartH;
+            yCursor -= h;
+            svg += '<rect x="' + (padL + i*cw + 1) + '" y="' + yCursor + '" width="' + (cw - 2) + '" height="' + h + '" fill="' + pc.color + '" opacity="0.78"/>';
+          }
+        });
+      }
+      // Total line overlay
+      let poly = '';
+      for (let i = 0; i < 18; i++) {
+        const x = padL + i*cw + cw/2;
+        const y = padT + chartH - (totalByMo[i] / maxY) * chartH;
+        poly += (i === 0 ? 'M ' : 'L ') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+      }
+      svg += '<path d="' + poly + '" fill="none" stroke="#1F1E1D" stroke-width="2"/>';
+      // Peak annotation
+      const px = padL + peakIdx*cw + cw/2;
+      const py = padT + chartH - (peakTotal / maxY) * chartH;
+      svg += '<circle cx="' + px + '" cy="' + py + '" r="4" fill="#B85C3E"/>';
+      svg += '<text x="' + (px + 8) + '" y="' + (py - 6) + '" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#B85C3E">peak · ' + peakTotal + ' · ' + peakMonthLabel + '</text>';
+      // X labels
+      for (let i = 0; i < 18; i += 2) {
+        const x = padL + i*cw + cw/2;
+        svg += '<text x="' + x + '" y="' + (H - 14) + '" font-family="JetBrains Mono,monospace" font-size="9" fill="#7F786E" text-anchor="middle">' + FD_MONTHS[i].label + '</text>';
+        svg += '<text x="' + x + '" y="' + (H - 4) + '" font-family="JetBrains Mono,monospace" font-size="8" fill="#B8AD9D" text-anchor="middle">' + String(FD_MONTHS[i].year).slice(2) + '</text>';
+      }
+      // Y axis max label
+      svg += '<text x="' + (padL - 6) + '" y="' + (padT + 10) + '" font-family="JetBrains Mono,monospace" font-size="9" fill="#7F786E" text-anchor="end">' + Math.round(maxY) + '</text>';
+      svg += '<text x="' + (padL - 6) + '" y="' + (padT + chartH) + '" font-family="JetBrains Mono,monospace" font-size="9" fill="#7F786E" text-anchor="end">0</text>';
+      svg += '</svg>';
+      manWrap.innerHTML = svg;
+      const peakCorner = document.getElementById('fd-manpower-peak');
+      if (peakCorner) peakCorner.textContent = 'peak · ' + peakTotal + ' workers · ' + peakMonthLabel;
+    }
+
+    // --- inject liveSummary into header ---
+    try {
+      const sum = rows.length + ' live · ' + fmtShortM(totalContract) + ' · peak ' + peakTotal + ' workers';
+      document.querySelectorAll('[data-tot="liveSummary"]').forEach(el => el.textContent = sum);
+    } catch(e){}
+  }
+  try { renderLiveProjects(); } catch(e) { console.warn('renderLiveProjects failed', e); }
+  window.renderLiveProjects = renderLiveProjects;
 
   /* ============ OPERATOR WORKBENCH · PRINCIPAL VIEW ============ */
   function wbSwitchPersona(p) {
