@@ -3315,6 +3315,31 @@
           <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 20, 2026</span></div>
         </div>
 
+        <!-- #2098 Chinn Trailside 2 — LIVE / retention-release -->
+        <div class="card" style="padding: 24px 26px; border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="text-[10px] tabular tracking-[0.14em] uppercase" style="color: var(--clay); font-family: 'JetBrains Mono', monospace; font-weight: 700;">#2098 · chinn · <span style="background: var(--clay); color: var(--cream); padding: 1px 6px; border-radius: 2px; font-size: 9px; letter-spacing: 0.08em; margin-left: 2px;">LIVE</span></div>
+              <div class="text-[20px] font-semibold mt-1" style="color: var(--ink); letter-spacing: -0.01em;">Trailside 2</div>
+              <div class="text-[12px] mt-1" style="color: var(--ink-3);">170 units · $6.92M contract · 100% billed · retention-release</div>
+            </div>
+            <span class="chip-clay" style="flex-shrink: 0;">⚠ in progress · retention pending</span>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="grid grid-cols-4 gap-3 mt-4">
+            <div><div class="hero-lab" style="font-size: 9px;">Ingested</div><div class="text-[22px] serif-it" style="color: var(--ink);">812</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Classified</div><div class="text-[22px] serif-it" style="color: var(--ink);">741</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Parsed</div><div class="text-[22px] serif-it" style="color: var(--sage-ink);">692</div></div>
+            <div><div class="hero-lab" style="font-size: 9px;">Indexed</div><div class="text-[22px] serif-it" style="color: var(--clay);">partial</div></div>
+          </div>
+          <div class="kpi-divider"></div>
+          <div class="kpi-row"><span class="kpi-lbl">Live SOVs ingested</span><span class="kpi-val">22 of 22 monthly pay apps · 100% billed</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Change orders</span><span class="kpi-val">net +$32,086 (+0.47%) · tight CO profile</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Watch flags</span><span class="kpi-val" style="color: var(--clay);">5 · Finish/Gas/Mech Rm/Warranty/UG Mat'l</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Retention held</span><span class="kpi-val" style="color: var(--clay);">$345,898 · release pending Q3 2025</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Last ingest</span><span class="kpi-val">Apr 23, 2026 (daily)</span></div>
+        </div>
+
         <!-- #2104 BMDC Big 1410 — LIVE / in-progress -->
         <div class="card" style="padding: 24px 26px; border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);">
           <div class="flex items-start justify-between mb-4">
@@ -3475,9 +3500,18 @@
 
         <!-- GC nodes: rounded squares, ink fill -->
         <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="chinn" style="cursor: pointer;">
-          <rect x="350" y="60" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <rect x="350" y="60" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
           <text x="376" y="91" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">CHINN</text>
-          <text x="376" y="134" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 5 jobs</text>
+          <text x="376" y="134" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 5 closed (1 live)</text>
+        </g>
+
+        <!-- #2098 Chinn Trailside 2 (170u · LIVE) — chinn GC · clay stroke, solid edge -->
+        <line x1="376" y1="86" x2="550" y2="220" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2098" style="cursor: pointer;">
+          <circle cx="550" cy="220" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="550" y="224" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2098</text>
+          <text x="550" y="246" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Trailside 2</text>
+          <text x="550" y="258" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">170u · LIVE</text>
         </g>
 
         <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="exxel" style="cursor: pointer;">
@@ -5265,7 +5299,7 @@
             </div>
             <div class="kpi-divider"></div>
             <div class="kpi-row"><span class="kpi-lbl">Lien filings (12mo)</span><span class="kpi-val" style="color: var(--sage-ink);">0 against Chinn</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Sibling project signals</span><span class="kpi-val" style="color: var(--sage-ink);">3 active · all nominal</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Sibling project signals</span><span class="kpi-val" style="color: var(--sage-ink);">4 active · #2098 watch (5 flags)</span></div>
             <div class="kpi-row"><span class="kpi-lbl">Last public event</span><span class="kpi-val">none</span></div>
           </div>
 
@@ -6656,7 +6690,7 @@
   // Defined here (before renderSkyline) so stageOf() can read it.
   const PROJECT_STAGES = {
     bidding: [],
-    active:  ["2104","2111","2112"],
+    active:  ["2098","2104","2111","2112"],
     closed:  PROJECT_ORDER
   };
   const STAGE_META = {
@@ -8147,6 +8181,48 @@
         { name: 'Ferguson Enterprises', invoices: null, spend: 2841, pct: 4.1 }
       ]
     },
+    "2098": {
+      reportNum: "REPORT #2098-LIVE01 \u00b7 ACTIVE",
+      chips: [
+        "<span class=\"chip-clay\">\u26a0 ACTIVE \u00b7 100% billed</span>",
+        "<span class=\"chip-ink\">Chinn Trailside 2 \u00b7 170u \u00b7 in retention-release</span>",
+        "<span class=\"chip-sage\">Forecast 25.0% margin \u00b7 5 watch flags post-billing</span>"
+      ],
+      jobTop: "Chinn", jobBottom: "Trailside 2.",
+      jobNum: "#2098", location: "Trailside 2 site \u2014 per Chinn job info", gc: "Chinn Construction, LLC",
+      gcShort: "Chinn",
+      dateRange: "Sep 2023 \u2192 Jun 2025 \u00b7 22 months \u00b7 in retention-release phase",
+      unitsDesc: "170-unit multifamily \u00b7 Chinn Construction",
+      status: 'active',
+
+      // ---- LIVE hero fields ----
+      pctComplete: 100,
+      pctCompleteLabel: "100% billed \u00b7 retention pending",
+      contractOrig: "$6,885,880",
+      contractRevised: "$6,917,966",
+      coPct: "+0.47%",
+      billedToDate: "$6,917,966",
+      earnedLessRetention: "$6,572,068",
+      balanceToFinish: "$0",
+
+      // ---- Standard schema fields (live/forecast snapshot) ----
+      revenue: "$6,917,966", revenueFoot: "current contract \u00b7 $6.89M base + $32k COs \u00b7 live project \u00b7 100% billed",
+      profit: "~$1,730,633", profitFoot: "forecast \u00b7 ~25.0% margin pending closeout \u00b7 live project",
+      expenses: "~$5,187,333", expensesFoot: "revised expense budget \u00b7 live project \u00b7 5 post-billing labor flags",
+      retainage: "$345,898", retainageFoot: "5.0% \u00b7 retention held post-billing \u00b7 release pending",
+      execHeadline: "Trailside 2 is <span class=\"n\">100% billed</span> and in <span class=\"n\">retention-release phase</span>, tracking to a <span class=\"n\">~25.0% forecast margin</span> with 5 post-billing watch flags.",
+      execBody: "Trailside 2 is an <span class=\"n\">ACTIVE</span> plumbing job for <span class=\"n\">Chinn Construction, LLC</span> \u2014 Chinn's <span class=\"n\">6th OWP job</span> (after #2009/#2010/#2011/#2023/#2041), running <span class=\"n\">Sep 2023 \u2192 Jun 2025</span> (22 months). 170-unit multifamily, Joe Hanley GC PM (same as #2041 Luna), Noel Baca superintendent, Orlando OWP RI foreman.<br/><br/>Original <span class=\"n\">$6,885,880</span> contract \u2192 revised <span class=\"n\">$6,917,966</span> via net COs (<span class=\"n\">+$32,086</span> / +0.47%) \u2014 unusually tight CO profile for a 170u Chinn job.<br/><br/><span class=\"n\">$6,917,966</span> billed to date = <span class=\"n\">100% complete</span>. Earned less retention <span class=\"n\">$6,572,068</span>. Retention outstanding <span class=\"n\">$345,898</span> (5%). Balance to finish + retention <span class=\"n\">$345,898</span> \u2014 billing is complete but retention has not been released.<br/><br/><span class=\"n\">Live watch flags</span> (5, post-billing): <span class=\"n\">130 Finish Labor +13%</span> ($222,921 vs $197,570 budget), <span class=\"n\">140 Gas Labor +79% CRITICAL</span> ($23,970 vs $13,400), <span class=\"n\">142 Mech Room Labor +23%</span> ($80,791 vs $65,600), <span class=\"n\">150 Warranty Labor unbudgeted</span> ($26,716 actual, zero budget), <span class=\"n\">210 Underground Material +19%</span> ($101,624 vs $85,650). Cortex status: <span class=\"n\">\u26a0 Watch \u00b7 5 flags post-billing</span>.<br/><br/><span class=\"n\">Forecast</span>: direct cost / profit / margin are live projections using revised expense budget \u2014 full vendor ledger and crew roster finalize at retention release.",
+      jobNum2: "#2098", workforce: "RI Foreman Orlando \u00b7 live project \u00b7 full crew roster at closeout",
+      bpLeft: "chinn trailside 2 \u00b7 ACTIVE", bpRight: "170 units \u00b7 22 months \u00b7 100% billed \u00b7 retention pending",
+      k01_revenue: "$6,917,966", k01_margin: "~25.0% (forecast)", k01_origContract: "$6,885,880",
+      k01_co: "+$32,086", k01_directCost: "~$5,187,333 (budget)", k01_profit: "~$1,730,633 (forecast)",
+      footerReport: "REPORT #2098-LIVE01 \u00b7 Live snapshot Apr 23, 2026 \u00b7 v0.1",
+      sbName: "Trailside 2.", skyName: "TRAILSIDE 2",
+      skyline: { floors: 6, cols: 20, w: 400 },
+      num: { units: 170, fixtures: 850, months: 22, revenue: 6917966, profit: 1730633, directCost: 5187333, origContract: 6885880, co: 32086, retainage: 345898, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: '\u2014', topShare: null, source: "Live project \u00b7 full vendor ledger at closeout" },
+      vendors: []
+    },
     "2104": {
       reportNum: "REPORT #2104-LIVE01 \u00b7 ACTIVE",
       chips: [
@@ -8233,6 +8309,7 @@
     "2047": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">GRE</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Eric Bentler</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">John Bolle</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Astra Persue / Titus Uomoto</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Reuben</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">GRE Green Lake LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Mike Donelson</div></div></div>", "jobInfoUnits": 70},
     "2048": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">GRE</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Eric Bentler</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Dan Schaeffer</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Astra Persue / Titus Uomoto</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Esteban</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">GRE 205th LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Mike Donelson</div></div></div>", "jobInfoUnits": 72},
     "2049": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Coby Jones</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Martin Solorio</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Reserve</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Orlando / Bob</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Reserve at Lynnwood LP</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div></div>", "jobInfoUnits": 295},
+    "2098": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Chinn Construction, LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Joe Hanley</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Noel Baca</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Bonnie Laremore Brennan / Mike McClure</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Orlando</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 100% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Sep 2023</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Closeout</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Q3 2025 (retention-dependent)</div></div></div>", "jobInfoUnits": 170},
     "2104": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">BMDC Services</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tommy / Ben</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 99.76% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jul 2024</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Apr 2026</div></div></div>", "jobInfoUnits": 24},
     "2111": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass General Construction I</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Northgate Station Residential M2 M3 LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 48.8% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Apr 2025</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Q4 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">CPL / GGLO</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div></div>", "jobInfoUnits": 186},
     "2112": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">BMDC Services</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 74.4% billed</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Job Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">May 2025</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Expected Completion</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jul 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Robison Engineering</div></div></div>", "jobInfoUnits": 20},
@@ -8250,6 +8327,29 @@
   });
 
   // ============ LIVE PROJECT DASHBOARD DATA (active jobs only) ============
+  if (PROJECTS['2098']) PROJECTS['2098'].live = {
+    lastSync: '3 hrs ago',
+    title: 'Trailside 2',
+    subtitle: '170 units \u00b7 Chinn Construction \u00b7 Sep 2023 \u2192 Jun 2025 \u00b7 retention-release phase',
+    chipContract: 'Contract: $6,917,966',
+    chipOrigMargin: 'Original margin target: 24.6%',
+    chipForecastMargin: '\u26a0 Forecast margin: 25.0%',
+    pctComplete: '100%',
+    pctSub: 'billing complete \u00b7 retention $345,898 held',
+    cortexStatus: '\u26a0 Watch \u00b7 5 flags post-billing',
+    cortexStatusBody: '5 labor/material cost codes over revised budget despite 100% billing: 130 Finish Labor +13% ($25k), 140 Gas Labor +79% CRITICAL ($11k), 142 Mech Room +23% ($15k), 150 Warranty Labor unbudgeted ($27k), 210 Underground Material +19% ($16k). Net drag ~$94k against $1.73M forecast profit \u2014 still lands at 25.0% margin.',
+    eta: 'Q3 2025 (retention)',
+    etaSub: 'billing complete \u00b7 awaiting retention release',
+    hoursVar: '\u2014',
+    hoursVarSub: 'full roster at closeout',
+    costVar: '+$94k',
+    costVarSub: '5 cost codes over revised budget',
+    schedVar: '\u2014',
+    schedVarSub: 'field work complete Jun 2025',
+    forecastEac: '$1,730,633',
+    forecastEacSub: 'vs $1,698,547 original target'
+  };
+
   if (PROJECTS['2104']) PROJECTS['2104'].live = {
     lastSync: '6 hrs ago',
     title: 'Big 1410 Apartments',
@@ -11470,7 +11570,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       `Cortex is tracking <b style="color:var(--ink); font-style:normal;">${closedN} closed plumbing jobs</b> (${fmtMoneyShort(closedRev)} cumulative revenue, ${(blendedMargin*100).toFixed(1)}% blended margin) + <b style="color:var(--ink); font-style:normal;">${activeN} active</b> (${fmtMoneyShort(backlog)} backlog at ~58% weighted billing) + <b style="color:var(--ink); font-style:normal;">1 pending bid</b> (Bellevue 220, due Fri 4/24).`
     );
     setHtml('wb-hero-body',
-      `<b style="color:var(--ink);">Noteworthy this week:</b> Bellevue 220 bid closes Friday — Cortex recommends <b style="color:var(--ink);">$2.66M</b> (P(win) 54% at 32% margin floor). <b style="color:var(--ink);">#2111 Northgate M3</b> labor tracking +9% over baseline; crew re-tier needed by next Tuesday or forecast margin drops from 29% → 23%. <b style="color:var(--ink);">#2104 Big 1410</b> is 99.8% billed — final pay app ready for submission.<br/><br/>` +
+      `<b style="color:var(--ink);">Noteworthy this week:</b> Bellevue 220 bid closes Friday — Cortex recommends <b style="color:var(--ink);">$2.66M</b> (P(win) 54% at 32% margin floor). <b style="color:var(--ink);">#2111 Northgate M3</b> labor tracking +9% over baseline; crew re-tier needed by next Tuesday or forecast margin drops from 29% → 23%. <b style="color:var(--ink);">#2104 Big 1410</b> is 99.8% billed — final pay app ready for submission. <b style="color:var(--ink);">#2098 Trailside 2</b> (Chinn, 170u) is 100% billed in retention-release with 5 post-billing labor flags; <b style="color:var(--ink);">$345,898</b> retention held — pursue release Q3 2025.<br/><br/>` +
       `<b style="color:var(--clay);">Cash position flag:</b> retention on #2001 230 Broadway (<b style="color:var(--ink);">$96,889</b>) has been outstanding 13 years. Never pursued. Total portfolio retention outstanding: <b style="color:var(--ink);">${fmtMoneyFull(retTotal)}</b>. Draft follow-up?`
     );
 
@@ -11745,7 +11845,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
   /* ============ BID INTELLIGENCE — interactive assumptions ============ */
   const GC_DB = {
-    chinn:    { name: 'Chinn Construction',  jobs: 5,  blendedMargin: 38.0, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '29 of 34 submitted, 5 jobs', projects: '#2009, #2010, #2011, #2023, #2041',                                                                 source: "Chinn blended (5 jobs)",         winRate: 41, knownTag: '✓ Known GC · 5 closed jobs in portfolio' },
+    chinn:    { name: 'Chinn Construction',  jobs: 6,  blendedMargin: 38.0, payLag: 47, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '29 of 34 submitted, 5 jobs + 1 live', projects: '#2009, #2010, #2011, #2023, #2041, #2098 (live)',                                                  source: "Chinn blended (5 closed, 1 live)", winRate: 41, knownTag: '✓ Known GC · 5 closed + 1 live (#2098 Trailside 2 in retention-release)' },
     exxel:    { name: 'Exxel Pacific',       jobs: 14, blendedMargin: 35.0, payLag: 52, payLagDelta: 'industry median 58d',     coRate: 65, coDetail: '37 of 54 submitted, 14 jobs', projects: '#2001, #2012, #2015, #2017, #2019, #2021, #2022, #2025, #2027, #2028, #2029, #2030, #2031, #2036, #2049', source: "Exxel blended (14 jobs)",        winRate: 38, knownTag: '✓ Known GC · 14 closed jobs incl #2049 Reserve REBUILD (48.9%)' },
     srm:      { name: 'SRM Development',     jobs: 5,  blendedMargin: 32.6, payLag: 53, payLagDelta: 'industry median 58d',     coRate: 71, coDetail: '17 of 24 submitted, 5 jobs',  projects: '#2001, #2008, #2018, #2020, #2024',                                                                 source: "SRM blended (5 jobs)",           winRate: 33, knownTag: '⚠ Mixed track record · 5 closed jobs (spread Astro 46.5% → Taylor 22.3%)' },
     natbuilt: { name: 'Natural & Built',     jobs: 2,  blendedMargin: 39.6, payLag: 44, payLagDelta: 'industry median 58d',     coRate: 80, coDetail: '4 of 5 submitted, 2 jobs',     projects: '#2016, #2035',                                                                                      source: "Natural & Built blended (2 jobs)", winRate: 24, knownTag: '✓ Known GC · 2 closed jobs in portfolio' },
