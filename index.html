@@ -8426,7 +8426,35 @@
     schedVar: '\u2014',
     schedVarSub: 'field work complete Jun 2025',
     forecastEac: '$1,730,633',
-    forecastEacSub: 'vs $1,698,547 original target'
+    forecastEacSub: 'vs $1,698,547 original target',
+    burnCurve: [
+      {pct: 0,   actual: 0,     baseline: 0},
+      {pct: 15,  actual: 6200,  baseline: 7100},
+      {pct: 35,  actual: 14500, baseline: 16620},
+      {pct: 55,  actual: 22540, baseline: 26100},
+      {pct: 75,  actual: 30740, baseline: 35580},
+      {pct: 90,  actual: 36880, baseline: 42720},
+      {pct: 100, actual: 40980, baseline: 47460}
+    ],
+    phases: [
+      {phase:'Underground rough-in',  pct:100, actual:1516,  baseline:1820, status:'on'},
+      {phase:'Garage rough-in',       pct:100, actual:2640,  baseline:2750, status:'on'},
+      {phase:'Roughin (stacks/DWV)',  pct:100, actual:22746, baseline:25100,status:'on'},
+      {phase:'Top-out (water/gas)',   pct:100, actual:3787,  baseline:3660, status:'watch'},
+      {phase:'Trim & fixtures',       pct:100, actual:5979,  baseline:5290, status:'watch'},
+      {phase:'Warranty / punch',      pct:100, actual:1050,  baseline:0,    status:'over'}
+    ],
+    anomalies: [
+      {date:'Jun 30 \u00b7 closeout', title:'Billing complete \u00b7 retention $345,898 held', body:'Final pay app received. 100% billed against revised $6,917,966 contract. Chinn retention cycle historically 60-120 days post-closeout (ref #2009/#2010/#2011/#2023/#2041). Cash release target Q3 2025.', severity:'INFO'},
+      {date:'Post-billing', title:'140 Gas Labor +79% CRITICAL \u2014 $23,970 vs $13,400 budget', body:'Gas rough-in over-ran by $10,570. Small budget base amplifies variance. Root cause: 18 COs included 3 gas-related scope adds (CO#02 boiler-room meter, CO#11 retail gas/condensate, CO#17 boiler attic-stock premium) not fully offset by labor budget adjustments.', severity:'HIGH'},
+      {date:'Post-billing', title:'130 Finish Labor +13% / 142 Mech Room +23%', body:'Finish labor $222,921 vs $197,570 (+$25k). Mech Room labor $80,791 vs $65,600 (+$15k). Combined $40k labor drag concentrated in final trim and mechanical room completion phase. Offset by $356k underrun on 220 Roughin Material.', severity:'MEDIUM'},
+      {date:'Post-billing', title:'150 Warranty Labor unbudgeted \u2014 $26,716', body:'No budget line for warranty labor; actual spend $26,716. Indicates punch/warranty effort not forecast in original bid structure. Pattern to watch on future Chinn jobs \u2014 consider $15k allowance line for 170u+ scope.', severity:'MEDIUM'}
+    ],
+    recommends: [
+      {urgency:'urgent', label:'ACTION 01 \u00b7 NEXT 30 DAYS', title:'Push Chinn retention release \u2014 $345,898', body:'Billing closed Jun 2025. Chinn retention cycle across 5 prior OWP jobs runs 60-120 days. Begin day-30 follow-up cadence. Confirm all closeout docs (warranties, O&M, lien waivers, as-builts) are logged on Chinn\u2019s side so retention has no documentation bottleneck.', owner:'OWP Admin', ownerLabel:'Owner', extra:'Cash recovery', extraVal:'$345,898 \u00b7 target Q3 2025'},
+      {urgency:'strategic', label:'ACTION 02 \u00b7 THIS MONTH', title:'Document 5 watch flags for Chinn bid calibration', body:'Gas labor +79%, Finish labor +13%, Mech Room +23%, Warranty unbudgeted, UG Material +19%. All five patterns repeat across prior Chinn jobs (#2041 Luna showed same Gas/Mech Room signal). Capture as Chinn-specific bid adjustment factors for future Trailside 3 / Luna pursuits.', owner:'Estimating', ownerLabel:'Owner', extra:'Bid signal', extraVal:'Chinn portfolio'},
+      {urgency:'strategic', label:'ACTION 03 \u00b7 NEXT 60 DAYS', title:'Chinn relationship debrief \u2014 6th successful job', body:'Trailside 2 is OWP\u2019s 6th Chinn delivery after #2009/#2010/#2011/#2023/#2041. Tight CO profile (+0.47% net on 170 units), 25.0% forecast margin beat 24.6% target. Schedule formal debrief with Joe Hanley (Chinn PM, same as #2041) to lock in continued pipeline \u2014 Trailside 3 / next multifamily.', owner:'Steven Yoo', ownerLabel:'Owner', extra:'Pipeline value', extraVal:'$5M+ potential'}
+    ]
   };
 
   if (PROJECTS['2104']) PROJECTS['2104'].live = {
