@@ -1333,15 +1333,6 @@
       </div>
     </div>
 
-    <!-- ============ 4. TOTAL MANPOWER FORECAST CURVE (visual summary) ============ -->
-    <div class="blueprint mt-10 mb-10" style="padding: 24px 20px 24px;">
-      <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 04 / total manpower forecast — stacked by gc color</div>
-      <div class="blueprint-corner" style="top: 10px; right: 14px;" id="fd-manpower-peak">peak · —</div>
-      <div id="fd-manpower-wrap" style="margin-top: 30px;">
-        <!-- rendered by JS -->
-      </div>
-    </div>
-
   </div> <!-- /view: flightdeck -->
 
   <!-- ========= PROJECT REPORT VIEW ========= -->
@@ -13527,75 +13518,114 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       if (watchChip) watchChip.textContent = offN + ' off-track · ' + watchN + ' watch';
     }
 
-    // --- Manpower curve SVG ---
-    const manWrap = view.querySelector('#fd-manpower-wrap');
-    if (manWrap) {
-      const W = 1000, H = 180, padL = 40, padR = 20, padT = 16, padB = 32;
-      const chartW = W - padL - padR, chartH = H - padT - padB;
-      const maxY = Math.max(peakTotal * 1.15, 10);
-      const cw = chartW / 18;
-      let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%; height:' + H + 'px; display:block;" preserveAspectRatio="none">';
-      svg += graphPaper('fd-man', padL, padT, chartW, chartH);
-      // Stacked bars per month
-      for (let i = 0; i < 18; i++) {
-        let yCursor = padT + chartH;
-        projectCurves.forEach(pc => {
-          const v = pc.curve[i];
-          if (v > 0) {
-            const h = (v / maxY) * chartH;
-            yCursor -= h;
-            svg += '<rect x="' + (padL + i*cw + 1) + '" y="' + yCursor + '" width="' + (cw - 2) + '" height="' + h + '" fill="' + pc.color + '" opacity="0.78"/>';
-          }
-        });
-      }
-      // Total line overlay
-      let poly = '';
-      for (let i = 0; i < 18; i++) {
-        const x = padL + i*cw + cw/2;
-        const y = padT + chartH - (totalByMo[i] / maxY) * chartH;
-        poly += (i === 0 ? 'M ' : 'L ') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
-      }
-      svg += '<path d="' + poly + '" fill="none" stroke="#1F1E1D" stroke-width="2"/>';
-      // Peak annotation
-      const px = padL + peakIdx*cw + cw/2;
-      const py = padT + chartH - (peakTotal / maxY) * chartH;
-      svg += '<circle cx="' + px + '" cy="' + py + '" r="4" fill="#B85C3E"/>';
-      svg += '<text x="' + (px + 8) + '" y="' + (py - 6) + '" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#B85C3E">peak · ' + peakTotal + ' · ' + peakMonthLabel + '</text>';
-      // X labels
-      for (let i = 0; i < 18; i += 2) {
-        const x = padL + i*cw + cw/2;
-        svg += '<text x="' + x + '" y="' + (H - 14) + '" font-family="JetBrains Mono,monospace" font-size="9" fill="#7F786E" text-anchor="middle">' + FD_MONTHS[i].label + '</text>';
-        svg += '<text x="' + x + '" y="' + (H - 4) + '" font-family="JetBrains Mono,monospace" font-size="8" fill="#B8AD9D" text-anchor="middle">' + String(FD_MONTHS[i].year).slice(2) + '</text>';
-      }
-      // Y axis max label
-      svg += '<text x="' + (padL - 6) + '" y="' + (padT + 10) + '" font-family="JetBrains Mono,monospace" font-size="9" fill="#7F786E" text-anchor="end">' + Math.round(maxY) + '</text>';
-      svg += '<text x="' + (padL - 6) + '" y="' + (padT + chartH) + '" font-family="JetBrains Mono,monospace" font-size="9" fill="#7F786E" text-anchor="end">0</text>';
-      svg += '</svg>';
-      manWrap.innerHTML = svg;
-      const peakCorner = document.getElementById('fd-manpower-peak');
-      if (peakCorner) peakCorner.textContent = 'peak · ' + peakTotal + ' workers · ' + peakMonthLabel;
-    }
-
-    // --- Manpower MATRIX (crew count per project per month) ---
+    // --- Manpower MATRIX (crew count per project per month) — EDITABLE w/ Cortex baseline ---
     const matrixWrap = view.querySelector('#fd-matrix-wrap');
     if (matrixWrap) {
       // Same order as Gantt — LIVE_ROSTER sheet order
       const matrixOrder = LIVE_ROSTER.map(r => r.id);
-      const curveById = {};
-      projectCurves.forEach(pc => { curveById[pc.id] = pc; });
 
-      // Compute per-cell background intensity based on worker count vs row max
+      // ---- localStorage: overrides + bench availability ----
+      const OV_KEY = 'cortex_manpower_overrides_v1';
+      const BENCH_KEY = 'cortex_bench_availability_v1';
+      let overrides = {}, benchAvail = null;
+      try { overrides = JSON.parse(localStorage.getItem(OV_KEY) || '{}') || {}; } catch(e){ overrides = {}; }
+      try { benchAvail = JSON.parse(localStorage.getItem(BENCH_KEY) || 'null'); } catch(e){ benchAvail = null; }
+      if (!Array.isArray(benchAvail) || benchAvail.length !== 18) {
+        benchAvail = new Array(18).fill(75);
+      }
+
+      // ---- Cortex baseline generator ----
+      const HRS_PER_UNIT_BY_GC = {
+        'chinn':240,'compass':195,'srm':220,'bmdc':210,'exxel':180,
+        'holland':215,'ravenna':200,'intracorp':200,'sierra':200,'braseth':200
+      };
+      const CONFIDENCE_BY_GC = {
+        // counted from PROJECTS closed jobs in CLAUDE.md
+        'chinn':'high','exxel':'high','srm':'high','compass':'high','bmdc':'high',
+        'holland':'low','ravenna':'low','intracorp':'low','sierra':'low','braseth':'low'
+      };
+      const PHASE_SPLIT = { GW:0.04, PT:0.08, RI:0.60, TRIM:0.27, CLOSE:0.01 };
+      function generateCortexBaseline(rosterRow) {
+        const baseline = new Array(18).fill(0);
+        const confidence = new Array(18).fill('na');
+        const gcKey = (rosterRow.gc || '').toLowerCase();
+        const hrsPerUnit = HRS_PER_UNIT_BY_GC[gcKey] || 200;
+        const conf = CONFIDENCE_BY_GC[gcKey] || 'medium';
+        const totalHrs = rosterRow.units * hrsPerUnit;
+        // Run-length encode strip per phase
+        const strip = rosterRow.phaseStrip || [];
+        // count months per phase across the strip
+        const monthsByPhase = {};
+        strip.forEach(ph => { if (ph) monthsByPhase[ph] = (monthsByPhase[ph]||0)+1; });
+        for (let i = 0; i < 18; i++) {
+          const ph = strip[i];
+          if (!ph) { baseline[i] = 0; confidence[i] = 'na'; continue; }
+          const phaseShare = PHASE_SPLIT[ph] != null ? PHASE_SPLIT[ph] : 0.1;
+          const phaseHrs = totalHrs * phaseShare;
+          const monthsInPhase = monthsByPhase[ph] || 1;
+          const monthlyHrs = phaseHrs / monthsInPhase;
+          const crew = Math.max(1, Math.round(monthlyHrs / (22 * 8)));
+          baseline[i] = crew;
+          confidence[i] = conf;
+        }
+        return { baseline, confidence };
+      }
+
+      // Build baselines + effective values (override merged in)
+      const baselineById = {};
+      const effectiveById = {};
+      LIVE_ROSTER.forEach(r => {
+        const { baseline, confidence } = generateCortexBaseline(r);
+        baselineById[r.id] = { baseline, confidence };
+        const eff = new Array(18);
+        for (let i = 0; i < 18; i++) {
+          // Pre-today (column 0) is locked to "Sage actuals" = LIVE_ROSTER manpower (immutable baseline of record)
+          if (i === 0) {
+            eff[i] = r.manpower[0];
+          } else if (overrides[r.id] && overrides[r.id][i] != null) {
+            eff[i] = overrides[r.id][i];
+          } else {
+            eff[i] = baseline[i];
+          }
+        }
+        effectiveById[r.id] = eff;
+      });
+
+      // Per-row max for intensity ramp
       const rowMaxById = {};
       matrixOrder.forEach(id => {
-        const c = curveById[id].curve;
-        rowMaxById[id] = Math.max(1, Math.max(...c));
+        rowMaxById[id] = Math.max(1, Math.max(...effectiveById[id]));
       });
-      // Column totals + column max (for total row intensity)
-      const colTotals = totalByMo.slice();
+
+      // Column totals from EFFECTIVE values (drives gap calc + recommendations)
+      const colTotals = new Array(18).fill(0);
+      matrixOrder.forEach(id => effectiveById[id].forEach((v,i) => colTotals[i] += v));
       const colMax = Math.max(1, Math.max(...colTotals));
+      const totalPeak = Math.max(...colTotals);
+      const totalPeakIdx = colTotals.indexOf(totalPeak);
+      const totalPeakLabel = FD_MONTHS[totalPeakIdx] ? (FD_MONTHS[totalPeakIdx].label + ' ' + FD_MONTHS[totalPeakIdx].year) : '—';
+
+      // Confidence → tint color
+      const confColor = {
+        'high':   { r:143, g:178, b:123 },
+        'medium': { r:212, g:160, b:106 },
+        'low':    { r:107, g: 91, b:149 }
+      };
+      const CLAY = { r:184, g:92, b:62 };
+      const GREY = { r:127, g:120, b:113 };
 
       const cellW = 42, cellH = 28, labelW = 300;
-      let html = '<table style="border-collapse:collapse; font-family:Inter,sans-serif; font-size:10.5px; width:auto; min-width:100%;">';
+      let html = '';
+
+      // Header strip with reset link + today chip
+      html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:12px; flex-wrap:wrap;">';
+      html += '<span class="mono" style="font-size:10px; letter-spacing:0.10em; text-transform:uppercase; color:var(--ink-3);">' + LIVE_ROSTER.length + ' jobs · today: apr 25, 2026 · 17 forecast months</span>';
+      html += '<span style="display:inline-flex; gap:14px; align-items:center;">';
+      html += '<a href="#" id="fd-matrix-reset" class="mono" style="font-size:10px; color:var(--clay); text-decoration:underline; letter-spacing:0.06em;">\u21bb RESET OVERRIDES</a>';
+      html += '<a href="#" id="fd-bench-reset" class="mono" style="font-size:10px; color:var(--clay); text-decoration:underline; letter-spacing:0.06em;">\u21bb RESET BENCH</a>';
+      html += '</span></div>';
+
+      html += '<table style="border-collapse:collapse; font-family:Inter,sans-serif; font-size:10.5px; width:auto; min-width:100%;">';
 
       // Header row
       html += '<thead><tr>';
@@ -13603,31 +13633,33 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       html += '<span class="mono" style="font-size:9px; letter-spacing:0.1em; color:var(--ink-4); text-transform:uppercase;">JOB · NAME · GC · UNITS</span></th>';
       html += '<th style="width:48px; padding:4px 6px; border-bottom:1px solid var(--border-2); text-align:right;">';
       html += '<span class="mono" style="font-size:9px; color:var(--ink-4); letter-spacing:0.08em;">PEAK</span></th>';
-      FD_MONTHS.forEach(mo => {
-        html += '<th style="width:' + cellW + 'px; padding:4px 0; border-bottom:1px solid var(--border-2); font-weight:500; text-align:center;">';
+      FD_MONTHS.forEach((mo, i) => {
+        const isToday = i === 0;
+        const todayMark = isToday ? ' border-right:1.5px dashed #B85C3E;' : '';
+        html += '<th style="width:' + cellW + 'px; padding:4px 0; border-bottom:1px solid var(--border-2); font-weight:500; text-align:center;' + todayMark + '">';
         html += '<span class="mono" style="font-size:9px; color:var(--ink-4); display:block; line-height:1.2;">' + mo.label + '</span>';
         html += '<span class="mono" style="font-size:8px; color:var(--ink-4); opacity:0.6;">\u2019' + String(mo.year).slice(2) + '</span>';
         html += '</th>';
       });
       html += '</tr></thead><tbody>';
 
-      // Data rows — one per project
+      // Data rows
       matrixOrder.forEach(id => {
-        const pc = curveById[id];
-        const r = pc.roster;
+        const r = LIVE_ROSTER.find(x => x.id === id);
+        const eff = effectiveById[id];
+        const { baseline, confidence } = baselineById[id];
         const unitsN = r.units + 'u';
         const name = r.name;
         const foreman = r.foreman || '\u00b7';
         const gcColor = _fdGcColor(id);
-        const rowPeak = Math.max(...pc.curve, 0);
+        const rowPeak = Math.max(...eff, 0);
         const isCloseout = r.status === 'closeout';
         const isOnHold   = r.status === 'onhold';
         const rowOpacity = isOnHold ? '0.5' : (isCloseout ? '0.55' : '1');
         const rowBg      = isOnHold ? 'rgba(127,120,113,0.06)' : 'var(--cream-card)';
 
-        html += '<tr class="fd-matrix-row" data-pid="' + id + '" style="cursor:pointer; opacity:' + rowOpacity + ';">';
-        // Label cell with GC color swatch
-        html += '<td style="padding:6px 10px; border-bottom:1px solid rgba(31,30,29,0.06); position:sticky; left:0; background:' + rowBg + '; z-index:1; white-space:nowrap;">';
+        html += '<tr class="fd-matrix-row" data-pid="' + id + '" style="opacity:' + rowOpacity + ';">';
+        html += '<td style="padding:6px 10px; border-bottom:1px solid rgba(31,30,29,0.06); position:sticky; left:0; background:' + rowBg + '; z-index:1; white-space:nowrap; cursor:pointer;" onclick="try{applyProject(\'' + id + '\')}catch(e){}">';
         html += '<span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:' + gcColor + '; vertical-align:middle; margin-right:8px;"></span>';
         html += '<span class="mono" style="font-size:10px; color:var(--ink-3);">#' + id + '</span> ';
         html += '<span style="font-weight:600; color:var(--ink);">' + name + '</span> · ';
@@ -13635,56 +13667,200 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         html += '<span class="mono" style="color:var(--ink-4); font-size:10px;">' + unitsN + '</span> · ';
         html += '<span class="mono" style="color:var(--ink-3); font-size:10px;">' + foreman + '</span>';
         html += '</td>';
-        // Peak count
         html += '<td style="width:48px; padding:4px 6px; border-bottom:1px solid rgba(31,30,29,0.06); text-align:right;">';
         html += '<span class="mono" style="font-size:11px; font-weight:600; color:var(--ink);">' + rowPeak + '</span></td>';
-        // Month cells
+
         for (let i = 0; i < 18; i++) {
-          const v = pc.curve[i];
+          const v = eff[i];
+          const bv = baseline[i];
+          const conf = confidence[i];
+          const isLocked = (i === 0);
+          const isOverride = (!isLocked && v !== bv && v > 0);
           const intensity = v > 0 ? Math.min(1, v / rowMaxById[id]) : 0;
-          // GC color tint: convert hex to rgba with alpha=intensity*0.72+0.08 (so even the lightest active cell has some color)
-          let bg = 'transparent';
-          if (intensity > 0) {
-            const alpha = (0.12 + intensity * 0.78).toFixed(2);
-            // Parse hex to rgb
-            const hex = gcColor.replace('#', '');
-            const r = parseInt(hex.substring(0,2), 16);
-            const g = parseInt(hex.substring(2,4), 16);
-            const b = parseInt(hex.substring(4,6), 16);
-            bg = 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+          const alpha = v > 0 ? (0.12 + intensity * 0.78) : 0;
+          let tint = null;
+          if (v === 0) {
+            tint = null;
+          } else if (isLocked) {
+            tint = GREY;
+          } else if (isOverride) {
+            tint = CLAY;
+          } else if (conf && confColor[conf]) {
+            tint = confColor[conf];
+          } else {
+            tint = { r:143, g:178, b:123 };
           }
+          const bg = tint ? 'rgba(' + tint.r + ',' + tint.g + ',' + tint.b + ',' + alpha.toFixed(2) + ')' : 'transparent';
           const textColor = intensity > 0.55 ? 'var(--cream)' : 'var(--ink)';
           const display = v > 0 ? v : '';
-          html += '<td style="width:' + cellW + 'px; height:' + cellH + 'px; padding:0; border:1px solid rgba(31,30,29,0.08); text-align:center; background:' + bg + '; color:' + textColor + '; font-family:\"JetBrains Mono\",monospace; font-size:10.5px; font-weight:' + (intensity > 0 ? '600' : '400') + '; letter-spacing:0.02em;">';
-          html += display;
-          html += '</td>';
+          const todayMark = (i === 0) ? ' border-right:1.5px dashed #B85C3E;' : '';
+          // Tooltip
+          let tip = '';
+          if (isLocked) {
+            tip = 'Sage actual (locked) · ' + v + ' workers';
+          } else if (bv > 0 || v > 0) {
+            const confLabel = conf === 'high' ? 'high confidence' : (conf === 'medium' ? 'medium confidence' : (conf === 'low' ? 'low confidence — new GC, no historical data' : 'no baseline'));
+            tip = 'Cortex: ' + bv + ' workers (' + confLabel + ', based on ' + r.gc + ' historical avg) · Current: ' + v + (isOverride ? ' (manual override)' : ' (matches baseline)');
+          }
+          const editable = isLocked ? '' : ' data-edit="1" data-pid="' + id + '" data-mo="' + i + '" data-base="' + bv + '"';
+          const cursor = isLocked ? 'default' : 'pointer';
+          const lockIcon = isLocked ? '<span style="position:absolute; top:1px; right:2px; font-size:8px; opacity:0.55;">\ud83d\udd12</span>' : '';
+          html += '<td class="fd-cell" style="width:' + cellW + 'px; height:' + cellH + 'px; padding:0; border:1px solid rgba(31,30,29,0.08); text-align:center; background:' + bg + '; color:' + textColor + '; font-family:\"JetBrains Mono\",monospace; font-size:10.5px; font-weight:' + (intensity > 0 ? '600' : '400') + '; letter-spacing:0.02em; position:relative; cursor:' + cursor + ';' + todayMark + '" title="' + tip.replace(/"/g,'&quot;') + '"' + editable + '>' + display + lockIcon + '</td>';
         }
         html += '</tr>';
       });
 
-      // TOTAL row
+      // ---- TOTAL DEMAND row ----
       html += '<tr style="border-top:2px solid var(--ink);">';
       html += '<td style="padding:10px 10px; position:sticky; left:0; background:var(--cream-card); z-index:1;">';
       html += '<span class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--clay); font-weight:700;">TOTAL MANPOWER</span></td>';
-      const totalPeak = Math.max(...colTotals);
       html += '<td style="padding:10px 6px; text-align:right; background:var(--cream-card);">';
       html += '<span class="mono" style="font-size:12px; font-weight:700; color:var(--clay);">' + totalPeak + '</span></td>';
       for (let i = 0; i < 18; i++) {
         const v = colTotals[i];
         const intensity = v > 0 ? Math.min(1, v / colMax) : 0;
-        // Use clay color for the total row, so it visually tops the matrix
         const alpha = (0.12 + intensity * 0.78).toFixed(2);
         const bg = v > 0 ? 'rgba(184,92,62,' + alpha + ')' : 'transparent';
         const textColor = intensity > 0.5 ? 'var(--cream)' : 'var(--ink)';
-        html += '<td style="width:' + cellW + 'px; height:32px; padding:0; border:1px solid rgba(184,92,62,0.15); text-align:center; background:' + bg + '; color:' + textColor + '; font-family:\"JetBrains Mono\",monospace; font-size:11px; font-weight:700;">' + (v > 0 ? v : '') + '</td>';
+        const todayMark = (i === 0) ? ' border-right:1.5px dashed #B85C3E;' : '';
+        html += '<td style="width:' + cellW + 'px; height:32px; padding:0; border:1px solid rgba(184,92,62,0.15); text-align:center; background:' + bg + '; color:' + textColor + '; font-family:\"JetBrains Mono\",monospace; font-size:11px; font-weight:700;' + todayMark + '">' + (v > 0 ? v : '') + '</td>';
+      }
+      html += '</tr>';
+
+      // ---- BENCH AVAILABLE row ----
+      html += '<tr>';
+      html += '<td style="padding:8px 10px; position:sticky; left:0; background:var(--cream-card); z-index:1;">';
+      html += '<span class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); font-weight:700;">BENCH AVAILABLE</span></td>';
+      html += '<td style="padding:6px 6px; text-align:right; background:var(--cream-card);"><span class="mono" style="font-size:11px; color:var(--ink-3);">\u00b7</span></td>';
+      for (let i = 0; i < 18; i++) {
+        const v = benchAvail[i];
+        const isLocked = (i === 0);
+        const todayMark = isLocked ? ' border-right:1.5px dashed #B85C3E;' : '';
+        const editable = isLocked ? '' : ' data-bench-edit="1" data-mo="' + i + '"';
+        const cursor = isLocked ? 'default' : 'pointer';
+        const lockIcon = isLocked ? '<span style="position:absolute; top:1px; right:2px; font-size:8px; opacity:0.55;">\ud83d\udd12</span>' : '';
+        html += '<td class="fd-bench-cell" style="width:' + cellW + 'px; height:28px; padding:0; border:1px solid rgba(31,30,29,0.08); text-align:center; background:rgba(31,30,29,0.06); color:var(--ink); font-family:\"JetBrains Mono\",monospace; font-size:11px; font-weight:600; position:relative; cursor:' + cursor + ';' + todayMark + '" title="Available bench plumbers (editable)"' + editable + '>' + v + lockIcon + '</td>';
+      }
+      html += '</tr>';
+
+      // ---- GAP row ----
+      html += '<tr>';
+      html += '<td style="padding:8px 10px; position:sticky; left:0; background:var(--cream-card); z-index:1;">';
+      html += '<span class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); font-weight:700;">GAP (HIRE/IDLE)</span></td>';
+      html += '<td style="padding:6px 6px; text-align:right; background:var(--cream-card);"><span class="mono" style="font-size:11px; color:var(--ink-3);">\u00b7</span></td>';
+      const gaps = [];
+      for (let i = 0; i < 18; i++) {
+        const gap = benchAvail[i] - colTotals[i];
+        gaps.push(gap);
+        let bg = 'transparent', txt = 'var(--ink)', display = String(gap), weight = '600';
+        if (gap < 0) {
+          const intensity = Math.min(1, Math.abs(gap) / 30);
+          bg = 'rgba(184,92,62,' + (0.18 + intensity * 0.6).toFixed(2) + ')';
+          txt = intensity > 0.4 ? 'var(--cream)' : 'var(--clay)';
+          display = gap + ' \u26a0';
+          weight = '700';
+        } else if (gap > 0) {
+          const intensity = Math.min(1, gap / 50);
+          bg = 'rgba(143,178,123,' + (0.12 + intensity * 0.5).toFixed(2) + ')';
+          txt = 'var(--ink)';
+          display = '+' + gap;
+        } else {
+          bg = 'rgba(127,120,113,0.08)';
+        }
+        const todayMark = (i === 0) ? ' border-right:1.5px dashed #B85C3E;' : '';
+        html += '<td style="width:' + cellW + 'px; height:28px; padding:0; border:1px solid rgba(31,30,29,0.08); text-align:center; background:' + bg + '; color:' + txt + '; font-family:\"JetBrains Mono\",monospace; font-size:10.5px; font-weight:' + weight + ';' + todayMark + '">' + display + '</td>';
       }
       html += '</tr>';
 
       html += '</tbody></table>';
 
-      // Legend strip below the matrix — shows GC swatches
+      // ---- Recommendations panel ----
+      html += '<div class="blueprint mt-8" style="padding:18px 18px 16px; background:rgba(184,92,62,0.03); border:1px solid rgba(184,92,62,0.15);">';
+      html += '<div class="blueprint-corner" style="top:8px; left:14px; color:var(--clay);">\u25e2 CORTEX RECOMMENDATIONS \u00b7 staffing intelligence</div>';
+      html += '<ul style="margin-top:28px; padding-left:0; list-style:none;">';
+
+      const recs = [];
+      // 1. Worst negative gap
+      const worstGap = Math.min(...gaps);
+      if (worstGap < -5) {
+        const worstIdx = gaps.indexOf(worstGap);
+        const worstMo = FD_MONTHS[worstIdx] ? (FD_MONTHS[worstIdx].label + ' ' + FD_MONTHS[worstIdx].year) : 'peak';
+        // find first month where gap turns negative as start window
+        let startNeg = worstIdx;
+        for (let i = 0; i < worstIdx; i++) { if (gaps[i] < 0) { startNeg = i; break; } }
+        const startMo = FD_MONTHS[startNeg] ? (FD_MONTHS[startNeg].label + ' ' + FD_MONTHS[startNeg].year) : 'soon';
+        recs.push('Hire <span class="serif-it" style="color:var(--clay); font-weight:700;">' + Math.abs(worstGap) + '</span> plumbers between <b>' + startMo + '</b> and <b>' + worstMo + '</b> to cover the ' + worstMo + ' peak of <b>' + colTotals[worstIdx] + '</b> workers.');
+      }
+      // 2. Late-window over-staffing (months 12-18)
+      const lateGaps = gaps.slice(12);
+      const avgLate = lateGaps.reduce((s,v)=>s+v,0) / lateGaps.length;
+      if (avgLate > 10) {
+        const benchLate = benchAvail.slice(12).reduce((s,v)=>s+v,0) / lateGaps.length;
+        const utilPct = Math.round((benchLate - avgLate) / benchLate * 100);
+        // pick month w/ largest surplus in late window
+        let maxLateSurplus = -Infinity, maxLateIdx = 12;
+        for (let i = 12; i < 18; i++) { if (gaps[i] > maxLateSurplus) { maxLateSurplus = gaps[i]; maxLateIdx = i; } }
+        const lateMo = FD_MONTHS[maxLateIdx] ? (FD_MONTHS[maxLateIdx].label + ' ' + FD_MONTHS[maxLateIdx].year) : 'late';
+        recs.push('Bench utilization drops to ~<span class="serif-it" style="color:var(--ink); font-weight:700;">' + utilPct + '%</span> in <b>' + lateMo + '</b> \u2014 consider taking on a small additive job or scheduling vacation/training.');
+      }
+      // 3. Single project >50% bench
+      for (let i = 0; i < 18; i++) {
+        for (const id of matrixOrder) {
+          const v = effectiveById[id][i];
+          if (v > benchAvail[i] * 0.5 && v >= 10) {
+            const r = LIVE_ROSTER.find(x => x.id === id);
+            const mo = FD_MONTHS[i] ? (FD_MONTHS[i].label + ' ' + FD_MONTHS[i].year) : '';
+            recs.push('Project <b>#' + id + ' ' + r.name + '</b> absorbs <span class="serif-it" style="color:var(--clay); font-weight:700;">>50%</span> of bench in <b>' + mo + '</b>. Schedule risk if it slips.');
+            i = 18; break;
+          }
+        }
+      }
+      // 4. 3+ projects same GC at RI peak in same month
+      const gcRiMonths = {};
+      LIVE_ROSTER.forEach(r => {
+        for (let i = 0; i < 18; i++) {
+          if (r.phaseStrip[i] === 'RI') {
+            const k = r.gc + '|' + i;
+            gcRiMonths[k] = (gcRiMonths[k] || 0) + 1;
+          }
+        }
+      });
+      let gcPeakRec = null;
+      Object.entries(gcRiMonths).forEach(([k, n]) => {
+        if (n >= 3 && !gcPeakRec) {
+          const [gc, iStr] = k.split('|');
+          const i = parseInt(iStr);
+          const mo = FD_MONTHS[i] ? (FD_MONTHS[i].label + ' ' + FD_MONTHS[i].year) : '';
+          gcPeakRec = '<span class="serif-it" style="color:var(--clay); font-weight:700;">' + n + '</span> <b>' + gc + '</b> jobs hit RI peak together in <b>' + mo + '</b> \u2014 request schedule stagger from ' + gc + '.';
+        }
+      });
+      if (gcPeakRec) recs.push(gcPeakRec);
+
+      // 5. Always last
+      recs.push('Cortex baseline assumes blended productivity from your <span class="serif-it" style="color:var(--ink); font-weight:700;">41 closed jobs</span> (~180\u2013240 hrs/unit by GC). Override any cell to update the gap calculation.');
+
+      recs.forEach(rec => {
+        html += '<li style="display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; font-size:12px; line-height:1.55; color:var(--ink-2);">';
+        html += '<span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--clay); margin-top:7px; flex-shrink:0;"></span>';
+        html += '<span>' + rec + '</span>';
+        html += '</li>';
+      });
+      html += '</ul></div>';
+
+      // ---- Legend strip ----
+      html += '<div style="margin-top:16px; padding-top:12px; border-top:1px dashed var(--border-2); display:flex; flex-wrap:wrap; gap:14px; align-items:center; font-size:11px; color:var(--ink-3);">';
+      html += '<span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-4);">CELL LEGEND:</span>';
+      const swatch = (rgb, label) => '<span style="display:inline-flex; align-items:center; gap:6px;"><span style="display:inline-block; width:14px; height:10px; border-radius:2px; background:rgba(' + rgb + ',0.55);"></span>' + label + '</span>';
+      html += swatch('143,178,123', 'sage \u00b7 Cortex baseline (high conf)');
+      html += swatch('212,160,106', 'tan \u00b7 baseline (medium)');
+      html += swatch('107,91,149',  'plum \u00b7 baseline (low conf, new GC)');
+      html += swatch('184,92,62',   'clay \u00b7 manual override');
+      html += swatch('127,120,113', 'grey \u00b7 Sage actual (locked)');
+      html += '</div>';
+
+      // ---- GC swatches ----
       const uniqGcs = [...new Set(LIVE_ROSTER.map(r => r.gc))];
-      html += '<div style="margin-top:16px; padding-top:12px; border-top:1px dashed var(--border-2); display:flex; flex-wrap:wrap; gap:18px; align-items:center;">';
+      html += '<div style="margin-top:10px; padding-top:8px; display:flex; flex-wrap:wrap; gap:14px; align-items:center;">';
       html += '<span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-4);">GC LEGEND:</span>';
       uniqGcs.forEach(gc => {
         const firstIdForGc = (LIVE_ROSTER.find(r => r.gc === gc) || {}).id;
@@ -13696,11 +13872,73 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       html += '</div>';
 
       matrixWrap.innerHTML = html;
-      matrixWrap.querySelectorAll('.fd-matrix-row').forEach(tr => {
-        tr.addEventListener('click', () => { try { applyProject(tr.dataset.pid); } catch(e){} });
+
+      // ---- Edit handlers ----
+      function commitEdit(td, newValRaw, originalDisplay) {
+        const id = td.dataset.pid;
+        const mo = parseInt(td.dataset.mo);
+        const base = parseInt(td.dataset.base);
+        let n = parseInt(newValRaw);
+        if (isNaN(n) || n < 0) n = 0;
+        if (n > 50) n = 50;
+        // Update overrides
+        if (n === base) {
+          if (overrides[id]) { delete overrides[id][mo]; if (Object.keys(overrides[id]).length === 0) delete overrides[id]; }
+        } else {
+          if (!overrides[id]) overrides[id] = {};
+          overrides[id][mo] = n;
+        }
+        try { localStorage.setItem(OV_KEY, JSON.stringify(overrides)); } catch(e){}
+        try { renderLiveProjects(); } catch(e){}
+      }
+      function commitBench(td, newValRaw) {
+        const mo = parseInt(td.dataset.mo);
+        let n = parseInt(newValRaw);
+        if (isNaN(n) || n < 0) n = 0;
+        if (n > 999) n = 999;
+        benchAvail[mo] = n;
+        try { localStorage.setItem(BENCH_KEY, JSON.stringify(benchAvail)); } catch(e){}
+        try { renderLiveProjects(); } catch(e){}
+      }
+      function startEdit(td, onCommit) {
+        if (td.querySelector('input')) return;
+        const orig = td.textContent.trim().replace(/\D/g, '');
+        const w = td.offsetWidth, h = td.offsetHeight;
+        td.innerHTML = '<input type="number" min="0" max="50" value="' + orig + '" style="width:100%; height:100%; border:2px solid var(--clay); background:var(--cream); color:var(--ink); font-family:\'JetBrains Mono\',monospace; font-size:11px; font-weight:600; text-align:center; padding:0; box-sizing:border-box; outline:none;"/>';
+        const inp = td.querySelector('input');
+        inp.focus();
+        inp.select();
+        let cancelled = false;
+        inp.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') { inp.blur(); }
+          else if (e.key === 'Escape') { cancelled = true; td.innerHTML = orig; }
+        });
+        inp.addEventListener('blur', () => {
+          if (cancelled) return;
+          onCommit(td, inp.value);
+        });
+      }
+      matrixWrap.querySelectorAll('td[data-edit="1"]').forEach(td => {
+        td.addEventListener('click', (e) => { e.stopPropagation(); startEdit(td, commitEdit); });
       });
+      matrixWrap.querySelectorAll('td[data-bench-edit="1"]').forEach(td => {
+        td.addEventListener('click', (e) => { e.stopPropagation(); startEdit(td, commitBench); });
+      });
+      const resetBtn = matrixWrap.querySelector('#fd-matrix-reset');
+      if (resetBtn) resetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        try { localStorage.removeItem(OV_KEY); } catch(_){}
+        try { renderLiveProjects(); } catch(_){}
+      });
+      const benchResetBtn = matrixWrap.querySelector('#fd-bench-reset');
+      if (benchResetBtn) benchResetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        try { localStorage.removeItem(BENCH_KEY); } catch(_){}
+        try { renderLiveProjects(); } catch(_){}
+      });
+
       const totalCorner = document.getElementById('fd-matrix-total-peak');
-      if (totalCorner) totalCorner.textContent = 'total peak · ' + totalPeak + ' workers · ' + peakMonthLabel;
+      if (totalCorner) totalCorner.textContent = 'total peak \u00b7 ' + totalPeak + ' workers \u00b7 ' + totalPeakLabel;
     }
 
     // --- inject liveSummary into header ---
