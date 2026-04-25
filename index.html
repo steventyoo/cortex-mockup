@@ -1298,34 +1298,30 @@
       </div>
     </div>
 
-    <!-- ============ 2. GANTT + HEALTH STACK ============ -->
-    <div style="display: flex; gap: 24px; align-items: stretch;">
+    <!-- ============ 2. GANTT (full-width Schedule Matrix) ============ -->
+    <div class="blueprint" style="padding: 24px 20px 24px;">
+      <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 02 / schedule matrix — apr 2026 → sep 2027</div>
+      <div class="blueprint-corner" style="top: 10px; right: 14px;" id="fd-gantt-corner">18 months · 15 jobs</div>
 
-      <!-- LEFT — Gantt -->
-      <div class="blueprint" style="flex: 2; padding: 24px 20px 24px; min-width: 0;">
-        <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 02 / schedule matrix — apr 2026 → sep 2027</div>
-        <div class="blueprint-corner" style="top: 10px; right: 14px;">18 months · 10 jobs</div>
-        <div id="fd-gantt-wrap" style="margin-top: 30px; overflow-x: auto;">
-          <!-- rendered by JS -->
-        </div>
-        <div class="mt-4 flex flex-wrap items-center gap-3 text-[10px] mono" style="color: var(--ink-4);">
-          <span><span style="display:inline-block;width:10px;height:10px;background:#EFE8D8;border:1px solid #D6CBB2;vertical-align:middle;margin-right:4px;"></span>GW · ground work</span>
-          <span><span style="display:inline-block;width:10px;height:10px;background:#D6E4C9;border:1px solid #B6C8A4;vertical-align:middle;margin-right:4px;"></span>PT · pre-top-out</span>
-          <span><span style="display:inline-block;width:10px;height:10px;background:#8FB27B;vertical-align:middle;margin-right:4px;"></span>RI · rough-in</span>
-          <span><span style="display:inline-block;width:10px;height:10px;background:rgba(184,92,62,0.32);border:1px solid rgba(184,92,62,0.5);vertical-align:middle;margin-right:4px;"></span>TRIM</span>
-          <span><span style="display:inline-block;width:10px;height:10px;background:#7A3A24;vertical-align:middle;margin-right:4px;"></span>CLOSE · retention</span>
-        </div>
+      <!-- Phase legend strip (top, before the Gantt) -->
+      <div class="mt-8 mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[10px] mono" style="color: var(--ink-4); letter-spacing: 0.04em;">
+        <span style="font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);">Phases:</span>
+        <span><span style="display:inline-block;width:14px;height:8px;border-radius:2px;background:#E8DCC0;vertical-align:middle;margin-right:5px;"></span>GW · ground work</span>
+        <span><span style="display:inline-block;width:14px;height:8px;border-radius:2px;background:#C8DAB5;vertical-align:middle;margin-right:5px;"></span>PT · pre-top-out</span>
+        <span><span style="display:inline-block;width:14px;height:8px;border-radius:2px;background:#8FB27B;vertical-align:middle;margin-right:5px;"></span>RI · rough-in</span>
+        <span><span style="display:inline-block;width:14px;height:8px;border-radius:2px;background:#D88A6A;vertical-align:middle;margin-right:5px;"></span>TRIM</span>
+        <span><span style="display:inline-block;width:14px;height:8px;border-radius:2px;background:#7A3A24;vertical-align:middle;margin-right:5px;"></span>CLOSE · retention</span>
+        <span style="margin-left:auto;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);">Status:</span>
+        <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#8FB27B;vertical-align:middle;margin-right:5px;"></span>ON TRACK</span>
+        <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#D4A06A;vertical-align:middle;margin-right:5px;"></span>WATCH</span>
+        <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#B85C3E;vertical-align:middle;margin-right:5px;"></span>OFF TRACK</span>
+        <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#A89A8A;vertical-align:middle;margin-right:5px;"></span>CLOSEOUT</span>
+        <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#7A8471;vertical-align:middle;margin-right:5px;"></span>ON HOLD</span>
       </div>
 
-      <!-- RIGHT — Health Stack -->
-      <div class="blueprint" style="flex: 1; padding: 24px 20px; min-width: 320px;">
-        <div class="blueprint-corner" style="top: 10px; left: 14px;">◢ fig. 03 / health stack</div>
-        <div class="blueprint-corner" style="top: 10px; right: 14px;">sorted · risk desc</div>
-        <div id="fd-health-stack" style="margin-top: 30px; display: flex; flex-direction: column; gap: 8px;">
-          <!-- rendered by JS -->
-        </div>
+      <div id="fd-gantt-wrap" style="overflow-x: auto;">
+        <!-- rendered by JS -->
       </div>
-
     </div>
 
     <!-- ============ 3. TOTAL MANPOWER FORECAST CURVE ============ -->
@@ -13309,54 +13305,173 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // --- Sort rows by LIVE_ROSTER order (already in the sheet's mental model) ---
     const ganttOrder = LIVE_ROSTER.slice();
 
-    // --- Gantt ---
+    // --- Gantt (continuous-bar layout, status dot+chip on left, TODAY marker) ---
     const ganttWrap = view.querySelector('#fd-gantt-wrap');
     if (ganttWrap) {
-      const cellW = 40, cellH = 30, labelW = 300;
-      let html = '<table style="border-collapse:collapse; font-size:10px; font-family:Inter,sans-serif; width: auto;">';
-      html += '<thead><tr><th style="width:' + labelW + 'px; text-align:left; padding:4px 8px; border-bottom:1px solid var(--border-2); position:sticky; left:0; background:var(--cream-card); z-index:2;">';
-      html += '<span class="mono" style="font-size:9px; letter-spacing:0.08em; color:var(--ink-4); text-transform:uppercase;">JOB · NAME · GC · UNITS · FOREMAN</span></th>';
-      FD_MONTHS.forEach(mo => {
-        html += '<th style="width:' + cellW + 'px; padding:2px 0; border-bottom:1px solid var(--border-2); font-weight:500;"><span class="mono" style="font-size:9px; color:var(--ink-4);">' + mo.label + '<br/>' + String(mo.year).slice(2) + '</span></th>';
+      const labelW   = 360;
+      const monthW   = 56;             // column width per month
+      const rowH     = 44;             // row height
+      const tableW   = labelW + monthW * 18;
+
+      // Today marker — Apr 25, 2026. Day-of-month / 30 for sub-column position.
+      // FD_MONTHS[0] = Apr 2026. So today column = 0, fraction = 25/30.
+      const todayCol = 0, todayFrac = 25/30;
+      const todayX = labelW + (todayCol + todayFrac) * monthW;
+
+      // Bar palette (continuous bars, slightly more refined than per-cell)
+      const PHASE_BAR = {
+        GW:    { bg:'#E8DCC0', fg:'#6B5A3E', label:'GW' },
+        PT:    { bg:'#C8DAB5', fg:'#3F5A2E', label:'PT' },
+        RI:    { bg:'#8FB27B', fg:'#FFFFFF', label:'RI' },
+        TRIM:  { bg:'#D88A6A', fg:'#FFFFFF', label:'TRIM' },
+        CLOSE: { bg:'#7A3A24', fg:'#FFFFFF', label:'CLOSE' }
+      };
+
+      // Status determination per project
+      const statusOf = (r) => {
+        if (r.status === 'onhold')   return { key:'onhold',   label:'ON HOLD',   color:'#7A8471' };
+        if (r.status === 'closeout') return { key:'closeout', label:'CLOSEOUT',  color:'#A89A8A' };
+        const p = PROJECTS[r.id] || {};
+        const score = _fdRiskScore(p);
+        if (score >= 4) return { key:'off',   label:'OFF TRACK', color:'#B85C3E' };
+        if (score >= 2) return { key:'watch', label:'WATCH',     color:'#D4A06A' };
+        return            { key:'on',    label:'ON TRACK',  color:'#8FB27B' };
+      };
+
+      // Group consecutive same-phase cells into bars { phase, start, span }
+      const groupPhases = (strip) => {
+        const out = [];
+        let i = 0;
+        while (i < 18) {
+          const ph = strip[i];
+          if (!ph) { i++; continue; }
+          let j = i;
+          while (j < 18 && strip[j] === ph) j++;
+          out.push({ phase: ph, start: i, span: j - i });
+          i = j;
+        }
+        return out;
+      };
+
+      // Build outer container
+      let html = '<div style="position:relative; min-width:' + tableW + 'px;">';
+
+      // ---- HEADER ROW ----
+      html += '<div style="display:grid; grid-template-columns:' + labelW + 'px repeat(18, ' + monthW + 'px); border-bottom:1px solid var(--border-2);">';
+      html += '<div style="padding:6px 14px 8px; position:sticky; left:0; background:var(--cream-card); z-index:3;">';
+      html += '<span class="mono" style="font-size:9px; letter-spacing:0.12em; color:var(--ink-4); text-transform:uppercase;">STATUS · JOB · NAME · GC · UNITS</span>';
+      html += '</div>';
+      FD_MONTHS.forEach((mo, i) => {
+        const isApr = mo.label === 'JAN' || mo.label === 'APR';  // year break visual cue
+        html += '<div style="text-align:center; padding:6px 0 8px; ' + (isApr && i > 0 ? 'border-left:1px dashed rgba(31,30,29,0.12);' : '') + '">';
+        html += '<div class="mono" style="font-size:9.5px; color:var(--ink-3); letter-spacing:0.06em;">' + mo.label + '</div>';
+        html += '<div class="mono" style="font-size:8.5px; color:var(--ink-4); opacity:0.75;">\u2019' + String(mo.year).slice(2) + '</div>';
+        html += '</div>';
       });
-      html += '</tr></thead><tbody>';
-      ganttOrder.forEach(r => {
+      html += '</div>';
+
+      // ---- BODY ROWS ----
+      ganttOrder.forEach((r, rowIdx) => {
         const id = r.id;
-        const p = PROJECTS[id] || {};
-        const unitsN = r.units + 'u';
-        const name = r.name;
-        const foreman = r.foreman || '\u00b7';
+        const status = statusOf(r);
         const isCloseout = r.status === 'closeout';
         const isOnHold   = r.status === 'onhold';
-        const rowOpacity = isOnHold ? '0.5' : (isCloseout ? '0.55' : '1');
-        const rowBg      = isOnHold ? 'rgba(127,120,113,0.06)' : 'var(--cream-card)';
-        const badge = isOnHold
-          ? '<span class="chip-clay" style="font-size:9px; margin-left:8px;">ON HOLD</span>'
-          : (isCloseout && r.startNote ? '<span class="mono" style="font-size:9px; color:var(--ink-4); margin-left:8px;">' + r.startNote + '</span>' : (r.startNote ? '<span class="mono" style="font-size:9px; color:var(--ink-4); margin-left:8px;">' + r.startNote + '</span>' : ''));
-        html += '<tr class="fd-gantt-row" data-pid="' + id + '" style="cursor:pointer; opacity:' + rowOpacity + ';">';
-        html += '<td style="padding:4px 8px; border-bottom:1px solid rgba(31,30,29,0.06); position:sticky; left:0; background:' + rowBg + '; z-index:1; white-space:nowrap;">';
+        const rowOpacity = isOnHold ? '0.55' : (isCloseout ? '0.62' : '1');
+        const rowBg = isOnHold ? 'rgba(127,120,113,0.05)' : (rowIdx % 2 === 1 ? 'rgba(31,30,29,0.015)' : 'transparent');
+        const gcCol = _fdGcColor(id);
+        const groups = groupPhases(r.phaseStrip);
+
+        html += '<div class="fd-gantt-row" data-pid="' + id + '" style="display:grid; grid-template-columns:' + labelW + 'px repeat(18, ' + monthW + 'px); cursor:pointer; opacity:' + rowOpacity + '; background:' + rowBg + '; transition:background .12s ease;" onmouseover="this.style.background=\'rgba(184,92,62,0.04)\'" onmouseout="this.style.background=\'' + rowBg + '\'">';
+
+        // LABEL CELL: status dot+chip + project info
+        html += '<div style="padding:8px 12px; position:sticky; left:0; background:' + (rowBg === 'transparent' ? 'var(--cream-card)' : 'var(--cream-card)') + '; z-index:2; border-bottom:1px solid rgba(31,30,29,0.05); display:flex; align-items:center; gap:10px; height:' + rowH + 'px;">';
+        // Status pill
+        html += '<div style="display:inline-flex; align-items:center; gap:5px; padding:3px 8px 3px 6px; border-radius:10px; background:' + status.color + '14; border:1px solid ' + status.color + '40; flex-shrink:0;">';
+        html += '<span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:' + status.color + ';"></span>';
+        html += '<span class="mono" style="font-size:8.5px; color:' + status.color + '; letter-spacing:0.08em; font-weight:600;">' + status.label + '</span>';
+        html += '</div>';
+        // Project info — two lines
+        html += '<div style="flex:1; min-width:0; line-height:1.25;">';
+        html += '<div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">';
         html += '<span class="mono" style="font-size:10px; color:var(--ink-3);">#' + id + '</span> ';
-        html += '<span style="font-weight:500; color:var(--ink);">' + name + '</span> · ';
-        html += '<span style="color:' + _fdGcColor(id) + '; font-weight:500;">' + r.gc + '</span> · ';
-        html += '<span class="mono" style="color:var(--ink-4); font-size:10px;">' + unitsN + '</span> · ';
-        html += '<span class="mono" style="color:var(--ink-3); font-size:10px;">' + foreman + '</span>';
-        html += badge;
-        html += '</td>';
-        for (let i = 0; i < 18; i++) {
-          const ph = r.phaseStrip[i];
-          const col = ph ? FD_PHASE_COLORS[ph] : FD_PHASE_COLORS.BLANK;
-          const content = ph || '';
-          html += '<td style="width:' + cellW + 'px; height:' + cellH + 'px; padding:0; border:1px solid ' + col.br + '; text-align:center; background:' + col.bg + '; color:' + col.fg + '; font-family:\"JetBrains Mono\",monospace; font-size:9.5px; font-weight:600; letter-spacing:0.04em;">';
-          html += content;
-          html += '</td>';
+        html += '<span style="font-weight:600; color:var(--ink); font-size:12px;">' + r.name + '</span>';
+        html += '<span style="color:var(--ink-4); margin:0 6px;">·</span>';
+        html += '<span style="color:' + gcCol + '; font-weight:500; font-size:11px;">' + r.gc + '</span>';
+        html += '<span class="mono" style="color:var(--ink-4); font-size:10px; margin-left:6px;">' + r.units + 'u</span>';
+        html += '</div>';
+        // Second line: foreman or startNote
+        const sub = r.foreman ? r.foreman : (r.startNote || '');
+        if (sub) {
+          html += '<div class="mono" style="font-size:9.5px; color:var(--ink-4); letter-spacing:0.04em; margin-top:1px;">' + sub + '</div>';
         }
-        html += '</tr>';
+        html += '</div>';
+        html += '</div>';
+
+        // BAR LANE (18 sub-cells via grid). Use grid-column to span continuous bars.
+        // The lane itself uses display:contents so its children land directly in the parent grid columns 2..19.
+        // Empty cells get faint vertical dividers.
+        for (let i = 0; i < 18; i++) {
+          const isYearBreak = FD_MONTHS[i] && FD_MONTHS[i].label === 'JAN' && i > 0;
+          html += '<div style="border-bottom:1px solid rgba(31,30,29,0.05); ' + (isYearBreak ? 'border-left:1px dashed rgba(31,30,29,0.12);' : 'border-left:1px solid rgba(31,30,29,0.025);') + '"></div>';
+        }
+        html += '</div>';
+
+        // BAR OVERLAY (one absolute-positioned bar per group)
+        // Wrap row in another div for positioning context — easier: render the bars inside the same grid via grid-column spans.
+        // To do that, the row must allow the bars to occupy specific columns. We'll add a SECOND row immediately after that overlays the bars on the same vertical position.
+        // Simpler approach: render bars as a separate absolutely-positioned strip aligned with the row.
       });
-      html += '</tbody></table>';
+
+      html += '</div>';
       ganttWrap.innerHTML = html;
+
+      // Now overlay the phase bars + TODAY marker as absolutely-positioned elements over each row.
+      // Compute row positions based on rendered DOM.
+      const rowEls = Array.from(ganttWrap.querySelectorAll('.fd-gantt-row'));
+      // Build a single absolute overlay layer
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:absolute; top:0; left:0; width:100%; pointer-events:none;';
+      const outer = ganttWrap.querySelector(':scope > div');
+      if (outer) {
+        outer.style.position = 'relative';
+        // For each row, figure out its top offset (relative to outer) and lay out the phase bars
+        rowEls.forEach((rowEl, idx) => {
+          const r = ganttOrder[idx];
+          const groups = groupPhases(r.phaseStrip);
+          const rowTop = rowEl.offsetTop;
+          const rowHeight = rowEl.offsetHeight;
+          const barTop = rowTop + 8;          // padding
+          const barH   = rowHeight - 16;
+          groups.forEach(g => {
+            const pal = PHASE_BAR[g.phase];
+            if (!pal) return;
+            const x = labelW + g.start * monthW + 3;
+            const w = g.span * monthW - 6;
+            const bar = document.createElement('div');
+            bar.style.cssText = 'position:absolute; left:' + x + 'px; top:' + barTop + 'px; width:' + w + 'px; height:' + barH + 'px; background:' + pal.bg + '; border-radius:5px; display:flex; align-items:center; justify-content:center; color:' + pal.fg + '; font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; letter-spacing:0.06em; box-shadow: 0 1px 2px rgba(31,30,29,0.06);';
+            bar.textContent = pal.label + (g.span > 2 ? '  \u00b7  ' + g.span + 'mo' : '');
+            overlay.appendChild(bar);
+          });
+        });
+        // TODAY marker (vertical clay line)
+        const totalH = outer.offsetHeight;
+        const today = document.createElement('div');
+        today.style.cssText = 'position:absolute; left:' + todayX + 'px; top:32px; width:0; height:' + (totalH - 32) + 'px; border-left:1.5px dashed #B85C3E; opacity:0.55;';
+        overlay.appendChild(today);
+        const todayLabel = document.createElement('div');
+        todayLabel.style.cssText = 'position:absolute; left:' + (todayX - 26) + 'px; top:14px; padding:1px 6px; background:#B85C3E; color:#FAF6EE; font-family:"JetBrains Mono",monospace; font-size:8.5px; font-weight:700; letter-spacing:0.1em; border-radius:3px;';
+        todayLabel.textContent = 'TODAY';
+        overlay.appendChild(todayLabel);
+        outer.appendChild(overlay);
+      }
+
       ganttWrap.querySelectorAll('.fd-gantt-row').forEach(tr => {
         tr.addEventListener('click', () => { try { applyProject(tr.dataset.pid); } catch(e){} });
       });
+
+      // Update header chip jobs count
+      const corner = document.getElementById('fd-gantt-corner');
+      if (corner) corner.textContent = '18 months · ' + ganttOrder.length + ' jobs';
     }
 
     // --- Health stack ---
