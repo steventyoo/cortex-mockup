@@ -3705,7 +3705,8 @@
       <span class="chip-ink atlas-filter" data-atlas-filter="project" style="cursor: pointer;">Projects only</span>
       <span class="chip-ink atlas-filter" data-atlas-filter="gc" style="cursor: pointer;">+ GCs</span>
       <span class="chip-ink atlas-filter" data-atlas-filter="vendor" style="cursor: pointer;">+ Vendors</span>
-      <span style="margin-left: auto; font-size: 11px; color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">layout · static · cortex.atlas v0.1</span>
+      <span id="atlas-focus-banner" class="mono" style="display:none; margin-left:14px; font-size:11px; color:var(--ink-3); padding:4px 10px; border:1px solid var(--clay); border-radius:12px; background:rgba(184,92,62,0.06);"></span>
+      <span style="margin-left: auto; font-size: 11px; color: var(--ink-4); font-family: 'JetBrains Mono', monospace;">click any node to focus · esc to reset · cortex.atlas v0.1</span>
     </div>
 
     <!-- The graph -->
@@ -4396,13 +4397,13 @@
 
         <!-- ============== NEW GC NODE: Ravenna Partners (1 job live \u2014 #2117) \u2014 clay stroke for NEW GC ============== -->
         <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="ravenna" style="cursor: pointer;">
-          <rect x="1180" y="74" width="72" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
-          <text x="1216" y="106" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">Ravenna</text>
-          <text x="1252" y="144" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">new gc \u00b7 1 job (live \u00b7 design/DD)</text>
+          <rect x="1024" y="74" width="72" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
+          <text x="1060" y="106" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">Ravenna</text>
+          <text x="1096" y="144" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">new gc \u00b7 1 job (live \u00b7 design/DD)</text>
         </g>
 
         <!-- #2117 Ravenna Lachlan (~104u \u00b7 LIVE \u00b7 DD) \u2014 ravenna GC \u00b7 clay stroke, solid edge -->
-        <line x1="1216" y1="126" x2="1110" y2="240" stroke="var(--clay)" stroke-width="1.4"/>
+        <line x1="1060" y1="126" x2="1110" y2="240" stroke="var(--clay)" stroke-width="1.4"/>
         <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2117" style="cursor: pointer;">
           <circle cx="1110" cy="240" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
           <text x="1110" y="244" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2117</text>
@@ -16504,9 +16505,169 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   }
   window.closeAtlasModal = closeAtlasModal;
 
-  // Node click delegation
+  // ============ ATLAS click-to-focus ============
+  // Click a GC → dim everything except that GC's projects + their edges.
+  // Click a project → dim everything except that project + its GC + their edge.
+  // Click background, press Esc, or click the focused node again → reset.
+  let _atlasFocusedKey = null;
+
+  // Build GC-key → [projectId,…] map from PROJECTS data.
+  function _atlasBuildGcProjectMap() {
+    const map = {};
+    Object.keys(PROJECTS).forEach(pid => {
+      const p = PROJECTS[pid];
+      const gcRaw = (p.gcShort || p.gc || '').toString().toLowerCase();
+      // normalize a few variants seen in dataset
+      let key = '';
+      if (gcRaw.includes('chinn'))           key = 'chinn';
+      else if (gcRaw.includes('exxel'))      key = 'exxel';
+      else if (gcRaw.includes('srm'))        key = 'srm';
+      else if (gcRaw.includes('compass'))    key = 'compass';
+      else if (gcRaw.includes('synergy'))    key = 'synergy';
+      else if (gcRaw.includes('blueprint'))  key = 'blueprint';
+      else if (gcRaw.includes('marpac'))     key = 'marpac';
+      else if (gcRaw.includes('shelter'))    key = 'shelter';
+      else if (gcRaw.includes('bmdc'))       key = 'bmdc';
+      else if (gcRaw.includes('gre'))        key = 'gre';
+      else if (gcRaw.includes('natural'))    key = 'natbuilt';
+      else if (gcRaw.includes('holland'))    key = 'holland';
+      else if (gcRaw.includes('ravenna'))    key = 'ravenna';
+      else if (gcRaw.includes('intracorp'))  key = 'intracorp';
+      else if (gcRaw.includes('sierra'))     key = 'sierra';
+      else if (gcRaw.includes('braseth'))    key = 'braseth';
+      if (key) {
+        if (!map[key]) map[key] = [];
+        map[key].push(pid);
+      }
+    });
+    return map;
+  }
+  const _atlasGcMap = _atlasBuildGcProjectMap();
+
+  // Get center coordinates of a node element (rect for GC, circle for project, polygon for vendor)
+  function _atlasNodeCenter(g) {
+    const rect = g.querySelector('rect');
+    if (rect) {
+      const x = parseFloat(rect.getAttribute('x')), y = parseFloat(rect.getAttribute('y'));
+      const w = parseFloat(rect.getAttribute('width')), h = parseFloat(rect.getAttribute('height'));
+      return { x: x + w/2, y: y + h/2 };
+    }
+    const c = g.querySelector('circle');
+    if (c) return { x: parseFloat(c.getAttribute('cx')), y: parseFloat(c.getAttribute('cy')) };
+    const t = g.querySelector('text');
+    if (t) return { x: parseFloat(t.getAttribute('x')) || 0, y: parseFloat(t.getAttribute('y')) || 0 };
+    return { x: 0, y: 0 };
+  }
+
+  function _atlasResetFocus() {
+    _atlasFocusedKey = null;
+    const svg = document.querySelector('.view[data-view="atlas"] svg');
+    if (!svg) return;
+    svg.querySelectorAll('.atlas-node').forEach(n => { n.style.opacity = ''; n.classList.remove('is-atlas-focused'); });
+    svg.querySelectorAll('line').forEach(l => { l.style.opacity = ''; l.style.strokeWidth = ''; });
+    const banner = document.getElementById('atlas-focus-banner');
+    if (banner) banner.style.display = 'none';
+  }
+  window._atlasResetFocus = _atlasResetFocus;
+
+  function _atlasApplyFocus(clickedG) {
+    const cat = clickedG.dataset.atlasCat;
+    const key = clickedG.dataset.atlasNode;
+    const svg = document.querySelector('.view[data-view="atlas"] svg');
+    if (!svg) return;
+
+    // Toggle off if same node clicked twice
+    if (_atlasFocusedKey === cat + ':' + key) { _atlasResetFocus(); return; }
+    _atlasFocusedKey = cat + ':' + key;
+
+    // Compute related node set
+    const related = new Set([cat + ':' + key]);
+    if (cat === 'gc') {
+      const pids = _atlasGcMap[key] || [];
+      pids.forEach(pid => related.add('project:' + pid));
+    } else if (cat === 'project') {
+      // find this project's GC
+      const p = PROJECTS[key];
+      if (p) {
+        const gcRaw = (p.gcShort || p.gc || '').toString().toLowerCase();
+        Object.keys(_atlasGcMap).forEach(gcKey => {
+          if (gcRaw.includes(gcKey) || gcKey === 'natbuilt' && gcRaw.includes('natural')) {
+            related.add('gc:' + gcKey);
+          }
+        });
+      }
+    }
+    // (vendors: leave related = just self for now)
+
+    // Apply dim to non-related nodes
+    const relatedNodes = [];
+    svg.querySelectorAll('.atlas-node').forEach(n => {
+      const id = n.dataset.atlasCat + ':' + n.dataset.atlasNode;
+      if (related.has(id)) {
+        n.style.opacity = '1';
+        n.classList.add('is-atlas-focused');
+        relatedNodes.push(n);
+      } else {
+        n.style.opacity = '0.15';
+        n.classList.remove('is-atlas-focused');
+      }
+    });
+
+    // Compute centers of related nodes for edge matching
+    const centers = relatedNodes.map(_atlasNodeCenter);
+    const TOL = 18; // px tolerance for endpoint match
+    function nearAnyCenter(x, y) {
+      return centers.some(c => Math.abs(c.x - x) < TOL && Math.abs(c.y - y) < TOL);
+    }
+
+    // Dim edges, brighten edges connecting two related nodes
+    svg.querySelectorAll('line').forEach(line => {
+      const x1 = parseFloat(line.getAttribute('x1')), y1 = parseFloat(line.getAttribute('y1'));
+      const x2 = parseFloat(line.getAttribute('x2')), y2 = parseFloat(line.getAttribute('y2'));
+      const a = nearAnyCenter(x1, y1);
+      const b = nearAnyCenter(x2, y2);
+      if (a && b) {
+        line.style.opacity = '1';
+        const cur = parseFloat(line.getAttribute('stroke-width')) || 1;
+        line.style.strokeWidth = (cur + 0.6) + 'px';
+      } else if (a || b) {
+        line.style.opacity = '0.25';
+      } else {
+        line.style.opacity = '0.05';
+      }
+    });
+
+    // Show focus banner
+    const banner = document.getElementById('atlas-focus-banner');
+    if (banner) {
+      const labelEl = clickedG.querySelector('text');
+      const label = labelEl ? labelEl.textContent.trim() : key;
+      const countMsg = cat === 'gc' ? ((_atlasGcMap[key] || []).length + ' projects') : (cat === 'project' ? 'project + its GC' : key);
+      banner.innerHTML = '◢ focused · <b>' + label + '</b> · ' + countMsg + '  <span style="cursor:pointer;color:var(--clay);font-weight:600;margin-left:10px;" onclick="_atlasResetFocus()">↻ reset</span>';
+      banner.style.display = 'inline-block';
+    }
+  }
+
+  // Replace simple modal-open click with focus + modal
   document.querySelectorAll('.atlas-node').forEach(g => {
-    g.addEventListener('click', () => openAtlasModal(g.dataset.atlasNode));
+    g.addEventListener('click', (e) => {
+      e.stopPropagation();
+      _atlasApplyFocus(g);
+      openAtlasModal(g.dataset.atlasNode);
+    });
+  });
+
+  // Click on SVG background → reset focus
+  const _atlasSvgEl = document.querySelector('.view[data-view="atlas"] svg');
+  if (_atlasSvgEl) {
+    _atlasSvgEl.addEventListener('click', (e) => {
+      // If click target isn't inside an .atlas-node, reset
+      if (!e.target.closest('.atlas-node')) _atlasResetFocus();
+    });
+  }
+  // Esc to reset
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && _atlasFocusedKey) _atlasResetFocus();
   });
 
   // Filter pills
