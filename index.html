@@ -1201,7 +1201,7 @@
       <!-- Prompt box -->
       <div class="mt-12 w-full">
         <div id="home-prompt-box" style="background: var(--cream-card); border: 1px solid var(--border-2); border-radius: 18px; padding: 20px 22px; transition: border-color .15s ease, box-shadow .15s ease;">
-          <textarea id="home-prompt-input" rows="3" placeholder="Ask Cortex anything about your jobs…  (⌘↵ to send)" style="width: 100%; background: transparent; border: none; outline: none; resize: none; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: var(--ink); letter-spacing: -0.005em;"></textarea>
+          <textarea id="home-prompt-input" rows="3" placeholder="Ask Cortex anything about your jobs…  (Enter to send · Shift+Enter for new line)" style="width: 100%; background: transparent; border: none; outline: none; resize: none; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: var(--ink); letter-spacing: -0.005em;"></textarea>
           <div class="mt-3 flex items-center justify-between">
             <div class="flex items-center gap-2 text-[11px]" style="color: var(--ink-4);">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -12998,10 +12998,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     if(input){ input.value = ''; input.focus(); }
   }
 
-  // Submit on ⌘/Ctrl + Enter
+  // Submit on Enter (chat convention — Shift+Enter for newline)
   document.addEventListener('keydown', e => {
     const input = document.getElementById('home-prompt-input');
-    if(input && document.activeElement === input && (e.metaKey || e.ctrlKey) && e.key === 'Enter'){
+    if(input && document.activeElement === input && e.key === 'Enter' && !e.shiftKey){
       e.preventDefault(); sendPrompt();
     }
   });
