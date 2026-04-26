@@ -128,30 +128,11 @@
   .atlas-filter { transition: background .15s ease, color .15s ease, border-color .15s ease; }
   .atlas-filter:hover { border-color: var(--ink-3); color: var(--ink); }
   .atlas-filter.is-active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-  .atlas-node { transition: opacity .18s ease, transform .15s ease; transform-origin: center; transform-box: fill-box; cursor: pointer; }
+  .atlas-node { transition: opacity .2s ease, transform .15s ease; transform-origin: center; transform-box: fill-box; }
   .atlas-node:hover { opacity: 1 !important; }
-  .atlas-node:hover circle, .atlas-node:hover rect, .atlas-node:hover polygon { filter: drop-shadow(0 0 8px rgba(184,92,62,0.45)); }
-  .atlas-node.is-dimmed { opacity: 0.12; }
-  .atlas-node.is-related { opacity: 1; }
-  .atlas-node.is-focused circle,
-  .atlas-node.is-focused rect,
-  .atlas-node.is-focused polygon { stroke: var(--clay) !important; stroke-width: 3px !important; filter: drop-shadow(0 2px 6px rgba(184,92,62,0.40)); }
-  .atlas-edge { transition: opacity .18s ease, stroke-width .18s ease; }
-  .atlas-edge.is-dimmed { opacity: 0.05 !important; }
-  .atlas-edge.is-active { opacity: 1 !important; stroke-width: 2px !important; }
-  .atlas-edge.vendor { display: none; }
-  .atlas-edge.vendor.is-active { display: block; }
-  /* filter-pill modes */
-  #atlas-graph-host.atlas-filter-gc .atlas-node[data-atlas-cat="project"],
-  #atlas-graph-host.atlas-filter-gc .atlas-node[data-atlas-cat="vendor"],
-  #atlas-graph-host.atlas-filter-gc .atlas-edge { display: none; }
-  #atlas-graph-host.atlas-filter-project .atlas-node[data-atlas-cat="gc"],
-  #atlas-graph-host.atlas-filter-project .atlas-node[data-atlas-cat="vendor"],
-  #atlas-graph-host.atlas-filter-project .atlas-edge { display: none; }
-  #atlas-graph-host.atlas-filter-vendor .atlas-node[data-atlas-cat="gc"] { opacity: 0.35; }
-  #atlas-graph-host.atlas-filter-vendor .atlas-edge:not(.vendor) { display: none; }
-  #atlas-graph-host.atlas-filter-vendor .atlas-edge.vendor { display: block; opacity: 0.65; }
-  .atlas-label { font-family: 'JetBrains Mono', monospace; pointer-events: none; user-select: none; }
+  .atlas-node:hover circle, .atlas-node:hover rect, .atlas-node:hover polygon { filter: drop-shadow(0 0 8px rgba(177, 91, 45, 0.45)); }
+  .atlas-node.is-dimmed { opacity: 0.12; pointer-events: none; }
+  .atlas-edge.is-dimmed { opacity: 0.08; }
 
   /* Finding callouts */
   .finding {
@@ -3734,14 +3715,728 @@
       <div class="blueprint-corner" style="bottom: 12px; left: 14px;">scale · n.t.s. · scroll →</div>
       <div class="blueprint-corner" style="bottom: 12px; right: 14px;">cortex · one way plumbing llc</div>
 
-      <div style="margin-top:14px;">
-        <div class="flex items-center justify-between" style="margin-bottom:10px;">
-          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-4); letter-spacing:0.06em;">
-            click any node to focus its network &middot; click background to reset &middot; esc
-          </div>
-          <a href="#" id="atlas-reset-focus" style="display:none; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--clay); text-decoration:none; letter-spacing:0.08em;">&#x21bb; RESET FOCUS</a>
-        </div>
-        <div id="atlas-graph-host" style="overflow-x:auto; overflow-y:hidden;"></div>
+      <div style="overflow-x: auto; overflow-y: hidden; margin-top: 14px;">
+      <svg viewBox="0 0 1600 920" style="display: block; height: auto; min-width: 1600px; width: 100%; max-height: 920px; overflow: visible;">
+        <defs>
+          <marker id="atlas-dot" viewBox="-2 -2 4 4" refX="0" refY="0" markerWidth="3" markerHeight="3"><circle r="1.5" fill="var(--ink-3)"/></marker>
+        </defs>
+
+        <!-- ========== EDGES (drawn first so nodes overlap them) ========== -->
+
+        <!-- Strong solid: GC → projects -->
+        <!-- Chinn → its 4 closed jobs + 2014 active + Bellevue 220 proposed -->
+        <line x1="376" y1="86" x2="130" y2="290" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="376" y1="86" x2="270" y2="250" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="376" y1="86" x2="170" y2="380" stroke="var(--ink)" stroke-width="1.1"/>
+        <line x1="376" y1="86" x2="320" y2="360" stroke="var(--ink)" stroke-width="1.1"/>
+        <line x1="376" y1="86" x2="600" y2="270" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="376" y1="86" x2="600" y2="110" stroke="var(--ink)" stroke-width="1.4"/>
+
+        <!-- Exxel → its 3 closed jobs -->
+        <line x1="806" y1="86" x2="920" y2="290" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="806" y1="86" x2="1080" y2="280" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="806" y1="86" x2="1010" y2="400" stroke="var(--ink)" stroke-width="1.4"/>
+
+        <!-- Natural & Built → its 1 closed job -->
+        <line x1="106" y1="606" x2="470" y2="210" stroke="var(--ink)" stroke-width="1.2"/>
+
+        <!-- Comparable / "would-bid" edges (clay, dashed) — Bellevue 220 ↔ analogs -->
+        <line x1="600" y1="110" x2="920" y2="290" stroke="var(--clay)" stroke-width="1.6" stroke-dasharray="5,4"/>
+        <line x1="600" y1="110" x2="1080" y2="280" stroke="var(--clay)" stroke-width="1.0" stroke-dasharray="5,4"/>
+        <line x1="600" y1="110" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.8" stroke-dasharray="5,4"/>
+
+        <!-- Vendor → projects (dashed ink-3) -->
+        <line x1="130" y1="540" x2="130" y2="290" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="130" y1="540" x2="270" y2="250" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="130" y1="540" x2="170" y2="380" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="270" y1="600" x2="920" y2="290" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="270" y1="600" x2="1080" y2="280" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="200" y1="460" x2="320" y2="360" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="200" y1="460" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+
+        <!-- ========== NODES ========== -->
+
+        <!-- GC nodes: rounded squares, ink fill -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="chinn" style="cursor: pointer;">
+          <rect x="350" y="60" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
+          <text x="376" y="91" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">CHINN</text>
+          <text x="376" y="134" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 5 closed (1 live)</text>
+        </g>
+
+        <!-- #2098 Chinn Trailside 2 (170u · LIVE) — chinn GC · clay stroke, solid edge -->
+        <line x1="376" y1="86" x2="550" y2="220" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2098" style="cursor: pointer;">
+          <circle cx="550" cy="220" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="550" y="224" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2098</text>
+          <text x="550" y="246" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Trailside 2</text>
+          <text x="550" y="258" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">170u · LIVE</text>
+        </g>
+
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="exxel" style="cursor: pointer;">
+          <rect x="780" y="60" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="806" y="91" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">EXXEL</text>
+          <text x="806" y="134" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 15 jobs</text>
+        </g>
+
+        <!-- Project nodes: closed jobs (Chinn cluster, left) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2009" style="cursor: pointer;">
+          <circle cx="130" cy="290" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="130" y="294" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2009</text>
+          <text x="130" y="320" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Greenwood</text>
+          <text x="130" y="333" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">168u · 27.0%</text>
+        </g>
+
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2010" style="cursor: pointer;">
+          <circle cx="270" cy="250" r="18" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="270" y="254" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2010</text>
+          <text x="270" y="282" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Old Town</text>
+          <text x="270" y="295" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">165u · 54.2% ★</text>
+        </g>
+
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2011" style="cursor: pointer;">
+          <circle cx="170" cy="380" r="15" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="170" y="384" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2011</text>
+          <text x="170" y="408" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Barrett Park</text>
+          <text x="170" y="421" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">117u · 38.2%</text>
+        </g>
+
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2008" style="cursor: pointer;">
+          <circle cx="320" cy="360" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="320" y="364" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2008</text>
+          <text x="320" y="388" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Taylor</text>
+          <text x="320" y="401" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">163u · 22.3%</text>
+        </g>
+
+        <!-- Project nodes: closed jobs (Exxel cluster, right) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2001" style="cursor: pointer;">
+          <circle cx="920" cy="290" r="18" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2.2"/>
+          <text x="920" y="294" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2001</text>
+          <text x="920" y="322" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">230 Broadway</text>
+          <text x="920" y="335" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">282u · 39.3%</text>
+        </g>
+
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2012" style="cursor: pointer;">
+          <circle cx="1080" cy="280" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="1080" y="284" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2012</text>
+          <text x="1080" y="312" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">8th Ave</text>
+          <text x="1080" y="325" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">163u · 38.3%</text>
+        </g>
+
+        <!-- #2015 Exxel Rooster — below Exxel cluster -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2015" style="cursor: pointer;">
+          <circle cx="1010" cy="400" r="18" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="1010" y="404" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2015</text>
+          <text x="1010" y="432" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Rooster</text>
+          <text x="1010" y="445" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">197u · 23.5%</text>
+        </g>
+
+        <!-- Natural & Built GC — new cluster top-center -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="natbuilt" style="cursor: pointer;">
+          <rect x="80" y="580" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="106" y="604" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">NATURAL</text>
+          <text x="106" y="616" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">&amp; BUILT</text>
+          <text x="140" y="610" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="start" letter-spacing="0.5">general contractor · 2 jobs</text>
+        </g>
+
+        <!-- #2016 Natural & Built Sedona -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2016" style="cursor: pointer;">
+          <circle cx="470" cy="210" r="14" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="470" y="214" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2016</text>
+          <text x="470" y="238" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Sedona</text>
+          <text x="470" y="251" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">80u · 29.5%</text>
+        </g>
+
+        <!-- ============== NEW EXPANSION (#2017–#2022 + SRM) ============== -->
+        <!-- SRM GC node — third primary trunk, top-right of new band -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="srm" style="cursor: pointer;">
+          <rect x="370" y="820" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="396" y="851" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">SRM</text>
+          <text x="396" y="810" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 3 jobs</text>
+        </g>
+
+        <!-- Edges: SRM → its 3 jobs (#2008 already at 320,360 in Chinn cluster — kept for visual) -->
+        <line x1="396" y1="846" x2="320" y2="360" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="2,2"/>
+        <line x1="396" y1="846" x2="600" y2="850" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="396" y1="846" x2="980" y2="850" stroke="var(--ink)" stroke-width="1.4"/>
+
+        <!-- Edges: Exxel → 4 new closed jobs -->
+        <line x1="806" y1="86" x2="200" y2="850" stroke="var(--ink)" stroke-width="1.0"/>
+        <line x1="806" y1="86" x2="470" y2="780" stroke="var(--ink)" stroke-width="1.0"/>
+        <line x1="806" y1="86" x2="1140" y2="850" stroke="var(--ink)" stroke-width="1.0"/>
+        <line x1="806" y1="86" x2="1140" y2="720" stroke="var(--ink)" stroke-width="0.8"/>
+
+        <!-- ===== New project nodes — second band, y=820–870 ===== -->
+        <!-- #2017 Exxel 36 Stone Way -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2017" style="cursor: pointer;">
+          <circle cx="200" cy="850" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="200" y="854" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2017</text>
+          <text x="200" y="882" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Stone Way</text>
+          <text x="200" y="895" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">119u · 37.3%</text>
+        </g>
+
+        <!-- #2018 SRM Astro ★ -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2018" style="cursor: pointer;">
+          <circle cx="600" cy="850" r="20" fill="var(--cream-card)" stroke="var(--sage-ink)" stroke-width="2.4"/>
+          <text x="600" y="854" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2018</text>
+          <text x="600" y="884" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Astro</text>
+          <text x="600" y="897" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">212u · 46.5% ★</text>
+        </g>
+
+        <!-- #2019 Exxel 8th & Republican ★★ portfolio leader -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2019" style="cursor: pointer;">
+          <circle cx="470" cy="780" r="22" fill="var(--cream-card)" stroke="var(--sage-ink)" stroke-width="2.6"/>
+          <text x="470" y="784" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2019</text>
+          <text x="470" y="818" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">8th &amp; Rep</text>
+          <text x="470" y="831" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">211u · 47.0% ★★</text>
+        </g>
+
+        <!-- #2020 SRM Bellevue ⚠ labor outlier -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2020" style="cursor: pointer;">
+          <circle cx="980" cy="850" r="20" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2.6" stroke-dasharray="3,2"/>
+          <text x="980" y="848" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--clay)" text-anchor="middle">⚠ LABOR</text>
+          <text x="980" y="860" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2020</text>
+          <text x="980" y="888" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Bellevue</text>
+          <text x="980" y="901" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">288u · 32.3%</text>
+        </g>
+
+        <!-- #2021 Exxel Admiral -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2021" style="cursor: pointer;">
+          <circle cx="1140" cy="850" r="16" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="1140" y="854" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2021</text>
+          <text x="1140" y="882" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Admiral</text>
+          <text x="1140" y="895" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">182u · 28.4%</text>
+        </g>
+
+        <!-- #2022 Exxel Interlake (smallest) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2022" style="cursor: pointer;">
+          <circle cx="1140" cy="720" r="11" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.6"/>
+          <text x="1140" y="724" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2022</text>
+          <text x="1140" y="745" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Interlake</text>
+          <text x="1140" y="757" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">20u · 35.9%</text>
+        </g>
+
+        <!-- ============== NEW: #2023–#2026 (added Apr 2026) ============== -->
+        <!-- Edges: GC → new projects -->
+        <line x1="376" y1="86" x2="70"  y2="780" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="396" y1="846" x2="700" y2="870" stroke="var(--ink)" stroke-width="1.4"/>
+        <line x1="806" y1="86" x2="1090" y2="560" stroke="var(--ink)" stroke-width="1.2"/>
+
+        <!-- #2023 Chinn Legacy Apartments (241u · large) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2023" style="cursor: pointer;">
+          <circle cx="70" cy="780" r="20" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="70" y="784" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2023</text>
+          <text x="70" y="814" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Legacy</text>
+          <text x="70" y="826" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">241u · 32.4%</text>
+        </g>
+
+        <!-- #2024 SRM Ballard Merrill Gardens (116u · large · ★ 48.9%) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2024" style="cursor: pointer;">
+          <circle cx="700" cy="870" r="18" fill="var(--cream-card)" stroke="var(--sage-ink)" stroke-width="2.4"/>
+          <text x="700" y="874" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2024</text>
+          <text x="700" y="902" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Ballard MG</text>
+          <text x="700" y="915" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">116u · 48.9% ★</text>
+        </g>
+
+        <!-- #2025 Exxel The Cora (80u · mid) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2025" style="cursor: pointer;">
+          <circle cx="1090" cy="560" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1090" y="564" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2025</text>
+          <text x="1090" y="586" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">The Cora</text>
+          <text x="1090" y="598" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">80u · 32.0%</text>
+        </g>
+
+        <!-- #2026 Synergy Fox & Finch (60u · mid · new GC) -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="synergy" style="cursor: pointer;">
+          <rect x="1180" y="820" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="1206" y="851" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">SYNERGY</text>
+          <text x="1206" y="810" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 1 job</text>
+        </g>
+        <line x1="1206" y1="846" x2="880" y2="320" stroke="var(--ink)" stroke-width="1.2"/>
+
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2026" style="cursor: pointer;">
+          <circle cx="880" cy="320" r="12" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="880" y="324" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2026</text>
+          <text x="880" y="346" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Fox &amp; Finch</text>
+          <text x="880" y="358" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">60u · 34.0%</text>
+        </g>
+
+        <!-- #2027 Exxel The Zig (92u · 40.5% margin · 550 Broadway) -->
+        <line x1="806" y1="86" x2="1180" y2="440" stroke="var(--ink)" stroke-width="1.2"/>
+        <line x1="500" y1="654" x2="1180" y2="440" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2027" style="cursor: pointer;">
+          <circle cx="1180" cy="440" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1180" y="444" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2027</text>
+          <text x="1180" y="466" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">The Zig</text>
+          <text x="1180" y="478" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">92u · 40.5%</text>
+        </g>
+
+        <!-- #2028 Exxel Reserve @ Lynnwood (296u · 48.9% margin · fire/rebuild) -->
+        <line x1="806" y1="86" x2="1260" y2="560" stroke="var(--ink)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2028" style="cursor: pointer;">
+          <circle cx="1260" cy="560" r="14" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1260" y="564" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2028</text>
+          <text x="1260" y="586" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Reserve @ Lynnwood</text>
+          <text x="1260" y="598" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">296u · 48.9%</text>
+        </g>
+
+        <!-- #2029 Exxel Pacific Parsonage (83u · 49.8% margin) -->
+        <line x1="806" y1="86" x2="1320" y2="440" stroke="var(--ink)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2029" style="cursor: pointer;">
+          <circle cx="1320" cy="440" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1320" y="444" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2029</text>
+          <text x="1320" y="466" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Parsonage</text>
+          <text x="1320" y="478" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">83u · 49.8%</text>
+        </g>
+
+        <!-- #2030 Exxel Pacific East Union (144u · 38.1% margin) -->
+        <line x1="806" y1="86" x2="1440" y2="360" stroke="var(--ink)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2030" style="cursor: pointer;">
+          <circle cx="1440" cy="360" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1440" y="364" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2030</text>
+          <text x="1440" y="386" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">East Union</text>
+          <text x="1440" y="398" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">144u · 38.1%</text>
+        </g>
+
+
+        <!-- #2031 Exxel Pacific Issaquah Gateway (398u · 53.2% margin) -->
+        <line x1="806" y1="86" x2="1380" y2="240" stroke="var(--ink)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2031" style="cursor: pointer;">
+          <circle cx="1380" cy="240" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1380" y="244" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2031</text>
+          <text x="1380" y="266" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Issaquah Gateway</text>
+          <text x="1380" y="278" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">398u · 53.2%</text>
+        </g>
+
+        <!-- BLUEPRINT GC (1 job: #2032 Luna Apts-Roosevelt) -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="blueprint" style="cursor: pointer;">
+          <rect x="1500" y="680" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="1526" y="708" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">BLUE</text>
+          <text x="1526" y="721" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">PRINT</text>
+          <text x="1492" y="710" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">general contractor · 3 jobs</text>
+        </g>
+
+        <!-- COMPASS GC (5 closed: #2033, #2034, #2038, #2043, #2050 + #2103/#2111 live variants) -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="compass" style="cursor: pointer;">
+          <rect x="1210" y="60" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="1236" y="87" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">COMPASS</text>
+          <text x="1236" y="99" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">HARBOR</text>
+          <text x="1236" y="134" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 5 closed (2 live)</text>
+        </g>
+
+        <!-- #2103 Compass Northgate M2 (234u · LIVE) — solid clay edge, sister of #2111 -->
+        <line x1="1236" y1="86" x2="1330" y2="200" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2103" style="cursor: pointer;">
+          <circle cx="1330" cy="200" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1330" y="204" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2103</text>
+          <text x="1330" y="226" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Northgate M2</text>
+          <text x="1330" y="238" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">234u · LIVE</text>
+        </g>
+        <!-- sibling link M2 ↔ M3 -->
+        <line x1="1330" y1="200" x2="1410" y2="250" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="2,2"/>
+
+        <!-- #2111 Compass Northgate M3 (186u · LIVE) — solid clay edge -->
+        <line x1="1236" y1="86" x2="1410" y2="250" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2111" style="cursor: pointer;">
+          <circle cx="1410" cy="250" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1410" y="254" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2111</text>
+          <text x="1410" y="276" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Northgate M3</text>
+          <text x="1410" y="288" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">186u · LIVE</text>
+        </g>
+
+        <!-- #2032 Blueprint Luna Apts-Roosevelt (71u · 45.2% margin) -->
+        <line x1="1526" y1="706" x2="1380" y2="380" stroke="var(--ink)" stroke-width="1.2"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2032" style="cursor: pointer;">
+          <circle cx="1380" cy="380" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1380" y="384" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2032</text>
+          <text x="1380" y="406" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Luna Apts</text>
+          <text x="1380" y="418" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">71u · 45.2%</text>
+        </g>
+
+        <!-- #2033 Compass Vuecrest (137u · 43.1% margin) -->
+        <line x1="1236" y1="86" x2="1560" y2="450" stroke="var(--ink)" stroke-width="1.2"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2033" style="cursor: pointer;">
+          <circle cx="1560" cy="450" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1560" y="454" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2033</text>
+          <text x="1560" y="476" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Vuecrest</text>
+          <text x="1560" y="488" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">137u · 43.1%</text>
+        </g>
+
+        <!-- #2034 Compass Park Lane (128u · 32.4% margin) -->
+        <line x1="1236" y1="86" x2="1450" y2="540" stroke="var(--ink)" stroke-width="1.2"/>
+        <line x1="1560" y1="450" x2="1450" y2="540" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="2,2"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2034" style="cursor: pointer;">
+          <circle cx="1450" cy="540" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1450" y="544" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2034</text>
+          <text x="1450" y="566" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Park Lane</text>
+          <text x="1450" y="578" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">128u · 32.4%</text>
+        </g>
+
+        <!-- #2043 Compass Aegis Mercer Island (98u · 46.0% margin) -->
+        <line x1="1236" y1="86" x2="1600" y2="600" stroke="var(--ink)" stroke-width="1.2"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2043" style="cursor: pointer;">
+          <circle cx="1600" cy="600" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1600" y="604" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2043</text>
+          <text x="1600" y="626" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Aegis MI</text>
+          <text x="1600" y="638" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">98u · 46.0%</text>
+        </g>
+
+        <!-- #2050 Compass 2100 Madison / Avant (50u · 46.5% margin) -->
+        <line x1="1236" y1="86" x2="1660" y2="450" stroke="var(--ink)" stroke-width="1.2"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2050" style="cursor: pointer;">
+          <circle cx="1660" cy="450" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1660" y="454" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2050</text>
+          <text x="1660" y="476" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">2100 Madison</text>
+          <text x="1660" y="488" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">50u · 46.5%</text>
+        </g>
+
+        <!-- ============== NEW GC NODE: Marpac (#2037) ============== -->
+        <!-- MARPAC GC (1 job: #2037 University Apts MYSA) -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="marpac" style="cursor: pointer;">
+          <rect x="1500" y="240" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="1526" y="272" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">MARPAC</text>
+          <text x="1492" y="270" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">general contractor · 2 jobs</text>
+        </g>
+
+        <!-- ============== NEW PROJECT NODES (2035-2040) ============== -->
+        <!-- #2035 Natural & Built 162 Ten (92u · 49.7% margin) — natbuilt GC -->
+        <line x1="106" y1="606" x2="340" y2="210" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2035" style="cursor: pointer;">
+          <circle cx="340" cy="210" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="340" y="214" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2035</text>
+          <text x="340" y="236" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">162 Ten</text>
+          <text x="340" y="248" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">92u · 49.7%</text>
+        </g>
+
+        <!-- #2036 Exxel Westridge (31u · 34.0% margin) — exxel GC -->
+        <line x1="806" y1="86" x2="1190" y2="210" stroke="var(--ink)" stroke-width="1.0"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2036" style="cursor: pointer;">
+          <circle cx="1190" cy="210" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1190" y="214" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2036</text>
+          <text x="1190" y="236" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Westridge</text>
+          <text x="1190" y="248" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">31u · 34.0%</text>
+        </g>
+
+        <!-- #2037 Marpac University Apts (122u · 41.4% margin) — marpac GC -->
+        <line x1="1526" y1="266" x2="1600" y2="210" stroke="var(--ink)" stroke-width="1.2"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2037" style="cursor: pointer;">
+          <circle cx="1600" cy="210" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1600" y="214" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2037</text>
+          <text x="1600" y="236" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">University</text>
+          <text x="1600" y="248" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">122u · 41.4%</text>
+        </g>
+
+        <!-- #2038 Compass 2nd & John (80u · 32.5% margin) — compass GC -->
+        <line x1="1236" y1="86" x2="1340" y2="600" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2038" style="cursor: pointer;">
+          <circle cx="1340" cy="600" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1340" y="604" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2038</text>
+          <text x="1340" y="626" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">2nd &amp; John</text>
+          <text x="1340" y="638" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">80u · 32.5%</text>
+        </g>
+
+        <!-- #2040 Blueprint Brooklyn 65 (55u · 35.2% margin) — blueprint GC -->
+        <line x1="1526" y1="706" x2="1220" y2="380" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2040" style="cursor: pointer;">
+          <circle cx="1220" cy="380" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1220" y="384" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2040</text>
+          <text x="1220" y="406" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Brooklyn 65</text>
+          <text x="1220" y="418" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">55u · 35.2%</text>
+        </g>
+
+        <!-- #2044 Blueprint Track 66 (75u · 31.1% margin) — blueprint GC -->
+        <line x1="1526" y1="706" x2="1080" y2="380" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2044" style="cursor: pointer;">
+          <circle cx="1080" cy="380" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1080" y="384" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2044</text>
+          <text x="1080" y="406" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Track 66</text>
+          <text x="1080" y="418" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">75u · 31.1%</text>
+        </g>
+
+        <!-- #2041 Chinn Luna 2749 California (108u · 29.4% margin) — chinn GC -->
+        <line x1="376" y1="86" x2="60" y2="430" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2041" style="cursor: pointer;">
+          <circle cx="60" cy="430" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="60" y="434" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2041</text>
+          <text x="60" y="456" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Luna</text>
+          <text x="60" y="468" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">108u · 29.4%</text>
+        </g>
+
+        <!-- ============== RESTORED GC NODE: SHELTER HOLDINGS (1 closed job — #2042) ============== -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="shelter" style="cursor: pointer;">
+          <rect x="80" y="300" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="106" y="324" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">SHELTER</text>
+          <text x="106" y="338" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">HOLDINGS</text>
+          <text x="140" y="330" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="start" letter-spacing="0.5">general contractor · 1 job</text>
+        </g>
+
+        <!-- #2042 Shelter Holdings Metro Line Flats (72u · 35.6% margin) — shelter GC -->
+        <line x1="106" y1="326" x2="130" y2="260" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2042" style="cursor: pointer;">
+          <circle cx="130" cy="260" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="130" y="264" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2042</text>
+          <text x="130" y="286" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Metro Flats</text>
+          <text x="130" y="298" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">72u · 35.6%</text>
+        </g>
+
+        <!-- ============== NEW GC NODE: BMDC (2 jobs live — #2104 + #2112) ============== -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="bmdc" style="cursor: pointer;">
+          <rect x="1500" y="460" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
+          <text x="1526" y="492" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">BMDC</text>
+          <text x="1492" y="490" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">general contractor · 2 jobs (live)</text>
+        </g>
+
+        <!-- #2104 BMDC Big 1410 (24u · LIVE) — bmdc GC · clay stroke, solid edge -->
+        <line x1="1526" y1="486" x2="1700" y2="210" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2104" style="cursor: pointer;">
+          <circle cx="1700" cy="210" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1700" y="214" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2104</text>
+          <text x="1700" y="236" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Big 1410</text>
+          <text x="1700" y="248" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">24u · LIVE</text>
+        </g>
+
+        <!-- #2112 BMDC Big 3 (20u · LIVE) — bmdc GC · clay stroke, solid edge -->
+        <line x1="1526" y1="486" x2="1640" y2="340" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2112" style="cursor: pointer;">
+          <circle cx="1640" cy="340" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1640" y="344" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2112</text>
+          <text x="1640" y="366" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Big 3</text>
+          <text x="1640" y="378" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">20u · LIVE</text>
+        </g>
+
+        <!-- ============== NEW GC NODE: GRE (1 closed job — #2045) ============== -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="gre" style="cursor: pointer;">
+          <rect x="780" y="820" width="52" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="806" y="852" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="var(--cream)" text-anchor="middle">GRE</text>
+          <text x="806" y="810" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 3 jobs</text>
+        </g>
+
+        <!-- #2045 GRE Notch Apartments (158u · 46.1% margin) — gre GC -->
+        <line x1="806" y1="846" x2="880" y2="540" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2045" style="cursor: pointer;">
+          <circle cx="880" cy="540" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="880" y="544" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2045</text>
+          <text x="880" y="566" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Notch</text>
+          <text x="880" y="578" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">158u · 46.1%</text>
+        </g>
+
+        <!-- #2046 Marpac 4218 Roosevelt / Sundodger (110u · 43.6% margin) — marpac GC -->
+        <line x1="1526" y1="266" x2="1380" y2="470" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2046" style="cursor: pointer;">
+          <circle cx="1380" cy="470" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1380" y="474" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2046</text>
+          <text x="1380" y="496" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Sundodger</text>
+          <text x="1380" y="508" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">110u · 43.6%</text>
+        </g>
+
+        <!-- #2047 GRE Greenlake (70u · 33.8% margin) — gre GC -->
+        <line x1="806" y1="846" x2="820" y2="470" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2047" style="cursor: pointer;">
+          <circle cx="820" cy="470" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="820" y="474" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2047</text>
+          <text x="820" y="496" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Greenlake</text>
+          <text x="820" y="508" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">70u · 33.8%</text>
+        </g>
+
+        <!-- #2048 GRE Ballinger / The 205 (72u · 43.0% margin) — gre GC -->
+        <line x1="806" y1="846" x2="960" y2="470" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2048" style="cursor: pointer;">
+          <circle cx="960" cy="470" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="960" y="474" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2048</text>
+          <text x="960" y="496" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">The 205</text>
+          <text x="960" y="508" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">72u · 43.0%</text>
+        </g>
+
+        <!-- #2049 Exxel Reserve Lynnwood REBUILD (295u · 48.9% margin) — exxel GC -->
+        <line x1="806" y1="86" x2="1140" y2="470" stroke="var(--ink)" stroke-width="1.1"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2049" style="cursor: pointer;">
+          <circle cx="1140" cy="470" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1140" y="474" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2049</text>
+          <text x="1140" y="496" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Reserve R2</text>
+          <text x="1140" y="508" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">295u · 48.9%</text>
+        </g>
+
+        <!-- Vendor edges: Rosen → 2023/2024/2026 (top vendor all three) · Keller → 2024/2025 · Consolidated → 2023/2026 · Ferguson → 2023 · Mech Sales → 2024 -->
+        <line x1="500" y1="654" x2="70"  y2="780" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="700" y2="870" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="880" y2="320" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="1090" y2="560" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="700" y2="870" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="1090" y2="560" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="280" y1="654" x2="70"  y2="780" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="280" y1="654" x2="880" y2="320" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="130" y1="540" x2="70"  y2="780" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="900" y1="654" x2="700" y2="870" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+
+        <!-- ===== New vendor nodes — Rosen + Keller anchor the new band ===== -->
+        <!-- Rosen Supply — pervasive, connects to 8 jobs -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="rosen" style="cursor: pointer;">
+          <polygon points="500,654 516,680 484,680" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="500" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Rosen Supply</text>
+          <text x="500" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 8 jobs</text>
+        </g>
+
+        <!-- Keller Supply -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="keller" style="cursor: pointer;">
+          <polygon points="700,654 716,680 684,680" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="700" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Keller Supply</text>
+          <text x="700" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 7 jobs</text>
+        </g>
+
+        <!-- Consolidated Supply -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="consolidated" style="cursor: pointer;">
+          <polygon points="280,654 296,680 264,680" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="280" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Consolidated</text>
+          <text x="280" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 6 jobs</text>
+        </g>
+
+        <!-- Mechanical Sales (specialty) -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="mechanical-sales" style="cursor: pointer;">
+          <polygon points="900,654 914,678 886,678" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="1.6"/>
+          <text x="900" y="700" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Mech Sales</text>
+          <text x="900" y="713" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 5 jobs</text>
+        </g>
+
+        <!-- Vendor → new project edges (dashed ink-3) -->
+        <!-- Rosen connects to 6 new + #2015 -->
+        <line x1="500" y1="654" x2="200" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="470" y2="780" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="600" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="500" y1="654" x2="1010" y2="400" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <!-- Keller connects to mid-rise / luxury jobs + #2016 -->
+        <line x1="700" y1="654" x2="600" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="470" y2="780" stroke="var(--ink-3)" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <line x1="700" y1="654" x2="470" y2="210" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="3,3"/>
+        <!-- Consolidated → small Exxel -->
+        <line x1="280" y1="654" x2="200" y2="850" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <line x1="280" y1="654" x2="1140" y2="720" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
+        <!-- Mechanical Sales → mid-rise mech rooms -->
+        <line x1="900" y1="654" x2="600" y2="850" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="900" y1="654" x2="470" y2="780" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="900" y1="654" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <line x1="900" y1="654" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <!-- Ferguson → new ferguson-heavy jobs (#2020, #2021) -->
+        <line x1="130" y1="540" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="130" y1="540" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
+
+        <!-- Active job (clay outline) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2014" style="cursor: pointer;">
+          <circle cx="600" cy="270" r="20" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2.8"/>
+          <text x="600" y="266" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--clay)" text-anchor="middle">ACTIVE</text>
+          <text x="600" y="278" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2014</text>
+          <text x="600" y="306" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Capitol Hill 168</text>
+          <text x="600" y="319" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">52% · ⚠ watch</text>
+        </g>
+
+        <!-- Proposed bid (dashed outline) -->
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="bellevue220" style="cursor: pointer;">
+          <circle cx="600" cy="110" r="20" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="4,3"/>
+          <text x="600" y="106" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink-3)" text-anchor="middle">PROPOSED</text>
+          <text x="600" y="118" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">220u</text>
+          <text x="600" y="148" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="var(--ink)" text-anchor="middle">Bellevue 220</text>
+          <text x="600" y="161" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">$3.58M @ 32.0%</text>
+        </g>
+
+        <!-- Vendor nodes: triangles, clay stroke -->
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="ferguson" style="cursor: pointer;">
+          <polygon points="130,524 144,548 116,548" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="130" y="572" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Ferguson</text>
+          <text x="130" y="585" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 3 jobs</text>
+        </g>
+
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="pacific" style="cursor: pointer;">
+          <polygon points="270,584 282,605 258,605" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="270" y="624" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Pacific Plumbing</text>
+          <text x="270" y="637" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 2 jobs</text>
+        </g>
+
+        <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="mclendon" style="cursor: pointer;">
+          <polygon points="200,444 212,464 188,464" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="200" y="438" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">McLendon</text>
+          <text x="200" y="425" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-4)" text-anchor="middle">vendor · 2 jobs</text>
+        </g>
+
+        <!-- ============== NEW GC NODE: Holland (1 job live — #2114) — clay stroke for NEW GC relationship ============== -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="holland" style="cursor: pointer;">
+          <rect x="1400" y="74" width="62" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
+          <text x="1431" y="106" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">Holland</text>
+          <text x="1462" y="144" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">new gc · 1 job (live · pre-construction)</text>
+        </g>
+
+        <!-- #2114 Holland Ballard Blossom (239u · LIVE · DD) — holland GC · clay stroke, solid edge -->
+        <line x1="1431" y1="126" x2="1340" y2="240" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2114" style="cursor: pointer;">
+          <circle cx="1340" cy="240" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1340" y="244" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2114</text>
+          <text x="1340" y="266" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Blossom</text>
+          <text x="1340" y="278" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">239u · LIVE · DD</text>
+        </g>
+
+
+        <!-- #2115 Chinn Elowen (2-building \u00b7 LIVE \u00b7 DD) \u2014 chinn GC \u00b7 clay stroke, solid edge -->
+        <line x1="376" y1="112" x2="320" y2="430" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2115" style="cursor: pointer;">
+          <circle cx="320" cy="430" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="320" y="434" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2115</text>
+          <text x="320" y="456" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Elowen</text>
+          <text x="320" y="468" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">2-bldg \u00b7 LIVE \u00b7 DD</text>
+        </g>
+
+        <!-- #2116 SRM The V (166u \u00b7 LIVE \u00b7 pre-construction) \u2014 srm GC \u00b7 clay stroke, solid edge -->
+        <line x1="520" y1="112" x2="830" y2="470" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2116" style="cursor: pointer;">
+          <circle cx="830" cy="470" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="830" y="474" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2116</text>
+          <text x="830" y="496" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">The V</text>
+          <text x="830" y="508" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">166u \u00b7 LIVE \u00b7 pre-con</text>
+        </g>
+
+
+        <!-- ============== NEW GC NODE: Ravenna Partners (1 job live \u2014 #2117) \u2014 clay stroke for NEW GC ============== -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="ravenna" style="cursor: pointer;">
+          <rect x="1180" y="74" width="72" height="52" rx="8" fill="var(--ink)" stroke="var(--clay)" stroke-width="1.8"/>
+          <text x="1216" y="106" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="var(--cream)" text-anchor="middle">Ravenna</text>
+          <text x="1252" y="144" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="end" letter-spacing="0.5">new gc \u00b7 1 job (live \u00b7 design/DD)</text>
+        </g>
+
+        <!-- #2117 Ravenna Lachlan (~104u \u00b7 LIVE \u00b7 DD) \u2014 ravenna GC \u00b7 clay stroke, solid edge -->
+        <line x1="1216" y1="126" x2="1110" y2="240" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2117" style="cursor: pointer;">
+          <circle cx="1110" cy="240" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1110" y="244" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2117</text>
+          <text x="1110" y="266" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Lachlan</text>
+          <text x="1110" y="278" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">~104u \u00b7 LIVE \u00b7 DD</text>
+        </g>
+
+        <!-- #2118 Exxel Edmonds Behar (406u \u00b7 LIVE \u00b7 bidding) \u2014 exxel GC \u00b7 clay stroke, solid edge -->
+        <line x1="806" y1="112" x2="960" y2="310" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2118" style="cursor: pointer;">
+          <circle cx="960" cy="310" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="960" y="314" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2118</text>
+          <text x="960" y="336" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Edmonds Behar</text>
+          <text x="960" y="348" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">406u \u00b7 LIVE \u00b7 bid</text>
+        </g>
+
+
+        <!-- #2119 Exxel The Frank (TBD units \u00b7 LIVE \u00b7 pre-bid mockup) \u2014 exxel GC \u00b7 clay stroke, solid edge -->
+        <line x1="806" y1="112" x2="1040" y2="310" stroke="var(--clay)" stroke-width="1.4"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2119" style="cursor: pointer;">
+          <circle cx="1040" cy="310" r="13" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2"/>
+          <text x="1040" y="314" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2119</text>
+          <text x="1040" y="336" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">The Frank</text>
+          <text x="1040" y="348" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--clay)" text-anchor="middle">mockup \u00b7 pre-bid</text>
+        </g>
+
+        <!-- Corner crosshairs -->
+        <g stroke="var(--ink-3)" stroke-width="0.6">
+          <line x1="35" y1="40" x2="45" y2="40"/><line x1="40" y1="35" x2="40" y2="45"/>
+          <line x1="1195" y1="40" x2="1205" y2="40"/><line x1="1200" y1="35" x2="1200" y2="45"/>
+          <line x1="35" y1="720" x2="45" y2="720"/><line x1="40" y1="715" x2="40" y2="725"/>
+          <line x1="1195" y1="720" x2="1205" y2="720"/><line x1="1200" y1="715" x2="1200" y2="725"/>
+        </g>
+      </svg>
       </div>
     </div>
 
@@ -13255,335 +13950,6 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   try { renderLiveProjects(); } catch(e) { console.warn('renderLiveProjects failed', e); }
   window.renderLiveProjects = renderLiveProjects;
 
-  /* ============ PROJECT ATLAS — JS-GENERATED 3-LANE GRAPH ============ */
-  let _atlasFocused = null;       // node id (gc:Chinn, proj:2034, vendor:ferguson)
-  let _atlasFilter  = 'all';      // all | gc | project | vendor
-
-  function renderAtlas() {
-    const host = document.getElementById('atlas-graph-host');
-    if (!host) return;
-
-    /* ---------- 1. Build data model ---------- */
-    // Live roster lookup
-    const liveById = {};
-    try { (LIVE_ROSTER || []).forEach(r => { liveById[r.id] = r; }); } catch(_){}
-
-    // Closed projects (from PROJECT_ORDER → PROJECTS)
-    const closedProj = (PROJECT_ORDER || []).filter(id => PROJECTS[id]).map(id => {
-      const p = PROJECTS[id];
-      const gcRaw = (p.gcShort || p.gc || 'Unknown').replace(/\(.*\)/,'').trim();
-      // Normalize to a short key
-      let gcKey = gcRaw.split(/[,\.]/)[0].split(/\s+/).slice(0,2).join(' ').trim();
-      // Manual aliases for the common GCs
-      const aliasMap = {
-        'Exxel Pacific':'Exxel','SRM Development':'SRM','SRM':'SRM','Chinn Construction':'Chinn',
-        'Chinn':'Chinn','Compass Harbor':'Compass','Compass Construction':'Compass','Compass':'Compass',
-        'Natural Built':'Natural & Built','Natural &':'Natural & Built',
-        'Synergy Construction':'Synergy','Synergy':'Synergy','Blueprint Capital':'Blueprint','Blueprint':'Blueprint',
-        'Marpac Construction':'Marpac','Marpac':'Marpac','Shelter Holdings':'Shelter','Shelter':'Shelter'
-      };
-      gcKey = aliasMap[gcKey] || gcKey;
-      const units = (p.num && p.num.units) || 0;
-      const contract = (p.num && (p.num.revenue || p.num.origContract)) || 0;
-      const profit = (p.num && p.num.profit) || 0;
-      const margin = contract ? profit / contract : 0;
-      return { id, gcKey, name: p.jobBottom || p.sbName || id, units, status: 'closed', margin, contract };
-    });
-
-    // Live projects
-    const liveProj = (LIVE_ROSTER || []).map(r => ({
-      id: r.id, gcKey: r.gc, name: r.name, units: r.units || 0,
-      status: r.status, margin: 0, contract: 0
-    }));
-
-    const PROJ = closedProj.concat(liveProj);
-
-    // Build GC list — unique gcKeys, with counts
-    const gcMap = {};
-    PROJ.forEach(pr => {
-      if (!gcMap[pr.gcKey]) gcMap[pr.gcKey] = { key: pr.gcKey, label: pr.gcKey, projectIds: [], jobCount: 0, liveCount: 0 };
-      gcMap[pr.gcKey].projectIds.push(pr.id);
-      gcMap[pr.gcKey].jobCount += 1;
-      if (pr.status !== 'closed') gcMap[pr.gcKey].liveCount += 1;
-    });
-    // Sort GCs by jobCount desc, then alpha
-    const GCS = Object.values(gcMap).sort((a,b) => b.jobCount - a.jobCount || a.label.localeCompare(b.label));
-    GCS.forEach(g => g.hasLive = g.liveCount > 0);
-
-    // Vendors — flatten allVendors arrays from PROJECTS, count per vendor across projects
-    const vendorAccum = {}; // key -> { label, projectIds:Set }
-    const vendorAliases = [
-      { key:'ferguson',     label:'Ferguson',         match:/ferguson/i },
-      { key:'keller',       label:'Keller Supply',    match:/keller/i },
-      { key:'rosen',        label:'Rosen Supply',     match:/rosen/i },
-      { key:'consolidated', label:'Consolidated',     match:/consolidated/i },
-      { key:'pacific',      label:'Pacific Plumbing', match:/pacific\s+plumbing/i },
-      { key:'mechsales',    label:'Mech Sales',       match:/mechanical\s+sales|mech\s*sales/i },
-    ];
-    vendorAliases.forEach(v => vendorAccum[v.key] = { key:v.key, label:v.label, projectIds:[] });
-    closedProj.concat(liveProj).forEach(pr => {
-      const av = (PROJECTS[pr.id] && PROJECTS[pr.id].allVendors) || [];
-      av.forEach(row => {
-        const name = String(row[0] || '');
-        vendorAliases.forEach(v => {
-          if (v.match.test(name) && vendorAccum[v.key].projectIds.indexOf(pr.id) === -1) {
-            vendorAccum[v.key].projectIds.push(pr.id);
-          }
-        });
-      });
-    });
-    const VENDORS = Object.values(vendorAccum).sort((a,b) => b.projectIds.length - a.projectIds.length).slice(0,6);
-
-    /* ---------- 2. Layout positions ---------- */
-    const W = 2200, H = 1000;
-    const gcY = 80, projYTop = 280, projYBot = 700, vendorY = 880;
-    const gcMargin = 120;
-    const gcStep = GCS.length > 1 ? (W - gcMargin*2) / (GCS.length - 1) : 0;
-    const gcPos = {}; // key -> {x,y,size}
-    GCS.forEach((g, i) => {
-      const size = 36 + Math.min(g.jobCount, 12) * 2.5;
-      gcPos[g.key] = { x: gcMargin + i*gcStep, y: gcY, size };
-    });
-
-    // Project positions: per-GC column, stacked vertically with sub-column split if many
-    const projPos = {}; // id -> {x,y,r,status}
-    GCS.forEach(g => {
-      const cx = gcPos[g.key].x;
-      const ids = g.projectIds.slice();
-      // Sort: live first, then closed by id
-      ids.sort((a,b) => {
-        const sa = (PROJ.find(p => p.id===a) || {}).status;
-        const sb = (PROJ.find(p => p.id===b) || {}).status;
-        const liveA = sa !== 'closed' ? 0 : 1;
-        const liveB = sb !== 'closed' ? 0 : 1;
-        if (liveA !== liveB) return liveA - liveB;
-        return String(a).localeCompare(String(b));
-      });
-      const colCap = 8;
-      const numCols = Math.ceil(ids.length / colCap);
-      const colSpread = numCols > 1 ? 60 : 0;
-      const rowsPerCol = Math.ceil(ids.length / numCols);
-      const rowSpan = (projYBot - projYTop);
-      const rowStep = rowsPerCol > 1 ? rowSpan / (rowsPerCol - 1) : 0;
-      ids.forEach((id, idx) => {
-        const colIdx = Math.floor(idx / rowsPerCol);
-        const rowIdx = idx % rowsPerCol;
-        const subOffset = numCols > 1 ? (colIdx - (numCols-1)/2) * (colSpread*2) : 0;
-        const jitter = (rowIdx % 2 === 0 ? -10 : 10);
-        const pr = PROJ.find(p => p.id === id);
-        const units = pr ? pr.units : 0;
-        const r = 8 + Math.min(units / 30, 14);
-        projPos[id] = {
-          x: cx + subOffset + jitter,
-          y: projYTop + rowIdx * rowStep,
-          r,
-          status: pr ? pr.status : 'closed',
-          name: pr ? pr.name : id,
-          units, gcKey: pr ? pr.gcKey : ''
-        };
-      });
-    });
-
-    // Vendor positions
-    const vendMargin = 200;
-    const vendStep = VENDORS.length > 1 ? (W - vendMargin*2) / (VENDORS.length - 1) : 0;
-    const vendPos = {};
-    VENDORS.forEach((v, i) => {
-      vendPos[v.key] = { x: vendMargin + i*vendStep, y: vendorY };
-    });
-
-    /* ---------- 3. Build SVG ---------- */
-    const NS = 'http://www.w3.org/2000/svg';
-    const svgParts = [];
-    svgParts.push(`<svg viewBox="0 0 ${W} ${H}" style="display:block; height:auto; min-width:${W}px; width:100%; max-height:${H}px; overflow:visible;" id="atlas-svg">`);
-
-    // ----- EDGES (drawn first) -----
-    // GC -> project
-    const edges = []; // collected for counting
-    GCS.forEach(g => {
-      const gp = gcPos[g.key];
-      g.projectIds.forEach(id => {
-        const pp = projPos[id];
-        if (!pp) return;
-        const isLive = pp.status !== 'closed';
-        const stroke = isLive ? 'var(--clay)' : 'var(--ink)';
-        const op = isLive ? 0.40 : 0.28;
-        const sw = isLive ? 1.4 : 1.0;
-        const path = `M ${gp.x} ${gp.y + gp.size/2} Q ${gp.x} ${(gp.y + pp.y)/2} ${pp.x} ${pp.y - pp.r}`;
-        svgParts.push(`<path class="atlas-edge gc-proj" data-from="gc:${g.key}" data-to="proj:${id}" d="${path}" fill="none" stroke="${stroke}" stroke-opacity="${op}" stroke-width="${sw}"/>`);
-        edges.push(1);
-      });
-    });
-    // Vendor -> project (hidden by default)
-    VENDORS.forEach(v => {
-      const vp = vendPos[v.key];
-      v.projectIds.forEach(id => {
-        const pp = projPos[id];
-        if (!pp) return;
-        const path = `M ${vp.x} ${vp.y - 14} Q ${vp.x} ${(vp.y + pp.y)/2} ${pp.x} ${pp.y + pp.r}`;
-        svgParts.push(`<path class="atlas-edge vendor" data-from="vendor:${v.key}" data-to="proj:${id}" d="${path}" fill="none" stroke="#8FB27B" stroke-opacity="0.55" stroke-width="0.8" stroke-dasharray="2,3"/>`);
-        edges.push(1);
-      });
-    });
-
-    // ----- LANE 1 — GC nodes -----
-    GCS.forEach(g => {
-      const gp = gcPos[g.key];
-      const half = gp.size / 2;
-      const ringStroke = g.hasLive ? 'var(--clay)' : 'var(--ink-3)';
-      const ringWidth = g.hasLive ? 2 : 1;
-      const subLabel = g.jobCount + ' closed' + (g.hasLive ? ' (' + g.liveCount + ' live)' : '');
-      svgParts.push(
-        `<g class="atlas-node" data-atlas-cat="gc" data-atlas-id="gc:${g.key}">` +
-          `<rect x="${gp.x - half}" y="${gp.y - half}" width="${gp.size}" height="${gp.size}" rx="8" ry="8" fill="var(--ink)" stroke="${ringStroke}" stroke-width="${ringWidth}"/>` +
-          `<text class="atlas-label" x="${gp.x}" y="${gp.y + 3}" text-anchor="middle" fill="var(--cream)" font-size="11" font-weight="600">${g.label}</text>` +
-          `<text class="atlas-label" x="${gp.x}" y="${gp.y + half + 16}" text-anchor="middle" fill="var(--ink-3)" font-size="10">${subLabel}</text>` +
-        `</g>`
-      );
-    });
-
-    // ----- LANE 2 — project nodes -----
-    Object.keys(projPos).forEach(id => {
-      const pp = projPos[id];
-      let fill = 'var(--cream-card)', stroke = 'var(--ink)', sw = 1, txtColor = 'var(--ink)';
-      if (pp.status === 'active') { fill = 'var(--clay)'; stroke = 'var(--clay)'; sw = 2; txtColor = 'var(--cream)'; }
-      else if (pp.status === 'closeout') { fill = '#A89A8A'; stroke = 'var(--ink)'; txtColor = 'var(--cream)'; }
-      else if (pp.status === 'onhold') { fill = '#7A8471'; stroke = 'var(--ink)'; txtColor = 'var(--cream)'; }
-      const isLive = pp.status !== 'closed';
-      svgParts.push(
-        `<g class="atlas-node" data-atlas-cat="project" data-atlas-id="proj:${id}" data-atlas-gc="${pp.gcKey}">` +
-          `<title>${id} · ${pp.name} · ${pp.units}u · ${pp.status}</title>` +
-          `<circle cx="${pp.x}" cy="${pp.y}" r="${pp.r}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>` +
-          `<text class="atlas-label" x="${pp.x}" y="${pp.y + 3}" text-anchor="middle" fill="${txtColor}" font-size="9" font-weight="${isLive?'600':'500'}">${id.slice(-2)}</text>` +
-        `</g>`
-      );
-    });
-
-    // ----- LANE 3 — vendor nodes (triangles) -----
-    VENDORS.forEach(v => {
-      const vp = vendPos[v.key];
-      const s = 14; // half-side
-      const pts = `${vp.x},${vp.y - s} ${vp.x - s},${vp.y + s*0.8} ${vp.x + s},${vp.y + s*0.8}`;
-      svgParts.push(
-        `<g class="atlas-node" data-atlas-cat="vendor" data-atlas-id="vendor:${v.key}">` +
-          `<title>${v.label} · ${v.projectIds.length} projects</title>` +
-          `<polygon points="${pts}" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.5"/>` +
-          `<text class="atlas-label" x="${vp.x}" y="${vp.y + s + 16}" text-anchor="middle" fill="var(--ink)" font-size="10" font-weight="600">${v.label}</text>` +
-          `<text class="atlas-label" x="${vp.x}" y="${vp.y + s + 30}" text-anchor="middle" fill="var(--ink-3)" font-size="9">${v.projectIds.length} jobs</text>` +
-        `</g>`
-      );
-    });
-
-    svgParts.push('</svg>');
-    host.innerHTML = svgParts.join('');
-
-    /* ---------- 4. Wire up clicks ---------- */
-    const svg = host.querySelector('#atlas-svg');
-    const allNodes = Array.from(host.querySelectorAll('.atlas-node'));
-    const allEdges = Array.from(host.querySelectorAll('.atlas-edge'));
-
-    function clearFocus() {
-      _atlasFocused = null;
-      allNodes.forEach(n => n.classList.remove('is-focused','is-related','is-dimmed'));
-      allEdges.forEach(e => e.classList.remove('is-active','is-dimmed'));
-      const r = document.getElementById('atlas-reset-focus');
-      if (r) r.style.display = 'none';
-    }
-
-    function focusNode(nodeId) {
-      if (_atlasFocused === nodeId) { clearFocus(); return; }
-      _atlasFocused = nodeId;
-      const [cat, key] = nodeId.split(':');
-      const related = new Set([nodeId]);
-
-      if (cat === 'gc') {
-        const g = GCS.find(x => x.key === key);
-        if (g) {
-          g.projectIds.forEach(id => related.add('proj:' + id));
-          // vendors used by these projects
-          VENDORS.forEach(v => {
-            if (v.projectIds.some(id => g.projectIds.indexOf(id) !== -1)) related.add('vendor:' + v.key);
-          });
-        }
-      } else if (cat === 'project') {
-        const pr = PROJ.find(x => x.id === key);
-        if (pr) {
-          related.add('gc:' + pr.gcKey);
-          VENDORS.forEach(v => { if (v.projectIds.indexOf(key) !== -1) related.add('vendor:' + v.key); });
-        }
-      } else if (cat === 'vendor') {
-        const v = VENDORS.find(x => x.key === key);
-        if (v) {
-          v.projectIds.forEach(id => {
-            related.add('proj:' + id);
-            const pr = PROJ.find(x => x.id === id);
-            if (pr) related.add('gc:' + pr.gcKey);
-          });
-        }
-      }
-
-      allNodes.forEach(n => {
-        const nid = n.dataset.atlasId;
-        n.classList.remove('is-focused','is-related','is-dimmed');
-        if (nid === nodeId) n.classList.add('is-focused','is-related');
-        else if (related.has(nid)) n.classList.add('is-related');
-        else n.classList.add('is-dimmed');
-      });
-      allEdges.forEach(e => {
-        const a = e.dataset.from, b = e.dataset.to;
-        e.classList.remove('is-active','is-dimmed');
-        if (related.has(a) && related.has(b)) e.classList.add('is-active');
-        else e.classList.add('is-dimmed');
-      });
-      const r = document.getElementById('atlas-reset-focus');
-      if (r) r.style.display = '';
-    }
-
-    allNodes.forEach(n => {
-      n.addEventListener('click', (ev) => { ev.stopPropagation(); focusNode(n.dataset.atlasId); });
-    });
-    if (svg) svg.addEventListener('click', () => clearFocus());
-    const resetBtn = document.getElementById('atlas-reset-focus');
-    if (resetBtn) resetBtn.addEventListener('click', (ev) => { ev.preventDefault(); clearFocus(); });
-
-    // Esc handler — register once
-    if (!window._atlasEscBound) {
-      window._atlasEscBound = true;
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && _atlasFocused) clearFocus(); });
-    }
-
-    /* ---------- 5. Filter pills ---------- */
-    function applyFilter(f) {
-      _atlasFilter = f;
-      host.classList.remove('atlas-filter-all','atlas-filter-gc','atlas-filter-project','atlas-filter-vendor');
-      host.classList.add('atlas-filter-' + f);
-      document.querySelectorAll('.atlas-filter').forEach(p => {
-        p.classList.toggle('is-active', p.dataset.atlasFilter === f);
-      });
-    }
-    document.querySelectorAll('.atlas-filter').forEach(btn => {
-      // Replace any existing handler
-      const fresh = btn.cloneNode(true);
-      btn.parentNode.replaceChild(fresh, btn);
-      fresh.addEventListener('click', () => applyFilter(fresh.dataset.atlasFilter));
-    });
-    applyFilter(_atlasFilter);
-
-    /* ---------- 6. Header chips ---------- */
-    const nodeCount = allNodes.length;
-    const edgeCount = allEdges.length;
-    const closedN = closedProj.length;
-    const activeN = liveProj.filter(p => p.status === 'active').length;
-    const biddingN = (PROJECT_STAGES.bidding || []).length;
-    document.querySelectorAll('[data-tot="atlasSize"]').forEach(el => el.textContent = nodeCount + ' nodes \u00b7 ' + edgeCount + ' edges');
-    document.querySelectorAll('[data-tot="atlasStages"]').forEach(el => el.textContent = closedN + ' closed \u00b7 ' + activeN + ' active \u00b7 ' + biddingN + ' bidding');
-    document.querySelectorAll('[data-tot="atlasGCs"]').forEach(el => el.textContent = GCS.length + ' GCs \u00b7 ' + VENDORS.length + ' vendors');
-
-    return { nodeCount, edgeCount, gcCount: GCS.length, vendorCount: VENDORS.length };
-  }
-  try { renderAtlas(); } catch(e) { console.warn('renderAtlas failed', e); }
-  window.renderAtlas = renderAtlas;
-
   /* ============ OPERATOR WORKBENCH · PRINCIPAL VIEW ============ */
   function wbSwitchPersona(p) {
     document.querySelectorAll('.persona-tab').forEach(btn => {
@@ -16138,7 +16504,26 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   }
   window.closeAtlasModal = closeAtlasModal;
 
-  // Old atlas node-click & filter delegation removed — replaced by renderAtlas() above.
+  // Node click delegation
+  document.querySelectorAll('.atlas-node').forEach(g => {
+    g.addEventListener('click', () => openAtlasModal(g.dataset.atlasNode));
+  });
+
+  // Filter pills
+  let atlasActiveFilter = 'all';
+  function applyAtlasFilter(filter) {
+    atlasActiveFilter = filter;
+    document.querySelectorAll('.atlas-filter').forEach(f => {
+      f.classList.toggle('is-active', f.dataset.atlasFilter === filter);
+    });
+    document.querySelectorAll('.atlas-node').forEach(n => {
+      const show = (filter === 'all') || (n.dataset.atlasCat === filter) || (filter === 'project' && n.dataset.atlasCat === 'project');
+      n.classList.toggle('is-dimmed', !show);
+    });
+  }
+  document.querySelectorAll('.atlas-filter').forEach(btn => {
+    btn.addEventListener('click', () => applyAtlasFilter(btn.dataset.atlasFilter));
+  });
 
   // Esc to close atlas modal
   document.addEventListener('keydown', (e) => {
