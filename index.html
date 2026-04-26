@@ -16747,16 +16747,57 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   });
 
   // ============ GC SUMMARY CARDS GRID ============
+  // Friendly display labels for GC keys
+  const _GC_LABELS = {
+    chinn: 'Chinn Construction LLC', exxel: 'Exxel Pacific Inc',
+    srm: 'SRM Development LLC', natbuilt: 'Natural & Built LLC',
+    compass: 'Compass Construction', bmdc: 'BMDC',
+    marpac: 'Marpac Construction', blueprint: 'Blueprint Capital',
+    synergy: 'Synergy Construction', shelter: 'Shelter Holdings',
+    holland: 'Holland Construction', ravenna: 'Ravenna Partners',
+    intracorp: 'Intracorp', sierra: 'Sierra Construction',
+    braseth: 'Braseth Construction', gre: 'GRE Construction'
+  };
+  // Generic short blurbs for GCs without bespoke ATLAS_NODES entries
+  const _GC_BLURBS = {
+    compass: 'OWP\'s most-active multi-family GC by live count — multiple buildings under construction at Northgate Station.',
+    bmdc: 'Big-1410 / Big-3 specialist — small-format, fast-cycle plumbing engagements.',
+    marpac: 'University Apartments delivered in 2018 (122u). One closed engagement to date.',
+    blueprint: 'Two closed jobs (Luna Roosevelt, Brooklyn 65) — repeatable mid-rise playbook.',
+    synergy: 'Single-job relationship — Fox & Finch (49u). Closed clean.',
+    shelter: 'Single-job HOA gas-piping engagement (Ravello). Service-class scope.',
+    holland: 'NEW GC · Ballard Blossom in pre-construction / DD phase.',
+    ravenna: 'NEW GC · Self-developed owner. Lachlan Apartments (104u) bid cleared, design phase.',
+    intracorp: 'NEW GC · Marysville Ph2 (246u) entering RI phase.',
+    sierra: 'NEW GC · Roosevelt Manor (137u) starting Q2 2026.',
+    braseth: 'NEW GC · R&G Apartments (263u) currently ON HOLD.',
+    gre: 'GRE-tagged jobs in the closed portfolio.'
+  };
+
   function atlasGcCardHTML(gcKey) {
-    const node = ATLAS_NODES[gcKey];
-    if (!node) return '';
+    const node = ATLAS_NODES[gcKey] || null;
     const map = (typeof _atlasGcMap === 'object') ? _atlasGcMap : {};
     const projectIds = map[gcKey] || [];
+    if (!node && projectIds.length === 0) return ''; // skip unknown GCs with no projects
     const liveIds = projectIds.filter(pid => (PROJECT_STAGES?.active || []).includes(pid));
     const hasLive = liveIds.length > 0;
 
-    const lifeRev   = node.stats.find(s => /Lifetime revenue/i.test(s[0]))?.[1] || '—';
-    const blendMrg  = node.stats.find(s => /Blended margin/i.test(s[0]))?.[1] || '—';
+    // Compute lifetime revenue + blended margin from PROJECTS data (works for any GC)
+    let totalRev = 0, weightedMargin = 0, marginWeight = 0;
+    projectIds.forEach(pid => {
+      const p = PROJECTS[pid] || {};
+      const rev = parseFloat(String(p.k01_revenue || p.revenue || '0').replace(/[^0-9.\-]/g, '')) || 0;
+      totalRev += rev;
+      const m = parseFloat(String(p.k01_margin || '').replace(/[^0-9.\-]/g, ''));
+      if (!isNaN(m) && rev > 0) { weightedMargin += m * rev; marginWeight += rev; }
+    });
+    const fmtMoneyShort = (v) => {
+      if (v >= 1e6) return '$' + (v/1e6).toFixed(2).replace(/\.?0+$/, '') + 'M';
+      if (v >= 1e3) return '$' + Math.round(v/1e3) + 'k';
+      return '$' + Math.round(v);
+    };
+    const lifeRev  = node?.stats?.find(s => /Lifetime revenue/i.test(s[0]))?.[1] || (totalRev > 0 ? fmtMoneyShort(totalRev) : '—');
+    const blendMrg = node?.stats?.find(s => /Blended margin/i.test(s[0]))?.[1] || (marginWeight > 0 ? (weightedMargin/marginWeight).toFixed(1) + '%' : '—');
 
     // Separate live vs completed
     const closedIds = projectIds.filter(pid => !liveIds.includes(pid));
@@ -16794,13 +16835,14 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
     const liveChip = hasLive ? `<span style="display:inline-block; background: var(--clay); color: var(--cream); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; padding: 2px 7px; border-radius: 3px; vertical-align: middle; margin-left: 8px;">${liveIds.length} LIVE</span>` : '';
     const borderStyle = hasLive ? 'border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);' : '';
-    const gcLabel = node.eyebrow.replace(/^GC\s*·\s*/, '');
+    const gcLabel = node?.eyebrow?.replace(/^GC\s*·\s*/, '') || _GC_LABELS[gcKey] || gcKey.toUpperCase();
+    const gcSub   = node?.sub || _GC_BLURBS[gcKey] || (projectIds.length + ' project' + (projectIds.length === 1 ? '' : 's') + ' in OWP\'s portfolio.');
 
     return `<div class="kpi" data-gc-card="${gcKey}" style="cursor:pointer; height:100%; ${borderStyle}">
       <div>
         <div class="kpi-eyebrow">GC · ${gcKey.toUpperCase()}${liveChip}</div>
         <div class="kpi-title" style="margin-top:12px; min-height:54px; line-height:1.22;"><b>${gcLabel}</b></div>
-        <div class="kpi-sub" style="min-height:48px;">${node.sub}</div>
+        <div class="kpi-sub" style="min-height:48px;">${gcSub}</div>
         <div class="kpi-divider"></div>
         <div class="flex items-baseline justify-between" style="gap:14px;">
           <div style="min-width:0; flex:1;">
@@ -16830,12 +16872,25 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   function renderAtlasGcCards() {
     const grid = document.getElementById('atlas-gc-grid');
     if (!grid) return;
-    const gcKeys = Object.keys(ATLAS_NODES).filter(k => {
+    const map = (typeof _atlasGcMap === 'object') ? _atlasGcMap : {};
+    // Source from _atlasGcMap (every GC with at least one project) + any
+    // ATLAS_NODES GC entries even if their map bucket is empty.
+    const fromMap = Object.keys(map);
+    const fromNodes = Object.keys(ATLAS_NODES).filter(k => {
       const entry = ATLAS_NODES[k];
       return entry && entry.eyebrow && /^GC\s/.test(entry.eyebrow);
     });
-    const map = (typeof _atlasGcMap === 'object') ? _atlasGcMap : {};
-    gcKeys.sort((a, b) => (map[b]?.length || 0) - (map[a]?.length || 0));
+    const gcKeys = Array.from(new Set([...fromMap, ...fromNodes]));
+    // Sort by project count desc; LIVE-having GCs slightly boosted
+    gcKeys.sort((a, b) => {
+      const al = (map[a] || []).filter(pid => (PROJECT_STAGES?.active || []).includes(pid)).length;
+      const bl = (map[b] || []).filter(pid => (PROJECT_STAGES?.active || []).includes(pid)).length;
+      const aTotal = (map[a] || []).length;
+      const bTotal = (map[b] || []).length;
+      // Live count first (desc), then total (desc)
+      if (bl !== al) return bl - al;
+      return bTotal - aTotal;
+    });
 
     grid.innerHTML = gcKeys.map(key => atlasGcCardHTML(key)).join('');
     grid.querySelectorAll('[data-gc-card]').forEach(el => {
