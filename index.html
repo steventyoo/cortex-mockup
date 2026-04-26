@@ -16397,7 +16397,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
           directCost: p.num.directCost,
           profit: p.num.profit,
           margin: p.num.revenue ? (p.num.profit / p.num.revenue) * 100 : null,
-          status: 'won',
+          status: (p.status && p.status !== 'won' && p.status !== 'closed') ? 'active' : 'won',
           note: ''
         });
       });
