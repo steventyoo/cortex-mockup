@@ -3954,6 +3954,22 @@
         </g>
         <line class="atlas-edge atlas-edge-gc" x1="1206" y1="846" x2="880" y2="320" stroke="var(--ink)" stroke-width="1.2"/>
 
+        <!-- ============== NEW GC: Farrell-McKenna Construction (1 job: #2052 Fifth & Roy) ============== -->
+        <g class="atlas-node" data-atlas-cat="gc" data-atlas-node="farrell" style="cursor: pointer;">
+          <rect x="1380" y="820" width="62" height="52" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="1411" y="845" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">FARRELL</text>
+          <text x="1411" y="857" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--cream)" text-anchor="middle">MCKENNA</text>
+          <text x="1411" y="810" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-4)" text-anchor="middle" letter-spacing="0.5">general contractor · 1 job</text>
+        </g>
+        <!-- #2052 Farrell-McKenna Fifth & Roy (107u · 45.4% margin) -->
+        <line class="atlas-edge atlas-edge-gc" x1="1411" y1="820" x2="1380" y2="700" stroke="var(--ink)" stroke-width="1.2"/>
+        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2052" style="cursor: pointer;">
+          <circle cx="1380" cy="700" r="13" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
+          <text x="1380" y="704" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2052</text>
+          <text x="1380" y="726" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="var(--ink)" text-anchor="middle">Fifth &amp; Roy</text>
+          <text x="1380" y="738" font-family="JetBrains Mono, monospace" font-size="7" fill="var(--ink-4)" text-anchor="middle">107u · 45.4%</text>
+        </g>
+
         <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2026" style="cursor: pointer;">
           <circle cx="880" cy="320" r="12" fill="var(--cream-card)" stroke="var(--ink)" stroke-width="1.8"/>
           <text x="880" y="324" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink)" text-anchor="middle">2026</text>
@@ -16672,6 +16688,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       else if (gcRaw.includes('intracorp'))  key = 'intracorp';
       else if (gcRaw.includes('sierra'))     key = 'sierra';
       else if (gcRaw.includes('braseth'))    key = 'braseth';
+      else if (gcRaw.includes('farrell'))    key = 'farrell';
       else if (gcRaw.includes('chinn'))      key = 'chinn';
       else if (gcRaw.includes('srm'))        key = 'srm';   // BEFORE exxel (JV case)
       else if (gcRaw.includes('exxel'))      key = 'exxel';
@@ -16823,7 +16840,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     synergy: 'Synergy Construction', shelter: 'Shelter Holdings',
     holland: 'Holland Construction', ravenna: 'Ravenna Partners',
     intracorp: 'Intracorp', sierra: 'Sierra Construction',
-    braseth: 'Braseth Construction', gre: 'GRE Construction'
+    braseth: 'Braseth Construction', gre: 'GRE Construction',
+    farrell: 'Farrell-McKenna Construction LLC'
   };
   // Generic short blurbs for GCs without bespoke ATLAS_NODES entries
   const _GC_BLURBS = {
@@ -16838,6 +16856,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     intracorp: 'NEW GC · Marysville Ph2 (246u) entering RI phase.',
     sierra: 'NEW GC · Roosevelt Manor (137u) starting Q2 2026.',
     braseth: 'NEW GC · R&G Apartments (263u) currently ON HOLD.',
+    farrell: 'Single-job relationship — Fifth & Roy (107u, mixed-use + Blarney Stone retail) closed clean in 2019.',
     gre: 'GRE-tagged jobs in the closed portfolio.'
   };
 
