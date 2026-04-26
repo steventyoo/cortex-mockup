@@ -16441,7 +16441,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // Table rows
     let html = '';
     rows.forEach(r => {
-      const unitEcon = (r.finalContract && r.units) ? (r.finalContract / r.units) : null;
+      const unitEcon = (r.origContract && r.units) ? (r.origContract / r.units) : null;
       const marginColor = r.margin == null ? 'var(--ink-4)' : (r.margin >= 40 ? 'var(--sage-ink)' : (r.margin >= 28 ? 'var(--ink)' : 'var(--clay)'));
       const rowBg = r.status === 'lost' ? 'background: #FDF7F5;' : (r.status === 'bidding' ? 'background: #FAF6EE;' : '');
       const coColor = r.co > 0 ? 'var(--sage-ink)' : (r.co < 0 ? 'var(--clay)' : 'var(--ink-4)');
@@ -16514,7 +16514,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       ['Job ID', 'Year', 'Project', 'GC', 'Units', 'Fixtures', 'Original contract $', 'Net COs $', 'Final contract $', 'Direct cost $', 'Profit $', 'Margin %', '$ / unit', 'Status', 'Notes']
     ];
     rows.forEach(r => {
-      const unitEcon = (r.finalContract && r.units) ? (r.finalContract / r.units) : '';
+      const unitEcon = (r.origContract && r.units) ? (r.origContract / r.units) : '';
       out.push([r.id, r.year || '', r.project, r.gc, r.units || '', r.fixtures || '', r.origContract || '', r.co || 0, r.finalContract || '', r.directCost || '', r.profit || '', r.margin != null ? r.margin.toFixed(2) : '', unitEcon ? Math.round(unitEcon) : '', r.status, r.note || '']);
     });
     downloadCsv('owp_bid_history.csv', out);
@@ -16596,10 +16596,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const x1 = scaleX(xMin), x2 = scaleX(xMax);
       const y1 = scaleY(Math.max(0, Math.min(yMax, y1raw)));
       const y2 = scaleY(Math.max(0, Math.min(yMax, y2raw)));
-      let s = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="2" ${dash?'stroke-dasharray="6,4"':''} opacity="0.9"/>`;
-      const slope = reg.m;
-      const labelTxt = `${label}: ${slope>=0?'+':''}$${Math.round(slope).toLocaleString()}/u·yr`;
-      s += `<text x="${x2-4}" y="${y2-6}" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" font-weight="600" fill="${color}">${labelTxt}</text>`;
+      const s = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="2" ${dash?'stroke-dasharray="6,4"':''} opacity="0.9"/>`;
       return s;
     };
     svg += drawLine(wonReg,  '#5B7F46', false, 'Won trend');
