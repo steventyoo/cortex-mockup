@@ -5094,6 +5094,35 @@
       </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- H · Bid trendline · $/unit as win driver                      -->
+    <!-- ============================================================ -->
+    <div class="meta-bar mt-14 mb-4">H · Bid trendline · <span style="color: var(--clay);">$/unit as win driver</span></div>
+    <div class="blueprint" style="padding:28px 32px; position:relative;">
+      <div class="blueprint-corner" style="top:12px; left:14px;">◢ fig. H / scatter — every bid 2016-2026</div>
+      <div class="blueprint-corner" style="top:12px; right:14px;" id="bid-scatter-stats">— bids · — won · — lost</div>
+      <div id="bid-scatter-svg-wrap" style="margin-top:18px;"></div>
+      <div id="bid-scatter-legend" class="mt-4 flex flex-wrap items-center gap-4 text-[10px] mono" style="color:var(--ink-4);"></div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5 mt-6">
+      <div class="card" style="padding:20px;">
+        <div class="kpi-eyebrow">Win rate by $/unit bucket</div>
+        <div id="bid-winrate-by-bucket" class="mt-3"></div>
+      </div>
+      <div class="card" style="padding:20px;">
+        <div class="kpi-eyebrow">Win rate by GC (top 6 by bid count)</div>
+        <div id="bid-winrate-by-gc" class="mt-3"></div>
+      </div>
+    </div>
+
+    <div class="mt-6" style="background:var(--cream-card); border-left:3px solid var(--clay); padding:18px 22px;">
+      <div class="meta-bar" style="color:var(--clay);">CORTEX TAKEAWAYS</div>
+      <ol id="bid-trendline-takeaways" class="mt-3 text-[13px]" style="color:var(--ink-2); line-height:1.7; padding-left:20px;">
+        <!-- filled by JS -->
+      </ol>
+    </div>
+
   </div>
 
 
@@ -8549,7 +8578,7 @@
       footerReport: "REPORT #2053-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "Parkside", skyName: "BLU PARKSIDE",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 135, fixtures: 1579, months: null, revenue: 2332680, profit: 934135, directCost: 1398545, origContract: 2241309, co: 91371, retainage: 113684, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 135, fixtures: 635, months: null, revenue: 2332680, profit: 934135, directCost: 1398545, origContract: 2241309, co: 91371, retainage: 113684, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2053_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -8574,7 +8603,7 @@
       footerReport: "REPORT #2054-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "800 5th", skyName: "800 5TH",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 68, fixtures: 487, months: null, revenue: 843087, profit: 121944, directCost: 721143, origContract: 785600, co: 57487, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 68, fixtures: 277, months: null, revenue: 843087, profit: 121944, directCost: 721143, origContract: 785600, co: 57487, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2054_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -8599,7 +8628,7 @@
       footerReport: "REPORT #2055-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "Dockside", skyName: "DOCKSIDE",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 98, fixtures: 515, months: null, revenue: 1315429, profit: 338808, directCost: 976621, origContract: 1142340, co: 173089, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 98, fixtures: 398, months: null, revenue: 1315429, profit: 338808, directCost: 976621, origContract: 1142340, co: 173089, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2055_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -8624,7 +8653,7 @@
       footerReport: "REPORT #2056-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "Acme", skyName: "ACME FARMS",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 321, fixtures: 1345, months: null, revenue: 6034876, profit: 2643999, directCost: 3390877, origContract: 5877400, co: 157476, retainage: 296894, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 321, fixtures: 1363, months: null, revenue: 6034876, profit: 2643999, directCost: 3390877, origContract: 5877400, co: 157476, retainage: 296894, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2056_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -8649,7 +8678,7 @@
       footerReport: "REPORT #2057-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "Plaza", skyName: "PLAZA",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 10, fixtures: 354, months: null, revenue: 1133967, profit: 559736, directCost: 574231, origContract: 1098897, co: 35070, retainage: 56698, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 10, fixtures: 350, months: null, revenue: 1133967, profit: 559736, directCost: 574231, origContract: 1098897, co: 35070, retainage: 56698, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2057_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -8674,7 +8703,7 @@
       footerReport: "REPORT #2058-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "Howell", skyName: "HOWELL",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 76, fixtures: 464, months: null, revenue: 961556, profit: 262224, directCost: 699332, origContract: 928800, co: 32756, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 76, fixtures: 310, months: null, revenue: 961556, profit: 262224, directCost: 699332, origContract: 928800, co: 32756, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2058_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -8699,7 +8728,7 @@
       footerReport: "REPORT #2059-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "Meeker", skyName: "MEEKER",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 107, fixtures: 773, months: null, revenue: 4492453, profit: 1476885, directCost: 3015568, origContract: 4378750, co: 113703, retainage: 224623, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 107, fixtures: 767, months: null, revenue: 4492453, profit: 1476885, directCost: 3015568, origContract: 4378750, co: 113703, retainage: 224623, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2059_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -8724,7 +8753,7 @@
       footerReport: "REPORT #2060-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
       sbName: "MSQ", skyName: "MARINA SQ",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 254, fixtures: 1176, months: null, revenue: 6156577, profit: 3580904, directCost: 2575673, origContract: 5307510, co: 849067, retainage: 300554, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
+      num: { units: 254, fixtures: 1039, months: null, revenue: 6156577, profit: 3580904, directCost: 2575673, origContract: 5307510, co: 849067, retainage: 300554, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
       vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2060_JCR_Cortex_v2.xlsx" },
       vendors: []
     },
@@ -12705,6 +12734,13 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const newHash = '#' + v;
       if (location.hash !== newHash) history.replaceState(null, '', newHash);
     }
+    // FIX: when switching TO flightdeck (Live Projects), re-run renderLiveProjects()
+    // because the Gantt overlay positions are computed via DOM offsetTop, which
+    // was wrong when the view was display:none at boot. Re-render now that the
+    // view is visible so positions are correct. Use rAF to ensure layout is settled.
+    if (v === 'flightdeck' && typeof renderLiveProjects === 'function') {
+      requestAnimationFrame(() => { try { renderLiveProjects(); } catch(e){} });
+    }
   }
 
   // Restore view from URL hash on load so refresh preserves the current page.
@@ -16489,6 +16525,225 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   if (bidHistExportBtn) bidHistExportBtn.addEventListener('click', exportBidHistoryCsv);
 
   renderBidHistory();
+
+  /* ============================================================
+   * BID TRENDLINE — $/unit as win/loss driver (scatter + buckets + GC)
+   * ============================================================ */
+  function renderBidScatter() {
+    const rows = (_bidHistRows || buildBidHistoryRows())
+      .filter(r => r.units && r.units > 0 && r.origContract && r.origContract > 0 && r.year);
+    if (!rows.length) return;
+
+    rows.forEach(r => { r._upu = r.origContract / r.units; });
+    const won  = rows.filter(r => r.status === 'won' || r.status === 'active');
+    const lost = rows.filter(r => r.status === 'lost');
+    const bid  = rows.filter(r => r.status === 'bidding');
+
+    // ---------- Scatter SVG ----------
+    const W = 1100, H = 380;
+    const M = { l: 60, r: 60, t: 24, b: 36 };
+    const xMin = 2016, xMax = 2026;
+    const yMin = 0,    yMax = 25000;
+    const scaleX = v => M.l + (v - xMin) / (xMax - xMin) * (W - M.l - M.r);
+    const scaleY = v => H - M.b - (Math.min(v, yMax) - yMin) / (yMax - yMin) * (H - M.t - M.b);
+
+    const jitter = (id) => {
+      let h = 0; const s = String(id);
+      for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+      return ((h % 1000) / 1000 - 0.5) * 0.30;
+    };
+
+    function lr(arr) {
+      const n = arr.length;
+      if (n < 2) return null;
+      let sx = 0, sy = 0, sxy = 0, sxx = 0;
+      arr.forEach(p => { sx += p.x; sy += p.y; sxy += p.x * p.y; sxx += p.x * p.x; });
+      const denom = n * sxx - sx * sx;
+      if (denom === 0) return null;
+      const m = (n * sxy - sx * sy) / denom;
+      const b = (sy - m * sx) / n;
+      return { m, b };
+    }
+    const wonReg  = lr(won.map(r => ({ x: r.year, y: r._upu })));
+    const lostReg = lr(lost.map(r => ({ x: r.year, y: r._upu })));
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" style="width:100%; height:auto; display:block;">`;
+    svg += `<line x1="${M.l}" y1="${H-M.b}" x2="${W-M.r}" y2="${H-M.b}" stroke="rgba(60,60,60,0.35)" stroke-width="0.6"/>`;
+    svg += `<line x1="${M.l}" y1="${M.t}"   x2="${M.l}"   y2="${H-M.b}" stroke="rgba(60,60,60,0.35)" stroke-width="0.6"/>`;
+    [5000, 10000, 15000, 20000].forEach(yv => {
+      const y = scaleY(yv);
+      svg += `<line x1="${M.l}" y1="${y}" x2="${W-M.r}" y2="${y}" stroke="rgba(60,60,60,0.10)" stroke-dasharray="2,3" stroke-width="0.5"/>`;
+      svg += `<text x="${W-M.r+6}" y="${y+3}" font-family="ui-monospace,monospace" font-size="9.5" fill="#7a7368">$${yv/1000}k</text>`;
+    });
+    for (let yr = xMin; yr <= xMax; yr++) {
+      const x = scaleX(yr);
+      svg += `<line x1="${x}" y1="${H-M.b}" x2="${x}" y2="${H-M.b+4}" stroke="rgba(60,60,60,0.5)" stroke-width="0.6"/>`;
+      svg += `<text x="${x}" y="${H-M.b+16}" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#7a7368">${yr}</text>`;
+    }
+
+    const drawDot = (r, color, radius, opacity, ring) => {
+      const x = scaleX(r.year + jitter(r.id));
+      const y = scaleY(r._upu);
+      const t = `${(r.project||'').replace(/"/g,'&quot;')} · ${r.gc||''} · ${r.units}u · $${Math.round(r._upu).toLocaleString()}/u · ${r.status}`;
+      return `<circle cx="${x}" cy="${y}" r="${radius}" fill="${color}" fill-opacity="${opacity}" stroke="${ring?'#3a342e':'none'}" stroke-width="${ring?1.2:0}"><title>${t}</title></circle>`;
+    };
+    lost.forEach(r => svg += drawDot(r, '#B85C3E', 5, 0.55, false));
+    won.forEach(r  => svg += drawDot(r, '#8FB27B', 5, 0.85, false));
+    bid.forEach(r  => svg += drawDot(r, '#D4A06A', 6, 0.95, true));
+
+    const drawLine = (reg, color, dash, label) => {
+      if (!reg) return '';
+      const y1raw = reg.m * xMin + reg.b;
+      const y2raw = reg.m * xMax + reg.b;
+      const x1 = scaleX(xMin), x2 = scaleX(xMax);
+      const y1 = scaleY(Math.max(0, Math.min(yMax, y1raw)));
+      const y2 = scaleY(Math.max(0, Math.min(yMax, y2raw)));
+      let s = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="2" ${dash?'stroke-dasharray="6,4"':''} opacity="0.9"/>`;
+      const slope = reg.m;
+      const labelTxt = `${label}: ${slope>=0?'+':''}$${Math.round(slope).toLocaleString()}/u·yr`;
+      s += `<text x="${x2-4}" y="${y2-6}" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" font-weight="600" fill="${color}">${labelTxt}</text>`;
+      return s;
+    };
+    svg += drawLine(wonReg,  '#5B7F46', false, 'Won trend');
+    svg += drawLine(lostReg, '#B85C3E', true,  'Lost trend');
+    svg += `</svg>`;
+    document.getElementById('bid-scatter-svg-wrap').innerHTML = svg;
+
+    document.getElementById('bid-scatter-stats').textContent =
+      `${rows.length} bids · ${won.length} won · ${lost.length} lost · ${bid.length} bidding`;
+    document.getElementById('bid-scatter-legend').innerHTML = `
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#8FB27B;margin-right:4px;vertical-align:middle;"></span>Won (${won.length})</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#B85C3E;opacity:0.55;margin-right:4px;vertical-align:middle;"></span>Lost (${lost.length})</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#D4A06A;border:1.2px solid #3a342e;margin-right:4px;vertical-align:middle;"></span>Bidding (${bid.length})</span>
+      <span style="color:var(--ink-3);">trend = least-squares · jitter ±0.15yr</span>
+    `;
+
+    // ---------- Buckets ----------
+    const buckets = [
+      { label: '<$8k',     min: 0,     max: 8000  },
+      { label: '$8–12k',   min: 8000,  max: 12000 },
+      { label: '$12–16k',  min: 12000, max: 16000 },
+      { label: '$16–20k',  min: 16000, max: 20000 },
+      { label: '>$20k',    min: 20000, max: Infinity },
+    ];
+    const decided = rows.filter(r => r.status === 'won' || r.status === 'active' || r.status === 'lost');
+    const bRows = buckets.map(b => {
+      const inB  = decided.filter(r => r._upu >= b.min && r._upu < b.max);
+      const wins = inB.filter(r => r.status === 'won' || r.status === 'active').length;
+      return { ...b, total: inB.length, wins, rate: inB.length ? wins / inB.length * 100 : 0 };
+    });
+    const validBuckets = bRows.filter(b => b.total >= 5);
+    const maxBRate = validBuckets.length ? Math.max(...validBuckets.map(b => b.rate)) : 0;
+    let bucketHtml = '';
+    bRows.forEach(b => {
+      const pct = b.rate.toFixed(0);
+      const isBest = b.total >= 5 && b.rate === maxBRate && maxBRate > 0;
+      const barW = b.total ? Math.max(2, b.rate) : 0;
+      bucketHtml += `<div style="display:grid; grid-template-columns:80px 50px 1fr 50px; gap:10px; align-items:center; padding:7px 10px; margin-bottom:4px; border:1px solid ${isBest?'var(--clay)':'transparent'}; border-radius:6px; background:${isBest?'rgba(184,92,62,0.04)':'transparent'};">
+        <span class="mono" style="font-size:11px; color:var(--ink-2);">${b.label}</span>
+        <span class="mono" style="font-size:10px; color:var(--ink-4); text-align:right;">${b.total}</span>
+        <span style="display:block; height:8px; background:rgba(184,92,62,0.18); border-radius:4px; position:relative;">
+          <span style="display:block; width:${barW}%; height:100%; background:#8FB27B; border-radius:4px;"></span>
+        </span>
+        <span class="mono tabular" style="font-size:11px; font-weight:600; color:${isBest?'var(--clay)':'var(--ink)'}; text-align:right;">${pct}%</span>
+      </div>`;
+    });
+    document.getElementById('bid-winrate-by-bucket').innerHTML = bucketHtml;
+
+    // ---------- GC win rate ----------
+    // Normalize GC name variants ("Exxel Pacific" / "Exxel Pacific, Inc." / "Exxel" → "Exxel Pacific";
+    // "Natural & Built" / "Natural&Built" / "Natural & Built Construction"; "Chinn Construction LLC" → "Chinn"; etc.)
+    const normGc = (g) => {
+      if (!g) return '—';
+      const s = String(g).trim();
+      if (/exxel/i.test(s))            return 'Exxel Pacific';
+      if (/chinn/i.test(s))            return 'Chinn';
+      if (/compass/i.test(s))          return 'Compass';
+      if (/marpac/i.test(s))           return 'Marpac';
+      if (/blueprint/i.test(s))        return 'Blueprint';
+      if (/natural ?& ?built/i.test(s))return 'Natural & Built';
+      if (/^srm/i.test(s) || /\bsrm\b/i.test(s)) return 'SRM';
+      if (/shelter/i.test(s))          return 'Shelter Holdings';
+      if (/synn?ergy/i.test(s))        return 'Synergy';
+      if (/^gre$/i.test(s))            return 'GRE';
+      if (/holland/i.test(s))          return 'Holland';
+      if (/bmdc/i.test(s))             return 'BMDC Services';
+      return s;
+    };
+    const gcMap = {};
+    decided.forEach(r => {
+      const g = normGc(r.gc);
+      if (!gcMap[g]) gcMap[g] = { name: g, total: 0, wins: 0 };
+      gcMap[g].total++;
+      if (r.status === 'won' || r.status === 'active') gcMap[g].wins++;
+    });
+    const gcArr = Object.values(gcMap).sort((a, b) => b.total - a.total).slice(0, 6);
+    gcArr.forEach(g => g.rate = g.total ? g.wins / g.total * 100 : 0);
+    gcArr.sort((a, b) => b.rate - a.rate);
+    let gcHtml = '';
+    gcArr.forEach(g => {
+      gcHtml += `<div style="display:grid; grid-template-columns:1fr 50px 1fr 50px; gap:10px; align-items:center; padding:7px 10px; margin-bottom:4px;">
+        <span style="font-size:11.5px; color:var(--ink); font-weight:600;">${g.name}</span>
+        <span class="mono" style="font-size:10px; color:var(--ink-4); text-align:right;">${g.wins}/${g.total}</span>
+        <span style="display:block; height:8px; background:rgba(184,92,62,0.18); border-radius:4px;">
+          <span style="display:block; width:${Math.max(2,g.rate)}%; height:100%; background:#8FB27B; border-radius:4px;"></span>
+        </span>
+        <span class="mono tabular" style="font-size:11px; font-weight:600; color:var(--ink); text-align:right;">${g.rate.toFixed(0)}%</span>
+      </div>`;
+    });
+    document.getElementById('bid-winrate-by-gc').innerHTML = gcHtml;
+
+    // ---------- Takeaways ----------
+    const overallWon = won.length, overallTot = won.length + lost.length;
+    const overallRate = overallTot ? (overallWon / overallTot * 100) : 0;
+
+    const yrMap = {};
+    decided.forEach(r => {
+      if (!yrMap[r.year]) yrMap[r.year] = { won: 0, tot: 0 };
+      yrMap[r.year].tot++;
+      if (r.status === 'won' || r.status === 'active') yrMap[r.year].won++;
+    });
+    const yrEntries = Object.entries(yrMap).filter(([y, v]) => v.tot >= 5)
+      .map(([y, v]) => ({ year: +y, rate: v.won / v.tot * 100, tot: v.tot, won: v.won }));
+    yrEntries.sort((a, b) => b.rate - a.rate);
+    const bestYr  = yrEntries[0];
+    const worstYr = yrEntries[yrEntries.length - 1];
+
+    const sweet = bRows.filter(b => b.total >= 5).sort((a, b) => b.rate - a.rate)[0];
+    const highEnd = bRows.filter(b => b.min >= 16000).reduce((acc, b) => {
+      acc.tot += b.total; acc.wins += b.wins; return acc;
+    }, { tot: 0, wins: 0 });
+    const highRate = highEnd.tot ? highEnd.wins / highEnd.tot * 100 : 0;
+
+    const gcBest  = gcArr[0];
+    const gcWorst = gcArr[gcArr.length - 1];
+
+    const wonStart  = wonReg  ? wonReg.m  * xMin + wonReg.b  : null;
+    const wonEnd    = wonReg  ? wonReg.m  * xMax + wonReg.b  : null;
+    const lostStart = lostReg ? lostReg.m * xMin + lostReg.b : null;
+    const lostEnd   = lostReg ? lostReg.m * xMax + lostReg.b : null;
+    const gapStart  = (wonStart != null && lostStart != null) ? Math.abs(wonStart - lostStart) : null;
+    const gapEnd    = (wonEnd   != null && lostEnd   != null) ? Math.abs(wonEnd   - lostEnd  ) : null;
+    const gapDir    = (gapStart != null && gapEnd != null) ? (gapEnd > gapStart ? 'widening' : 'closing') : '—';
+
+    const recentYr = Math.max(...decided.map(r => r.year));
+    const recentSet = decided.filter(r => r.year === recentYr);
+    const recentWon = recentSet.filter(r => r.status === 'won' || r.status === 'active').length;
+    const recentRate = recentSet.length ? recentWon / recentSet.length * 100 : 0;
+
+    const fmt$ = v => '$' + Math.round(v).toLocaleString('en-US');
+    const takeaways = [
+      `OWP wins <b>${overallRate.toFixed(0)}% of all bids 2016&ndash;2026</b> (${overallWon} won / ${overallTot} decided pursuits). Best year was <b>${bestYr?bestYr.year:'—'}</b> at ${bestYr?bestYr.rate.toFixed(0):'—'}% (${bestYr?bestYr.won+'/'+bestYr.tot:''}); worst was <b>${worstYr?worstYr.year:'—'}</b> at ${worstYr?worstYr.rate.toFixed(0):'—'}%.`,
+      `Sweet spot: bids in the <b>${sweet?sweet.label:'—'}/unit</b> band win <b>${sweet?sweet.rate.toFixed(0):'—'}%</b> of the time (${sweet?sweet.wins+'/'+sweet.total:''}), versus <b>${highRate.toFixed(0)}%</b> for bids above $16k/unit (${highEnd.wins}/${highEnd.tot}). Lower $/unit aligns with higher win rate.`,
+      `<b>${gcBest?gcBest.name:'—'}</b> is the highest-win-rate GC at <b>${gcBest?gcBest.rate.toFixed(0):'—'}%</b> across ${gcBest?gcBest.total:0} bids. <b>${gcWorst?gcWorst.name:'—'}</b> is the lowest at <b>${gcWorst?gcWorst.rate.toFixed(0):'—'}%</b> (${gcWorst?gcWorst.total:0} bids) &mdash; consider declining more of those invitations.`,
+      `Won bid $/unit trends <b>${wonReg?(wonReg.m>=0?'+':'')+Math.round(wonReg.m).toLocaleString()+'/yr':'—'}</b> (from ${wonStart!=null?fmt$(wonStart):'—'} in ${xMin} to ${wonEnd!=null?fmt$(wonEnd):'—'} in ${xMax}). Lost-bid $/unit trends <b>${lostReg?(lostReg.m>=0?'+':'')+Math.round(lostReg.m).toLocaleString()+'/yr':'—'}</b>. Gap is <b>${gapDir}</b>${gapEnd!=null?' ('+fmt$(gapEnd)+'/u in '+xMax+')':''}.`,
+      `Of ${recentSet.length} decided pursuits in <b>${recentYr}</b>, OWP won <b>${recentRate.toFixed(0)}%</b> &mdash; ${recentRate >= overallRate ? 'above' : 'below'} the long-term average of ${overallRate.toFixed(0)}%.`,
+    ];
+    document.getElementById('bid-trendline-takeaways').innerHTML =
+      takeaways.map(t => `<li style="margin-bottom:8px;">${t}</li>`).join('');
+  }
+
+  try { renderBidScatter(); } catch (e) { console.warn('renderBidScatter failed:', e); }
 
   /* ============================================================
    * ATLAS — filter pills + node click → detail modal
