@@ -12795,16 +12795,19 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   /* ============ BENCHMARK TABLE ============ */
   // fmt: 'int' | 'money' | 'money0' | 'pct' | 'dec2' | 'dec1'
   // dir: 'hi' = higher is better, 'lo' = lower is better, '-' = neutral (no hi/lo shading)
+  // Guard: any non-finite value (NaN / Infinity / null / undefined) renders as '—'.
+  // Caused by projects with null fixtures/units → division by zero → Infinity.
+  const _safe = (fn) => v => (v == null || !isFinite(v)) ? '\u2014' : fn(v);
   const fmtNum = {
-    int:    v => v.toLocaleString('en-US', {maximumFractionDigits: 0}),
-    money0: v => '$' + Math.round(v).toLocaleString('en-US'),
-    money:  v => (v<0?'-$':'$') + Math.abs(v).toLocaleString('en-US', {maximumFractionDigits: 0}),
-    moneyS: v => (v>0?'+$':(v<0?'-$':'$')) + Math.abs(v).toLocaleString('en-US',{maximumFractionDigits:0}),
-    pct:    v => (v*100).toFixed(1) + '%',
-    pct2:   v => (v*100).toFixed(2) + '%',
-    dec2:   v => v.toFixed(2),
-    dec1:   v => v.toFixed(1),
-    money2: v => '$' + v.toFixed(2)
+    int:    _safe(v => v.toLocaleString('en-US', {maximumFractionDigits: 0})),
+    money0: _safe(v => '$' + Math.round(v).toLocaleString('en-US')),
+    money:  _safe(v => (v<0?'-$':'$') + Math.abs(v).toLocaleString('en-US', {maximumFractionDigits: 0})),
+    moneyS: _safe(v => (v>0?'+$':(v<0?'-$':'$')) + Math.abs(v).toLocaleString('en-US',{maximumFractionDigits:0})),
+    pct:    _safe(v => (v*100).toFixed(1) + '%'),
+    pct2:   _safe(v => (v*100).toFixed(2) + '%'),
+    dec2:   _safe(v => v.toFixed(2)),
+    dec1:   _safe(v => v.toFixed(1)),
+    money2: _safe(v => '$' + v.toFixed(2))
   };
   /* ============ INFLATION INDEX LOOKUP (2011 = 100 base) ============
      Used by benchmark comparison to adjust nominal $ across years.
@@ -13002,6 +13005,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   const PROJ_FLAGS = { '2010':'star', '2018':'star', '2019':'star', '2020':'warn' };
   // Abbreviated currency for display in cells (CSV download keeps full precision)
   function fmtMoneyAbbr(v){
+    if (v == null || !isFinite(v)) return '\u2014';
     const a = Math.abs(v);
     const sign = v < 0 ? '-' : '';
     if (a >= 1000000) return sign + '$' + (a/1000000).toFixed(2) + 'M';
@@ -13010,6 +13014,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     return sign + '$' + Math.round(a).toLocaleString('en-US');
   }
   function fmtMoneySAbbr(v){
+    if (v == null || !isFinite(v)) return '\u2014';
     if (v === 0) return '$0';
     const sign = v > 0 ? '+' : '-';
     const a = Math.abs(v);
@@ -13090,8 +13095,12 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       rows.forEach(r=>{
         const nums = r.v;
         const fmt = fmtCell[r.fmt] || fmtNum[r.fmt];
-        const min = Math.min(...nums), max = Math.max(...nums);
-        const avg = nums.reduce((a,b)=>a+b,0) / nums.length;
+        // Filter out non-finite values from min/max/avg calculations
+        // (Infinity from div-by-zero on projects with null fixtures/units)
+        const finite = nums.filter(v => v != null && isFinite(v));
+        const min = finite.length ? Math.min(...finite) : 0;
+        const max = finite.length ? Math.max(...finite) : 0;
+        const avg = finite.length ? finite.reduce((a,b)=>a+b,0) / finite.length : 0;
         const mPos = max === min ? 50 : ((avg - min) / (max - min)) * 100;
         const ri = _benchRowIdx++;
         _benchRowData.push({ label: r.label, vals: nums, fmt: r.fmt, dir: r.dir, section: label });
@@ -13226,8 +13235,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const rd = window._benchRowData[rowIdx]; if (!rd) return;
     const fmt = fmtCell[rd.fmt] || fmtNum[rd.fmt];
     const vals = rd.vals;
-    const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
-    const min = Math.min(...vals), max = Math.max(...vals);
+    // Filter non-finite values from chart calculations (Infinity from div-by-zero)
+    const finite = vals.filter(v => v != null && isFinite(v));
+    const avg = finite.length ? finite.reduce((a, b) => a + b, 0) / finite.length : 0;
+    const min = finite.length ? Math.min(...finite) : 0;
+    const max = finite.length ? Math.max(...finite) : 0;
     const range = max - min || 1;
     const n = vals.length;
 
