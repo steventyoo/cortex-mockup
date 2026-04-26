@@ -16661,16 +16661,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       banner.style.display = 'inline-block';
     }
 
-    // If a GC was focused, scroll to its card below and pulse-highlight
-    if (cat === 'gc') {
-      const card = document.querySelector('[data-gc-card="' + key + '"]');
-      if (card) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        card.style.transition = 'box-shadow .3s ease';
-        card.style.boxShadow = '0 0 0 3px var(--clay)';
-        setTimeout(() => { card.style.boxShadow = ''; }, 1500);
-      }
-    }
+    // (Card scroll/pulse intentionally disabled — clicking a GC stays
+    // in the graph view to show connections only.)
   }
 
   // Atlas node click: apply focus only (modal popup disabled in favor of persistent GC grid below)
@@ -16692,16 +16684,40 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
     const lifeRev   = node.stats.find(s => /Lifetime revenue/i.test(s[0]))?.[1] || '—';
     const blendMrg  = node.stats.find(s => /Blended margin/i.test(s[0]))?.[1] || '—';
-    const jobsLine  = node.stats.find(s => /Jobs/i.test(s[0]))?.[1] || '—';
 
-    const recentIds = projectIds.slice().sort((a,b) => Number(b) - Number(a)).slice(0, 4);
-    const recentList = recentIds.map(pid => {
+    // Separate live vs completed
+    const closedIds = projectIds.filter(pid => !liveIds.includes(pid));
+    closedIds.sort((a, b) => Number(b) - Number(a)); // most recent first
+    liveIds.sort((a, b) => Number(b) - Number(a));
+
+    const projRow = (pid, isLive) => {
       const p = PROJECTS[pid] || {};
       const name = (p.jobBottom || p.sbName || pid).replace(/\.$/, '');
-      const isLive = liveIds.includes(pid);
-      const dot = isLive ? '<span style="color:var(--clay);">●</span>' : '<span style="color:var(--sage-ink);">●</span>';
-      return `<div class="kpi-row"><span class="kpi-lbl" style="display:flex;align-items:center;gap:6px;">${dot} <span class="mono" style="font-size:10px;color:var(--ink-3);">#${pid}</span> ${name}</span><span class="kpi-val" style="font-size:11px;color:var(--ink-4);">${p.k01_margin || ''}</span></div>`;
-    }).join('');
+      const dot  = isLive ? '<span style="color:var(--clay);">●</span>' : '<span style="color:var(--sage-ink);">●</span>';
+      const mrg  = (p.k01_margin || '').replace(/~/g, '');
+      return `<div class="kpi-row" style="padding:3px 0;"><span class="kpi-lbl" style="display:flex;align-items:center;gap:6px;font-size:11px;">${dot}<span class="mono" style="font-size:10px;color:var(--ink-3);">#${pid}</span><span style="color:var(--ink);">${name}</span></span><span class="kpi-val" style="font-size:10.5px;color:var(--ink-4);">${mrg}</span></div>`;
+    };
+
+    // Live block (always shown; says "no live" if empty)
+    const liveBlock = liveIds.length
+      ? `<div style="margin-top:10px;">
+           <div class="mono" style="font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);font-weight:600;margin-bottom:4px;">▸ ${liveIds.length} live · in flight</div>
+           ${liveIds.map(pid => projRow(pid, true)).join('')}
+         </div>`
+      : `<div style="margin-top:10px;">
+           <div class="mono" style="font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-4);margin-bottom:4px;">▸ no live work</div>
+         </div>`;
+
+    // Closed block — show top 4 most recent if many, else all
+    const closedShow = closedIds.slice(0, 4);
+    const closedMore = closedIds.length > 4 ? `<div class="mono" style="font-size:9.5px;color:var(--ink-4);padding:3px 0 0 14px;">+ ${closedIds.length - 4} more closed</div>` : '';
+    const closedBlock = closedIds.length
+      ? `<div style="margin-top:12px;">
+           <div class="mono" style="font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-ink);font-weight:600;margin-bottom:4px;">▸ ${closedIds.length} completed</div>
+           ${closedShow.map(pid => projRow(pid, false)).join('')}
+           ${closedMore}
+         </div>`
+      : '';
 
     const liveChip = hasLive ? `<span style="display:inline-block; background: var(--clay); color: var(--cream); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; padding: 2px 7px; border-radius: 3px; vertical-align: middle; margin-left: 8px;">${liveIds.length} LIVE</span>` : '';
     const borderStyle = hasLive ? 'border: 1.5px solid var(--clay); background: rgba(184,92,62,0.04);' : '';
@@ -16724,8 +16740,12 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
           </div>
         </div>
         <div class="kpi-divider"></div>
-        <div class="kpi-row"><span class="kpi-lbl">Jobs</span><span class="kpi-val">${jobsLine}</span></div>
-        ${recentList}
+        <div style="display:flex;gap:18px;justify-content:space-between;">
+          <div><div class="hero-lab">Live</div><div class="serif-it" style="font-size:22px;color:var(--clay);line-height:1;">${liveIds.length}</div></div>
+          <div style="text-align:right;"><div class="hero-lab">Completed</div><div class="serif-it" style="font-size:22px;color:var(--sage-ink);line-height:1;">${closedIds.length}</div></div>
+        </div>
+        ${liveBlock}
+        ${closedBlock}
       </div>
       <div style="margin-top:auto; padding-top:18px;">
         <div style="border-top:1px dashed var(--border-2); margin-bottom:14px;"></div>
