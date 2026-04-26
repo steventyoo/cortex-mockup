@@ -14020,62 +14020,48 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         html += '</div>';
         html += '</div>';
 
-        // BAR LANE (18 sub-cells via grid). Use grid-column to span continuous bars.
-        // The lane itself uses display:contents so its children land directly in the parent grid columns 2..19.
-        // Empty cells get faint vertical dividers.
+        // BAR LANE — one wrapper cell spanning all 18 month columns; bars sit
+        // INSIDE this wrapper using absolute positioning relative to the wrapper,
+        // not the outer container. This avoids the offsetTop bug that caused all
+        // bars to render at top:0 when the view was display:none at boot.
+        html += '<div style="grid-column: 2 / span 18; position:relative; display:grid; grid-template-columns:repeat(18, ' + monthW + 'px); height:' + rowH + 'px;">';
+        // Empty grid cells (faint vertical dividers + year-break dashes)
         for (let i = 0; i < 18; i++) {
           const isYearBreak = FD_MONTHS[i] && FD_MONTHS[i].label === 'JAN' && i > 0;
           html += '<div style="border-bottom:1px solid rgba(31,30,29,0.05); ' + (isYearBreak ? 'border-left:1px dashed rgba(31,30,29,0.12);' : 'border-left:1px solid rgba(31,30,29,0.025);') + '"></div>';
         }
+        // Phase bars — positioned absolutely INSIDE the bar lane
+        groups.forEach(g => {
+          const pal = PHASE_BAR[g.phase];
+          if (!pal) return;
+          const x = g.start * monthW + 3;
+          const w = g.span * monthW - 6;
+          const label = pal.label + (g.span > 2 ? '  \u00b7  ' + g.span + 'mo' : '');
+          html += '<div style="position:absolute; left:' + x + 'px; top:8px; width:' + w + 'px; height:' + (rowH - 16) + 'px; background:' + pal.bg + '; border-radius:5px; display:flex; align-items:center; justify-content:center; color:' + pal.fg + '; font-family:&quot;JetBrains Mono&quot;,monospace; font-size:9.5px; font-weight:700; letter-spacing:0.06em; box-shadow: 0 1px 2px rgba(31,30,29,0.06); pointer-events:none;">' + label + '</div>';
+        });
         html += '</div>';
-
-        // BAR OVERLAY (one absolute-positioned bar per group)
-        // Wrap row in another div for positioning context — easier: render the bars inside the same grid via grid-column spans.
-        // To do that, the row must allow the bars to occupy specific columns. We'll add a SECOND row immediately after that overlays the bars on the same vertical position.
-        // Simpler approach: render bars as a separate absolutely-positioned strip aligned with the row.
+        html += '</div>';
       });
 
       html += '</div>';
       ganttWrap.innerHTML = html;
 
-      // Now overlay the phase bars + TODAY marker as absolutely-positioned elements over each row.
-      // Compute row positions based on rendered DOM.
-      const rowEls = Array.from(ganttWrap.querySelectorAll('.fd-gantt-row'));
-      // Build a single absolute overlay layer
-      const overlay = document.createElement('div');
-      overlay.style.cssText = 'position:absolute; top:0; left:0; width:100%; pointer-events:none;';
+      // TODAY marker — append as a single absolutely-positioned line spanning
+      // the full container height. The outer wrapper has min-width set, so
+      // querying offsetHeight is safe even if the view is hidden (CSS height
+      // is set explicitly via row heights).
       const outer = ganttWrap.querySelector(':scope > div');
       if (outer) {
         outer.style.position = 'relative';
-        // For each row, figure out its top offset (relative to outer) and lay out the phase bars
-        rowEls.forEach((rowEl, idx) => {
-          const r = ganttOrder[idx];
-          const groups = groupPhases(r.phaseStrip);
-          const rowTop = rowEl.offsetTop;
-          const rowHeight = rowEl.offsetHeight;
-          const barTop = rowTop + 8;          // padding
-          const barH   = rowHeight - 16;
-          groups.forEach(g => {
-            const pal = PHASE_BAR[g.phase];
-            if (!pal) return;
-            const x = labelW + g.start * monthW + 3;
-            const w = g.span * monthW - 6;
-            const bar = document.createElement('div');
-            bar.style.cssText = 'position:absolute; left:' + x + 'px; top:' + barTop + 'px; width:' + w + 'px; height:' + barH + 'px; background:' + pal.bg + '; border-radius:5px; display:flex; align-items:center; justify-content:center; color:' + pal.fg + '; font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; letter-spacing:0.06em; box-shadow: 0 1px 2px rgba(31,30,29,0.06);';
-            bar.textContent = pal.label + (g.span > 2 ? '  \u00b7  ' + g.span + 'mo' : '');
-            overlay.appendChild(bar);
-          });
-        });
-        // TODAY marker (vertical clay line)
-        const totalH = outer.offsetHeight;
+        // Compute total height = header + (15 rows × rowH)
+        const totalH = 32 + ganttOrder.length * 44 + 8;
         const today = document.createElement('div');
-        today.style.cssText = 'position:absolute; left:' + todayX + 'px; top:32px; width:0; height:' + (totalH - 32) + 'px; border-left:1.5px dashed #B85C3E; opacity:0.55;';
-        overlay.appendChild(today);
+        today.style.cssText = 'position:absolute; left:' + todayX + 'px; top:32px; width:0; height:' + (totalH - 32) + 'px; border-left:1.5px dashed #B85C3E; opacity:0.55; pointer-events:none;';
+        outer.appendChild(today);
         const todayLabel = document.createElement('div');
-        todayLabel.style.cssText = 'position:absolute; left:' + (todayX - 26) + 'px; top:14px; padding:1px 6px; background:#B85C3E; color:#FAF6EE; font-family:"JetBrains Mono",monospace; font-size:8.5px; font-weight:700; letter-spacing:0.1em; border-radius:3px;';
+        todayLabel.style.cssText = 'position:absolute; left:' + (todayX - 26) + 'px; top:14px; padding:1px 6px; background:#B85C3E; color:#FAF6EE; font-family:"JetBrains Mono",monospace; font-size:8.5px; font-weight:700; letter-spacing:0.1em; border-radius:3px; pointer-events:none;';
         todayLabel.textContent = 'TODAY';
-        overlay.appendChild(todayLabel);
-        outer.appendChild(overlay);
+        outer.appendChild(todayLabel);
       }
 
       ganttWrap.querySelectorAll('.fd-gantt-row').forEach(tr => {
