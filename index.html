@@ -13145,6 +13145,13 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const key = getKey();
     if(!proxy && !key){ openKeyModal(); return; }
 
+    posthog.capture('chat_message_sent', {
+      chat_type: 'home_prompt',
+      question: question,
+      model: getModel(),
+      turn_number: homeHistory.filter(m => m.role === 'user').length + 1,
+    });
+
     if(chips) chips.style.display = 'none';
     resp.style.display = '';
 
@@ -13190,6 +13197,13 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n\n');
       homeHistory.push({ role: 'assistant', content: text || '(empty response)' });
 
+      posthog.capture('chat_response_received', {
+        chat_type: 'home_prompt',
+        model: getModel(),
+        response_length: (text || '').length,
+        turn_number: homeHistory.filter(m => m.role === 'assistant').length,
+      });
+
       label.innerHTML = `<div class="mono text-[10px] uppercase tracking-wider mb-1" style="color: var(--ink-4);">You</div><div class="text-[15px] mb-4" style="color: var(--ink); font-weight: 500;">${escQ}</div><span>Cortex · ${getModel()}</span>`;
       body.innerHTML = mdToHtml(text || '(empty response)');
       // Update turn counter
@@ -13199,6 +13213,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     } catch(err){
       // Pop the failed user turn so it doesn't poison future calls
       homeHistory.pop();
+      posthog.capture('chat_error', {
+        chat_type: 'home_prompt',
+        error: String(err.message || err),
+        model: getModel(),
+      });
       renderHomeTranscript();
       label.textContent = 'Cortex · error';
       body.innerHTML = '<div style="color: var(--clay);"><b>Request failed.</b> ' + String(err.message || err) + '</div>' +
@@ -18383,6 +18402,14 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // Push user turn into history
     _miniHistory.push({ role: 'user', content: text });
 
+    posthog.capture('chat_message_sent', {
+      chat_type: 'cortex_mini',
+      question: text,
+      model: getModel(),
+      project_id: _miniProjectId || null,
+      turn_number: _miniHistory.filter(m => m.role === 'user').length,
+    });
+
     // If neither proxy nor BYOK key, prompt the user
     const proxy = usingProxy();
     const key = getKey();
@@ -18419,11 +18446,24 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const data = await res.json();
       const reply = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n\n') || '(empty response)';
       _miniHistory.push({ role: 'assistant', content: reply });
+      posthog.capture('chat_response_received', {
+        chat_type: 'cortex_mini',
+        model: getModel(),
+        project_id: _miniProjectId || null,
+        response_length: reply.length,
+        turn_number: _miniHistory.filter(m => m.role === 'assistant').length,
+      });
       tBub.querySelector('.bubble').innerHTML = _renderMiniReply(reply);
       body.scrollTop = body.scrollHeight;
     } catch (err) {
       tBub.querySelector('.bubble').innerHTML = `<b style="color: var(--clay);">Request failed.</b><br><span style="font-size: 11px; color: var(--ink-3);">${String(err.message || err)}</span>`;
-      _miniHistory.pop(); // don't keep the failed user turn poisoning future calls
+      _miniHistory.pop();
+      posthog.capture('chat_error', {
+        chat_type: 'cortex_mini',
+        error: String(err.message || err),
+        model: getModel(),
+        project_id: _miniProjectId || null,
+      }); // don't keep the failed user turn poisoning future calls
       body.scrollTop = body.scrollHeight;
     }
   }
