@@ -15990,41 +15990,50 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   // files aren't in the repo yet.
   // ------------------------------------------------------------------
   const N_ANALOGS = 4;                 // Jobs contributing to code stats
-  const PORTFOLIO_PF_BASE = 797;       // Sum of all code mean $/fixture
-  const PORTFOLIO_TOTAL_SIGMA = 38.3;  // σ of total direct $/fixture across 4 jobs
+  // Cost codes — 50-job calibration (was 4-job parse before Apr 2026 rebuild).
+  // Each meanPf is the median actual $/fixture across closed jobs for that code,
+  // derived from cost_code_benchmarks.by_code in OWP_Productivity_Insights.json.
+  // Conversion: actual_per_unit_median ÷ 4.5 fx/unit (typical OWP multifamily
+  // density per #2061: 1093 fx / 243 units). sigma derived from (P75-P25)/(2×median).
+  // n = number of closed jobs in the calibration sample for that code.
+  const PORTFOLIO_PF_BASE = 1788;      // Sum of 50-job medians ($/fx)
+  const PORTFOLIO_TOTAL_SIGMA = 22.0;  // Median code-level σ% on major codes (n≥45)
 
   const COST_CODES = [
-    { code: '120', desc: 'Roughin Labor',              cat: 'labor',    meanPf: 138.55, sigma: 47.3, n: 4 },
-    { code: '130', desc: 'Finish Labor',               cat: 'labor',    meanPf: 32.68,  sigma: 38.8, n: 4 },
-    { code: '111', desc: 'Garage Labor',               cat: 'labor',    meanPf: 22.26,  sigma: 46.0, n: 4 },
-    { code: '145', desc: 'Tub / Shower Labor',         cat: 'labor',    meanPf: 8.95,   sigma: 50.3, n: 4 },
-    { code: '141', desc: 'Water Main / Insulation Lab',cat: 'labor',    meanPf: 8.08,   sigma: 123.2,n: 3 },
-    { code: '100', desc: 'Supervision',                cat: 'labor',    meanPf: 6.07,   sigma: 27.6, n: 4 },
-    { code: '110', desc: 'Underground Labor',          cat: 'labor',    meanPf: 5.41,   sigma: 79.5, n: 4 },
-    { code: '101', desc: 'Takeoff &amp; Purchase Labor',   cat: 'labor',meanPf: 5.12,   sigma: 48.9, n: 4 },
-    { code: '142', desc: 'Mech Room Labor',            cat: 'labor',    meanPf: 4.16,   sigma: 126.0,n: 4 },
-    { code: '112', desc: 'Canout Labor',               cat: 'labor',    meanPf: 3.92,   sigma: 51.1, n: 4 },
-    { code: '011', desc: 'DS &amp; RD Labor',              cat: 'labor',meanPf: 2.75,   sigma: 47.1, n: 4 },
-    { code: '113', desc: 'Foundation Drain Labor',     cat: 'labor',    meanPf: 2.40,   sigma: 70.2, n: 2 },
-    { code: '140', desc: 'Gas Labor',                  cat: 'labor',    meanPf: 2.39,   sigma: 15.5, n: 2 },
-    { code: '230', desc: 'Finish Material',            cat: 'material', meanPf: 240.06, sigma: 37.4, n: 4 },
-    { code: '220', desc: 'Roughin Material',           cat: 'material', meanPf: 79.65,  sigma: 39.9, n: 4 },
-    { code: '241', desc: 'Water Main / Insulation Mat',cat: 'material', meanPf: 31.96,  sigma: 36.2, n: 3 },
-    { code: '211', desc: 'Garage Material',            cat: 'material', meanPf: 9.50,   sigma: 41.3, n: 4 },
-    { code: '242', desc: 'Mech Room Material',         cat: 'material', meanPf: 7.93,   sigma: 167.4,n: 4 },
-    { code: '212', desc: 'Canout Material',            cat: 'material', meanPf: 7.47,   sigma: 40.9, n: 4 },
-    { code: '213', desc: 'Foundation Material',        cat: 'material', meanPf: 4.20,   sigma: 67.6, n: 2 },
-    { code: '210', desc: 'Underground Material',       cat: 'material', meanPf: 4.03,   sigma: 83.7, n: 4 },
-    { code: '039', desc: 'DS &amp; RD Material',           cat: 'material', meanPf: 2.52,sigma: 100.8,n: 4 },
-    { code: '245', desc: 'Tub / Shower Material',      cat: 'material', meanPf: 1.70,   sigma: 59.3, n: 3 },
-    { code: '240', desc: 'Gas Material',               cat: 'material', meanPf: 1.28,   sigma: 6.9,  n: 2 },
-    { code: '603', desc: 'Permits &amp; Licenses',         cat: 'overhead', meanPf: 16.84,sigma: 88.2,n: 4 },
-    { code: '601', desc: 'Engineering / Plans',        cat: 'overhead', meanPf: 15.01,  sigma: 45.3, n: 4 },
-    { code: '600', desc: 'Subcontractor',              cat: 'overhead', meanPf: 3.86,   sigma: 122.7,n: 4 },
-    { code: '602', desc: 'Rental Equipment',           cat: 'overhead', meanPf: 2.99,   sigma: 0,    n: 1 },
-    { code: '604', desc: 'Backcharges',                cat: 'overhead', meanPf: 2.25,   sigma: 0,    n: 1 },
-    { code: '995', desc: 'Payroll Burden',             cat: 'burden',   meanPf: 102.85, sigma: 44.9, n: 4 },
-    { code: '998', desc: 'Payroll Taxes',              cat: 'burden',   meanPf: 18.29,  sigma: 43.4, n: 4 }
+    { code: '120', desc: 'Roughin Labor',              cat: 'labor',    meanPf: 364.96, sigma: 22.2, n: 50 },
+    { code: '130', desc: 'Finish Labor',               cat: 'labor',    meanPf: 64.40,  sigma: 18.9, n: 50 },
+    { code: '111', desc: 'Garage Labor',               cat: 'labor',    meanPf: 61.03,  sigma: 53.9, n: 44 },
+    { code: '141', desc: 'Water Main/Insulation Lab',  cat: 'labor',    meanPf: 60.83,  sigma: 37.2, n: 47 },
+    { code: '142', desc: 'Mech Room Labor',            cat: 'labor',    meanPf: 21.55,  sigma: 48.6, n: 46 },
+    { code: '101', desc: 'Takeoff &amp; Purchase Labor',   cat: 'labor',meanPf: 20.85,  sigma: 33.0, n: 50 },
+    { code: '110', desc: 'Underground Labor',          cat: 'labor',    meanPf: 15.73,  sigma: 52.8, n: 48 },
+    { code: '112', desc: 'Canout Labor',               cat: 'labor',    meanPf: 14.58,  sigma: 50.0, n: 44 },
+    { code: '140', desc: 'Gas Labor',                  cat: 'labor',    meanPf: 13.70,  sigma: 33.8, n: 42 },
+    { code: '100', desc: 'Supervision',                cat: 'labor',    meanPf: 8.28,   sigma: 31.0, n: 50 },
+    { code: '011', desc: 'DS &amp; RD Labor',              cat: 'labor',meanPf: 5.15,   sigma: 66.7, n: 7 },
+    { code: '113', desc: 'Foundation Drain Labor',     cat: 'labor',    meanPf: 2.29,   sigma: 54.3, n: 8 },
+    { code: '143', desc: 'Condensation Drains Labor',  cat: 'labor',    meanPf: 0.79,   sigma: 100,  n: 14 },
+    { code: '145', desc: 'Tub/Shower Labor',           cat: 'labor',    meanPf: 0.56,   sigma: 100,  n: 7 },
+    { code: '150', desc: 'Warranty Labor',             cat: 'labor',    meanPf: 0.24,   sigma: 100,  n: 13 },
+    { code: '230', desc: 'Finish Material',            cat: 'material', meanPf: 359.06, sigma: 21.2, n: 50 },
+    { code: '220', desc: 'Roughin Material',           cat: 'material', meanPf: 145.92, sigma: 24.6, n: 50 },
+    { code: '241', desc: 'Water Main/Insulation Mat',  cat: 'material', meanPf: 71.80,  sigma: 20.9, n: 46 },
+    { code: '242', desc: 'Mech Room Material',         cat: 'material', meanPf: 35.34,  sigma: 54.1, n: 47 },
+    { code: '211', desc: 'Garage Material',            cat: 'material', meanPf: 32.28,  sigma: 69.5, n: 48 },
+    { code: '210', desc: 'Underground Material',       cat: 'material', meanPf: 15.13,  sigma: 64.4, n: 48 },
+    { code: '212', desc: 'Canout Material',            cat: 'material', meanPf: 14.89,  sigma: 26.5, n: 46 },
+    { code: '240', desc: 'Gas Material',               cat: 'material', meanPf: 5.63,   sigma: 46.7, n: 43 },
+    { code: '039', desc: 'DS &amp; RD Material',           cat: 'material', meanPf: 4.45,sigma: 94.2, n: 7 },
+    { code: '213', desc: 'Foundation Material',        cat: 'material', meanPf: 3.38,   sigma: 98.3, n: 9 },
+    { code: '245', desc: 'Tub/Shower Material',        cat: 'material', meanPf: 0.97,   sigma: 94.7, n: 5 },
+    { code: '243', desc: 'Condensation Drains Mat',    cat: 'material', meanPf: 0.19,   sigma: 100,  n: 17 },
+    { code: '601', desc: 'Engineering / Plans',        cat: 'overhead', meanPf: 54.38,  sigma: 50.9, n: 46 },
+    { code: '603', desc: 'Permits &amp; Licenses',         cat: 'overhead', meanPf: 14.21,sigma: 46.1, n: 45 },
+    { code: '607', desc: 'Other Expenses',             cat: 'overhead', meanPf: 13.26,  sigma: 82.6, n: 34 },
+    { code: '600', desc: 'Subcontractor',              cat: 'overhead', meanPf: 11.11,  sigma: 79.3, n: 49 },
+    { code: '602', desc: 'Rental Equipment',           cat: 'overhead', meanPf: 3.44,   sigma: 100,  n: 28 },
+    { code: '995', desc: 'Payroll Burden',             cat: 'burden',   meanPf: 293.98, sigma: 23.8, n: 49 },
+    { code: '998', desc: 'Payroll Taxes',              cat: 'burden',   meanPf: 54.11,  sigma: 23.4, n: 49 }
   ];
 
   const CAT_META = {
@@ -16198,7 +16207,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // This is the LLM's explicit judgment layer: it names the tier, flags the
     // data-source mismatch, and justifies the recommended cpf in plain English.
     const tier = c.tier;
-    const parsedBase = PORTFOLIO_PF_BASE;                // $797 — small-job mean
+    const parsedBase = PORTFOLIO_PF_BASE;                // $1,788 — sum of 50-job code medians
     const tierAnchor = tier.cpf;                          // tier-specific cpf
     const userCpf    = BID.cpf;
     const gap        = userCpf - tierAnchor;
@@ -16234,12 +16243,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
         <div style="font-family: var(--serif); font-style: italic; color: var(--clay); font-size: 18px; line-height: 1.2;">2</div>
         <div>
-          <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Data source reconciliation <span style="color: var(--clay); font-weight: 500; font-size: 11px; margin-left: 6px;">⚠ two layers disagreed — I chose the comparables</span></div>
+          <div style="font-weight: 600; color: var(--ink); font-size: 13px;">Data source reconciliation <span style="color: var(--sage-ink); font-weight: 500; font-size: 11px; margin-left: 6px;">✓ rebuilt on 50-job calibration (Apr 2026)</span></div>
           <div style="margin-top: 2px;">
-            Code-level parse covers the <b>4 smaller production jobs</b> only (#2009–#2012, avg 755 fx), mean direct cost $${parsedBase}/fx nominal <span style="color: var(--ink-4);">(≈ <b>$1,290/fx in 2026 $</b> after 3.5%/yr escalation over ~13 yrs)</span>.
-            Closest scope comparables (#2001, #2008) ran higher — their direct cost per fixture in 2026 $ sits in the <b>$1,500–$1,700/fx</b> band — the production-job base understates the mid-rise scope.
-            Using the nominal $${parsedBase} as the default would underbid a ${tier.label.toLowerCase()} job by roughly <b>${bidFmtMoneyM((tierAnchor - parsedBase) * c.totalFixtures / (1 - BID.margin/100))}</b>.
-            <span style="display: block; margin-top: 4px; color: var(--sage-ink); font-weight: 600;">→ Anchored the direct-cost default at $${tierAnchor.toLocaleString('en-US')}/fx (2026 $). Contingency, escalation, and margin are applied on top to derive the contract bid. Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios across labor / material / overhead / burden.</span>
+            Code-level medians now sourced from the <b>50-job calibration</b> (OWP_Productivity_Insights.json v1.2 · n≥45 on every major code · 1,510 (job, code) records). Sum of medians = <b>$${parsedBase}/fx</b> (year-blended dollars 2018–2026, no explicit inflation normalization).
+            Tier anchor (${tier.label.toLowerCase()}) sits at <b>$${tierAnchor.toLocaleString('en-US')}/fx in 2026 $</b> based on closest comparables ${tier.analogs}.
+            <span style="display: block; margin-top: 4px; color: var(--sage-ink); font-weight: 600;">→ Anchored the direct-cost default at $${tierAnchor.toLocaleString('en-US')}/fx (2026 $). Contingency, escalation, and margin are applied on top to derive the contract bid. Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the calibration base, preserving the 50-job mix ratios across labor / material / overhead / burden.</span>
           </div>
         </div>
 
@@ -17090,7 +17098,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     } else if (kind === 'cpf') {
       eyebrow = 'Cortex reasoning · Direct cost $ / fixture';
       title  = `Anchored at $${c.tier.cpf.toLocaleString('en-US')}/fx in 2026 $ (${c.tier.label.toLowerCase()})`;
-      body = `<b>This slider is the direct cost anchor, not the bid price.</b> Cortex takes your cpf × fixtures to scale the per-code cost codes (labor/material/overhead/burden), then adds contingency + escalation + margin on top to derive the recommended contract bid. The contract $/fx that comes out the other side is higher than what you input here.<br><br>Code-level parse from the 4 smaller production jobs (#2009–#2012) gives a mean of <b>$${PORTFOLIO_PF_BASE}/fx direct cost nominal</b> (≈ $1,290/fx in 2026 $ after 3.5%/yr escalation).<br><br>Closest scope comparables (#2001, #2008) run roughly <b>$1,500–$1,700/fx direct cost in 2026 $</b> — the production-job base understates mid-rise scope.<br><br>Anchored default <b>$${c.tier.cpf.toLocaleString('en-US')}/fx (2026 $)</b> based on the tier match (${c.tier.analogs}). Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the parsed base, preserving mix ratios.<br><br>Slider runs $400–$3,500. Drop it for production-scope work, raise it for luxury / high-spec.`;
+      body = `<b>This slider is the direct cost anchor, not the bid price.</b> Cortex takes your cpf × fixtures to scale the per-code cost codes (labor/material/overhead/burden), then adds contingency + escalation + margin on top to derive the recommended contract bid. The contract $/fx that comes out the other side is higher than what you input here.<br><br>Cost-code medians now sourced from the <b>50-job calibration</b> (OWP_Productivity_Insights.json v1.2, n≥45 on every major code). Sum of code medians = <b>$${PORTFOLIO_PF_BASE}/fx</b> (year-blended dollars 2018–2026). Major codes: Roughin Labor $365/fx (n=50, σ 22%), Finish Material $359/fx (n=50, σ 21%), Roughin Material $146/fx (n=50, σ 25%), Payroll Burden $294/fx (n=49, σ 24%).<br><br>Anchored default <b>$${c.tier.cpf.toLocaleString('en-US')}/fx (2026 $)</b> based on the tier match (${c.tier.analogs}). Per-code breakdown is scaled ×${c.scale.toFixed(2)} from the calibration base, preserving the 50-job mix ratios.<br><br>Slider runs $400–$3,500. Drop it for production-scope work, raise it for luxury / high-spec. Caveat: portfolio dollars span 2018–2026 without explicit inflation normalization — see Productivity Calibration panel below for the full per-code distributions.`;
     }
     const pop = document.createElement('div');
     pop.className = 'cortex-popover';
