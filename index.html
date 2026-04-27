@@ -14666,37 +14666,102 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         benchAvail = new Array(18).fill(75);
       }
 
-      // ---- Cortex baseline generator ----
+      // ---- Cortex baseline generator (v2 — calibrated against 8 closed jobs 2051-2060) ----
+      // Methodology:
+      //   total_hours = units × HRS_PER_UNIT[gc]   (medians from closed-job line items)
+      //   monthly_hours = total_hours × CANONICAL_CURVE[month_in_project]  (avg of 8 closed jobs)
+      //   workers = monthly_hours ÷ 70  (calibrated from closed actuals — accounts for floaters/OT/partial)
+      // Backtest (8 closed jobs): mean abs error 36% on peak vs actual.
       const HRS_PER_UNIT_BY_GC = {
-        'chinn':240,'compass':195,'srm':220,'bmdc':210,'exxel':180,
-        'holland':215,'ravenna':200,'intracorp':200,'sierra':200,'braseth':200
+        'blueprint':117, 'compass':120, 'compass harbor':144, 'compass construction':107,
+        'farrell-mckenna':144, 'exxel':130, 'chinn':125, 'natural & built':125,
+        'holland':125, 'sierra':125, 'ravenna':125, 'bmdc':125, 'intracorp':125,
+        'srm':125, 'gre':125, 'gre construction':125, 'braseth':125, 'marpac':125,
+        'synergy':125, 'shelter holdings':125
       };
+      const PORTFOLIO_MEDIAN_HRS_PER_UNIT = 125;
+      const HRS_PER_WORKER_PER_MONTH = 70;   // calibrated divisor (vs naive 160 FTE)
+      // Canonical 24-month phase curve (% of total hours per month-of-project-life)
+      // Derived from 8 closed jobs avg, normalized to sum=1
+      const CANONICAL_CURVE = [
+        0.0003,0.0004,0.0006,0.0029,0.0048,0.0054,0.0061,0.0116,
+        0.0209,0.0176,0.0291,0.0466,0.0754,0.0893,0.1103,0.1062,
+        0.0906,0.1001,0.0901,0.0556,0.0474,0.0309,0.0257,0.0318
+      ];
       const CONFIDENCE_BY_GC = {
-        // counted from PROJECTS closed jobs in CLAUDE.md
-        'chinn':'high','exxel':'high','srm':'high','compass':'high','bmdc':'high',
-        'holland':'low','ravenna':'low','intracorp':'low','sierra':'low','braseth':'low'
+        'blueprint':'high','compass':'high','compass harbor':'high','compass construction':'high',
+        'farrell-mckenna':'high','exxel':'high','chinn':'medium','bmdc':'medium','srm':'medium',
+        // new GCs without closed-job baseline
+        'holland':'low','ravenna':'low','intracorp':'low','sierra':'low','braseth':'low',
+        'natural & built':'medium','gre':'medium','marpac':'low','synergy':'low','shelter holdings':'low'
       };
-      const PHASE_SPLIT = { GW:0.04, PT:0.08, RI:0.60, TRIM:0.27, CLOSE:0.01 };
+      // MATRIX_START is Apr 2026 = month index 0. PROJECT_START_OFFSETS[id] = month index in matrix when project starts.
+      // Negative = project started before matrix window. Project month_in_project = matrix_idx - start_offset + 1
+      const PROJECT_START_OFFSETS = {
+        '2098': -20,  // Aug 2024
+        '2104': -25,  // Mar 2024
+        '2103': -24,  // Apr 2024
+        '2107':  -6,  // Oct 2025
+        '2109':   0,  // Apr 2026
+        '2112':  -10, // Jun 2025
+        '2111':  -7,  // Sep 2025
+        '2116':   1,  // May 2026
+        '2114':   1,  // May 2026
+        '2110':   1,  // May 2026
+        '2117':   2,  // Jun 2026
+        '2106':   3,  // Jul 2026
+        '2115':   4,  // Aug 2026
+        '2118':   5,  // Sep 2026
+        '2108':   9   // Jan 2027 (on-hold est)
+      };
+      const PROJECT_DURATION = {
+        '2098': 24, '2104': 18, '2103': 22, '2107': 26, '2109': 22, '2112': 14,
+        '2111': 22, '2116': 24, '2114': 28, '2110': 22, '2117': 22, '2106': 24,
+        '2115': 22, '2118': 30, '2108': 24
+      };
       function generateCortexBaseline(rosterRow) {
         const baseline = new Array(18).fill(0);
         const confidence = new Array(18).fill('na');
+        // Closeout / on-hold projects: respect the existing zero array
+        if (rosterRow.status === 'closeout' || rosterRow.status === 'onhold') {
+          return { baseline, confidence };
+        }
         const gcKey = (rosterRow.gc || '').toLowerCase();
-        const hrsPerUnit = HRS_PER_UNIT_BY_GC[gcKey] || 200;
+        const hrsPerUnit = HRS_PER_UNIT_BY_GC[gcKey] || PORTFOLIO_MEDIAN_HRS_PER_UNIT;
         const conf = CONFIDENCE_BY_GC[gcKey] || 'medium';
         const totalHrs = rosterRow.units * hrsPerUnit;
-        // Run-length encode strip per phase
-        const strip = rosterRow.phaseStrip || [];
-        // count months per phase across the strip
-        const monthsByPhase = {};
-        strip.forEach(ph => { if (ph) monthsByPhase[ph] = (monthsByPhase[ph]||0)+1; });
+        const startOffset = PROJECT_START_OFFSETS[rosterRow.id];
+        const duration = PROJECT_DURATION[rosterRow.id] || 22;
+        if (startOffset == null) {
+          // Fall back to flat zero if project not in offset table
+          return { baseline, confidence };
+        }
+        // Stretch/compress canonical curve to project duration
+        let curve;
+        if (duration >= 24) {
+          curve = CANONICAL_CURVE.slice();
+          // Extend tail
+          for (let i = 24; i < duration; i++) curve.push(0.005);
+        } else {
+          curve = [];
+          for (let i = 0; i < duration; i++) {
+            const src = i * 24 / duration;
+            const lo = Math.floor(src), hi = Math.min(lo+1, 23);
+            const f = src - lo;
+            curve.push(CANONICAL_CURVE[lo] * (1-f) + CANONICAL_CURVE[hi] * f);
+          }
+          // Renormalize
+          const sum = curve.reduce((a,b)=>a+b, 0);
+          curve = curve.map(c => c/sum);
+        }
+        // Map matrix months → project month offset
         for (let i = 0; i < 18; i++) {
-          const ph = strip[i];
-          if (!ph) { baseline[i] = 0; confidence[i] = 'na'; continue; }
-          const phaseShare = PHASE_SPLIT[ph] != null ? PHASE_SPLIT[ph] : 0.1;
-          const phaseHrs = totalHrs * phaseShare;
-          const monthsInPhase = monthsByPhase[ph] || 1;
-          const monthlyHrs = phaseHrs / monthsInPhase;
-          const crew = Math.max(1, Math.round(monthlyHrs / (22 * 8)));
+          const projectMonth = i - startOffset;  // 0 = first month of project
+          if (projectMonth < 0 || projectMonth >= duration) {
+            baseline[i] = 0; confidence[i] = 'na'; continue;
+          }
+          const monthlyHrs = totalHrs * curve[projectMonth];
+          const crew = monthlyHrs > 50 ? Math.max(1, Math.round(monthlyHrs / HRS_PER_WORKER_PER_MONTH)) : 0;
           baseline[i] = crew;
           confidence[i] = conf;
         }
