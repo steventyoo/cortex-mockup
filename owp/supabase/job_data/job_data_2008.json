@@ -1,0 +1,4064 @@
+{
+  "schema_version": "CORTEX_V2.1",
+  "job": "2008",
+  "source_file": "/sessions/keen-determined-mccarthy/mnt/cortex-mockup/owp/cortex v2 files/OWP_2008_JCR_Cortex_v2.xlsx",
+  "cohort": "legacy_v1",
+  "overview": {
+    "\u00a7 IDENTITY": {
+      "value": "",
+      "source": ""
+    },
+    "project_job_number": {
+      "value": "2008",
+      "source": null
+    },
+    "Project Name:": {
+      "value": "Exxel Pacific Vivo Apartments",
+      "source": null
+    },
+    "\u00a7 CONTRACT & PARTIES": {
+      "value": "",
+      "source": ""
+    },
+    "general_contractor": {
+      "value": "Exxel Pacific, Inc.",
+      "source": null
+    },
+    "\u00a7 JOB SITE": {
+      "value": "",
+      "source": ""
+    },
+    "jobsite_location": {
+      "value": "Seattle, WA",
+      "source": null
+    },
+    "Plumbing Units": {
+      "value": "163",
+      "source": "Fixtures / Unit"
+    },
+    "\u00a7 SCHEDULE": {
+      "value": "",
+      "source": ""
+    },
+    "work_period": {
+      "value": "15 mo",
+      "source": null
+    },
+    "Project Duration": {
+      "value": "Jun 2013 \u2013 Aug 2014 (~15 months)",
+      "source": null
+    }
+  },
+  "budget_vs_actual": [
+    {
+      "cost_code": "LABOR",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "011",
+      "description": "DS & RD Labor",
+      "original_budget": 46715,
+      "revised_budget": 46715,
+      "actual": 11671.12,
+      "variance": 35043.88,
+      "pct_used": 0.24983666916408,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "100",
+      "description": "Supervision",
+      "original_budget": 11600,
+      "revised_budget": 11915,
+      "actual": 8811.5,
+      "variance": 3103.5,
+      "pct_used": 0.739530004196391,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "101",
+      "description": "Takeoff & Purchase Labor",
+      "original_budget": 10300,
+      "revised_budget": 11560,
+      "actual": 15093.5,
+      "variance": -3533.5,
+      "pct_used": 0.013056660899654,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "110",
+      "description": "Underground Labor",
+      "original_budget": 5440,
+      "revised_budget": 5440,
+      "actual": 7757.5,
+      "variance": -2317.5,
+      "pct_used": 0.014260110294117601,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "111",
+      "description": "Garage Labor",
+      "original_budget": 44625,
+      "revised_budget": 44625,
+      "actual": 38324.13,
+      "variance": 6300.87,
+      "pct_used": 0.858804033613445,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "112",
+      "description": "Canout Labor",
+      "original_budget": 42255,
+      "revised_budget": 42255,
+      "actual": 29831.5,
+      "variance": 12423.5,
+      "pct_used": 0.705987457105668,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "113",
+      "description": "Foundation Drain Labor",
+      "original_budget": 3400,
+      "revised_budget": 3400,
+      "actual": 2454,
+      "variance": 946,
+      "pct_used": 0.721764705882353,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "120",
+      "description": "Roughin Labor",
+      "original_budget": 261585,
+      "revised_budget": 269760,
+      "actual": 303122.05,
+      "variance": -33362.05,
+      "pct_used": 0.011236730797746099,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "130",
+      "description": "Finish Labor",
+      "original_budget": 43650,
+      "revised_budget": 49430,
+      "actual": 76368.5,
+      "variance": -26938.5,
+      "pct_used": 0.015449828039652001,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "140",
+      "description": "Gas Labor",
+      "original_budget": 18000,
+      "revised_budget": 18200,
+      "actual": 21795.5,
+      "variance": -3595.5,
+      "pct_used": 0.0119755494505495,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "141",
+      "description": "Water Main/Insulation Lab",
+      "original_budget": 40050,
+      "revised_budget": 40050,
+      "actual": 64816.03,
+      "variance": -24766.03,
+      "pct_used": 0.0161837777777778,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "142",
+      "description": "Mech Room Labor",
+      "original_budget": 8100,
+      "revised_budget": 8100,
+      "actual": 13633.25,
+      "variance": -5533.25,
+      "pct_used": 0.016831172839506203,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "145",
+      "description": "Tub/Shower Labor",
+      "original_budget": 0,
+      "revised_budget": 0,
+      "actual": 101.5,
+      "variance": -101.5,
+      "pct_used": 0,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "MATERIAL",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "039",
+      "description": "DS & RD Material",
+      "original_budget": 60420,
+      "revised_budget": 60420,
+      "actual": 26220.27,
+      "variance": 34199.73,
+      "pct_used": 0.433966732869911,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "210",
+      "description": "Underground Material",
+      "original_budget": 3000,
+      "revised_budget": 3000,
+      "actual": 10852.76,
+      "variance": -7852.76,
+      "pct_used": 0.0361758666666667,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "211",
+      "description": "Garage Material",
+      "original_budget": 33750,
+      "revised_budget": 33750,
+      "actual": 15831.2,
+      "variance": 17918.8,
+      "pct_used": 0.469072592592593,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "212",
+      "description": "Canout Material",
+      "original_budget": 70425,
+      "revised_budget": 70425,
+      "actual": 58265.64,
+      "variance": 12159.36,
+      "pct_used": 0.827343130990415,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "213",
+      "description": "Foundation Material",
+      "original_budget": 10550,
+      "revised_budget": 10550,
+      "actual": 2839.07,
+      "variance": 7710.93,
+      "pct_used": 0.269106161137441,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "220",
+      "description": "Roughin Material",
+      "original_budget": 247610,
+      "revised_budget": 250830,
+      "actual": 178543.02,
+      "variance": 72286.98,
+      "pct_used": 0.711808874536539,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "230",
+      "description": "Finish Material",
+      "original_budget": 498050,
+      "revised_budget": 521715,
+      "actual": 428881.3,
+      "variance": 92833.7,
+      "pct_used": 0.822060511965345,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "240",
+      "description": "Gas Material",
+      "original_budget": 18000,
+      "revised_budget": 18300,
+      "actual": 11391.29,
+      "variance": 6908.71,
+      "pct_used": 0.622474863387978,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "241",
+      "description": "Water Main/Insulation Mat",
+      "original_budget": 66750,
+      "revised_budget": 66750,
+      "actual": 80448.24,
+      "variance": -13698.24,
+      "pct_used": 0.012052170786516901,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "242",
+      "description": "Mech Room Material",
+      "original_budget": 5400,
+      "revised_budget": 5400,
+      "actual": 2236.93,
+      "variance": 3163.07,
+      "pct_used": 0.414246296296296,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "245",
+      "description": "Tub/Shower Material",
+      "original_budget": 2600,
+      "revised_budget": 2600,
+      "actual": 536.61,
+      "variance": 2063.39,
+      "pct_used": 0.206388461538462,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "OVERHEAD",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "600",
+      "description": "Subcontractor",
+      "original_budget": 7870,
+      "revised_budget": 9070,
+      "actual": 16900.64,
+      "variance": -7830.64,
+      "pct_used": 0.018633561190738702,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "601",
+      "description": "Engineering/Plans",
+      "original_budget": 35000,
+      "revised_budget": 35500,
+      "actual": 57119.45,
+      "variance": -21619.45,
+      "pct_used": 0.016089985915493,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "603",
+      "description": "Permits & Licenses",
+      "original_budget": 2000,
+      "revised_budget": 2000,
+      "actual": 6197.36,
+      "variance": -4197.36,
+      "pct_used": 0.0309868,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "BURDEN",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "995",
+      "description": "Payroll Burden",
+      "original_budget": 228724,
+      "revised_budget": 254698.59,
+      "actual": 270898.22,
+      "variance": -16199.63,
+      "pct_used": 0.0106360313969543,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "998",
+      "description": "Payroll Taxes",
+      "original_budget": 43743.47,
+      "revised_budget": 44946.82,
+      "actual": 47960.74,
+      "variance": -3013.92,
+      "pct_used": 0.0106705524439771,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "SOURCES",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "Cost codes parsed: 30",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "Unit count: 163 (from project specifications)",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    },
+    {
+      "cost_code": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "description": null,
+      "original_budget": null,
+      "revised_budget": null,
+      "actual": null,
+      "variance": null,
+      "pct_used": null,
+      "hours": null,
+      "source": null
+    }
+  ],
+  "cost_breakdown": [
+    {
+      "category": "Labor",
+      "cost_codes": 13,
+      "actual": 551450,
+      "pct_of_direct_cost": 0.01076761410826,
+      "pct_of_revenue": null,
+      "per_unit": 3642.82257668712,
+      "source": null
+    },
+    {
+      "category": "Material",
+      "cost_codes": 11,
+      "actual": 1043740,
+      "pct_of_direct_cost": 0.781848285971602,
+      "pct_of_revenue": null,
+      "per_unit": 5006.41920245399,
+      "source": null
+    },
+    {
+      "category": "Overhead",
+      "cost_codes": 3,
+      "actual": 46570,
+      "pct_of_direct_cost": 0.0172251342065708,
+      "pct_of_revenue": null,
+      "per_unit": 492.131595092025,
+      "source": null
+    },
+    {
+      "category": "Burden",
+      "cost_codes": 2,
+      "actual": 299645.41,
+      "pct_of_direct_cost": 0.010641209554987,
+      "pct_of_revenue": null,
+      "per_unit": 1956.18993865031,
+      "source": null
+    },
+    {
+      "category": "B. LARGEST OVERRUNS (Actual > Revised Budget)",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Code",
+      "cost_codes": "Description",
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "120",
+      "cost_codes": "Roughin Labor",
+      "actual": 269760,
+      "pct_of_direct_cost": 0.123673079774614,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "130",
+      "cost_codes": "Finish Labor",
+      "actual": 49430,
+      "pct_of_direct_cost": 0.544982803965203,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "141",
+      "cost_codes": "Water Main/Insulation Lab",
+      "actual": 40050,
+      "pct_of_direct_cost": 0.618377777777778,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "601",
+      "cost_codes": "Engineering/Plans",
+      "actual": 35500,
+      "pct_of_direct_cost": 0.608998591549296,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "995",
+      "cost_codes": "Payroll Burden",
+      "actual": 254698.59,
+      "pct_of_direct_cost": 0.0636031396954336,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "241",
+      "cost_codes": "Water Main/Insulation Mat",
+      "actual": 66750,
+      "pct_of_direct_cost": 0.205217078651685,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "210",
+      "cost_codes": "Underground Material",
+      "actual": 3000,
+      "pct_of_direct_cost": 0.0261758666666667,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "600",
+      "cost_codes": "Subcontractor",
+      "actual": 9070,
+      "pct_of_direct_cost": 0.86335611907387,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "142",
+      "cost_codes": "Mech Room Labor",
+      "actual": 8100,
+      "pct_of_direct_cost": 0.683117283950617,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "603",
+      "cost_codes": "Permits & Licenses",
+      "actual": 2000,
+      "pct_of_direct_cost": 0.0209868,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "C. LARGEST SAVINGS (Actual < Revised Budget)",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Code",
+      "cost_codes": "Description",
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "230",
+      "cost_codes": "Finish Material",
+      "actual": 521715,
+      "pct_of_direct_cost": 0.177939488034655,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "220",
+      "cost_codes": "Roughin Material",
+      "actual": 250830,
+      "pct_of_direct_cost": 0.288191125463461,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "011",
+      "cost_codes": "DS & RD Labor",
+      "actual": 46715,
+      "pct_of_direct_cost": 0.75016333083592,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "039",
+      "cost_codes": "DS & RD Material",
+      "actual": 60420,
+      "pct_of_direct_cost": 0.566033267130089,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "211",
+      "cost_codes": "Garage Material",
+      "actual": 33750,
+      "pct_of_direct_cost": 0.530927407407407,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "112",
+      "cost_codes": "Canout Labor",
+      "actual": 42255,
+      "pct_of_direct_cost": 0.294012542894332,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "212",
+      "cost_codes": "Canout Material",
+      "actual": 70425,
+      "pct_of_direct_cost": 0.172656869009585,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "213",
+      "cost_codes": "Foundation Material",
+      "actual": 10550,
+      "pct_of_direct_cost": 0.730893838862559,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "240",
+      "cost_codes": "Gas Material",
+      "actual": 18300,
+      "pct_of_direct_cost": 0.377525136612022,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "111",
+      "cost_codes": "Garage Labor",
+      "actual": 44625,
+      "pct_of_direct_cost": 0.141195966386555,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "SOURCES",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Cost codes parsed: 30",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Unit count: 163 (from project specifications)",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    },
+    {
+      "category": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "cost_codes": null,
+      "actual": null,
+      "pct_of_direct_cost": null,
+      "pct_of_revenue": null,
+      "per_unit": null,
+      "source": null
+    }
+  ],
+  "material": [
+    {
+      "vendor_id": "039",
+      "vendor_name": "DS & RD Material",
+      "total_spend": 60420,
+      "transactions": null,
+      "category": 0.0321308595309779,
+      "source": null
+    },
+    {
+      "vendor_id": "210",
+      "vendor_name": "Underground Material",
+      "total_spend": 3000,
+      "transactions": null,
+      "category": 0.0132991958924685,
+      "source": null
+    },
+    {
+      "vendor_id": "211",
+      "vendor_name": "Garage Material",
+      "total_spend": 33750,
+      "transactions": null,
+      "category": 0.0193998789259919,
+      "source": null
+    },
+    {
+      "vendor_id": "212",
+      "vendor_name": "Canout Material",
+      "total_spend": 70425,
+      "transactions": null,
+      "category": 0.0713999167179638,
+      "source": null
+    },
+    {
+      "vendor_id": "213",
+      "vendor_name": "Foundation Material",
+      "total_spend": 10550,
+      "transactions": null,
+      "category": 0.00347905492081559,
+      "source": null
+    },
+    {
+      "vendor_id": "220",
+      "vendor_name": "Roughin Material",
+      "total_spend": 250830,
+      "transactions": null,
+      "category": 0.218790298340046,
+      "source": null
+    },
+    {
+      "vendor_id": "230",
+      "vendor_name": "Finish Material",
+      "total_spend": 521715,
+      "transactions": null,
+      "category": 0.525559988732503,
+      "source": null
+    },
+    {
+      "vendor_id": "240",
+      "vendor_name": "Gas Material",
+      "total_spend": 18300,
+      "transactions": null,
+      "category": 0.0139591216591833,
+      "source": null
+    },
+    {
+      "vendor_id": "241",
+      "vendor_name": "Water Main/Insulation Mat",
+      "total_spend": 66750,
+      "transactions": null,
+      "category": 0.0985829321724908,
+      "source": null
+    },
+    {
+      "vendor_id": "242",
+      "vendor_name": "Mech Room Material",
+      "total_spend": 5400,
+      "transactions": null,
+      "category": 0.00274118014843593,
+      "source": null
+    },
+    {
+      "vendor_id": "245",
+      "vendor_name": "Tub/Shower Material",
+      "total_spend": 2600,
+      "transactions": null,
+      "category": 0.000657572959123534,
+      "source": null
+    },
+    {
+      "vendor_id": "B. VENDORS BY SPEND (AP)",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Vendor",
+      "vendor_name": "# Invoices",
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Ferguson Enterprises, Inc.",
+      "vendor_name": 204,
+      "total_spend": 597586.16,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Rosen Supply Company, Inc.",
+      "vendor_name": 118,
+      "total_spend": 91819.63,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Mechanical Sales, Inc.",
+      "vendor_name": 5,
+      "total_spend": 78442.97,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Keller Supply Company",
+      "vendor_name": 83,
+      "total_spend": 71760.48,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Franklin Engineering",
+      "vendor_name": 9,
+      "total_spend": 56505.5,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Bank of America CC",
+      "vendor_name": 19,
+      "total_spend": 20102,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Quality Concrete Products, Inc.",
+      "vendor_name": 7,
+      "total_spend": 19615,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Duraseal, Inc.",
+      "vendor_name": 3,
+      "total_spend": 15300,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Fastenal Company",
+      "vendor_name": 11,
+      "total_spend": 14267.27,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Kele, Inc",
+      "vendor_name": 7,
+      "total_spend": 2272.16,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "C.M. Hoskins Company",
+      "vendor_name": 5,
+      "total_spend": 1597.08,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Ferguson Enterprises, Inc. #3007",
+      "vendor_name": 5,
+      "total_spend": 1061.65,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Capital One Credit Card",
+      "vendor_name": 92,
+      "total_spend": 936.66,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Consolidated Supply Co.",
+      "vendor_name": 5,
+      "total_spend": 782.55,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "DRSi",
+      "vendor_name": 5,
+      "total_spend": 613.95,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Structural Imaging, LLC",
+      "vendor_name": 1,
+      "total_spend": 500,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Evergreen Concrete Cutting, Inc.",
+      "vendor_name": 1,
+      "total_spend": 375,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "American Express 3-41000",
+      "vendor_name": 2,
+      "total_spend": 335,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "R.A. Brown Backflow Testing",
+      "vendor_name": 1,
+      "total_spend": 257.64,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Platt",
+      "vendor_name": 2,
+      "total_spend": 147.74,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "SOURCES",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Cost codes parsed: 30",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Unit count: 163 (from project specifications)",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    },
+    {
+      "vendor_id": "Vendor AP ties to JDR 'by Source: AP' line (974,278.44)",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    }
+  ],
+  "crew_labor": [
+    {
+      "worker_id": "Salazar, Hajdar L",
+      "worker_name": null,
+      "total_hours": 1950,
+      "gross_pay": 25346,
+      "blended_wage_per_hr": 12.9979487179487,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Reed, Reuben H",
+      "worker_name": null,
+      "total_hours": 1839,
+      "gross_pay": 50190,
+      "blended_wage_per_hr": 27.2920065252855,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Hubbard, Robert W",
+      "worker_name": null,
+      "total_hours": 1771,
+      "gross_pay": 59000.5,
+      "blended_wage_per_hr": 33.3147939017504,
+      "tier": "Senior",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Sepulveda Gonzalez, Alfredo",
+      "worker_name": null,
+      "total_hours": 1755.5,
+      "gross_pay": 42871.5,
+      "blended_wage_per_hr": 24.4212475078325,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Arreola, Israel A",
+      "worker_name": null,
+      "total_hours": 1278,
+      "gross_pay": 19601,
+      "blended_wage_per_hr": 15.3372456964006,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Velasquez Cruz, Denis M",
+      "worker_name": null,
+      "total_hours": 1236,
+      "gross_pay": 16740,
+      "blended_wage_per_hr": 13.5436893203884,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Spears, Gregory M",
+      "worker_name": null,
+      "total_hours": 1186,
+      "gross_pay": 16134,
+      "blended_wage_per_hr": 13.6037099494098,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Ross, Kelli M",
+      "worker_name": null,
+      "total_hours": 1185,
+      "gross_pay": 33066,
+      "blended_wage_per_hr": 27.9037974683544,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Cortes Mendiola, Victor H",
+      "worker_name": null,
+      "total_hours": 1180,
+      "gross_pay": 28772,
+      "blended_wage_per_hr": 24.3830508474576,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Ramirez, Lorenzo A",
+      "worker_name": null,
+      "total_hours": 1101.75,
+      "gross_pay": 17628,
+      "blended_wage_per_hr": 16,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Castro Hernandez, Carlos E",
+      "worker_name": null,
+      "total_hours": 1057,
+      "gross_pay": 26832,
+      "blended_wage_per_hr": 25.3850520340587,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "McCabe, Thomas C",
+      "worker_name": null,
+      "total_hours": 985.5,
+      "gross_pay": 17406.3,
+      "blended_wage_per_hr": 17.662404870624,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Castaneda Juarez, Gustavo",
+      "worker_name": null,
+      "total_hours": 892,
+      "gross_pay": 12019,
+      "blended_wage_per_hr": 13.4742152466368,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Gerard, Jeffrey S",
+      "worker_name": null,
+      "total_hours": 806.5,
+      "gross_pay": 27755.8,
+      "blended_wage_per_hr": 34.4151270923745,
+      "tier": "Senior",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Balderas Ortiz, Ricardo I",
+      "worker_name": null,
+      "total_hours": 784,
+      "gross_pay": 10192,
+      "blended_wage_per_hr": 13,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Lopez Martinez, Abimael",
+      "worker_name": null,
+      "total_hours": 762,
+      "gross_pay": 9144,
+      "blended_wage_per_hr": 12,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Castaneda Martinez, Gustavo",
+      "worker_name": null,
+      "total_hours": 738,
+      "gross_pay": 20470,
+      "blended_wage_per_hr": 27.7371273712737,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Vega Arriaga, Jorge",
+      "worker_name": null,
+      "total_hours": 734.5,
+      "gross_pay": 9233.5,
+      "blended_wage_per_hr": 12.571136827774,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Monico Brambila, Jesus S",
+      "worker_name": null,
+      "total_hours": 659,
+      "gross_pay": 9185.5,
+      "blended_wage_per_hr": 13.9385432473445,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Sanders, Allen O",
+      "worker_name": null,
+      "total_hours": 635,
+      "gross_pay": 18427.5,
+      "blended_wage_per_hr": 29.0196850393701,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Veley, Nathaniel S",
+      "worker_name": null,
+      "total_hours": 541,
+      "gross_pay": 13895,
+      "blended_wage_per_hr": 25.6839186691312,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Paco Leyva, Orlando",
+      "worker_name": null,
+      "total_hours": 518.5,
+      "gross_pay": 6543,
+      "blended_wage_per_hr": 12.619093539055,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Soto Cruz, Jovani",
+      "worker_name": null,
+      "total_hours": 498.75,
+      "gross_pay": 7964,
+      "blended_wage_per_hr": 15.9679197994987,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Alba Martinez, Santiago",
+      "worker_name": null,
+      "total_hours": 480,
+      "gross_pay": 7200,
+      "blended_wage_per_hr": 15,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Rivera, Jorge A",
+      "worker_name": null,
+      "total_hours": 461,
+      "gross_pay": 8298,
+      "blended_wage_per_hr": 18,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Palma Vides, Hugo",
+      "worker_name": null,
+      "total_hours": 400,
+      "gross_pay": 11200,
+      "blended_wage_per_hr": 28,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Waites, Thaddeus Z",
+      "worker_name": null,
+      "total_hours": 396,
+      "gross_pay": 10770,
+      "blended_wage_per_hr": 27.1969696969697,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Sanchez Garcia, Adelaido",
+      "worker_name": null,
+      "total_hours": 368,
+      "gross_pay": 4784,
+      "blended_wage_per_hr": 13,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Kinssies, Jr, John E",
+      "worker_name": null,
+      "total_hours": 331,
+      "gross_pay": 4801,
+      "blended_wage_per_hr": 14.5045317220544,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Soto Serna, Cesar E",
+      "worker_name": null,
+      "total_hours": 321.25,
+      "gross_pay": 4176.25,
+      "blended_wage_per_hr": 13,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Bateman, Rohan O",
+      "worker_name": null,
+      "total_hours": 318,
+      "gross_pay": 3816,
+      "blended_wage_per_hr": 12,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Anderson, Richard P",
+      "worker_name": null,
+      "total_hours": 312,
+      "gross_pay": 8320,
+      "blended_wage_per_hr": 26.6666666666667,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Castro Hernandez, Jose A",
+      "worker_name": null,
+      "total_hours": 288,
+      "gross_pay": 4896,
+      "blended_wage_per_hr": 17,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Agustin Rodriguez, Ezequiel",
+      "worker_name": null,
+      "total_hours": 287,
+      "gross_pay": 3444,
+      "blended_wage_per_hr": 12,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Ramos Banegas, Noel O",
+      "worker_name": null,
+      "total_hours": 231,
+      "gross_pay": 3003,
+      "blended_wage_per_hr": 13,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Rivera, Eli P",
+      "worker_name": null,
+      "total_hours": 224,
+      "gross_pay": 2912,
+      "blended_wage_per_hr": 13,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Meza Fuentes, Erick A",
+      "worker_name": null,
+      "total_hours": 188,
+      "gross_pay": 3597,
+      "blended_wage_per_hr": 19.1329787234043,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Vaughan, Tyler J",
+      "worker_name": null,
+      "total_hours": 157,
+      "gross_pay": 2512,
+      "blended_wage_per_hr": 16,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Castaneda Juarez, Edgar D",
+      "worker_name": null,
+      "total_hours": 136,
+      "gross_pay": 1972,
+      "blended_wage_per_hr": 14.5,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Perez, David B",
+      "worker_name": null,
+      "total_hours": 121,
+      "gross_pay": 1694,
+      "blended_wage_per_hr": 14,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Ramos Garcia, Jose M",
+      "worker_name": null,
+      "total_hours": 120,
+      "gross_pay": 1560,
+      "blended_wage_per_hr": 13,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Hubbard, Dustin R",
+      "worker_name": null,
+      "total_hours": 116,
+      "gross_pay": 1388,
+      "blended_wage_per_hr": 11.9655172413793,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Hayton, Evan R",
+      "worker_name": null,
+      "total_hours": 112,
+      "gross_pay": 1536,
+      "blended_wage_per_hr": 13.7142857142857,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Lima Romero, Melvin A",
+      "worker_name": null,
+      "total_hours": 60.5,
+      "gross_pay": 1140.5,
+      "blended_wage_per_hr": 18.8512396694215,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Garcia, Jordan X",
+      "worker_name": null,
+      "total_hours": 48,
+      "gross_pay": 672,
+      "blended_wage_per_hr": 14,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Wilson, Garret A",
+      "worker_name": null,
+      "total_hours": 32,
+      "gross_pay": 456,
+      "blended_wage_per_hr": 14.25,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Donelson, Richard T",
+      "worker_name": null,
+      "total_hours": 11,
+      "gross_pay": 495,
+      "blended_wage_per_hr": 45,
+      "tier": "Senior",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Reyes, Robert J",
+      "worker_name": null,
+      "total_hours": 6,
+      "gross_pay": 78,
+      "blended_wage_per_hr": 13,
+      "tier": "Apprentice",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Barnhart, Joseph N",
+      "worker_name": null,
+      "total_hours": 5.5,
+      "gross_pay": 164.5,
+      "blended_wage_per_hr": 29.9090909090909,
+      "tier": "Mid",
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "TOTAL (49 workers)",
+      "worker_name": null,
+      "total_hours": 29624.25,
+      "gross_pay": 593301.85,
+      "blended_wage_per_hr": 20.0275736938488,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "SOURCES",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Cost codes parsed: 30",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Unit count: 163 (from project specifications)",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    },
+    {
+      "worker_id": "Tier: Apprentice <$18/hr, Mid $18\u201330, Senior >$30",
+      "worker_name": null,
+      "total_hours": null,
+      "gross_pay": null,
+      "blended_wage_per_hr": null,
+      "tier": null,
+      "work_days": null,
+      "source": null
+    }
+  ],
+  "crew_analytics": [
+    {
+      "tier": "Senior",
+      "worker_count": 3,
+      "hours": 2588.5,
+      "gross_pay": 87251.3,
+      "pct_of_hours": 0.0873777395208318,
+      "blended_wage": null
+    },
+    {
+      "tier": "Mid",
+      "worker_count": 15,
+      "hours": 10753.5,
+      "gross_pay": 278014,
+      "pct_of_hours": 0.362996531557761,
+      "blended_wage": null
+    },
+    {
+      "tier": "Apprentice",
+      "worker_count": 31,
+      "hours": 16282.25,
+      "gross_pay": 228036.55,
+      "pct_of_hours": 0.549625728921407,
+      "blended_wage": null
+    },
+    {
+      "tier": "B. WAGE STATISTICS",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Blended Gross Wage",
+      "worker_count": 20.0275736938488,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Fully-Loaded Wage",
+      "worker_count": 30.8071610251736,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Burden Multiplier",
+      "worker_count": 1.53823730703014,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Min Worker Rate",
+      "worker_count": 11.9655172413793,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Max Worker Rate",
+      "worker_count": 45,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Avg Hours / Worker",
+      "worker_count": 604.576530612245,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "SOURCES",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Cost codes parsed: 30",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Unit count: 163 (from project specifications)",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    },
+    {
+      "tier": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "worker_count": null,
+      "hours": null,
+      "gross_pay": null,
+      "pct_of_hours": null,
+      "blended_wage": null
+    }
+  ],
+  "productivity": [
+    {
+      "phase": "DS & RD",
+      "labor_code": "011",
+      "hours": 532.75,
+      "pct_of_total": 0.018155639238673,
+      "hours_per_unit": 3.26840490797546
+    },
+    {
+      "phase": "Supervision",
+      "labor_code": "100",
+      "hours": 246.5,
+      "pct_of_total": 0.00840049755482475,
+      "hours_per_unit": 1.51226993865031
+    },
+    {
+      "phase": "Takeoff & Purchasing",
+      "labor_code": "101",
+      "hours": 443,
+      "pct_of_total": 0.0150970402303747,
+      "hours_per_unit": 2.71779141104294
+    },
+    {
+      "phase": "Underground",
+      "labor_code": "110",
+      "hours": 392.5,
+      "pct_of_total": 0.0133760458023072,
+      "hours_per_unit": 2.4079754601227
+    },
+    {
+      "phase": "Garage",
+      "labor_code": "111",
+      "hours": 1728,
+      "pct_of_total": 0.058888680627737,
+      "hours_per_unit": 10.601226993865
+    },
+    {
+      "phase": "Canout",
+      "labor_code": "112",
+      "hours": 1126.5,
+      "pct_of_total": 0.0383901034300612,
+      "hours_per_unit": 6.91104294478528
+    },
+    {
+      "phase": "Foundation Drain",
+      "labor_code": "113",
+      "hours": 120,
+      "pct_of_total": 0.00408949171025951,
+      "hours_per_unit": 0.736196319018405
+    },
+    {
+      "phase": "Roughin",
+      "labor_code": "120",
+      "hours": 15344.5,
+      "pct_of_total": 0.522926712900642,
+      "hours_per_unit": 94.138036809816
+    },
+    {
+      "phase": "Finish",
+      "labor_code": "130",
+      "hours": 4236.75,
+      "pct_of_total": 0.14438461669535,
+      "hours_per_unit": 25.9923312883436
+    },
+    {
+      "phase": "Gas",
+      "labor_code": "140",
+      "hours": 910,
+      "pct_of_total": 0.0310119788028013,
+      "hours_per_unit": 5.58282208588957
+    },
+    {
+      "phase": "Water Main / Insulation",
+      "labor_code": "141",
+      "hours": 3421.5,
+      "pct_of_total": 0.116601632388774,
+      "hours_per_unit": 20.9907975460123
+    },
+    {
+      "phase": "Mech Room",
+      "labor_code": "142",
+      "hours": 838,
+      "pct_of_total": 0.0285582837766456,
+      "hours_per_unit": 5.14110429447853
+    },
+    {
+      "phase": "Tub / Shower",
+      "labor_code": "145",
+      "hours": 3.5,
+      "pct_of_total": 0.000119276841549236,
+      "hours_per_unit": 0.0214723926380368
+    },
+    {
+      "phase": "B. PRODUCTIVITY RATIOS",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Metric",
+      "labor_code": "Value",
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Hours / Unit",
+      "labor_code": 180.021472392638,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Hours / Fixture",
+      "labor_code": 16.4297312430011,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Revenue / Hour",
+      "labor_code": 79.3258472915637,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Profit / Hour",
+      "labor_code": 17.6800715661049,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Units / Month",
+      "labor_code": 10.8666666666667,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Fixtures / Month",
+      "labor_code": 119.066666666667,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Hours / Month",
+      "labor_code": 1956.23333333333,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Revenue / Month",
+      "labor_code": 155179.866666667,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "SOURCES",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Cost codes parsed: 30",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Unit count: 163 (from project specifications)",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    },
+    {
+      "phase": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "labor_code": null,
+      "hours": null,
+      "pct_of_total": null,
+      "hours_per_unit": null
+    }
+  ],
+  "po_commitments": [
+    {
+      "po_number": "B. COMMITMENTS BY VENDOR",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Vendor",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": "PO Count",
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "C. PO COVERAGE NOTES",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Total Material Actual (JDR)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Unique PO Count",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "  (Dollar PO commitment not extracted \u2014 requires per-PDF parse)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "SOURCES",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Cost codes parsed: 30",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Unit count: 163 (from project specifications)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "PO count is deduplicated by 5-digit PO number extracted from filenames",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    },
+    {
+      "po_number": "Vendor/code classification is heuristic (filename keyword match)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    }
+  ],
+  "billing_sov": [
+    {
+      "source_document": "OWP Taylor SOV 10-7-25-13.xlsx",
+      "pay_app_number": "10",
+      "date": "2013-07-25",
+      "period_to": "2013-07-31",
+      "contract_total": 2274720,
+      "this_period": 98550.0,
+      "cumulative": 542950.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.2387
+    },
+    {
+      "source_document": "OWP Taylor SOV 11-8-25-13.xlsx",
+      "pay_app_number": "11",
+      "date": "2013-08-22",
+      "period_to": "2013-08-31",
+      "contract_total": 2274720,
+      "this_period": 129550.0,
+      "cumulative": 672500.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.2956
+    },
+    {
+      "source_document": "OWP Taylor SOV 12- 9-25-13.xlsx",
+      "pay_app_number": "12",
+      "date": "2013-09-24",
+      "period_to": "2013-09-30",
+      "contract_total": 2274720,
+      "this_period": 110200.0,
+      "cumulative": 782700.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.3441
+    },
+    {
+      "source_document": "OWP Taylor SOV 13- 10-25-13 co#4.xlsx",
+      "pay_app_number": "13",
+      "date": "2013-10-24",
+      "period_to": "2013-10-31",
+      "contract_total": 2284949,
+      "this_period": 204500.0,
+      "cumulative": 987200.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.432
+    },
+    {
+      "source_document": "OWP Taylor SOV 14- 11-19-13.xlsx",
+      "pay_app_number": "14",
+      "date": "2013-11-19",
+      "period_to": "2013-11-30",
+      "contract_total": 2284949,
+      "this_period": 204650.0,
+      "cumulative": 1191850.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.5216
+    },
+    {
+      "source_document": "OWP Taylor SOV 15- 12-19-13.xlsx",
+      "pay_app_number": "15",
+      "date": "2013-12-19",
+      "period_to": "2013-12-31",
+      "contract_total": 2284949,
+      "this_period": 240500.0,
+      "cumulative": 1432350.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.6269
+    },
+    {
+      "source_document": "OWP Taylor SOV 16- 1-23-14.xlsx",
+      "pay_app_number": "16",
+      "date": "2014-01-23",
+      "period_to": "2014-01-31",
+      "contract_total": 2284949,
+      "this_period": 218800.0,
+      "cumulative": 1651150.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.7226
+    },
+    {
+      "source_document": "OWP Taylor SOV 17- 2-25-14 co#5.xlsx",
+      "pay_app_number": "17",
+      "date": "2014-02-25",
+      "period_to": "2014-02-28",
+      "contract_total": 2296031,
+      "this_period": 283604.0,
+      "cumulative": 1934754.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.8427
+    },
+    {
+      "source_document": "OWP Taylor SOV 18- 3-25-14.xlsx",
+      "pay_app_number": "18",
+      "date": "2014-03-25",
+      "period_to": "2014-03-31",
+      "contract_total": 2296031,
+      "this_period": 161489.0,
+      "cumulative": 2096243.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.913
+    },
+    {
+      "source_document": "OWP Taylor SOV 19-4-25-14.xlsx",
+      "pay_app_number": "18",
+      "date": "2014-03-25",
+      "period_to": "2014-03-31",
+      "contract_total": 2296031,
+      "this_period": 125142.0,
+      "cumulative": 2221385.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.9675
+    },
+    {
+      "source_document": "OWP Taylor SOV 20-5-25-14.xlsx",
+      "pay_app_number": "21",
+      "date": "2014-05-22",
+      "period_to": "2014-05-31",
+      "contract_total": 2322729,
+      "this_period": 59306.0,
+      "cumulative": 2280691.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.9819
+    },
+    {
+      "source_document": "OWP Taylor SOV 21-6-24-14.xlsx",
+      "pay_app_number": "21",
+      "date": "2014-06-24",
+      "period_to": "2014-06-30",
+      "contract_total": 2322729,
+      "this_period": 42038.0,
+      "cumulative": 2322729.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 1.0
+    },
+    {
+      "source_document": "OWP Taylor SOV 22-7-24-14 co#9.xlsx",
+      "pay_app_number": "22",
+      "date": "2014-07-24",
+      "period_to": "2014-07-31",
+      "contract_total": 2323808,
+      "this_period": 1079.0,
+      "cumulative": 2323808.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 1.0
+    },
+    {
+      "source_document": "OWP Taylor SOV 23-8-24-14 co#10.xlsx",
+      "pay_app_number": "23",
+      "date": "2014-08-25",
+      "period_to": "2014-08-31",
+      "contract_total": 2327698,
+      "this_period": 3890.0,
+      "cumulative": 2327698.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 1.0
+    },
+    {
+      "source_document": "OWP Taylor SOV 24-12-16-14 co#11.xlsx",
+      "pay_app_number": "24",
+      "date": "2014-12-16",
+      "period_to": "2014-12-31",
+      "contract_total": 2328917,
+      "this_period": 1219.0,
+      "cumulative": 2328917.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 1.0
+    },
+    {
+      "source_document": "OWP Taylor SOV 8-5-25-13.xlsx",
+      "pay_app_number": "8",
+      "date": "2013-05-25",
+      "period_to": "2013-05-31",
+      "contract_total": 2274720,
+      "this_period": 75100.0,
+      "cumulative": 318800.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.1401
+    },
+    {
+      "source_document": "OWP Taylor SOV 9-6-25-13.xlsx",
+      "pay_app_number": "9",
+      "date": "2013-06-25",
+      "period_to": "2013-06-30",
+      "contract_total": 2274720,
+      "this_period": 125600.0,
+      "cumulative": 444400.0,
+      "retainage": 0.0,
+      "stored_materials": 0.0,
+      "pct_complete": 0.1954
+    }
+  ],
+  "insights": [
+    {
+      "insight_id": 1,
+      "title": "Labor overran budget by 10.8%",
+      "finding": "Total labor actual $593,780 vs budget $535,720 \u2014 $58,060 unfavorable variance. Review crew mix and productivity.",
+      "verified": "Derived",
+      "source": "budget_vs_actual"
+    },
+    {
+      "insight_id": 2,
+      "title": "Scope stability \u2014 3 executed COs net $0 (+0.00% of contract)",
+      "finding": "Minimal scope churn indicates well-defined contract and experienced GC. Candidate GC profile for future similar bids.",
+      "verified": "Derived",
+      "source": "change_log"
+    },
+    {
+      "insight_id": 3,
+      "title": "Largest variance \u2014 cost code 230 (Finish Material) under by $92,834",
+      "finding": "Budget $521,715, actual $428,881 (-17.8%). Flag for bid calibration.",
+      "verified": "Derived",
+      "source": "budget_vs_actual"
+    }
+  ],
+  "benchmark_kpis": {
+    "\u00a7 PROFILE": {
+      "value": "",
+      "source": ""
+    },
+    "job_number": {
+      "value": "2008",
+      "source": "Overview"
+    },
+    "general_contractor": {
+      "value": "Exxel Pacific, Inc.",
+      "source": "Overview / Customer"
+    },
+    "location": {
+      "value": "Seattle, WA",
+      "source": "Overview"
+    },
+    "project_type": {
+      "value": "Apartment building",
+      "source": "Inferred from cost codes"
+    },
+    "duration_months": {
+      "value": 15.0,
+      "source": "Payroll + AR span"
+    },
+    "plumbing_units": {
+      "value": 163,
+      "source": "Overview.unit_count"
+    },
+    "total_fixtures": {
+      "value": null,
+      "source": "Overview.Fixture Inventory"
+    },
+    "fixtures_per_unit": {
+      "value": null,
+      "source": "fixtures / units"
+    },
+    "\u00a7 FINANCIAL": {
+      "value": "",
+      "source": ""
+    },
+    "contract_original": {
+      "value": 2256200.0,
+      "source": "Code 999 Org Budget"
+    },
+    "contract_final": {
+      "value": 2256200.0,
+      "source": "Code 999 Rev Budget (abs)"
+    },
+    "change_orders_net": {
+      "value": 0.0,
+      "source": "contract_final \u2212 contract_original"
+    },
+    "revenue": {
+      "value": 2328917.0,
+      "source": "AR net-of-reversals (validator)"
+    },
+    "net_profit": {
+      "value": 546234.45,
+      "source": "revenue \u2212 direct_cost"
+    },
+    "gross_margin_pct": {
+      "value": 0.2345,
+      "source": "net_profit / revenue"
+    },
+    "direct_cost": {
+      "value": 1782682.55,
+      "source": "\u03a3 labor + material + OH + burden + tax"
+    },
+    "overhead_cost": {
+      "value": 80217.45,
+      "source": "Codes 600, 601, 603, 607"
+    },
+    "burden_cost": {
+      "value": 270898.22,
+      "source": "Code 995"
+    },
+    "retainage_outstanding": {
+      "value": 0.0,
+      "source": "JDR retainage"
+    },
+    "revenue_per_unit": {
+      "value": 14288.0,
+      "source": "revenue / units"
+    },
+    "profit_per_unit": {
+      "value": 3351.0,
+      "source": "net_profit / units"
+    },
+    "cost_per_unit": {
+      "value": 10937.0,
+      "source": "direct_cost / units"
+    },
+    "\u00a7 LABOR": {
+      "value": "",
+      "source": ""
+    },
+    "labor_cost": {
+      "value": 593780.08,
+      "source": "Codes 100\u2013150"
+    },
+    "total_hours": {
+      "value": 59248.5,
+      "source": "\u03a3 Crew.total_hours"
+    },
+    "total_workers": {
+      "value": 58,
+      "source": "count(distinct worker_id)"
+    },
+    "blended_wage": {
+      "value": 20.03,
+      "source": "gross_pay / hours"
+    },
+    "fully_loaded_wage": {
+      "value": 15.4,
+      "source": "(labor+burden+tax) / hours"
+    },
+    "burden_multiplier": {
+      "value": 0.77,
+      "source": "fully_loaded / blended"
+    },
+    "hours_per_unit": {
+      "value": 0.0,
+      "source": "hours / units"
+    },
+    "labor_per_unit": {
+      "value": 3643.0,
+      "source": "labor_cost / units"
+    },
+    "labor_pct_revenue": {
+      "value": 0.255,
+      "source": "labor_cost / revenue"
+    },
+    "\u00a7 MATERIAL": {
+      "value": "",
+      "source": ""
+    },
+    "material_cost": {
+      "value": 789826.06,
+      "source": "Codes 210\u2013244"
+    },
+    "material_per_unit": {
+      "value": 4846.0,
+      "source": "material_cost / units"
+    },
+    "material_pct_revenue": {
+      "value": 0.3391,
+      "source": "material_cost / revenue"
+    },
+    "total_vendors": {
+      "value": 21,
+      "source": "count(distinct vendor_id)"
+    },
+    "top_vendor_spend": {
+      "value": 0.0,
+      "source": "Top: None"
+    },
+    "top_vendor_pct": {
+      "value": 0,
+      "source": "top vendor spend / material_cost"
+    },
+    "\u00a7 PRODUCTIVITY": {
+      "value": "",
+      "source": ""
+    },
+    "revenue_per_hour": {
+      "value": null,
+      "source": "revenue / hours"
+    },
+    "profit_per_hour": {
+      "value": null,
+      "source": "net_profit / hours"
+    },
+    "revenue_per_month": {
+      "value": 155261.0,
+      "source": "revenue / duration_months"
+    },
+    "hours_per_month": {
+      "value": 0.0,
+      "source": "hours / duration_months"
+    },
+    "units_per_month": {
+      "value": 10.87,
+      "source": "units / duration_months"
+    }
+  },
+  "change_log": [
+    {
+      "event_id": "COR-001",
+      "type": "COR",
+      "date": "2014-07-31",
+      "subject": "Added Irrigation Line \u2014 POC",
+      "originator": "GC (SRM)",
+      "linked_events": [
+        "COR-002"
+      ],
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Priced",
+      "source_document": "2008-SRM, 101 Taylor/Change Orders/COR_s/Taylor - OWP COR - Added Irrigation POC_s.pdf"
+    },
+    {
+      "event_id": "COR-002",
+      "type": "COR",
+      "date": "2014-07-31",
+      "subject": "Added Irrigation Line \u2014 Cost Sheet",
+      "originator": "GC (SRM)",
+      "linked_events": [
+        "COR-001"
+      ],
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Priced",
+      "source_document": "2008-SRM, 101 Taylor/Change Orders/COR_s/COR Pricing - Added Irrigation Line.xlsx"
+    },
+    {
+      "event_id": "COR-003",
+      "type": "COR",
+      "date": "2014-11-25",
+      "subject": "Install Gas Meter \u2014 T&M",
+      "originator": "GC (SRM)",
+      "linked_events": [
+        "TM-001"
+      ],
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Priced",
+      "source_document": "2008-SRM, 101 Taylor/Change Orders/COR_s/COR Pricing - Install Gas Meter T&M.xlsx"
+    },
+    {
+      "event_id": "COP-001",
+      "type": "COP",
+      "date": "2018-10-24",
+      "subject": "Century 101 Taylor \u2014 Drinking Fountain Proposal",
+      "originator": "GC/OWP",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Proposal",
+      "source_document": "2008-SRM, 101 Taylor/Change Orders/COR_s/Century 101 Taylor Ave - Drinking Fountain Proposal.pdf"
+    },
+    {
+      "event_id": "ASI-002",
+      "type": "ASI",
+      "date": null,
+      "subject": "Multipurpose Room Revisions",
+      "originator": "Architect (Runberg)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 2 Multipurpose Room Revisions.pdf"
+    },
+    {
+      "event_id": "ASI-003",
+      "type": "ASI",
+      "date": null,
+      "subject": "L1 East Railing Layout \u2014 Details",
+      "originator": "Architect (Runberg)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 3 L1 East Railing Layout - Details.pdf"
+    },
+    {
+      "event_id": "ASI-004",
+      "type": "ASI",
+      "date": null,
+      "subject": "Generator Fuel Filling Alcove",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 4 Generator Fuel Filling Alcove.pdf"
+    },
+    {
+      "event_id": "ASI-005",
+      "type": "ASI",
+      "date": null,
+      "subject": "Additional Dimensions",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI_5 Additional Dimensions.pdf"
+    },
+    {
+      "event_id": "ASI-008",
+      "type": "ASI",
+      "date": null,
+      "subject": "Revise RO of Windows",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 8 Revise RO of Windows.pdf"
+    },
+    {
+      "event_id": "ASI-010",
+      "type": "ASI",
+      "date": null,
+      "subject": "Exterior Light Elevations",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 10 Ext Light Elevations.pdf"
+    },
+    {
+      "event_id": "ASI-011",
+      "type": "ASI",
+      "date": null,
+      "subject": "Elevator Overrun Revisions",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI-11 Elevator Overrun Revisions.pdf"
+    },
+    {
+      "event_id": "ASI-014",
+      "type": "ASI",
+      "date": null,
+      "subject": "ASI 14 \u2014 spec detail",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/07122_ASI_14.pdf"
+    },
+    {
+      "event_id": "ASI-016",
+      "type": "ASI",
+      "date": null,
+      "subject": "ASI 16 \u2014 spec detail",
+      "originator": "Architect",
+      "linked_events": [
+        "ASI-016.R1"
+      ],
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/07122_ASI_16.pdf"
+    },
+    {
+      "event_id": "ASI-016.R1",
+      "type": "ASI",
+      "date": null,
+      "subject": "Insulation at Roof Locations (revision)",
+      "originator": "Architect",
+      "linked_events": [
+        "ASI-016"
+      ],
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 16.R1 - Insulation at Roof Locations.pdf"
+    },
+    {
+      "event_id": "ASI-018",
+      "type": "ASI",
+      "date": null,
+      "subject": "ASI 18r1 \u2014 spec detail",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/07122_ASI_18r1.pdf"
+    },
+    {
+      "event_id": "ASI-019",
+      "type": "ASI",
+      "date": null,
+      "subject": "Trash Chute Dog Houses",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 19 Trash Chute Dog Houses.pdf"
+    },
+    {
+      "event_id": "ASI-021",
+      "type": "ASI",
+      "date": null,
+      "subject": "L9 Corridor RCPs",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 21 - L9 Corridor RCPs.pdf"
+    },
+    {
+      "event_id": "ASI-023",
+      "type": "ASI",
+      "date": null,
+      "subject": "Solarium \u2014 Trellis Layout",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 23 Solarium - Trellis Layout.pdf"
+    },
+    {
+      "event_id": "ASI-024",
+      "type": "ASI",
+      "date": null,
+      "subject": "L9 Deck Overflows",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 24 L9 deck overflows.pdf"
+    },
+    {
+      "event_id": "ASI-028",
+      "type": "ASI",
+      "date": null,
+      "subject": "Theatre Door Framing",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 28 - Theatre Door Framing.pdf"
+    },
+    {
+      "event_id": "ASI-029",
+      "type": "ASI",
+      "date": null,
+      "subject": "Spiral Staircase Clarification",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 29 - Spiral Staircase Clarification.pdf"
+    },
+    {
+      "event_id": "ASI-030",
+      "type": "ASI",
+      "date": null,
+      "subject": "Elevator Lobby Framing",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 30 - Elevator Lobby Framing.pdf"
+    },
+    {
+      "event_id": "ASI-031",
+      "type": "ASI",
+      "date": null,
+      "subject": "Alternating Stair Tread",
+      "originator": "Architect",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ASI - 31 - Alternating Stair Tread.pdf"
+    },
+    {
+      "event_id": "OCD-01",
+      "type": "OCD",
+      "date": null,
+      "subject": "Studio Wall Replaced with Sliding Glass Door",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _01 - STUDIO WALL REPLACED WITH SLIDING GLASS DOOR.pdf"
+    },
+    {
+      "event_id": "OCD-02",
+      "type": "OCD",
+      "date": null,
+      "subject": "Stairwell Light Move",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _02 - ARCHITECTURAL - STAIRWELL LIGHT MOVE.pdf"
+    },
+    {
+      "event_id": "OCD-04",
+      "type": "OCD",
+      "date": null,
+      "subject": "L1-L2 South Closure Pour Relocation",
+      "originator": "Owner/Structural",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/DCI Response - OCD _04 - L1 - L2 SOUTH CLOSURE POUR RELOCATION.pdf"
+    },
+    {
+      "event_id": "OCD-06",
+      "type": "OCD",
+      "date": null,
+      "subject": "Added Package Room",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _06 - ADDED PACKAGE ROOM.pdf"
+    },
+    {
+      "event_id": "OCD-07",
+      "type": "OCD",
+      "date": null,
+      "subject": "Revised Door #136H",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _07 - REVISED DOOR _ 136H.pdf"
+    },
+    {
+      "event_id": "OCD-08",
+      "type": "OCD",
+      "date": null,
+      "subject": "Elevator Machine Room Re-design",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _08 - ELEVATOR MACHINE ROOM RE-DESIGN.pdf"
+    },
+    {
+      "event_id": "OCD-09",
+      "type": "OCD",
+      "date": null,
+      "subject": "Laminated Face Back Panel",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _09 - LAMINATED FACE BACK PANEL.pdf"
+    },
+    {
+      "event_id": "OCD-12",
+      "type": "OCD",
+      "date": null,
+      "subject": "Revised CMU Frames",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _12 - REVISED CMU FRAMES.pdf"
+    },
+    {
+      "event_id": "OCD-14",
+      "type": "OCD",
+      "date": null,
+      "subject": "Man Hoist Footing \u2014 Shoring",
+      "originator": "Owner/MEP",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/OCD _14 - MAN HOIST FOOTING - SHORING.pdf"
+    },
+    {
+      "event_id": "OCD-18",
+      "type": "OCD",
+      "date": null,
+      "subject": "Dropped Soffits for Return Air Duct",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _018 - DROPPED SOFFITS FOR RETURN AIR DUCT.pdf"
+    },
+    {
+      "event_id": "OCD-19",
+      "type": "OCD",
+      "date": null,
+      "subject": "Remove Hall Closet in 1-1-D1",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _019 - REMOVE HALL CLOSET IN 1-1-D1.pdf"
+    },
+    {
+      "event_id": "OCD-20",
+      "type": "OCD",
+      "date": null,
+      "subject": "Townhouse L1 Bathroom Doors",
+      "originator": "Owner",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Runberg Response - OCD _020 - TOWNHOUSE L1 BATHROOM DOORS.pdf"
+    },
+    {
+      "event_id": "OCD-23",
+      "type": "OCD",
+      "date": null,
+      "subject": "Electric Heaters in Townhouse L2 Bathroom",
+      "originator": "Owner/MEP",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/OCD _23 - ELECTRIC HEATERS IN TOWNHOUSE L2 BATHROOM.pdf"
+    },
+    {
+      "event_id": "OCD-24",
+      "type": "OCD",
+      "date": null,
+      "subject": "CAT5E and Coax Cables Merged",
+      "originator": "Owner/MEP",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/Pillar Response - OCD _24 - CAT5E AND COAX CABLES MERGED.pdf"
+    },
+    {
+      "event_id": "BC-001",
+      "type": "Backcharge",
+      "date": "2016-04-29",
+      "subject": "RDMDMDSRM Backcharge",
+      "originator": "GC (SRM)",
+      "linked_events": null,
+      "cost_impact": -500,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/Invoices/2016-04-29 RDMDMDSRM Backcharge.pdf"
+    },
+    {
+      "event_id": "TM-001",
+      "type": "T&M",
+      "date": "2014-11-25",
+      "subject": "Install Gas Meter \u2014 T&M directed work",
+      "originator": "GC/Field",
+      "linked_events": [
+        "COR-003"
+      ],
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Billed",
+      "source_document": "2008-SRM, 101 Taylor/Change Orders/COR_s/COR Pricing - Install Gas Meter T&M.xlsx"
+    },
+    {
+      "event_id": "RFI-SUMMARY",
+      "type": "RFI",
+      "date": null,
+      "subject": "164 RFIs logged \u2014 architectural (95+), structural (35+), MEP (15+). Heavy coordination activity \u2014 details in ASI-RFI folder.",
+      "originator": "Field (OWP)",
+      "linked_events": [
+        "multiple ASIs"
+      ],
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/ASI-RFI/TAYLOR RFI-ASI/ (150+ RFI PDFs)"
+    },
+    {
+      "event_id": "SUB-RESUB",
+      "type": "Submittal-resub",
+      "date": null,
+      "subject": "13+ submittal resubmissions (backflow preventers, drain systems, insulation, fixture alts)",
+      "originator": "Sub/OWP",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": 0,
+      "status": "Closed",
+      "source_document": "2008-SRM, 101 Taylor/Submittals/ (multiple -R1/-R2 versions)"
+    }
+  ],
+  "root_cause_analysis": [],
+  "predictive_signals": [
+    {
+      "signal_id": "WAREHOUSE",
+      "signal_name": "Predictive signals computed at warehouse layer",
+      "direction": "Neutral",
+      "metric": "cross-project benchmark",
+      "threshold": "n/a",
+      "historical_outcome": "See benchmark_envelopes view; not stored per-project.",
+      "source": "warehouse view (predictive_signals_v)"
+    }
+  ],
+  "metric_registry": [
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "2008",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "Exxel Pacific Vivo Apartments",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "Exxel Pacific, Inc.",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "Seattle, WA",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "163-unit multifamily apartments",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 15,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 163,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1786,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 2256200,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 2327698,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 71498,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 2327698,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 518795.18,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.222879076237553,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1808902.82,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 593780.08,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 816046.33,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 80217.45,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 318858.96,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 116385,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 29343.5,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 49,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 20.2191916438053,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 20,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.0316895665277901,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 164,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 33,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 4,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 13,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 41,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": -500,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    }
+  ],
+  "reconciliation": [
+    {
+      "check_number": null,
+      "check_description": "A. JDR COST CODE ROLLUP",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Labor subtotal (13 codes)",
+      "value_a": 593780.08,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Material subtotal (11 codes)",
+      "value_a": 816046.33,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Overhead subtotal (3 codes)",
+      "value_a": 80217.45,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Burden subtotal (2 codes)",
+      "value_a": 318858.96,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Direct Cost (all categories)",
+      "value_a": 1808902.82,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Revenue (code 999)",
+      "value_a": 2327698,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Net Profit (Revenue - Expenses)",
+      "value_a": 518795.18,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "B. LABOR HOURS ROLLUP",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "JDR Cost Code hours (Payroll Hours lines)",
+      "value_a": 29343.5,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Per-worker hours (sum of PR Regular)",
+      "value_a": 29343.5,
+      "value_b": null,
+      "difference": null,
+      "status": "WITHIN",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "C. BILLING (SOV) \u2194 JDR",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Final Contract Value",
+      "value_a": 2327698,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Retainage",
+      "value_a": 116385,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Direct Cost",
+      "value_a": 1808903,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "D. VENDOR AP \u2194 JDR",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Vendor AP total (sum of invoices)",
+      "value_a": 974278,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "SOURCES",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Job #2008 \u2014 Exxel Pacific Vivo Apartments  \u2022  GC: Exxel Pacific, Inc.  \u2022  Seattle, WA",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Canonical source: 2008 Job Detail Report.pdf (282 pages, OWP Sage Timberline export)",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Cost codes parsed: 30",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Unit count: 163 (from project specifications)",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Fixture count: 1,786 (estimated at ~11 fixtures per unit for mid-rise apartments)",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Final contract $2,327,698 (original $2,256,200 + $71,498 COs)",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "TIES = within $1 or 5 hrs  \u2022  WITHIN = within 5%  \u2022  OFF = investigate",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "K. CHANGE LOG \u2194 ROOT CAUSE ANALYSIS",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Total Event Count",
+      "value_a": 41,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Net $ Impact (all events)",
+      "value_a": -500,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "L. PREDICTIVE SIGNALS \u2194 CHANGE LOG",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Backcharge Count signal",
+      "value_a": 1,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "M. METRIC REGISTRY \u2194 BENCHMARK KPIs",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "revenue (row 17)",
+      "value_a": 2327698,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "unit_count (row 12)",
+      "value_a": 163,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "total_fixtures (row 13)",
+      "value_a": 1786,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "direct_cost (row 19)",
+      "value_a": 1808902.82,
+      "value_b": null,
+      "difference": null,
+      "status": "OFF",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "total_pos (row 30)",
+      "value_a": 0,
+      "value_b": null,
+      "difference": null,
+      "status": "TIES",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "N. CHANGE LOG \u2194 METRIC REGISTRY (event counts)",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "change_event_total",
+      "value_a": 41,
+      "value_b": null,
+      "difference": null,
+      "status": "OFF",
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "SOURCES",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Job #2008 \u2014 Cortex v2 17-tab layout",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "12 analytical tabs + Change Log + Root Cause Analysis + Predictive Signals + Metric Registry + Reconciliation",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Canonical source: 2008 Job Detail Report.pdf (Sage Timberline export)",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Change artifacts: folders scanned \u2014 ASI-RFI, Change Orders, Submittals, Invoices (Backcharges), JDR cost codes",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Every Change Log row cites its source document path",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "TIES = within $1/5hrs/exact count  \u2022  WITHIN = within 5%  \u2022  OFF = investigate",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Cross-sheet formulas (='Tab'!Cell) update automatically when source tabs change",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": null,
+      "check_description": "Tabs: 1-12 analytical  \u2022  13=ChangeLog  \u2022  14=RootCause  \u2022  15=PredictiveSignals  \u2022  16=MetricRegistry  \u2022  17=Reconciliation",
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    }
+  ],
+  "vendors": [
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": "Invoices"
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 204
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 118
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 5
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 83
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 9
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 19
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 7
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 3
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 11
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 7
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 5
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 5
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 92
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 5
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 5
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 1
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 1
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 2
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 1
+    },
+    {
+      "vendor_id": null,
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": 2
+    }
+  ],
+  "project_name": ""
+}

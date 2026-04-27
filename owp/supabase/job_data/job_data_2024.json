@@ -1,0 +1,3359 @@
+{
+  "schema_version": "CORTEX_V2.1",
+  "job": "2024",
+  "source_file": "/sessions/keen-determined-mccarthy/mnt/cortex-mockup/owp/cortex v2 files/OWP_2024_JCR_Cortex_v2.xlsx",
+  "cohort": "current_v2",
+  "overview": {
+    "\u00a7 IDENTITY": {
+      "value": "",
+      "source": ""
+    },
+    "project_job_number": {
+      "value": "2024",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages) header"
+    },
+    "project_name_sage": {
+      "value": "SRM, Ballard Merrill Gardens",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages) header"
+    },
+    "project_description": {
+      "value": "Merrill Gardens at Ballard \u2014 senior-living plumbing, ~116 residential units + amenity",
+      "source": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net) + trim PO fixture count"
+    },
+    "customer_code_sage": {
+      "value": "2024MG",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    "\u00a7 CONTRACT & PARTIES": {
+      "value": "",
+      "source": ""
+    },
+    "Contract Counterparty": {
+      "value": "Merrill Gardens at Ballard, LLC",
+      "source": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net)"
+    },
+    "Parent Owner / Developer": {
+      "value": "SRM Development Corp / Merrill Gardens (Spokane)",
+      "source": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net) (111 N. Post, Suite 200, Spokane, WA)"
+    },
+    "Architect": {
+      "value": "Urbal Architecture (Seattle)",
+      "source": "Per contract \u00a7 'Main Contract' documents"
+    },
+    "contract_type": {
+      "value": "Lump Sum",
+      "source": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net)"
+    },
+    "contract_document": {
+      "value": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net)",
+      "source": "Fully executed 4/21/2015, Lump Sum + WSST 9.6%"
+    },
+    "\u00a7 JOB SITE": {
+      "value": "",
+      "source": ""
+    },
+    "jobsite_location": {
+      "value": "5601 24th Ave NW, Seattle, WA 98107",
+      "source": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net)"
+    },
+    "\u00a7 SCHEDULE": {
+      "value": "",
+      "source": ""
+    },
+    "work_period": {
+      "value": "05/19/15 \u2013 08/22/16 \u2248 15 months (first\u2192last invoice)",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    "\u00a7 SCOPE & DESIGN": {
+      "value": "",
+      "source": ""
+    },
+    "Fixture Schedule": {
+      "value": "Submittals/FIXTURE SUBMITTALS/BALLARD MERRILL GARDENS FIXTURE SUBMITTAL CONTENTS.xlsx",
+      "source": "Residential (P-1/P-2/P-5/P-7) + Common/Amenity/Staff (P-1A/P-2A/P-2B/P-5/P-5A/P-6/P-8/P-9/P-10/P-12/P-13)"
+    },
+    "Plans / Specifications": {
+      "value": "Plans/ folder \u2014 8 subfolders (Current / Contract / Misc / MEF / Old / CADD / Bid / As-Built)",
+      "source": "Folder scan"
+    },
+    "Bid Documents": {
+      "value": "Plans/7 - Bid Documents/14-11-14 Merrill Gardens at Ballard Specifications.pdf",
+      "source": "Bid Documents subfolder"
+    },
+    "\u00a7 DOCUMENTATION": {
+      "value": "",
+      "source": ""
+    },
+    "Total Unique Documents Reviewed": {
+      "value": "1000+ across 2 mirror folders",
+      "source": "File inventory across owp-2024/"
+    }
+  },
+  "budget_vs_actual": [
+    {
+      "cost_code": "100",
+      "description": "Supervision",
+      "original_budget": 14000,
+      "revised_budget": 14800,
+      "actual": 12228.5,
+      "variance": -2571.5,
+      "pct_used": 0.82625,
+      "hours": 295,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "101",
+      "description": "Takeoff & Purchase Labor",
+      "original_budget": 20800,
+      "revised_budget": 21407,
+      "actual": 20381.5,
+      "variance": -1025.5,
+      "pct_used": 0.95209510907647,
+      "hours": 471.5,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "110",
+      "description": "Underground Labor",
+      "original_budget": 13300,
+      "revised_budget": 13300,
+      "actual": 7558,
+      "variance": -5742,
+      "pct_used": 0.568270676691729,
+      "hours": 297,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "111",
+      "description": "Garage Labor",
+      "original_budget": 85500,
+      "revised_budget": 91072,
+      "actual": 66691,
+      "variance": -24381,
+      "pct_used": 0.732288738580464,
+      "hours": 2754,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "112",
+      "description": "Canout Labor",
+      "original_budget": 9400,
+      "revised_budget": 9400,
+      "actual": 5878.5,
+      "variance": -3521.5,
+      "pct_used": 0.625372340425532,
+      "hours": 231,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "120",
+      "description": "Roughin Labor",
+      "original_budget": 183700,
+      "revised_budget": 190647,
+      "actual": 164177,
+      "variance": -26470,
+      "pct_used": 0.861157007453566,
+      "hours": 8731,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "130",
+      "description": "Finish Labor",
+      "original_budget": 29900,
+      "revised_budget": 31289,
+      "actual": 28250.5,
+      "variance": -3038.5,
+      "pct_used": 0.902889194285532,
+      "hours": 1150.5,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "140",
+      "description": "Gas Labor",
+      "original_budget": 8700,
+      "revised_budget": 8700,
+      "actual": 9547,
+      "variance": 847,
+      "pct_used": 0.0109735632183908,
+      "hours": 406.5,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "141",
+      "description": "Water Main/Insulation Lab",
+      "original_budget": 27000,
+      "revised_budget": 27000,
+      "actual": 33366.5,
+      "variance": 6366.5,
+      "pct_used": 0.012357962962963001,
+      "hours": 1554.5,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "142",
+      "description": "Mech Room Labor",
+      "original_budget": 7000,
+      "revised_budget": 7097,
+      "actual": 10740.5,
+      "variance": 3643.5,
+      "pct_used": 0.0151338593772016,
+      "hours": 343.5,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "143",
+      "description": "Condensation Drains Labor",
+      "original_budget": 0,
+      "revised_budget": 46,
+      "actual": 20595.5,
+      "variance": 20549.5,
+      "pct_used": 4.47728260869565,
+      "hours": 854.5,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "150",
+      "description": "Warranty Labor",
+      "original_budget": 0,
+      "revised_budget": 0,
+      "actual": 343,
+      "variance": 343,
+      "pct_used": null,
+      "hours": 9,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "210",
+      "description": "Underground Material",
+      "original_budget": 17800,
+      "revised_budget": 17800,
+      "actual": 22920.93,
+      "variance": 5120.93,
+      "pct_used": 0.012876926966292099,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "211",
+      "description": "Garage Material",
+      "original_budget": 57600,
+      "revised_budget": 57951,
+      "actual": 25579.57,
+      "variance": -32371.43,
+      "pct_used": 0.441399975841659,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "212",
+      "description": "Canout Material",
+      "original_budget": 14100,
+      "revised_budget": 14100,
+      "actual": 8927.31,
+      "variance": -5172.69,
+      "pct_used": 0.633142553191489,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "213",
+      "description": "Foundation Material",
+      "original_budget": 0,
+      "revised_budget": 0,
+      "actual": 9.84,
+      "variance": 9.84,
+      "pct_used": null,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "220",
+      "description": "Roughin Material",
+      "original_budget": 122600,
+      "revised_budget": 124334,
+      "actual": 75249.36,
+      "variance": -49084.64,
+      "pct_used": 0.605219489439735,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "230",
+      "description": "Finish Material",
+      "original_budget": 267000,
+      "revised_budget": 276405,
+      "actual": 70943.89,
+      "variance": -205461.11,
+      "pct_used": 0.256666449593893,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "240",
+      "description": "Gas Material",
+      "original_budget": 7200,
+      "revised_budget": 7200,
+      "actual": 4159.94,
+      "variance": -3040.06,
+      "pct_used": 0.577769444444444,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "241",
+      "description": "Water Main/Insulation Mat",
+      "original_budget": 59400,
+      "revised_budget": 59400,
+      "actual": 50657.33,
+      "variance": -8742.67,
+      "pct_used": 0.852817003367003,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "242",
+      "description": "Mech Room Material",
+      "original_budget": 29000,
+      "revised_budget": 30622,
+      "actual": 76386.17,
+      "variance": 45764.17,
+      "pct_used": 0.0249448664358958,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "243",
+      "description": "Condensation Drains Mat",
+      "original_budget": 0,
+      "revised_budget": 45,
+      "actual": 1704,
+      "variance": 1659,
+      "pct_used": 0.37866666666666704,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "600",
+      "description": "Subcontractor",
+      "original_budget": 1000,
+      "revised_budget": 1000,
+      "actual": 1711,
+      "variance": 711,
+      "pct_used": 0.01711,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "601",
+      "description": "Engineering/Plans",
+      "original_budget": 20000,
+      "revised_budget": 20000,
+      "actual": 1218.23,
+      "variance": -18781.77,
+      "pct_used": 0.0609115,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "602",
+      "description": "Rental Equipment",
+      "original_budget": 5000,
+      "revised_budget": 5000,
+      "actual": 2202.92,
+      "variance": -2797.08,
+      "pct_used": 0.440584,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "603",
+      "description": "Permits & Licenses",
+      "original_budget": 11000,
+      "revised_budget": 11123,
+      "actual": 7148,
+      "variance": -3975,
+      "pct_used": 0.642632383349816,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "607",
+      "description": "Other Expenses",
+      "original_budget": 10000,
+      "revised_budget": 10000,
+      "actual": 123.75,
+      "variance": -9876.25,
+      "pct_used": 0.012375,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "995",
+      "description": "Payroll Burden",
+      "original_budget": 173096.55,
+      "revised_budget": 180294,
+      "actual": 167598.54,
+      "variance": -12695.46,
+      "pct_used": 0.929584678358681,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "998",
+      "description": "Payroll Taxes",
+      "original_budget": 30546.45,
+      "revised_budget": 31729,
+      "actual": 29136.68,
+      "variance": -2592.32,
+      "pct_used": 0.918298086923635,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "cost_code": "999",
+      "description": "Sales",
+      "original_budget": -1763480,
+      "revised_budget": -1811843,
+      "actual": -1811843,
+      "variance": 0,
+      "pct_used": 1,
+      "hours": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    }
+  ],
+  "cost_breakdown": [
+    {
+      "category": "Labor",
+      "cost_codes": "100,101,110,111,112,120,130,140,141,142,143,150",
+      "actual": 379757.5,
+      "pct_of_direct_cost": 0.410355688313309,
+      "pct_of_revenue": 0.20959735473769,
+      "per_unit": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "category": "Material",
+      "cost_codes": "210,211,212,213,220,230,240,241,242,243",
+      "actual": 336538.34,
+      "pct_of_direct_cost": 0.363654232383873,
+      "pct_of_revenue": 0.185743654389481,
+      "per_unit": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "category": "Subcontractor + Engineering + Rental + Permits + Other",
+      "cost_codes": "600,601,602,603,607",
+      "actual": 12403.9,
+      "pct_of_direct_cost": 0.0134033190187671,
+      "pct_of_revenue": 0.00684601259601411,
+      "per_unit": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "category": "Payroll Burden",
+      "cost_codes": "995",
+      "actual": 167598.54,
+      "pct_of_direct_cost": 0.181102451543434,
+      "pct_of_revenue": 0.0925016902678654,
+      "per_unit": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "category": "Payroll Taxes",
+      "cost_codes": "998",
+      "actual": 29136.68,
+      "pct_of_direct_cost": 0.0314843087406164,
+      "pct_of_revenue": 0.0160812388269845,
+      "per_unit": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "category": "TOTAL DIRECT COST",
+      "cost_codes": null,
+      "actual": 925434.96,
+      "pct_of_direct_cost": 1,
+      "pct_of_revenue": 0.510769950818034,
+      "per_unit": null,
+      "source": null
+    }
+  ],
+  "material": [
+    {
+      "vendor_id": "2024RS",
+      "vendor_name": "Rosen Supply Company, Inc. $MG-Ballard",
+      "total_spend": 102072.49,
+      "transactions": 99,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2024KS",
+      "vendor_name": "Keller Supply Company $MG-Ballard",
+      "total_spend": 80438.14,
+      "transactions": 90,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "3612MS",
+      "vendor_name": "Mechanical Sales, Inc.",
+      "total_spend": 37098.89,
+      "transactions": 6,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2024FE",
+      "vendor_name": "Ferguson Enterprises, Inc. $MG-Ballard",
+      "total_spend": 22824.24,
+      "transactions": 29,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2024CS",
+      "vendor_name": "Consolidated Supply Co. $MG-Ballard",
+      "total_spend": 21645.04,
+      "transactions": 9,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1609QC",
+      "vendor_name": "Quality Concrete Products, Inc. $32",
+      "total_spend": 11655,
+      "transactions": 4,
+      "category": "Concrete / subcon",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1234BA",
+      "vendor_name": "Bank of America CC",
+      "total_spend": 7148,
+      "transactions": 9,
+      "category": "Credit Card (mixed)",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1231KS",
+      "vendor_name": "Keller Supply Company",
+      "total_spend": 5234.3,
+      "transactions": 7,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1344HD",
+      "vendor_name": "HD Fowler Company",
+      "total_spend": 3590.93,
+      "transactions": 1,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "7200UR",
+      "vendor_name": "United Rentals, Inc.",
+      "total_spend": 1948.38,
+      "transactions": 3,
+      "category": "Rental Equipment (602)",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "3181SC",
+      "vendor_name": "Scan2Core, Inc.",
+      "total_spend": 1514,
+      "transactions": 2,
+      "category": "Concrete coring / subcon",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1625FE",
+      "vendor_name": "Franklin Engineering",
+      "total_spend": 1021,
+      "transactions": 1,
+      "category": "Engineering (601)",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "8068MI",
+      "vendor_name": "Kele, Inc $ MI Controls",
+      "total_spend": 847.74,
+      "transactions": 1,
+      "category": "Controls",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1303CM",
+      "vendor_name": "C.M. Hoskins Company",
+      "total_spend": 716,
+      "transactions": 2,
+      "category": "Service / subcon",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1175FE",
+      "vendor_name": "Ferguson Enterprises, Inc. #3007",
+      "total_spend": 390.48,
+      "transactions": 1,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1130CS",
+      "vendor_name": "Consolidated Supply Co.",
+      "total_spend": 348.12,
+      "transactions": 3,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1234CO",
+      "vendor_name": "Capital One Credit Card",
+      "total_spend": 315.62,
+      "transactions": 5,
+      "category": "Credit Card (mixed)",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "5621HD",
+      "vendor_name": "Core & Main LP",
+      "total_spend": 256,
+      "transactions": 1,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1799AW",
+      "vendor_name": "AllWest Underground, Inc.",
+      "total_spend": 254.54,
+      "transactions": 2,
+      "category": "Uncategorized",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1421RA",
+      "vendor_name": "R.A. Brown Backflow Testing",
+      "total_spend": 197,
+      "transactions": 1,
+      "category": "Testing subcontractor",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1380RS",
+      "vendor_name": "Rosen Supply Kirkland",
+      "total_spend": 123.14,
+      "transactions": 2,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1978FC",
+      "vendor_name": "Fastenal Company",
+      "total_spend": 36.18,
+      "transactions": 1,
+      "category": "Uncategorized",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1233AE",
+      "vendor_name": "American Express 3-41000",
+      "total_spend": 2,
+      "transactions": 1,
+      "category": "Uncategorized",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2020RS",
+      "vendor_name": "Rosen Supply Company",
+      "total_spend": 0,
+      "transactions": 2,
+      "category": "Plumbing / Supplies",
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "NOTE: AP total per JDR footer = $299,677.23. Top vendors: Rosen Supply (MG-Ballard), Mechanical Sales, Ferguson, Consolidated Supply, Quality Concrete. Submittals folder contains 80+ submittals documenting approved products. POs folder shows 138+ POs (102 completed, 0 placed, 36 scheduled) + Trim PO_s subfolder (toilets, faucets/lavs, kitchen sinks, attic stock, utility/mop sink).",
+      "vendor_name": null,
+      "total_spend": null,
+      "transactions": null,
+      "category": null,
+      "source": null
+    }
+  ],
+  "crew_labor": [
+    {
+      "worker_id": "CA74",
+      "worker_name": "Castaneda Martinez, Gustavo",
+      "total_hours": 1735,
+      "gross_pay": 58252,
+      "blended_wage_per_hr": 33.5746397694524,
+      "tier": null,
+      "work_days": 49,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "CO71",
+      "worker_name": "Cortes Mendiola, Victor H",
+      "total_hours": 1221,
+      "gross_pay": 36239,
+      "blended_wage_per_hr": 29.6797706797707,
+      "tier": null,
+      "work_days": 32,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "CA72",
+      "worker_name": "Castaneda Juarez, Edgar D",
+      "total_hours": 1189.5,
+      "gross_pay": 23273.5,
+      "blended_wage_per_hr": 19.5657839428331,
+      "tier": null,
+      "work_days": 37,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "GU19",
+      "worker_name": "Guerrero, Jorge A",
+      "total_hours": 1128,
+      "gross_pay": 17608,
+      "blended_wage_per_hr": 15.6099290780142,
+      "tier": null,
+      "work_days": 32,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "CA73",
+      "worker_name": "Castaneda Juarez, Gustavo",
+      "total_hours": 1113.5,
+      "gross_pay": 20874,
+      "blended_wage_per_hr": 18.7462954647508,
+      "tier": null,
+      "work_days": 33,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "AS10",
+      "worker_name": "Ascencio, Jose L",
+      "total_hours": 1104,
+      "gross_pay": 16272,
+      "blended_wage_per_hr": 14.7391304347826,
+      "tier": null,
+      "work_days": 32,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "AM03",
+      "worker_name": "Amaya Gonzalez, Edilberto A",
+      "total_hours": 981,
+      "gross_pay": 15104,
+      "blended_wage_per_hr": 15.3965341488277,
+      "tier": null,
+      "work_days": 27,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "PA11",
+      "worker_name": "Paco Leyva, Orlando",
+      "total_hours": 933,
+      "gross_pay": 22813,
+      "blended_wage_per_hr": 24.4512325830654,
+      "tier": null,
+      "work_days": 24,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "RA52",
+      "worker_name": "Ramos Banegas, Noel O",
+      "total_hours": 932,
+      "gross_pay": 15170,
+      "blended_wage_per_hr": 16.2768240343348,
+      "tier": null,
+      "work_days": 27,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "GE70",
+      "worker_name": "Gerard, Jordan E",
+      "total_hours": 787,
+      "gross_pay": 13221,
+      "blended_wage_per_hr": 16.7992376111817,
+      "tier": null,
+      "work_days": 25,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "PO71",
+      "worker_name": "Portillo, Kevin J",
+      "total_hours": 714,
+      "gross_pay": 9535,
+      "blended_wage_per_hr": 13.3543417366947,
+      "tier": null,
+      "work_days": 20,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "HU06",
+      "worker_name": "Hubbard, Robert W",
+      "total_hours": 612.5,
+      "gross_pay": 23388,
+      "blended_wage_per_hr": 38.1844897959184,
+      "tier": null,
+      "work_days": 60,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "GE69",
+      "worker_name": "Gerard, Jeffrey S",
+      "total_hours": 544,
+      "gross_pay": 22874,
+      "blended_wage_per_hr": 42.0477941176471,
+      "tier": null,
+      "work_days": 68,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "GE71",
+      "worker_name": "Gerard, Mitchell J",
+      "total_hours": 492,
+      "gross_pay": 9632,
+      "blended_wage_per_hr": 19.5772357723577,
+      "tier": null,
+      "work_days": 18,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "RE96",
+      "worker_name": "Reyes Cruz, Denis A",
+      "total_hours": 489,
+      "gross_pay": 7754,
+      "blended_wage_per_hr": 15.8568507157464,
+      "tier": null,
+      "work_days": 14,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "MO54",
+      "worker_name": "Monico Brambila, Jesus S",
+      "total_hours": 408,
+      "gross_pay": 7264,
+      "blended_wage_per_hr": 17.8039215686275,
+      "tier": null,
+      "work_days": 13,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "SA54",
+      "worker_name": "Sanders, Allen O",
+      "total_hours": 341.5,
+      "gross_pay": 12463.5,
+      "blended_wage_per_hr": 36.4963396778917,
+      "tier": null,
+      "work_days": 28,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "AG51",
+      "worker_name": "Aguilar Rivas, Henry",
+      "total_hours": 340.5,
+      "gross_pay": 4426.5,
+      "blended_wage_per_hr": 13,
+      "tier": null,
+      "work_days": 9,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "ME98",
+      "worker_name": "Meza Fuentes, Erick A",
+      "total_hours": 277,
+      "gross_pay": 6632,
+      "blended_wage_per_hr": 23.942238267148,
+      "tier": null,
+      "work_days": 8,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "DO56",
+      "worker_name": "Donelson, Richard T",
+      "total_hours": 221,
+      "gross_pay": 10049,
+      "blended_wage_per_hr": 45.4705882352941,
+      "tier": null,
+      "work_days": 63,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "TA96",
+      "worker_name": "Taylor, Evan R",
+      "total_hours": 216,
+      "gross_pay": 3408,
+      "blended_wage_per_hr": 15.7777777777778,
+      "tier": null,
+      "work_days": 9,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "BE54",
+      "worker_name": "Benites Portillo, Marvin E",
+      "total_hours": 210.5,
+      "gross_pay": 2820,
+      "blended_wage_per_hr": 13.396674584323,
+      "tier": null,
+      "work_days": 9,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "NE91",
+      "worker_name": "Newton, Carson T",
+      "total_hours": 156.5,
+      "gross_pay": 2347.5,
+      "blended_wage_per_hr": 15,
+      "tier": null,
+      "work_days": 6,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "VA86",
+      "worker_name": "Vaughan, Tyler J",
+      "total_hours": 137,
+      "gross_pay": 2877,
+      "blended_wage_per_hr": 21,
+      "tier": null,
+      "work_days": 9,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "MO69",
+      "worker_name": "Moran Fernandez, Jose",
+      "total_hours": 104,
+      "gross_pay": 1872,
+      "blended_wage_per_hr": 18,
+      "tier": null,
+      "work_days": 4,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "RO16",
+      "worker_name": "Rodriguez Bonilla, Lisandro",
+      "total_hours": 104,
+      "gross_pay": 1520,
+      "blended_wage_per_hr": 14.6153846153846,
+      "tier": null,
+      "work_days": 3,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "MO56",
+      "worker_name": "Montenegro, Carlos E",
+      "total_hours": 91.5,
+      "gross_pay": 1555.5,
+      "blended_wage_per_hr": 17,
+      "tier": null,
+      "work_days": 5,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "QU35",
+      "worker_name": "Quintanilla, Esteban R",
+      "total_hours": 91.5,
+      "gross_pay": 3111,
+      "blended_wage_per_hr": 34,
+      "tier": null,
+      "work_days": 4,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "MC09",
+      "worker_name": "McCabe, Thomas C",
+      "total_hours": 76,
+      "gross_pay": 1596,
+      "blended_wage_per_hr": 21,
+      "tier": null,
+      "work_days": 8,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "RI87",
+      "worker_name": "Rivera, Jorge A",
+      "total_hours": 64,
+      "gross_pay": 1408,
+      "blended_wage_per_hr": 22,
+      "tier": null,
+      "work_days": 4,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "HO14",
+      "worker_name": "Holmes, Anthony R",
+      "total_hours": 62,
+      "gross_pay": 1178,
+      "blended_wage_per_hr": 19,
+      "tier": null,
+      "work_days": 2,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "EL33",
+      "worker_name": "Eliassen, Cory H",
+      "total_hours": 49.5,
+      "gross_pay": 693,
+      "blended_wage_per_hr": 14,
+      "tier": null,
+      "work_days": 3,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "HU04",
+      "worker_name": "Hubbard, Dustin R",
+      "total_hours": 43,
+      "gross_pay": 682.5,
+      "blended_wage_per_hr": 15.8720930232558,
+      "tier": null,
+      "work_days": 20,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "AL03",
+      "worker_name": "Alba Jimenez, Jovani",
+      "total_hours": 24,
+      "gross_pay": 384,
+      "blended_wage_per_hr": 16,
+      "tier": null,
+      "work_days": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "GO56",
+      "worker_name": "Gonzalez Hernandez, Josue",
+      "total_hours": 21,
+      "gross_pay": 357,
+      "blended_wage_per_hr": 17,
+      "tier": null,
+      "work_days": 2,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "CR79",
+      "worker_name": "Cruz Guzman, Joel A",
+      "total_hours": 16,
+      "gross_pay": 208,
+      "blended_wage_per_hr": 13,
+      "tier": null,
+      "work_days": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "WE55",
+      "worker_name": "Wennig, Johnathan M",
+      "total_hours": 16,
+      "gross_pay": 288,
+      "blended_wage_per_hr": 18,
+      "tier": null,
+      "work_days": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "CR87",
+      "worker_name": "Cruz Reyes, Jose",
+      "total_hours": 8,
+      "gross_pay": 120,
+      "blended_wage_per_hr": 15,
+      "tier": null,
+      "work_days": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "BA70",
+      "worker_name": "Barnhart, Joseph N",
+      "total_hours": 5,
+      "gross_pay": 191,
+      "blended_wage_per_hr": 38.2,
+      "tier": null,
+      "work_days": 2,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "worker_id": "GA70",
+      "worker_name": "Garcia, Jordan X",
+      "total_hours": 2,
+      "gross_pay": 48,
+      "blended_wage_per_hr": 24,
+      "tier": null,
+      "work_days": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    }
+  ],
+  "crew_analytics": [],
+  "productivity": [],
+  "po_commitments": [
+    {
+      "po_number": "100-220002",
+      "date": "2015-04-21",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Lump Sum Subcontract",
+      "status": "Closed (100% billed)",
+      "description": "Merrill Gardens at Ballard plumbing (5601 24th Ave NW) \u2014 full scope",
+      "amount": 1763480,
+      "source": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net)"
+    },
+    {
+      "po_number": "COR-02 (CO#1)",
+      "date": "2016-01-11",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "RFI-061 ADDED EYEWASH STATIONS",
+      "amount": 3015,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-FX (CO#1)",
+      "date": "2016-01-11",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "ALTERNATE FIXTURE PRICING",
+      "amount": 653,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-05 (CO#1)",
+      "date": "2016-01-11",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "UPGRADED P-17 SINK",
+      "amount": 161,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-06-R1 (CO#2)",
+      "date": "2016-02-18",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "ASI-039-R1 Kitchen Equipment Changes",
+      "amount": 1107,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-04 (CO#3)",
+      "date": "2016-02-18",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "CHANGE OUT CAST IRON 90'S",
+      "amount": 9302,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-09 (CO#3)",
+      "date": "2016-02-18",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "Undermount Kitchen & Bar Sinks",
+      "amount": 6842,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-01 (CO#4)",
+      "date": "2016-04-20",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "RFI-074 ADD AUTOWASH BOX",
+      "amount": 637,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-03 (CO#4)",
+      "date": "2016-04-20",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "RFI-122 MOVE KITCHEN STACKS",
+      "amount": 2012,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-07 (CO#4)",
+      "date": "2016-04-20",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "RFI-159 Condenser Rack Drain",
+      "amount": 271,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-08 (CO#4)",
+      "date": "2016-04-20",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "RFI-162 Added Drinking Fountain",
+      "amount": 2020,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-10 (CO#4)",
+      "date": "2016-04-20",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "RFI-175 Added Sink",
+      "amount": 933,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-11 (CO#4)",
+      "date": "2016-04-20",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "Stolen Fittings & Valves",
+      "amount": 1772,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-12 (CO#4)",
+      "date": "2016-04-20",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "ASI-045 Level 7 Suite Revision",
+      "amount": 21954,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-Kitchen Vent (CO#6)",
+      "date": "2016-06-24",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "Move Vent for Kitchen Exhaust",
+      "amount": 517,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-15 (CO#7)",
+      "date": "2016-07-14",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "Sink Changes",
+      "amount": 732,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-14 (CO#8)",
+      "date": "2016-08-19",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "Attic Stock",
+      "amount": 690,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "COR-16 (CO#8)",
+      "date": "2016-08-19",
+      "issuer": "Merrill Gardens at Ballard, LLC",
+      "type": "Change Order (COR)",
+      "status": "Executed",
+      "description": "Eyewash Stations",
+      "amount": 2045,
+      "source": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "po_number": "TOTAL (contract + documented COs)",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": 1818143,
+      "source": null
+    },
+    {
+      "po_number": "NOTE: Documented COs sum to $54,663.00; JDR-implied COs = $48,363.00 (diff $6,300.00 \u2014 documented CORs exceed JDR delta by ~$6,300, likely due to CORs that were re-priced or cancelled, and WSST-exclusive pricing vs contract-net figures). Outbound POs: 138+ total (102 completed + 36 scheduled) + extensive Trim PO subfolder.",
+      "date": null,
+      "issuer": null,
+      "type": null,
+      "status": null,
+      "description": null,
+      "amount": null,
+      "source": null
+    }
+  ],
+  "billing_sov": [
+    {
+      "pay_app_number": "036614",
+      "date": "05/19/15",
+      "contract_total": -114100,
+      "this_period": null,
+      "retainage": -5705,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.04,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036622",
+      "date": "06/25/15",
+      "contract_total": -19000,
+      "this_period": null,
+      "retainage": -950,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036629",
+      "date": "07/23/15",
+      "contract_total": -25700,
+      "this_period": null,
+      "retainage": -1285,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036638",
+      "date": "08/25/15",
+      "contract_total": -89950,
+      "this_period": null,
+      "retainage": -4497.5,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.03,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036648",
+      "date": "09/25/15",
+      "contract_total": -321150,
+      "this_period": null,
+      "retainage": -16057.5,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.05,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036656",
+      "date": "10/22/15",
+      "contract_total": -446910,
+      "this_period": null,
+      "retainage": -22345.5,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.09,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036663",
+      "date": "11/23/15",
+      "contract_total": -156760,
+      "this_period": null,
+      "retainage": -7838,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.06,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036672",
+      "date": "12/18/15",
+      "contract_total": -231660,
+      "this_period": null,
+      "retainage": -11583,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036679",
+      "date": "01/22/16",
+      "contract_total": -141050,
+      "this_period": null,
+      "retainage": -7052.5,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.06,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036687",
+      "date": "02/25/16",
+      "contract_total": -59829,
+      "this_period": null,
+      "retainage": -2991.45,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036699",
+      "date": "03/18/16",
+      "contract_total": -49480,
+      "this_period": null,
+      "retainage": -2474,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.06,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036714",
+      "date": "04/25/16",
+      "contract_total": -56998,
+      "this_period": null,
+      "retainage": -2849.9,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036728",
+      "date": "05/24/16",
+      "contract_total": -55020,
+      "this_period": null,
+      "retainage": -2751,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.05,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036744",
+      "date": "06/24/16",
+      "contract_total": -40252,
+      "this_period": null,
+      "retainage": -2012.6,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.07,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036745",
+      "date": "06/24/16",
+      "contract_total": 40252,
+      "this_period": null,
+      "retainage": 2012.6,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.07,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036746",
+      "date": "06/24/16",
+      "contract_total": -40769,
+      "this_period": null,
+      "retainage": -2038.45,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.08,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036758",
+      "date": "07/20/16",
+      "contract_total": -732,
+      "this_period": null,
+      "retainage": -36.6,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 1,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "036777",
+      "date": "08/22/16",
+      "contract_total": -2735,
+      "this_period": null,
+      "retainage": -136.75,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": 0.02,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "pay_app_number": "TOTAL (signed)",
+      "date": null,
+      "contract_total": -1811843,
+      "this_period": null,
+      "retainage": -90592.15,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": null,
+      "source": null
+    },
+    {
+      "pay_app_number": "NOTE: AR entries signed negative per Sage convention. Net billed = $1,811,843.00; retainage $90,592.15 outstanding on JDR dated 04/03/2026. First invoice 036614 (05/19/15); last invoice 036777 (08/22/16). Aggregate billing log (MGB AGGREGATE BILLING.xlsx (16 billings + retainage release row, ties to JDR)) shows 16 billings + retainage-release line, 5% retention, 9.6% WSST add-on, with running aggregate ties to the contract ledger.",
+      "date": null,
+      "contract_total": null,
+      "this_period": null,
+      "retainage": null,
+      "stored_materials": null,
+      "cumulative": null,
+      "pct_complete": null,
+      "source": null
+    }
+  ],
+  "insights": [
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    },
+    {
+      "insight_id": null,
+      "title": null,
+      "finding": null,
+      "verified": "Verified",
+      "source": null
+    }
+  ],
+  "benchmark_kpis": {
+    "\u00a7 PROFILE": {
+      "value": "",
+      "source": ""
+    },
+    "job_number": {
+      "value": "2024",
+      "source": "Overview"
+    },
+    "general_contractor": {
+      "value": "",
+      "source": "Overview / Customer"
+    },
+    "location": {
+      "value": "5601 24th Ave NW, Seattle, WA 98107",
+      "source": "Overview"
+    },
+    "project_type": {
+      "value": "Commercial",
+      "source": "Inferred from cost codes"
+    },
+    "duration_months": {
+      "value": 15.0,
+      "source": "Payroll + AR span"
+    },
+    "plumbing_units": {
+      "value": null,
+      "source": "Overview.unit_count"
+    },
+    "total_fixtures": {
+      "value": null,
+      "source": "Overview.Fixture Inventory"
+    },
+    "fixtures_per_unit": {
+      "value": null,
+      "source": "fixtures / units"
+    },
+    "\u00a7 FINANCIAL": {
+      "value": "",
+      "source": ""
+    },
+    "contract_original": {
+      "value": -114100.0,
+      "source": "Code 999 Org Budget"
+    },
+    "contract_final": {
+      "value": 1811843.0,
+      "source": "Code 999 Rev Budget (abs)"
+    },
+    "change_orders_net": {
+      "value": 1925943.0,
+      "source": "contract_final \u2212 contract_original"
+    },
+    "revenue": {
+      "value": 1811843.0,
+      "source": "AR net-of-reversals (validator)"
+    },
+    "net_profit": {
+      "value": 888610.96,
+      "source": "revenue \u2212 direct_cost"
+    },
+    "gross_margin_pct": {
+      "value": 0.4904,
+      "source": "net_profit / revenue"
+    },
+    "direct_cost": {
+      "value": 923232.04,
+      "source": "\u03a3 labor + material + OH + burden + tax"
+    },
+    "overhead_cost": {
+      "value": 10200.98,
+      "source": "Codes 600, 601, 603, 607"
+    },
+    "burden_cost": {
+      "value": 167598.54,
+      "source": "Code 995"
+    },
+    "retainage_outstanding": {
+      "value": 0.0,
+      "source": "JDR retainage"
+    },
+    "revenue_per_unit": {
+      "value": null,
+      "source": "revenue / units"
+    },
+    "profit_per_unit": {
+      "value": null,
+      "source": "net_profit / units"
+    },
+    "cost_per_unit": {
+      "value": null,
+      "source": "direct_cost / units"
+    },
+    "\u00a7 LABOR": {
+      "value": "",
+      "source": ""
+    },
+    "labor_cost": {
+      "value": 379757.5,
+      "source": "Codes 100\u2013150"
+    },
+    "total_hours": {
+      "value": 17061.0,
+      "source": "\u03a3 Crew.total_hours"
+    },
+    "total_workers": {
+      "value": 40,
+      "source": "count(distinct worker_id)"
+    },
+    "blended_wage": {
+      "value": 22.24,
+      "source": "gross_pay / hours"
+    },
+    "fully_loaded_wage": {
+      "value": 33.79,
+      "source": "(labor+burden+tax) / hours"
+    },
+    "burden_multiplier": {
+      "value": 1.52,
+      "source": "fully_loaded / blended"
+    },
+    "hours_per_unit": {
+      "value": null,
+      "source": "hours / units"
+    },
+    "labor_per_unit": {
+      "value": null,
+      "source": "labor_cost / units"
+    },
+    "labor_pct_revenue": {
+      "value": 0.2096,
+      "source": "labor_cost / revenue"
+    },
+    "\u00a7 MATERIAL": {
+      "value": "",
+      "source": ""
+    },
+    "material_cost": {
+      "value": 336538.34,
+      "source": "Codes 210\u2013244"
+    },
+    "material_per_unit": {
+      "value": null,
+      "source": "material_cost / units"
+    },
+    "material_pct_revenue": {
+      "value": 0.1857,
+      "source": "material_cost / revenue"
+    },
+    "total_vendors": {
+      "value": 24,
+      "source": "count(distinct vendor_id)"
+    },
+    "top_vendor_spend": {
+      "value": 102072.49,
+      "source": "Top: Rosen Supply Company, Inc. $MG-Ballard"
+    },
+    "top_vendor_pct": {
+      "value": 0.3033,
+      "source": "top vendor spend / material_cost"
+    },
+    "\u00a7 PRODUCTIVITY": {
+      "value": "",
+      "source": ""
+    },
+    "revenue_per_hour": {
+      "value": 105.97,
+      "source": "revenue / hours"
+    },
+    "profit_per_hour": {
+      "value": 51.97,
+      "source": "net_profit / hours"
+    },
+    "revenue_per_month": {
+      "value": 120790.0,
+      "source": "revenue / duration_months"
+    },
+    "hours_per_month": {
+      "value": 1140.0,
+      "source": "hours / duration_months"
+    },
+    "units_per_month": {
+      "value": 0.0,
+      "source": "units / duration_months"
+    }
+  },
+  "change_log": [
+    {
+      "event_id": "CONTRACT-ORIG",
+      "type": "Contract",
+      "date": "2015-04-21",
+      "subject": "Prime subcontract \u2014 Lump Sum $1,763,480.00 (+9.6% WSST = $1,932,774.08 gross)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 1763480,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "mgb contract brett signed OCR_D.pdf (21-Apr-2015, Lump Sum $1,932,774.08 gross incl $169,294 WSST = $1,763,480 net)"
+    },
+    {
+      "event_id": "COR-02",
+      "type": "Change Order (COR)",
+      "date": "2016-01-11",
+      "subject": "COR-02: RFI-061 ADDED EYEWASH STATIONS (rolled into CO#1)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 3015,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-FX",
+      "type": "Change Order (COR)",
+      "date": "2016-01-11",
+      "subject": "COR-FX: ALTERNATE FIXTURE PRICING (rolled into CO#1)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 653,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-05",
+      "type": "Change Order (COR)",
+      "date": "2016-01-11",
+      "subject": "COR-05: UPGRADED P-17 SINK (rolled into CO#1)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 161,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-06-R1",
+      "type": "Change Order (COR)",
+      "date": "2016-02-18",
+      "subject": "COR-06-R1: ASI-039-R1 Kitchen Equipment Changes (rolled into CO#2)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 1107,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-04",
+      "type": "Change Order (COR)",
+      "date": "2016-02-18",
+      "subject": "COR-04: CHANGE OUT CAST IRON 90'S (rolled into CO#3)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 9302,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-09",
+      "type": "Change Order (COR)",
+      "date": "2016-02-18",
+      "subject": "COR-09: Undermount Kitchen & Bar Sinks (rolled into CO#3)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 6842,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-01",
+      "type": "Change Order (COR)",
+      "date": "2016-04-20",
+      "subject": "COR-01: RFI-074 ADD AUTOWASH BOX (rolled into CO#4)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 637,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-03",
+      "type": "Change Order (COR)",
+      "date": "2016-04-20",
+      "subject": "COR-03: RFI-122 MOVE KITCHEN STACKS (rolled into CO#4)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 2012,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-07",
+      "type": "Change Order (COR)",
+      "date": "2016-04-20",
+      "subject": "COR-07: RFI-159 Condenser Rack Drain (rolled into CO#4)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 271,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-08",
+      "type": "Change Order (COR)",
+      "date": "2016-04-20",
+      "subject": "COR-08: RFI-162 Added Drinking Fountain (rolled into CO#4)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 2020,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-10",
+      "type": "Change Order (COR)",
+      "date": "2016-04-20",
+      "subject": "COR-10: RFI-175 Added Sink (rolled into CO#4)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 933,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-11",
+      "type": "Change Order (COR)",
+      "date": "2016-04-20",
+      "subject": "COR-11: Stolen Fittings & Valves (rolled into CO#4)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 1772,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-12",
+      "type": "Change Order (COR)",
+      "date": "2016-04-20",
+      "subject": "COR-12: ASI-045 Level 7 Suite Revision (rolled into CO#4)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 21954,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-Kitchen Vent",
+      "type": "Change Order (COR)",
+      "date": "2016-06-24",
+      "subject": "COR-Kitchen Vent: Move Vent for Kitchen Exhaust (rolled into CO#6)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 517,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-15",
+      "type": "Change Order (COR)",
+      "date": "2016-07-14",
+      "subject": "COR-15: Sink Changes (rolled into CO#7)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 732,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-14",
+      "type": "Change Order (COR)",
+      "date": "2016-08-19",
+      "subject": "COR-14: Attic Stock (rolled into CO#8)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 690,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "COR-16",
+      "type": "Change Order (COR)",
+      "date": "2016-08-19",
+      "subject": "COR-16: Eyewash Stations (rolled into CO#8)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 2045,
+      "schedule_days": null,
+      "status": "Executed",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "CO-CANCELLED",
+      "type": "COR (cancelled)",
+      "date": "2015-12-11",
+      "subject": "MGB - COR-06 ASI-039 Kitchen Equipment (superseded by COR-06-R1)",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 1480,
+      "schedule_days": null,
+      "status": "Cancelled",
+      "source_document": "Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "CO-GAP",
+      "type": "CO Reconciliation",
+      "date": null,
+      "subject": "Documented CORs $54,663 > JDR-implied $48,363 by $6,300; includes WSST net/gross variance & repriced/cancelled items",
+      "originator": "\u2014",
+      "linked_events": null,
+      "cost_impact": 6300,
+      "schedule_days": null,
+      "status": "Reconciled (note)",
+      "source_document": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages) + Change Orders/COR_s/Ballard MG - Outstanding COR_s.xlsx"
+    },
+    {
+      "event_id": "ASI-007",
+      "type": "ASI",
+      "date": null,
+      "subject": "Package Lockers (Hadley Ballard note: also appears in 2023)",
+      "originator": "Urbal Architecture (Seattle)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Resolved",
+      "source_document": "ASI-RFI/"
+    },
+    {
+      "event_id": "ASI-024",
+      "type": "ASI",
+      "date": null,
+      "subject": "Overtime \u2014 Joe Barnhart (gas main relocation)",
+      "originator": "Urbal Architecture (Seattle)",
+      "linked_events": null,
+      "cost_impact": 4232,
+      "schedule_days": null,
+      "status": "Resolved",
+      "source_document": "ASI-RFI/ + COR outstanding sheet2"
+    },
+    {
+      "event_id": "ASI-039",
+      "type": "ASI",
+      "date": null,
+      "subject": "Kitchen Equipment Changes (revised to -R1, COR-06-R1)",
+      "originator": "Urbal Architecture (Seattle)",
+      "linked_events": null,
+      "cost_impact": 1107,
+      "schedule_days": null,
+      "status": "Resolved",
+      "source_document": "ASI-RFI/ + CO#2"
+    },
+    {
+      "event_id": "ASI-045",
+      "type": "ASI",
+      "date": null,
+      "subject": "Level 7 Suite Revision",
+      "originator": "Urbal Architecture (Seattle)",
+      "linked_events": null,
+      "cost_impact": 21954,
+      "schedule_days": null,
+      "status": "Resolved",
+      "source_document": "ASI-RFI/ + CO#4"
+    },
+    {
+      "event_id": "RFI-BATCH",
+      "type": "RFI batch",
+      "date": null,
+      "subject": "52 ASI-RFI PDFs: RFI-051 through RFI-491+ (Urbal Architecture responses)",
+      "originator": "Urbal Architecture (Seattle)/Sub/GC",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Resolved",
+      "source_document": "ASI-RFI/"
+    },
+    {
+      "event_id": "DROPBOX-RFI",
+      "type": "RFI batch",
+      "date": null,
+      "subject": "Additional RFI docs from field tablets",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Resolved",
+      "source_document": "DROPBOX FILES FROM TABLETS/"
+    },
+    {
+      "event_id": "SUB-EQUIPMENT",
+      "type": "Submittal batch",
+      "date": null,
+      "subject": "Equipment submittals (Backflow preventer Watts LF009/957/SS009, Expansion tank, boilers, pumps)",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Approved",
+      "source_document": "Submittals/EQUIPMENT SUBMITTALS/"
+    },
+    {
+      "event_id": "SUB-FIXTURE",
+      "type": "Submittal batch",
+      "date": null,
+      "subject": "Fixture submittals (WC, lav, tub/shower, sinks, faucets) \u2014 original + revised",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Approved",
+      "source_document": "Submittals/FIXTURE SUBMITTALS/"
+    },
+    {
+      "event_id": "SUB-MATERIAL",
+      "type": "Submittal batch",
+      "date": null,
+      "subject": "Material submittals (PVC, cast iron, valves, insulation, trap seals)",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Approved",
+      "source_document": "Submittals/MATERIAL SUBMITTALS/"
+    },
+    {
+      "event_id": "SUB-UG",
+      "type": "Submittal batch",
+      "date": null,
+      "subject": "Underground & Garage submittals (trench drains, pump basins, oil-water separator)",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Approved",
+      "source_document": "Submittals/UNDERGROUND & GARAGE SUBMITTALS/"
+    },
+    {
+      "event_id": "SUB-ALTKS",
+      "type": "Submittal batch",
+      "date": null,
+      "subject": "Alternate Kitchen Sinks submittals (undermount kitchen & bar sinks)",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Approved",
+      "source_document": "Submittals/ALTERNATE KITCHEN SINKS/"
+    },
+    {
+      "event_id": "SUB-SUMP",
+      "type": "Submittal batch",
+      "date": null,
+      "subject": "Sump pumps submittals",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Approved",
+      "source_document": "Submittals/SUMP PUMPS/"
+    },
+    {
+      "event_id": "SUB-RESPONSES",
+      "type": "Submittal Responses",
+      "date": null,
+      "subject": "Returned submittal responses from Architect",
+      "originator": "Urbal Architecture (Seattle)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Logged",
+      "source_document": "Submittals/RESPONSES/"
+    },
+    {
+      "event_id": "PERMIT-PLUMBING",
+      "type": "Permit",
+      "date": "2016-04-21",
+      "subject": "Plumbing permit (MGB ApplicationPlumbingPermit + MGB plumbing permit)",
+      "originator": "Seattle DPD",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Issued",
+      "source_document": "Permits/"
+    },
+    {
+      "event_id": "PERMIT-PLUMBING-REN",
+      "type": "Permit",
+      "date": null,
+      "subject": "Plumbing permit renewed",
+      "originator": "Seattle DPD",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Issued",
+      "source_document": "Permits/"
+    },
+    {
+      "event_id": "PERMIT-BACKFLOW",
+      "type": "Permit",
+      "date": null,
+      "subject": "Backflow permit (+ renewal)",
+      "originator": "Seattle DPD",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Issued",
+      "source_document": "Permits/"
+    },
+    {
+      "event_id": "PERMIT-BOILER",
+      "type": "Permit",
+      "date": "2016-04-21",
+      "subject": "Boiler permit",
+      "originator": "WA L&I",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Issued",
+      "source_document": "Permits/"
+    },
+    {
+      "event_id": "PERMIT-GAS",
+      "type": "Permit",
+      "date": null,
+      "subject": "Gas permit",
+      "originator": "Seattle DPD",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Issued",
+      "source_document": "Permits/"
+    },
+    {
+      "event_id": "PO-COMPLETED",
+      "type": "PO batch",
+      "date": null,
+      "subject": "102 completed POs (including key Rosen/Keller/Mech Sales/QCP orders)",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Complete",
+      "source_document": "PO_S/3 Completed/"
+    },
+    {
+      "event_id": "PO-SCHEDULED",
+      "type": "PO batch",
+      "date": null,
+      "subject": "36 scheduled POs",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Scheduled",
+      "source_document": "PO_S/2 Scheduled/"
+    },
+    {
+      "event_id": "PO-TRIM",
+      "type": "PO batch (trim)",
+      "date": null,
+      "subject": "Trim PO_s: toilets (116 WP B872), faucets/lavs, kitchen sinks, attic stock, utility/mop sinks",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Complete",
+      "source_document": "PO_S/Trim PO_s/"
+    },
+    {
+      "event_id": "BILLING-REGISTER",
+      "type": "SOV register",
+      "date": "2015-05-19",
+      "subject": "MGB AGGREGATE BILLING.xlsx \u2014 16 billings + retainage-release row, 5% retention, 9.6% WSST",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Closed",
+      "source_document": "MGB AGGREGATE BILLING.xlsx (16 billings + retainage release row, ties to JDR)"
+    },
+    {
+      "event_id": "LIEN-WAIVERS",
+      "type": "Closeout docs",
+      "date": null,
+      "subject": "12+ MGB INTERIM LIEN WAIVER PDFs + FINAL 9-21-16",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Delivered",
+      "source_document": "Billing/ + vendor lien waivers/"
+    },
+    {
+      "event_id": "WARRANTY-UPONOR",
+      "type": "Warranty",
+      "date": "2013-05-25",
+      "subject": "2016 Uponor Warranty 130525.pdf",
+      "originator": "Uponor",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Active",
+      "source_document": "Root doc"
+    },
+    {
+      "event_id": "WARRANTY-OWP",
+      "type": "Warranty",
+      "date": null,
+      "subject": "OWP Ballard warranty doc.docx",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Active",
+      "source_document": "Root doc"
+    },
+    {
+      "event_id": "STARTUP-ZOELLER",
+      "type": "Startup Report",
+      "date": null,
+      "subject": "Zoeller Startup Report.pdf",
+      "originator": "Zoeller",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Complete",
+      "source_document": "Root doc"
+    },
+    {
+      "event_id": "OM-TURNOVER",
+      "type": "O&M Closeout",
+      "date": null,
+      "subject": "Operations & Maintenance closeout package",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Delivered",
+      "source_document": "O&M_s/"
+    },
+    {
+      "event_id": "FRANKLIN-ENG",
+      "type": "Engineering",
+      "date": null,
+      "subject": "Franklin Merrill Gardens Ballard engineering package (code 601)",
+      "originator": "Franklin Engineering",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Completed",
+      "source_document": "Franklin Merrill Gardens Ballard/"
+    },
+    {
+      "event_id": "INSURANCE",
+      "type": "Insurance",
+      "date": null,
+      "subject": "Certificate of Insurance 2016 + Insurance compliance form",
+      "originator": "OWP",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Active",
+      "source_document": "Contract/ + Insurance/"
+    },
+    {
+      "event_id": "MEETINGS",
+      "type": "Meeting log",
+      "date": null,
+      "subject": "Project meeting notes & schedules",
+      "originator": "Merrill Gardens at Ballard, LLC",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Logged",
+      "source_document": "Meetings-Schedules/"
+    },
+    {
+      "event_id": "DAMAGED-FIXTURES",
+      "type": "Incident log",
+      "date": null,
+      "subject": "Damaged Fixtures.pdf (scope/remedy tracking)",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Logged",
+      "source_document": "Root doc"
+    },
+    {
+      "event_id": "FIRST-INVOICE",
+      "type": "Invoice",
+      "date": null,
+      "subject": "First billing #036614",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 114100,
+      "schedule_days": null,
+      "status": "Paid",
+      "source_document": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "event_id": "LAST-INVOICE",
+      "type": "Invoice",
+      "date": null,
+      "subject": "Last billing #036777",
+      "originator": "Sub (OWP)",
+      "linked_events": null,
+      "cost_impact": 2735,
+      "schedule_days": null,
+      "status": "Paid",
+      "source_document": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "event_id": "RETAINAGE-OPEN",
+      "type": "Retainage",
+      "date": null,
+      "subject": "Retainage $90,592.15 outstanding 9+ years post-closeout",
+      "originator": "GC",
+      "linked_events": null,
+      "cost_impact": 0,
+      "schedule_days": null,
+      "status": "Outstanding",
+      "source_document": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    }
+  ],
+  "root_cause_analysis": [
+    {
+      "rca_id": "RCA-01",
+      "observation": "Overtime \u2014 Joe Barnhart (gas main relocation)",
+      "root_cause": "Pending document review \u2014 see source document for detail",
+      "responsibility": "Architect",
+      "cost_impact": 4232.0,
+      "mitigation": "",
+      "source": "ASI-RFI/ + COR outstanding sheet2"
+    },
+    {
+      "rca_id": "RCA-02",
+      "observation": "Kitchen Equipment Changes (revised to -R1, COR-06-R1)",
+      "root_cause": "Pending document review \u2014 see source document for detail",
+      "responsibility": "Architect",
+      "cost_impact": 1107.0,
+      "mitigation": "",
+      "source": "ASI-RFI/ + CO#2"
+    },
+    {
+      "rca_id": "RCA-03",
+      "observation": "Level 7 Suite Revision",
+      "root_cause": "Pending document review \u2014 see source document for detail",
+      "responsibility": "Architect",
+      "cost_impact": 21954.0,
+      "mitigation": "",
+      "source": "ASI-RFI/ + CO#4"
+    }
+  ],
+  "predictive_signals": [
+    {
+      "signal_id": "WAREHOUSE",
+      "signal_name": "Predictive signals computed at warehouse layer",
+      "direction": "Neutral",
+      "metric": "cross-project benchmark",
+      "threshold": "n/a",
+      "historical_outcome": "See benchmark_envelopes view; not stored per-project.",
+      "source": "warehouse view (predictive_signals_v)"
+    }
+  ],
+  "metric_registry": [
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "2024",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "SRM, Ballard Merrill Gardens",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "Merrill Gardens at Ballard (senior living)",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "Merrill Gardens at Ballard, LLC",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "2024MG",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "SRM Development Corp / Merrill Gardens (Spokane)",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "Urbal Architecture (Seattle)",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "5601 24th Ave NW, Seattle WA 98107",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "Senior Living Plumbing (116 units)",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "2015-04-21",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": "2016-08-22",
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 15.1,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 116,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1763480,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1932774.08,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.096,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1811843,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 48363,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 54663,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 17,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 8,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.0274247510604033,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1811843,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 925434.96,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 886408.04,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.489230049181966,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 90592.15,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.05,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 379757.5,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 336538.34,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 12403.9,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 167598.54,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 29136.68,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 17098,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 40,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 22.2106386711896,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 33.7169680664405,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 1.51805486395924,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 105.968124926892,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 51.8427909697041,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 15619.3362068966,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 7977.8875862069,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 147.396551724138,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.20959735473769,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.185743654389481,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 24,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 18,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 52,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 7,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 80,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 138,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 8,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.101473856591414,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 0.37355246227629,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    },
+    {
+      "metric_key": null,
+      "metric_label": null,
+      "value": 30,
+      "data_label": null,
+      "tab_home": null,
+      "verification": null,
+      "source": null
+    }
+  ],
+  "reconciliation": [
+    {
+      "check_number": 1,
+      "check_description": "Revenue (JDR) = Contract Final",
+      "value_a": 1811843,
+      "value_b": 1811843,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "1\u21948"
+    },
+    {
+      "check_number": 2,
+      "check_description": "Expenses = Labor+Material+OH+Burden+Tax",
+      "value_a": 925434.96,
+      "value_b": 925434.96,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "1\u21943"
+    },
+    {
+      "check_number": 3,
+      "check_description": "Net Profit = Revenue - Expenses",
+      "value_a": 886408.04,
+      "value_b": 886408.04,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "1\u2194Derived"
+    },
+    {
+      "check_number": 4,
+      "check_description": "JDR Source: AP+PR+GL = Expenses",
+      "value_a": 925434.96,
+      "value_b": 925434.96,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "1\u2194Derived (footer)"
+    },
+    {
+      "check_number": 5,
+      "check_description": "Budget vs Actual (code 999) = -Revenue",
+      "value_a": 1811843,
+      "value_b": 1811843,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "2\u21941"
+    },
+    {
+      "check_number": 6,
+      "check_description": "Total Labor Hours = Worker hours sum",
+      "value_a": 17098,
+      "value_b": 17061,
+      "difference": 37,
+      "status": "WITHIN",
+      "tabs": "5\u21942"
+    },
+    {
+      "check_number": 7,
+      "check_description": "Labor Cost = Worker gross sum",
+      "value_a": 379757.5,
+      "value_b": 379509,
+      "difference": 248.5,
+      "status": "WITHIN",
+      "tabs": "5\u21943"
+    },
+    {
+      "check_number": 8,
+      "check_description": "Vendor total \u2248 AP footer",
+      "value_a": 299677.23,
+      "value_b": 299677.23,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "12\u21941 (approximate)"
+    },
+    {
+      "check_number": 9,
+      "check_description": "Invoice count",
+      "value_a": 18,
+      "value_b": 18,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "9\u219411"
+    },
+    {
+      "check_number": 10,
+      "check_description": "Contract Final - Orig = CO implied",
+      "value_a": 48363,
+      "value_b": 48363,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "11\u2194Derived"
+    },
+    {
+      "check_number": 11,
+      "check_description": "Retainage outstanding",
+      "value_a": 90592.15,
+      "value_b": 90592.15,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "9\u2194JDR footer"
+    },
+    {
+      "check_number": 12,
+      "check_description": "Retainage sum from invoices",
+      "value_a": 90592.15,
+      "value_b": 90592.15,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "9\u2194JDR footer"
+    },
+    {
+      "check_number": 13,
+      "check_description": "Aggregate billing Total before retention = Revenue",
+      "value_a": 1811843,
+      "value_b": 1811843,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "9\u2194Billing XLSX"
+    },
+    {
+      "check_number": 14,
+      "check_description": "Aggregate billing Retention = JDR Retainage",
+      "value_a": 90592.15,
+      "value_b": 90592.15,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "9\u2194Billing XLSX"
+    },
+    {
+      "check_number": 15,
+      "check_description": "Contract net + WSST = Contract gross",
+      "value_a": 1932774.08,
+      "value_b": 1932774.08,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "Contract header"
+    },
+    {
+      "check_number": 16,
+      "check_description": "Worker count",
+      "value_a": 40,
+      "value_b": 40,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "5\u219411"
+    },
+    {
+      "check_number": 17,
+      "check_description": "Cost code count",
+      "value_a": 30,
+      "value_b": 30,
+      "difference": 0,
+      "status": "TIES",
+      "tabs": "2\u219416"
+    },
+    {
+      "check_number": 18,
+      "check_description": "COR documented \u2248 CO implied",
+      "value_a": 54663,
+      "value_b": 48363,
+      "difference": 6300,
+      "status": "NEAR",
+      "tabs": "8\u219413"
+    },
+    {
+      "check_number": 2024.04032026285,
+      "check_description": null,
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": 0.16,
+      "check_description": null,
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": 806.0,
+      "check_description": null,
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": 138102036.0,
+      "check_description": null,
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    },
+    {
+      "check_number": 1515.0,
+      "check_description": null,
+      "value_a": null,
+      "value_b": null,
+      "difference": null,
+      "status": null,
+      "tabs": null
+    }
+  ],
+  "vendors": [
+    {
+      "vendor_id": "2024RS",
+      "vendor_name": "Rosen Supply Company, Inc. $MG-Ballard",
+      "total_spend": 102072.49,
+      "transactions": 99,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2024KS",
+      "vendor_name": "Keller Supply Company $MG-Ballard",
+      "total_spend": 80438.14,
+      "transactions": 90,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "3612MS",
+      "vendor_name": "Mechanical Sales, Inc.",
+      "total_spend": 37098.89,
+      "transactions": 6,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2024FE",
+      "vendor_name": "Ferguson Enterprises, Inc. $MG-Ballard",
+      "total_spend": 22824.24,
+      "transactions": 29,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2024CS",
+      "vendor_name": "Consolidated Supply Co. $MG-Ballard",
+      "total_spend": 21645.04,
+      "transactions": 9,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1609QC",
+      "vendor_name": "Quality Concrete Products, Inc. $32",
+      "total_spend": 11655,
+      "transactions": 4,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1234BA",
+      "vendor_name": "Bank of America CC",
+      "total_spend": 7148,
+      "transactions": 9,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1231KS",
+      "vendor_name": "Keller Supply Company",
+      "total_spend": 5234.3,
+      "transactions": 7,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1344HD",
+      "vendor_name": "HD Fowler Company",
+      "total_spend": 3590.93,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "7200UR",
+      "vendor_name": "United Rentals, Inc.",
+      "total_spend": 1948.38,
+      "transactions": 3,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "3181SC",
+      "vendor_name": "Scan2Core, Inc.",
+      "total_spend": 1514,
+      "transactions": 2,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1625FE",
+      "vendor_name": "Franklin Engineering",
+      "total_spend": 1021,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "8068MI",
+      "vendor_name": "Kele, Inc $ MI Controls",
+      "total_spend": 847.74,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1303CM",
+      "vendor_name": "C.M. Hoskins Company",
+      "total_spend": 716,
+      "transactions": 2,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1175FE",
+      "vendor_name": "Ferguson Enterprises, Inc. #3007",
+      "total_spend": 390.48,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1130CS",
+      "vendor_name": "Consolidated Supply Co.",
+      "total_spend": 348.12,
+      "transactions": 3,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1234CO",
+      "vendor_name": "Capital One Credit Card",
+      "total_spend": 315.62,
+      "transactions": 5,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "5621HD",
+      "vendor_name": "Core & Main LP",
+      "total_spend": 256,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1799AW",
+      "vendor_name": "AllWest Underground, Inc.",
+      "total_spend": 254.54,
+      "transactions": 2,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1421RA",
+      "vendor_name": "R.A. Brown Backflow Testing",
+      "total_spend": 197,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1380RS",
+      "vendor_name": "Rosen Supply Kirkland",
+      "total_spend": 123.14,
+      "transactions": 2,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1978FC",
+      "vendor_name": "Fastenal Company",
+      "total_spend": 36.18,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "1233AE",
+      "vendor_name": "American Express 3-41000",
+      "total_spend": 2,
+      "transactions": 1,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    },
+    {
+      "vendor_id": "2020RS",
+      "vendor_name": "Rosen Supply Company",
+      "total_spend": 0,
+      "transactions": 2,
+      "category": null,
+      "source": "2024 Job Detail Report.pdf (Sage Timberline, 04/03/2026, 285 pages)"
+    }
+  ],
+  "project_name": "SRM, Ballard Merrill Gardens"
+}

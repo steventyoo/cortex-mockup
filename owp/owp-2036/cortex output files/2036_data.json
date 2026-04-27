@@ -1,0 +1,563 @@
+{
+  "codes": {
+    "100": {
+      "desc": "Supervision",
+      "orig": 5120.0,
+      "rev": 5220.0,
+      "var": -1826.0,
+      "actual": 3394.0,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 71.0,
+      "hrs_reg": 71.0,
+      "hrs_ot": 0.0,
+      "hrs_dt": 0.0,
+      "hrs_other": 0.0
+    },
+    "101": {
+      "desc": "Takeoff & Purchase Labor",
+      "orig": 5760.0,
+      "rev": 6060.0,
+      "var": 61.5,
+      "actual": 6121.5,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 123.0,
+      "hrs_reg": 123.0,
+      "hrs_ot": 0.0,
+      "hrs_dt": 0.0,
+      "hrs_other": 0.0
+    },
+    "110": {
+      "desc": "Underground Labor",
+      "orig": 6800.0,
+      "rev": 10340.0,
+      "var": 1573.5,
+      "actual": 11913.5,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 400.5,
+      "hrs_reg": 399.0,
+      "hrs_ot": 1.5,
+      "hrs_dt": 0.0,
+      "hrs_other": 0.0
+    },
+    "120": {
+      "desc": "Roughin Labor",
+      "orig": 66670.0,
+      "rev": 66670.0,
+      "var": -65.5,
+      "actual": 66604.5,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 2582.5,
+      "hrs_reg": 2580.5,
+      "hrs_ot": 2.0,
+      "hrs_dt": 0.0,
+      "hrs_other": 0.0
+    },
+    "130": {
+      "desc": "Finish Labor",
+      "orig": 17520.0,
+      "rev": 17520.0,
+      "var": 1007.25,
+      "actual": 18527.25,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 731.5,
+      "hrs_reg": 717.0,
+      "hrs_ot": 14.5,
+      "hrs_dt": 0.0,
+      "hrs_other": 0.0
+    },
+    "141": {
+      "desc": "Water Main/Insulation Lab",
+      "orig": 2960.0,
+      "rev": 4004.0,
+      "var": 1616.0,
+      "actual": 5620.0,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 180.0,
+      "hrs_reg": 180.0,
+      "hrs_ot": 0.0,
+      "hrs_dt": 0.0,
+      "hrs_other": 0.0
+    },
+    "142": {
+      "desc": "Mech Room Labor",
+      "orig": 2600.0,
+      "rev": 2600.0,
+      "var": -2195.0,
+      "actual": 405.0,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 9.5,
+      "hrs_reg": 9.5,
+      "hrs_ot": 0.0,
+      "hrs_dt": 0.0,
+      "hrs_other": 0.0
+    },
+    "210": {
+      "desc": "Underground Material",
+      "orig": 6300.0,
+      "rev": 7778.0,
+      "var": -108.71,
+      "actual": 7669.29,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "211": {
+      "desc": "Garage Material",
+      "orig": 0.0,
+      "rev": 0.0,
+      "var": 65.0,
+      "actual": 65.0,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "220": {
+      "desc": "Roughin Material",
+      "orig": 30375.0,
+      "rev": 30375.0,
+      "var": -9132.03,
+      "actual": 21242.97,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "230": {
+      "desc": "Finish Material",
+      "orig": 62775.0,
+      "rev": 73757.0,
+      "var": -8095.78,
+      "actual": 65661.22,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "241": {
+      "desc": "Water Main/Insulation Mat",
+      "orig": 3320.0,
+      "rev": 3917.0,
+      "var": 5697.37,
+      "actual": 9614.37,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "607": {
+      "desc": "Other Expenses",
+      "orig": 2500.0,
+      "rev": 2500.0,
+      "var": -1674.52,
+      "actual": 825.48,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "995": {
+      "desc": "Payroll Burden",
+      "orig": 48719.51,
+      "rev": 51014.51,
+      "var": -1082.73,
+      "actual": 49931.78,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "998": {
+      "desc": "Payroll Taxes",
+      "orig": 8218.4,
+      "rev": 8608.55,
+      "var": 4.55,
+      "actual": 8613.1,
+      "net": 0.0,
+      "ret": 0.0,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    },
+    "999": {
+      "desc": "Sales",
+      "orig": -388515.0,
+      "rev": -418677.0,
+      "var": 0.0,
+      "actual": -418677.0,
+      "net": 0.0,
+      "ret": -41867.7,
+      "hrs_total": 0,
+      "hrs_reg": 0,
+      "hrs_ot": 0,
+      "hrs_dt": 0,
+      "hrs_other": 0
+    }
+  },
+  "workers": {
+    "GE69": {
+      "name": "Gerard, Jeffrey S",
+      "hours": 131.0,
+      "amount": 6211.0,
+      "days": 55
+    },
+    "DO56": {
+      "name": "Donelson, Richard T",
+      "hours": 63.0,
+      "amount": 3304.5,
+      "days": 31
+    },
+    "GA70": {
+      "name": "Garcia, Jordan X",
+      "hours": 5.0,
+      "amount": 135.0,
+      "days": 1
+    },
+    "HU06": {
+      "name": "Hubbard, Robert W",
+      "hours": 76.5,
+      "amount": 3290.5,
+      "days": 21
+    },
+    "RE18": {
+      "name": "Reed, Reuben H",
+      "hours": 5.0,
+      "amount": 180.0,
+      "days": 1
+    },
+    "CA71": {
+      "name": "Castaneda Juarez, Cesar O",
+      "hours": 866.0,
+      "amount": 13356.0,
+      "days": 34
+    },
+    "CA74": {
+      "name": "Castaneda Martinez, Gustavo",
+      "hours": 853.0,
+      "amount": 33761.0,
+      "days": 35
+    },
+    "CO73": {
+      "name": "Cortes Sepulveda, Jose R",
+      "hours": 5.0,
+      "amount": 95.0,
+      "days": 1
+    },
+    "BA70": {
+      "name": "Barnhart, Joseph N",
+      "hours": 33.0,
+      "amount": 1520.0,
+      "days": 6
+    },
+    "MA71": {
+      "name": "Martinez Reyes, Juan C",
+      "hours": 16.0,
+      "amount": 416.0,
+      "days": 2
+    },
+    "GE70": {
+      "name": "Gerard, Jordan E",
+      "hours": 231.0,
+      "amount": 6908.0,
+      "days": 13
+    },
+    "SA54": {
+      "name": "Sanders, Allen O",
+      "hours": 96.0,
+      "amount": 4167.0,
+      "days": 20
+    },
+    "AM03": {
+      "name": "Amaya Gonzalez, Edilberto A",
+      "hours": 501.0,
+      "amount": 12514.0,
+      "days": 15
+    },
+    "AS10": {
+      "name": "Ascencio, Jose L",
+      "hours": 390.0,
+      "amount": 8990.0,
+      "days": 11
+    },
+    "RO12": {
+      "name": "Rodriguez Rodriguez, Aminadab N",
+      "hours": 152.0,
+      "amount": 3344.0,
+      "days": 4
+    },
+    "CA72": {
+      "name": "Castaneda Juarez, Edgar D",
+      "hours": 240.0,
+      "amount": 6240.0,
+      "days": 9
+    },
+    "HU04": {
+      "name": "Hubbard, Dustin R",
+      "hours": 4.0,
+      "amount": 84.0,
+      "days": 2
+    },
+    "HE70": {
+      "name": "Hernandez Gonzalez, Osbaldo",
+      "hours": 16.0,
+      "amount": 304.0,
+      "days": 1
+    },
+    "MC09": {
+      "name": "McCabe, Thomas C",
+      "hours": 3.0,
+      "amount": 93.0,
+      "days": 1
+    },
+    "TA96": {
+      "name": "Taylor, Evan R",
+      "hours": 2.0,
+      "amount": 44.0,
+      "days": 1
+    },
+    "GO51": {
+      "name": "Gomez Reyes, Edith N",
+      "hours": 79.0,
+      "amount": 1563.0,
+      "days": 7
+    },
+    "NE46": {
+      "name": "Nelson, Charles E",
+      "hours": 37.0,
+      "amount": 592.0,
+      "days": 5
+    },
+    "EL33": {
+      "name": "Eliassen, Cory H",
+      "hours": 39.0,
+      "amount": 859.0,
+      "days": 4
+    },
+    "OL17": {
+      "name": "Olea Galeana, Maricela",
+      "hours": 8.0,
+      "amount": 128.0,
+      "days": 1
+    },
+    "YO29": {
+      "name": "Yohannes Jr., Samson",
+      "hours": 32.0,
+      "amount": 576.0,
+      "days": 2
+    },
+    "GE71": {
+      "name": "Gerard, Mitchell J",
+      "hours": 16.0,
+      "amount": 0.0,
+      "days": 1
+    },
+    "EG05": {
+      "name": "Egbaou, Kossi D",
+      "hours": 132.0,
+      "amount": 2112.0,
+      "days": 5
+    },
+    "FO55": {
+      "name": "Fonseca Teruel, Eduardo",
+      "hours": 8.0,
+      "amount": 128.0,
+      "days": 1
+    },
+    "RE91": {
+      "name": "Reyes, Maria E",
+      "hours": 39.0,
+      "amount": 624.0,
+      "days": 3
+    },
+    "KI55": {
+      "name": "Kinssies, Jr, John E",
+      "hours": 17.5,
+      "amount": 455.0,
+      "days": 2
+    }
+  },
+  "vendors": {
+    "2036CS": {
+      "name": "Consolidated Supply Co. $Westridge",
+      "total": 16172.660000000002,
+      "count": 14
+    },
+    "2036RS": {
+      "name": "Rosen Supply Company, Inc. $Westridge",
+      "total": 32338.03,
+      "count": 31
+    },
+    "5621HD": {
+      "name": "Core & Main LP $HD Supply Waterworks",
+      "total": 45.7,
+      "count": 1
+    },
+    "2032RS": {
+      "name": "Rosen Supply Company, Inc. $Roosevelt",
+      "total": 37.68,
+      "count": 1
+    },
+    "1130CS": {
+      "name": "Consolidated Supply Co.",
+      "total": 931.38,
+      "count": 1
+    },
+    "1234CO": {
+      "name": "Capital One Credit Card",
+      "total": 108.86000000000001,
+      "count": 4
+    },
+    "1380RS": {
+      "name": "Rosen Supply Kirkland",
+      "total": 414.11,
+      "count": 5
+    },
+    "1175FE": {
+      "name": "Ferguson Enterprises, Inc. #3007",
+      "total": 4793.630000000001,
+      "count": 15
+    },
+    "2033RS": {
+      "name": "Rosen Supply Company, Inc. $Vuecrest",
+      "total": 351.36,
+      "count": 1
+    },
+    "2036FE": {
+      "name": "Ferguson Enterprises, Inc. $Westridge",
+      "total": 34359.22,
+      "count": 16
+    },
+    "2036KS": {
+      "name": "Keller Supply Co. $Westridge",
+      "total": 1132.08,
+      "count": 2
+    },
+    "1231KS": {
+      "name": "Keller Supply Company",
+      "total": 2581.14,
+      "count": 3
+    },
+    "2035CS": {
+      "name": "Consolidated Supply Co. $162Ten",
+      "total": 0.0,
+      "count": 2
+    }
+  },
+  "invoices": {
+    "036880": {
+      "date": "05/19/17",
+      "total": -28650.0,
+      "retainage": -1432.5,
+      "lines": 1
+    },
+    "036892": {
+      "date": "06/01/17",
+      "total": 28650.0,
+      "retainage": 1432.5,
+      "lines": 1
+    },
+    "036893": {
+      "date": "06/01/17",
+      "total": -28650.0,
+      "retainage": -2865.0,
+      "lines": 1
+    },
+    "036954": {
+      "date": "09/20/17",
+      "total": -88188.0,
+      "retainage": -8818.8,
+      "lines": 1
+    },
+    "036962": {
+      "date": "10/20/17",
+      "total": -177270.0,
+      "retainage": -17727.0,
+      "lines": 1
+    },
+    "036985": {
+      "date": "11/17/17",
+      "total": -38955.0,
+      "retainage": -3895.5,
+      "lines": 1
+    },
+    "036997": {
+      "date": "12/15/17",
+      "total": -4800.0,
+      "retainage": -480.0,
+      "lines": 1
+    },
+    "037096": {
+      "date": "05/18/18",
+      "total": -29034.0,
+      "retainage": -2903.4,
+      "lines": 1
+    },
+    "037120": {
+      "date": "06/20/18",
+      "total": -34491.0,
+      "retainage": -3449.1,
+      "lines": 1
+    },
+    "037142": {
+      "date": "07/20/18",
+      "total": -4600.0,
+      "retainage": -460.0,
+      "lines": 1
+    },
+    "037176": {
+      "date": "09/19/18",
+      "total": -750.0,
+      "retainage": -75.0,
+      "lines": 1
+    },
+    "037194": {
+      "date": "09/19/18",
+      "total": 750.0,
+      "retainage": 75.0,
+      "lines": 1
+    },
+    "037195": {
+      "date": "09/19/18",
+      "total": -9200.0,
+      "retainage": -920.0,
+      "lines": 1
+    },
+    "037239": {
+      "date": "11/16/18",
+      "total": -3489.0,
+      "retainage": -348.9,
+      "lines": 1
+    }
+  }
+}

@@ -865,7 +865,7 @@ widths(ws, {1:2, 2:4, 3:48, 4:20, 5:20, 6:14, 7:12, 8:22})
 
 # ============ SAVE ============
 import os
-out = "/sessions/keen-determined-mccarthy/mnt/rhema-8170/cortex_v2_deliverables/OWP_2025_JCR_Cortex_v2.xlsx"
+out = "/sessions/keen-determined-mccarthy/work/OWP_2025_JCR_Cortex_v2.xlsx"
 os.makedirs(os.path.dirname(out), exist_ok=True)
 wb.save(out)
 print(f"Saved {out}")
