@@ -5172,6 +5172,35 @@
     </div>
 
     <!-- ============================================================ -->
+    <!-- PRODUCTIVITY CALIBRATION (OWP house standards) -->
+    <!-- ============================================================ -->
+    <div class="meta-bar mt-12 mb-4 flex items-center justify-between">
+      <span>⬢ Productivity calibration <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 11px; margin-left: 6px;">— OWP house standards from 50 closed jobs · the layer underneath the assumptions above</span></span>
+      <span class="text-[11px] tabular" id="calib-scope-chip" style="color: var(--ink-4);">v— · — jobs</span>
+    </div>
+    <div class="card" id="bid-calib-card" style="padding: 28px 32px; background: var(--paper); border: 1px solid var(--border-2);">
+      <div id="calib-headline-strip" class="grid grid-cols-4 gap-4"></div>
+
+      <div class="grid grid-cols-2 gap-8 mt-8">
+        <div>
+          <div class="hero-lab mb-2" style="color: var(--sage-ink);">▼ Where bids systematically over-estimate (cushion)</div>
+          <div class="text-[11px] mb-3" style="color: var(--ink-4); line-height: 1.5;">These cost codes consistently come in <b>under</b> their original budget. Treat their original-budget as a soft ceiling, not a target.</div>
+          <table class="modal-table" id="calib-cushion-table" style="font-size: 11.5px;"></table>
+        </div>
+        <div>
+          <div class="hero-lab mb-2" style="color: var(--clay);">▲ Where bids systematically under-estimate (overrun)</div>
+          <div class="text-[11px] mb-3" style="color: var(--ink-4); line-height: 1.5;">These cost codes consistently come in <b>over</b> their original budget. Pad these line items at takeoff or the bid carries hidden risk.</div>
+          <table class="modal-table" id="calib-overrun-table" style="font-size: 11.5px;"></table>
+        </div>
+      </div>
+
+      <div class="meta-bar mt-8 mb-3" style="font-size: 10.5px;">Calibration rules <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 10.5px;">— defaults the bidding tool applies before assumptions overrides</span></div>
+      <div id="calib-rules-grid" class="grid grid-cols-2 gap-3"></div>
+
+      <div class="mt-5 pt-4 text-[10.5px]" style="color: var(--ink-4); border-top: 1px dashed var(--border-2); line-height: 1.5;" id="calib-source-foot">—</div>
+    </div>
+
+    <!-- ============================================================ -->
     <!-- WIN-PROBABILITY CURVE (hero recommendation) -->
     <!-- ============================================================ -->
     <div class="meta-bar mt-12 mb-4 flex items-center justify-between">
@@ -15779,6 +15808,103 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     'new':    { name: 'Unknown / new GC',    jobs: 0,  blendedMargin: 33.4, payLag: 58, payLagDelta: 'no history · est. median', coRate: 50, coDetail: 'no submitted COs in portfolio', projects: 'no closed jobs',                                                                                  source: 'portfolio average',              winRate: 28, knownTag: '⚠ Unknown GC · no closed jobs in portfolio' }
   };
 
+  const OWP_CALIB = JSON.parse('{"version":"1.2","generated_at":"2026-04-27T20:16:54.362682+00:00","source":"cortex-mockup repo \u00b7 53 cortex output JSONs + 17 supabase rollups \u00b7 65 unique OWP jobs","headline_findings":[{"id":"material_takeoff_systematically_conservative","severity":"high","title":"OWP material takeoffs systematically come in under original budget","value":-0.2389,"unit":"fraction","summary":"Across 50 completed jobs, the median material variance from original budget to actual spend is -23.9%. Negative means UNDER budget. This is the strongest single signal in the dataset for calibrating the bid model.","evidence":{"n_jobs":50,"p25":-0.3298,"median":-0.2389,"p75":-0.1744},"implication":"Two valid responses for the bid model: (a) tighten the takeoff factor by ~25% and bid a leaner number, or (b) hold the cushion as a declared margin contribution and report it explicitly to leadership. Without an explicit policy, this cushion compounds opaquely."},{"id":"roughin_labor_overruns","severity":"high","title":"Rough-in labor (code 120) is the ONLY major labor code that runs over budget","value":0.1016,"unit":"fraction","summary":"Across 50 completed jobs, code 120 (rough-in labor) has a median original\u2192actual variance of +10.2%. Every other major labor code (supervision 100, takeoff 101, underground 110, trim 130, water main 141, mech room 142) runs UNDER budget. This means takeoff hours for rough-in are systematically too low.","evidence":{"code":"120","description":"Roughin Labor","n_jobs":50,"variance_orig_to_actual":{"n":50,"min":-0.4403,"max":1.0927,"mean":0.1056,"median":0.1016,"p25":-0.1057,"p75":0.2433},"median_total_hours":7100.0,"median_actual_dollars":191341.795},"implication":"Bid model should apply a +10\u201315% correction factor to rough-in labor takeoff specifically. Material cushion alone does not compensate for this \u2014 labor is harder to recover once underbid. Validate against estimator who owns the 120 takeoff: is the unit rate stale, or is scope creep happening between takeoff and field?"},{"id":"hours_per_unit_house_standard","severity":"high","title":"House standard for labor productivity is ~123 hours per plumbing unit","value":123.4295,"unit":"hours","summary":"Median is 123 hrs/unit (P25 94, P75 154). The middle 50% of jobs sit between 94 and 154 hrs/unit \u2014 that is the credible band for a like-for-like new bid.","evidence":{"n_jobs":50,"p25":93.9379,"median":123.4295,"p75":154.4867,"min":50.8847,"max":305.5515},"implication":"Bids that fall below P25 or above P75 should be flagged for explicit justification \u2014 the bidding tool should not silently extrapolate beyond the historical band."},{"id":"gross_margin_band","severity":"medium","title":"Gross margin clusters at 41.4%","value":0.4139,"unit":"fraction","summary":"Median gross margin is 41.4%. This is what OWP earns once direct cost (labor + material + burden + tax) is removed from billed revenue. The bid model should default to this margin as the floor; anything materially below P25 is unacceptable.","evidence":{"n_jobs":37,"p25":0.3391,"median":0.4139,"p75":0.4769},"implication":"Use as default target margin. Combine with material-takeoff cushion finding for total margin posture."},{"id":"wage_burden","severity":"medium","title":"Fully loaded labor cost is ~$40.23/hr (1.34\u00d7 blended)","value":40.231,"unit":"USD/hr","summary":"Median fully loaded wage (labor + burden) is $40.23/hr. Burden multiplier of 1.34\u00d7 means OWP carries ~34% on top of direct wages for taxes, insurance, vehicles, etc. Bid models that price labor at blended wage understate true cost by this factor.","evidence":{"blended_wage_median":25.6234,"loaded_wage_median":40.231,"burden_multiplier_median":1.3421},"implication":"Always price labor at fully-loaded wage in the bid model."},{"id":"labor_variance_neutral","severity":"medium","title":"Labor variance is roughly balanced (-5.0% median)","value":-0.0497,"unit":"fraction","summary":"Unlike material (consistently under), labor variance from original budget to actual is closer to neutral (median -5.0%). The bid model should NOT assume a labor cushion the way it can for material.","evidence":{"n":50,"min":-0.4043,"max":0.4215,"mean":-0.0196,"median":-0.0497,"p25":-0.1503,"p50":-0.0497,"p75":0.1287,"p10":-0.2741,"p90":0.2,"unit":"fraction","note":"Negative = under original budget"},"implication":"Bid the labor number close to the takeoff \u2014 there is no systematic safety margin."},{"id":"crew_fte_typical","severity":"low","title":"Typical crew is 5.0 FTE-equivalent","value":5.012,"unit":"people","summary":"Median average crew FTE is 5.0. Useful sanity check for scheduling: a 123-hr/unit job with a typical crew implies ~14.2 months for 100 units.","evidence":{"n":30,"min":1.3208,"max":22.7883,"mean":7.364,"median":5.012,"p25":3.0463,"p50":5.012,"p75":11.4036,"p10":1.8566,"p90":17.7458,"unit":"people","note":"Total hours / (duration \u00d7 173.33)"},"implication":"Use for duration sanity-checks and resource planning."}],"benchmarks":{"hours_per_unit":{"n":50,"min":50.8847,"max":305.5515,"mean":136.5598,"median":123.4295,"p25":93.9379,"p50":123.4295,"p75":154.4867,"p10":65.4946,"p90":248.5915,"unit":"hours","note":"Total field hours / plumbing units"},"labor_dollars_per_unit":{"n":50,"min":1221.2201,"max":4326.8287,"mean":2905.7194,"median":3076.6684,"p25":2064.0275,"p50":3076.6684,"p75":3613.7606,"p10":1468.5146,"p90":4158.4635,"unit":"USD","note":"Direct labor cost / plumbing units"},"material_dollars_per_unit":{"n":50,"min":1219.6971,"max":4653.8523,"mean":3060.8531,"median":3166.7379,"p25":2645.4142,"p50":3166.7379,"p75":3515.8398,"p10":1897.6376,"p90":3992.3552,"unit":"USD","note":"200-series cost code spend / plumbing units"},"revenue_per_unit":{"n":50,"min":7039.4286,"max":22802.137,"mean":13113.947,"median":13147.3483,"p25":10227.2509,"p50":13147.3483,"p75":15937.0548,"p10":7929.5555,"p90":17756.5883,"unit":"USD","note":"999 sales code billed / plumbing units"},"labor_pct_of_revenue":{"n":50,"min":0.1089,"max":0.3355,"mean":0.2219,"median":0.2165,"p25":0.1944,"p50":0.2165,"p75":0.2538,"p10":0.1684,"p90":0.2723,"unit":"fraction","note":"Labor cost / revenue"},"material_pct_of_revenue":{"n":50,"min":0.0936,"max":0.3832,"mean":0.2396,"median":0.2346,"p25":0.2127,"p50":0.2346,"p75":0.263,"p10":0.1868,"p90":0.3089,"unit":"fraction","note":"Material cost / revenue"},"gross_margin_pct":{"n":37,"min":0.1448,"max":0.7823,"mean":0.4098,"median":0.4139,"p25":0.3391,"p50":0.4139,"p75":0.4769,"p10":0.2903,"p90":0.4992,"unit":"fraction","note":"(Revenue - direct cost) / revenue"},"fully_loaded_wage":{"n":50,"min":14.22,"max":67.4035,"mean":40.8588,"median":40.231,"p25":24.766,"p50":40.231,"p75":56.7669,"p10":15.109,"p90":63.5615,"unit":"USD/hr","note":"(Labor cost + 995 burden) / total hours"},"blended_wage":{"n":50,"min":19.0439,"max":33.9147,"mean":25.7048,"median":25.6234,"p25":22.0396,"p50":25.6234,"p75":28.7598,"p10":19.7631,"p90":32.4423,"unit":"USD/hr","note":"Labor cost / total hours"},"burden_multiplier":{"n":50,"min":0.68,"max":1.5817,"mean":1.2537,"median":1.3421,"p25":1.0075,"p50":1.3421,"p75":1.5061,"p10":0.751,"p90":1.5559,"unit":"x","note":"Loaded wage / blended wage"}},"bid_calibration_rules":[{"rule_id":"OWP-BID-001","statement":"Default labor estimate = plumbing_units \u00d7 123.4 hrs/unit","default_value":123.4295,"unit":"hours/unit","band":{"p25":93.9379,"p75":154.4867},"rationale":"Median across 50 completed jobs with unit counts.","applies_when":"Plumbing unit count is known. For non-residential jobs without unit counts, fall back to historical labor%revenue."},{"rule_id":"OWP-BID-002","statement":"Price labor at fully-loaded wage of $40.23/hr (or pass-through of current loaded wage)","default_value":40.231,"unit":"USD/hr","rationale":"Burden multiplier of 1.34\u00d7 consistently observed. Blended wage alone understates true cost.","applies_when":"Always."},{"rule_id":"OWP-BID-003","statement":"Apply ~24% takeoff cushion / margin contribution on material","default_value":0.2389,"unit":"fraction","rationale":"Median material original\u2192actual variance is -23.9%. Either tighten takeoff or hold as explicit margin. Communicate the choice to leadership rather than burying it.","applies_when":"Material takeoff is being generated. Re-evaluate per project type \u2014 variance is wider on smaller jobs."},{"rule_id":"OWP-BID-004","statement":"Target gross margin floor = 41.4%","default_value":0.4139,"unit":"fraction","rationale":"Historical median across 37 completed jobs.","applies_when":"Always. Bids below P25 (33.9%) require sign-off."},{"rule_id":"OWP-BID-005","statement":"Sanity-check duration: months \u2248 (hours/unit \u00d7 units) / (crew \u00d7 173.33)","default_value":5.012,"unit":"people (typical crew)","rationale":"Crew FTE median is 5.0; throughput derived from hours/month median 868.","applies_when":"After labor estimate is set, validate duration is feasible given typical crew capacity."},{"rule_id":"OWP-BID-006","statement":"Carry overhead burden of ~34% on top of direct labor (cost code 995 equivalent)","default_value":0.34210000000000007,"unit":"fraction","rationale":"Burden ratio embedded in fully loaded wage; if labor priced at blended wage, this needs to be added separately.","applies_when":"Whenever labor is itemized at blended wage instead of loaded wage."},{"rule_id":"OWP-BID-007","statement":"Apply a +12% correction to rough-in labor (code 120) takeoff","default_value":0.1016,"unit":"fraction","rationale":"Code 120 median variance is +10.2% across 50 jobs \u2014 it is the only major labor code that systematically overruns. Material cushion does not cover labor exposure.","applies_when":"Always, until estimator-side fix is implemented."}],"top_cushion_codes":[{"code":"230","category":"material","phase":"trim_finish","description":"Finish Material","n_jobs":50,"median_variance_orig_to_actual":-0.1403,"p25_variance":-0.2974,"p75_variance":-0.017,"direction":"under","intensity":"moderate","median_actual_dollars":201714.0},{"code":"220","category":"material","phase":"rough_in","description":"Roughin Material","n_jobs":50,"median_variance_orig_to_actual":-0.283,"p25_variance":-0.4176,"p75_variance":-0.1754,"direction":"under","intensity":"large","median_actual_dollars":76246.0},{"code":"241","category":"material","phase":"water_main","description":"Water Main/Insulation Mat","n_jobs":46,"median_variance_orig_to_actual":-0.1997,"p25_variance":-0.3651,"p75_variance":0.0431,"direction":"under","intensity":"moderate","median_actual_dollars":44409.0},{"code":"211","category":"material","phase":"underground","description":"Garage Material","n_jobs":48,"median_variance_orig_to_actual":-0.4712,"p25_variance":-0.6635,"p75_variance":-0.2148,"direction":"under","intensity":"very large","median_actual_dollars":18509.0},{"code":"141","category":"labor","phase":"water_main","description":"Water Main/Insulation Lab","n_jobs":47,"median_variance_orig_to_actual":-0.1636,"p25_variance":-0.4371,"p75_variance":0.2464,"direction":"under","intensity":"moderate","median_actual_dollars":36651.0}],"top_overrun_codes":[{"code":"120","category":"labor","phase":"rough_in","description":"Roughin Labor","n_jobs":50,"median_variance_orig_to_actual":0.1016,"p25_variance":-0.1057,"p75_variance":0.2433,"direction":"over","intensity":"moderate","median_actual_dollars":191342.0},{"code":"600","category":"overhead","phase":"overhead","description":"Subcontractor","n_jobs":49,"median_variance_orig_to_actual":1.0597,"p25_variance":-0.4974,"p75_variance":4.8803,"direction":"over","intensity":"very large","median_actual_dollars":4654.0}],"scope":{"total_jobs":65,"completed_jobs_in_benchmarks":50,"completed_with_unit_data":50,"live_jobs":14,"schema_distribution":{}}}');
+
+  function renderCalibration() {
+    if (typeof OWP_CALIB === 'undefined' || !document.getElementById('bid-calib-card')) return;
+    const C = OWP_CALIB;
+    const fmtPct = (x) => (x*100).toFixed(1) + '%';
+    const fmtSigned = (x) => (x>=0?'+':'') + (x*100).toFixed(1) + '%';
+    const fmtMoney = (x) => '$' + Math.round(x).toLocaleString();
+    const fmtNum = (x, d=1) => Number(x).toFixed(d);
+
+    // Scope chip
+    const scope = C.scope || {};
+    const chip = document.getElementById('calib-scope-chip');
+    if (chip) chip.textContent = 'v' + C.version + ' · ' + scope.completed_jobs_in_benchmarks + ' closed / ' + scope.total_jobs + ' total · ' + (C.generated_at || '').slice(0,10);
+
+    // Headline strip — 4 stat tiles
+    const b = C.benchmarks;
+    const tiles = [
+      { lbl: 'Hours / unit', val: fmtNum(b.hours_per_unit.median, 1), sub: 'P25–P75: ' + fmtNum(b.hours_per_unit.p25,0) + '–' + fmtNum(b.hours_per_unit.p75,0) + ' · n=' + b.hours_per_unit.n },
+      { lbl: 'Loaded wage', val: '$' + fmtNum(b.fully_loaded_wage.median, 2) + '/hr', sub: 'Burden ' + fmtNum(b.burden_multiplier.median, 2) + '× · blended $' + fmtNum(b.blended_wage.median,2) },
+      { lbl: 'Gross margin', val: fmtPct(b.gross_margin_pct.median), sub: 'P25–P75: ' + fmtPct(b.gross_margin_pct.p25) + '–' + fmtPct(b.gross_margin_pct.p75) + ' · n=' + b.gross_margin_pct.n },
+      { lbl: 'Material cushion', val: '−23.9%', sub: 'Median original→actual variance · always under' }
+    ];
+    const strip = document.getElementById('calib-headline-strip');
+    if (strip) {
+      strip.innerHTML = tiles.map(t => (
+        '<div class="p-3" style="background:var(--cream-soft); border:1px solid var(--border-2); border-radius:8px;">' +
+        '<div class="hero-lab" style="font-size:9.5px;">' + t.lbl + '</div>' +
+        '<div class="text-[22px] font-semibold tabular mt-1" style="color:var(--ink); line-height:1.1;">' + t.val + '</div>' +
+        '<div class="text-[10.5px] mt-1" style="color:var(--ink-4); line-height:1.4;">' + t.sub + '</div>' +
+        '</div>'
+      )).join('');
+    }
+
+    // Cushion table
+    const cushTbl = document.getElementById('calib-cushion-table');
+    if (cushTbl) {
+      cushTbl.innerHTML =
+        '<thead><tr><th style="text-align:left;">Code · Description</th><th class="num">Median Δ</th><th class="num">P25–P75</th><th class="num">Median $</th><th class="num">n</th></tr></thead>' +
+        '<tbody>' + C.top_cushion_codes.map(c => (
+          '<tr><td><b>' + c.code + '</b> · <span style="color:var(--ink-3);">' + c.description + '</span></td>' +
+          '<td class="num" style="color:var(--sage-ink); font-weight:600;">' + fmtSigned(c.median_variance_orig_to_actual) + '</td>' +
+          '<td class="num" style="color:var(--ink-4);">' + fmtSigned(c.p25_variance) + ' / ' + fmtSigned(c.p75_variance) + '</td>' +
+          '<td class="num" style="color:var(--ink-3);">' + fmtMoney(c.median_actual_dollars) + '</td>' +
+          '<td class="num" style="color:var(--ink-4);">' + c.n_jobs + '</td></tr>'
+        )).join('') + '</tbody>';
+    }
+
+    // Overrun table
+    const overTbl = document.getElementById('calib-overrun-table');
+    if (overTbl) {
+      overTbl.innerHTML =
+        '<thead><tr><th style="text-align:left;">Code · Description</th><th class="num">Median Δ</th><th class="num">P25–P75</th><th class="num">Median $</th><th class="num">n</th></tr></thead>' +
+        '<tbody>' + C.top_overrun_codes.map(c => (
+          '<tr><td><b>' + c.code + '</b> · <span style="color:var(--ink-3);">' + c.description + '</span></td>' +
+          '<td class="num" style="color:var(--clay); font-weight:600;">' + fmtSigned(c.median_variance_orig_to_actual) + '</td>' +
+          '<td class="num" style="color:var(--ink-4);">' + fmtSigned(c.p25_variance) + ' / ' + fmtSigned(c.p75_variance) + '</td>' +
+          '<td class="num" style="color:var(--ink-3);">' + fmtMoney(c.median_actual_dollars) + '</td>' +
+          '<td class="num" style="color:var(--ink-4);">' + c.n_jobs + '</td></tr>'
+        )).join('') + '</tbody>';
+    }
+
+    // Calibration rules grid
+    const rulesGrid = document.getElementById('calib-rules-grid');
+    if (rulesGrid) {
+      rulesGrid.innerHTML = C.bid_calibration_rules.map(r => {
+        const dv = r.default_value;
+        let dvStr = '';
+        if (r.unit === 'fraction') dvStr = (dv*100).toFixed(1) + '%';
+        else if (r.unit === 'USD/hr') dvStr = '$' + dv.toFixed(2) + '/hr';
+        else if (r.unit === 'hours/unit') dvStr = dv.toFixed(1) + ' hrs/unit';
+        else dvStr = dv.toFixed(1) + ' ' + r.unit;
+        let band = '';
+        if (r.band) {
+          if (r.unit === 'fraction') band = ' (P25–P75: ' + (r.band.p25*100).toFixed(1) + '%–' + (r.band.p75*100).toFixed(1) + '%)';
+          else if (r.unit === 'hours/unit') band = ' (P25–P75: ' + r.band.p25.toFixed(1) + '–' + r.band.p75.toFixed(1) + ')';
+        }
+        return (
+          '<div class="p-3" style="background:var(--cream-soft); border:1px solid var(--border-2); border-radius:8px;">' +
+          '<div class="flex items-center gap-2 mb-1">' +
+          '<span class="text-[9.5px] tabular tracking-widest uppercase font-semibold" style="color:var(--clay);">' + r.rule_id + '</span>' +
+          '<span class="text-[10.5px] tabular" style="color:var(--ink-4);">default: ' + dvStr + band + '</span>' +
+          '</div>' +
+          '<div class="text-[12.5px] font-semibold mt-1" style="color:var(--ink); line-height:1.4;">' + r.statement + '</div>' +
+          '<div class="text-[10.5px] mt-1.5" style="color:var(--ink-3); line-height:1.45;"><i>Why:</i> ' + r.rationale + '</div>' +
+          '<div class="text-[10px] mt-1" style="color:var(--ink-4); line-height:1.4;"><i>When:</i> ' + r.applies_when + '</div>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    // Source footer
+    const foot = document.getElementById('calib-source-foot');
+    if (foot) foot.innerHTML = '<b>Source:</b> ' + C.source + ' · OWP_Productivity_Insights.json v' + C.version + ' · regenerated whenever a new JCR lands';
+  }
+
+
   // ------------------------------------------------------------------
   // COST CODES — parsed from OWP JCR summaries for jobs #2009-#2012.
   // Each entry: mean $/fixture across N jobs, and σ% (coefficient of
@@ -16404,6 +16530,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
             const input = document.getElementById('bid-margin');
             if (input) input.value = m;
             renderBid();
+  renderCalibration();
           }
         });
       });

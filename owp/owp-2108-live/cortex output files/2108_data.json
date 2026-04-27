@@ -5,8 +5,8 @@
     "job_number": "2108",
     "job_name": "R&G Apartments",
     "general_contractor": "Braseth",
-    "owner": "TBD",
-    "location": "TBD",
+    "owner": "Lake Union Partners (per AR invoice 'Lake Union Partners $R&G Apts')",
+    "location": "Seattle, WA \u2014 Rainier Ave S \u00d7 S Genesee St (per AR invoice 'Rainier & Genesee, LLC')",
     "project_type": "Multi-family apartments (on-hold \u00b7 summer 26?)",
     "units": 263,
     "total_fixtures": null,
@@ -33,7 +33,12 @@
     "billed_to_date": null,
     "foreman": "",
     "status_note": "ON HOLD \u00b7 Summer 26?",
-    "insurance": "TBD"
+    "insurance": "TBD",
+    "units_provenance": "\u26a0 UNVERIFIED ESTIMATE \u2014 set by prior session in parse_2108.py PROJECT_META. JDR has no unit count. No GDrive folder mounted. Must be confirmed against drawing P001 or OWP bid sheet once available.",
+    "fixtures_provenance": "UNKNOWN \u2014 no fixture schedule available (pre-construction \u00b7 no design drawings extracted yet).",
+    "location_prior": "TBD",
+    "owner_prior": "TBD",
+    "name_decoded": "R&G Apartments \u2192 'Rainier & Genesee Apartments'"
   },
   "totals": {
     "revenue_ar_actual": 91402.0,

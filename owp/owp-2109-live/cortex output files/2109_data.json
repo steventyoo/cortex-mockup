@@ -33,7 +33,9 @@
     "billed_to_date": null,
     "foreman": "Garrett/Mitch",
     "status_note": "Active \u00b7 ramping up Apr 2026",
-    "insurance": "TBD"
+    "insurance": "TBD",
+    "units_provenance": "\u26a0 UNVERIFIED ESTIMATE \u2014 set by prior session in parse_2109.py PROJECT_META. JDR has no unit count. No GDrive folder mounted. Must be confirmed against drawing P001 or OWP bid sheet once available. (Phase 1 = #2097 Intracorp Marysville \u2014 Job Book folder exists but is empty.)",
+    "fixtures_provenance": "UNKNOWN \u2014 no fixture schedule available. 30 workers + 377 hrs logged YTD, $3.57M billed \u2192 this is an active project, fixture data should exist in Sage purchase orders + GDrive submittals."
   },
   "totals": {
     "revenue_ar_actual": 3570012.0,
