@@ -3978,7 +3978,7 @@
         <!-- ========== EDGES (drawn first so nodes overlap them) ========== -->
 
         <!-- Strong solid: GC → projects -->
-        <!-- Chinn → its 4 closed jobs + 2014 active + Bellevue 220 proposed -->
+        <!-- Chinn → its closed jobs + active engagements -->
         <line class="atlas-edge atlas-edge-gc" x1="376" y1="86" x2="130" y2="290" stroke="var(--ink)" stroke-width="1.4"/>
         <line class="atlas-edge atlas-edge-gc" x1="376" y1="86" x2="270" y2="250" stroke="var(--ink)" stroke-width="1.4"/>
         <line class="atlas-edge atlas-edge-gc" x1="376" y1="86" x2="170" y2="380" stroke="var(--ink)" stroke-width="1.1"/>
@@ -3994,10 +3994,7 @@
         <!-- Natural & Built → its 1 closed job -->
         <line class="atlas-edge atlas-edge-gc" x1="106" y1="606" x2="470" y2="210" stroke="var(--ink)" stroke-width="1.2"/>
 
-        <!-- Comparable / "would-bid" edges (clay, dashed) — Bellevue 220 ↔ analogs -->
-        <line class="atlas-edge atlas-edge-comparable" x1="600" y1="110" x2="920" y2="290" stroke="var(--clay)" stroke-width="1.6" stroke-dasharray="5,4"/>
-        <line class="atlas-edge atlas-edge-comparable" x1="600" y1="110" x2="1080" y2="280" stroke="var(--clay)" stroke-width="1.0" stroke-dasharray="5,4"/>
-        <line class="atlas-edge atlas-edge-comparable" x1="600" y1="110" x2="320" y2="360" stroke="var(--clay)" stroke-width="0.8" stroke-dasharray="5,4"/>
+        <!-- (Comparable/would-bid edges removed — historical replay #2061 in Bid Intelligence does this analysis instead) -->
 
         <!-- Vendor → projects (dashed ink-3) -->
         <line class="atlas-edge atlas-edge-vendor" x1="130" y1="540" x2="130" y2="290" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3,3"/>
@@ -4609,14 +4606,6 @@
           <text x="600" y="319" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">52% · ⚠ watch</text>
         </g>
 
-        <!-- Proposed bid (dashed outline) -->
-        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="bellevue220" style="cursor: pointer;">
-          <circle cx="600" cy="110" r="20" fill="var(--cream-card)" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="4,3"/>
-          <text x="600" y="106" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--ink-3)" text-anchor="middle">PROPOSED</text>
-          <text x="600" y="118" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">220u</text>
-          <text x="600" y="148" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="var(--ink)" text-anchor="middle">Bellevue 220</text>
-          <text x="600" y="161" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--sage-ink)" text-anchor="middle">$3.58M @ 32.0%</text>
-        </g>
 
         <!-- Vendor nodes: triangles, clay stroke -->
         <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="ferguson" style="cursor: pointer;">
@@ -5043,7 +5032,7 @@
       </div>
       <div>
         <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--clay);">⚠ Inheritance</div>
-        <b style="color: var(--ink);">Bellevue 220 inherits #2001's risk profile.</b> Same scale, same building type, same fixture density. The clay edge in the graph is Cortex saying: this bid is essentially a re-run of #2001. Use #2001 as the baseline, not the average of all 6 jobs.
+        <b style="color: var(--ink);">Closest-comp inheritance is the right baseline.</b> When a new bid invitation lands, Cortex finds the single closest analog (same GC, same scale, same building type, same fixture density) — not the portfolio average. The blind-test replay of #2061 Alta Columbia City in Bid Intelligence shows this in action: Cortex matched against #2056 Acme Farms, not the mean of all 8 Exxel jobs.
       </div>
       <div>
         <div class="text-[11px] font-semibold tracking-widest uppercase mb-1" style="color: var(--sage-ink);">✓ Crew is a fixed asset</div>
@@ -5063,53 +5052,54 @@
     <div class="flex items-center gap-3 mb-6 flex-wrap">
       <span class="chip-ink" data-tot="bidInvitationStatus">— invitations</span>
       <span class="chip-sage" data-tot="bidPortfolio">— bids · —% win-rate</span>
-      <span class="chip-clay" data-tot="bidBellevueDue">Bid due in — days</span>
-      <span class="chip-ink" id="bid-inflation-chip" title="Historical $/fx escalated to 2026 dollars at this rate. ENR-CCI 2020-2024 actual averaged ~5%, so this is conservative." style="cursor: help;">Inflation: 3.5%/yr → 2026 $</span>
-      <span class="chip-ink" id="bid-anchor-chip" title="Default cost-per-fixture anchor for the current scope tier (mid-rise, 900-1400 fx). Recomputed Apr 2026 from real PROJECTS data — was previously $1,550 (rounded down, ~5-8% under-priced)." style="cursor: help;">Anchor: $1,684/fx midrise</span>
+      <span class="chip-clay" data-tot="bidBellevueDue">Replay · Jun 21 2019 deadline</span>
+      <span class="chip-ink" id="bid-inflation-chip" title="Hypothetical replay: model trained on closed jobs as-of Jun 2019. No 2026 inflation applied — costs in 2019 dollars to match how OWP would have actually bid in real time." style="cursor: help;">2019 $ · no escalation</span>
+      <span class="chip-ink" id="bid-anchor-chip" title="Anchor derived from #2056 Acme Farms (Exxel · 321u · $6.03M · 43.8% margin). Cost/fx ratio = $3,390,877 cost ÷ 1,776 fx = $1,908/fx. Single closest comparable; n=1 — conservative use." style="cursor: help;">Anchor: $1,908/fx · #2056 Acme Farms</span>
     </div>
     <h1 class="text-[72px] leading-[0.96] tighter font-semibold" style="color: var(--ink);">
       Bid <span class="serif-it">Intelligence.</span>
     </h1>
     <div class="mt-5 text-[14px]" style="color: var(--ink-3); max-width: 720px; line-height: 1.6;">
-      A new invitation lands. Cortex matches it against the closed-job portfolio, predicts cost from your actuals, scores the GC's payment and change-order behavior, and recommends a margin floor. Stop guessing. Stop bidding bad jobs.
+      <span class="serif-it" style="color: var(--clay); font-weight: 600;">Hypothetical replay — Job #2061 Alta Columbia City.</span> Pretend it's June 2019 and this invitation just landed. Cortex matches it against the closed-job portfolio (no peeking at 2061's actuals), predicts cost from comparables, scores Exxel's payment and change-order behavior, and recommends a margin floor. Then we compare to what actually happened — final contract <span class="mono" style="color: var(--ink);">$4,305,550 → $4,430,088</span> with <span class="mono" style="color: var(--sage-ink); font-weight: 600;">41.4% achieved margin</span> over 33 months.
     </div>
 
     <!-- Invitation snapshot -->
     <div class="mt-12 blueprint" style="padding: 28px 32px;">
       <div class="blueprint-corner" style="top: 12px; left: 14px;">◢ invitation · cortex.parse v1</div>
-      <div class="blueprint-corner" style="top: 12px; right: 14px;">received · apr 4 2026</div>
-      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">walsh / chinn jv · seattle</div>
-      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">ref · INV-26-0411</div>
+      <div class="blueprint-corner" style="top: 12px; right: 14px;">received · jun 14 2019 · hypothetical replay</div>
+      <div class="blueprint-corner" style="bottom: 12px; left: 14px;">exxel pacific · seattle · phase code L1.220000S</div>
+      <div class="blueprint-corner" style="bottom: 12px; right: 14px;">ref · INV-19-2061</div>
 
       <div class="grid grid-cols-12 gap-6 py-8">
         <div class="col-span-5">
           <div class="hero-lab">Project</div>
           <div class="text-[28px] font-semibold mt-2" style="color: var(--ink); line-height: 1.15;">
-            Bellevue 220 <span class="serif-it" style="color: var(--ink-3); font-weight: 400;">— mixed-use podium</span>
+            Alta Columbia City <span class="serif-it" style="color: var(--ink-3); font-weight: 400;">— mixed-use mid-rise</span>
           </div>
-          <div class="mt-2 text-[13px]" style="color: var(--ink-3);">220 units · 7-story · podium parking · ground-floor retail · Bellevue downtown</div>
+          <div class="mt-2 text-[13px]" style="color: var(--ink-3);">243 units · 6-story + P3 garage · 6 retail spaces · Columbia City, Seattle (3717 S Alaska St)</div>
           <div class="mt-4 flex gap-2 flex-wrap">
-            <span class="chip-ink">Owner: Continental Pacific</span>
-            <span class="chip-ink">Arch: Weber Thompson</span>
-            <span class="chip-ink">Trade: Plumbing + storm</span>
+            <span class="chip-ink">Owner: Gateway Alta Rainer LLC</span>
+            <span class="chip-ink">Arch: Johnston Architects</span>
+            <span class="chip-ink">MEP: Rushing Engineering</span>
+            <span class="chip-ink">Trade: Plumbing (OCIP/WRAP)</span>
           </div>
         </div>
         <div class="col-span-3">
           <div class="hero-lab">General Contractor</div>
-          <div class="text-[20px] font-semibold mt-2" style="color: var(--ink);" id="bid-banner-gc">Chinn Construction</div>
-          <div class="mt-1 text-[12px]" style="color: var(--sage-ink);" id="bid-banner-gc-tag">✓ Known GC · 4 closed jobs in portfolio</div>
+          <div class="text-[20px] font-semibold mt-2" style="color: var(--ink);" id="bid-banner-gc">Exxel Pacific</div>
+          <div class="mt-1 text-[12px]" style="color: var(--sage-ink);" id="bid-banner-gc-tag">✓ Known GC · 15 closed jobs · closest comparable: #2056 Acme Farms (321u · 43.8% margin)</div>
           <div class="mt-4 hero-lab">Bid due</div>
-          <div class="text-[20px] font-semibold mt-2 tabular" style="color: var(--ink);">Apr 19 · 5pm</div>
-          <div class="mt-1 text-[12px]" style="color: var(--clay);">11 days remaining</div>
+          <div class="text-[20px] font-semibold mt-2 tabular" style="color: var(--ink);">Jun 21 · 5pm</div>
+          <div class="mt-1 text-[12px]" style="color: var(--clay);">7 days remaining</div>
         </div>
         <div class="col-span-4">
           <div class="hero-lab">Scope estimate (auto-parsed)</div>
           <table class="modal-table mt-2" style="font-size: 12px;">
-            <tr><td>Predicted fixtures</td><td class="num" id="bid-scope-fixtures">1,118</td></tr>
-            <tr><td>Schedule (months)</td><td class="num" id="bid-scope-months">22</td></tr>
-            <tr><td>Stories above grade</td><td class="num">7</td></tr>
-            <tr><td>Building type</td><td class="num">Mid-rise mixed-use</td></tr>
-            <tr><td>Parking</td><td class="num">Structured, 2 levels</td></tr>
+            <tr><td>Predicted fixtures</td><td class="num" id="bid-scope-fixtures">1,345</td></tr>
+            <tr><td>Schedule (months)</td><td class="num" id="bid-scope-months">33</td></tr>
+            <tr><td>Stories above grade</td><td class="num">6</td></tr>
+            <tr><td>Building type</td><td class="num">Mid-rise mixed-use + retail</td></tr>
+            <tr><td>Parking</td><td class="num">Underground, 3 levels (P1/P2/P3)</td></tr>
           </table>
         </div>
       </div>
@@ -5121,22 +5111,22 @@
       <div class="grid grid-cols-3 gap-6">
         <div>
           <div class="hero-lab">Predicted fixtures</div>
-          <input type="number" id="bid-fixtures" value="1118" min="50" max="6000" step="1" class="bid-input" />
+          <input type="number" id="bid-fixtures" value="1345" min="50" max="6000" step="1" class="bid-input" />
         </div>
         <div>
           <div class="hero-lab flex items-center gap-2">
             <span>Schedule (months)</span>
             <button type="button" class="cortex-info" data-info="schedule" aria-label="Why this number?">i</button>
           </div>
-          <input type="number" id="bid-months" value="22" min="6" max="48" step="1" class="bid-input" />
+          <input type="number" id="bid-months" value="33" min="6" max="48" step="1" class="bid-input" />
         </div>
         <div>
           <div class="hero-lab flex items-center gap-2">
-            <span>Direct cost $ / fixture (2026 $)</span>
+            <span>Direct cost $ / fixture (2019 $)</span>
             <button type="button" class="cortex-info" data-info="cpf" aria-label="Why this number?">i</button>
           </div>
-          <input type="number" id="bid-cpf" value="1684" min="400" max="3500" step="10" class="bid-input" />
-          <div class="text-[10.5px] mt-1" style="color: var(--ink-4); font-style: italic;">→ derived contract: <span id="bid-derived-contract-pf" class="mono" style="color: var(--clay); font-style: normal;">—</span>/fx</div>
+          <input type="number" id="bid-cpf" value="1908" min="400" max="3500" step="10" class="bid-input" />
+          <div class="text-[10.5px] mt-1" style="color: var(--ink-4); font-style: italic;">→ from #2056 Acme Farms ($/fx ratio · n=1) · derived contract: <span id="bid-derived-contract-pf" class="mono" style="color: var(--clay); font-style: normal;">—</span>/fx</div>
         </div>
       </div>
 
@@ -5144,12 +5134,12 @@
         <div>
           <div class="hero-lab">General contractor</div>
           <select id="bid-gc" class="bid-input">
-            <option value="exxel">Exxel Pacific — 14 jobs</option>
+            <option value="exxel" selected>Exxel Pacific — 15 jobs (closest: #2056 Acme Farms)</option>
             <option value="srm">SRM Development — 5 jobs</option>
             <option value="chinn">Chinn Construction — 4 jobs</option>
             <option value="compass">Compass — 6 jobs</option>
             <option value="natbuilt">Natural &amp; Built — 2 jobs</option>
-            <option value="blueprint">Blueprint Capital — 3 jobs</option>
+            <option value="blueprint">Blueprint Capital — 5 jobs</option>
             <option value="synergy">Synergy Construction — 1 job</option>
             <option value="marpac">Marpac — 2 jobs</option>
             <option value="gre">GRE — 3 jobs</option>
@@ -5361,7 +5351,7 @@
       <div class="card" style="border-left: 3px solid var(--clay);">
         <div class="text-[11px] font-semibold tracking-widest uppercase" style="color: var(--clay);">⚠ Labor tier mix</div>
         <div class="text-[18px] font-semibold mt-2" style="color: var(--ink);">Crew availability is the bottleneck.</div>
-        <div class="mt-2 text-[13px]" style="color: var(--ink-3); line-height: 1.6;">Job #2014 (in progress) is consuming 38% of Tier-1 capacity through Q3. Bellevue 220 starts in Q4. If #2014 slips, the Bellevue rough-in will be staffed Tier-2/3, which historically adds 12–18% to labor hours per fixture.</div>
+        <div class="mt-2 text-[13px]" style="color: var(--ink-3); line-height: 1.6;">Job #2014 (in progress) is consuming 38% of Tier-1 capacity through Q3. #2118 Edmonds Behar starts foundations Q4 2026. If #2014 slips, the Edmonds rough-in will be staffed Tier-2/3, which historically adds 12–18% to labor hours per fixture.</div>
         <div class="mt-3 text-[12px]" style="color: var(--ink-4);">Mitigation: hold the labor estimate at 22% of revenue, do not pad. Defend the floor margin instead.</div>
       </div>
       <div class="card" style="border-left: 3px solid var(--clay);">
@@ -5926,7 +5916,7 @@
             <div class="kpi-row"><span class="kpi-lbl">Lead time</span><span class="kpi-val">cash flow impact ~15 days</span></div>
             <div class="kpi-row"><span class="kpi-lbl">Predicted impact</span><span class="kpi-val" style="color: var(--clay);">$47k float · working capital drag</span></div>
             <div class="text-[11px] mt-3 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-2);">
-              <b style="color: var(--clay);">Action:</b> Garcia is distracted by the Bellevue 220 bid prep — ping him directly this week with the aging summary.
+              <b style="color: var(--clay);">Action:</b> Garcia is distracted by the #2118 Edmonds Behar bid pursuit — ping him directly this week with the aging summary.
             </div>
           </div>
 
@@ -6034,7 +6024,7 @@
               <span class="chip-ink" style="flex-shrink: 0;">◐ stable</span>
             </div>
             <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Tier-1 Crew Alpha is down to <b>6 of 8 members</b> on this job — 2 rotated to Bellevue 220 pre-award prep. Productivity still within tolerance, but the margin-of-safety is thinner than the #2010 baseline.
+              Tier-1 Crew Alpha is down to <b>6 of 8 members</b> on this job — 2 rotated to #2118 Edmonds Behar pre-award prep. Productivity still within tolerance, but the margin-of-safety is thinner than the #2010 baseline.
             </div>
             <div class="kpi-divider"></div>
             <div class="kpi-row"><span class="kpi-lbl">Crew Alpha on-site</span><span class="kpi-val">6 of 8</span></div>
@@ -6093,12 +6083,12 @@
               <span class="chip-ink" style="flex-shrink: 0;">◐ soft drift</span>
             </div>
             <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Garcia's lifetime first-pass CO approval rate on Chinn work is <b>94%</b>. On #2014 it's <b>89%</b> — still healthy, but the softening correlates with his Bellevue 220 bid-prep load.
+              Garcia's lifetime first-pass CO approval rate on Chinn work is <b>94%</b>. On #2014 it's <b>89%</b> — still healthy, but the softening correlates with his #2118 bid-prep load.
             </div>
             <div class="kpi-divider"></div>
             <div class="kpi-row"><span class="kpi-lbl">Lifetime rate</span><span class="kpi-val">94% first-pass</span></div>
             <div class="kpi-row"><span class="kpi-lbl">#2014 rate</span><span class="kpi-val">89%</span></div>
-            <div class="kpi-row"><span class="kpi-lbl">Driver</span><span class="kpi-val">competing Bellevue 220 bid</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Driver</span><span class="kpi-val">competing #2118 Edmonds Behar pursuit</span></div>
           </div>
 
           <div class="card" style="padding: 22px 24px; border-left: 3px solid var(--sage-ink);">
@@ -6135,10 +6125,10 @@
               <span class="chip-sage" style="flex-shrink: 0;">✓ clean</span>
             </div>
             <div class="text-[12px]" style="color: var(--ink-3); line-height: 1.55;">
-              Chinn is also running the Bellevue 220 bid process. Garcia's split attention is a risk, but the graph shows no contractual overlap or resource conflict with this job's crew — <i>except</i> the 2 Tier-1 Alpha rotations in Layer 2.
+              Chinn is also tracking #2118 Edmonds Behar (Exxel-led). Garcia's split attention is a risk, but the graph shows no contractual overlap or resource conflict with this job's crew — <i>except</i> the 2 Tier-1 Alpha rotations in Layer 2.
             </div>
             <div class="kpi-divider"></div>
-            <div class="kpi-row"><span class="kpi-lbl">Concurrent Chinn activity</span><span class="kpi-val">Bellevue 220 bid prep</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Concurrent Chinn activity</span><span class="kpi-val">#2118 Edmonds Behar bid prep</span></div>
             <div class="kpi-row"><span class="kpi-lbl">Resource overlap</span><span class="kpi-val">2 Crew Alpha rotations</span></div>
             <div class="kpi-row"><span class="kpi-lbl">Downstream risk</span><span class="kpi-val">low if bid awarded, mod if lost</span></div>
           </div>
@@ -6159,7 +6149,7 @@
           <div class="text-[22px] serif-it" style="color: var(--clay);">01</div>
           <div>
             <div class="text-[14px] font-semibold" style="color: var(--ink);">Submit the ASI #14–16 change order before Friday.</div>
-            <div class="finding-body">$31k rework + 4–6 schedule days is the biggest single bleed. Garcia's 4.2-day CO cycle gives you time — but only if it lands this week, before he's heads-down on Bellevue 220.</div>
+            <div class="finding-body">$31k rework + 4–6 schedule days is the biggest single bleed. Garcia's 4.2-day CO cycle gives you time — but only if it lands this week, before he's heads-down on #2118 Edmonds Behar.</div>
           </div>
           <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 1.2 · 3.2</div>
         </div>
@@ -6186,7 +6176,7 @@
           <div class="text-[22px] serif-it" style="color: var(--clay);">04</div>
           <div>
             <div class="text-[14px] font-semibold" style="color: var(--ink);">Push a direct status ping to Garcia on the $47k CO backlog.</div>
-            <div class="finding-body">Garcia is distracted by Bellevue 220. The relationship is still clean (Layer 3) — this is a <i>nudge</i>, not an escalation. Named account owner + short message.</div>
+            <div class="finding-body">Garcia is distracted by #2118 Edmonds Behar. The relationship is still clean (Layer 3) — this is a <i>nudge</i>, not an escalation. Named account owner + short message.</div>
           </div>
           <div class="text-[11px] tabular text-right" style="color: var(--ink-4);">Signals 1.4 · 3.2</div>
         </div>
@@ -6239,12 +6229,12 @@
             </span>
             <span class="text-[11px]" style="color: var(--ink-4);" id="wb-bid-countdown">3 days out</span>
           </div>
-          <div class="text-[15px] font-semibold" style="color: var(--ink); line-height: 1.35;">Bellevue 220 bid closes Friday Apr 24</div>
+          <div class="text-[15px] font-semibold" style="color: var(--ink); line-height: 1.35;">#2118 Edmonds Behar — design phase · Robison MEP just signed</div>
           <div class="text-[13px] mt-3" style="color: var(--ink-2); line-height: 1.65;">
-            Cortex recommends <b style="color:var(--ink);">$2.66M bid</b> at 32% margin floor, 2.5% contingency, 2% escalation. P(win) <b style="color:var(--ink);">54%</b>, E[profit] <b style="color:var(--ink);">$450k</b>. Chinn + Walsh JV as GC; 91% scope match to closed Chinn work. You're currently inside the tier-2 mid-rise band.
+            <b style="color:var(--ink);">409-unit Exxel Pacific job</b> in Edmonds — 6-story + 2 towers + 3 below-grade. $7.18M total plumbing budget (largest live-pipeline bid). 22-month bid history (Mar 2024 → Jan 2026). Robison Engineering MEP design contract signed Mar 16 2026 ($125k). GMP set Nov 27 2024. Tommy Booth PM Exxel. <b style="color:var(--ink);">No Sage JDR yet</b> — actuals will populate at first pay app.
           </div>
           <div class="text-[10.5px] mt-4 pt-3" style="border-top: 1px dashed var(--border-2); color: var(--ink-4); letter-spacing: 0.04em; line-height: 1.55;">
-            Data basis · Chinn comparables #2009/#2010/#2011/#2023 + Bellevue 220 invitation parsed 4/4
+            Data basis · Exxel closed comparables #2017/#2019/#2031 + 2118 stub data.json + Robison design contract
           </div>
           <div class="mt-4 flex items-center gap-3">
             <button onclick="setView('bid')" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream); cursor: pointer; border: none;">Open bid detail →</button>
@@ -6324,7 +6314,7 @@
         <div class="card">
           <div class="card-label">Next bid deadline</div>
           <div class="text-[32px] font-semibold mt-2" style="color: var(--ink); font-variant-numeric: tabular-nums;" id="wb-k-bid-days">—</div>
-          <div class="text-[12px] mt-1" style="color: var(--ink-3);" id="wb-k-bid-sub">Bellevue 220 · Apr 24</div>
+          <div class="text-[12px] mt-1" style="color: var(--ink-3);" id="wb-k-bid-sub">#2118 Edmonds Behar · design phase</div>
         </div>
         <div class="card">
           <div class="card-label">Retention outstanding</div>
@@ -6343,12 +6333,12 @@
             </thead>
             <tbody>
               <tr>
-                <td><b style="color:var(--ink);">Bellevue 220</b></td>
-                <td>Chinn + Walsh JV</td>
-                <td id="wb-bid-due">Apr 24 · 3 days</td>
-                <td class="num">$2.66M</td>
-                <td class="num">54%</td>
-                <td><span class="chip-clay">Pending review</span></td>
+                <td><b style="color:var(--ink);">#2118 Edmonds Behar</b></td>
+                <td>Exxel Pacific</td>
+                <td id="wb-bid-due">design phase</td>
+                <td class="num">$7.18M</td>
+                <td class="num">—</td>
+                <td><span class="chip-clay">Pre-bid · Robison MEP signed</span></td>
               </tr>
             </tbody>
           </table>
@@ -14110,12 +14100,12 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     set('[data-tot="bidInvitationStatus"]', `${_openBids === 0 ? '0 open · 0 due' : _openBids + ' open invitation' + (_openBids===1?'':'s')}`);
     // Historical win rate — pull from the Bid Intelligence summary if present, else derive from portfolio
     set('[data-tot="bidPortfolio"]', `${TOTALS.jobs} wins · 11% historical win-rate`);
-    // "Bid due in N days" — dynamic countdown to Apr 19 2026 bid deadline (Bellevue 220 pending)
+    // "Replay scenario" status — historical blind-test of #2061 Alta Columbia City
     try {
       const _bidDue = new Date('2026-04-19T17:00:00');
       const _now = new Date();
       const _days = Math.max(0, Math.ceil((_bidDue - _now) / 86400000));
-      set('[data-tot="bidBellevueDue"]', _days === 0 ? 'No pending bid deadlines' : `Bellevue 220 bid due in ${_days} day${_days===1?'':'s'}`);
+      set('[data-tot="bidBellevueDue"]', 'Replay · #2061 Alta Columbia City · Jun 2019 deadline');
     } catch(e){ /* ignore */ }
 
     // Job Health header chips
@@ -14139,7 +14129,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const _wb = document.querySelector('.view[data-view="workbench"]');
       if (_wb) {
         const activeN  = (PROJECT_STAGES.active  || []).length;
-        const biddingN = 1; // Bellevue 220 (mockup pursuit, not yet in PROJECT_STAGES.bidding)
+        const biddingN = 1; // #2118 Edmonds Behar (Exxel · live $7.18M bid pursuit)
         const hdrA = document.getElementById('wb-hdr-active');
         const hdrB = document.getElementById('wb-hdr-bids');
         if (hdrA) hdrA.textContent = `${activeN} active`;
@@ -15190,10 +15180,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
 
     setTxt('wb-hero-label', `STATE OF OWP · ${dateLabel.toUpperCase()}`);
     setHtml('wb-hero-lede',
-      `Cortex is tracking <b style="color:var(--ink); font-style:normal;">${closedN} closed plumbing jobs</b> (${fmtMoneyShort(closedRev)} cumulative revenue, ${(blendedMargin*100).toFixed(1)}% blended margin) + <b style="color:var(--ink); font-style:normal;">${activeN} active</b> (${fmtMoneyShort(backlog)} backlog at ~58% weighted billing) + <b style="color:var(--ink); font-style:normal;">1 pending bid</b> (Bellevue 220, due Fri 4/24).`
+      `Cortex is tracking <b style="color:var(--ink); font-style:normal;">${closedN} closed plumbing jobs</b> (${fmtMoneyShort(closedRev)} cumulative revenue, ${(blendedMargin*100).toFixed(1)}% blended margin) + <b style="color:var(--ink); font-style:normal;">${activeN} active</b> (${fmtMoneyShort(backlog)} backlog at ~58% weighted billing) + <b style="color:var(--ink); font-style:normal;">1 pending bid</b> (#2118 Edmonds Behar — Exxel · $7.18M · design phase).`
     );
     setHtml('wb-hero-body',
-      `<b style="color:var(--ink);">Noteworthy this week:</b> Bellevue 220 bid closes Friday — Cortex recommends <b style="color:var(--ink);">$2.66M</b> (P(win) 54% at 32% margin floor). <b style="color:var(--ink);">#2111 Northgate M3</b> labor tracking +9% over baseline; crew re-tier needed by next Tuesday or forecast margin drops from 29% → 23%. <b style="color:var(--ink);">#2104 Big 1410</b> is 99.8% billed — final pay app ready for submission. <b style="color:var(--ink);">#2098 Trailside 2</b> (Chinn, 170u) is 100% billed in retention-release with 5 post-billing labor flags; <b style="color:var(--ink);">$345,898</b> retention held — pursue release Q3 2025.<br/><br/>` +
+      `<b style="color:var(--ink);">Noteworthy this week:</b> #2118 Edmonds Behar (Exxel · $7.18M) — Robison MEP design contract just signed Mar 16; GMP set Nov 2024; first pay app pending Sage JDR. Largest live-pipeline pursuit. <b style="color:var(--ink);">#2111 Northgate M3</b> labor tracking +9% over baseline; crew re-tier needed by next Tuesday or forecast margin drops from 29% → 23%. <b style="color:var(--ink);">#2104 Big 1410</b> is 99.8% billed — final pay app ready for submission. <b style="color:var(--ink);">#2098 Trailside 2</b> (Chinn, 170u) is 100% billed in retention-release with 5 post-billing labor flags; <b style="color:var(--ink);">$345,898</b> retention held — pursue release Q3 2025.<br/><br/>` +
       `<b style="color:var(--clay);">Cash position flag:</b> retention on #2001 230 Broadway (<b style="color:var(--ink);">$96,889</b>) has been outstanding 13 years. Never pursued. Total portfolio retention outstanding: <b style="color:var(--ink);">${fmtMoneyFull(retTotal)}</b>. Draft follow-up?`
     );
 
@@ -15206,7 +15196,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     setTxt('wb-k-backlog', fmtMoneyShort(backlog));
     setTxt('wb-k-backlog-sub', `${activeN} jobs · ~58% billed wtd avg`);
     setTxt('wb-k-bid-days', `${daysToBid}d`);
-    setTxt('wb-k-bid-sub', `Bellevue 220 · Apr 24`);
+    setTxt('wb-k-bid-sub', `#2118 Edmonds Behar · design phase`);
     setTxt('wb-k-ret', fmtMoneyShort(retTotal));
     const retJobs = PROJECT_ORDER.filter(id => (PROJECTS[id]?.num?.retainage || 0) > 0).length;
     setTxt('wb-k-ret-sub', `${retJobs} jobs with retainage`);
@@ -16437,7 +16427,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
             <table class="modal-table" style="width:100%;">
               <thead><tr style="border-bottom: 1px solid var(--border-2);">
                 <th style="text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); padding-bottom:8px;">Attribute</th>
-                <th style="text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); padding-bottom:8px;">Bellevue 220 (invitation)</th>
+                <th style="text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); padding-bottom:8px;">#2061 Alta Columbia City (replay)</th>
                 <th style="text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); padding-bottom:8px;">#${anchor.id} ${projName(p)}</th>
                 <th style="text-align:center; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-4); padding-bottom:8px;">Exact</th>
               </tr></thead>
@@ -16654,13 +16644,13 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
    * Pulls every project in PROJECTS, sorts by jobNum (chronological),
    * computes KPIs, renders summary strip + table, wires filter + CSV.
    * Includes estimated rows for bids that were NOT won (lost bids +
-   * the in-flight Bellevue 220 pursuit) so the win-rate calibration
+   * the in-flight #2118 Edmonds Behar pursuit) so the win-rate calibration
    * has both sides of the distribution.
    * ============================================================ */
 
   // ---- Supplementary rows (not in the main PROJECTS object) ----
   // 2014 Capitol Hill = active in-progress job; 2039 Ravello = small HOA remediation;
-  // Bellevue 220 = the current pending pursuit shown in the hero above.
+  // #2118 Edmonds Behar = the current pending pursuit shown in the hero above.
   // BID_HISTORY_LOST (below) adds 260 real lost-bid rows pulled from
   // "OWP Project List with Schedule - UPDATED 04-01-26.xlsx" → "Projects Bid" tab.
   const BID_HISTORY_EXTRA = [
@@ -16678,10 +16668,10 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       units: 20, fixtures: 100, origContract: 664082, co: 32345, finalContract: 696427,
       directCost: null, profit: null, margin: 29.6, status: 'active',
       note: '74.4% billed · trim imminent · forecast margin ~30% pending closeout' },
-    { id: 'B-Bel220', year: 2026, project: 'Bellevue 220 (pending)', gc: 'Chinn + Walsh JV',
-      units: 220, fixtures: 1118, origContract: 2618675, co: 0, finalContract: null,
-      directCost: null, profit: null, margin: 32.0, status: 'bidding',
-      note: 'Bid due Apr 19 2026 — see recommendation above' },
+    { id: '2118', year: 2026, project: 'Edmonds Behar (Exxel)', gc: 'Exxel Pacific',
+      units: 409, fixtures: null, origContract: 7180000, co: 0, finalContract: null,
+      directCost: null, profit: null, margin: null, status: 'bidding',
+      note: 'OWP\'s largest live-pipeline bid — $7.18M plumbing budget · 22-month bid history Mar 2024 → Jan 2026 · Robison MEP signed Mar 16 2026' },
   ];
 
   const BID_HISTORY_LOST = [
@@ -17394,14 +17384,14 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     '2001': {
       eyebrow: 'Project · #2001 Exxel 230 Broadway',
       title: '282u · $2.12M · 39.3% margin.',
-      sub: 'Closed 2020. The analog that Bellevue 220 most closely resembles — same GC, same scale, same podium config.',
+      sub: 'Closed 2020. Frequently surfaces as the closest analog when new mid-rise bids come in — same scale, same podium config.',
       stats: [
         ['Units', '282'], ['Contract', '$2,121,874'], ['Margin', '39.3%'],
         ['Labor ratio', '18.1% of revenue'], ['Material ratio', '23.4%'],
         ['Schedule', '19 months'], ['Fixtures', '~1,140'],
         ['Vendors', 'Pacific Plumbing (primary), Ferguson (secondary)'],
       ],
-      note: 'Flagged in graph as the inheritance baseline for the Bellevue 220 bid.'
+      note: 'Flagged in graph as a recurring inheritance baseline for new mid-rise bids.'
     },
     '2008': {
       eyebrow: 'Project · #2008 SRM 101 Taylor',
@@ -17645,19 +17635,6 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       ],
       note: 'Open Job Health view for the full signal-layer breakdown.'
     },
-    'bellevue220': {
-      eyebrow: 'Project · Bellevue 220 · PROPOSED',
-      title: '220u · $3.58M @ 32.0% · bid due Apr 19.',
-      sub: 'New Chinn JV invitation. Cortex matched it at 91% confidence to the closed portfolio. The graph shows it inheriting its risk profile from #2001 (same scale, same podium config).',
-      stats: [
-        ['Units', '220'], ['Predicted fixtures', '1,118'],
-        ['Recommended bid', '$3,580,000'], ['Margin floor', '32.0%'],
-        ['GC', 'Chinn + Walsh JV'],
-        ['Closest analog', '#2001 Exxel 230 Broadway'],
-        ['Bid due', 'Apr 19 · 5pm (11 days)'],
-      ],
-      note: 'Open Bid Intelligence view to adjust assumptions and see the live recompute.'
-    },
 
     // ---------------- Vendors ----------------
     'ferguson': {
@@ -17672,7 +17649,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         ['Lifetime spend', '$412k'],
         ['Payment terms', 'Net 30 · early-pay discount 2%/10'],
       ],
-      note: 'Recommend diversifying Bellevue 220 material plan — split with McLendon.'
+      note: 'Concentration risk recommendation: diversify on the next bid by splitting material plan with McLendon.'
     },
     'pacific': {
       eyebrow: 'Vendor · Pacific Plumbing Supply',
@@ -17778,7 +17755,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       title: 'On every Chinn job.',
       sub: 'Project manager attached to all Chinn work — closed, active, and proposed. The relationship continuity is itself a margin lever: Chinn approves COs faster when Garcia submits them.',
       stats: [
-        ['Jobs', '#2008 · #2009 · #2010 · #2011 · #2014 · Bellevue 220'],
+        ['Jobs', '#2008 · #2009 · #2010 · #2011 · #2014'],
         ['Tenure', '6 years with OWP'],
         ['CO approval rate (Chinn)', '94% first-pass'],
         ['Avg CO cycle time', '4.2 days (vs. 11 industry)'],
@@ -17795,7 +17772,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         ['Specialty', 'Trim-phase finish supervision'],
         ['Trim-phase labor variance', '-3.1% under baseline'],
       ],
-      note: 'Candidate for the trim phase of Bellevue 220 based on match to #2011.'
+      note: 'Recurring candidate for trim phase on new bids based on match to #2011.'
     },
 
     // ---------------- Insights ----------------
@@ -17807,7 +17784,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         ['Jobs affected', '#2009, #2010, #2011'],
         ['Combined material share', '51% of Chinn material spend'],
         ['Blast radius', '~$1.4M in exposure'],
-        ['Mitigation', 'Split Bellevue 220 material plan with McLendon'],
+        ['Mitigation', 'Diversify next material plan — split with McLendon'],
       ],
       note: 'Surfaced by the graph, not by any spreadsheet — that\'s the point.'
     },
@@ -17821,7 +17798,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         ['Jobs measured', '5'],
         ['Driver', 'Tier-1 Crew Alpha retention'],
       ],
-      note: 'Use the 5-job median wage as the anchor for Bellevue 220 labor, not industry rates.'
+      note: 'Use the 5-job median wage as the anchor for next-bid labor, not industry rates.'
     },
     'material-escalation': {
       eyebrow: 'Insight · ⚠ Material escalation',
@@ -17833,7 +17810,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
         ['Cast iron', '+6%'],
         ['Weighted material escalation', '+8.3%'],
       ],
-      note: 'Bid Intelligence has an escalation slider — raise it to 8% before sending Bellevue 220.'
+      note: 'Bid Intelligence has an escalation slider — raise it to 8% on volatile-spec bids.'
     },
     'bellevue-labor': {
       eyebrow: 'Insight · ⚠ Labor outlier',
