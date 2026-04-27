@@ -5108,7 +5108,15 @@
     <!-- Assumptions card -->
     <div class="meta-bar mt-12 mb-4">Adjust assumptions <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 11px;">— everything below recomputes live</span></div>
     <div class="card" id="bid-assumptions-card" style="padding: 28px 32px;">
-      <div class="grid grid-cols-3 gap-6">
+      <div class="grid grid-cols-4 gap-6">
+        <div>
+          <div class="hero-lab flex items-center gap-2">
+            <span>Plumbing units</span>
+            <button type="button" class="cortex-info" data-info="units" aria-label="How calibration uses units">i</button>
+          </div>
+          <input type="number" id="bid-units" value="243" min="1" max="1000" step="1" class="bid-input" />
+          <div class="text-[10.5px] mt-1" style="color: var(--ink-4); font-style: italic;" id="bid-units-implied">→ implied labor: — hrs · — @ $40.23/hr loaded</div>
+        </div>
         <div>
           <div class="hero-lab">Predicted fixtures</div>
           <input type="number" id="bid-fixtures" value="1450" min="50" max="6000" step="1" class="bid-input" />
@@ -5149,9 +5157,13 @@
           </select>
         </div>
         <div>
-          <div class="hero-lab">Margin floor — <span id="bid-margin-display" class="tabular" style="color: var(--ink); font-weight: 700;">32.0%</span></div>
+          <div class="hero-lab flex items-center gap-2">
+            <span>Margin floor — <span id="bid-margin-display" class="tabular" style="color: var(--ink); font-weight: 700;">32.0%</span></span>
+            <button type="button" class="cortex-info" data-info="margin" aria-label="Calibration band for margin">i</button>
+          </div>
           <input type="range" id="bid-margin" value="32" min="0" max="50" step="0.5" class="bid-slider" />
           <div class="flex justify-between text-[10px] mt-1" style="color: var(--ink-4);"><span>0%</span><span>50%</span></div>
+          <div class="text-[10.5px] mt-1" style="color: var(--ink-4); font-style: italic;" id="bid-margin-band">— OWP band: P25 33.9% · median 41.4% · P75 47.7%</div>
         </div>
         <div>
           <div class="hero-lab">Contingency reserve — <span id="bid-cont-display" class="tabular" style="color: var(--ink); font-weight: 700;">3.0%</span></div>
@@ -15985,7 +15997,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     { label: 'Payroll burden &amp; taxes',                  codes: ['995','998'] }
   ];
 
-  const BID_DEFAULTS = { fixtures: 1450, months: 33, cpf: 1837, gc: 'exxel', margin: 32.0, cont: 3.0, esc: 0.0 };  // calibrated to #2061 (pre-2019 Exxel mid-rise + 35% inflation + 10% mixed-use premium)
+  const BID_DEFAULTS = { fixtures: 1450, units: 243, months: 33, cpf: 1837, gc: 'exxel', margin: 32.0, cont: 3.0, esc: 0.0 };  // calibrated to #2061 (pre-2019 Exxel mid-rise + 35% inflation + 10% mixed-use premium · 243 units)
   let BID = Object.assign({}, BID_DEFAULTS);
 
   // Inflation rate used to escalate historical $/fx into 2026 dollars.
@@ -16078,6 +16090,31 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     set('bid-margin-display', bidFmtPct(BID.margin));
     set('bid-cont-display',   bidFmtPct(BID.cont));
     set('bid-esc-display',    bidFmtPct(BID.esc));
+
+    // Calibration cross-checks (driven by OWP_CALIB)
+    if (typeof OWP_CALIB !== 'undefined' && OWP_CALIB.benchmarks) {
+      const hpu = OWP_CALIB.benchmarks.hours_per_unit.median;        // 123.4295
+      const lwage = OWP_CALIB.benchmarks.fully_loaded_wage.median;   // 40.231
+      const gm = OWP_CALIB.benchmarks.gross_margin_pct;              // {p25, median, p75}
+      const units = BID.units || 0;
+      const impliedHrs = Math.round(units * hpu);
+      const impliedLabor = Math.round(impliedHrs * lwage);
+      const fmtMoney = (n) => '$' + (n >= 1000000 ? (n/1000000).toFixed(2) + 'M' : n >= 1000 ? Math.round(n/1000) + 'k' : n);
+      setHtml('bid-units-implied',
+        '→ implied labor: <b style="color:var(--ink); font-style:normal;">' + impliedHrs.toLocaleString() + ' hrs</b> · <b style="color:var(--ink); font-style:normal;">' + fmtMoney(impliedLabor) + '</b> @ $' + lwage.toFixed(2) + '/hr loaded · OWP house standard ' + hpu.toFixed(1) + ' hrs/unit (P25 ' + OWP_CALIB.benchmarks.hours_per_unit.p25.toFixed(0) + '–P75 ' + OWP_CALIB.benchmarks.hours_per_unit.p75.toFixed(0) + ')'
+      );
+
+      // Margin band — show where slider sits in OWP band
+      const m = BID.margin / 100;
+      let badge, badgeColor;
+      if (m < gm.p25)        { badge = '⚠ BELOW P25';  badgeColor = 'var(--clay)'; }
+      else if (m < gm.median){ badge = '◐ BELOW MEDIAN'; badgeColor = 'var(--ink-3)'; }
+      else if (m <= gm.p75)  { badge = '✓ IN BAND';     badgeColor = 'var(--sage-ink)'; }
+      else                   { badge = '↑ ABOVE P75';   badgeColor = 'var(--sage-ink)'; }
+      setHtml('bid-margin-band',
+        '<span style="color:' + badgeColor + '; font-weight:600; font-style:normal;">' + badge + '</span> · OWP band: P25 ' + (gm.p25*100).toFixed(1) + '% · median <b style="color:var(--ink); font-style:normal;">' + (gm.median*100).toFixed(1) + '%</b> · P75 ' + (gm.p75*100).toFixed(1) + '% (n=' + gm.n + ')'
+      );
+    }
 
     // Invitation snapshot — scope estimate
     set('bid-scope-fixtures', bidFmtInt(c.totalFixtures));
@@ -16914,6 +16951,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       });
     };
     bind('bid-fixtures', 'fixtures', true);
+    bind('bid-units',    'units',    true);
     bind('bid-months',   'months',   true);
     bind('bid-cpf',      'cpf',      true);
     bind('bid-margin', 'margin', false);
@@ -16928,6 +16966,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       BID = Object.assign({}, BID_DEFAULTS);
       const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
       setVal('bid-fixtures', BID.fixtures);
+      setVal('bid-units',    BID.units);
       setVal('bid-months',   BID.months);
       setVal('bid-cpf',      BID.cpf);
       setVal('bid-margin',   BID.margin);
@@ -16973,6 +17012,27 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       eyebrow = 'Cortex reasoning · Schedule';
       title = `${BID.months}-month schedule fits the tier`;
       body = `Comparable mid-rise jobs in the portfolio averaged <b>20–24 months</b> from mobilization to punchlist. ${BID.months}mo lands inside that band.<br><br>Risk tied to schedule: a ${BID.months}-month window means at least one commodity buyout cycle. Copper is +14% YoY — every additional month lengthens material escalation exposure by ~0.6% on the rough-in line.<br><br><b>Lock copper riser + PEX manifold pricing within 30 days of award</b> to defuse this.`;
+    } else if (kind === 'units') {
+      const hpu = OWP_CALIB.benchmarks.hours_per_unit;
+      const lwage = OWP_CALIB.benchmarks.fully_loaded_wage.median;
+      const u = BID.units || 0;
+      const hrsM = Math.round(u * hpu.median);
+      const hrsLow = Math.round(u * hpu.p25);
+      const hrsHigh = Math.round(u * hpu.p75);
+      eyebrow = 'Productivity calibration · Plumbing units';
+      title = `${u} units → ${hrsM.toLocaleString()} hrs implied (median)`;
+      body = `OWP's house standard from <b>50 closed jobs</b> is <b>${hpu.median.toFixed(1)} hrs/unit</b> (P25 ${hpu.p25.toFixed(1)} · P75 ${hpu.p75.toFixed(1)} · range ${hpu.min.toFixed(0)}–${hpu.max.toFixed(0)}).<br><br>For ${u} units, the credible labor band is <b>${hrsLow.toLocaleString()}–${hrsHigh.toLocaleString()} hrs</b>. Median: <b>${hrsM.toLocaleString()} hrs</b>.<br><br>At fully-loaded wage <b>$${lwage.toFixed(2)}/hr</b> (burden 1.34× blended): <b>$${(hrsM * lwage / 1000).toFixed(0)}k labor cost</b> at median, <b>$${(hrsLow * lwage / 1000).toFixed(0)}k–$${(hrsHigh * lwage / 1000).toFixed(0)}k</b> band.<br><br>Bids that fall outside P25–P75 should carry an explicit justification — productivity below P25 (≪94 hrs/unit) usually indicates GC standardization advantage; above P75 (≫154 hrs/unit) signals scope complexity that may not be in the takeoff.`;
+    } else if (kind === 'margin') {
+      const gm = OWP_CALIB.benchmarks.gross_margin_pct;
+      const m = BID.margin;
+      let posCopy;
+      if (m < gm.p25*100) posCopy = `<b style="color:var(--clay);">${m.toFixed(1)}% sits BELOW P25 (${(gm.p25*100).toFixed(1)}%)</b> — historically only the bottom quartile of closed jobs landed here. Requires sign-off per OWP-BID-004.`;
+      else if (m < gm.median*100) posCopy = `<b>${m.toFixed(1)}% sits below the median (${(gm.median*100).toFixed(1)}%)</b> but above P25 — defensible if the GC scorecard or contingency posture justifies it.`;
+      else if (m <= gm.p75*100) posCopy = `<b style="color:var(--sage-ink);">${m.toFixed(1)}% is IN BAND</b> (median ${(gm.median*100).toFixed(1)}%, P75 ${(gm.p75*100).toFixed(1)}%) — typical for OWP closed jobs.`;
+      else posCopy = `<b style="color:var(--sage-ink);">${m.toFixed(1)}% sits ABOVE P75 (${(gm.p75*100).toFixed(1)}%)</b> — top-quartile margin posture. Watch P(win) on the curve below.`;
+      eyebrow = 'Productivity calibration · Margin floor';
+      title = `OWP gross-margin band: ${(gm.p25*100).toFixed(1)}% / ${(gm.median*100).toFixed(1)}% / ${(gm.p75*100).toFixed(1)}%`;
+      body = `Across <b>${gm.n} closed jobs with full P&L</b>, gross margin (revenue minus direct cost) clusters at <b>${(gm.median*100).toFixed(1)}%</b>. The middle 50% sits between <b>${(gm.p25*100).toFixed(1)}%</b> and <b>${(gm.p75*100).toFixed(1)}%</b>.<br><br>${posCopy}<br><br>Note: this band is what OWP <i>delivered</i> after final reconciliation, not what was bid. Material consistently came in <b>−23.9% under takeoff</b> — that cushion contributes to the achieved margin, but the bid model should treat it as separate from the posted margin floor (OWP-BID-003 + OWP-BID-004).`;
     } else if (kind === 'cpf') {
       eyebrow = 'Cortex reasoning · Direct cost $ / fixture';
       title  = `Anchored at $${c.tier.cpf.toLocaleString('en-US')}/fx in 2026 $ (${c.tier.label.toLowerCase()})`;
