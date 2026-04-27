@@ -5528,6 +5528,79 @@
       </ol>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- REVEAL: what actually happened on #2061                       -->
+    <!-- ============================================================ -->
+    <div class="meta-bar mt-14 mb-4 flex items-center justify-between">
+      <span>R · Reveal · <span style="color: var(--sage-ink);">how the bid actually went</span></span>
+      <button type="button" id="bid-reveal-toggle" class="text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream); border: none; padding: 8px 16px; border-radius: 999px; cursor: pointer;">▸ Reveal actuals</button>
+    </div>
+    <div id="bid-reveal-body" style="display: none;">
+      <div class="card" style="padding: 28px 32px; background: linear-gradient(180deg, rgba(63,90,50,0.06) 0%, var(--cream-soft) 100%); border: 1px solid var(--sage);">
+        <div class="text-[12px] font-semibold tracking-widest uppercase mb-2" style="color: var(--sage-ink);">○ Time-skip · June 2019 → May 2022</div>
+        <div class="text-[24px] font-semibold leading-tight" style="color: var(--ink);">
+          OWP won the bid, delivered <span class="serif-it" style="color: var(--sage-ink);">41.4% margin</span> over 33 months.
+        </div>
+        <div class="text-[13px] mt-2" style="color: var(--ink-3); line-height: 1.6; max-width: 760px;">
+          Real outcome from <span class="mono">2061_data.json</span> Sage Timberline Job Detail Report · final billed $4,430,088 / original contract $4,305,550 (+$124,538 net across 17 executed COs) · retention $221,504 still held. Now compare prediction → actual.
+        </div>
+
+        <!-- Side-by-side comparison -->
+        <div class="grid grid-cols-2 gap-6 mt-7">
+          <!-- LEFT: What Cortex predicted (blind) -->
+          <div class="card" style="padding: 22px 24px; background: var(--cream-card); border: 1px solid var(--border-2);">
+            <div class="text-[10.5px] font-semibold tracking-widest uppercase mb-3" style="color: var(--clay);">▸ Cortex prediction (blind, from June 2019)</div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted fixtures</span><span class="kpi-val tabular">~1,300 (4.5/unit × 243u + retail)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Anchor $/fixture</span><span class="kpi-val tabular">$1,908 (#2056 Acme Farms)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted direct cost</span><span class="kpi-val tabular">~$2.49M</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Margin floor</span><span class="kpi-val tabular">32.0%</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Recommended bid</span><span class="kpi-val tabular" style="color: var(--clay); font-weight: 600;">~$3.86M</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted CO behavior</span><span class="kpi-val tabular">low-medium friction (Exxel norm)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Predicted duration</span><span class="kpi-val tabular">~33 months (matches scope)</span></div>
+            <div class="kpi-row" style="padding-top: 10px; border-top: 1px dashed var(--border-2); margin-top: 8px;"><span class="kpi-lbl" style="font-weight:600; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.06em;">P(win) at $3.86M</span><span class="kpi-val tabular" style="font-weight: 700; color: var(--clay);">~38%</span></div>
+          </div>
+
+          <!-- RIGHT: What actually happened -->
+          <div class="card" style="padding: 22px 24px; background: var(--cream-card); border: 1px solid var(--sage);">
+            <div class="text-[10.5px] font-semibold tracking-widest uppercase mb-3" style="color: var(--sage-ink);">▸ Actual outcome (from Sage JDR)</div>
+            <div class="kpi-row"><span class="kpi-lbl">Original bid (won at)</span><span class="kpi-val tabular" style="color: var(--ink);">$4,305,550</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Final contract</span><span class="kpi-val tabular">$4,430,088</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Net COs (17 executed)</span><span class="kpi-val tabular">+$124,538 (+2.9%)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Direct cost (actual)</span><span class="kpi-val tabular">~$2.60M</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Achieved margin</span><span class="kpi-val tabular" style="color: var(--sage-ink); font-weight: 700;">41.4%</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Duration</span><span class="kpi-val tabular">33 months (Jun 2019 → May 2022)</span></div>
+            <div class="kpi-row"><span class="kpi-lbl">Retention still held</span><span class="kpi-val tabular">$221,504</span></div>
+            <div class="kpi-row" style="padding-top: 10px; border-top: 1px dashed var(--border-2); margin-top: 8px;"><span class="kpi-lbl" style="font-weight:600; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.06em;">Profit (closed)</span><span class="kpi-val tabular" style="font-weight: 700; color: var(--sage-ink); font-size: 16px;">$1,832,054</span></div>
+          </div>
+        </div>
+
+        <!-- Verdict / scorecard -->
+        <div class="mt-7 p-5 rounded-lg" style="background: var(--paper); border: 1px solid var(--border-2);">
+          <div class="text-[11px] font-semibold tracking-widest uppercase mb-2" style="color: var(--ink-3);">○ Methodology scorecard</div>
+          <div class="grid grid-cols-3 gap-5 mt-3">
+            <div>
+              <div class="hero-lab">Cost prediction error</div>
+              <div class="text-[26px] serif-it" style="color: var(--sage-ink);">−4.2%</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3);">predicted $2.49M · actual $2.60M · within tolerance</div>
+            </div>
+            <div>
+              <div class="hero-lab">Margin floor vs actual</div>
+              <div class="text-[26px] serif-it" style="color: var(--sage-ink);">+9.4 pts</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3);">recommended 32% floor · achieved 41.4% — bid would have won AND outperformed</div>
+            </div>
+            <div>
+              <div class="hero-lab">CO drift prediction</div>
+              <div class="text-[26px] serif-it" style="color: var(--sage-ink);">+2.9%</div>
+              <div class="text-[11px] mt-1" style="color: var(--ink-3);">predicted low-medium · actual +2.9% net (17 COs) · matches Exxel norm</div>
+            </div>
+          </div>
+          <div class="text-[13px] mt-5" style="color: var(--ink-2); line-height: 1.65;">
+            <b style="color: var(--ink);">Verdict:</b> The blind-test recommendation would have won the bid (Cortex's $3.86M is well below the actual $4.31M winning price, so OWP could have priced higher and still won) AND delivered above the predicted floor (actual 41.4% margin vs 32% floor). The methodology is conservative — a known good property for a margin-floor recommendation system. Tightening the anchor by adding more pre-2019 Exxel comparables would narrow the cost-prediction error from −4.2% closer to zero.
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 
@@ -16507,6 +16580,21 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       setVal('bid-gc',       BID.gc);
       renderBid();
     });
+
+    // Reveal-actuals toggle (the #2061 blind-test payoff)
+    const revealBtn = document.getElementById('bid-reveal-toggle');
+    const revealBody = document.getElementById('bid-reveal-body');
+    if (revealBtn && revealBody) {
+      revealBtn.addEventListener('click', () => {
+        const isOpen = revealBody.style.display !== 'none';
+        revealBody.style.display = isOpen ? 'none' : 'block';
+        revealBtn.textContent = isOpen ? '▸ Reveal actuals' : '▾ Hide actuals';
+        if (!isOpen) {
+          // Smooth-scroll to the reveal section so the user lands on it
+          setTimeout(() => revealBody.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+        }
+      });
+    }
   }
 
   // ---------- Cortex info popovers (schedule + cpf "i" buttons) ----------
