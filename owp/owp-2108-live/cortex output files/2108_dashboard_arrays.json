@@ -1,0 +1,286 @@
+{
+  "allVendors": [
+    [
+      "Franklin Engineering",
+      9,
+      90629,
+      92.5
+    ],
+    [
+      "Bank of America CC",
+      2,
+      6402,
+      6.5
+    ],
+    [
+      "Herc Rentals, Inc.",
+      1,
+      922,
+      0.9
+    ]
+  ],
+  "changeLog": [],
+  "payApps": [],
+  "sovData": {
+    "originalContract": 0,
+    "changeOrders": 0,
+    "finalContract": 0,
+    "retainage": 0,
+    "netPaid": 91402
+  },
+  "insights": [
+    [
+      "MARGIN PROFILE",
+      "Net profit of $-117,162 on $0 revenue = 0.0% gross margin. Direct cost $117,162 absorbs 100.0% of revenue."
+    ],
+    [
+      "VENDOR CONCENTRATION",
+      "Franklin Engineering alone = $90,629 (92.5% of all AP) across 9 invoices. Total 3 AP vendors, $97,953 total AP spend."
+    ],
+    [
+      "CREW PROFILE",
+      "2 workers for 32 hours = 16 avg hrs/worker. Top 3 workers logged 32 hrs combined (100% of all labor)."
+    ],
+    [
+      "ROUGHIN DOMINANCE",
+      "Code 120 Roughin Labor = 0 hrs (0% of all labor) and $0 actual. Code 230 Finish Material = $0."
+    ],
+    [
+      "BUDGET DELIVERY",
+      "Revised expense budget was $0; actual direct cost $117,162 \u2192 $-117,162 variance (+0.0%)."
+    ],
+    [
+      "CONTRACT GROWTH",
+      "Contract grew from $0 to $0 \u2014 net +$0 (+0.0%). Retainage of $0 (0%) released."
+    ],
+    [
+      "BURDEN RATIO",
+      "Burden codes 995 + 998 = $1,216 on $2,134 labor base = 57.0%. Outside OWP's typical 48\u201350% labor burden."
+    ],
+    [
+      "PROJECT SCALE",
+      "263 units \u00b7 \u2014 fixtures. Revenue/unit $0, hours/unit 0.1, profit/unit $-445."
+    ],
+    [
+      "PRODUCTIVITY",
+      "Blended labor rate $65.66/hr. Revenue/hour $0. Profit/hour $-3605."
+    ],
+    [
+      "CO PROFILE",
+      "0 executed COs, 0 CORs. Net CO impact $0 (+0.0%)."
+    ]
+  ],
+  "predictiveSignals": [
+    [
+      "BVA Critical Flags",
+      "1",
+      "<2",
+      "HEALTHY"
+    ],
+    [
+      "BVA Over Flags",
+      "0",
+      "<5",
+      "HEALTHY"
+    ],
+    [
+      "Change Order Count",
+      "0",
+      "<10",
+      "HEALTHY"
+    ],
+    [
+      "Retention Held",
+      "$0",
+      "<6%",
+      "HEALTHY"
+    ],
+    [
+      "Forecast Margin",
+      "0.0%",
+      ">25%",
+      "ELEVATED"
+    ]
+  ],
+  "crewRoster": [
+    [
+      "Gerard, Jeffrey S",
+      20.5,
+      1414,
+      69.0,
+      "Senior"
+    ],
+    [
+      "Gerard, Jordan E",
+      12.0,
+      720,
+      60.0,
+      "Senior"
+    ]
+  ],
+  "phases": [
+    [
+      "Takeoff & Purchasing",
+      "101",
+      32.5,
+      100.0,
+      0.12
+    ]
+  ],
+  "rootCauses": [],
+  "responsibility": [],
+  "tierDist": [
+    [
+      "Senior",
+      2,
+      32.5,
+      2134,
+      100.0
+    ]
+  ],
+  "wageStats": {
+    "bl": 65.66,
+    "fl": 69.0,
+    "bm": 1.15,
+    "mn": 60.0,
+    "mx": 69.0,
+    "ah": 16.2
+  },
+  "costCodes": [
+    [
+      "101",
+      "Takeoff & Purchase Labor",
+      0,
+      2134,
+      -2134
+    ],
+    [
+      "601",
+      "Engineering/Plans",
+      0,
+      106488,
+      -106488
+    ],
+    [
+      "602",
+      "Rental Equipment",
+      0,
+      922,
+      -922
+    ],
+    [
+      "603",
+      "Permits & Licenses",
+      0,
+      6402,
+      -6402
+    ],
+    [
+      "995",
+      "Payroll Burden",
+      0,
+      1052,
+      -1052
+    ],
+    [
+      "998",
+      "Payroll Taxes",
+      0,
+      163,
+      -163
+    ]
+  ],
+  "costCats": [
+    [
+      "Labor",
+      1,
+      0,
+      2134,
+      1.8,
+      8
+    ],
+    [
+      "Overhead",
+      3,
+      0,
+      113812,
+      97.1,
+      433
+    ],
+    [
+      "Burden",
+      2,
+      0,
+      1216,
+      1.0,
+      5
+    ]
+  ],
+  "bva": [
+    [
+      "101 \u00b7 Takeoff & Purchase Labor",
+      0,
+      2134,
+      2134,
+      100.0,
+      null,
+      null,
+      "UNBUDGETED"
+    ],
+    [
+      "601 \u00b7 Engineering/Plans",
+      0,
+      106488,
+      106488,
+      100.0,
+      null,
+      null,
+      "UNBUDGETED"
+    ],
+    [
+      "602 \u00b7 Rental Equipment",
+      0,
+      922,
+      922,
+      100.0,
+      null,
+      null,
+      "UNBUDGETED"
+    ],
+    [
+      "603 \u00b7 Permits & Licenses",
+      0,
+      6402,
+      6402,
+      100.0,
+      null,
+      null,
+      "UNBUDGETED"
+    ],
+    [
+      "995 \u00b7 Payroll Burden",
+      0,
+      1052,
+      1052,
+      100.0,
+      null,
+      null,
+      "UNBUDGETED"
+    ],
+    [
+      "998 \u00b7 Payroll Taxes",
+      0,
+      163,
+      163,
+      100.0,
+      null,
+      null,
+      "UNBUDGETED"
+    ]
+  ],
+  "changeMeta": {
+    "total": 0,
+    "costImpact": 0,
+    "types": {}
+  }
+}
