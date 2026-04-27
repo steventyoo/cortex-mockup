@@ -4,6 +4,16 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cortex Project Intelligence</title>
+
+<!-- PostHog Analytics & Session Recording -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ai Ri init Vi Yi Rr zi Gi Zi capture calculateEventProperties en register register_once register_for_session unregister unregister_for_session sn getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync an identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty rn Ki createPersonProfile setInternalOrTestUser nn $i hn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Xi debug Mr tn getPageViewId captureTraceFeedback captureTraceMetric Di".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_D6x9XqYnKkaWJ79xZA9UTamAid94spdvNRaF6BXxZPdo', {
+    api_host: 'https://us.i.posthog.com',
+    defaults: '2026-01-30',
+    person_profiles: 'identified_only',
+  });
+</script>
 <meta name="description" content="Portfolio intelligence for specialty subcontractors. Closed jobs, parsed and benchmarked." />
 
 <!-- Open Graph (iMessage, Slack, Facebook, LinkedIn) -->
@@ -13135,6 +13145,13 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const key = getKey();
     if(!proxy && !key){ openKeyModal(); return; }
 
+    posthog.capture('chat_message_sent', {
+      chat_type: 'home_prompt',
+      question: question,
+      model: getModel(),
+      turn_number: homeHistory.filter(m => m.role === 'user').length + 1,
+    });
+
     if(chips) chips.style.display = 'none';
     resp.style.display = '';
 
@@ -13180,6 +13197,13 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n\n');
       homeHistory.push({ role: 'assistant', content: text || '(empty response)' });
 
+      posthog.capture('chat_response_received', {
+        chat_type: 'home_prompt',
+        model: getModel(),
+        response_length: (text || '').length,
+        turn_number: homeHistory.filter(m => m.role === 'assistant').length,
+      });
+
       label.innerHTML = `<div class="mono text-[10px] uppercase tracking-wider mb-1" style="color: var(--ink-4);">You</div><div class="text-[15px] mb-4" style="color: var(--ink); font-weight: 500;">${escQ}</div><span>Cortex · ${getModel()}</span>`;
       body.innerHTML = mdToHtml(text || '(empty response)');
       // Update turn counter
@@ -13189,6 +13213,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     } catch(err){
       // Pop the failed user turn so it doesn't poison future calls
       homeHistory.pop();
+      posthog.capture('chat_error', {
+        chat_type: 'home_prompt',
+        error: String(err.message || err),
+        model: getModel(),
+      });
       renderHomeTranscript();
       label.textContent = 'Cortex · error';
       body.innerHTML = '<div style="color: var(--clay);"><b>Request failed.</b> ' + String(err.message || err) + '</div>' +
@@ -18373,6 +18402,14 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // Push user turn into history
     _miniHistory.push({ role: 'user', content: text });
 
+    posthog.capture('chat_message_sent', {
+      chat_type: 'cortex_mini',
+      question: text,
+      model: getModel(),
+      project_id: _miniProjectId || null,
+      turn_number: _miniHistory.filter(m => m.role === 'user').length,
+    });
+
     // If neither proxy nor BYOK key, prompt the user
     const proxy = usingProxy();
     const key = getKey();
@@ -18409,11 +18446,24 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       const data = await res.json();
       const reply = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n\n') || '(empty response)';
       _miniHistory.push({ role: 'assistant', content: reply });
+      posthog.capture('chat_response_received', {
+        chat_type: 'cortex_mini',
+        model: getModel(),
+        project_id: _miniProjectId || null,
+        response_length: reply.length,
+        turn_number: _miniHistory.filter(m => m.role === 'assistant').length,
+      });
       tBub.querySelector('.bubble').innerHTML = _renderMiniReply(reply);
       body.scrollTop = body.scrollHeight;
     } catch (err) {
       tBub.querySelector('.bubble').innerHTML = `<b style="color: var(--clay);">Request failed.</b><br><span style="font-size: 11px; color: var(--ink-3);">${String(err.message || err)}</span>`;
-      _miniHistory.pop(); // don't keep the failed user turn poisoning future calls
+      _miniHistory.pop();
+      posthog.capture('chat_error', {
+        chat_type: 'cortex_mini',
+        error: String(err.message || err),
+        model: getModel(),
+        project_id: _miniProjectId || null,
+      }); // don't keep the failed user turn poisoning future calls
       body.scrollTop = body.scrollHeight;
     }
   }
