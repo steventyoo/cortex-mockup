@@ -7581,7 +7581,7 @@
   // Defined here (before renderSkyline) so stageOf() can read it.
   const PROJECT_STAGES = {
     bidding: [],
-    active:  ["2098","2103","2104","2106","2107","2108","2109","2110","2111","2112","2114","2115","2116","2117","2118"],
+    active:  ["2098","2103","2104","2105","2106","2107","2108","2109","2110","2111","2112","2114","2115","2116","2117","2118"],
     closed:  PROJECT_ORDER
   };
   const STAGE_META = {
@@ -9037,6 +9037,31 @@
         { name: "Ferguson Enterprises, Inc. #3007", invoices: 49, spend: 54269, pct: 11.2 }
       ]
     },
+    "2105": {
+      reportNum: "REPORT #2105-IR01",
+      chips: ["<span class=\"chip-clay\">Compass 3000 Western \u00b7 219u \u00b7 CANCELLED</span>","<span class=\"chip-ink\">Compass General \u00b7 pre-construction</span>","<span class=\"chip-sage\">$193k revenue \u00b7 24.4% margin recovered on cancellation</span>"],
+      jobTop: "Compass", jobBottom: "3000 Western.",
+      jobNum: "#2105", location: "3000 Western Ave, Seattle, WA", gc: "Compass",
+      gcShort: "Compass",
+      dateRange: "Pre-construction \u00b7 cancelled by Compass",
+      unitsDesc: "219-unit multi-family · OWP captured $47k profit on cancellation (24.4% margin) before project shut down",
+      revenue: "$193,091", revenueFoot: "Partial bid/proposal billing \u00b7 219-unit Compass General Construction",
+      profit: "$47,034", profitFoot: "24.4% margin on cancellation \u2014 OWP recovered design effort costs",
+      expenses: "$146,057", expensesFoot: "Pre-construction takeoff + design phase only",
+      retainage: "$0", retainageFoot: "No retention \u00b7 cancelled before AR matured",
+      execHeadline: "<span class=\"n\">Compass 3000 Western</span> was cancelled in pre-construction. OWP delivered <span class=\"n\">24.4% margin</span> on $193k of partial billing \u2014 a clean recovery on a cancelled project.",
+      execBody: "Compass General Construction project at <span class=\"n\">3000 Western Ave, Seattle</span> — 219-unit multi-family. Project cancelled in pre-construction phase. OWP captured $47k profit (24.4% margin) on partial bid/proposal work before shutdown. Compare to #2108 R&G Apartments (also pre-construction) which is at -28% margin and $0 retention because no billing has been issued.",
+      jobNum2: "#2105", workforce: "0 workers \u00b7 0 hrs",
+      bpLeft: "compass 3000 western \u00b7 cancelled", bpRight: "219 units \u00b7 pre-construction",
+      k01_revenue: "$193,091", k01_margin: "24.4%", k01_origContract: "TBD",
+      k01_co: "$0", k01_directCost: "$146,057", k01_profit: "$47,034",
+      footerReport: "REPORT #2105-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
+      sbName: "3000 Western", skyName: "3000 WESTERN",
+      skyline: { floors: 5, cols: 12, w: 280 },
+      num: { units: 219, fixtures: null, months: null, revenue: 193091, profit: 47034, directCost: 146057, origContract: 0, co: 0, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: 0, workers: 0 },
+      vendorMeta: { count: null, invoices: null, totalAp: null, topVendor: null, topShare: null, source: "OWP_2105_JCR_Cortex_v2.xlsx" },
+      vendors: []
+    },
     "2053": {
       reportNum: "REPORT #2053-IR01",
       chips: ["<span class=\"chip-sage\">Compass Harbor Bellevue Parkside \u00b7 135u \u00b7 40.0% margin</span>","<span class=\"chip-ink\">Compass Harbor \u00b7 closed</span>","<span class=\"chip-clay\">$2,332,680 \u00b7 +$91,371 COs (+4.1%) \u00b7 retention $113,684</span>"],
@@ -9983,6 +10008,7 @@
     "2050": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Scott Miller</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Pat McCabe / Brett</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Steve Garka</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Garrett / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">12 Madison Investment LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">2100 E Madison St, Seattle</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div></div>", "jobInfoUnits": 50},
     "2051": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Justin Anderson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Will Fenton</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jeff Seeb</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Bob</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">AAA Management</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div></div>", "jobInfoUnits": 163},
     "2052": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Farrell-McKenna Construction LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Fifth North & Roy LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Hewitt Architects</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Civil Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">KPFF Consulting Engineers</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Structural Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Bykonen Carter Quinn</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Rushing Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Michael Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap (Bond Not Req\u2019d)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Subcontract #</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">22-0000 (Proj 17-100)</div></div></div>", "jobInfoUnits": 107},
+    "2105": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass General Construction</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ON HOLD \u00b7 pre-construction</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">3000 Western LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Recovery</div><div class=\"text-[12px]\" style=\"color:var(--sage-ink); font-weight:600;\">$47k profit / 24.4% margin</div></div></div>", "jobInfoUnits": 219},
     "2053": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass Harbor</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Bellevue Parkside, LP</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Subcontract #</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">22-0500</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Effective</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">May 23, 2018</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">OCIP / Wrap-up</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Encore Architects</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Vince Dennison / Ryan Ames (signatory)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Encore Architects</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div></div>", "jobInfoUnits": 135},
     "2054": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint Capital Services LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint 800, LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Subcontract #</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">03-08-6505</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Effective</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Feb 5, 2018</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap (OWP CGL · Hub International / Liberty Mutual)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Retention</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">5% per contract</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Contract Value</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$785,600</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson, VP</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP License #</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">ONEWAWP895BU</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Latest Job Ticket</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint 800 5th job ticket 12-10-18.pdf</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">PO Box 16309, Seattle WA 98116 · (206) 282-9270</div></div></div>", "jobInfoUnits": 68},
     "2055": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint Capital Services LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Blueprint</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Subcontract #</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Dockside SC 6505 (Blueprint format)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Effective</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">2018-2019</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Retention</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">5% per contract</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Contract Value</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$1,142,340 original</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP License #</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">ONEWAWP895BU</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Latest Job Ticket</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Dockside job ticket 7-21-2020.pdf</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">PO Box 16309, Seattle WA 98116</div></div></div>", "jobInfoUnits": 98},
@@ -10554,6 +10580,100 @@
     ]
   };
 
+  PROJECTS['2105'].live = {
+    burnCurve: {
+      actual: [
+      {month: "Apr 2026", amt: 193091, label: "$193k pre-construction"}
+    ],
+      baseline: []
+    },
+    phases: [
+      {phase: "DESIGN", status: "complete", note: "Pre-construction takeoff complete"},
+      {phase: "BID", status: "complete", note: "OWP bid submitted"},
+      {phase: "CANCELLED", status: "cancelled", note: "Project cancelled \u2014 see notes"}
+    ],
+    anomalies: [
+      {date: "Apr 3 2026", title: "Project cancelled", body: "Pre-construction phase only. $193k revenue (likely partial bid/proposal billing) vs $146k cost. OWP recovered design effort with positive 24.4% margin on the cancellation. Better than 2108's at-risk $91k.", severity: "INFO"}
+    ],
+    recommends: [
+      {urgency: "resolved", label: "PROJECT ARCHIVED", title: "No further action \u2014 cancelled with positive recovery", body: "Compass cancelled the project pre-construction. OWP captured $47k profit (24.4% margin) on partial work. Move on.", owner: "None", ownerLabel: "Owner", extra: "Status", extraVal: "Cancelled \u00b7 archived"}
+    ]
+  };
+  PROJECTS['2108'].live = {
+    burnCurve: {
+      actual: [
+      {month: "Apr 2026", amt: 91402, label: "$91k design / takeoff"}
+    ],
+      baseline: []
+    },
+    phases: [
+      {phase: "DESIGN", status: "complete", note: "Pre-design takeoff $91k spent"},
+      {phase: "BID", status: "onhold", note: "Awaiting Braseth go-ahead"},
+      {phase: "GW", status: "notstarted"},
+      {phase: "PT", status: "notstarted"},
+      {phase: "RI", status: "notstarted"},
+      {phase: "TRIM", status: "notstarted"},
+      {phase: "CLOSE", status: "notstarted"}
+    ],
+    anomalies: [
+      {date: "Apr 3 2026", title: "Project on hold", body: "Braseth has not committed start date. OWP carrying $91k of design/takeoff cost as overhead. Watch for re-activation signal.", severity: "WATCH"},
+      {date: "Apr 3 2026", title: "No retention", body: "$0 retention because no AR has been billed. Risk: if project cancels, OWP eats the $91k design cost.", severity: "INFO"}
+    ],
+    recommends: [
+      {urgency: "strategic", label: "ACTION 01 \u00b7 NEXT QUARTER", title: "Confirm Braseth project start", body: "Reach out to Braseth PM to confirm summer 2026 start. If push beyond Q4 2026, re-evaluate carrying the $91k design cost or write-off.", owner: "OWP Estimating", ownerLabel: "Owner", extra: "Risk", extraVal: "$91k carrying cost"}
+    ]
+  };
+  PROJECTS['2109'].live = {
+    burnCurve: {
+      actual: [
+      {month: "Apr 2026", amt: 3570012, label: "$3.57M billed"}
+    ],
+      baseline: []
+    },
+    phases: [
+      {phase: "DESIGN", status: "complete"},
+      {phase: "BID", status: "complete"},
+      {phase: "GW", status: "complete"},
+      {phase: "PT", status: "complete"},
+      {phase: "RI", status: "inprogress", note: "Active production \u00b7 $3.57M billed"},
+      {phase: "TRIM", status: "notstarted"},
+      {phase: "CLOSE", status: "notstarted"}
+    ],
+    anomalies: [
+      {date: "Apr 3 2026", title: "$3.57M billed \u00b7 24.8% margin", body: "Project is in active production with substantial billing. Margin tracking healthy at 24.8% (close to portfolio median).", severity: "INFO"},
+      {date: "Apr 3 2026", title: "Intracorp = NEW GC", body: "OWP has no closed-job history with Intracorp. Watch payment behavior + change-order velocity closely as the project progresses.", severity: "WATCH"},
+      {date: "Apr 3 2026", title: "Retention $153,880 held", body: "5% retention is being held per contract. Track aging once retention release becomes due.", severity: "INFO"}
+    ],
+    recommends: [
+      {urgency: "important", label: "ACTION 01 \u00b7 THIS MONTH", title: "Review Intracorp payment cycle", body: "Pull last 3 months of AR aging on Intracorp invoices. New GC = unknown payment behavior. Compare to closed-portfolio averages.", owner: "OWP Admin", ownerLabel: "Owner", extra: "Field", extraVal: "AR aging report"},
+      {urgency: "strategic", label: "ACTION 02 \u00b7 NEXT QUARTER", title: "Forecast trim phase manpower", body: "Roughin in progress. Trim phase typically starts 60% through schedule. Coordinate with manpower allocation matrix to ensure crew availability.", owner: "OWP Operations", ownerLabel: "Owner", extra: "Phase", extraVal: "Trim Q3 2026"}
+    ]
+  };
+  PROJECTS['2110'].live = {
+    burnCurve: {
+      actual: [
+      {month: "Apr 2026", amt: 78800, label: "$79k design"}
+    ],
+      baseline: []
+    },
+    phases: [
+      {phase: "DESIGN", status: "inprogress", note: "$79k design phase spend"},
+      {phase: "BID", status: "complete"},
+      {phase: "GW", status: "notstarted", note: "Start Q2 2026"},
+      {phase: "PT", status: "notstarted"},
+      {phase: "RI", status: "notstarted"},
+      {phase: "TRIM", status: "notstarted"},
+      {phase: "CLOSE", status: "notstarted"}
+    ],
+    anomalies: [
+      {date: "Apr 3 2026", title: "Pre-construction \u00b7 design phase", body: "$79k design + $135k cost = -70% margin (pre-AR billing). Will normalize once construction starts and AR catches up.", severity: "INFO"},
+      {date: "Apr 3 2026", title: "Sierra = NEW GC", body: "First OWP \u00d7 Sierra engagement. No closed-job history to benchmark against.", severity: "WATCH"}
+    ],
+    recommends: [
+      {urgency: "strategic", label: "ACTION 01 \u00b7 THIS MONTH", title: "Confirm Q2 2026 start with Sierra", body: "Project tagged 'Start Q2 2026' but no specific date. Confirm with Sierra PM and lock crew assignments.", owner: "OWP Estimating", ownerLabel: "Owner", extra: "Action", extraVal: "Schedule confirmation"}
+    ]
+  };
+
   // ============ INJECTED JCR DATA (crew, vendors, phases, cost codes, insights) ============
 
   // ── #2051 data arrays (auto-generated by dashboardize.py) ──
@@ -10831,6 +10951,110 @@
   PROJECTS['2059'].fixtureScheduleHtml = "<div class=\"mt-6\"><div class=\"meta-bar mb-3\">Verified Fixture Schedule</div></div><div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">Toilets — Building A</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">134</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">117 Gerber SE 21-112 + 17 ADA SE 21-118</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Lavs — Building A</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">134</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">Lenova UB-903W undercounter + Delta 573LF-PP</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tub/showers — Building A</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">134</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">117 Aquatic 2603CT + 17 ADA 2603CTH + Delta BT13210/R10000MF</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Kitchen sinks — Building A</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">107</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">90 Dayton DCFU2115 + 17 Elkay ELUHAD ADA + Delta 9113</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Garbage disposals</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">107</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">Moen GXP33C 1/3hp</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Disposal air switches</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">33</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">Moen ARC-4200 (island sinks + ADA)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Water heaters per unit</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">107</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">50-gallon electric Ruud ProE50-T2</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Building A amenity</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">17</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">4 ADA toilets + 4 lavs + 3 SS sinks + 6 Eemax on-demand WHs</div></div></div><div class=\"flex items-baseline gap-4 mt-2 pt-1\"><span class=\"hero-lab\" style=\"font-size:10px;\">Verified main fixture count</span><span class=\"text-[14px] tabular font-semibold\" style=\"color: var(--ink);\">767</span><span class=\"text-[11px] mono\" style=\"color: var(--ink-3);\">per unit (107): 7.17</span><span class=\"text-[10px] mono\" style=\"color: var(--ink-4); margin-left: auto;\">verified from latest Job Ticket · audit 2026-04-25</span></div>";
   PROJECTS['2060'].fixtureSchedule = {verifiedCount: "1039", perUnit: "(254): 4.09", items: [{"label": "Tower 1 Toilets", "count": "139", "detail": "128 Gerber 21-912 + 11 ADA Gerber 21-918"}, {"label": "Tower 1 Lavs", "count": "139", "detail": "Gerber 12-791 undercounter + Delta 559LF-TP"}, {"label": "Tower 1 Tub/showers", "count": "139", "detail": "130 Aquatic 2603SMTE + 7 ADA + 2 SMTH (alcove)"}, {"label": "Tower 1 Kitchen sinks", "count": "129", "detail": "118 Amerisink AS3337 + 11 ADA AS3336 + Delta 9659-DST"}, {"label": "Tower 1 Dishwasher rough-ins", "count": "129", "detail": "incl amenity"}, {"label": "Tower 2 Toilets", "count": "125", "detail": "Kohler K-3609 elongated"}, {"label": "Tower 2 Lavs", "count": "125", "detail": "Kohler K-2355 undercounter"}, {"label": "Tower 2 Tub/showers", "count": "132", "detail": "94 Aquatic 2603SMTE + 24 SMTH L5 + 5 ADA + 1 ADA SMTH L5"}, {"label": "Tower 2 Kitchen sinks", "count": "119", "detail": "Elkay ECTRU12179T undercounter SS"}]};
   PROJECTS['2060'].fixtureScheduleHtml = "<div class=\"mt-6\"><div class=\"meta-bar mb-3\">Verified Fixture Schedule</div></div><div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 1 Toilets</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">139</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">128 Gerber 21-912 + 11 ADA Gerber 21-918</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 1 Lavs</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">139</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">Gerber 12-791 undercounter + Delta 559LF-TP</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 1 Tub/showers</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">139</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">130 Aquatic 2603SMTE + 7 ADA + 2 SMTH (alcove)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 1 Kitchen sinks</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">129</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">118 Amerisink AS3337 + 11 ADA AS3336 + Delta 9659-DST</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 1 Dishwasher rough-ins</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">129</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">incl amenity</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 2 Toilets</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">125</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">Kohler K-3609 elongated</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 2 Lavs</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">125</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">Kohler K-2355 undercounter</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 2 Tub/showers</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">132</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">94 Aquatic 2603SMTE + 24 SMTH L5 + 5 ADA + 1 ADA SMTH L5</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Tower 2 Kitchen sinks</div><div class=\"text-[12px]\" style=\"color: var(--ink); font-weight: 500;\">119</div><div class=\"text-[10px] mono mt-0.5\" style=\"color: var(--ink-4); line-height: 1.4;\">Elkay ECTRU12179T undercounter SS</div></div></div><div class=\"flex items-baseline gap-4 mt-2 pt-1\"><span class=\"hero-lab\" style=\"font-size:10px;\">Verified main fixture count</span><span class=\"text-[14px] tabular font-semibold\" style=\"color: var(--ink);\">1039</span><span class=\"text-[11px] mono\" style=\"color: var(--ink-3);\">per unit (254): 4.09</span><span class=\"text-[10px] mono\" style=\"color: var(--ink-4); margin-left: auto;\">verified from latest Job Ticket · audit 2026-04-25</span></div>";
+
+  // ── #2105 data arrays (auto-generated by dashboardize.py) ──
+  PROJECTS['2105'].crewRoster = [["Barnhart, Joseph N",27.5,1904,69.24,"Senior"],["Gerard, Jeffrey S",22.0,1518,69.0,"Senior"]];
+  PROJECTS['2105'].tierDist = [["Senior",2,49.5,3422,100.0]];
+  PROJECTS['2105'].wageStats = {"bl":69.13,"fl":69.24,"bm":1.003,"mn":69.0,"mx":69.24,"ah":24.8};
+  PROJECTS['2105'].allVendors = [["Franklin Engineering",10,131071,93.2],["Bank of America CC",2,9636,6.8]];
+  PROJECTS['2105'].phases = [["Takeoff & Purchasing","101",43.5,87.9,0.2],["Underground","110",3.0,6.1,0.01],["Mech Room","142",3.0,6.1,0.01]];
+  PROJECTS['2105'].costCodes = [["101","Takeoff & Purchase Labor",0,3014,-3014],["110","Underground Labor",0,204,-204],["142","Mech Room Labor",0,204,-204],["601","Engineering/Plans",0,131071,-131071],["603","Permits & Licenses",0,9636,-9636],["995","Payroll Burden",0,1666,-1666],["998","Payroll Taxes",0,262,-262]];
+  PROJECTS['2105'].costCats = [["Labor",3,0,3422,2.3,16],["Overhead",2,0,140707,96.3,642],["Burden",2,0,1928,1.3,9]];
+  PROJECTS['2105'].insights = [["MARGIN PROFILE","Net profit of $-146,057 on $0 revenue = 0.0% gross margin. Direct cost $146,057 absorbs 100.0% of revenue."],["VENDOR CONCENTRATION","Franklin Engineering alone = $131,071 (93.2% of all AP) across 10 invoices. Total 2 AP vendors, $140,707 total AP spend."],["CREW PROFILE","2 workers for 50 hours = 25 avg hrs/worker. Top 3 workers logged 50 hrs combined (100% of all labor)."],["ROUGHIN DOMINANCE","Code 120 Roughin Labor = 0 hrs (0% of all labor) and $0 actual. Code 230 Finish Material = $0."],["BUDGET DELIVERY","Revised expense budget was $0; actual direct cost $146,057 \u2192 $-146,057 variance (+0.0%)."],["CONTRACT GROWTH","Contract grew from $0 to $0 \u2014 net +$0 (+0.0%). Retainage of $0 (0%) released."],["BURDEN RATIO","Burden codes 995 + 998 = $1,928 on $3,422 labor base = 56.3%. Outside OWP's typical 48\u201350% labor burden."],["PROJECT SCALE","219 units \u00b7 \u2014 fixtures. Revenue/unit $0, hours/unit 0.2, profit/unit $-667."],["PRODUCTIVITY","Blended labor rate $69.13/hr. Revenue/hour $0. Profit/hour $-2951."],["CO PROFILE","0 executed COs, 1 CORs. Net CO impact $0 (+0.0%)."]];
+  PROJECTS['2105'].bva = [["101 \u00b7 Takeoff & Purchase Labor",0,3014,3014,100.0,null,null,"UNBUDGETED"],["110 \u00b7 Underground Labor",0,204,204,100.0,null,null,"UNBUDGETED"],["142 \u00b7 Mech Room Labor",0,204,204,100.0,null,null,"UNBUDGETED"],["601 \u00b7 Engineering/Plans",0,131071,131071,100.0,null,null,"UNBUDGETED"],["603 \u00b7 Permits & Licenses",0,9636,9636,100.0,null,null,"UNBUDGETED"],["995 \u00b7 Payroll Burden",0,1666,1666,100.0,null,null,"UNBUDGETED"],["998 \u00b7 Payroll Taxes",0,262,262,100.0,null,null,"UNBUDGETED"]];
+  PROJECTS['2105'].sovData = {"originalContract":0,"changeOrders":0,"finalContract":0,"retainage":0,"netPaid":193091};
+  PROJECTS['2105'].payApps = [];
+  PROJECTS['2105'].changeLog = [["COR#01","COR","Pending","Pending \u2014 $24,995 (not executed, project cancelled)","GC",24995,0]];
+  PROJECTS['2105'].rootCauses = [];
+  PROJECTS['2105'].responsibility = [];
+  PROJECTS['2105'].predictiveSignals = [["BVA Critical Flags","1","<2","HEALTHY"],["BVA Over Flags","0","<5","HEALTHY"],["Change Order Count","0","<10","HEALTHY"],["Retention Held","$0","<6%","HEALTHY"],["Forecast Margin","0.0%",">25%","ELEVATED"]];
+  PROJECTS['2105'].changeMeta = {"total":1,"costImpact":0,"types":{"COR":1}};
+  // num field patches
+  if (PROJECTS['2105'].num) {
+    Object.assign(PROJECTS['2105'].num, {labor:3422,material:0,overhead:140707,burden:1928,hours:50,workers:2});
+  }
+  if (PROJECTS['2105'].vendorMeta) {
+    Object.assign(PROJECTS['2105'].vendorMeta, {count:2,invoices:12,totalAp:140707,topVendor:"Franklin Engineering",topShare:93.2});
+  }
+  PROJECTS['2105'].vendors = [{"name":"Franklin Engineering","invoices":10,"spend":131071,"pct":93.2},{"name":"Bank of America CC","invoices":2,"spend":9636,"pct":6.8}];
+
+  // ── #2108 data arrays (auto-generated by dashboardize.py) ──
+  PROJECTS['2108'].crewRoster = [["Gerard, Jeffrey S",20.5,1414,69.0,"Senior"],["Gerard, Jordan E",12.0,720,60.0,"Senior"]];
+  PROJECTS['2108'].tierDist = [["Senior",2,32.5,2134,100.0]];
+  PROJECTS['2108'].wageStats = {"bl":65.66,"fl":69.0,"bm":1.15,"mn":60.0,"mx":69.0,"ah":16.2};
+  PROJECTS['2108'].allVendors = [["Franklin Engineering",9,90629,92.5],["Bank of America CC",2,6402,6.5],["Herc Rentals, Inc.",1,922,0.9]];
+  PROJECTS['2108'].phases = [["Takeoff & Purchasing","101",32.5,100.0,0.12]];
+  PROJECTS['2108'].costCodes = [["101","Takeoff & Purchase Labor",0,2134,-2134],["601","Engineering/Plans",0,106488,-106488],["602","Rental Equipment",0,922,-922],["603","Permits & Licenses",0,6402,-6402],["995","Payroll Burden",0,1052,-1052],["998","Payroll Taxes",0,163,-163]];
+  PROJECTS['2108'].costCats = [["Labor",1,0,2134,1.8,8],["Overhead",3,0,113812,97.1,433],["Burden",2,0,1216,1.0,5]];
+  PROJECTS['2108'].insights = [["MARGIN PROFILE","Net profit of $-117,162 on $0 revenue = 0.0% gross margin. Direct cost $117,162 absorbs 100.0% of revenue."],["VENDOR CONCENTRATION","Franklin Engineering alone = $90,629 (92.5% of all AP) across 9 invoices. Total 3 AP vendors, $97,953 total AP spend."],["CREW PROFILE","2 workers for 32 hours = 16 avg hrs/worker. Top 3 workers logged 32 hrs combined (100% of all labor)."],["ROUGHIN DOMINANCE","Code 120 Roughin Labor = 0 hrs (0% of all labor) and $0 actual. Code 230 Finish Material = $0."],["BUDGET DELIVERY","Revised expense budget was $0; actual direct cost $117,162 \u2192 $-117,162 variance (+0.0%)."],["CONTRACT GROWTH","Contract grew from $0 to $0 \u2014 net +$0 (+0.0%). Retainage of $0 (0%) released."],["BURDEN RATIO","Burden codes 995 + 998 = $1,216 on $2,134 labor base = 57.0%. Outside OWP's typical 48\u201350% labor burden."],["PROJECT SCALE","263 units \u00b7 \u2014 fixtures. Revenue/unit $0, hours/unit 0.1, profit/unit $-445."],["PRODUCTIVITY","Blended labor rate $65.66/hr. Revenue/hour $0. Profit/hour $-3605."],["CO PROFILE","0 executed COs, 0 CORs. Net CO impact $0 (+0.0%)."]];
+  PROJECTS['2108'].bva = [["101 \u00b7 Takeoff & Purchase Labor",0,2134,2134,100.0,null,null,"UNBUDGETED"],["601 \u00b7 Engineering/Plans",0,106488,106488,100.0,null,null,"UNBUDGETED"],["602 \u00b7 Rental Equipment",0,922,922,100.0,null,null,"UNBUDGETED"],["603 \u00b7 Permits & Licenses",0,6402,6402,100.0,null,null,"UNBUDGETED"],["995 \u00b7 Payroll Burden",0,1052,1052,100.0,null,null,"UNBUDGETED"],["998 \u00b7 Payroll Taxes",0,163,163,100.0,null,null,"UNBUDGETED"]];
+  PROJECTS['2108'].sovData = {"originalContract":0,"changeOrders":0,"finalContract":0,"retainage":0,"netPaid":91402};
+  PROJECTS['2108'].payApps = [];
+  PROJECTS['2108'].changeLog = [];
+  PROJECTS['2108'].rootCauses = [];
+  PROJECTS['2108'].responsibility = [];
+  PROJECTS['2108'].predictiveSignals = [["BVA Critical Flags","1","<2","HEALTHY"],["BVA Over Flags","0","<5","HEALTHY"],["Change Order Count","0","<10","HEALTHY"],["Retention Held","$0","<6%","HEALTHY"],["Forecast Margin","0.0%",">25%","ELEVATED"]];
+  PROJECTS['2108'].changeMeta = {"total":0,"costImpact":0,"types":{}};
+  // num field patches
+  if (PROJECTS['2108'].num) {
+    Object.assign(PROJECTS['2108'].num, {labor:2134,material:0,overhead:113812,burden:1216,hours:32,workers:2});
+  }
+  if (PROJECTS['2108'].vendorMeta) {
+    Object.assign(PROJECTS['2108'].vendorMeta, {count:3,invoices:12,totalAp:97953,topVendor:"Franklin Engineering",topShare:92.5});
+  }
+  PROJECTS['2108'].vendors = [{"name":"Franklin Engineering","invoices":9,"spend":90629,"pct":92.5},{"name":"Bank of America CC","invoices":2,"spend":6402,"pct":6.5},{"name":"Herc Rentals, Inc.","invoices":1,"spend":922,"pct":0.9}];
+
+  // ── #2109 data arrays (auto-generated by dashboardize.py) ──
+  PROJECTS['2109'].crewRoster = [["Gerard, Jeffrey S",168.0,11592,69.0,"Senior"],["Gerard, Jordan E",98.0,5831,59.5,"Senior"],["Romero Garza, Jesus I",60.0,0,0.0,"Apprentice"],["Wilson, Garret A",28.75,1553,54.03,"Senior"],["Johnson, Jake E",11.0,572,52.0,"Senior"],["Goodwin, Marcus A",8.5,238,28.0,"Senior"],["Barnhart, Joseph N",3.0,204,68.0,"Senior"],["Aquino, Juan",0,0,0,"Apprentice"],["Castro, Marcus J",0,0,0,"Apprentice"],["Araque, Mario W",0,0,0,"Apprentice"],["Ramos Herrera, Franklin J",0,0,0,"Apprentice"],["Young, Joshua S",0,0,0,"Apprentice"],["Fox, Tamron P",0,0,0,"Apprentice"],["Reed, Reuben H",0,0,0,"Apprentice"],["Del Villar, Flabio",0,0,0,"Apprentice"],["Balderas Ortiz, Ricardo I",0,0,0,"Apprentice"],["Guerrero Espinoza, Mario",0,0,0,"Apprentice"],["Rodriguez Arevalos, Christian",0,0,0,"Apprentice"],["Perez Araque, Manuel A",0,0,0,"Apprentice"],["Cornejo Orellana, Carlos E",0,0,0,"Apprentice"],["Ross, Kelli M",0,0,0,"Apprentice"],["Merino Martinez, Humberto",0,0,0,"Apprentice"],["Portillo Soriano, Walter A",0,0,0,"Apprentice"],["Gochez Molina, Douglas O",0,0,0,"Apprentice"],["Castro Hernandez, Jose A",0,0,0,"Apprentice"],["Cruz, Azael S",0,0,0,"Apprentice"],["Gorman, Nathan W",0,0,0,"Apprentice"],["Taylor, Evan R",0,0,0,"Apprentice"],["Valeriano Romero, Oswaldo",0,0,0,"Apprentice"],["Gerard, Mitchell J",0,0,0,"Apprentice"]];
+  PROJECTS['2109'].tierDist = [["Senior",6,317.25,19990,84.1],["Apprentice",24,60.0,0,15.9]];
+  PROJECTS['2109'].wageStats = {"bl":52.99,"fl":69.0,"bm":2.464,"mn":28.0,"mx":69.0,"ah":12.6};
+  PROJECTS['2109'].allVendors = [["Pacific Plumbing Supply Co., LLC",169,500869,46.7],["Consolidated Supply Co.",107,305150,28.5],["Rosen Supply Kirkland",94,103987,9.7],["California Hydronics Corp",6,76546,7.1],["Keller Supply Company",24,52036,4.9],["Franklin Engineering",1,22320,2.1],["Williams Scotsman, Inc. $Mobile Mini",10,2472,0.2],["Ferguson Enterprises, Inc. #3007",1,2408,0.2],["ACME Corp",7,1984,0.2],["All Pro Repair Service LLC",3,1865,0.2],["Capital One Credit Card",10,1603,0.1],["A.R. Brown Backflow Testing",2,545,0.1],["Bank of America CC",2,195,0.0]];
+  PROJECTS['2109'].phases = [["Supervision","100",59.0,19.6,0.24],["Takeoff & Purchasing","101",241.5,80.3,0.98],["Warranty","150",0.25,0.1,0.0]];
+  PROJECTS['2109'].costCodes = [["100","Supervision",18450,4071,14379],["101","Takeoff & Purchase Labor",24600,15235,9365],["141","Water Main/Insulation Lab",0,0,0],["150","Warranty Labor",0,14,-14],["151","T&M Labor",675,670,5],["210","Underground Material",96801,55460,41341],["220","Roughin Material",454876,464398,-9522],["230","Finish Material",838640,621810,216830],["240","Gas Material",0,0,0],["241","Water Main/Insulation Mat",0,0,0],["242","Mech Room Material",0,2569,-2569],["600","Subcontractor",26000,2410,23590],["601","Engineering/Plans",5850,22320,-16470],["602","Rental Equipment",0,2472,-2472],["603","Permits & Licenses",102758,39308,63450],["607","Other Expenses",12450,5515,6935],["995","Payroll Burden",448466,428740,19726],["998","Payroll Taxes",90401,73900,16501]];
+  PROJECTS['2109'].costCats = [["Labor",4,43050,19320,1.1,79],["Material",6,1390317,1144237,65.8,4651],["Overhead",5,147058,72025,4.1,293],["Burden",2,538867,502640,28.9,2043],["Other",1,675,670,0.0,3]];
+  PROJECTS['2109'].insights = [["MARGIN PROFILE","Forecast profit of $1,979,958 on $3,718,851 revenue = 53.2% gross margin. Direct cost $1,738,893 absorbs 46.8% of revenue."],["VENDOR CONCENTRATION","Pacific Plumbing Supply Co., LLC alone = $500,869 (46.7% of all AP) across 169 invoices. Total 13 AP vendors, $1,071,980 total AP spend."],["CREW PROFILE","30 workers for 377 hours = 13 avg hrs/worker. Top 3 workers logged 326 hrs combined (86% of all labor)."],["ROUGHIN DOMINANCE","Code 120 Roughin Labor = 0 hrs (0% of all labor) and $0 actual. Code 230 Finish Material = $621,810."],["BUDGET DELIVERY","Revised expense budget was $2,119,967; actual direct cost $1,738,893 \u2192 $381,074 variance (+18.0%)."],["CONTRACT GROWTH","Contract grew from $3,700,937 to $3,718,851 \u2014 net +$17,914 (+0.5%). Retainage of $153,880 (4%) held."],["BURDEN RATIO","Burden codes 995 + 998 = $502,640 on $19,320 labor base = 2601.6%. Outside OWP's typical 48\u201350% labor burden."],["PROJECT SCALE","246 units \u00b7 \u2014 fixtures. Revenue/unit $15,117, hours/unit 1.5, profit/unit $8,049."],["PRODUCTIVITY","Blended labor rate $52.99/hr. Revenue/hour $9858. Profit/hour $5248."],["CO PROFILE","0 executed COs, 0 CORs. Net CO impact $17,914 (+0.5%)."]];
+  PROJECTS['2109'].bva = [["100 \u00b7 Supervision",18450,4071,-14379,-77.9,null,null,"UNDER"],["101 \u00b7 Takeoff & Purchase Labor",24600,15235,-9365,-38.1,null,null,"UNDER"],["141 \u00b7 Water Main/Insulation Lab",0,0,0,0,null,null,"ON"],["150 \u00b7 Warranty Labor",0,14,14,100.0,null,null,"UNBUDGETED"],["151 \u00b7 T&M Labor",675,670,-5,-0.7,null,null,"ON"],["210 \u00b7 Underground Material",96801,55460,-41341,-42.7,null,null,"UNDER"],["220 \u00b7 Roughin Material",454876,464398,9522,2.1,null,null,"ON"],["230 \u00b7 Finish Material",838640,621810,-216830,-25.9,null,null,"UNDER"],["240 \u00b7 Gas Material",0,0,0,0,null,null,"ON"],["241 \u00b7 Water Main/Insulation Mat",0,0,0,0,null,null,"ON"],["242 \u00b7 Mech Room Material",0,2569,2569,100.0,null,null,"UNBUDGETED"],["600 \u00b7 Subcontractor",26000,2410,-23590,-90.7,null,null,"UNDER"],["601 \u00b7 Engineering/Plans",5850,22320,16470,281.5,null,null,"CRITICAL"],["602 \u00b7 Rental Equipment",0,2472,2472,100.0,null,null,"UNBUDGETED"],["603 \u00b7 Permits & Licenses",102758,39308,-63450,-61.7,null,null,"UNDER"],["607 \u00b7 Other Expenses",12450,5515,-6935,-55.7,null,null,"UNDER"],["995 \u00b7 Payroll Burden",448466,428740,-19726,-4.4,null,null,"ON"],["998 \u00b7 Payroll Taxes",90401,73900,-16501,-18.3,null,null,"UNDER"]];
+  PROJECTS['2109'].sovData = {"originalContract":3700937,"changeOrders":17914,"finalContract":3718851,"retainage":153880,"netPaid":3416132};
+  PROJECTS['2109'].payApps = [];
+  PROJECTS['2109'].changeLog = [];
+  PROJECTS['2109'].rootCauses = [];
+  PROJECTS['2109'].responsibility = [];
+  PROJECTS['2109'].predictiveSignals = [["BVA Critical Flags","1","<2","HEALTHY"],["BVA Over Flags","0","<5","HEALTHY"],["Change Order Count","0","<10","HEALTHY"],["Retention Held","$153,880","<6%","HEALTHY"],["Forecast Margin","43.0%",">25%","HEALTHY"]];
+  PROJECTS['2109'].changeMeta = {"total":0,"costImpact":0,"types":{}};
+  // num field patches
+  if (PROJECTS['2109'].num) {
+    Object.assign(PROJECTS['2109'].num, {labor:19320,material:1144237,overhead:72025,burden:502640,hours:377,workers:30});
+  }
+  if (PROJECTS['2109'].vendorMeta) {
+    Object.assign(PROJECTS['2109'].vendorMeta, {count:13,invoices:436,totalAp:1071980,topVendor:"Pacific Plumbing Supply Co., LLC",topShare:46.7});
+  }
+  PROJECTS['2109'].vendors = [{"name":"Pacific Plumbing Supply Co., LLC","invoices":169,"spend":500869,"pct":46.7},{"name":"Consolidated Supply Co.","invoices":107,"spend":305150,"pct":28.5},{"name":"Rosen Supply Kirkland","invoices":94,"spend":103987,"pct":9.7},{"name":"California Hydronics Corp","invoices":6,"spend":76546,"pct":7.1},{"name":"Keller Supply Company","invoices":24,"spend":52036,"pct":4.9},{"name":"Franklin Engineering","invoices":1,"spend":22320,"pct":2.1},{"name":"Williams Scotsman, Inc. $Mobile Mini","invoices":10,"spend":2472,"pct":0.2},{"name":"Ferguson Enterprises, Inc. #3007","invoices":1,"spend":2408,"pct":0.2},{"name":"ACME Corp","invoices":7,"spend":1984,"pct":0.2},{"name":"All Pro Repair Service LLC","invoices":3,"spend":1865,"pct":0.2}];
+
+  // ── #2110 data arrays (auto-generated by dashboardize.py) ──
+  PROJECTS['2110'].crewRoster = [["Gerard, Jordan E",66.0,3928,59.52,"Senior"],["Gerard, Jeffrey S",53.5,3692,69.0,"Senior"],["Barnhart, Joseph N",9.0,612,68.0,"Senior"]];
+  PROJECTS['2110'].tierDist = [["Senior",3,128.5,8232,100.0]];
+  PROJECTS['2110'].wageStats = {"bl":64.06,"fl":69.0,"bm":1.159,"mn":59.52,"mx":69.0,"ah":42.8};
+  PROJECTS['2110'].allVendors = [["Franklin Engineering",10,93354,76.7],["Bank of America CC",3,28296,23.3]];
+  PROJECTS['2110'].phases = [["Supervision","100",2.25,1.8,0.02],["Takeoff & Purchasing","101",117.25,91.2,0.86],["Roughin","120",9.0,7.0,0.07]];
+  PROJECTS['2110'].costCodes = [["100","Supervision",0,133,-133],["101","Takeoff & Purchase Labor",0,7487,-7487],["120","Roughin Labor",0,612,-612],["601","Engineering/Plans",0,93354,-93354],["603","Permits & Licenses",0,28296,-28296],["995","Payroll Burden",0,3990,-3990],["998","Payroll Taxes",0,630,-630]];
+  PROJECTS['2110'].costCats = [["Labor",3,0,8232,6.1,60],["Overhead",2,0,121650,90.4,888],["Burden",2,0,4619,3.4,34]];
+  PROJECTS['2110'].insights = [["MARGIN PROFILE","Net profit of $-134,500 on $0 revenue = 0.0% gross margin. Direct cost $134,500 absorbs 100.0% of revenue."],["VENDOR CONCENTRATION","Franklin Engineering alone = $93,354 (76.7% of all AP) across 10 invoices. Total 2 AP vendors, $121,650 total AP spend."],["CREW PROFILE","3 workers for 128 hours = 43 avg hrs/worker. Top 3 workers logged 128 hrs combined (100% of all labor)."],["ROUGHIN DOMINANCE","Code 120 Roughin Labor = 9 hrs (7% of all labor) and $612 actual. Code 230 Finish Material = $0."],["BUDGET DELIVERY","Revised expense budget was $0; actual direct cost $134,500 \u2192 $-134,500 variance (+0.0%)."],["CONTRACT GROWTH","Contract grew from $0 to $0 \u2014 net +$0 (+0.0%). Retainage of $0 (0%) released."],["BURDEN RATIO","Burden codes 995 + 998 = $4,619 on $8,232 labor base = 56.1%. Outside OWP's typical 48\u201350% labor burden."],["PROJECT SCALE","137 units \u00b7 \u2014 fixtures. Revenue/unit $0, hours/unit 0.9, profit/unit $-982."],["PRODUCTIVITY","Blended labor rate $64.06/hr. Revenue/hour $0. Profit/hour $-1047."],["CO PROFILE","0 executed COs, 0 CORs. Net CO impact $0 (+0.0%)."]];
+  PROJECTS['2110'].bva = [["100 \u00b7 Supervision",0,133,133,100.0,null,null,"UNBUDGETED"],["101 \u00b7 Takeoff & Purchase Labor",0,7487,7487,100.0,null,null,"UNBUDGETED"],["120 \u00b7 Roughin Labor",0,612,612,100.0,null,null,"UNBUDGETED"],["601 \u00b7 Engineering/Plans",0,93354,93354,100.0,null,null,"UNBUDGETED"],["603 \u00b7 Permits & Licenses",0,28296,28296,100.0,null,null,"UNBUDGETED"],["995 \u00b7 Payroll Burden",0,3990,3990,100.0,null,null,"UNBUDGETED"],["998 \u00b7 Payroll Taxes",0,630,630,100.0,null,null,"UNBUDGETED"]];
+  PROJECTS['2110'].sovData = {"originalContract":0,"changeOrders":0,"finalContract":0,"retainage":0,"netPaid":78800};
+  PROJECTS['2110'].payApps = [];
+  PROJECTS['2110'].changeLog = [];
+  PROJECTS['2110'].rootCauses = [];
+  PROJECTS['2110'].responsibility = [];
+  PROJECTS['2110'].predictiveSignals = [["BVA Critical Flags","2","<2","ELEVATED"],["BVA Over Flags","0","<5","HEALTHY"],["Change Order Count","0","<10","HEALTHY"],["Retention Held","$0","<6%","HEALTHY"],["Forecast Margin","0.0%",">25%","ELEVATED"]];
+  PROJECTS['2110'].changeMeta = {"total":0,"costImpact":0,"types":{}};
+  // num field patches
+  if (PROJECTS['2110'].num) {
+    Object.assign(PROJECTS['2110'].num, {labor:8232,material:0,overhead:121650,burden:4619,hours:128,workers:3});
+  }
+  if (PROJECTS['2110'].vendorMeta) {
+    Object.assign(PROJECTS['2110'].vendorMeta, {count:2,invoices:13,totalAp:121650,topVendor:"Franklin Engineering",topShare:76.7});
+  }
+  PROJECTS['2110'].vendors = [{"name":"Franklin Engineering","invoices":10,"spend":93354,"pct":76.7},{"name":"Bank of America CC","invoices":3,"spend":28296,"pct":23.3}];
 
   // ── LIVE PROJECT DATA ARRAYS (generated by dashboardize.py) ──
   // ── #2098 data arrays (auto-generated by dashboardize.py) ──
@@ -14261,6 +14485,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       phaseStrip: ['','','','','','GW','GW','PT','PT','RI','RI','RI','RI','RI','RI','RI','RI','RI'],
       manpower:   [0,0,0,0,0,2,3,5,10,12,15,18,20,24,24,24,20,18] },
     { id: '2108', status: 'onhold',   name: 'R&G Apartments',      gc: 'Braseth',   units: 263, foreman: '',                 startNote: 'ON HOLD \u00b7 Summer 26?',
+      phaseStrip: ['','','','','','','','','','','','','','','','','',''],
+      manpower:   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] },
+    { id: '2105', status: 'onhold',   name: '3000 Western',        gc: 'Compass',   units: 219, foreman: '',                 startNote: 'ON HOLD \u00b7 pre-construction',
       phaseStrip: ['','','','','','','','','','','','','','','','','',''],
       manpower:   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] }
   ];
