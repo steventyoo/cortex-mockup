@@ -13931,8 +13931,15 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // Split revenue similarly (e.g. "$5,670,000 (bid forecast)").
     const _rev = String(p.revenue || '');
     const _revMatch = _rev.match(/^(.*?)\s*(\([^)]+\))\s*$/);
-    const _revMain = _revMatch ? _revMatch[1].trim() : _rev;
-    const _revHint = _revMatch ? _revMatch[2] : '';
+    let _revMain = _revMatch ? _revMatch[1].trim() : _rev;
+    let _revHint = _revMatch ? _revMatch[2] : '';
+    // Pre-construction / no-contract live projects: swap "$0" for "—" and
+    // surface revenueFoot ("bid pending · pre-construction" etc.) as the hint
+    // so the card doesn't read as $0-revenue / broken.
+    if (isLive && (_revMain === '$0' || _revMain === '$0.00' || _revMain === '')) {
+      _revMain = '—';
+      if (!_revHint && p.revenueFoot) _revHint = p.revenueFoot;
+    }
     return `<div class="kpi" style="cursor:pointer; height:100%; ${borderStyle}" onclick="applyProject('${id}')">
       <div>
         <div class="kpi-eyebrow">JOB ${p.jobNum} · ${id}${liveChip}</div>
