@@ -1071,7 +1071,7 @@
     'steven@axiomic.us':              { pw: 'cortex2026', name: 'Steven Yoo',         role: 'founder',  org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
     'sam@axiomic.us':                 { pw: 'cortex2026', name: 'Sam Comer',          role: 'founder',  org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
     'ishaan.shrivastava@gmail.com':   { pw: 'cortex2026', name: 'Ishaan Shrivastava', role: 'engineer', org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
-    'jqcheng9413@yahoo.com':          { pw: 'cortex2026', name: 'Jack Cheng',         role: 'advisor',  org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
+    'jqcheng9413@yahoo.com':          { pw: 'cortex2026', name: 'Jack Cheng',         role: 'engineer', org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
     'richd@owpllc.net':               { pw: 'cortex2026', name: 'Rich Donelson',      role: 'client',   org: 'owp',     orgLabel: 'One Way Plumbing LLC' }
   };
   // Backward-compat: any user with this legacy passphrase still gets in (anon)
@@ -1106,15 +1106,30 @@
     }
   }
 
-  // Render the bottom-of-sidebar identity pill once the user is known.
+  // Render the bottom-of-sidebar identity pill.
+  // Two modes:
+  //   - Identified: shows name + company + sign-out
+  //   - Anonymous (legacy gated, no email known): shows 'Anonymous' + sign-out
+  //   - Not gated at all: pill stays hidden (the gate is the gate)
   function renderIdentityPill(rec){
     var pill = document.getElementById('sb-identity');
-    if (!pill || !rec) return;
-    var name = rec.name || rec.email || '—';
-    var initials = name.split(/\s+/).map(function(s){ return (s||'')[0]; }).filter(Boolean).slice(0,2).join('').toUpperCase() || '·';
-    var av = document.getElementById('sb-identity-avatar');  if (av) { av.textContent = initials; av.title = (rec.email || '') + ' · ' + (rec.role || ''); }
-    var nm = document.getElementById('sb-identity-name');    if (nm) { nm.textContent = name; nm.title = rec.email || ''; }
-    var og = document.getElementById('sb-identity-org');     if (og) { og.textContent = rec.orgLabel || rec.org || ''; og.title = rec.role ? (rec.role.charAt(0).toUpperCase() + rec.role.slice(1)) : ''; }
+    if (!pill) return;
+    var av = document.getElementById('sb-identity-avatar');
+    var nm = document.getElementById('sb-identity-name');
+    var og = document.getElementById('sb-identity-org');
+
+    if (rec) {
+      var name = rec.name || rec.email || '—';
+      var initials = name.split(/\s+/).map(function(s){ return (s||'')[0]; }).filter(Boolean).slice(0,2).join('').toUpperCase() || '·';
+      if (av) { av.textContent = initials; av.title = (rec.email || '') + ' · ' + (rec.role || ''); av.style.background = 'var(--ink)'; av.style.color = 'var(--cream)'; }
+      if (nm) { nm.textContent = name; nm.title = rec.email || ''; nm.style.color = 'var(--ink)'; }
+      if (og) { og.textContent = rec.orgLabel || rec.org || ''; og.title = rec.role ? (rec.role.charAt(0).toUpperCase() + rec.role.slice(1)) : ''; }
+    } else {
+      // Anonymous mode — gated but unidentified (legacy bookmark, etc.)
+      if (av) { av.textContent = '?'; av.title = 'Not identified — sign out and use email login'; av.style.background = 'var(--clay)'; av.style.color = 'var(--cream)'; }
+      if (nm) { nm.textContent = 'Anonymous'; nm.title = 'Not signed in with email — PostHog cannot attribute your activity'; nm.style.color = 'var(--clay)'; }
+      if (og) { og.textContent = 'Sign in with your email'; og.title = ''; }
+    }
     pill.style.display = 'block';
     var so = document.getElementById('sb-identity-signout');
     if (so && !so.__wired) {
@@ -1126,8 +1141,10 @@
   }
   // Try once now (in case sidebar already in DOM) and again on DOMContentLoaded.
   function tryRenderPill(){
+    // Only render if user has passed the gate (KEY set); otherwise gate is doing its job.
+    if (sessionStorage.getItem(KEY) !== '1' && localStorage.getItem(KEY) !== '1') return;
     var u = (typeof window.cortexCurrentUser === 'function') ? window.cortexCurrentUser() : null;
-    if (u) renderIdentityPill(u);
+    renderIdentityPill(u); // u may be null → renders 'Anonymous' mode
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', tryRenderPill);
@@ -1159,7 +1176,7 @@
     var rec   = USERS[email];
 
     if (rec && rec.pw === pw) {
-      // Known user — full identification
+      // Known user — full identification (the only valid path)
       sessionStorage.setItem(KEY, '1');
       localStorage.setItem(KEY, '1');
       localStorage.setItem(KEY_USER, email);
@@ -1167,16 +1184,20 @@
       renderIdentityPill(rec);
       gate.classList.add('ok');
       document.body.style.overflow = '';
-    } else if (pw === LEGACY_PW && !email) {
-      // Backward-compat: legacy passphrase with no email → anonymous unlock
-      sessionStorage.setItem(KEY, '1');
-      localStorage.setItem(KEY, '1');
-      gate.classList.add('ok');
-      document.body.style.overflow = '';
     } else {
-      err.textContent = '× incorrect email or passphrase';
-      pwInput.value = '';
-      (email ? pwInput : emailInput).focus();
+      // Email required — no anonymous unlock anymore (so PostHog always knows who's who)
+      if (!email) {
+        err.textContent = '× please enter your email';
+        emailInput.focus();
+      } else if (!rec) {
+        err.textContent = '× email not on the access list — contact Steven to add';
+        emailInput.focus();
+        emailInput.select();
+      } else {
+        err.textContent = '× incorrect passphrase for ' + email;
+        pwInput.value = '';
+        pwInput.focus();
+      }
     }
   }
 
