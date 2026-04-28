@@ -2454,9 +2454,7 @@
       <div class="bench-toolbar">
         <div class="bench-toolbar-l">
           <span class="bench-title">The Full Table</span>
-          <span class="chip-ink">35 projects</span>
-          <span class="chip-sage">#2010 wins 15 categories</span>
-          <span class="chip-clay">#2020 ⚠ labor +29%</span>
+          <span class="chip-ink" id="bench-count-chip">— projects</span>
         </div>
         <button onclick="downloadBenchmarkCSV()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase" style="background: var(--ink); color: var(--cream);">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -14147,6 +14145,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   function renderBench(){
     const cont = document.getElementById('bench-table'); if(!cont) return;
     const numProjects = PROJECT_ORDER.length;
+    const countChip = document.getElementById('bench-count-chip');
+    if (countChip) countChip.textContent = numProjects + ' projects';
     const metricW = 180;
     const avgW    = 128;
     const chartW  = 34;
