@@ -18869,11 +18869,132 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // in the graph view to show connections only.)
   }
 
-  // Atlas node click: apply focus only (modal popup disabled in favor of persistent GC grid below)
+  // ============ AUTO-INSIGHT FALLBACK ============
+  // For nodes not in ATLAS_NODES, build insights on the fly from
+  // PROJECTS / GC_DB / vendor data so every clickable node shows something.
+  function _atlasFmtMoney(n) {
+    if (n == null || isNaN(n)) return '—';
+    if (n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
+    if (n >= 1e3) return '$' + Math.round(n/1e3) + 'k';
+    return '$' + Math.round(n);
+  }
+  function _atlasBuildProjectInsight(pid) {
+    const p = PROJECTS[pid];
+    if (!p) return null;
+    const num = p.num || {};
+    const isLive = (PROJECT_STAGES.active || []).includes(pid);
+    const margin = (num.revenue && num.profit) ? ((num.profit / num.revenue) * 100).toFixed(1) + '%' : '—';
+    const stats = [
+      ['Status', isLive ? 'ACTIVE · live' : 'CLOSED'],
+      ['Units', num.units || '—'],
+      ['Revenue', _atlasFmtMoney(num.revenue)],
+      ['Net profit', _atlasFmtMoney(num.profit)],
+      ['Gross margin', margin],
+      ['Direct cost', _atlasFmtMoney(num.directCost)],
+    ];
+    if (num.workers) stats.push(['Crew', num.workers + ' workers · ' + (num.hours||0).toLocaleString() + ' hrs']);
+    if (num.retainage) stats.push(['Retention', _atlasFmtMoney(num.retainage)]);
+    if (p.vendorMeta && p.vendorMeta.topVendor) stats.push(['Top vendor', p.vendorMeta.topVendor + ' · ' + (p.vendorMeta.topShare||0) + '%']);
+    return {
+      eyebrow: 'PROJECT · #' + pid + ' · ' + (p.gcShort || p.gc || '—'),
+      title: (p.jobTop || '') + ' ' + (p.jobBottom || '').replace(/\.$/, ''),
+      sub: p.unitsDesc || (num.units ? num.units + '-unit project' : 'Portfolio entry'),
+      stats: stats,
+      note: (p.execHeadline ? p.execHeadline.replace(/<[^>]+>/g, '') : (p.execBody ? p.execBody.replace(/<[^>]+>/g, '').slice(0, 280) + '…' : 'Click into the project view for full hero card, BVA, vendor ledger, and CO log.'))
+    };
+  }
+  function _atlasBuildGcInsight(gcKey) {
+    const projectIds = (_atlasGcMap[gcKey] || []).slice();
+    const projects = projectIds.map(id => PROJECTS[id]).filter(Boolean);
+    const closed = projects.filter(p => !(PROJECT_STAGES.active || []).includes(p.id || (p.jobNum||'').replace('#','')));
+    const live   = projects.filter(p => (PROJECT_STAGES.active || []).includes(p.id || (p.jobNum||'').replace('#','')));
+    const totalRev = projects.reduce((s,p) => s + (p.num?.revenue||0), 0);
+    const totalProfit = projects.reduce((s,p) => s + (p.num?.profit||0), 0);
+    const margins = projects.map(p => p.num?.revenue && p.num?.profit ? p.num.profit/p.num.revenue : null).filter(x => x != null);
+    const minM = margins.length ? Math.min(...margins) : null;
+    const maxM = margins.length ? Math.max(...margins) : null;
+    const stats = [
+      ['Jobs in portfolio', projects.length + ' total · ' + closed.length + ' closed · ' + live.length + ' live'],
+      ['Total revenue', _atlasFmtMoney(totalRev)],
+      ['Total net profit', _atlasFmtMoney(totalProfit)],
+      ['Margin range', margins.length ? (minM*100).toFixed(1) + '% → ' + (maxM*100).toFixed(1) + '%' : '—'],
+      ['Project IDs', projectIds.slice(0, 6).map(id => '#' + id).join(', ') + (projectIds.length > 6 ? ' +' + (projectIds.length-6) + ' more' : '')],
+    ];
+    const label = (typeof _GC_LABELS !== 'undefined' && _GC_LABELS[gcKey]) ? _GC_LABELS[gcKey] : gcKey;
+    const note = (typeof _GC_BLURBS !== 'undefined' && _GC_BLURBS[gcKey]) ? _GC_BLURBS[gcKey]
+      : 'GC relationship spanning ' + projects.length + ' job' + (projects.length===1?'':'s') + '. Click into individual projects for full hero data.';
+    return {
+      eyebrow: 'GC · ' + label,
+      title: label + ' · ' + projects.length + ' job' + (projects.length===1?'':'s'),
+      sub: note,
+      stats: stats,
+      note: note
+    };
+  }
+  function _atlasBuildVendorInsight(vKey) {
+    // Aggregate vendor across portfolio: search PROJECTS[*].allVendors for matching name
+    const matches = [];
+    Object.keys(PROJECTS).forEach(pid => {
+      const vs = PROJECTS[pid].allVendors || [];
+      vs.forEach(v => {
+        const name = (Array.isArray(v) ? v[0] : (v.name || '')).toLowerCase();
+        if (name.includes(vKey.toLowerCase()) || vKey.toLowerCase().includes(name.split(' ')[0])) {
+          matches.push({ pid, name: Array.isArray(v) ? v[0] : v.name, invoices: Array.isArray(v) ? v[1] : v.invoices, spend: Array.isArray(v) ? v[2] : v.spend });
+        }
+      });
+    });
+    const totalSpend = matches.reduce((s,m) => s + (m.spend||0), 0);
+    const totalInv   = matches.reduce((s,m) => s + (m.invoices||0), 0);
+    const projectIds = [...new Set(matches.map(m => m.pid))];
+    const displayName = matches.length ? matches[0].name : vKey;
+    return {
+      eyebrow: 'VENDOR · ' + displayName,
+      title: displayName,
+      sub: 'Appears on ' + projectIds.length + ' project' + (projectIds.length===1?'':'s') + ' in the portfolio.',
+      stats: [
+        ['Projects served', projectIds.length],
+        ['Total invoices', totalInv.toLocaleString()],
+        ['Total spend', _atlasFmtMoney(totalSpend)],
+        ['Avg invoice', totalInv ? _atlasFmtMoney(totalSpend/totalInv) : '—'],
+        ['Project IDs', projectIds.slice(0, 6).map(id => '#' + id).join(', ') + (projectIds.length > 6 ? ' +' + (projectIds.length-6) + ' more' : '')]
+      ],
+      note: 'Vendor pattern across the portfolio. Click into individual projects to see invoice-level detail in the AP ledger.'
+    };
+  }
+
+  // Patch openAtlasModal to fall back to auto-built insight when no bespoke entry.
+  const _originalOpenAtlasModal = openAtlasModal;
+  openAtlasModal = function(nodeId, cat) {
+    let data = ATLAS_NODES[nodeId];
+    if (!data) {
+      // Build on the fly from category
+      if (cat === 'project')      data = _atlasBuildProjectInsight(nodeId);
+      else if (cat === 'gc')      data = _atlasBuildGcInsight(nodeId);
+      else if (cat === 'vendor')  data = _atlasBuildVendorInsight(nodeId);
+    }
+    if (!data) return; // truly unknown
+    document.getElementById('atlas-modal-eyebrow').textContent = data.eyebrow;
+    document.getElementById('atlas-modal-title').textContent = data.title;
+    document.getElementById('atlas-modal-sub').textContent = data.sub;
+    document.getElementById('atlas-modal-content').innerHTML =
+      renderAtlasStats(data.stats) +
+      `<div class="modal-section" style="border-top: 1px dashed var(--border-2); padding-top: 18px; margin-top: 18px;">
+        <div class="modal-section-label" style="color: var(--clay);">Cortex note</div>
+        <div style="font-size: 13px; color: var(--ink-2); line-height: 1.6; margin-top: 6px;">${data.note}</div>
+      </div>`;
+    const m = document.getElementById('atlas-modal');
+    m.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Atlas node click: apply focus AND open insight modal (re-enabled with auto-fallback for any node)
   document.querySelectorAll('.atlas-node').forEach(g => {
     g.addEventListener('click', (e) => {
       e.stopPropagation();
       _atlasApplyFocus(g);
+      const nodeId = g.getAttribute('data-atlas-node');
+      const cat    = g.getAttribute('data-atlas-cat');
+      if (nodeId) openAtlasModal(nodeId, cat);
     });
   });
 
