@@ -1068,11 +1068,11 @@
   // Email → { pw, name, role, org }. Add new users here.
   // PostHog identifies by email; name/role/org show on the Persons tab.
   var USERS = {
-    'steven@axiomic.us':              { pw: 'cortex2026', name: 'Steven Yoo',         role: 'founder',     org: 'axiomic' },
-    'sam@axiomic.us':                 { pw: 'cortex2026', name: 'Sam',                role: 'founder',     org: 'axiomic' },
-    'ishaan.shrivastava@gmail.com':   { pw: 'cortex2026', name: 'Ishaan Shrivastava', role: 'engineer',    org: 'axiomic' },
-    'jqcheng9413@yahoo.com':          { pw: 'cortex2026', name: 'JQ Cheng',           role: 'advisor',     org: 'external' },
-    'richd@owpllc.net':               { pw: 'cortex2026', name: 'Richard Donelson',   role: 'owner',       org: 'owp' }
+    'steven@axiomic.us':              { pw: 'cortex2026', name: 'Steven Yoo',         role: 'founder',  org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
+    'sam@axiomic.us':                 { pw: 'cortex2026', name: 'Sam Comer',          role: 'founder',  org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
+    'ishaan.shrivastava@gmail.com':   { pw: 'cortex2026', name: 'Ishaan Shrivastava', role: 'engineer', org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
+    'jqcheng9413@yahoo.com':          { pw: 'cortex2026', name: 'Jack Cheng',         role: 'advisor',  org: 'axiomic', orgLabel: 'Axiomic, Inc.' },
+    'richd@owpllc.net':               { pw: 'cortex2026', name: 'Rich Donelson',      role: 'client',   org: 'owp',     orgLabel: 'One Way Plumbing LLC' }
   };
   // Backward-compat: any user with this legacy passphrase still gets in (anon)
   var LEGACY_PW = 'cortex2026';
@@ -1098,22 +1098,51 @@
 
   function identifyInPostHog(email, rec){
     if (!window.posthog || typeof posthog.identify !== 'function') return;
+    var props = { email: email, name: rec.name, role: rec.role, org: rec.org, company: rec.orgLabel };
     try {
-      posthog.identify(email, {
-        email: email,
-        name:  rec.name,
-        role:  rec.role,
-        org:   rec.org
-      });
+      posthog.identify(email, props);
     } catch (e) { /* PostHog stub may not be ready yet — retry once */
-      setTimeout(function(){ try { posthog.identify(email, { email: email, name: rec.name, role: rec.role, org: rec.org }); } catch(_){} }, 800);
+      setTimeout(function(){ try { posthog.identify(email, props); } catch(_){} }, 800);
     }
+  }
+
+  // Render the bottom-of-sidebar identity pill once the user is known.
+  function renderIdentityPill(rec){
+    var pill = document.getElementById('sb-identity');
+    if (!pill || !rec) return;
+    var name = rec.name || rec.email || '—';
+    var initials = name.split(/\s+/).map(function(s){ return (s||'')[0]; }).filter(Boolean).slice(0,2).join('').toUpperCase() || '·';
+    var av = document.getElementById('sb-identity-avatar');  if (av) { av.textContent = initials; av.title = (rec.email || '') + ' · ' + (rec.role || ''); }
+    var nm = document.getElementById('sb-identity-name');    if (nm) { nm.textContent = name; nm.title = rec.email || ''; }
+    var og = document.getElementById('sb-identity-org');     if (og) { og.textContent = rec.orgLabel || rec.org || ''; og.title = rec.role ? (rec.role.charAt(0).toUpperCase() + rec.role.slice(1)) : ''; }
+    pill.style.display = 'block';
+    var so = document.getElementById('sb-identity-signout');
+    if (so && !so.__wired) {
+      so.__wired = true;
+      so.addEventListener('click', function(){
+        if (typeof window.cortexSignOut === 'function') window.cortexSignOut();
+      });
+    }
+  }
+  // Try once now (in case sidebar already in DOM) and again on DOMContentLoaded.
+  function tryRenderPill(){
+    var u = (typeof window.cortexCurrentUser === 'function') ? window.cortexCurrentUser() : null;
+    if (u) renderIdentityPill(u);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryRenderPill);
+  } else {
+    tryRenderPill();
   }
 
   // Already-gated visitor: re-identify so PostHog keeps attributing them
   if (sessionStorage.getItem(KEY) === '1' || localStorage.getItem(KEY) === '1') {
     var savedEmail = localStorage.getItem(KEY_USER);
-    if (savedEmail && USERS[savedEmail]) identifyInPostHog(savedEmail, USERS[savedEmail]);
+    if (savedEmail && USERS[savedEmail]) {
+      identifyInPostHog(savedEmail, USERS[savedEmail]);
+      // Re-render pill after sidebar paints
+      setTimeout(tryRenderPill, 100);
+    }
     gate.classList.add('ok');
     return;
   }
@@ -1135,6 +1164,7 @@
       localStorage.setItem(KEY, '1');
       localStorage.setItem(KEY_USER, email);
       identifyInPostHog(email, rec);
+      renderIdentityPill(rec);
       gate.classList.add('ok');
       document.body.style.overflow = '';
     } else if (pw === LEGACY_PW && !email) {
@@ -1216,6 +1246,18 @@
 
     <div class="sb-label">Projects</div>
     <div id="sidebar-projects" style="display: flex; flex-direction: column;"></div>
+   </div>
+
+   <!-- ==== Identity pill (bottom of sidebar) ==== -->
+   <div id="sb-identity" style="display:none; padding: 12px 16px 14px; border-top: 1px solid var(--border-2); background: var(--cream-soft); flex-shrink: 0;">
+     <div style="display: flex; align-items: flex-start; gap: 9px;">
+       <div id="sb-identity-avatar" title="" style="width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--cream); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; flex-shrink: 0; margin-top: 2px;">·</div>
+       <div style="min-width: 0; flex: 1; line-height: 1.25;">
+         <div id="sb-identity-name" title="" style="font-size: 12px; font-weight: 600; color: var(--ink); word-break: break-word;">—</div>
+         <div id="sb-identity-org"  title="" style="font-size: 10px; color: var(--ink-3); margin-top: 2px; word-break: break-word;">—</div>
+         <button id="sb-identity-signout" type="button" title="Sign out" aria-label="Sign out" style="margin-top: 6px; background: transparent; border: 1px solid var(--border-2); border-radius: 999px; padding: 3px 9px; font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); cursor: pointer;">Sign out</button>
+       </div>
+     </div>
    </div>
 
   </aside>
