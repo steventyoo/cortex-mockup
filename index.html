@@ -5307,13 +5307,11 @@
     <!-- PRODUCTIVITY CALIBRATION (OWP house standards) -->
     <!-- ============================================================ -->
     <div class="meta-bar mt-12 mb-4 flex items-center justify-between">
-      <span>⬢ Productivity calibration <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 11px; margin-left: 6px;">— OWP house standards from 50 closed jobs · the layer underneath the assumptions above</span></span>
+      <span>⬢ Where bids systematically over- and under-estimate <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 11px; margin-left: 6px;">— the cost codes that consistently drift from original budget across 50 closed jobs</span></span>
       <span class="text-[11px] tabular" id="calib-scope-chip" style="color: var(--ink-4);">v— · — jobs</span>
     </div>
     <div class="card" id="bid-calib-card" style="padding: 28px 32px; background: var(--paper); border: 1px solid var(--border-2);">
-      <div id="calib-headline-strip" class="grid grid-cols-4 gap-4"></div>
-
-      <div class="grid grid-cols-2 gap-8 mt-8">
+      <div class="grid grid-cols-2 gap-8">
         <div>
           <div class="hero-lab mb-2" style="color: var(--sage-ink);">▼ Where bids systematically over-estimate (cushion)</div>
           <div class="text-[11px] mb-3" style="color: var(--ink-4); line-height: 1.5;">These cost codes consistently come in <b>under</b> their original budget. Treat their original-budget as a soft ceiling, not a target.</div>
@@ -5325,9 +5323,6 @@
           <table class="modal-table" id="calib-overrun-table" style="font-size: 11.5px;"></table>
         </div>
       </div>
-
-      <div class="meta-bar mt-8 mb-3" style="font-size: 10.5px;">Calibration rules <span style="color: var(--ink-4); text-transform: none; letter-spacing: 0; font-size: 10.5px;">— defaults the bidding tool applies before assumptions overrides</span></div>
-      <div id="calib-rules-grid" class="grid grid-cols-2 gap-3"></div>
 
       <div class="mt-5 pt-4 text-[10.5px]" style="color: var(--ink-4); border-top: 1px dashed var(--border-2); line-height: 1.5;" id="calib-source-foot">—</div>
     </div>
@@ -16094,25 +16089,6 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const chip = document.getElementById('calib-scope-chip');
     if (chip) chip.textContent = 'v' + C.version + ' · ' + scope.completed_jobs_in_benchmarks + ' closed / ' + scope.total_jobs + ' total · ' + (C.generated_at || '').slice(0,10);
 
-    // Headline strip — 4 stat tiles
-    const b = C.benchmarks;
-    const tiles = [
-      { lbl: 'Hours / unit', val: fmtNum(b.hours_per_unit.median, 1), sub: 'P25–P75: ' + fmtNum(b.hours_per_unit.p25,0) + '–' + fmtNum(b.hours_per_unit.p75,0) + ' · n=' + b.hours_per_unit.n },
-      { lbl: 'Loaded wage', val: '$' + fmtNum(b.fully_loaded_wage.median, 2) + '/hr', sub: 'Burden ' + fmtNum(b.burden_multiplier.median, 2) + '× · blended $' + fmtNum(b.blended_wage.median,2) },
-      { lbl: 'Gross margin', val: fmtPct(b.gross_margin_pct.median), sub: 'P25–P75: ' + fmtPct(b.gross_margin_pct.p25) + '–' + fmtPct(b.gross_margin_pct.p75) + ' · n=' + b.gross_margin_pct.n },
-      { lbl: 'Material cushion', val: '−23.9%', sub: 'Median original→actual variance · always under' }
-    ];
-    const strip = document.getElementById('calib-headline-strip');
-    if (strip) {
-      strip.innerHTML = tiles.map(t => (
-        '<div class="p-3" style="background:var(--cream-soft); border:1px solid var(--border-2); border-radius:8px;">' +
-        '<div class="hero-lab" style="font-size:9.5px;">' + t.lbl + '</div>' +
-        '<div class="text-[22px] font-semibold tabular mt-1" style="color:var(--ink); line-height:1.1;">' + t.val + '</div>' +
-        '<div class="text-[10.5px] mt-1" style="color:var(--ink-4); line-height:1.4;">' + t.sub + '</div>' +
-        '</div>'
-      )).join('');
-    }
-
     // Cushion table
     const cushTbl = document.getElementById('calib-cushion-table');
     if (cushTbl) {
@@ -16139,35 +16115,6 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
           '<td class="num" style="color:var(--ink-3);">' + fmtMoney(c.median_actual_dollars) + '</td>' +
           '<td class="num" style="color:var(--ink-4);">' + c.n_jobs + '</td></tr>'
         )).join('') + '</tbody>';
-    }
-
-    // Calibration rules grid
-    const rulesGrid = document.getElementById('calib-rules-grid');
-    if (rulesGrid) {
-      rulesGrid.innerHTML = C.bid_calibration_rules.map(r => {
-        const dv = r.default_value;
-        let dvStr = '';
-        if (r.unit === 'fraction') dvStr = (dv*100).toFixed(1) + '%';
-        else if (r.unit === 'USD/hr') dvStr = '$' + dv.toFixed(2) + '/hr';
-        else if (r.unit === 'hours/unit') dvStr = dv.toFixed(1) + ' hrs/unit';
-        else dvStr = dv.toFixed(1) + ' ' + r.unit;
-        let band = '';
-        if (r.band) {
-          if (r.unit === 'fraction') band = ' (P25–P75: ' + (r.band.p25*100).toFixed(1) + '%–' + (r.band.p75*100).toFixed(1) + '%)';
-          else if (r.unit === 'hours/unit') band = ' (P25–P75: ' + r.band.p25.toFixed(1) + '–' + r.band.p75.toFixed(1) + ')';
-        }
-        return (
-          '<div class="p-3" style="background:var(--cream-soft); border:1px solid var(--border-2); border-radius:8px;">' +
-          '<div class="flex items-center gap-2 mb-1">' +
-          '<span class="text-[9.5px] tabular tracking-widest uppercase font-semibold" style="color:var(--clay);">' + r.rule_id + '</span>' +
-          '<span class="text-[10.5px] tabular" style="color:var(--ink-4);">default: ' + dvStr + band + '</span>' +
-          '</div>' +
-          '<div class="text-[12.5px] font-semibold mt-1" style="color:var(--ink); line-height:1.4;">' + r.statement + '</div>' +
-          '<div class="text-[10.5px] mt-1.5" style="color:var(--ink-3); line-height:1.45;"><i>Why:</i> ' + r.rationale + '</div>' +
-          '<div class="text-[10px] mt-1" style="color:var(--ink-4); line-height:1.4;"><i>When:</i> ' + r.applies_when + '</div>' +
-          '</div>'
-        );
-      }).join('');
     }
 
     // Source footer
