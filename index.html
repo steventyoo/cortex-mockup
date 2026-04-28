@@ -1029,13 +1029,13 @@
   .cortex-gate-sub {
     font-size: 13px; color: #6B6762; line-height: 1.5; margin-bottom: 22px;
   }
-  #cortex-gate-input {
+  #cortex-gate-input, #cortex-gate-email {
     width: 100%; padding: 12px 14px; font-size: 15px;
     border: 1px solid #D2CCC0; border-radius: 8px;
     background: #FAF7F1; color: #1F1E1D; outline: none; margin-bottom: 12px;
     font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em;
   }
-  #cortex-gate-input:focus { border-color: #1F1E1D; background: #FFFFFF; }
+  #cortex-gate-input:focus, #cortex-gate-email:focus { border-color: #1F1E1D; background: #FFFFFF; }
   #cortex-gate-btn {
     width: 100%; padding: 11px 14px; font-size: 12px;
     font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
@@ -1055,38 +1055,104 @@
       <span>Cortex · One Way Plumbing</span>
     </div>
     <div class="cortex-gate-title">Preview <span style="font-style:italic;">access</span>.</div>
-    <div class="cortex-gate-sub">This mockup is password-protected. Enter the passphrase shared with you to continue.</div>
-    <input id="cortex-gate-input" type="password" placeholder="passphrase" autocomplete="off" autofocus />
+    <div class="cortex-gate-sub">Enter your email + the shared passphrase to continue.</div>
+    <input id="cortex-gate-email" type="email" placeholder="email" autocomplete="username" autofocus />
+    <input id="cortex-gate-input" type="password" placeholder="passphrase" autocomplete="current-password" />
     <button id="cortex-gate-btn">Enter</button>
     <div id="cortex-gate-err"></div>
   </div>
 </div>
 <script>
 (function(){
-  var KEY = 'cortex_gate_ok_v1';
-  var PW  = 'cortex2026';
+  // ============ USER DIRECTORY ============
+  // Email → { pw, name, role, org }. Add new users here.
+  // PostHog identifies by email; name/role/org show on the Persons tab.
+  var USERS = {
+    'steven@axiomic.us':              { pw: 'cortex2026', name: 'Steven Yoo',         role: 'founder',     org: 'axiomic' },
+    'sam@axiomic.us':                 { pw: 'cortex2026', name: 'Sam',                role: 'founder',     org: 'axiomic' },
+    'ishaan.shrivastava@gmail.com':   { pw: 'cortex2026', name: 'Ishaan Shrivastava', role: 'engineer',    org: 'axiomic' },
+    'jqcheng9413@yahoo.com':          { pw: 'cortex2026', name: 'JQ Cheng',           role: 'advisor',     org: 'external' },
+    'richd@owpllc.net':               { pw: 'cortex2026', name: 'Richard Donelson',   role: 'owner',       org: 'owp' }
+  };
+  // Backward-compat: any user with this legacy passphrase still gets in (anon)
+  var LEGACY_PW = 'cortex2026';
+
+  var KEY      = 'cortex_gate_ok_v2';
+  var KEY_USER = 'cortex_gate_user_v2';
   var gate = document.getElementById('cortex-gate');
+
+  // Sign-out is always available — even for already-gated returning visitors.
+  // Wired here (before any early return) so any code path can call it.
+  window.cortexSignOut = function(){
+    sessionStorage.removeItem(KEY);
+    localStorage.removeItem(KEY);
+    localStorage.removeItem(KEY_USER);
+    if (window.posthog && typeof posthog.reset === 'function') posthog.reset();
+    location.reload();
+  };
+  // Also expose the current user (if any) so UI elsewhere can show "Signed in as X"
+  window.cortexCurrentUser = function(){
+    var email = localStorage.getItem(KEY_USER);
+    return (email && USERS[email]) ? Object.assign({ email: email }, USERS[email]) : null;
+  };
+
+  function identifyInPostHog(email, rec){
+    if (!window.posthog || typeof posthog.identify !== 'function') return;
+    try {
+      posthog.identify(email, {
+        email: email,
+        name:  rec.name,
+        role:  rec.role,
+        org:   rec.org
+      });
+    } catch (e) { /* PostHog stub may not be ready yet — retry once */
+      setTimeout(function(){ try { posthog.identify(email, { email: email, name: rec.name, role: rec.role, org: rec.org }); } catch(_){} }, 800);
+    }
+  }
+
+  // Already-gated visitor: re-identify so PostHog keeps attributing them
   if (sessionStorage.getItem(KEY) === '1' || localStorage.getItem(KEY) === '1') {
+    var savedEmail = localStorage.getItem(KEY_USER);
+    if (savedEmail && USERS[savedEmail]) identifyInPostHog(savedEmail, USERS[savedEmail]);
     gate.classList.add('ok');
     return;
   }
+
   document.body.style.overflow = 'hidden';
-  var input = document.getElementById('cortex-gate-input');
-  var btn   = document.getElementById('cortex-gate-btn');
-  var err   = document.getElementById('cortex-gate-err');
+  var emailInput = document.getElementById('cortex-gate-email');
+  var pwInput    = document.getElementById('cortex-gate-input');
+  var btn        = document.getElementById('cortex-gate-btn');
+  var err        = document.getElementById('cortex-gate-err');
+
   function tryUnlock(){
-    if (input.value === PW) {
+    var email = (emailInput.value || '').trim().toLowerCase();
+    var pw    = pwInput.value;
+    var rec   = USERS[email];
+
+    if (rec && rec.pw === pw) {
+      // Known user — full identification
       sessionStorage.setItem(KEY, '1');
-      localStorage.setItem(KEY, '1'); // remember across tabs
+      localStorage.setItem(KEY, '1');
+      localStorage.setItem(KEY_USER, email);
+      identifyInPostHog(email, rec);
+      gate.classList.add('ok');
+      document.body.style.overflow = '';
+    } else if (pw === LEGACY_PW && !email) {
+      // Backward-compat: legacy passphrase with no email → anonymous unlock
+      sessionStorage.setItem(KEY, '1');
+      localStorage.setItem(KEY, '1');
       gate.classList.add('ok');
       document.body.style.overflow = '';
     } else {
-      err.textContent = '× incorrect passphrase';
-      input.value = ''; input.focus();
+      err.textContent = '× incorrect email or passphrase';
+      pwInput.value = '';
+      (email ? pwInput : emailInput).focus();
     }
   }
+
   btn.addEventListener('click', tryUnlock);
-  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') tryUnlock(); });
+  emailInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') { if (!pwInput.value) pwInput.focus(); else tryUnlock(); } });
+  pwInput.addEventListener('keydown',    function(e){ if (e.key === 'Enter') tryUnlock(); });
 })();
 </script>
 <!-- ============ END CORTEX GATE ============ -->
@@ -9768,11 +9834,11 @@
       retainage: "$0", retainageFoot: "design-phase only · 5% retention activates at subcontract execution",
       execHeadline: "Ravenna Partners' first OWP engagement — Lachlan Apartments 104u, 23-month bid pursuit, FINAL BID $1.95M Nov 19 2025.",
       execBody: "OWP has pursued 3421 Woodland Park Ave N (Lower Woodland / Wallingford corridor) for 23 months across 3 budget rounds: 1st Budget Dec 15 2023 ($2.61M / 122u, Blueprint as GC), 2nd Budget Oct 17 2024 ($2.10M / 100u, Blueprint as GC, -19.5%), 3rd Budget FINAL Nov 19 2025 ($1.948M / 104u / 425 trim, Ravenna Partners as new owner-GC, -7.2% from 2nd). Net -$662k (-25.4%) and -18 units across the 3-bid arc — owner repeatedly tightened scope to hit pro-forma. Owner contact Andrew Withnell. OWP design-build MEP is Franklin Engineering ($10,701 / 97% of $11k AP). $0 billed against $11,007 sunk cost = -$11,007 carrying loss (tiny relative to $1.95M bid · standard 23-month pursuit posture). 2 OWP estimators (Jeffrey + Jordan Gerard) logged 3.0 hours YTD. Verified fixture profile from Nov 19 2025 bid sheet + proposal: 425 trim across 104 toilets (Gerber Maxwell GWS20912/20918) + 104 lavs (Kohler K-2035-1 + matte black Peerless trim) + 53 tubs (Sterling 71121110 Vikrell) + 51 showers (Sterling 95077) + 104 kitchen sinks (Peerless P7946LF-BL) + amenity/common (4 common, 2 amenity sinks, 1 mop, 1 drinking fountain, 1 coffee). Plus 535 RI total (106 DW + 104 icemaker + 104 washer + 104 condensate + 208 water spacer tubes). Heat source: 3 gas boilers (199mbh × 100-gal AO Smith/Rinnai/Bock vertical) + B&G recirc + Heat Timer mixing valve. Owner-GC pattern means lean PM teams + price-sensitive negotiation — expect tight CO scrutiny once subcontract executes. Forecast 24% margin once mobilized.",
-      jobNum2: "#2117", workforce: "Design/takeoff phase · 2 estimators · 3.0 hrs YTD (Jeffrey + Jordan Gerard) · field crew TBD",
+      jobNum2: "#2117", workforce: "Design phase · 2 estimators · 3.0 hrs YTD",
       bpLeft: "ravenna partners lachlan · 3421 woodland park ave n · final BID nov 19 2025",
       bpRight: "104 units · 425 trim fixtures · $1,948,000 final BID (-25.4% from 1st)",
-      k01_revenue: "$0 billed", k01_margin: "carrying loss · 24% forecast", k01_origContract: "$2,610,000 (1st BID Dec 2023 · Blueprint era)",
-      k01_co: "-$662,000 (-25.4% scope · 122u → 104u across 3 bids)", k01_directCost: "$11,007", k01_profit: "($11,007) carrying loss",
+      k01_revenue: "$0 billed", k01_margin: "— (24% forecast)", k01_origContract: "$2,610,000 (1st BID Dec 2023)",
+      k01_co: "-$662,000 (-25.4% across 3 bids)", k01_directCost: "$11,007", k01_profit: "($11,007) carrying loss",
       footerReport: "REPORT #2117-LIVE01 · Live snapshot Apr 28, 2026 · v1.0 · 3-bid pursuit · verified bid sheet fixtures",
       sbName: "Lachlan.", skyName: "LACHLAN",
       skyline: { floors: 8, cols: 5, w: 120 },
@@ -9786,49 +9852,60 @@
       vendors: [
         { name: "Franklin Engineering", count: 2, total: 10701, share: 100.0, role: "OWP design-build MEP · $10.7k design fees booked to Code 601" }
       ]
-    },    "2118": {
-      reportNum: "REPORT #2118-LIVE01 \u00b7 BIDDING/DESIGN",
+    },
+    "2118": {
+      reportNum: "REPORT #2118-LIVE01 · ACTIVE · pre-construction · design contract signed",
       chips: [
-        "<span class=\"chip-clay\">\u25cb BIDDING / DESIGN \u00b7 no JDR yet</span>",
-        "<span class=\"chip-ink\">Exxel Edmonds Behar \u00b7 406 units \u00b7 6-story + 2 towers + 3 below-grade</span>",
-        "<span class=\"chip-sage\">$7.18M total plumbing budget \u00b7 Robison design contract signed Mar 16</span>"
+        "<span class=\"chip-clay\">○ ACTIVE · pre-construction · design contract signed Mar 16 2026</span>",
+        "<span class=\"chip-ink\">Exxel Edmonds Behar · 409u · 1,899 trim fixtures · OWP's largest live bid</span>",
+        "<span class=\"chip-sage\">$7.18M FINAL BID · 22-month pursuit · 8 bid events · Robison $125k design</span>"
       ],
-      jobTop: "Exxel", jobBottom: "Behar.",
+      jobTop: "Exxel", jobBottom: "Edmonds Behar.",
       jobNum: "#2118", location: "Edmonds, WA", gc: "Exxel Pacific, Inc.",
       gcShort: "Exxel",
-      dateRange: "Mar 2024 first bid \u2192 Jan 2026 latest proposal \u2192 Mar 2026 design contract \u00b7 22-month bid history",
-      unitsDesc: "406-unit \u00b7 6-story, 2 towers, 3 below-grade levels \u00b7 OWP's largest live-pipeline bid",
+      dateRange: "Mar 29 2024 1st BID → Nov 27 2024 GMP set → Jan 16 2026 FINAL BID → Mar 16 2026 Robison design signed",
+      unitsDesc: "409-unit · 6-story + 2 towers + 3 below-grade · OWP's LARGEST live-pipeline bid (15th Exxel project)",
       status: 'active',
 
       // ---- LIVE hero fields ----
       pctComplete: 0,
-      pctCompleteLabel: "0% billed \u00b7 bidding / design contract signed",
-      contractOrig: "$7,183,400",
-      contractRevised: "$7,183,400",
-      coPct: "0%",
+      pctCompleteLabel: "0% billed · construction subcontract pending Exxel issuance",
+      contractOrig: "$8,198,000 (1st Bid Mar 29 2024)",
+      contractRevised: "$7,183,400 (FINAL BID Jan 16 2026)",
+      coPct: "-12.4% (8-event bid pursuit · -$1.015M / -53u net)",
       billedToDate: "$0",
       earnedLessRetention: "$0",
-      balanceToFinish: "$7,183,400",
+      balanceToFinish: "$7,183,400 (pending construction subcontract)",
 
       // ---- Standard schema fields (live/forecast snapshot) ----
-      revenue: "$7,183,400", revenueFoot: "total plumbing budget from Jan 16 2026 proposal to Exxel (Tommy Booth)",
-      profit: "TBD", profitFoot: "forecast margin established at subcontract execution \u00b7 pre-construction",
-      expenses: "$0", expensesFoot: "no Sage JDR yet \u00b7 design contract signed Mar 16, 2026 (Robison $125k)",
-      retainage: "$0", retainageFoot: "pre-construction \u00b7 5% will accrue once field work starts",
-      execHeadline: "Behar is a <span class=\"n\">$7.18M</span> Exxel engagement, in pre-subcontract.",
-      execBody: "Edmonds Behar is a $7.18M design-phase Exxel bid — 406 units, 6-story, 2 towers — OWP's largest live-pipeline project.",
-      jobNum2: "#2118", workforce: "Pre-Sage \u00b7 design contract only \u00b7 no OWP labor posted yet",
-      bpLeft: "exxel edmonds behar \u00b7 edmonds wa \u00b7 BIDDING", bpRight: "406 units \u00b7 6-story 2 towers \u00b7 $7.18M total plumbing",
-      k01_revenue: "$7,183,400", k01_margin: "TBD (pre-subcontract)", k01_origContract: "$7,183,400",
-      k01_co: "0 (no COs yet)", k01_directCost: "TBD", k01_profit: "TBD",
-      footerReport: "REPORT #2118-LIVE01 \u00b7 Live snapshot Apr 24, 2026 \u00b7 v0.1 \u00b7 bidding/design",
-      sbName: "Behar.", skyName: "EDMONDS BEHAR",
+      revenue: "$0", revenueFoot: "no progress billings yet · Sage Job Cost ledger not yet opened",
+      profit: "TBD", profitFoot: "carrying loss $0 · forecast 8-12% margin once Exxel issues construction subcontract",
+      expenses: "$0", expensesFoot: "Sage hasn't opened ledger · Robison $125k design contract will book first to Code 601",
+      retainage: "$0", retainageFoot: "pre-construction · 5% retention activates at construction subcontract execution",
+      execHeadline: "OWP's LARGEST live-pipeline bid — Edmonds Behar 409u, $7.18M FINAL BID, 22-month pursuit, Robison design contract signed Mar 16 2026.",
+      execBody: "OWP has been pursuing the Edmonds Behar Apartments project at Edmonds WA for 22 months across 8 distinct bid events: 1st Bid Mar 29 2024 ($8.198M / 462u) → revised May 16 2024 ($7.36M, -10.2%) → Jun 11 2024 proposal finalized → Exxel GMP set issued Nov 27 2024 → 2nd Bid Feb 7 2025 ($7.39M / 465u) → revised Mar 24 2025 ($7.158M, -3.1%) → 3rd Bid FINAL Jan 16 2026 ($7,183,400 / 409u / 1,899 trim) → Robison Engineering design-build contract signed Mar 16 2026 ($125k). Net -$1.015M (-12.4%) across 22 months indicates Exxel is highly price-sensitive · forecast 8-12% margin per OWP closed-Exxel benchmarks. OWP's LARGEST live-pipeline bid by both unit count AND total budget. Sage Job Cost ledger not yet opened — $0 billed, $0 expensed. Tommy Booth (Exxel Bellingham PM, same PM who delivered closed #2017 Mack Urban + #2022) is GC PM. Architect Clark Barnes Architecture. Owner Behar Company. Heat source: 6 gas boilers + 2× 150's + 6 B&G recirc pumps + 3 Heat Timer mixing valves. Verified fixture profile from Jan 16 2026 proposal RESIDENT UNIT TRIM: 1,899 trim across 486 toilets (Gerber Maxwell) + 492 lavs (Amerisink + Peerless chrome) + 376 tubs (Maax TSEA Plus 60x32) + 84 showers (Aquatic 38/50/60 + 3 ada) + 409 kitchen sinks (Krause + Kohler ada) + 16 common toilets/urinal + 13 common lavs + 7 amenity sinks + 16 specialty (4 ICE + 5 DF + 2 MS + 1 bike + 2 Vevor dog wash + 2 coffee). Plus 415 dishwasher RI + 411 icemaker RI + 411 washer RI + 818 unit shutoffs + 409 water spacer tubes. Tariff/duty exclusion clause hedges margin. OCIP-Wrap deduct + 3D BIM design (+$168k) + heat-pump alternates available — Exxel may select. Construction subcontract from Exxel pending (~60-90 days post design-signing target = May/Jun 2026). Exxel Pacific is OWP's most-engaged GC at 14 closed projects · strongest historical baseline of any live-pipeline pursuit.",
+      jobNum2: "#2118", workforce: "Pre-Sage · design contract only · no OWP labor posted yet",
+      bpLeft: "exxel edmonds behar · edmonds wa · 8-event 22-month bid pursuit · FINAL BID jan 16 2026",
+      bpRight: "409 units · 1,899 trim fixtures · 4.64/unit · $7,183,400 FINAL BID · OWP's LARGEST live bid",
+      k01_revenue: "$0 billed", k01_margin: "TBD (8-12% forecast)", k01_origContract: "$8,198,000 (Mar 2024 1st BID · 462u)",
+      k01_co: "— / -12.4% (8-bid pursuit)", k01_directCost: "—", k01_profit: "TBD",
+      footerReport: "REPORT #2118-LIVE01 · Live snapshot Apr 28, 2026 · v1.0 · 22-month pursuit · OWP's largest live bid · verified bid sheet fixtures",
+      sbName: "Edmonds Behar.", skyName: "EDMONDS BEHAR",
       skyline: { floors: 6, cols: 24, w: 440 },
-      num: { units: 409, fixtures: 1899, months: null, revenue: 7183400, profit: null, directCost: null, origContract: 7183400, co: 0, retainage: 0, labor: null, material: null, overhead: null, burden: null, hours: null, workers: null },
-      vendorMeta: { count: 0, invoices: 0, totalAp: 0, topVendor: '\u2014', topShare: null, source: "Bidding/design phase \u00b7 no vendors yet (Robison on separate design contract)" },
+      num: { units: 409, fixtures: 1899, months: null, revenue: 0, profit: 0, directCost: 0, origContract: 8198000, co: -1014600, retainage: 0, labor: 0, material: 0, overhead: 0, burden: 0, hours: 0, workers: 0 },
+      bidHistory: [
+        { date: "2024-03-29", type: "BID",             gc: "Exxel · 1st initial",  units: 462, amount: 8198000, note: "1st Bid initial · 462 units · $17,745/unit · OWP's first response to Exxel bid invitation" },
+        { date: "2024-05-16", type: "BID",             gc: "Exxel · 1st revised",  units: 462, amount: 7360000, note: "Revised 1st Bid 'update with low number' · -$838k / -10.2% from initial" },
+        { date: "2024-06-11", type: "PROPOSAL",        gc: "Exxel · Jun 2024",     units: 462, amount: 7360000, note: "Proposal package finalized for May 2024 bid · Tommy Booth (Bellingham PM)" },
+        { date: "2024-11-27", type: "GMP_SET",         gc: "Exxel · GMP issued",   units: 462, amount: null,    note: "Exxel published GMP set documents to OWP for re-pricing · scope refinement signal" },
+        { date: "2025-02-07", type: "BID",             gc: "Exxel · 2nd Bid",      units: 465, amount: 7390000, note: "2nd Bid · +3 units · +$30k from Jun 2024 · scope refined post-GMP" },
+        { date: "2025-03-24", type: "BID",             gc: "Exxel · 2nd revised",  units: 465, amount: 7158000, note: "Revised 2nd Bid · -$232k / -3.1% · OHP compression" },
+        { date: "2026-01-16", type: "BID",             gc: "Exxel · 3rd FINAL",    units: 409, amount: 7183400, note: "FINAL BID · 409 plumbing units · 1,899 main trim · $7.18M total budget (Design $173.8k + Permit $77.5k + Construction $6.33M + Fixtures $606.8k)" },
+        { date: "2026-03-16", type: "DESIGN_CONTRACT", gc: "Robison Engineering",  units: 409, amount:  125000, note: "Robison design-build contract signed for $125k · Jeff MacGillivray Mechanical Designer · construction subcontract pending" }
+      ],
+      vendorMeta: { count: 0, invoices: 0, totalAp: 0, topVendor: "Robison Engineering (design contract $125k)", topShare: null, source: "Pre-Sage-ledger · Robison will be first vendor when Sage opens" },
       vendors: []
-    },
-    "2119": {
+    },    "2119": {
       reportNum: "REPORT #2119-LIVE01 \u00b7 PRE-BID / MOCKUP",
       chips: [
         "<span class=\"chip-clay\">\u25cb PRE-BID \u00b7 mockup-only \u00b7 no full bid yet</span>",
@@ -10054,11 +10131,11 @@
       retainage: "$0", retainageFoot: "pre-construction · 5% retention activates at subcontract execution",
       execHeadline: "Sierra Construction's first OWP engagement — Roosevelt Manor 137-unit, LNTP-secured Mar 2025, final BID Jan 2026 at $2.58M.",
       execBody: "OWP has pursued Roosevelt Manor since Jan 2025 (initial BID $2.598M / 137u). Sierra issued Limited Notice to Proceed Mar 24 2025 (signed Matt Enany, Sierra Sr PM); Public 47 architect, Rushing Engineering bridge MEP, Franklin Engineering OWP design-build MEP. Bid revised May 2025 to $2.691M (+3.6%) then refined down to $2.583M Jan 20 2026 final (-4.0% from peak). $78,800 billed against $134,500 sunk cost = -$55,700 carrying loss — typical pre-mob posture. Verified bid sheet fixture takeoff: 591 trim fixtures across 4.31/unit (148 toilets + 148 lavs + 148 tub/showers + 137 kitchen sinks + amenity/retail/common). Sierra's LNTP-then-bid pattern is unfamiliar to OWP — no historical BvA baseline. Watch CO/COR behavior closely once Q2 2026 mobilization breaks.",
-      jobNum2: "#2110", workforce: "3 design-phase workers · 128.5 hrs (Jordan/Jeffrey Gerard estimating + Joseph Barnhart RI prep)",
+      jobNum2: "#2110", workforce: "3 design-phase workers · 128.5 hrs YTD",
       bpLeft: "sierra roosevelt manor · roosevelt way ne seattle · LNTP mar 24 2025",
       bpRight: "137 units · 591 fixtures · final BID $2,583,277 (Jan 20 2026)",
-      k01_revenue: "$78,800 billed", k01_margin: "-70.7% YTD (carrying loss · 23% forecast)", k01_origContract: "$2,598,000 (initial BID Jan 29 2025)",
-      k01_co: "-$14,723 (-0.6% · BID revisions, no field COs yet)", k01_directCost: "$134,500.35", k01_profit: "($55,700) carrying loss",
+      k01_revenue: "$78,800 billed", k01_margin: "— (23% forecast)", k01_origContract: "$2,598,000 (Jan 2025 initial)",
+      k01_co: "-$14,723 (-0.6% · BID revisions)", k01_directCost: "$134,500", k01_profit: "($55,700) carrying",
       footerReport: "REPORT #2110-LIVE01 · Live snapshot Apr 28, 2026 · v1.0 · LNTP-secured pre-construction · verified bid sheet fixtures",
       sbName: "Roosevelt Manor.", skyName: "ROOSEVELT MANOR",
       skyline: { floors: 5, cols: 14, w: 300 },
@@ -10127,7 +10204,7 @@
     "2115": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Chinn Construction, LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Charlie Poggemann</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">North Cove Investors, LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner POC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tejal Pastakia \u00b7 Matthew Burton (Mgr)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">OWP (design-build)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 design / DD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Location</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Lake Stevens, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Design Start</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Sep 2025 (Dec 3 2025 signed)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Bid Date</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Sep 24, 2025</div></div></div>", "jobInfoUnits": 201},
     "2116": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">SRM Construction, Inc.</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Erik Benzel (Spokane)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">NYL (per GMP contract)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Emerald City Engineers (ECE)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 pre-construction</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Seattle, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GMP Contract</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Executed Feb 24, 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Bid Date</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Sep 13, 2025</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Project Type</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">7-story multifamily</div></div></div>", "jobInfoUnits": 166},
 "2117": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Ravenna Partners (owner-GC)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Andrew Withnell</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Ravenna Partners (self-developing)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP (OWP DB)</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">3421 Woodland Park Ave N, Seattle</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Units</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">104</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Fixtures (verified)</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">425 trim · 4.09/unit · 535 RI · 705 permit</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Final BID</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$1,948,000 (Nov 19 2025)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">1st Bid (Blueprint era)</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$2,610,000 (Dec 2023 · 122u)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Bid Pursuit</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">23 months · 3 rounds · -25.4% net</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Estimator</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jeffrey + Jordan Gerard (3.0 hrs YTD)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Heat Source</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Gas (3 × 199mbh boilers)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard COI · OCIP-deduct alt offered</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE · pre-construction · final BID submitted</div></div></div>", "jobInfoUnits": 104},
-    "2118": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific, Inc.</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tommy Booth (Bellingham)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Robison Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Designer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jeff MacGillivray</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE \u00b7 bidding / design</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Edmonds, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Design Contract</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Signed Mar 16, 2026 ($125k Robison)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Latest Bid</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jan 16, 2026 ($7.18M total)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Project Type</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">6-story, 2 towers, 3 below-grade, 406u</div></div></div>", "jobInfoUnits": 406},
+    "2118": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific, Inc.</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Tommy Booth (Bellingham · same PM as #2017+#2022)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Behar Company</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Architect</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Clark Barnes Architecture</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP (OWP DB)</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Robison Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Designer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jeff MacGillivray</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Edmonds, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Units</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">409 (verified Jan 16 2026 proposal)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Fixtures (verified)</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">1,899 trim · 4.64/unit · 2,331 RI · 3,132 permit</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Final BID</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$7,183,400 (Jan 16 2026)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">1st Bid (initial)</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$8,198,000 (Mar 29 2024 · 462u)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Bid Pursuit</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">22 months · 8 events · -12.4% net erosion</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Design Contract</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Robison · $125k · signed Mar 16 2026</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Construction Subcontract</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">PENDING Exxel issuance</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Estimator</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Gerard takeoff team</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">TBD (pre-construction)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Heat Source</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">6 gas boilers + 2× 150's</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Std COI · OCIP-Wrap deduct alt offered</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">ACTIVE · pre-construction · design signed</div></div></div>", "jobInfoUnits": 409},
     "2119": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Exxel Pacific, Inc.</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Michael Fisher (Bellingham)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Developer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Graham</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Status</div><div class=\"text-[12px]\" style=\"color:var(--clay); font-weight:600;\">PRE-BID \u00b7 mockup only</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Standard (COI)</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">508 Fremont, Seattle, WA</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Mockup Proposal</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">$4,700 \u00b7 Nov 13, 2024</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Bid Status</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Bid set received \u00b7 OWP proposal pending</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Project Type</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Multifamily (TBD)</div></div></div>", "jobInfoUnits": null},
     "2050": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Scott Miller</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Pat McCabe / Brett</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Steve Garka</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Garrett / Joe</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">12 Madison Investment LLC</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Address</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">2100 E Madison St, Seattle</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div></div>", "jobInfoUnits": 50},
     "2051": {"teamHTML": "<div class=\"grid grid-cols-4 gap-x-6 gap-y-3 py-4 border-b border-dashed\" style=\"border-color: var(--border-2);\"><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Compass</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PM</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Justin Anderson</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC Sup</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Will Fenton</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">GC PE</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Jeff Seeb</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP RI Foreman</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Bob</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Owner</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">AAA Management</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">MEP Engineer</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Franklin Engineering</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">Insurance</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Not Wrap</div></div><div><div class=\"hero-lab\" style=\"font-size:10px;\">OWP Signatory</div><div class=\"text-[12px]\" style=\"color:var(--ink); font-weight:500;\">Richard Donelson</div></div></div>", "jobInfoUnits": 163},
