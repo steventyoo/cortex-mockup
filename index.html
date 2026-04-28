@@ -4112,8 +4112,9 @@
         <line class="atlas-edge atlas-edge-gc" x1="376" y1="86" x2="270" y2="250" stroke="var(--ink)" stroke-width="1.4"/>
         <line class="atlas-edge atlas-edge-gc" x1="376" y1="86" x2="170" y2="380" stroke="var(--ink)" stroke-width="1.1"/>
         <!-- removed wrong edge: Chinn→2008 (project 2008 is SRM, not Chinn) -->
-        <line class="atlas-edge atlas-edge-gc" x1="376" y1="86" x2="600" y2="270" stroke="var(--ink)" stroke-width="1.4"/>
-        <line class="atlas-edge atlas-edge-gc" x1="376" y1="86" x2="600" y2="110" stroke="var(--ink)" stroke-width="1.4"/>
+        <!-- removed stale edges: Chinn→(600,270) and Chinn→(600,110) — destinations were
+             phantom #2014 'Capitol Hill 168' (ID never used per CLAUDE.md) and a deleted
+             node at (600,110). They rendered as random lines extending right from Chinn. -->
 
         <!-- Exxel → its 3 closed jobs -->
         <line class="atlas-edge atlas-edge-gc" x1="806" y1="86" x2="920" y2="290" stroke="var(--ink)" stroke-width="1.4"/>
@@ -4726,15 +4727,7 @@
         <line class="atlas-edge atlas-edge-vendor" x1="130" y1="540" x2="980" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
         <line class="atlas-edge atlas-edge-vendor" x1="130" y1="540" x2="1140" y2="850" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="3,3"/>
 
-        <!-- Active job (clay outline) -->
-        <g class="atlas-node" data-atlas-cat="project" data-atlas-node="2014" style="cursor: pointer;">
-          <circle cx="600" cy="270" r="20" fill="var(--cream-card)" stroke="var(--clay)" stroke-width="2.8"/>
-          <text x="600" y="266" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="var(--clay)" text-anchor="middle">ACTIVE</text>
-          <text x="600" y="278" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="var(--ink)" text-anchor="middle">2014</text>
-          <text x="600" y="306" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">Capitol Hill 168</text>
-          <text x="600" y="319" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--clay)" text-anchor="middle">52% · ⚠ watch</text>
-        </g>
-
+        <!-- removed phantom #2014 'Capitol Hill 168' node — IDs 2013/2014 never existed per CLAUDE.md -->
 
         <!-- Vendor nodes: triangles, clay stroke -->
         <g class="atlas-node" data-atlas-cat="vendor" data-atlas-node="ferguson" style="cursor: pointer;">
