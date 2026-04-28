@@ -4133,7 +4133,7 @@
         <line class="atlas-edge atlas-edge-vendor" x1="270" y1="600" x2="920" y2="290" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
         <line class="atlas-edge atlas-edge-vendor" x1="270" y1="600" x2="1080" y2="280" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
         <line class="atlas-edge atlas-edge-vendor" x1="200" y1="460" x2="320" y2="360" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
-        <line class="atlas-edge atlas-edge-vendor" x1="200" y1="460" x2="600" y2="270" stroke="var(--ink-3)" stroke-width="0.9" stroke-dasharray="3,3"/>
+        <!-- removed orphan: vendor mclendon → (600,270) — destination was the deleted phantom #2014 -->
 
         <!-- ========== NODES ========== -->
 
@@ -5477,14 +5477,14 @@
         <div class="card" style="height: 100%;">
           <div class="card-label">Confidence</div>
           <div class="text-[44px] serif-it mt-2" style="color: var(--clay); line-height: 1;" id="bid-confidence-label">Medium</div>
-          <div class="text-[12px] mt-2" style="color: var(--ink-3);">Cortex parsed 32 cost codes across 4 closed jobs (#2009–#2012, smaller scale ≈ <b>$1,290/fx direct cost</b> in 2026 $). Default is anchored at <b>$1,684/fx direct cost</b> — the median of the four mid-rise comparables (#2001 $1,641 · #2008 $1,641 · #2018 $1,684 · #2028 $1,634, all in 2026 $). All figures are direct cost in 2026 $ (escalated 3.5%/yr — ENR-CCI 2020-2024 actual ran ~5%, so this is conservative); contingency + escalation + margin are applied separately to derive the contract bid price.</div>
+          <div class="text-[12px] mt-2" style="color: var(--ink-3);">Per-code mean and σ are calibrated across <b>50 closed jobs</b> — median n=46 per code, n=50 on the 14 major codes (Roughin Labor, Finish/Roughin Material, Payroll Burden, etc.). Default is anchored at <b>$1,684/fx direct cost</b> — the median of the four mid-rise comparables (#2001 $1,641 · #2008 $1,641 · #2018 $1,684 · #2028 $1,634, all in 2026 $). The tier anchor uses cohort comparables; the per-code σ that drives P10–P90 uses all 50 jobs. All figures are direct cost in 2026 $ (escalated 3.5%/yr — ENR-CCI 2020-2024 actual ran ~5%, so this is conservative); contingency + escalation + margin are applied separately to derive the contract bid price.</div>
 
           <div class="kpi-divider mt-5"></div>
-          <div class="kpi-row"><span class="kpi-lbl">Cost codes parsed</span><span class="kpi-val tabular">32 codes</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Code-level analogs</span><span class="kpi-val tabular">4 (#2009–#2012)</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Parsed base · $/fx</span><span class="kpi-val tabular">$797</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Cost codes modeled</span><span class="kpi-val tabular">34 codes</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Calibration sample</span><span class="kpi-val tabular">50 closed jobs (n=46 median)</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Portfolio base · $/fx</span><span class="kpi-val tabular">$1,788</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Scale-tier default · $/fx</span><span class="kpi-val tabular">$1,684</span></div>
-          <div class="kpi-row"><span class="kpi-lbl">Portfolio σ · total $/fx</span><span class="kpi-val tabular">38.3%</span></div>
+          <div class="kpi-row"><span class="kpi-lbl">Portfolio σ · per-code median</span><span class="kpi-val tabular">22.0%</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Margin floor source</span><span class="kpi-val" id="bid-margin-source">Chinn blended (4 jobs)</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Walk-away threshold</span><span class="kpi-val" id="bid-walk-away" style="color: var(--clay);">&lt; 28.0%</span></div>
           <div class="kpi-row"><span class="kpi-lbl">Win-rate at floor</span><span class="kpi-val" id="bid-win-rate">est. 41%</span></div>
@@ -16367,8 +16367,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const recommendedBid = totalCost / denom;
     const profit = recommendedBid - totalCost;
 
-    // Portfolio-level band on total direct cost (σ = 38.3% across 4 jobs).
-    // We soften this to ±1σ bounded by code-aggregated band, whichever is tighter.
+    // Portfolio-level band on total direct cost (σ = 22.0% — median per-code σ
+    // across 50 closed jobs, n≥45 on major codes). We soften this to ±1σ bounded
+    // by code-aggregated band, whichever is tighter.
     const portfolioLow  = baseDirect * (1 - PORTFOLIO_TOTAL_SIGMA/100);
     const portfolioHigh = baseDirect * (1 + PORTFOLIO_TOTAL_SIGMA/100);
     const p10 = Math.max(portfolioLow, baseDirect * 0.6);
