@@ -18749,6 +18749,43 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   }
   const _atlasGcMap = _atlasBuildGcProjectMap();
 
+  // Auto-refresh GC caption text from live PROJECTS data so counts stay accurate.
+  // Each GC <g> has two <text> children: [0] = label (CHINN, EXXEL...),
+  // [1] = caption ('general contractor · 5 closed · 4 live'). We rewrite [1].
+  function _atlasRefreshGcCaptions() {
+    const liveSet = new Set(PROJECT_STAGES.active || []);
+    const closedSet = new Set(PROJECT_ORDER || []);
+    document.querySelectorAll('.atlas-node[data-atlas-cat="gc"]').forEach(g => {
+      const key = g.getAttribute('data-atlas-node');
+      const ids = (_atlasGcMap[key] || []);
+      // Only count projects that are actually classified (live or closed) — orphans
+      // like #2119 in PROJECTS but not in PROJECT_ORDER/active should be excluded.
+      let live = 0, closed = 0;
+      ids.forEach(pid => {
+        if (liveSet.has(pid)) live++;
+        else if (closedSet.has(pid)) closed++;
+      });
+      const total = live + closed;
+      if (!total) return;
+      let caption;
+      if (closed === 0 && live > 0) {
+        caption = 'new gc · ' + live + ' job' + (live===1?'':'s') + ' (live)';
+      } else if (live === 0 && closed > 0) {
+        caption = 'general contractor · ' + closed + ' closed' + (closed===1?'':' jobs');
+      } else {
+        caption = 'general contractor · ' + closed + ' closed · ' + live + ' live';
+      }
+      const texts = g.querySelectorAll('text');
+      if (texts.length >= 2) texts[texts.length - 1].textContent = caption;
+    });
+  }
+  // Run once after DOM settles. Atlas SVG is in markup so already in DOM.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _atlasRefreshGcCaptions);
+  } else {
+    _atlasRefreshGcCaptions();
+  }
+
   // Get center coordinates of a node element (rect for GC, circle for project, polygon for vendor)
   function _atlasNodeCenter(g) {
     const rect = g.querySelector('rect');
