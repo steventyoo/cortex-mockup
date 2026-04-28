@@ -9,7 +9,7 @@
     "location": "Edmonds, WA",
     "project_type": "6-story multifamily, 2 towers, 3 below-grade levels (409 units)",
     "units": 409,
-    "total_fixtures": null,
+    "total_fixtures": 1899,
     "architect": null,
     "mep_engineer": "Robison Engineering (Jeff MacGillivray, Mechanical Designer)",
     "report_date": "2026-04-03",
@@ -52,7 +52,24 @@
     "gmp_set_date": "2024-11-27",
     "bid_history_months": 22,
     "water_heating_system": "Gas (6x Bock OT-800N-A 800mbh + 2x OT-150N 150mbh)",
-    "status_note": "No JDR yet \u2014 bidding/design phase. Design contract signed Mar 16 2026 with Robison. Construction subcontract pending."
+    "status_note": "No JDR yet \u2014 bidding/design phase. Design contract signed Mar 16 2026 with Robison. Construction subcontract pending.",
+    "units_reconciled": true,
+    "units_provenance": "Latest BID 2026-01-16 + data.json agree at 409u. Schedule shows stale 406u (was bid count at earlier stage). 409 is current.",
+    "fixtures_provenance": "\u2713 VERIFIED via OWP bid sheet: Exxel - Edmonds Behar Bid Sheet - Jan 2026 - FINAL (Estimating - Won Bids GDrive folder). 409 units \u00b7 Exxel Pacific \u00b7 Behar Company \u00b7 Clark Barnes \u00b7 Rushing",
+    "fixtures_estimated": null,
+    "total_fixtures_grand_with_roughins": 1899,
+    "fixtures_per_unit": 4.64,
+    "fixture_categories": {
+      "Toilets (resid + ADA)": 486,
+      "Lavatories (resid + ADA)": 492,
+      "Tubs (resid + ADA)": 376,
+      "Standalone showers": 84,
+      "Kitchen sinks": 409,
+      "Common toilets": 17,
+      "Common lavs": 12,
+      "Amenity sinks": 7,
+      "Specialty (DF/MS/dog/eye/coffee/ice)": 16
+    }
   },
   "totals": {
     "revenue": 0.0,
@@ -60,7 +77,12 @@
     "net_profit": 0.0,
     "net_due": 0.0,
     "retainage": 0.0,
-    "by_source": {"GL": 0.0, "AP": 0.0, "PR": 0.0, "AR": 0.0}
+    "by_source": {
+      "GL": 0.0,
+      "AP": 0.0,
+      "PR": 0.0,
+      "AR": 0.0
+    }
   },
   "labor": {
     "total_hours": 0.0,
@@ -81,7 +103,12 @@
     "job_totals_net": 0.0,
     "job_totals_net_due": 0.0,
     "job_totals_retainage": 0.0,
-    "job_totals_by_source": {"GL": 0.0, "AP": 0.0, "PR": 0.0, "AR": 0.0}
+    "job_totals_by_source": {
+      "GL": 0.0,
+      "AP": 0.0,
+      "PR": 0.0,
+      "AR": 0.0
+    }
   },
   "codes": {},
   "cost_codes": [],

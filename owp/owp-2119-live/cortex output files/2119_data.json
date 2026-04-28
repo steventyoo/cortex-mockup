@@ -1,6 +1,6 @@
 {
   "schema": "CORTEX_V2.2",
-  "schema_note": "STUB: No JDR yet for 2119 The Frank (508 Fremont). Earliest-stage live project — only a mockup fixture proposal ($4,700 from Nov 13, 2024) exists. No full construction bid yet. Placeholder schema matches 2020 gold standard + 2049 v2.2 extensions.",
+  "schema_note": "STUB: No JDR yet for 2119 The Frank (508 Fremont). Earliest-stage live project \u2014 only a mockup fixture proposal ($4,700 from Nov 13, 2024) exists. No full construction bid yet. Placeholder schema matches 2020 gold standard + 2049 v2.2 extensions.",
   "project": {
     "job_number": "2119",
     "job_name": "The Frank (508 Fremont)",
@@ -8,7 +8,7 @@
     "owner": "Graham (developer)",
     "location": "508 Fremont, Seattle, WA",
     "project_type": "Multifamily \u2014 details TBD (mockup phase)",
-    "units": null,
+    "units": 109,
     "total_fixtures": null,
     "architect": null,
     "mep_engineer": null,
@@ -46,7 +46,11 @@
     "previous_plumber": null,
     "invoice_count": null,
     "vendor_quote_count": null,
-    "status_note": "Pre-bid / mockup-only phase. No JDR yet. No full construction bid yet. Mockup-fixture proposal $4,700 (Nov 13, 2024). Next milestone: OWP full plumbing proposal + bid sheet to Exxel."
+    "status_note": "Pre-bid / mockup-only phase. No JDR yet. No full construction bid yet. Mockup-fixture proposal $4,700 (Nov 13, 2024). Next milestone: OWP full plumbing proposal + bid sheet to Exxel.",
+    "units_reconciled": true,
+    "units_provenance": "Latest BID 2026-02-23 (Kirtley Cole) shows 109u (latest scope). Earlier bids had 169u (Exxel) and 185u (Holland) at different scopes. Using latest 109.",
+    "fixtures_provenance": "TBD \u2014 no Job Ticket exists yet for this project. Job Tickets (the source of fixture takeoff data) are only generated when OWP cuts a per-project takeoff for field installation, typically at subcontract execution. The OWP Master Project List does not track fixtures \u2014 only units. Definitive fixture count will populate when project advances to active field stage and Job Ticket is created. As a planning estimate, ~4.5 trim fixtures per unit is the OWP closed-portfolio median (verified against #2061 Alta Columbia City: 1,093 trim fixtures / 243 units = 4.50/unit).",
+    "fixtures_estimated": 490
   },
   "totals": {
     "revenue": 0.0,
@@ -54,7 +58,12 @@
     "net_profit": 0.0,
     "net_due": 0.0,
     "retainage": 0.0,
-    "by_source": {"GL": 0.0, "AP": 0.0, "PR": 0.0, "AR": 0.0}
+    "by_source": {
+      "GL": 0.0,
+      "AP": 0.0,
+      "PR": 0.0,
+      "AR": 0.0
+    }
   },
   "labor": {
     "total_hours": 0.0,
@@ -75,7 +84,12 @@
     "job_totals_net": 0.0,
     "job_totals_net_due": 0.0,
     "job_totals_retainage": 0.0,
-    "job_totals_by_source": {"GL": 0.0, "AP": 0.0, "PR": 0.0, "AR": 0.0}
+    "job_totals_by_source": {
+      "GL": 0.0,
+      "AP": 0.0,
+      "PR": 0.0,
+      "AR": 0.0
+    }
   },
   "codes": {},
   "cost_codes": [],
