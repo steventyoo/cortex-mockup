@@ -1,0 +1,96 @@
+{
+  "allVendors": [
+    ["Franklin Engineering", 2, 10701, 100.0]
+  ],
+  "changeLog": [],
+  "payApps": [],
+  "sovData": {
+    "originalContract": 1948000,
+    "changeOrders": 0,
+    "finalContract": 1948000,
+    "retainage": 0,
+    "netPaid": 0,
+    "billedToDate": 0
+  },
+  "insights": [
+    ["MARGIN PROFILE", "Pre-construction · $0 billed against $11,007 sunk design cost = -$11,007 carrying loss. Forecast 24% margin once Ravenna accepts Nov 19 2025 BID and field work mobilizes (industry benchmark for new owner-GC relationship)."],
+    ["VENDOR CONCENTRATION", "Franklin Engineering (OWP design-build MEP) = $10,701 (100% of $11,007 AP) across 2 design invoices. Only 1 AP vendor active — design-only phase has not yet engaged supply houses."],
+    ["CREW PROFILE", "2 OWP estimators logged 3.0 hours YTD: Jeffrey Gerard 2.0 hrs + Jordan Gerard 1.0 hr (takeoff). $197 labor base — virtually all takeoff/refinement work in design phase."],
+    ["ROUGHIN DOMINANCE", "Code 120 Roughin Labor = 0 hrs / $0 actual (pre-mobilization). Code 101 Takeoff & Purchase Labor = 3.0 hrs / $197 — the only OWP labor activity to date."],
+    ["BUDGET DELIVERY", "Final BID Nov 19 2025 = $1,948,000 (104 units · $18,731/unit · $4,584/trim fixture). 23-month bid pursuit since Dec 2023: 122u/$2.61M → 100u/$2.10M → 104u/$1.95M (-25% net)."],
+    ["CONTRACT GROWTH", "Bid trajectory: $2,610,000 (Dec 15 2023 1st Budget · Blueprint GC) → $2,100,000 (Oct 17 2024 2nd Budget Blueprint · -19.5%) → $1,948,000 (Nov 19 2025 FINAL Ravenna Partners · -7.2%). Net -$662k (-25.4%) and -18 units across 3 bids."],
+    ["BURDEN RATIO", "Burden codes 995 + 998 = $109 on $197 labor base = 55.3%. Slightly above OWP's typical 48-50% — design-phase labor with no field crew yet skews ratio."],
+    ["PROJECT SCALE", "104 units · 425 trim fixtures (verified Nov 19 2025 bid sheet) = 4.09 fixtures/unit. 535 RI fixtures · 705 permit fixtures. Revenue/unit $0 (pre-billing), hours/unit 0.03 takeoff. Ravenna Partners' 1st OWP engagement."],
+    ["PRODUCTIVITY", "Blended labor rate $65.67/hr in design phase. Revenue/hour $0 (pre-billing). Profit/hour $-3,669 (carrying loss on tiny labor base). Field productivity benchmarks pending Ravenna acceptance."],
+    ["CO PROFILE", "0 executed COs (pre-construction). Bid revisions across 3 budget rounds (Dec 2023 → Nov 2025) not classified as COs. CO pipeline opens upon Ravenna acceptance."],
+    ["FIXTURE DENSITY", "425 trim fixtures ÷ 104 units = 4.09 fixtures/unit (verified Ravenna bid sheet 3rd Budget Nov 19 2025 + proposal RESIDENT UNIT TRIM): 104 toilets (98+6 ADA Gerber) + 104 lavs (Kohler K-2035-1 + matte black Peerless) + 53 tubs (47+6 ADA Sterling Vikrell) + 51 showers (Sterling 95077) + 104 kitchen sinks (Peerless P7946LF-BL) + 4 common (2 Toto WC + 2 Kohler lav) + 2 amenity sinks + 1 mop + 1 drinking fountain + 1 coffee. Plus 106 dishwasher RI + 104 icemaker RI + 104 washer RI + 104 condensate drains + 208 water spacer tubes."],
+    ["NEW GC SIGNAL · OWNER-GC", "First OWP engagement with Ravenna Partners (owner-GC pattern · self-developing). Initial budget rounds Dec 2023 + Oct 2024 listed Blueprint as GC; Ravenna took over for Nov 2025 final bid. Owner-GC posture (lean PM, price-sensitive, schedule-focused) is unfamiliar territory for OWP — no closed-job baseline."],
+    ["DESIGN-TEAM POSTURE", "Architect TBD per Master Project List (drawings published as 'Building Permit Plans' Nov 2025). MEP Franklin Engineering is OWP design-build partner ($10,701 design fees, ~0.55% of bid value · standard pre-permit ratio). Heat source: 3 gas boilers (199mbh × 100-gal AO Smith/Rinnai/Bock) — gas water heating with electric fallback alternate."]
+  ],
+  "predictiveSignals": [
+    ["BVA Critical Flags", "0", "<2", "HEALTHY"],
+    ["BVA Over Flags", "0", "<5", "HEALTHY"],
+    ["Change Order Count", "0", "<10", "PRE-CONSTRUCTION"],
+    ["Retention Held", "$0", "<6%", "PRE-CONSTRUCTION"],
+    ["Forecast Margin", "24.0%", ">22%", "ON-TRACK"],
+    ["Carrying Loss", "$11,007", "<$15k pre-mob", "ON-TRACK"],
+    ["Vendor Concentration (top1)", "100.0%", "<60%", "EXPECTED · DESIGN PHASE"],
+    ["Roughin Labor Share", "0.0%", ">40% post-mob", "PRE-CONSTRUCTION"],
+    ["Bid Pursuit Length", "23 months", "<18 months", "EXTENDED"],
+    ["Bid Price Erosion", "-25.4%", "<-15%", "AGGRESSIVE"]
+  ],
+  "rootCauses": [],
+  "responsibility": [],
+  "phases": [
+    ["DESIGN", 3.0, 11007, "in-progress"],
+    ["TAKEOFF", 0, 0, "complete"],
+    ["PERMIT", 0, 0, "notstarted"],
+    ["MOBILIZE", 0, 0, "notstarted"],
+    ["UNDERGROUND", 0, 0, "notstarted"],
+    ["ROUGHIN", 0, 0, "notstarted"],
+    ["TRIM", 0, 0, "notstarted"],
+    ["FIXTURES", 0, 0, "notstarted"],
+    ["TEST/PUNCH", 0, 0, "notstarted"]
+  ],
+  "changeMeta": {
+    "executed": 0,
+    "cors_pending": 0,
+    "rfis": 0,
+    "asis": 0,
+    "submittals": 3
+  },
+  "crewRoster": [
+    ["Gerard, Jeffrey S", 2.0, 138, 69.00, "Tier 1 (Estimator/Mgr)"],
+    ["Gerard, Jordan E", 1.0, 59, 59.00, "Tier 1 (Sr Estimator)"]
+  ],
+  "tierDist": [
+    ["Tier 1 (Estimator)", 2, 3.0, 100.0, "Senior estimating leadership · takeoff phase"]
+  ],
+  "wageStats": {
+    "totalHours": 3.0,
+    "totalLabor": 197,
+    "blendedRate": 65.67,
+    "regularHours": 3.0,
+    "otHours": 0,
+    "dtHours": 0
+  },
+  "costCodes": [
+    ["101", "Takeoff & Purchase Labor", 0, 197, -197],
+    ["601", "Engineering/Plans", 0, 10701, -10701],
+    ["995", "Payroll Burden", 0, 94, -94],
+    ["998", "Payroll Taxes", 0, 15, -15]
+  ],
+  "costCats": [
+    ["Labor", 1, 0, 197, 1.8, 1.9],
+    ["Material", 0, 0, 0, 0, 0],
+    ["Overhead", 1, 0, 10701, 97.2, 102.9],
+    ["Burden", 2, 0, 109, 1.0, 1.0],
+    ["Revenue", 0, 0, 0, 0, 0]
+  ],
+  "bva": [
+    ["Code 101 Takeoff Labor", 0, 197, -197, 0, null, null, "UNBUDGETED"],
+    ["Code 601 Engineering/Plans", 0, 10701, -10701, 0, null, null, "UNBUDGETED"],
+    ["Code 995 Payroll Burden", 0, 94, -94, 0, null, null, "UNBUDGETED"],
+    ["Code 998 Payroll Taxes", 0, 15, -15, 0, null, null, "UNBUDGETED"]
+  ]
+}
