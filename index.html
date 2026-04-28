@@ -18769,11 +18769,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       if (!total) return;
       let caption;
       if (closed === 0 && live > 0) {
-        caption = 'new gc · ' + live + ' job' + (live===1?'':'s') + ' (live)';
+        caption = live + ' live · new gc';
       } else if (live === 0 && closed > 0) {
-        caption = 'general contractor · ' + closed + ' closed' + (closed===1?'':' jobs');
+        caption = closed + ' closed';
       } else {
-        caption = 'general contractor · ' + closed + ' closed · ' + live + ' live';
+        caption = closed + ' closed · ' + live + ' live';
       }
       const texts = g.querySelectorAll('text');
       if (texts.length >= 2) texts[texts.length - 1].textContent = caption;
