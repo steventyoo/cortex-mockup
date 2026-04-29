@@ -89,6 +89,109 @@ def hero_lookup(jid):
     return _HERO_CACHE.get(jid, (0, 0))
 
 
+def load_xlsx_data(jid):
+    """v1.0-era fallback: read OWP_XXXX_JCR_Cortex_v2.xlsx from
+    owp/cortex_v2_files_rebuilt/ for projects that don't have data.json.
+    Used to bridge the 13 original projects (#2001-#2022) into the
+    calibration sample. Returns same normalized shape as load_project_data."""
+    xlsx_path = ROOT / "owp" / "cortex_v2_files_rebuilt" / f"OWP_{jid}_JCR_Cortex_v2.xlsx"
+    if not xlsx_path.exists():
+        return None
+    try:
+        from openpyxl import load_workbook
+    except ImportError:
+        return None
+
+    wb = load_workbook(xlsx_path, data_only=True)
+    n = {'jid': jid, 'codes': {}, 'schema': 'xlsx-v2.1'}
+
+    # Hero lookup for units + fixtures
+    hu, hf = hero_lookup(jid)
+    n['units'] = hu
+    n['fixtures'] = hf
+
+    # Read Budget vs Actual sheet for cost codes
+    if 'Budget vs Actual' in wb.sheetnames:
+        ws = wb['Budget vs Actual']
+        # Header at row 5 (index 4); data starts at row 7+ (skipping LABOR/MATERIAL section headers)
+        for row in ws.iter_rows(min_row=6, values_only=True):
+            # Row layout: [None, cost_code, description, original_budget, revised_budget, actual, variance, pct_used, hours]
+            if not row or len(row) < 7:
+                continue
+            code = row[1]
+            if code is None or not isinstance(code, str):
+                continue
+            # Skip section headers (LABOR, MATERIAL, OVERHEAD, BURDEN, SALES, TOTAL, etc.)
+            if not code.strip().isdigit() and code != '011' and code != '039':
+                continue
+            try:
+                orig = float(row[3] or 0)
+                actual = float(row[5] or 0)
+                hours = float(row[8] or 0) if len(row) > 8 and row[8] else 0
+            except (ValueError, TypeError):
+                continue
+            n['codes'][code.strip()] = {'orig': orig, 'actual': actual, 'hours': hours}
+
+    # Read Overview for revenue + direct cost + GC
+    if 'Overview' in wb.sheetnames:
+        ws = wb['Overview']
+        rows = list(ws.iter_rows(values_only=True))
+        for i, row in enumerate(rows):
+            if not row or all(c is None for c in row):
+                continue
+            label = str(row[1]).strip() if row[1] else ''
+            value = row[2] if len(row) > 2 else None
+            if label == 'General Contractor' and value:
+                n['gc'] = str(value).strip()
+            elif label == 'CONTRACT VALUE':
+                # Next row has the values: [None, contract_value, None, net_profit, None, direct_cost]
+                # Values may be either numeric or string-formatted ("$1,850,270")
+                def parse_money(v):
+                    if v is None: return 0.0
+                    if isinstance(v, (int, float)): return float(v)
+                    if isinstance(v, str):
+                        cleaned = v.replace('$', '').replace(',', '').strip()
+                        try: return float(cleaned)
+                        except ValueError: return 0.0
+                    return 0.0
+                if i + 1 < len(rows):
+                    vrow = rows[i + 1]
+                    if vrow and len(vrow) >= 6:
+                        n['revenue'] = parse_money(vrow[1])
+                        n['direct_cost'] = parse_money(vrow[5])
+
+    # Read Crew & Labor for worker count + total hours
+    if 'Crew & Labor' in wb.sheetnames:
+        ws = wb['Crew & Labor']
+        worker_count = 0
+        total_hours = 0.0
+        for row in ws.iter_rows(min_row=5, values_only=True):
+            if not row or len(row) < 4:
+                continue
+            name = row[1]
+            hours = row[3]
+            if name and isinstance(name, str) and hours and isinstance(hours, (int, float)):
+                worker_count += 1
+                total_hours += float(hours)
+        n['total_workers'] = worker_count
+        n['total_hours'] = total_hours
+
+    # Defaults if Overview parsing missed something
+    n.setdefault('revenue', 0)
+    n.setdefault('direct_cost', 0)
+    n.setdefault('total_hours', 0)
+    n.setdefault('total_workers', 0)
+    n.setdefault('gc', '')
+
+    # Compute gross_margin
+    if n.get('revenue') and n['revenue'] > 0:
+        n['gross_margin'] = (n['revenue'] - n.get('direct_cost', 0)) / n['revenue']
+    else:
+        n['gross_margin'] = None
+
+    return n
+
+
 def load_project_data(jid):
     """Load and normalize a project's data.json regardless of schema. Returns
     a normalized dict with consistent keys, or None if no data.json found.
@@ -104,7 +207,7 @@ def load_project_data(jid):
         'total_workers': int,
         'codes': { code: {orig, actual, hours} },  # the per-cost-code dict
         'gc': str,
-        'schema': str ('v2.0'/'v2.1'/'v2.2'),
+        'schema': str ('v2.0'/'v2.1'/'v2.2'/'xlsx-v2.1'),
       }
     """
     for folder in (f"owp-{jid}-live", f"owp-{jid}"):
@@ -112,7 +215,8 @@ def load_project_data(jid):
         if path.exists():
             break
     else:
-        return None
+        # No data.json found — try XLSX fallback for v1.0-era projects
+        return load_xlsx_data(jid)
 
     raw = json.loads(path.read_text())
     n = {'jid': jid, 'codes': {}, 'schema': 'unknown'}
