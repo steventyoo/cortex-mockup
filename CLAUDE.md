@@ -416,6 +416,25 @@ The archetype now spans:
 
 2. **#2097 is the LARGEST 0-doc project in OWP closed portfolio** at $5.23M / 228 units / 1,950 fixtures. This breaks the prior assumption that 0-RFI jobs are small-scope. Intracorp ran a near-perfect $5M+ delivery with zero formal documentation flow. Either Intracorp has unusually robust pre-construction coordination, or large jobs with 0 RFIs become a distinctive new class to model. Worth verifying when a 3rd large-scale (>$3M) 0-doc job appears.
 
+## #2099 Kirtley-Cole Koz Apts (added 2026-04-29) — NEW GC, 18th closed-portfolio
+
+**#2091 + #2095 confirmed dead** (no parse output). Skip list now: #2062, #2065, #2068, #2070, #2083, #2091, #2095 (7 dead projects total — all design-only / scope-shifted / loss-leader engagements).
+
+- **#2099 Kirtley-Cole Associates LLC, Koz Apartments** (Seattle WA · 300 West Republican St · Lower Queen Anne / SLU · 169-unit mixed-use multifamily · 716 fixtures · $3,030,296 final / $2,950,000 base / **10 executed COs net $0** — Mechanism A: $3.34M gross + $307k credits = +10.1% gross over · **32.4% gross margin** · $981,570 net profit · 50 workers / 16,414 hrs / 21 months Jan 2024 → Sep 2025 · Subcontract **23913-3356** (Job #23913, KOZ on 3rd Ave West) · GC Kirtley-Cole Associates LLC (Everett WA-based) — **OWP's first closed Kirtley-Cole engagement, 18th closed-portfolio GC** (joining Chinn/SRM/Exxel/Compass/BMDC/Blueprint/Natural & Built/Marpac/Shelter/GRE/Synergy/Farrell-McKenna/Jabooda/Braseth/Intracorp/Holland/Kirtley-Cole) · Owner **KOZ on 3rd Ave West LLC (Koz Development)** · MEP Franklin Engineering — light role at $23,883 AP / 2 invoices (atypical — most closed jobs have Franklin at $50k+ AP) · OWP PM Richard Donelson · Insurance Standard (no wrap) · top vendor **Trane US, Inc 30.4% / 5 invoices / $290,000 — FIRST TIME Trane leads as top vendor in OWP closed portfolio** (Trane is HVAC; suggests heat-pump-heavy scope, paralleling #2086 Compass LIZA's California Hydronics 27% top-vendor pattern for hydronic-heavy projects) · Pacific Plumbing #2 (26.3% / 120 invoices), Consolidated #3 (12.7%) — distributed runner-ups · 22 vendors total, $952,880 AP across 496 invoices · 25 RFIs + 103 submittals — high-submittal load typical for heat-pump mid-rise · **$0 retention held — clean closeout**).
+
+PROJECT_ORDER now contains 79 IDs (was 78). Calibration sample now n=66 (was n=65). Headline benchmarks: hours/unit 117.1 · gross_margin 38.6% · loaded_wage $44.46/hr · burden_multiplier 1.424. Code 120 Roughin Labor overrun stable at +5.7%.
+
+**Workspace updates this batch:**
+- **NEW Kirtley-Cole GC_DB entry** (jobs: 1, kirtleycole key in dropdown). knownTag flags Trane-led top vendor as the distinctive feature plus Standard insurance + clean closeout.
+- Bid dropdown: NEW Kirtley-Cole entry below Holland.
+- Bulk-updated 5 prose references "65 closed jobs" → "66 closed jobs".
+
+**Two pattern signals from this batch:**
+
+1. **Trane US as top vendor is genuinely new.** Trane has been a peripheral supplier across the closed portfolio (typically <5% share when present). Jumping to #1 with 30.4% / $290k spend on a $3M project means OWP installed multiple Trane heat-pump units — almost certainly per-unit VRF or split systems for the 169 dwelling units. Compare with #2086 Compass LIZA (Cal Hydronics 27% top — boiler/hydronic-heavy) and the older Bradford White Ruud per-unit electric WH pattern in #2059 GRE Meeker. **Heat system class is becoming a real top-vendor signature**: hydronic = California Hydronics, heat-pump = Trane, per-unit electric = Bradford White / Ruud, central gas = various. Worth surfacing in bid tool risk panel for any heat-pump-spec'd live project (#2114, #2116, etc.).
+
+2. **OWP closed-portfolio GC count is now 18.** That's broad — covers most major Seattle-area multifamily GCs. **The marginal value of adding more GCs to the calibration sample is decreasing**; what's more valuable now is depth on the existing GCs (more jobs per GC) to nail down per-GC margin/CO/vendor patterns. Compass leads with 17, Exxel 19, Blueprint 10, Chinn 8, GRE 7, SRM 6 — the rest are 1–3 jobs each. **Bid tool should weight per-GC predictions by sample size**: high-N GCs (Compass/Exxel) get tight confidence bands; low-N GCs (Synergy, Shelter, Farrell, Jabooda, Braseth, Holland, Kirtley-Cole, Intracorp at 1-2 jobs each) should carry wider uncertainty in margin estimates.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
