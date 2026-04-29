@@ -318,6 +318,31 @@ Calibration sample now n=60 (was n=58). Headline benchmarks: hours/unit 120.2 ·
 
 2. **SRM #2088 is the first non-OCIP SRM job in closed portfolio.** All 5 prior SRM jobs were OCIP. #2088 switched to Standard insurance. Mirrors the Exxel #2069/#2087 shift to Standard. Both Compass + Exxel + SRM may be moving away from OCIP for newer projects — worth tracking as a portfolio trend.
 
+## Deleted #2074 + added #2090 + #2092 (2026-04-29)
+
+**User direction: "lets delete project 2074".** Removed #2074 Marpac Buddha Jewel from PROJECT_ORDER, PROJECTS hero block, PROJECT_TEAMS entry, and all data array assignments (crewRoster, costCodes, bva, num patches, vendor patches, etc.). Cleaned up downstream prose references in #2076 and #2092 hero text. Marpac GC_DB count restored to 2 (was 3) and dropdown label updated. The project's pipeline files remain in `owp/owp-2074/cortex output files/` for reference but it is no longer surfaced in the dashboard.
+
+**#2083 was confirmed as a dead project** — no parse output exists in `owp/owp-2083/cortex output files/` and the user explicitly directed "2083 is a dead project". Adding to the skip list alongside #2062 Marpac Origin, #2065 Holland Flag, #2068 Schuchart Alloy, #2070 Chinn Beacon (5 dead projects total in this number range, all design-only / scope-shifted / loss-leader engagements that didn't represent OWP's actual closed work).
+
+- **#2090 Blueprint Capital, Chronicle** (Seattle WA · 4417 Wallingford Ave N · Wallingford · 78-unit multifamily · 401 fixtures · $1,446,452 final / $1,455,000 base / **4 executed COs net $0** — Mechanism A: $1.56M gross + $115k credits = +8% gross over · **40.1% gross margin** · $580,524 net profit · 31 workers / 7,776 hrs / 31 months Jan 2022 → Aug 2024 · Subcontract **03-20-ONEWAYP** executed 2022-01-17 · **lump-sum Design-Build delivery** (OWP responsible for design) · Owner Blueprint 4417, LLC · OWP PM Richard Donelson · Insurance Standard · top vendor **Keller Supply 29.8% / 24 invoices / $112,741** with Rosen 25.7% and California Hydronics 14.6% · 16 vendors total, $378,296 AP across 192 invoices · 12 RFIs + 14 submittals — balanced doc load · **$0 retention held — Blueprint clean-closeout pattern continues** (joining #2055 Dockside, #2058 Howell, #2085 Basalt with $0 retention)).
+
+- **#2092 Blueprint Capital, Reed Apartments** (Seattle WA · 4007/4009/4011/4015 Stone Way North, 98103 · Wallingford / Stone Way · 4-address parcel · 125-unit multifamily · 401 fixtures · $2,502,592 final / $2,456,100 base / **10 executed COs net $0** — Mechanism A: $2.77M gross + $264k credits = +10.5% gross over · **45.6% gross margin — HIGHEST closed Blueprint margin** · $1,140,791 net profit · 30 workers / 11,772 hrs / 37 months Jun 2022 → Jun 2025 · Subcontract **03-19-ONEWAYP** effective 2022-05-16 (executed 2022-06-09) · GC Blueprint Capital · Owner Blueprint 4007, LLC · MEP Franklin Engineering · OWP PM Richard Donelson · Insurance Standard (Blueprint pattern) · top vendor **Keller Supply 34.0% / 39 invoices / $186,191** · 16 vendors total, $547,541 AP across 282 invoices · **0 RFIs + 14 submittals — zero-RFI profile** matching #2064 Jabooda's 0-RFI / 47.6%-margin profile · "low-friction GC" archetype now **N=2** in closed portfolio · $0 retention held).
+
+PROJECT_ORDER now contains 74 IDs (was 73, net +1 after deleting #2074 and adding #2090 + #2092). **Marpac drops back to 2 closed**. **Blueprint becomes 9 closed** — second-largest GC by closed-job count after Compass (17) and Exxel (19). Calibration sample now n=61 (was n=60). Headline benchmarks: hours/unit 117.5 · gross_margin 38.2% · loaded_wage $42.58/hr · burden_multiplier 1.421. Code 120 Roughin Labor overrun softened back to +5.4% (was +7.4%). Top cushion code 211 Garage Material moved to -36.9% (was -39.8%) — slightly less under-budget with the new sample.
+
+**Workspace updates:**
+- Marpac GC_DB: 3 → 2 jobs (removed #2074, restored to original "both 40%+ margin" descriptor).
+- Blueprint GC_DB: 7 → 9 jobs. knownTag updated to flag highest closed Blueprint margin (#2092 45.6%), the all-recent-closed-Blueprints-clear-retention pattern, and the zero-RFI archetype shared with #2064.
+- Bid dropdown: Marpac '2 closed' (revert), Blueprint '9 closed (#2090 Chronicle + #2092 Reed added · all $0-retention closeouts)'.
+- Bulk-updated 5 prose references "60 closed jobs" → "61 closed jobs".
+- 5 dead-project skip list now: #2062 / #2065 / #2068 / #2070 / #2083.
+
+**Two pattern signals from this batch:**
+
+1. **Blueprint clean-closeout pattern is now N=4** (#2055 Dockside, #2058 Howell, #2085 Basalt, #2090 Chronicle, #2092 Reed Apts — all $0 retention held). Plus #2032/#2040/#2044/#2054 across the older Blueprint cohort. This is meaningfully different from Compass (7+yr retention tail) or GRE (5% retention held on every closed job). Worth surfacing in the bid tool's GC scorecard panel as **"Blueprint = clean-closeout GC"** archetype — they release retention on time. Cash-flow positive.
+
+2. **#2092 zero-RFI / 45.6%-margin profile matches #2064 Jabooda** (47.6% margin, 0 RFIs, 114 submittals). Both are "low-friction GC" archetypes — projects that ran with effectively no formal RFI activity but high submittal volume, suggesting tight design-spec coordination + experienced field crew. **Now N=2 across 2 different GCs** (Jabooda, Blueprint). Promising enough to model as a real archetype if a 3rd zero-RFI / 40%+ margin job appears.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
