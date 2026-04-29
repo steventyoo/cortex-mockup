@@ -225,6 +225,26 @@ PROJECT_ORDER now contains 67 IDs (was 65). **Compass becomes 14 closed + 2 live
 
 3. **GRE margin trend is genuinely softening over time.** Chronologically: #2045 46.1% → #2048 43.0% → #2047 33.8% → #2059 32.9% → #2067 29.8% → #2082 25.7%. That's a monotone decrease across 6 closed jobs spanning 2017-ish through 2024. Could be: (a) GRE pricing pressure increased and OWP didn't raise bids accordingly, (b) GRE scope complexity grew with newer/larger projects, (c) general OWP margin compression on this GC. Worth surfacing in the bid tool's GC scorecard panel for any future GRE pursuit — the 30%+ historical median is no longer a credible expectation; current run-rate is closer to 26-30%.
 
+## #2084 GRE Willows + #2085 Blueprint Basalt (added 2026-04-29)
+
+- **#2084 GRE Construction, Willows** (Redmond WA · 13631 NE 124th Street · Willows / Willow Road area · 195-unit multifamily · 876 fixtures · $3,528,985 final / $3,398,000 base / **16 executed COs net $0** — Mechanism A: $3.74M gross + $207k credits = +5.9% gross over (modest) · **22.8% gross margin — NEW lowest in OWP closed GRE portfolio**, sharper than #2082's 25.7% · $802,905 net profit · 58 workers / 33,268 hrs / 36 months Oct 2021 → Aug 2024 · Subcontract executed 2021-09-17 · GC GRE Construction LLC · MEP Franklin Engineering · OWP PM Richard Donelson · Insurance **Standard (NOT OCIP)** — consistent with #2067 GRE Edmonds 99 · top vendor **Keller Supply 28.0% / 40 invoices / $265,699** with Rosen 22.9% / 229 invoices and Pacific Plumbing Supply 13.9% — distributed top-3 · 19 vendors total, $947,834 AP across 468 invoices · 12 RFIs + 14 submittals — balanced doc load · retention $176,449 still held).
+
+- **#2085 Blueprint Capital Services, Basalt Apartments** (Seattle WA · 4205 SW Genesee Street · West Seattle · bid parcel address 4401 42nd Ave SW · 72-unit multifamily · 500 fixtures · $1,345,757 final / $1,288,000 base / **8 executed COs net $0** — Mechanism A: $1.24M gross + $51k credits · **30.9% gross margin — mid-range for Blueprint** · $416,475 net profit · 29 workers / 9,922 hrs / 24 months Jun 2021 → Jun 2023 · Subcontract **03-18-ONEWAYP** signed 2021-06-07 · **lump-sum Design-Build delivery — OWP responsible for design coordination per Article 3.8** (integrated DB scope, no separate design engineer in folder) · GC Blueprint Capital Services LLC · Owner Blueprint 4401, LLC · OWP PM Richard Donelson · Insurance Standard (Hub International / Middlesex Policy A0166148004) · top vendor **Rosen Supply Kirkland 28.6% / 69 invoices / $108,857** with Keller 27.6% (close behind) and California Hydronics 13.7% — Rosen-Keller co-leadership · 18 vendors total, $380,360 AP across 177 invoices · 15 RFIs + 14 submittals — balanced · **$0 retention held — clean closeout** (rare in OWP portfolio; most jobs still hold 5%)).
+
+PROJECT_ORDER now contains 69 IDs (was 67). **GRE becomes 7 closed**, **Blueprint becomes 7 closed**. Calibration sample now n=56 (was n=54). Recalibrated via `python3 owp/build_calibration.py`. Headline benchmarks: hours/unit 118.7 (was 117.4) · gross_margin 38.4% (was 38.6%) · loaded_wage $41.27/hr (was $40.97) · burden_multiplier 1.424. **Notable shift: code 120 Roughin Labor overrun jumped from +5.7% → +10.1%** — back to the v1.2 era level (10.2%); the 2084+2085 additions pulled the rough-in labor pattern hotter, consistent with both being margin-compressed jobs.
+
+**Workspace updates this batch:**
+- GRE GC_DB now 7 jobs, knownTag updated to flag NEW BOTTOM (22.8%, #2084) and emphasize the 23-point monotone decline. Updated guidance: **"Bid tool should NOT use 30%+ historical median for GRE; current run-rate is 22-26%"** (was previously 26-30%).
+- Blueprint GC_DB now 7 jobs, knownTag flags Design-Build + clean-closeout pattern from #2085.
+- Bid dropdown labels updated for both.
+- Bulk-updated 5 prose references "54 closed jobs" → "56 closed jobs".
+
+**Two pattern signals worth recording from this batch:**
+
+1. **GRE margin trend is now even sharper.** 7 closed GRE jobs in chronological order: 46.1% → 43.0% → 33.8% → 32.9% → 29.8% → 25.7% → **22.8%**. That's a 23-point monotone decline. Updated bid-tool guidance: **22-26% is the credible range for GRE jobs**, not the historical 30%+. This is now flagged in GRE's GC_DB knownTag with explicit warning prefix (⚠ instead of ✓).
+
+2. **Code 120 Roughin Labor overrun is recovering.** The recalibration shows code 120 went from +5.7% (n=54) → **+10.1% (n=56)** variance — back to the v1.2 era level (+10.2%). Both #2084 and #2085 contributed hot rough-in labor relative to budget, suggesting the rough-in-overrun pattern from the OG calibration is more durable than the dip into the +4-5% range during n=46-52. **Worth re-establishing OWP-BID-007's +12% correction factor as appropriate** for new bids.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
