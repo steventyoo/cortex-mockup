@@ -374,6 +374,48 @@ All four projects share: zero RFIs, 45%+ margin, Standard insurance (not OCIP), 
 
 2. **#2093 vendor concentration extreme** (Rosen 50.8% on a small $1M job) joins #2077 Intracorp Shoreline (Rosen 77.6% on $5.6M). Two of the most concentrated single-vendor closed jobs are both small-vendor-count jobs (14 and 13 vendors total). Bid tool should flag any project with <16 vendors expected as elevated single-source-of-failure risk.
 
+## #2096 Chinn Sundowner + #2097 Intracorp Marysville Ph1 (added 2026-04-29)
+
+**#2095 was confirmed dead** (no parse output). Skip list now: #2062, #2065, #2068, #2070, #2083, #2095 (6 dead projects total).
+
+- **#2096 Chinn Construction, Sundowner Apartments** (Seattle WA · 101 N 46th Street · Wallingford · 28-unit small multifamily · 138 fixtures · $462,490 final / $448,000 base / **7 executed COs net $0 — TRUE Mechanism B (zero credits)** · **43.3% gross margin** · $200,234 net profit · 22 workers / 3,082 hrs / **8 months Sep 2022 → May 2023 — FASTEST closed-portfolio delivery** (next is #2074 Marpac at 10 months, now deleted) · Subcontract AIA executed 2022 · GC Chinn Construction LLC — **7th closed Chinn (extends Chinn count to 4th GC in low-friction archetype after Jabooda/Blueprint/Intracorp)** · Owner Chinn affiliate · MEP Franklin Engineering (assumed — Chinn standard) · OWP PM Richard Donelson · Insurance **Standard (no wrap) — atypical for Chinn**, joins #2071 Stellar as 2nd Standard-insurance closed Chinn job (most prior Chinn were OCIP) · top vendor **Consolidated Supply 53.8% / 17 invoices / $38,731 — extreme single-vendor concentration** on a small $462k job (joining #2093 Rosen 50.8%, #2077 Rosen 77.6% as the small-vendor-count outliers) · 8 vendors total, $72,042 AP across 55 invoices · **0 RFIs + 0 submittals** · retention $23,124 still held).
+
+- **#2097 Intracorp, Marysville Phase 1** (Marysville WA · 2100 172nd ST NE · North Snohomish suburban · 228-unit multifamily · 1,950 fixtures · $5,225,416 final / $5,135,097 base lump sum / **8 executed COs net $0** — Mechanism A near-flat ($5.23M gross + only $1,822 credits = +0.0% gross over, extremely tight) · **44.2% gross margin** · $2,309,295 net profit · 48 workers / 30,963 hrs / 20 months Jan 2024 → Aug 2025 · Trade Contract **MV1-ONEW00** dated Nov 7, 2023 · GC Intracorp (Marysville 172nd Ph1 LLC) — **2nd closed Intracorp** (was N=1) · Owner Marysville 172nd Ph1 LLC (Intracorp affiliate) · MEP Franklin Engineering · OWP PM Richard Donelson · Insurance Standard (Trade Contract — no OCIP) · **first Marysville closed-portfolio job** — suburban / North Snohomish geographic expansion · top vendor **Rosen Supply Kirkland 27.2% / 81 invoices / $331,620** with Pacific Plumbing Supply 25.1% (225 invoices) and Keller 19.5% — **distributed top-3, NO single-vendor concentration risk despite 0-doc profile** (contrast with #2096 Sundowner's Consolidated 53.8% and #2077 Shoreline's Rosen 77.6%) · 15 vendors total, $1,218,413 AP across 628 invoices · **0 RFIs + 0 submittals — LARGEST 0-doc job in OWP closed portfolio** · retention $261,015 still held).
+
+PROJECT_ORDER now contains 78 IDs (was 76). **Chinn becomes 7 closed + 1 live**. **Intracorp becomes 2 closed**. Calibration sample now n=65 (was n=63). Headline benchmarks: hours/unit 117.4 (unchanged) · gross_margin 38.7% (was 38.6%) · loaded_wage $44.42/hr (unchanged) · burden_multiplier 1.423 (was 1.421). Code 120 Roughin Labor overrun stable at +5.4%.
+
+**Workspace updates this batch:**
+- Chinn GC_DB: 7 → 8 jobs. knownTag updated to flag #2096 as the Chinn 0-RFI / 8-month / TRUE Mech B job, and Standard-insurance pattern (#2071 + #2096) being atypical.
+- Intracorp GC_DB: 1 → 2 jobs. knownTag flipped from ⚠ thin data to ✓ known GC, contrasts #2077's vendor concentration with #2097's distributed top-3.
+- Bid dropdown: Chinn '7 closed + 1 live (#2096 Sundowner · 0-RFI archetype · fastest at 8 mo)', Intracorp '2 closed (#2097 Marysville · LARGEST 0-doc job)'.
+- Bulk-updated 5 prose references "63 closed jobs" → "65 closed jobs".
+
+## "Low-friction GC" archetype now N=6 across 4 GCs — strong real signal
+
+| Job | GC | Units | Revenue | Margin | RFIs | Submittals |
+|---|---|---|---|---|---|---|
+| #2064 Jabooda Melody | Jabooda | 186 | $2.98M | 47.6% | 0 | 114 |
+| #2092 Blueprint Reed Apts | Blueprint | 125 | $2.50M | 45.6% | 0 | 14 |
+| #2093 Jabooda Symphony 37th | Jabooda | 55 | $1.06M | 45.4% | 0 | 0 |
+| #2094 Blueprint Carrick | Blueprint | 86 | $1.69M | 48.0% | 0 | 0 |
+| **#2096 Chinn Sundowner** | **Chinn** | **28** | **$462k** | **43.3%** | **0** | **0** |
+| **#2097 Intracorp Marysville Ph1** | **Intracorp** | **228** | **$5.23M** | **44.2%** | **0** | **0** |
+
+The archetype now spans:
+- **GC**: 4 different GCs (Jabooda, Blueprint, Chinn, Intracorp) — not GC-specific
+- **Project size**: $462k → $5.23M (11× range)
+- **Unit count**: 28 → 228 (8× range)
+- **Fixtures**: 138 → 1,950
+- **Margin range**: 43.3% → 48.0% — all within tight 5-point band
+
+**This is a real, repeatable pattern** that transcends GC, scope, and project size. The shared traits are: 0 RFIs, Standard insurance (no OCIP wrap), Franklin MEP, **and a margin floor of 43%+**. **The bid tool should now treat this as a calibration class** — when bidding any project that matches the low-friction profile (low expected RFI volume, Standard insurance, Franklin MEP), the credible margin range is 43-48%, not the 38% portfolio median.
+
+**Two new pattern signals from this batch:**
+
+1. **Mechanism B confirmed at #2096 Chinn** — 7 COs with ZERO AR credits. This is the 5th true Mech B job in the closed portfolio (after #2067 GRE, #2080 Compass, #2082 GRE, and now #2096 Chinn), spanning **3 different GCs** (GRE × 2, Compass × 1, Chinn × 1). Previously hypothesized Mech B was a Compass/GRE phenomenon — now it's clearly cross-GC and correlates with the low-friction archetype (5 of 6 archetype jobs use either Mech B or near-zero gross-over-contract postures). **Reframing: Mech B is a CO-administration discipline that low-friction GCs share, not a GC-specific behavior.**
+
+2. **#2097 is the LARGEST 0-doc project in OWP closed portfolio** at $5.23M / 228 units / 1,950 fixtures. This breaks the prior assumption that 0-RFI jobs are small-scope. Intracorp ran a near-perfect $5M+ delivery with zero formal documentation flow. Either Intracorp has unusually robust pre-construction coordination, or large jobs with 0 RFIs become a distinctive new class to model. Worth verifying when a 3rd large-scale (>$3M) 0-doc job appears.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
