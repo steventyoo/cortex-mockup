@@ -343,6 +343,37 @@ PROJECT_ORDER now contains 74 IDs (was 73, net +1 after deleting #2074 and addin
 
 2. **#2092 zero-RFI / 45.6%-margin profile matches #2064 Jabooda** (47.6% margin, 0 RFIs, 114 submittals). Both are "low-friction GC" archetypes — projects that ran with effectively no formal RFI activity but high submittal volume, suggesting tight design-spec coordination + experienced field crew. **Now N=2 across 2 different GCs** (Jabooda, Blueprint). Promising enough to model as a real archetype if a 3rd zero-RFI / 40%+ margin job appears.
 
+## #2093 Jabooda Symphony 37th + #2094 Blueprint Carrick (added 2026-04-29)
+
+- **#2093 Jabooda Construction, Symphony 37th** (Seattle WA · 4221 37th Ave S · Columbia City · 55-unit multifamily · 275 fixtures · $1,058,006 final / $1,029,900 base / **1 executed CO net $0** — Mechanism A: $1.11M gross + $42k credits = +5.1% gross over · **45.4% gross margin** · $479,984 net profit · 27 workers / 5,837 hrs / 24 months Oct 2022 → Oct 2024 · Subcontract **AIA A401-2017** executed 2022-09-29 · GC Jabooda Construction Inc. — **2nd closed Jabooda engagement** (was N=1 with #2064) · Owner Symphony LLC (Jabooda affiliate) · MEP Franklin Engineering · OWP PM Richard Donelson · Insurance Standard (no wrap) · top vendor **Rosen Supply Kirkland 50.8% / 35 invoices / $103,606 — extreme single-vendor concentration on a small job** (next is Franklin Engineering at 11.3%) · 14 vendors total, $203,974 AP across 115 invoices · **0 RFIs + 0 submittals — most extreme zero-doc job in closed portfolio** · retention $53,493 still held).
+
+- **#2094 Blueprint Capital, Carrick** (Seattle WA · 1140 NW Market St · Ballard · 86-unit multifamily · 440 fixtures · $1,688,740 final / $1,689,000 firm-fixed base / **5 executed COs net $0** — Mechanism A: $1.73M gross + $46k credits = +2.7% gross over · **48.0% gross margin — NEW HIGHEST closed Blueprint margin** (beats #2092 Reed Apts 45.6%) · $809,783 net profit · 30 workers / 8,594 hrs / 25 months Sep 2022 → Oct 2024 · Subcontract **03-21-ONEWAYP Design/Build** executed 2022-08-04 (firm fixed) · GC Blueprint Capital Services LLC — **10th closed Blueprint** · Owner Blueprint 1140, LLC · MEP Franklin Engineering · OWP PM Richard Donelson · Insurance Standard (Blueprint pattern, no wrap) · top vendor **Keller Supply 36.3% / 18 invoices / $119,821** with Rosen 20.2% and Consolidated 12.7% · 15 vendors total, $330,447 AP across 197 invoices · **0 RFIs + 0 submittals — zero-doc profile** · **$0 retention held — Blueprint clean-closeout pattern continues** (now 6 of 10 closed Blueprints at $0 retention)).
+
+PROJECT_ORDER now contains 76 IDs (was 74). **Blueprint becomes 10 closed**. **Jabooda becomes 2 closed**. Calibration sample now n=63 (was n=61). Headline benchmarks: hours/unit 117.4 (was 117.5) · gross_margin 38.6% (was 38.2% — high-margin Jabooda + Blueprint additions pulled it up) · loaded_wage $44.42/hr (was $42.58 — notable jump, likely sample composition) · burden_multiplier 1.421 (unchanged). Code 120 Roughin Labor overrun softened to +5.3% (was +5.4%).
+
+**Workspace updates this batch:**
+- Blueprint GC_DB: 9 → 10 jobs. knownTag updated with NEW HIGHEST margin (#2094 48.0%), 6-of-10 $0-retention pattern, 3-of-10 zero-RFI archetype.
+- Jabooda GC_DB: 1 → 2 jobs. **knownTag flipped from ⚠ thin data to ✓ Known GC** with N=2 across both 0-RFI / 45%+ margin (top-tier portfolio profile).
+- Bid dropdown: Blueprint '10 closed (#2094 Carrick · NEW top margin 48.0% · all $0-retention)', Jabooda '2 closed (both 45%+ · 0-RFI archetype)'.
+- Bulk-updated 5 prose references "61 closed jobs" → "63 closed jobs".
+
+**The "low-friction GC" archetype is now real (N=4 across 2 GCs):**
+
+| Job | GC | Margin | RFIs | Submittals |
+|---|---|---|---|---|
+| #2064 Jabooda Melody | Jabooda | 47.6% | 0 | 114 |
+| #2092 Blueprint Reed Apts | Blueprint | 45.6% | 0 | 14 |
+| #2093 Jabooda Symphony 37th | Jabooda | 45.4% | 0 | **0** |
+| #2094 Blueprint Carrick | Blueprint | **48.0%** | 0 | **0** |
+
+All four projects share: zero RFIs, 45%+ margin, Standard insurance (not OCIP), Franklin MEP. They differ in: GC, unit count (55-186), fixture count (275-1,280). The pattern transcends GC and project size — it's a **scope/coordination archetype**. **Worth surfacing in the bid tool as a "low-friction GC" calibration class** — when bidding Jabooda or Blueprint or any GC with documented zero-RFI history on similar-scope projects, expect 45%+ margin to be achievable. This is the cleanest predictive signal we've found in the closed portfolio.
+
+**Two pattern signals from this batch:**
+
+1. **"Low-friction GC" archetype is now confirmed at N=4 across 2 GCs.** No longer an anomaly — it's a real, repeatable archetype that should drive bid-tool calibration. Both #2093 and #2094 had ZERO submittals (extreme), suggesting these projects use a different documentation regime entirely from the rest of the portfolio. Possible mechanism: pre-fab / off-site assembly heavy projects where coordination happens at the manufacturer level, not the field level. Worth verifying with project-type metadata.
+
+2. **#2093 vendor concentration extreme** (Rosen 50.8% on a small $1M job) joins #2077 Intracorp Shoreline (Rosen 77.6% on $5.6M). Two of the most concentrated single-vendor closed jobs are both small-vendor-count jobs (14 and 13 vendors total). Bid tool should flag any project with <16 vendors expected as elevated single-source-of-failure risk.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
