@@ -896,9 +896,11 @@
                 var(--cream-soft);
     border-radius: 14px; position: relative;
     padding: 28px 32px 20px; margin: 16px auto 8px;
-    max-width: 880px;
+    max-width: 100%;
+    overflow-x: auto;
     animation: chartSlideIn 0.25s ease-out;
   }
+  .bench-metric-chart svg { display: block; min-width: 100%; }
   @keyframes chartSlideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
   .bench-metric-chart .chart-close {
     position: absolute; top: 10px; right: 14px; cursor: pointer;
@@ -2385,6 +2387,12 @@
         <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#B56B7C;margin-right:4px;vertical-align:middle;"></span>GRE</span>
         <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7A8840;margin-right:4px;vertical-align:middle;"></span>Marpac</span>
         <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3F3A36;margin-right:4px;vertical-align:middle;"></span>Shelter Holdings</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#9B7B5E;margin-right:4px;vertical-align:middle;"></span>Farrell-McKenna</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#8B6F47;margin-right:4px;vertical-align:middle;"></span>Jabooda Homes</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7A8471;margin-right:4px;vertical-align:middle;"></span>Braseth</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#6B5B95;margin-right:4px;vertical-align:middle;"></span>Intracorp</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4A6B8A;margin-right:4px;vertical-align:middle;"></span>Holland</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#5C7A5E;margin-right:4px;vertical-align:middle;"></span>Kirtley-Cole</span>
         <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7C5B3F;margin-right:4px;vertical-align:middle;"></span>BMDC <span style="color:var(--clay);">· live</span></span>
       </div>
     </div>
@@ -9431,26 +9439,26 @@
     },
     "2059": {
       reportNum: "REPORT #2059-IR01",
-      chips: ["<span class=\"chip-sage\">GRE Meeker \u00b7 107u \u00b7 32.9% margin</span>","<span class=\"chip-ink\">GRE \u00b7 closed</span>","<span class=\"chip-clay\">$4,492,453 \u00b7 +$113,703 COs (+2.6%) \u00b7 retention $224,623</span>"],
+      chips: ["<span class=\"chip-sage\">GRE Meeker \u00b7 365u \u00b7 6 bldgs \u00b7 32.9% margin</span>","<span class=\"chip-ink\">GRE \u00b7 closed</span>","<span class=\"chip-clay\">$4,492,453 \u00b7 +$113,703 COs (+2.6%) \u00b7 retention $224,623</span>"],
       jobTop: "GRE", jobBottom: "Meeker",
       jobNum: "#2059", location: "Kent, WA", gc: "GRE",
       gcShort: "GRE",
       dateRange: "Feb 2019 → Jun 2020 (~18 months)",
-      unitsDesc: "107-unit Multi-building multifamily (Buildings A + B)",
-      revenue: "$4,492,453", revenueFoot: "Final AR billed \u00b7 107-unit Kent, WA plumbing \u00b7 GRE GC",
+      unitsDesc: "365-unit Multi-building multifamily (6 buildings: A+B+C+D+E+F)",
+      revenue: "$4,492,453", revenueFoot: "Final AR billed \u00b7 365-unit Kent, WA \u00b7 6 buildings \u00b7 GRE GC",
       profit: "$1,476,885", profitFoot: "32.9% gross margin",
       expenses: "$3,015,568", expensesFoot: "Direct cost",
       retainage: "$224,623", retainageFoot: "5% retention",
-      execHeadline: "<span class=\"n\">Meeker</span> delivered <span class=\"n\">32.9% margin</span> on $4,492,453 revenue across 107 units. GRE GC \u00b7 Kent, WA.",
-      execBody: "Meeker is a Multi-building multifamily (Buildings A + B) for <span class=\"n\">GRE Construction LLC</span> at 2030 West Meeker Street, Kent WA 98032. Owner: <span class=\"n\">GRE</span>. Subcontract <span class=\"n\">MasterSubcontract 78472</span> effective Feb 27, 2019. Original $4,378,750 contract delivered at final $4,492,453 (net +$113,703 / +2.6%). Direct cost $3,015,568 \u00b7 net profit $1,476,885 (32.9% margin). Retention $224,623 held. See JCR Cortex v2 workbook for full cost-code breakdown, vendor analysis, crew roster, and BVA flags.",
+      execHeadline: "<span class=\"n\">Meeker</span> delivered <span class=\"n\">32.9% margin</span> on $4,492,453 revenue across <span class=\"n\">365 units / 6 buildings</span>. GRE GC \u00b7 Kent, WA.",
+      execBody: "Meeker is a 6-building multi-building multifamily campus (BLDGS A+B+C+D+E+F) for <span class=\"n\">GRE Construction LLC</span> at 2030 West Meeker Street, Kent WA 98032. Per-bldg breakdown from Feb 25 2019 bid revisions: <span class=\"n\">BLDG A 107u $1.18M / 744 RI</span>, <span class=\"n\">BLDG B 107u $1.18M / 734 RI</span>, <span class=\"n\">BLDG C 103u $1.14M / 724 RI</span>, <span class=\"n\">BLDG D utility scope $106k / 24 RI</span>, <span class=\"n\">BLDG E 24u $302k / 217 RI</span>, <span class=\"n\">BLDG F 24u $302k / 217 RI</span> = <span class=\"n\">365 residential units / 2,660 RI fixtures total</span>. Subcontract <span class=\"n\">MasterSubcontract 78472</span> effective Feb 27, 2019. Original $4,378,750 contract delivered at final $4,492,453 (net +$113,703 / +2.6%). Direct cost $3,015,568 (matches sum of per-bldg bid costs $3,045,569 within 1% \u2014 confirms 6-building scope). Net profit $1,476,885 (32.9% margin). Per-fixture $1,689 (now in line with portfolio median); per-unit $12,308. <span class=\"n\">CORRECTED 2026-04-29</span>: prior dashboard showed 107u/767 fx (BLDG A only) paired with whole-project financials \u2014 a 3.5\u00d7 ratio distortion. See JCR Cortex v2 workbook for full breakdown.",
       jobNum2: "#2059", workforce: "48 workers \u00b7 37,914 hrs",
-      bpLeft: "meeker \u00b7 kent, wa", bpRight: "107 units \u00b7 feb 2019 → jun 2020 (~18 months)",
+      bpLeft: "meeker \u00b7 kent, wa", bpRight: "365 units \u00b7 6 buildings \u00b7 feb 2019 → jun 2020 (~18 months)",
       k01_revenue: "$4,492,453", k01_margin: "32.9%", k01_origContract: "$4,378,750",
       k01_co: "+$113,703", k01_directCost: "$3,015,568", k01_profit: "$1,476,885",
-      footerReport: "REPORT #2059-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.1",
+      footerReport: "REPORT #2059-IR01 \u00b7 Generated April 25, 2026 \u00b7 v0.2 (multi-bldg corrected 2026-04-29)",
       sbName: "Meeker", skyName: "MEEKER",
       skyline: { floors: 5, cols: 14, w: 300 },
-      num: { units: 107, fixtures: 767, months: 30.6, revenue: 4492453, profit: 1476884, directCost: 3015568, origContract: 4378750, co: 113703, retainage: 224622, labor: 1244297, material: 1034931, overhead: 113253, burden: 622904, hours: 37913.75, workers: 48 },
+      num: { units: 365, fixtures: 2660, months: 30.6, revenue: 4492453, profit: 1476884, directCost: 3015568, origContract: 4378750, co: 113703, retainage: 224622, labor: 1244297, material: 1034931, overhead: 113253, burden: 622904, hours: 37913.75, workers: 48 },
       vendorMeta: { count: 15, invoices: 588, totalAp: 1009212, topVendor: "Rosen Supply Kirkland", topShare: 43.7, source: "OWP_2059_JCR_Cortex_v2.xlsx" },
       vendors: [
         { name: "Rosen Supply Kirkland", invoices: 290, spend: 441453, pct: 43.7 },
@@ -16036,9 +16044,11 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     const range = max - min || 1;
     const n = vals.length;
 
-    // Chart dimensions — taller, narrower, better proportions
-    const W = 800, H = 380;
-    const padL = 72, padR = 60, padT = 50, padB = 80;
+    // Chart dimensions — width scales with project count so labels don't pile up.
+    // ~22px per project + axis padding gives readable density even at n=80+.
+    const padL = 72, padR = 80, padT = 50, padB = 90;
+    const W = Math.max(900, 22 * vals.length + padL + padR);
+    const H = 380;
     const chartW = W - padL - padR, chartH = H - padT - padB;
     const step = chartW / (n - 1);
 
@@ -16069,6 +16079,9 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       if (g.includes('intracorp')) return '#6B5B95';
       if (g.includes('sierra'))    return '#A67C52';
       if (g.includes('braseth'))   return '#7A8471';
+      if (g.includes('jabooda'))   return '#8B6F47';   // warm tan
+      if (g.includes('kirtley'))   return '#5C7A5E';   // muted forest
+      if (g.includes('farrell'))   return '#9B7B5E';   // dusty bronze
       return '#1F1E1D';
     };
 
@@ -16163,7 +16176,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     panel.className = 'bench-metric-chart';
     panel.innerHTML = `
       <div class="blueprint-corner" style="top:10px; left:14px;">◢ fig. / ${rd.section.toLowerCase()}</div>
-      <div class="blueprint-corner" style="top:10px; right:40px;">41 projects</div>
+      <div class="blueprint-corner" style="top:10px; right:40px;">${vals.length} projects</div>
       <div class="chart-close" onclick="this.parentElement.remove(); document.querySelectorAll('.bench-graph-btn.active').forEach(b=>b.classList.remove('active'));">×</div>
       <div class="chart-header" style="margin-top:8px;">${rd.label}</div>
       ${svg}
@@ -17660,13 +17673,18 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       if(g.includes('ravenna'))   return '#8E6B3F'; // bronze (NEW GC, LIVE)
       if(g.includes('intracorp')) return '#6B5B95'; // muted plum (LIVE)
       if(g.includes('sierra'))    return '#A67C52'; // warm earth (LIVE)
-      if(g.includes('braseth'))   return '#7A8471'; // muted olive (on-hold, LIVE)
+      if(g.includes('braseth'))   return '#7A8471'; // muted olive
+      if(g.includes('jabooda'))   return '#8B6F47'; // warm tan
+      if(g.includes('kirtley'))   return '#5C7A5E'; // muted forest
+      if(g.includes('farrell'))   return '#9B7B5E'; // dusty bronze
       return '#5B7FA8';
     };
 
-    const W = 1100, H = 520;
-    const pad = { t:30, r:60, b:70, l:65 };
-    const xMax = 310, yMin = 14, yMax = 58;
+    // Wider chart + more right padding to keep right-edge labels in frame.
+    // xMax bumped to 360 for the larger projects (#2069 342u, #2087 332u, #2077 346u).
+    const W = 1600, H = 560;
+    const pad = { t:30, r:180, b:70, l:65 };
+    const xMax = 360, yMin = 14, yMax = 58;
     const sx = (u) => pad.l + (u / xMax) * (W - pad.l - pad.r);
     const sy = (m) => pad.t + ((yMax - m) / (yMax - yMin)) * (H - pad.t - pad.b);
 
@@ -17678,7 +17696,7 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       svg += `<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${cBorder}" stroke-dasharray="${m===35?'6,4':'none'}" stroke-width="${m===35?1.2:0.5}" opacity="${m===35?0.7:0.4}"/>`;
       svg += `<text x="${pad.l-8}" y="${y+4}" text-anchor="end" font-size="10" font-family="'JetBrains Mono',monospace" fill="${cInk4}">${m}%</text>`;
     }
-    for(let u = 50; u <= 300; u += 50){
+    for(let u = 50; u <= 350; u += 50){
       const x = sx(u);
       svg += `<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${H-pad.b}" stroke="${cBorder}" stroke-width="0.5" opacity="0.4"/>`;
       svg += `<text x="${x}" y="${H-pad.b+18}" text-anchor="middle" font-size="10" font-family="'JetBrains Mono',monospace" fill="${cInk4}">${u}</text>`;
