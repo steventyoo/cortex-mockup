@@ -182,6 +182,27 @@ PROJECT_ORDER now contains 63 IDs (was 59). **Compass becomes 12 closed** (#2076
 
 3. **The Keller-led pattern is now N=4** (#2071 27%, #2074 29%, #2076 37%, #2078 33%). Not GC-specific (spans Chinn / Marpac / Compass×2). Suggests Keller is the secondary go-to supplier for jobs where Rosen isn't dominant — possibly Compass-Kirkland axis (both #2076 and #2078 are Compass) plus the Keller-friendly GCs (Chinn historically). Watch.
 
+## #2079 BMDC Crown Hill + #2080 Compass Redmond Square (added 2026-04-29)
+
+- **#2079 BMDC, Crown Hill** (Seattle WA · 7730 15th Ave NW, Crown Hill · 54-unit multifamily · 376 fixtures · $1,035,531 final / $992,600 base / **4 executed COs net $0** — Mechanism A but minimal traffic ($200 in credits, essentially flat) · **23.1% gross margin** — second-lowest in recent batch · $239,561 net profit · 40 workers / 8,570 hrs / 17 months Nov 2020 → Apr 2022 · Subcontract **AIA A401-2017** executed 2021-01-20 · GC BMDC — **OWP's first closed BMDC engagement** (BMDC was previously 2 live only: #2104, #2112) · Owner 7750 15th Ave NW LLC · Architect **Johnston Architects** (same architect as #2061 Alta CC) · MEP not in folder, likely Franklin per OWP standard · OWP PM Richard Donelson · Insurance Standard (per A401 contract) · top vendor **Rosen Supply Kirkland 28.0% / 80 invoices** with Keller (23.6%) and Consolidated (13.3%) — distributed top-3 (continues the small-job balanced-vendor pattern from #2075 Braseth) · 15 vendors total, $280,493 AP across 192 invoices · 9 RFIs + 4 submittals — low load · retention $51,777 still held).
+
+- **#2080 Compass General, Redmond Square** (Redmond WA · 16563 Redmond Way + 16425 Cleveland Street · 311-unit mixed-use multifamily · 1,900 fixtures — **largest-fixture closed Compass job** · $5,931,932 final / 18 executed COs net $0 — but mechanism is **TRUE Mechanism B (zero AR credits)**, the **first time we've seen Mechanism B on a Compass job** (was previously GRE-only via #2067). $5.93M positive billings + $0 credits = $5.93M net flat. The 18 COs were processed at $0 internally or never billed as separate items · **40.1% gross margin** · $2,377,107 net profit · $3,554,825 direct cost · 63 workers / 37,438 hrs / 30 months Sep 2021 → Mar 2024 · GC Compass General Construction I, LLC · Owner Redmond Grand LLC (Compass-affiliate) · MEP **Emerald City Engineers, Inc. (Lynnwood WA) — FIRST non-Franklin MEP in OWP closed portfolio**; every prior closed job used Franklin Engineering as standard · OWP PM Richard Donelson · Insurance OCIP / Wrap-up (Compass developer-administered, confirmed via CO#06 OCIP Credit) · top vendor **Rosen Supply Kirkland 28.2% / 309 invoices / $383,263** with Keller (25.6%, $347k) and Consolidated (15.8%, $215k) — distributed top-3 · 22 vendors total, $1,357,848 AP across 742 invoices · 23 RFIs + 19 submittals · retention $296,597 still held).
+
+PROJECT_ORDER now contains 65 IDs (was 63). **Compass becomes 13 closed + 2 live (15 total — largest-volume GC by far)**. **BMDC becomes 1 closed + 2 live (first closed BMDC sets a baseline for the 2 in-flight live projects)**. Calibration sample now n=52 (was n=50). Recalibrated via `python3 owp/build_calibration.py` and re-embedded. Headline benchmarks: hours/unit 117.1 (was 116.1) · gross_margin 39.4% (unchanged) · loaded_wage $40.65/hr (was $40.35) · burden_multiplier 1.428 (was 1.432). Cushion codes essentially unchanged: 211 -44.7%, 220 -27.2%, 241 -23.9%, 601 -22.1%, 111 -17.2%. Overrun: code 120 Roughin Labor +5.4%.
+
+**GC_DB and bid tool dropdown updated to reflect new composition:**
+- Compass: 10 closed + 2 live → **13 closed + 2 live** (jobs counter 12 → 15). knownTag updated to flag the bimodal CO behavior (Mechanism A on most jobs, but #2080 ran true Mech B)
+- BMDC: 2 live → **1 closed + 2 live** (jobs counter 2 → 3). knownTag flags low-margin small-job profile so far (23.1% on #2079)
+- Chinn: 5 closed + 1 live → **6 closed + 1 live** (added #2071 Stellar)
+- Marpac: 2 closed → **3 closed** (added #2074 Buddha Jewel — all three are 40%+ margin)
+- Intracorp + Braseth: new GC entries added (each 1 closed)
+
+**Two new pattern signals from this batch:**
+
+1. **Mechanism B is no longer GRE-only.** #2080 Compass Redmond Square executed 18 COs with ZERO AR credits and zero gross-over-contract movement — first Compass job to use the GRE-style true-$0-CO posture. With #2080's 40.1% margin sitting between #2076's 31.3% (Mech A +1.2% gross) and #2078's 23.8% (Mech A +28.3% gross), within-GC margin variance on closed Compass jobs (12 jobs, 23.8%–58.2% spread) is now wider than I'd expected. Mechanism B may correlate with healthier margins (#2067 GRE 29.8% was lower; need more N).
+
+2. **First non-Franklin MEP partner in closed portfolio (#2080 Emerald City Engineers).** Every other closed job in the dataset used Franklin Engineering as the MEP. This is a meaningful diversification — worth tracking whether Emerald City correlates with different cost-code behavior. Same applies to #2116 The V (live) which uses Emerald City Engineers — first time we'd see consistency on a non-Franklin partner across a Compass + SRM job.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
