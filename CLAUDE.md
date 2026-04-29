@@ -267,6 +267,57 @@ PROJECT_ORDER now contains 71 IDs (was 69). **Compass becomes 15 closed + 2 live
 
 3. **#2087 cross-GC owner relationship (Intracorp).** Intracorp owned #2077 (Shoreline, GC also Intracorp = self-developed) AND now owns #2087 (Exxel as GC, Intracorp as owner). This is the first observed split where Intracorp delegates GC work to another firm. Suggests Intracorp may be migrating from self-development to owner-only role. If a 3rd Intracorp-owned job appears with another GC, that's a real shift worth modeling for any future Intracorp pursuit.
 
+## Major fixture-count correction batch (2026-04-29) + #2088/#2089 added
+
+**User shared verified RI fixture counts from bid sheet ESTIMATE tabs for all 21 closed projects #2063-#2089.** Old dashboard fixture counts were derived from various sources (some from finish counts, some from permit counts, some hand-estimated). All updated to verified RI counts. Net deltas were significant — biggest corrections:
+
+| ID | Project | Old | New (RI) | Δ |
+|---|---|---|---|---|
+| #2063 | Compass Aria | 1,513 | **580** | -62% |
+| #2074 | Marpac Buddha Jewel | 138 | **39** | -72% |
+| #2071 | Chinn 1405 Dexter | 1,260 | **842** | -33% |
+| #2086 | Compass LIZA | 1,700 | **1,135** | -33% |
+| #2067 | GRE Edmonds 99 | 1,870 | **1,290** | -31% |
+| #2075 | Braseth Everett | 1,300 | **912** | -30% |
+| #2081 | Compass 400 Queen Anne | 1,100 | **779** | -29% |
+| #2064 | Jabooda Melody | 1,280 | **957** | -25% |
+| #2085 | Blueprint Basalt | 500 | **396** | -21% |
+| #2076 | Compass Yesler T2 | 1,504 | **1,207** | -20% |
+| #2069 | Exxel Theory | 1,775 | **1,447** | -18% |
+| #2079 | BMDC Crown Hill | 376 | **311** | -17% |
+| #2087 | Exxel 11201 Roosevelt | 1,850 | **1,623** | -12% |
+| #2066 | Compass Fireside | 626 | **548** | -12% |
+| #2078 | Compass 112 Lake St | 800 | **818** | +2% |
+| #2080 | Compass Redmond Grand | 1,900 | **1,860** | -2% |
+| #2082 | GRE Northgate II | 1,500 | **1,518** | +1% |
+| #2077 | Intracorp Shoreline (4 bldg) | 1,518 | **1,959** | +29% |
+| #2084 | GRE Willows | 876 | **1,313** | +50% |
+
+All 21 projects rebuilt with zero formula errors across 10,275 formulas (per user). Dashboard `num.fixtures` updated for all 19 prior projects via window-walk through PROJECTS hero blocks. The fixture corrections affect per-fixture metrics displayed in the dashboard (fixtures/unit, $/fixture, hrs/fixture per project) but do NOT directly affect the bid-tool calibration JSON since `build_calibration.py` reads units + hours + costs from data.json, not fixtures.
+
+## #2088 SRM Gridline KOC + #2089 Holland 24th & Market (added 2026-04-29)
+
+- **#2088 SRM Development, Gridline KOC** (Seattle WA · 704 E Union St [West] + 1421 Harvard Ave [North], 98122 · First Hill / Capitol Hill · **189-unit two-building complex (W+N)** · 967 RI fixtures · $4,010,548 final / $4,093,785 base / **18 executed COs net $0** — Mechanism A: $4.16M gross + $148k credits = +3.7% gross over · **30.7% gross margin** · $1,233,110 net profit · 78 workers / 30,154 hrs / 21 months Feb 2022 → Nov 2023 · GC SRM Development · Owner Knights of Columbus / SRM developer entity · MEP Franklin Engineering (SRM standard) · Insurance **Standard (NOT OCIP) — atypical for SRM** (first non-OCIP closed SRM job; all prior SRM jobs #2001/#2008/#2018/#2020/#2024 were OCIP) · top vendor Rosen Supply Kirkland 29.1% / 187 invoices · 21 vendors total, $1,098,502 AP across 570 invoices · 24 RFIs + 18 submittals · retention $200,527 still held).
+
+- **#2089 Holland Construction, 24th & Market** (Seattle WA · 2400 NW Market Street, 98107 · Ballard · 300-unit mixed-use multifamily · 1,370 RI fixtures · $6,296,612 final / **57 executed COs net $0 — NEW HIGHEST CO COUNT IN OWP CLOSED PORTFOLIO** (was #2086 LIZA Eastlake at 44 · #2078 Lake St at 40) · Mechanism A: $6.41M gross + $109k credits = +1.7% gross over (extremely tight credit posture for 57 COs) · **37.5% gross margin** · $2,361,876 net profit · 60 workers / 40,653 hrs / 38 months Jan 2022 → Mar 2025 — **longest closed-portfolio duration** · GC Holland Construction LLC — **OWP's first closed Holland engagement** (Holland was previously known via live #2114 Ballard Blossom only) · Owner Holland Acquisitions Co., LLC · MEP Franklin Engineering ($195k AP / 31 inv — Holland standard MEP partner confirmed) · Insurance OCIP / Wrap-up (Holland-administered) · top vendor Rosen Supply Kirkland 25.4% / 113 invoices · 25 vendors total, $1,661,269 AP across 773 invoices · 30 RFIs + 20 submittals · retention $337,912 still held).
+
+PROJECT_ORDER now contains 73 IDs. **SRM becomes 6 closed**. **Holland becomes 1 closed + 1 live (17th closed-portfolio GC)** — joining Chinn/SRM/Exxel/Compass/BMDC/Blueprint/Natural & Built/Marpac/Shelter/GRE/Synergy/Farrell-McKenna/Jabooda/Braseth/Intracorp/Holland.
+
+Calibration sample now n=60 (was n=58). Headline benchmarks: hours/unit 120.2 · gross_margin 38.1% · loaded_wage $42.08/hr · burden_multiplier 1.421. Code 120 Roughin Labor overrun softened to +7.4% (was +10.1%) — high-margin additions #2087 + #2089 pulled the median back down.
+
+**Workspace updates:**
+- SRM GC_DB: 5 → 6 jobs. knownTag flags #2088 as first non-OCIP closed SRM.
+- **NEW Holland GC_DB entry**: 2 jobs (1 closed + 1 live). knownTag flags #2089's 57-CO record + longest duration.
+- Bid dropdown: SRM '6 closed', NEW Holland entry.
+- Bulk-updated 5 prose references "58 closed jobs" → "60 closed jobs".
+- All 19 prior closed-project hero blocks updated with verified RI fixture counts.
+
+**Two pattern signals from this batch:**
+
+1. **#2089 Holland blew past the previous CO-count record by 13 COs** (57 vs prior #2086 record of 44). And it did so on a longer duration (38 mo vs 34 mo). Combined with **+1.7% gross over** — extremely tight credit posture relative to the CO volume — Holland's CO-administration discipline looks structurally tighter than Compass's recent jobs. If a 2nd closed Holland job appears, this becomes a credible "high-CO-discipline-low-gross-bleed" archetype distinct from Compass.
+
+2. **SRM #2088 is the first non-OCIP SRM job in closed portfolio.** All 5 prior SRM jobs were OCIP. #2088 switched to Standard insurance. Mirrors the Exxel #2069/#2087 shift to Standard. Both Compass + Exxel + SRM may be moving away from OCIP for newer projects — worth tracking as a portfolio trend.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
