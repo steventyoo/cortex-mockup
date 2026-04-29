@@ -93,6 +93,49 @@ Compass becomes OWP's largest GC by closed-job count — now 9 closed Compass jo
 
 **Insurance class observation:** #2067 is the first closed job in recent additions (post-#2050 batch) that is NOT under OCIP/Wrap-up. Closed Compass jobs (#2033/#2034/#2038/#2050/#2051/#2053/#2060/#2063/#2066) are all OCIP. Closed Exxel jobs (#2056/#2061) are all OCIP. GRE #2059 Meeker had MasterSubcontract terms but per-job insurance — and now #2067 Edmonds 99 is explicitly Standard (not OCIP). This is becoming a useful third axis for the bid tool: GC × insurance class × $0-net CO behavior. Standard-insurance jobs may have different retention/billing dynamics worth modeling separately.
 
+## #2069 Exxel Theory U-District (added 2026-04-29 — skipped #2070)
+
+- **#2069 Exxel Pacific, Theory U-District** (Seattle WA · 4731 15th Ave NE, U-District 98105 · **342-unit student housing** — OWP's largest closed Exxel job by unit count after #2056 Acme Farms (321u) · 1,775 itemized fixtures · $4,087,616 final / $3,872,036 lump-sum subcontract / **6 executed COs net $0** — but mechanism is contract-bill-and-credit (see pattern dig below) · **38.7% gross margin** — highest dollar net in this batch at $1,581,148 · $2,505,628 direct cost · 60 workers / 25,818 hrs / 33 months Feb 2021 → Nov 2023 · Subcontract **L1.220000 S** executed 2021-02-01 (design-build) · GC Exxel Pacific Inc. · Owner **BYSHSF Seattle LLC c/o McKinley Seattle LLC** · Architect **Ankrom Moisan Architects** · MEP Franklin Engineering · OWP PM Richard Donelson · Insurance **Standard (NOT OCIP)** — atypical for Exxel; prior closed Exxel jobs #2056/#2061 were both OCIP · top vendor **Rosen Supply Kirkland 33.6% / 225 invoices / $359,657** · 17 vendors total, $1,069,358 AP across 524 invoices · **78 RFIs + 16 submittals** — high RFI count reflects design-build + tight Exxel coordination across electrical/fire/elevator/framing trades · 2 boilers + duplex booster + 18 motorized irrigation zone valves · retention $199,638 still held).
+
+**Skipped #2070 Chinn Beacon Crossing** — same pattern as #2062 Marpac, #2065 Holland Flag Lot, #2068 Schuchart. OWP did 14 months of design + permit phase work (Dec 2020 → Feb 2022) on Chinn's 103-unit Beacon Hill TOD project but **the construction subcontract was NOT executed**. Total billed $42,289 / 16 hours / 2 workers / 1 RFI / 8 submittals / **−$1,981 net loss**. Pipeline files exist (`owp/owp-2070/cortex output files/`) but the project was deliberately not added to the dashboard for the same reasons as the prior skips. Chinn closed-portfolio count remains at 5 (#2009 Greenwood, #2010 Old Town, #2011 Phinney Ridge, #2023 Legacy, #2041) — Beacon Crossing would not have changed that count anyway since it was never built.
+
+#2069 is the 56th ID in PROJECT_ORDER, closed-portfolio count is now 56. **Exxel becomes 3rd closed Exxel job** (#2056 Acme Farms, #2061 Alta Columbia City, #2069 Theory U-District). Pipeline: parse_2069.py + build_2069.py + notionize_2069.py + audit_2069.py in `owp/owp-2069/cortex output files/`. Wired purely through the standardized v2.2 pipeline. Output: 17-tab JCR + 2-tab Notion summary, zero formula errors.
+
+## CO-mechanism dig (2026-04-29) — the "$0-net" pattern is actually TWO mechanisms
+
+Earlier I flagged that #2063 Aria Flats, #2066 Fireside Flats, and #2067 Edmonds 99 all delivered with executed COs netting $0, and called it a single "no-net-CO" pattern across Compass + GRE. **After #2069 Theory U-District landed (also $0 net) and a closer dig into AR invoice ledgers, the pattern decomposes into two genuinely different mechanisms:**
+
+### Mechanism A: Contract-bill-and-credit (Compass + Exxel)
+OWP bills MORE than the contract value gross, then issues credits on separate invoices to bring net billing back to the flat contract. CO scope is real and billed; credits offset.
+
+| Job | GC | Contract | Gross billings | Credits | Over-bill % |
+|---|---|---|---|---|---|
+| #2063 Aria Flats | Compass | $1,653,409 | $1,705,127 | −$51,718 | +3.1% |
+| #2066 Fireside Flats | Compass | $1,695,972 | $2,067,638 | −$371,666 | **+21.9%** |
+| #2069 Theory U-District | Exxel | $4,087,616 | $4,758,038 | −$670,422 | +16.4% |
+
+#2066 and #2069 are running massive CO activity (~$370–670k of adds) that gets fully credited back. The credits are likely OCIP insurance deducts (for the Compass jobs that ARE OCIP), final pay-app reconciliations, or owner-directed scope reductions billed as separate credits. Either way, the gross/net delta is real CO traffic — just net-zero to OWP economics.
+
+### Mechanism B: True $0-CO (GRE)
+| Job | GC | Contract | Gross billings | Credits | Over-bill % |
+|---|---|---|---|---|---|
+| #2067 Edmonds 99 | GRE | $2,588,429 | $2,588,429 | $0 | **+0.0%** |
+
+GRE #2067 has ZERO negative AR invoices and zero gross over-billing. The 4 executed COs that "net $0" must have been processed at $0 internally (add + deduct in the same CO line, or scope changes that didn't move price), or they were never billed as separate items. Fundamentally different from the Compass/Exxel pattern.
+
+### Bid-tool implications
+
+The two mechanisms have different bid implications:
+
+- **Mechanism A (Compass, Exxel):** COs add scope and revenue, but credits offset. Net economic effect on OWP is preserved-margin even though gross volume swings. Bid tool should expect CO traffic on Compass/Exxel jobs but model it as cost-neutral. **Margin discipline is what matters, not contingency size** — credits will eat any inflated CO billing anyway.
+- **Mechanism B (GRE):** COs don't move money. Bid tool can model GRE jobs with **lower contingency** because scope changes get absorbed without billing impact — which is favorable to OWP's cash flow but means there's no cushion to recover from underbids.
+
+Both mechanisms differ from the **additive-pattern GCs** in the rest of the closed portfolio (#2052 +$97k, #2059 +$114k, #2061 +$125k) where CO billings flow through to revenue and margin in the conventional way.
+
+**Caveat — N is still small.** Mechanism A is N=3 across 2 GCs; Mechanism B is N=1. To ship this as a bid-calibration signal we'd want N=2 on Mechanism B (another closed GRE job) and ideally N=4-5 on Mechanism A across more GCs. Worth re-checking when more closed jobs land (#2071+).
+
+**Caveat — GDrive Change Orders folders are not mounted** for #2063/#2066/#2067/#2069. The decomposition above is derived purely from AR invoice ledger amounts in the data.json (positive vs negative billings against final contract value). Folder review (per-CO description, dollar amount, who initiated, what scope changed) would let us distinguish "OCIP insurance deduct" credits from "scope reduction" credits from "reconciliation" credits — currently we can't tell. If you mount the GDrive folders or upload the CO PDFs for any of these jobs, I can refine the analysis.
+
 Live project pipeline is nearly identical to closed-job pipeline but:
 - Uses 'revised' budget as canonical basis (not 'original') — `rev_contract`, `rev_expense` in build script
 - Forecast margin = (rev_contract - rev_expense) / rev_contract (not actual)
