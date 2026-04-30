@@ -14520,6 +14520,13 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       setSectionVisibility(sid, '');
     });
 
+    // Restore the blueprint elevation (in case it was hidden by a prior bidding render)
+    const bpResetAnchor = document.querySelector('[data-f="bpLeft"]');
+    if (bpResetAnchor) {
+      const bpBlock = bpResetAnchor.closest('.blueprint');
+      if (bpBlock) bpBlock.style.display = '';
+    }
+
     // Remove any prior bidding badge + bid-analysis injection
     document.querySelectorAll('.bid-mode-badge, .bid-analysis-injected').forEach(el => el.remove());
 
@@ -14544,13 +14551,21 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
       reportChip.parentElement.appendChild(badge);
     }
 
-    // Hide Sections II–V (about actuals — meaningless for bid). Section I
-    // (Financial) stays visible because its 3 cards still convey the bid
-    // breakdown if relabeled, and they hold the architectural blueprint
-    // illustration that opens the project view.
-    ['section-ii-sub','section-iii-sub','section-iv-sub','section-v-sub'].forEach(sid => {
+    // Hide ALL sections (I-V) — every one of them is about actuals or
+    // post-award metrics. The bid analysis injection IS the content for
+    // bidding-stage projects.
+    ['section-i-sub','section-ii-sub','section-iii-sub','section-iv-sub','section-v-sub'].forEach(sid => {
       setSectionVisibility(sid, 'none');
     });
+
+    // Hide the architectural blueprint elevation (FIG. 01) — it sits
+    // between the fixture schedule and Section I, so the bid analysis
+    // content is the last thing visible.
+    const bpAnchor = document.querySelector('[data-f="bpLeft"]');
+    if (bpAnchor) {
+      const bpBlock = bpAnchor.closest('.blueprint');
+      if (bpBlock) bpBlock.style.display = 'none';
+    }
 
     // Inject the BID ANALYSIS block right after the fixture-schedule div.
     // Contains: Comparable Projects, Forecast Profitability, Bid Cost
