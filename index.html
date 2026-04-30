@@ -7767,7 +7767,7 @@
   /* ============ PROJECT DATA (real — from OWP_4Way_Comparison.xlsx) ============ */
   // Order in which projects appear in the sidebar / portfolio / benchmark.
   // Add a project ID here once its PROJECTS entry exists, and every view picks it up.
-  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035","2036","2037","2038","2040","2041","2042","2043","2044","2045","2046","2047","2048","2049","2050","2051","2052","2053","2054","2055","2056","2057","2058","2059","2060","2061","2063","2064","2066","2067","2069","2071","2075","2076","2077","2078","2079","2080","2081","2082","2084","2085","2086","2087","2088","2089","2090","2092","2093","2094","2096","2097","2099"];
+  const PROJECT_ORDER = ["2001","2008","2009","2010","2011","2012","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030","2031","2032","2033","2034","2035","2036","2037","2038","2040","2041","2042","2043","2044","2045","2046","2047","2048","2049","2050","2051","2052","2053","2054","2055","2056","2057","2058","2059","2060","2061","2063","2064","2066","2067","2069","2071","2075","2076","2077","2078","2079","2080","2081","2082","2084","2085","2086","2087","2088","2089","2090","2092","2093","2094","2096","2097","2099","2120"];
 
   // Project stages — add ids to bidding/active as those jobs are entered.
   // Closed jobs flow through PROJECT_ORDER so totals stay in sync.
@@ -10483,6 +10483,54 @@
         { name: "Rosen Supply Kirkland", invoices: 61, spend: 51470, pct: 5.4 }
       ]
     },
+    "2120": {
+      reportNum: "REPORT #2120-LIVE01 · ACTIVE · 1st bid submitted Dec 11 2025 · 2nd bid May 2026",
+      chips: [
+        "<span class=\"chip-clay\">⚠ ACTIVE · SD-set bid · awaiting Chinn acceptance</span>",
+        "<span class=\"chip-ink\">Chinn 1200 · 215u · 1,648 permit fixtures</span>",
+        "<span class=\"chip-sage\">1st bid $4,700,000 · 12% O&P · heat-pump central plant</span>"
+      ],
+      jobTop: "Chinn", jobBottom: "1200 116th.",
+      jobNum: "#2120", location: "1200 116th Ave NE · Bellevue WA 98004 (Downtown / 98004 core)", gc: "Chinn Construction",
+      gcShort: "Chinn",
+      dateRange: "ADR Submittal Oct 17 2025 → SD Pricing Set Nov 18 2025 → 1st bid Dec 11 2025 → 2nd bid May 2026",
+      unitsDesc: "215-unit · 8 above + 3 below grade · Type IIIA wood / Type IA podium · Bellevue 98004 · 38,341 SF site",
+      status: 'active',
+
+      // ---- LIVE hero fields ----
+      pctComplete: 0,
+      pctCompleteLabel: "0% billed · SD pricing phase · awaiting Chinn acceptance",
+      contractOrig: "$4,700,000 (1st bid Dec 11 2025)",
+      contractRevised: "$4,700,000 (1st bid · 2nd bid in flight May 2026)",
+      coPct: "0%",
+      billedToDate: "$0",
+      earnedLessRetention: "$0",
+      balanceToFinish: "$4,700,000",
+
+      // ---- Standard schema fields (live/forecast snapshot) ----
+      revenue: "$4,700,000", revenueFoot: "1st bid amount · SD pricing set 11/18/2025 · 12% O&P built in",
+      profit: "~$564,000", profitFoot: "forecast at 12% O&P · implies ~32% gross margin once mobilized",
+      expenses: "~$4,196,269", expensesFoot: "bid-phase forecast direct cost · RI mat $862k + RI lab $1.12M + finish mat $1.12M + finish lab $114k + equip $113k + perm/eng $164k",
+      retainage: "$0", retainageFoot: "5% retention will accrue once subcontract executes · SD-set · not CD",
+      execHeadline: "Chinn 1200 116th is in flight on <span class=\"n\">$4.70M</span>, <span class=\"n\">215u</span>, Bellevue 98004 · heat-pump central plant.",
+      execBody: "Chinn job E25-07 at 1200 116th Ave NE in downtown Bellevue — 215-unit, 8-above-3-below mid-rise on a 38,341 SF site. Owner is High Street Northwest Development (Trammell Crow). Architect Weber Thompson, civil Coughlin Porter Lundeen. Bid set is SD Pricing 11/18/2025 (NOT CD — schematic-design pricing). 1st bid $4,700,000 submitted Dec 11, 2025 to Chinn; 2nd bid in flight May 2026. Permit fixture count 1,648 (1,502 upper + 146 lower per ESTIMATE tab) — 22-fx delta from city's 1,675 permit-fee estimator due to BFP/WS reconciliation. Heat source: 4 NYLE heat-pump WHs ($448k + $95k storage tanks + $12k controls = $555k central plant). 23 small support boilers ($80.5k). Hot-only submeter system priced at $0 (deferred to owner scope). 2 dog wash tubs ($16k), sauna + frost locker (vendor-supplied AmFinn). 2,800 LF underslab + sumps + foundation drain pumps + OWS for below-grade garage. Construction $4,196,269 + 12% OH&P = $4,700,000. Per-unit $21,860/u, per-fx $2,852/fx. Calibration anchor: closely matches OWP closed-portfolio P75 of $18,244/u once heat-pump central + Bellevue urban site premiums are layered.",
+      jobNum2: "#2120", workforce: "SD pricing phase · estimating only · RI foreman TBD at subcontract execution",
+      bpLeft: "chinn 1200 116th · bellevue 98004 · SD pricing", bpRight: "215 units · 1,648 permit fx · $4.70M / $21,860/u",
+      k01_revenue: "$4,700,000", k01_margin: "~32% (forecast)", k01_origContract: "$4,700,000 (1st bid)",
+      k01_co: "+$0 (no COs yet)", k01_directCost: "~$4,196,269 (bid forecast)", k01_profit: "~$564,000 (12% O&P)",
+      footerReport: "REPORT #2120-LIVE01 · Live snapshot Apr 29, 2026 · v1.0 · SD-set bid · Chinn 1200 116th Ave NE",
+      sbName: "1200 116th.", skyName: "1200 116TH",
+      skyline: { floors: 8, cols: 12, w: 240 },
+      num: { units: 215, fixtures: 1648, months: null, revenue: 4700000, profit: 564000, directCost: 4196269, origContract: 4700000, co: 0, retainage: 0, labor: 1232636, material: 1984148, overhead: 164375, burden: null, hours: null, workers: null },
+      bidHistory: [
+        { date: "2025-10-17", type: "MILESTONE", gc: "Weber Thompson / High Street NW", units: 215, amount: null, note: "ADR Submittal · city design review milestone" },
+        { date: "2025-11-18", type: "MILESTONE", gc: "Weber Thompson", units: 215, amount: null, note: "SD Pricing Set issued · schematic-design (NOT CD)" },
+        { date: "2025-12-11", type: "BID", gc: "Chinn Construction", units: 215, amount: 4700000, note: "1st bid submitted · $21,860/u · 1,648 permit fx · 12% O&P" }
+      ],
+      vendorMeta: { count: 0, invoices: 0, totalAp: 0, topVendor: "(no AP yet · SD pricing phase)", topShare: 0, source: "Pre-construction · AP begins at subcontract execution / mobilization" },
+      vendors: []
+    },
+
     "2103": {
       reportNum: "REPORT #2103-LIVE01 \u00b7 ACTIVE",
       chips: [
@@ -11839,6 +11887,54 @@
       {urgency:'strategic', label:'ACTION 03 \u00b7 NEXT QUARTER', title:'Watch for subcontract signal from Michael Fisher', body:'Same Exxel PM as #2015 Portage Bay / #2025 Cora. Strong prior relationship. If subcontract converts, this is OWP\u2019s 12th Exxel engagement. Track win probability and close any bid-package gaps.', owner:'Estimating', ownerLabel:'Owner', extra:'Pipeline value', extraVal:'Exxel continuity'}
     ]
   };
+
+  if (PROJECTS['2120']) PROJECTS['2120'].live = {
+    lastSync: 'today',
+    title: '1200 116th Ave NE',
+    subtitle: '215-unit · Chinn Construction · Bellevue 98004 (downtown core) · SD-set bid',
+    chipContract: 'Bid: $4,700,000 (1st)',
+    chipOrigMargin: 'O&P target: 12% ($504k)',
+    chipForecastMargin: '○ Forecast margin: ~32% gross / 12% net',
+    pctComplete: '0%',
+    pctSub: 'SD pricing · awaiting Chinn acceptance · 2nd bid May 2026',
+    cortexStatus: '○ SD-set bid · not CD',
+    cortexStatusBody: 'Chinn job E25-07 · 215u / 1,648 permit fx / $4.70M 1st bid / $21,860 per unit / $2,852 per fixture. Heat-pump central plant (4 NYLE + 5 storage tanks + 23 support boilers + controls = ~$640k equipment). Owner High Street NW Development (Trammell Crow). Architect Weber Thompson. SD pricing 11/18/2025 — contingency posture is implicit in equipment line items, no explicit SD-risk cushion. Submeter system priced at $0 (deferred to owner scope). 2nd bid round in flight May 2026.',
+    eta: 'TBD',
+    etaSub: 'schedule locks at subcontract execution · typical 22-26 mo for 215u Bellevue',
+    hoursVar: '—',
+    hoursVarSub: 'no field hours yet · SD-pricing phase',
+    costVar: '$0',
+    costVarSub: 'no AP yet · design + bid only',
+    schedVar: '—',
+    schedVarSub: 'NTP / mobilization not scheduled',
+    forecastEac: '$4.70M',
+    forecastEacSub: 'EAC matches 1st bid · will revise on 2nd bid',
+    burnCurve: [
+      {pct: 0, actual: 0, baseline: 0}
+    ],
+    phases: [
+      {phase:'SD pricing / takeoff',  pct:100, actual:1, baseline:1, status:'on'},
+      {phase:'2nd bid round (May)',   pct:0,  actual:0, baseline:0, status:'notstarted'},
+      {phase:'Subcontract execution', pct:0,  actual:0, baseline:0, status:'notstarted'},
+      {phase:'Underground rough-in',  pct:0,  actual:0, baseline:0, status:'notstarted'},
+      {phase:'Roughin',               pct:0,  actual:0, baseline:0, status:'notstarted'},
+      {phase:'Trim & fixtures',       pct:0,  actual:0, baseline:0, status:'notstarted'},
+      {phase:'Test & inspection',     pct:0,  actual:0, baseline:0, status:'notstarted'}
+    ],
+    anomalies: [
+      {date:'Oct 17, 2025', title:'ADR Submittal filed', body:'City of Bellevue design review submittal. Architect Weber Thompson, civil Coughlin Porter Lundeen. 215 units, 8 above + 3 below grade.', severity:'INFO'},
+      {date:'Nov 18, 2025', title:'SD Pricing Set issued', body:'Schematic Design Pricing Set — NOT Construction Documents. SD-stage bids carry implicit scope risk (vs CD bids). Permit Fee Estimator pinned 1,675 fixtures (1,509 std + 156 special + 6 BFP + 4 WS). Bellevue permit fee ~$33k.', severity:'INFO'},
+      {date:'Dec 11, 2025', title:'1st bid submitted to Chinn', body:'$4,700,000 base bid. RI mat $862k + RI lab $1.12M + finish mat $1.12M + finish lab $114k + equip $113k + eng/rental/parking $121k + permits $43k = $4.20M direct cost. 12% O&P = $504k = $4.70M total. Heat-pump central plant ($555k NYLE+tanks+controls). Submeter system $0 (deferred to owner scope).', severity:'WARN'},
+      {date:'Apr 2026', title:'2nd bid round in flight', body:'Chinn requested 2nd bid round May 2026 — typical for SD-set bids as design progresses to DD/CD. Watch for: (1) submeter scope re-assignment, (2) parking-deck drainage scope change, (3) heat-pump-system right-sizing.', severity:'WATCH'}
+    ],
+    recommends: [
+      {urgency:'urgent', label:'ACTION 01 · PRE-2ND-BID', title:'Verify submeter scope assignment with Chinn', body:'1st bid priced submeter system at $0 (rows 64-66 in ESTIMATE: cold meters, hot meters/transceivers, repeaters all zero). Spec calls for hot-only submetering w/ transceivers + repeaters — confirm with Chinn whether this is owner scope (deferred) or oversight to capture in 2nd bid. Could be +$50-70k delta.', owner:'Estimating', ownerLabel:'Owner', extra:'Bid delta', extraVal:'+$50-70k if added back'},
+      {urgency:'urgent', label:'ACTION 02 · PRE-2ND-BID', title:'Re-anchor against $/unit calibration v1.4', body:'1st bid lands at $21,860/u — above OWP closed-portfolio P75 of $18,244 but justified by heat-pump central + Bellevue urban site. v1.4 calibration just shipped with orig_bid_per_unit benchmark; re-validate 2nd bid against archetype-filtered comps (mid-rise heat-pump multifamily $17,500-18,200/u + scope premiums).', owner:'Estimating', ownerLabel:'Owner', extra:'Calibration', extraVal:'v1.4 (29 Apr 2026)'},
+      {urgency:'urgent', label:'ACTION 03 · PRE-2ND-BID', title:'Capture Chinn job E25-07 PM team', body:'GC PM / PE / Sup names not yet captured. Chinn 1200 is OWP\'s 8th Chinn engagement (7 closed + 1 in design). Chinn-OWP relationship is healthy — closed-portfolio Chinn margins run +5% above OWP median. Capture team for dashboard PROJECT_TEAMS enrichment.', owner:'OWP Admin', ownerLabel:'Owner', extra:'Deliverable', extraVal:'Team data populated'},
+      {urgency:'strategic', label:'ACTION 04 · POST-AWARD', title:'Track Chinn 1200 against KOZ #2099 heat-pump benchmark', body:'KOZ Apartments (closed) is the closest system comp — heat-pump central plant, Trane vendor, 169u $3.03M / 32.4% margin. Chinn 1200 should track similar margin profile if scope stays stable. Use as live BvA benchmark once mobilized.', owner:'PM', ownerLabel:'Owner', extra:'Comp', extraVal:'#2099 KOZ Apts'}
+    ]
+  };
+
 
   PROJECTS['2105'].live = {
     burnCurve: {
@@ -14089,24 +14185,28 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
   //         running total).
   function aggregatePayAppsByDate(payApps){
     if (!payApps || !payApps.length) return [];
-    const byDate = new Map(); // date -> { period, retainage, net, aggregate, pct }
+    // Date keys: real dates sort first (lexically), missing dates get sentinel
+    // "ZZZZ-closeout" so the row survives but lands at the end of the chart.
+    const byDate = new Map(); // dateKey -> { displayDate, period, retainage, net, aggregate, pct }
     payApps.forEach(r => {
-      const date = r[1];
-      if (!date || date === '-') return;
-      const existing = byDate.get(date) || { period: 0, retainage: 0, net: 0, aggregate: 0, pct: 0 };
+      const rawDate = r[1];
+      const hasDate = rawDate && rawDate !== '-';
+      const key = hasDate ? rawDate : 'ZZZZ-closeout';
+      const display = hasDate ? rawDate : '—';
+      const existing = byDate.get(key) || { displayDate: display, period: 0, retainage: 0, net: 0, aggregate: 0, pct: 0 };
       existing.period    += Number(r[2]) || 0;
       existing.retainage += Number(r[3]) || 0;
       existing.net       += Number(r[4]) || 0;
-      // aggregate + pct come from the LAST line item on that date (running total),
+      // aggregate + pct come from the LAST line item on that key (running total),
       // not summed — they're already cumulative across line items.
       existing.aggregate = Number(r[5]) || existing.aggregate;
       existing.pct       = Number(r[6]) || existing.pct;
-      byDate.set(date, existing);
+      byDate.set(key, existing);
     });
-    if (!byDate.size) return payApps; // fall back to raw if no dates parseable
-    // Sort by date ascending, reassign appNum
+    if (!byDate.size) return payApps; // fall back to raw if nothing aggregated
+    // Sort by key ascending (sentinel sorts to end), reassign appNum
     const sorted = Array.from(byDate.entries()).sort((a, b) => a[0].localeCompare(b[0]));
-    return sorted.map(([date, v], i) => [i + 1, date, v.period, v.retainage, v.net, v.aggregate, v.pct]);
+    return sorted.map(([key, v], i) => [i + 1, v.displayDate, v.period, v.retainage, v.net, v.aggregate, v.pct]);
   }
 
   /* ============ DERIVED PORTFOLIO TOTALS ============ */

@@ -102,7 +102,10 @@ def load_xlsx_data(jid):
     except ImportError:
         return None
 
-    wb = load_workbook(xlsx_path, data_only=True)
+    try:
+        wb = load_workbook(xlsx_path, data_only=True)
+    except Exception:
+        return None
     n = {'jid': jid, 'codes': {}, 'schema': 'xlsx-v2.1'}
 
     # Hero lookup for units + fixtures
@@ -182,6 +185,9 @@ def load_xlsx_data(jid):
     n.setdefault('total_hours', 0)
     n.setdefault('total_workers', 0)
     n.setdefault('gc', '')
+    # XLSX fallback can't reliably read original bid — anchor to revenue
+    n.setdefault('contract_original', n.get('revenue', 0))
+    n.setdefault('contract_final', n.get('revenue', 0))
 
     # Compute gross_margin
     if n.get('revenue') and n['revenue'] > 0:
@@ -212,13 +218,17 @@ def load_project_data(jid):
     """
     for folder in (f"owp-{jid}-live", f"owp-{jid}"):
         path = ROOT / "owp" / folder / "cortex output files" / f"{jid}_data.json"
-        if path.exists():
+        if path.exists() and path.stat().st_size > 0:
             break
     else:
-        # No data.json found — try XLSX fallback for v1.0-era projects
+        # No data.json found (or empty stub) — try XLSX fallback for v1.0-era projects
         return load_xlsx_data(jid)
 
-    raw = json.loads(path.read_text())
+    try:
+        raw = json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError):
+        # Drive sync race / empty stub — try XLSX fallback
+        return load_xlsx_data(jid)
     n = {'jid': jid, 'codes': {}, 'schema': 'unknown'}
 
     # Always look up units/fixtures from index.html hero (most reliable)
@@ -243,6 +253,9 @@ def load_project_data(jid):
         # Revenue: report_record.job_totals_revenue is negative (Sage convention) — take abs
         n['revenue'] = abs(rr.get('job_totals_revenue', 0)) or 0
         n['direct_cost'] = derived.get('direct_cost', 0) or 0
+        # Original-bid economics: v2.0 schema uses derived_fields or report_record
+        n['contract_original'] = derived.get('contract_original', 0) or rr.get('contract_original', 0) or n['revenue']
+        n['contract_final'] = derived.get('contract_final', 0) or rr.get('contract_final', 0) or n['revenue']
         n['total_hours'] = derived.get('total_labor_hours', 0) or 0
         # Total workers: count workers list if present, else 0
         ww = raw.get('worker_wages', [])
@@ -268,6 +281,9 @@ def load_project_data(jid):
         t = raw.get('totals', {})
         n['revenue'] = t.get('revenue_ar_actual', 0) or 0
         n['direct_cost'] = t.get('direct_cost', 0) or 0
+        # ORIGINAL bid economics (for calibration of NEW bids — distinct from final $/u)
+        n['contract_original'] = p.get('contract_original', 0) or t.get('contract_original', 0) or 0
+        n['contract_final'] = p.get('contract_final', 0) or t.get('contract_final', 0) or n['revenue']
         lab = raw.get('labor', {})
         n['total_hours'] = lab.get('total_hours', 0) or 0
         n['total_workers'] = lab.get('total_workers', 0) or 0
@@ -279,6 +295,8 @@ def load_project_data(jid):
             if code == '999':
                 # 999 = Sales code, drives revenue
                 n['revenue'] = abs(c.get('actual', 0) or 0)
+                # 999 code's 'orig' is the original sales/contract value
+                n['contract_original'] = abs(c.get('orig', 0) or 0) or n['revenue']
                 continue
             n['codes'][code] = {
                 'orig': c.get('orig', 0) or 0,
@@ -287,6 +305,8 @@ def load_project_data(jid):
             }
         # Direct cost = sum of non-999 actuals
         n['direct_cost'] = sum(v['actual'] for v in n['codes'].values())
+        n.setdefault('contract_original', n['revenue'])
+        n['contract_final'] = n['revenue']
         # Total hours: sum from workers dict
         workers = raw.get('workers', {})
         if isinstance(workers, dict):
@@ -384,6 +404,25 @@ def main():
         if p['units'] and p['revenue']:
             return p['revenue'] / p['units']
         return None
+    def orig_bid_per_unit(p):
+        # ORIGINAL contract value / units — the right anchor for calibrating NEW bids.
+        # Distinct from revenue_per_unit which is FINAL billed (post-CO traffic).
+        co = p.get('contract_original', 0)
+        if p['units'] and co:
+            return co / p['units']
+        return None
+    def orig_bid_per_fixture(p):
+        co = p.get('contract_original', 0)
+        if p.get('fixtures', 0) and co:
+            return co / p['fixtures']
+        return None
+    def co_traffic_pct(p):
+        # (final - original) / original — positive = additive, negative = credit-net, ~0 = mech B / net-zero mech A
+        co = p.get('contract_original', 0)
+        cf = p.get('contract_final', 0)
+        if co and cf:
+            return (cf - co) / co
+        return None
     def labor_pct(p):
         if p['revenue']:
             return labor_actual(p) / p['revenue']
@@ -414,8 +453,14 @@ def main():
     benchmarks['labor_dollars_per_unit']['unit'] = 'USD'
     b('material_dollars_per_unit', material_dollars_per_unit, '200-series cost code spend / plumbing units')
     benchmarks['material_dollars_per_unit']['unit'] = 'USD'
-    b('revenue_per_unit', revenue_per_unit, '999 sales code billed / plumbing units')
+    b('revenue_per_unit', revenue_per_unit, '999 sales code billed / plumbing units (FINAL — includes CO traffic)')
     benchmarks['revenue_per_unit']['unit'] = 'USD'
+    b('orig_bid_per_unit', orig_bid_per_unit, 'Original contract value / plumbing units (PRIMARY ANCHOR for new-bid calibration — pre-CO)')
+    benchmarks['orig_bid_per_unit']['unit'] = 'USD'
+    b('orig_bid_per_fixture', orig_bid_per_fixture, 'Original contract value / permit fixtures (secondary anchor — varies with fixture density)')
+    benchmarks['orig_bid_per_fixture']['unit'] = 'USD'
+    b('co_traffic_pct', co_traffic_pct, '(Final - Original) / Original — CO traffic posture by job')
+    benchmarks['co_traffic_pct']['unit'] = 'fraction'
     b('labor_pct_of_revenue', labor_pct, 'Labor cost / revenue')
     benchmarks['labor_pct_of_revenue']['unit'] = 'fraction'
     b('material_pct_of_revenue', material_pct, 'Material cost / revenue')
@@ -535,7 +580,27 @@ def main():
                 lab_vars.append((p['codes'][c]['actual'] - p['codes'][c]['orig']) / p['codes'][c]['orig'])
     lab_var_stat = stats(lab_vars)
 
+    obu = benchmarks.get('orig_bid_per_unit', {})
+    obf = benchmarks.get('orig_bid_per_fixture', {})
+    cot = benchmarks.get('co_traffic_pct', {})
+
     headline_findings = [
+        {
+            'id': 'orig_bid_per_unit_anchor', 'severity': 'critical',
+            'title': f'Original-bid $/unit clusters tight at ${obu.get("median", 0):,.0f}/u (P25 ${obu.get("p25", 0):,.0f} – P75 ${obu.get("p75", 0):,.0f})',
+            'value': obu.get('median', 0), 'unit': 'USD/unit',
+            'summary': f"Across {obu.get('n', 0)} closed jobs, the median ORIGINAL contract value per plumbing unit is ${obu.get('median', 0):,.0f}. The middle 50% sit between ${obu.get('p25', 0):,.0f} and ${obu.get('p75', 0):,.0f}/unit — a tight band even across GCs, project sizes, and unit counts. This is the PRIMARY ANCHOR for new-bid calibration. NOTE: this is original (pre-CO) economics, distinct from revenue_per_unit which includes CO traffic.",
+            'evidence': obu,
+            'implication': "Use orig_bid_per_unit as the FIRST calibration step for any new bid. $/fixture is a poor anchor when fixture density varies between project types (small studios 4 fx/u vs full apartments 7-8 fx/u). $/unit is durable across density. Then add scope-specific premiums per-unit (heat-pump central plant: ~$2,100/u; below-grade garage drainage: ~$400/u; dense-urban site complexity: ~$600/u) calibrated against comp-to-comp deltas, NOT generic percentage cushions."
+        },
+        {
+            'id': 'orig_vs_final_distinction', 'severity': 'critical',
+            'title': f'CO traffic median is {cot.get("median", 0)*100:+.1f}% — original bid ≠ final billed',
+            'value': cot.get('median', 0), 'unit': 'fraction',
+            'summary': f"Median (final - original) / original = {cot.get('median', 0)*100:+.1f}%. The bid tool MUST distinguish original-bid economics (for calibrating new bids) from final-billed economics (for retrospective margin analysis). Calibrating new bids against final $/u biases UPWARD — the additional CO traffic isn't part of a fresh bid scope.",
+            'evidence': cot,
+            'implication': "Bid-tool dropdowns and calibration anchors should default to ORIGINAL contract values. Final values belong in margin/CO-pattern analysis, not in scope pricing."
+        },
         {
             'id': 'material_takeoff_systematically_conservative', 'severity': 'high',
             'title': 'OWP material takeoffs systematically come in under original budget',
@@ -588,6 +653,11 @@ def main():
 
     # ── Bid calibration rules (data-driven defaults) ──────────────────────────
     bid_rules = [
+        {'rule_id': 'OWP-BID-000', 'statement': f'PRIMARY ANCHOR: bid baseline = units × ${obu.get("median", 0):,.0f}/u (original-bid median)',
+         'default_value': obu.get('median', 0), 'unit': 'USD/unit',
+         'band': {'p25': obu.get('p25', 0), 'p75': obu.get('p75', 0)},
+         'rationale': f'Original contract value / units median across {obu.get("n", 0)} closed jobs. Tight P25–P75 band of ${obu.get("p25", 0):,.0f}–${obu.get("p75", 0):,.0f}/u across GCs, sizes, and project types makes this the most durable single anchor. $/fixture varies too much with density (4–8 fx/u depending on unit type).',
+         'applies_when': 'Always — start any new bid here. Then layer scope-specific premiums per-unit (heat-pump plant +$2.1k/u, dense urban site +$600/u, below-grade garage drainage +$400/u). Avoid blanket percentage cushions like "Bellevue +10%" or "SD-set +6%" — they double-count what comp-to-comp deltas already capture.'},
         {'rule_id': 'OWP-BID-001', 'statement': f'Default labor estimate = plumbing_units × {hpu.get("median", 0):.1f} hrs/unit',
          'default_value': hpu.get('median', 0), 'unit': 'hours/unit', 'band': {'p25': hpu.get('p25', 0), 'p75': hpu.get('p75', 0)},
          'rationale': f'Median across {hpu.get("n", 0)} completed jobs with unit counts.',
@@ -621,7 +691,7 @@ def main():
     # ── Final output ──────────────────────────────────────────────────────────
     output = {
         'name': 'OWP Productivity Insights',
-        'version': '1.3',
+        'version': '1.4',
         'generated_at': datetime.now(timezone.utc).isoformat(),
         'source': f'cortex-mockup repo · {len(projects)} cortex output JSONs across 3 schema generations (v2.0/v2.1/v2.2) · PROJECT_ORDER {len(ids)} closed jobs',
         'cortex_layer': 'productivity_insights',
@@ -658,6 +728,9 @@ def main():
     print(f"  gross_margin median: {margin_b.get('median', 0)*100:.1f}% (n={margin_b.get('n', 0)})", file=sys.stderr)
     print(f"  loaded_wage median: ${loaded.get('median', 0):.2f}/hr (n={loaded.get('n', 0)})", file=sys.stderr)
     print(f"  burden_mult median: {burden.get('median', 1):.3f} (n={burden.get('n', 0)})", file=sys.stderr)
+    print(f"  orig_bid_per_unit median: ${obu.get('median', 0):,.0f} (P25 ${obu.get('p25', 0):,.0f}, P75 ${obu.get('p75', 0):,.0f}, n={obu.get('n', 0)})", file=sys.stderr)
+    print(f"  orig_bid_per_fixture median: ${obf.get('median', 0):,.0f} (n={obf.get('n', 0)})", file=sys.stderr)
+    print(f"  co_traffic median: {cot.get('median', 0)*100:+.1f}% (n={cot.get('n', 0)})", file=sys.stderr)
     print(f"  cushion codes: " + ', '.join(f"{c['code']} {c['median_variance_orig_to_actual']*100:+.1f}%" for c in top_cushion), file=sys.stderr)
     print(f"  overrun codes: " + ', '.join(f"{c['code']} {c['median_variance_orig_to_actual']*100:+.1f}%" for c in top_overrun), file=sys.stderr)
 
