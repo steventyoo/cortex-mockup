@@ -2152,7 +2152,7 @@
   </div>
 
   <!-- CORTEX COVERAGE -->
-  <div class="mt-24 card p-0" style="background: var(--cream-soft);">
+  <div id="cortex-coverage-card" class="mt-24 card p-0" style="background: var(--cream-soft);">
     <div class="p-8 grid grid-cols-12 gap-10 items-center">
       <!-- Radial gauge -->
       <div class="col-span-4 flex items-center justify-center">
@@ -14540,6 +14540,8 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     }
     const card11 = document.getElementById('card-11');
     if (card11) card11.style.display = '';
+    const coverageCard = document.getElementById('cortex-coverage-card');
+    if (coverageCard) coverageCard.style.display = '';
 
     // Remove any prior bidding badge + bid-analysis injection
     document.querySelectorAll('.bid-mode-badge, .bid-analysis-injected').forEach(el => el.remove());
@@ -14596,6 +14598,12 @@ PROJECTS['2010'].payApps = [[1,"2012-09-20",24000,1200,22800,22800,0.0164],[2,"2
     // bid project there are no actuals to compare, every metric reads $0.
     const card11Hide = document.getElementById('card-11');
     if (card11Hide) card11Hide.style.display = 'none';
+
+    // Hide CORTEX COVERAGE card (radial gauge + file mix + schemas present/missing).
+    // For a bid project there are no source documents to index — coverage is
+    // meaningless until a contract executes and AP/RFI/CO docs start flowing.
+    const coverageHide = document.getElementById('cortex-coverage-card');
+    if (coverageHide) coverageHide.style.display = 'none';
 
     // Inject the BID ANALYSIS block right after the fixture-schedule div.
     // Contains: Comparable Projects, Forecast Profitability, Bid Cost
