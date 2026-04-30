@@ -1,0 +1,200 @@
+{
+  "schema": "CORTEX_LIVE_BID_v1.0",
+  "schema_note": "Live bid workspace — different from CORTEX_V2.2 which is for closed projects with JDR. No JDR yet for Chinn 1200; populated from bid sheet + plans + permit estimator.",
+  "project": {
+    "id_placeholder": "CHINN-1200",
+    "id_status": "OWP project number TBD — using string placeholder until assigned",
+    "job_name": "1200 116th Ave NE",
+    "general_contractor": "Chinn Construction",
+    "gc_job_number": "E25-07",
+    "owner": "High Street Northwest Development (Trammell Crow)",
+    "architect": "Weber Thompson",
+    "civil_engineer": "Coughlin Porter Lundeen",
+    "mep_engineer": "TBD",
+    "location": "1200 116th Ave NE, Bellevue WA 98004",
+    "neighborhood": "Downtown Bellevue / 98004 core",
+    "site_area_sf": 38341,
+    "site_density": "dense urban — under 1 acre",
+    "project_type": "mixed-use multifamily",
+    "construction_type": "Type IIIA wood over Type IA podium / Type IA garage",
+    "stories_above_grade": 8,
+    "stories_below_grade": 3,
+    "total_levels": 11,
+    "units": 215,
+    "unit_avg_sf": 736,
+    "permit_fixtures_total": 1648,
+    "permit_fixtures_breakdown": {
+      "upper": 1502,
+      "lower": 146,
+      "source": "Bid Sheet ESTIMATE tab rows 95-97"
+    },
+    "city_permit_fixtures_total": 1675,
+    "city_permit_fixtures_breakdown": {
+      "standard": 1509,
+      "special": 156,
+      "bfp": 6,
+      "ws": 4,
+      "source": "City of Bellevue PermitFeeEstimator (BO Plumbing Plan Review Inputs)"
+    },
+    "fixture_count_delta_explanation": "22-fx delta between OWP bid sheet (1648) and city estimator (1675) is BFP/WS reconciliation. OWP counts BFP and WS in different categories than city.",
+    "permits_estimate_usd": 36000,
+    "leed_target": "Silver",
+    "scope_status": "1st bid submitted Dec 11 2025 · 2nd bid in flight May 2026"
+  },
+  "bid_set": {
+    "type": "SD Pricing Set",
+    "issued": "2025-11-18",
+    "is_construction_documents": false,
+    "scope_risk_class": "schematic-design (CO traffic expected as design progresses to DD/CD)"
+  },
+  "milestones": [
+    { "date": "2025-10-17", "type": "MILESTONE", "note": "ADR Submittal · city of Bellevue design review" },
+    { "date": "2025-11-18", "type": "MILESTONE", "note": "SD Pricing Set issued by Weber Thompson" },
+    { "date": "2025-12-11", "type": "BID_SUBMITTED", "amount": 4700000, "note": "1st bid · $21,860/unit · 1,648 permit fx · 12% O&P" },
+    { "date": "2026-05-01", "type": "BID_SCHEDULED", "amount": null, "note": "2nd bid round in flight" }
+  ],
+  "bid_1st": {
+    "submitted": "2025-12-11",
+    "total": 4700000,
+    "construction_cost": 4196269,
+    "overhead_profit_pct": 0.12,
+    "overhead_profit_dollars": 503731,
+    "per_unit": 21860,
+    "per_permit_fixture": 2852,
+    "breakdown": {
+      "ri_material": 862467,
+      "ri_labor": 1118756,
+      "finish_material": 1121681,
+      "finish_labor": 114480,
+      "finish_labor_extra": 420,
+      "supervision": 12900,
+      "takeoff": 35475,
+      "subs_insulation_sterilize": 28600,
+      "equipment_sumps_booster_ows": 112750,
+      "engineering_rental_parking": 121375,
+      "permits": 43000,
+      "tub_repairs": 2580
+    },
+    "key_equipment": [
+      { "item": "NYLE heat-pump water heaters", "qty": 4, "unit_cost": 112000, "total": 448000 },
+      { "item": "Storage tanks (price w/ heat pumps)", "qty": 5, "unit_cost": 19000, "total": 95000 },
+      { "item": "Support boilers (small unit-level)", "qty": 23, "unit_cost": 3500, "total": 80500 },
+      { "item": "Controls", "qty": 1, "unit_cost": 12000, "total": 12000 },
+      { "item": "Booster pump", "qty": 1, "unit_cost": 45000, "total": 45000 },
+      { "item": "Garage drain pumps", "qty": 1, "unit_cost": 32000, "total": 32000 },
+      { "item": "Foundation drain pumps", "qty": 1, "unit_cost": 32000, "total": 32000 },
+      { "item": "Elevator pit pumps", "qty": 2, "unit_cost": 3200, "total": 6400 },
+      { "item": "Oil/water separator basin", "qty": 1, "unit_cost": 6000, "total": 6000 },
+      { "item": "Trench drain", "qty": 2, "unit_cost": 4300, "total": 8600 },
+      { "item": "Dog wash tubs", "qty": 2, "unit_cost": 8000, "total": 16000 }
+    ],
+    "submeter_scope_status": "$0 in 1st bid — flagged for verification with Chinn (deferred to owner scope OR oversight to capture in 2nd bid). Spec calls for hot-only submetering with transceivers + repeaters. Potential delta +$50-70k.",
+    "underground_drainage": {
+      "underslab_lf": 2800,
+      "sumps": 2,
+      "ows": 1,
+      "trench_drains": 2,
+      "garage_pumps_dollars": 64000
+    }
+  },
+  "bid_2nd": {
+    "scheduled": "2026-05-01",
+    "status": "in flight",
+    "watch_items": [
+      "Submeter scope re-assignment ($50-70k delta)",
+      "Parking-deck drainage scope evolution",
+      "Heat-pump-system right-sizing if design progresses to DD/CD"
+    ]
+  },
+  "comp_anchors": [
+    {
+      "id": "2099",
+      "name": "KOZ Apartments (Kirtley-Cole)",
+      "match_basis": "Closest system match — heat-pump central plant",
+      "units": 169,
+      "fixtures": 716,
+      "original_bid": 2950000,
+      "final_billed": 3030296,
+      "original_per_unit": 17455,
+      "original_per_fixture": 4120,
+      "gross_margin": 0.324,
+      "top_vendor": "Trane US 30.4%",
+      "weight_for_calibration": 0.4
+    },
+    {
+      "id": "2071",
+      "name": "Chinn Stellar (1405 Dexter)",
+      "match_basis": "Same GC (Chinn), dense urban Seattle, similar 160u scale",
+      "units": 160,
+      "fixtures": 1260,
+      "original_bid": 2786700,
+      "final_billed": 2833195,
+      "original_per_unit": 17417,
+      "original_per_fixture": 2212,
+      "gross_margin": 0.386,
+      "weight_for_calibration": 0.3
+    },
+    {
+      "id": "2061",
+      "name": "Alta Columbia City (Exxel)",
+      "match_basis": "OWP house median anchor",
+      "units": 243,
+      "fixtures": 1093,
+      "original_bid": 4305550,
+      "final_billed": 4430088,
+      "original_per_unit": 17718,
+      "original_per_fixture": 3939,
+      "gross_margin": 0.414,
+      "weight_for_calibration": 0.2
+    },
+    {
+      "id": "2087",
+      "name": "Exxel Northgate Roosevelt",
+      "match_basis": "Larger but Bellevue-area mid-rise",
+      "units": 332,
+      "fixtures": 1623,
+      "original_bid": 6026200,
+      "final_billed": 6236066,
+      "original_per_unit": 18151,
+      "original_per_fixture": 3713,
+      "gross_margin": 0.476,
+      "weight_for_calibration": 0.1
+    },
+    {
+      "id": "2107",
+      "name": "Chinn 68th & Roosevelt (DIFFERENT live project)",
+      "match_basis": "Same Trammell Crow / High Street NW owner family — but DIFFERENT project. Listed for context only, NOT a comp.",
+      "weight_for_calibration": 0
+    }
+  ],
+  "calibration_v1_4_notes": {
+    "primary_anchor": "orig_bid_per_unit (original-bid $/unit, NOT final-billed)",
+    "portfolio_median_per_unit": 14978,
+    "portfolio_p25": 11342,
+    "portfolio_p75": 18244,
+    "n_jobs": 76,
+    "archetype_filter_for_chinn1200": "mid-rise heat-pump multifamily 150-300u → median $17,500-18,200/u (P75 zone)",
+    "rule_id": "OWP-BID-000",
+    "rule_text": "PRIMARY ANCHOR: bid baseline = units × archetype-filtered $/u (original-bid). NOT per-fixture, NOT final-billed."
+  },
+  "blind_bid_attempt": {
+    "attempted": 7800000,
+    "actual": 4700000,
+    "miss_dollars": 3100000,
+    "miss_pct": 0.66,
+    "root_cause": "$/fixture closed-final anchor + phantom Bellevue +10% + phantom SD +6% + over-blended heat-pump premium",
+    "corrected_methodology_result": 4731250,
+    "corrected_miss_dollars": 31250,
+    "corrected_miss_pct": 0.0066,
+    "lesson": "Calibrating new bids against retrospective $/fx final values is a structural error. Always use $/u original-bid economics for new-bid calibration."
+  },
+  "dashboard_wiring": {
+    "project_order_id": "CHINN-1200",
+    "hero_block_location": "index.html PROJECTS dict, after #2099",
+    "live_block_location": "index.html PROJECTS['CHINN-1200'].live block",
+    "footer_report": "BID · CHINN-1200 · LIVE01",
+    "skyline": { "floors": 8, "cols": 12, "w": 240 }
+  },
+  "snapshot_date": "2026-04-29",
+  "data_source": "OWP bid sheet (Chinn 1200 116th Ave NE - Bid Sheet - Dec 11 2025.xlsx) + plans + Bellevue PermitFeeEstimator + closed-portfolio comp data"
+}
