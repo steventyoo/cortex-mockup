@@ -439,6 +439,7 @@ def main():
         actuals = []
         origs = []
         variances = []  # (actual - orig) / orig
+        per_fixture = []  # actual$ / project fixtures (drives bid-tool COST_CODES)
         n_with_data = 0
         for p in projects:
             if code in p['codes']:
@@ -449,6 +450,9 @@ def main():
                 origs.append(c['orig'])
                 if c['orig'] != 0:
                     variances.append((c['actual'] - c['orig']) / c['orig'])
+                # Per-fixture rate: actual$ / project fixtures (skip if no fixtures)
+                if p.get('fixtures', 0) and c['actual'] != 0:
+                    per_fixture.append(c['actual'] / p['fixtures'])
         cat = 'labor' if code in LABOR_CODES else ('material' if code in MATERIAL_CODES else ('overhead' if code in OVERHEAD_CODES else ('burden' if code in BURDEN_CODES else 'other')))
         by_code[code] = {
             'code': code,
@@ -457,6 +461,7 @@ def main():
             'description': CODE_DESC.get(code, ''),
             'n_jobs_with_data': n_with_data,
             'actual_dollars': stats(actuals),
+            'actual_dollars_per_fixture': stats(per_fixture),
             'original_budget_dollars': stats(origs),
             'variance_orig_to_actual': stats(variances),
         }
